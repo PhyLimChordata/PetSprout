@@ -91,5 +91,5 @@ Calvin Cheng\
 Cheryl Chen\
 Tuan Zi Li\
 Patrick Keener\
-Katrina Emily\
+Katrina Best\
 Rachelle Willemsma
