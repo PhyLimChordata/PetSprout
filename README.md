@@ -90,6 +90,5 @@ Andy PhyLim\
 Calvin Cheng\
 Cheryl Chen\
 Tuan Zi Li\
-Patrick Keener\
 Katrina Best\
 Rachelle Willemsma
