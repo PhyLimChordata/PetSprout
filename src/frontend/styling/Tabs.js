@@ -20,5 +20,9 @@ export default StyleSheet.create({
     textTitle: {
         fontSize: 20,
         fontWeight: "bold"
+    },
+    imageBox: {
+        height:200,
+        width: 200,
     }
 });
