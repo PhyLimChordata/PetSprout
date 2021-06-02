@@ -32,28 +32,34 @@ export default function App() {
   },[])
 
   return (
-    // <NavigationContainer>
-    //   <Tab.Navigator  initialRouteName="TabOne" backBehavior="order" tabBarOptions={{
-    //         activeTintColor: ColorSet.examplePrimary}}>
-    //     <Tab.Screen name="TabOne" component={TabOne} options={{
-    //       tabBarLabel: 'TabOne',
-    //       tabBarIcon: ({ color, size }) => (<MaterialCommunityIcons name="home" color={color} size={size} />)}}/>
-    //     <Tab.Screen name="TabTwo" component={TabTwo} />
-    //     <Tab.Screen name="TabThree" component={TabThree} />
-    //     </Tab.Navigator>    
-    // </NavigationContainer>
     <NavigationContainer>
       <Stack.Navigator headerMode="none">
         {
-          isloggedin ?
+          isloggedin == null ?
           (<Stack.Screen name="LoginScreen" component={LoginScreen} />) :
+          !isloggedin ?
           (<><Stack.Screen name="LoginScreen" component={LoginScreen} />
-          <Stack.Screen name="HomeScreen" component={HomeScreen} /> 
-          </>)
+          <Stack.Screen name="HomeScreen" component={HomeScreen} /></>) :
+          (<Stack.Screen name="Nav" component={Navigation} />)
         }
         {/* <Stack.Screen name="LoginScreen" component={LoginScreen} />
         <Stack.Screen name="HomeScreen" component={HomeScreen} /> */}
       </Stack.Navigator>
     </NavigationContainer>
   );
+}
+
+function Navigation(props) {
+  return (
+   <NavigationContainer independent={true}>
+      <Tab.Navigator  initialRouteName="TabOne" backBehavior="order" tabBarOptions={{
+            activeTintColor: ColorSet.examplePrimary}}>
+        <Tab.Screen name="TabOne" component={TabOne} options={{
+          tabBarLabel: 'TabOne',
+          tabBarIcon: ({ color, size }) => (<MaterialCommunityIcons name="home" color={color} size={size} />)}}/>
+        <Tab.Screen name="TabTwo" component={TabTwo} />
+        <Tab.Screen name="TabThree" component={TabThree} />
+        </Tab.Navigator>    
+    </NavigationContainer>
+  )
 }
