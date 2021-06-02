@@ -21,8 +21,48 @@ export default StyleSheet.create({
         fontSize: 20,
         fontWeight: "bold"
     },
-    imageBox: {
+    AuthenticationLogo: {
         height:200,
         width: 200,
-    }
+    },
+    AuthenticationInput: {
+        maxLength: 40,
+        backgroundColor: ColorSet.SecondaryGreen,
+        padding: 10,
+        borderWidth: 0,
+        borderStyle: 'solid',
+        fontSize:15,
+        borderRadius: 5,
+        marginBottom: 20,
+    },
+    AuthenticationText: {
+        fontSize: 20,
+        fontWeight: "bold",
+        paddingBottom: 5,
+        color: ColorSet.QuaternaryGreen
+    },
+    inputContainer: {
+        alignItems:"flex-start"
+    },
+    AuthenticationButton: {
+        backgroundColor: ColorSet.QuaternaryGreen,
+        borderRadius: 30,
+        padding: 10,
+        paddingLeft: 40,
+        paddingRight: 40,
+        marginBottom: 20,
+    },
+    AuthenticationButtonText: {
+        fontSize: 20,
+        fontWeight: "bold",
+        color: ColorSet.white
+    },
+    SignupText: {
+        color: ColorSet.QuaternaryGreen,
+        fontWeight: "bold",
+    },
+    subText: {
+        color: ColorSet.grey,
+        fontWeight: "bold",
+    } 
 });
