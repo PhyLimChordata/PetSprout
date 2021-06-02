@@ -3,7 +3,7 @@ import {View, Button, Text, TextInput, Image} from 'react-native';
 
 import styles from '../styling/Tabs';
 
-function HomeScreen(props) {
+function SignupScreen(props) {
     return (
         <View style={styles.container}>
             <Image
@@ -14,4 +14,4 @@ function HomeScreen(props) {
     );
 }
 
-export default HomeScreen;
+export default SignupScreen;
