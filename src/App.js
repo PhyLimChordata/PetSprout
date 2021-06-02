@@ -12,7 +12,7 @@ import TabTwo from './frontend/screens/TabTwo';
 import TabThree from './frontend/screens/TabThree';
 
 import LoginScreen from './frontend/screens/LoginScreen';
-import HomeScreen from './frontend/screens/HomeScreen';
+import SignupScreen from './frontend/screens/SignupScreen';
 
 import ColorSet from './frontend/resources/themes/Global'
 
@@ -35,21 +35,17 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator headerMode="none">
         {
-          isloggedin == null ?
-          (<Stack.Screen name="LoginScreen" component={LoginScreen} />) :
-          !isloggedin ?
+          isloggedin == null || !isloggedin ?
           (<><Stack.Screen name="LoginScreen" component={LoginScreen} />
-          <Stack.Screen name="HomeScreen" component={HomeScreen} /></>) :
-          (<Stack.Screen name="Nav" component={Navigation} />)
+          <Stack.Screen name="SignupScreen" component={SignupScreen} /></>) :
+          (<Stack.Screen name="HomeScreen" component={HomeScreen} />)
         }
-        {/* <Stack.Screen name="LoginScreen" component={LoginScreen} />
-        <Stack.Screen name="HomeScreen" component={HomeScreen} /> */}
       </Stack.Navigator>
     </NavigationContainer>
   );
 }
 
-function Navigation(props) {
+function HomeScreen(props) {
   return (
    <NavigationContainer independent={true}>
       <Tab.Navigator  initialRouteName="TabOne" backBehavior="order" tabBarOptions={{
