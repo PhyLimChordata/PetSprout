@@ -14,7 +14,10 @@ import TabThree from './frontend/screens/TabThree';
 import LoginScreen from './frontend/screens/LoginScreen';
 import SignupScreen from './frontend/screens/SignupScreen';
 
-import ColorSet from './frontend/resources/themes/Global'
+import ColorSet from './frontend/resources/themes/Global';
+
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 const Tab = createBottomTabNavigator();
 
@@ -24,7 +27,16 @@ export default function App() {
   const [isloggedin, setlogged] = useState(null);
 
   const detectLogin = async () => {
-    setlogged(false);
+    try {
+      const token = await AsyncStorage.getItem('token');
+      if (token) {
+        setlogged(true);
+      } else {
+        setlogged(false);
+      }
+    }
+    catch (e) {
+    }
   }
 
   useEffect(()=>{

@@ -4,13 +4,14 @@ import {View, Text, TextInput, Image, TouchableHighlight} from 'react-native';
 
 import styles from '../styling/Tabs';
 
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 function LoginScreen(props) {
     const [primaryInfo, setPrimaryInfo] = useState('');
     const[password, setPassword] = useState('');
 
     const inputExample = async () => {
-        //loginstuff
-        console.log("asd");
+        await AsyncStorage.setItem("token", "token");
     }
 
     const navigateToSignUp = () => {
