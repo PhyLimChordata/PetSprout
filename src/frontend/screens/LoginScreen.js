@@ -1,28 +1,42 @@
 import React, {useState} from 'react';
 
-import {View, Button, Text, TextInput, Image} from 'react-native';
+import {View, Text, TextInput, Image, TouchableHighlight} from 'react-native';
 
 import styles from '../styling/Tabs';
 
 function LoginScreen(props) {
     const [primaryInfo, setPrimaryInfo] = useState('');
-    const[password, setPassword] = useState('extra');
+    const[password, setPassword] = useState('');
 
     const inputExample = async () => {
         //loginstuff
+        console.log("asd");
+    }
+
+    const navigateToSignUp = () => {
+        props.navigation.navigate("SignupScreen");
     }
 
     return (
     <View style={styles.container}>
         <Image
-            style={styles.imageBox}
+            style={styles.AuthenticationLogo}
             source={require('../resources/images/logo.JPG')}
         />
-        <Text style={styles.textTitle}>Email/Username</Text>
-        <TextInput style={styles.textInput} value={primaryInfo} onChangeText={(text)=>setPrimaryInfo(text)}></TextInput>
-        <Text style={styles.textTitle}>Password</Text>
-        <TextInput secureTextEntry={true} defaultValue="password" style={styles.textInput} value={password} onChangeText={(text)=>setPassword(text)}></TextInput>
-        <Button title="Login" onPress = {() => inputExample()}></Button>
+        <View style={styles.inputContainer}>
+            <Text style={styles.AuthenticationText}>Email/Username</Text>
+            <TextInput style={styles.AuthenticationInput} value={primaryInfo} onChangeText={(text)=>setPrimaryInfo(text)}></TextInput>
+            <Text style={styles.AuthenticationText}>Password</Text>
+            <TextInput style={styles.AuthenticationInput} secureTextEntry={true} value={password} onChangeText={(text)=>setPassword(text)}></TextInput>
+        </View>
+        <TouchableHighlight style={styles.AuthenticationButton} onPress ={() => inputExample()}>
+                <Text style={styles.AuthenticationButtonText}>Login</Text>
+        </TouchableHighlight>
+        <Text style={styles.subText}>New User?
+            <TouchableHighlight style={styles.SignupText} onPress = {() => navigateToSignUp()}>
+                <Text> Sign up</Text>
+            </TouchableHighlight>
+        </Text>
     </View>
     );
 }
