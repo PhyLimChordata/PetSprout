@@ -24,6 +24,7 @@ export default StyleSheet.create({
     AuthenticationLogo: {
         height:200,
         width: 200,
+        marginBottom: 50
     },
     AuthenticationInput: {
         maxLength: 40,

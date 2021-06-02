@@ -21,7 +21,7 @@ function LoginScreen(props) {
     <View style={styles.container}>
         <Image
             style={styles.AuthenticationLogo}
-            source={require('../resources/images/logo.JPG')}
+            source={require('../resources/images/Logo.png')}
         />
         <View style={styles.inputContainer}>
             <Text style={styles.AuthenticationText}>Email/Username</Text>
