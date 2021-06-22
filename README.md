@@ -89,6 +89,6 @@ Manola Yvonet\
 Andy PhyLim\
 Calvin Cheng\
 Cheryl Chen\
-Tuan Zi Li\
+YuanYuan Li\
 Katrina Best\
 Rachelle Willemsma
