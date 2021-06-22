@@ -12,7 +12,6 @@ function SignupScreen(props) {
 
     const inputExample = async () => {
         //signupstuff
-        console.log("asd");
     }
 
     const navigateToLogin = () => {
@@ -39,8 +38,8 @@ function SignupScreen(props) {
                 <Text style={styles.AuthenticationButtonText}>Sign Up</Text>
         </TouchableHighlight>
         <Text style={styles.subText}>Already have an account?
-            <TouchableHighlight style={styles.SignupText} onPress = {() => navigateToLogin()}>
-                <Text> Log in</Text>
+            <TouchableHighlight onPress = {() => navigateToLogin()}>
+                <Text style={styles.SignupText}> Log in</Text>
             </TouchableHighlight>
         </Text>
     </View>

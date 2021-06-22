@@ -27,7 +27,6 @@ export default StyleSheet.create({
         marginBottom: 50
     },
     AuthenticationInput: {
-        maxLength: 40,
         backgroundColor: ColorSet.SecondaryGreen,
         padding: 10,
         borderWidth: 0,
@@ -35,6 +34,7 @@ export default StyleSheet.create({
         fontSize:15,
         borderRadius: 5,
         marginBottom: 20,
+        width: 300
     },
     AuthenticationText: {
         fontSize: 20,

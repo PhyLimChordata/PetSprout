@@ -1,3 +1,4 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import React from 'react';
 import {View, Button, Text} from 'react-native';
 
@@ -7,7 +8,11 @@ function TabThree(props) {
     const get = () => {
         fetch('http://localhost:5000/example/get')
         .then(res => res.json())
-        .then(data => console.log(data))
+        .then(data => {
+            console.log(data);
+            AsyncStorage.removeItem('token', (err) => console.log('finished', err));
+            // props.navigation.navigate("LoginScreen");
+            })
         .catch();
     }
 
