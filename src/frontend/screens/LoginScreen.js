@@ -12,6 +12,7 @@ function LoginScreen(props) {
 
     const inputExample = async () => {
         await AsyncStorage.setItem("token", "token");
+        // props.navigation.navigate("HomeScreen");
     }
 
     const navigateToSignUp = () => {
@@ -34,8 +35,8 @@ function LoginScreen(props) {
                 <Text style={styles.AuthenticationButtonText}>Login</Text>
         </TouchableHighlight>
         <Text style={styles.subText}>New User?
-            <TouchableHighlight style={styles.SignupText} onPress = {() => navigateToSignUp()}>
-                <Text> Sign up</Text>
+            <TouchableHighlight onPress = {() => navigateToSignUp()}>
+                <Text style={styles.SignupText}> Sign up</Text>
             </TouchableHighlight>
         </Text>
     </View>

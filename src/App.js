@@ -24,7 +24,7 @@ const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 
 export default function App() {
-  const [isloggedin, setlogged] = useState(null);
+  const [isloggedin, setlogged] = useState(false);
 
   const detectLogin = async () => {
     try {
@@ -47,11 +47,14 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator headerMode="none">
         {
-          isloggedin == null || !isloggedin ?
+          !isloggedin ?
           (<><Stack.Screen name="LoginScreen" component={LoginScreen} />
           <Stack.Screen name="SignupScreen" component={SignupScreen} /></>) :
-          (<Stack.Screen name="HomeScreen" component={HomeScreen} />)
+          <Stack.Screen name="HomeScreen" component={HomeScreen} />
         }
+         {/* <Stack.Screen name="LoginScreen" component={LoginScreen} />
+        <Stack.Screen name="SignupScreen" component={SignupScreen} />  */}
+        {/* <Stack.Screen name="HomeScreen" component={HomeScreen} /> */}
       </Stack.Navigator>
     </NavigationContainer>
   );
