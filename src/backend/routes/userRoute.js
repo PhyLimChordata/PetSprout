@@ -1,5 +1,5 @@
 const router = require('express').Router()
-let User = require('../models/UserSchema')
+let User = require('../schemas/UserSchema')
 const {check, validationResult} = require("express-validator")
 const bcryptjs = require('bcryptjs')
 const jwt = require('jsonwebtoken')
