@@ -7,5 +7,5 @@ module.exports=(req,res,next)=>{
         process.env.JSONWEBTOKEN,
     )
     req.user=decoded.user
-    next();
+    next()
 }
