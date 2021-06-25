@@ -15,7 +15,7 @@ const Tab = createBottomTabNavigator();
 
 const CustomTabBarButton = ({children, onPress}) => (
     <TouchableOpacity activeOpacity={1} style={{top:-30, width:70, height:70, justifyContent:"center", alignItems:"center"}} onPress={onPress}>
-        <View style={{ backgroundColor:ColorSet.tertiaryColor, width:70, height:70,borderRadius:35}}>
+        <View style={{ backgroundColor:ColorSet.QuaternaryGreen, width:70, height:70,borderRadius:35}}>
             {children}
         </View>
     </TouchableOpacity>)
@@ -24,9 +24,9 @@ export default function App() {
   return (
     <NavigationContainer>
       <Tab.Navigator  initialRouteName="TabOne" backBehavior="order" tabBarOptions={{
-          activeTintColor: ColorSet.quaternaryColor,
+          activeTintColor: ColorSet.QuinaryGreen,
           inactiveTintColor: ColorSet.white,
-          style: { backgroundColor: ColorSet.secondaryColor}
+          style: { backgroundColor: ColorSet.SecondaryGreen}
 
       }}>
         <Tab.Screen name="Calendar" component={TabOne} options={{
@@ -47,7 +47,7 @@ export default function App() {
                             style={{
                                 width:35,
                                 height:35,
-                                tintColor: focused ? ColorSet.quaternaryColor :ColorSet.white
+                                tintColor: focused ? ColorSet.QuinaryGreen :ColorSet.white
                             }}
                             />
                         ),
