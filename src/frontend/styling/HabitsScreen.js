@@ -12,7 +12,7 @@ export default StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'flex-start'
     },
-    container: {
+    verticalContainer: {
         flex: 19,
         backgroundColor: ColorSet.white,
         alignItems: "center",

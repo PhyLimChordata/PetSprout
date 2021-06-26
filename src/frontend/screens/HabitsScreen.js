@@ -36,7 +36,7 @@ function HabitsScreen(props) {
                     return (<Hearts>)
                 })} */}
             </View>
-            <View style={styles.container}>
+            <View style={styles.verticalContainer}>
                 <Image style={styles.creature} source={require('../resources/images/Egg.gif')}/>
                 <ExperienceBar/>
             </View>
