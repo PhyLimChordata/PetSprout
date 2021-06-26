@@ -2,9 +2,12 @@ const router = require('express').Router();
 let example = require('../models/example')
 
 router.route('/get').get((req, res) => {
-    example.find()
-        .then(resultQuery => res.json(resultQuery))
+
+    let examples = []
+    examples = example.find()
+        .then((resultQuery) => { res.json({ex: resultQuery}); return resultQuery; } )
         .catch(error => res.status(400).json("Error: " + error));
+    
 });
 
 router.route('/get/:id').get((req, res) => {

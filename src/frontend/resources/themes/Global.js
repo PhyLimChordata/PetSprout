@@ -2,6 +2,7 @@ const ColorSet = {
     examplePrimary: '#FF5733',
     white: '#ffffff',
     grey: '#B7BEB0',
+    lightgrey: '#E7E7E7',
     someColor: '#EF2723',
     PrimaryGreen: '#F5FEEC',
     SecondaryGreen: '#D7F2BA',
