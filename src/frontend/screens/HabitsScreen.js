@@ -7,7 +7,7 @@ import Menu from '../components/Menu'
 import Checkmark from '../components/Checkmark'
 import ExperienceBar from '../components/ExperienceBar'
 
-function HomeScreen(props) {
+function HabitsScreen(props) {
     const [habits, setHabits] = useState([]);
     const [hearts, setHearts] = useState([]); 
     const scrolling = React.useRef(new Animated.Value(0)).current;
@@ -71,4 +71,4 @@ function HomeScreen(props) {
     );
 }
 
-export default HomeScreen;
+export default HabitsScreen;

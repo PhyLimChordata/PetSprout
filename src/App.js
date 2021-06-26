@@ -1,22 +1,28 @@
-
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 
 import { NavigationContainer } from '@react-navigation/native';
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { createStackNavigator } from "@react-navigation/stack";
+import {createStackNavigator} from "@react-navigation/stack";
+
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import TabOne from './frontend/screens/TabOne';
 import TabTwo from './frontend/screens/TabTwo';
 import TabThree from './frontend/screens/TabThree';
+import HabitScreen from './frontend/screens/HabitsScreen';
 
-import ColorSet from './frontend/resources/themes/Global'
-import HomeScreens from './frontend/screens/HomeScreen';
+import ColorSet from './frontend/resources/themes/Global';
+
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 const Tab = createBottomTabNavigator();
 
+const Stack = createStackNavigator();
+
 export default function App() {
-  const [isloggedin, setlogged] = useState(true);
+  const [isloggedin, setlogged] = useState(false);
 
   const detectLogin = async () => {
     try {
@@ -31,20 +37,20 @@ export default function App() {
     }
   }
 
-  useEffect(() => {
+  useEffect(()=>{
     detectLogin()
-  }, [])
+  },[])
 
   return (
     <NavigationContainer>
       <Stack.Navigator headerMode="none">
         {/* {
           !isloggedin ?
-            (<><Stack.Screen name="LoginScreen" component={LoginScreen} />
-              <Stack.Screen name="SignupScreen" component={SignupScreen} /></>) :
-            <Stack.Screen name="HomeScreen" component={HomeScreen} />
+          (<><Stack.Screen name="LoginScreen" component={LoginScreen} />
+          <Stack.Screen name="SignupScreen" component={SignupScreen} /></>) :
+          <Stack.Screen name="HomeScreen" component={HomeScreen} />
         } */}
-        {/* <Stack.Screen name="LoginScreen" component={LoginScreen} />
+         {/* <Stack.Screen name="LoginScreen" component={LoginScreen} />
         <Stack.Screen name="SignupScreen" component={SignupScreen} />  */}
         <Stack.Screen name="HomeScreen" component={HomeScreen} />
       </Stack.Navigator>
@@ -54,17 +60,15 @@ export default function App() {
 
 function HomeScreen(props) {
   return (
-    <NavigationContainer independent={true}>
-      <Tab.Navigator initialRouteName="TabOne" backBehavior="order" tabBarOptions={{
-        activeTintColor: ColorSet.examplePrimary
-      }}>
-        <Tab.Screen name="TabOne" component={HomeScreens} options={{
+   <NavigationContainer independent={true}>
+      <Tab.Navigator  initialRouteName="TabOne" backBehavior="order" tabBarOptions={{
+            activeTintColor: ColorSet.examplePrimary}}>
+        <Tab.Screen name="TabOne" component={HabitScreen} options={{
           tabBarLabel: 'TabOne',
-          tabBarIcon: ({ color, size }) => (<MaterialCommunityIcons name="home" color={color} size={size} />)
-        }} />
+          tabBarIcon: ({ color, size }) => (<MaterialCommunityIcons name="home" color={color} size={size} />)}}/>
         <Tab.Screen name="TabTwo" component={TabTwo} />
         <Tab.Screen name="TabThree" component={TabThree} />
-      </Tab.Navigator>
+        </Tab.Navigator>    
     </NavigationContainer>
-  );
+  )
 }

@@ -26,7 +26,10 @@ function Habits(props) {
 }
 
 function Capitalize(str){
-    return str.charAt(0).toUpperCase() + str.slice(1);
+    if (str != null) {
+        return str.charAt(0).toUpperCase() + str.slice(1);
+    }
+    return "";
 }
 
 function DaysOfTheWeek(arr) {
