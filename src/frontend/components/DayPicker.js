@@ -8,14 +8,14 @@ function DayPicker(props) {
     //Check for the day
     if (1) {
         return (
-                <TouchableHighlight style={styles.Circle} onPress={() => changeCompletion}>
+                <TouchableHighlight style={styles.circle} onPress={() => changeCompletion}>
                 <View />
                 </TouchableHighlight>
         );
     }
 
     return (
-        <TouchableHighlight style={styles.TodayCircle} onPress={() => changeCompletion}>
+        <TouchableHighlight style={styles.todayCircle} onPress={() => changeCompletion}>
             <View />
         </TouchableHighlight>
     );

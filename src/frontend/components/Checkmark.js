@@ -6,7 +6,7 @@ import styles from '../styling/Habits';
 function Checkmark(props) {
     return (
         <TouchableHighlight onPress={() => changeCompletion}>
-            <Image style={styles.Checkmark} source={require('../resources/images/Checkmark.png')}/>
+            <Image style={styles.checkmark} source={require('../resources/images/Checkmark.png')}/>
         </TouchableHighlight>
     );
 }

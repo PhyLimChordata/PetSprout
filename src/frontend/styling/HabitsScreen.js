@@ -7,24 +7,24 @@ export default StyleSheet.create({
         backgroundColor: ColorSet.white,
         padding: 20
     },
+    header: {
+        flex: 2,
+        flexDirection: 'row',
+        alignItems: 'flex-start'
+    },
     container: {
         flex: 19,
         backgroundColor: ColorSet.white,
         alignItems: "center",
         justifyContent: "center"
     },
+    middleComponent: {
+        flex:8
+    },
     creature: {
         width: 200,
         height: 200,
         marginBottom: 30
-    },
-    header: {
-        flex: 2,
-        flexDirection: 'row',
-        alignItems: 'flex-start'
-    },
-    middleComponent: {
-        flex:8
     },
     scrollViewContainer: {
        flex: 19,

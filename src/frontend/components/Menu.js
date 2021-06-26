@@ -6,7 +6,7 @@ import styles from '../styling/Habits';
 function Menu(props) {
     return (
         <TouchableHighlight onPress={() => changeCompletion}>
-            <Image style={styles.Menu} source={require('../resources/images/Menu.png')}/>
+            <Image style={styles.menu} source={require('../resources/images/Menu.png')}/>
         </TouchableHighlight>
     );
 }

@@ -6,9 +6,9 @@ import styles from '../styling/Habits';
 function Ellipsis(props) {
     return (
         <View style={styles.horizontalContainer}>
-            <View style={styles.EllipsisCircle}/>
-            <View style={styles.EllipsisCircle}/>
-            <View style={styles.EllipsisCircle}/>
+            <View style={styles.ellipsisCircle}/>
+            <View style={styles.ellipsisCircle}/>
+            <View style={styles.ellipsisCircle}/>
         </View>
     );
 }
