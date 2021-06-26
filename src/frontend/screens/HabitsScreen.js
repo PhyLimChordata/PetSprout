@@ -1,10 +1,9 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { View, Text, Image, ScrollView, Animated } from 'react-native';
+import React, { useState, useEffect} from 'react';
+import { View, Image, Animated } from 'react-native';
 
-import styles from '../styling/Tabs'
+import styles from '../styling/HabitsScreen'
 import Habits from '../components/Habits'
 import Menu from '../components/Menu'
-import Checkmark from '../components/Checkmark'
 import ExperienceBar from '../components/ExperienceBar'
 
 function HabitsScreen(props) {
@@ -29,7 +28,7 @@ function HabitsScreen(props) {
     }
 
     return (
-        <View style={styles.headcontainer}>
+        <View style={styles.headContainer}>
             <View style={styles.header}>
                 <Menu/>
                 <View style={styles.middleComponent}/>
@@ -38,10 +37,10 @@ function HabitsScreen(props) {
                 })} */}
             </View>
             <View style={styles.container}>
-                <Image style={styles.Creature} source={require('../resources/images/Egg.gif')}/>
+                <Image style={styles.creature} source={require('../resources/images/Egg.gif')}/>
                 <ExperienceBar/>
             </View>
-        <View style={styles.c}>
+            <View style={styles.scrollViewContainer}>
                 <Animated.ScrollView showsVerticalScrollIndicator={false}
                     onScroll={Animated.event(
                         [{ nativeEvent: { contentOffset: { y: scrolling }}}],
