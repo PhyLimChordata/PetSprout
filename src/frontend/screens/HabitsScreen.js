@@ -38,7 +38,7 @@ function HabitsScreen(props) {
             </View>
             <View style={styles.verticalContainer}>
                 <Image style={styles.creature} source={require('../resources/images/Egg.gif')}/>
-                <ExperienceBar/>
+                <ExperienceBar width='28%'/>
             </View>
             <View style={styles.scrollViewContainer}>
                 <Animated.ScrollView showsVerticalScrollIndicator={false}
