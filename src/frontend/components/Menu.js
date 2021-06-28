@@ -1,13 +1,13 @@
 import React, {useState} from 'react';
-import {Image, TouchableHighlight} from 'react-native';
+import {Image, TouchableOpacity} from 'react-native';
 
 import styles from '../styling/Habits';
 
 function Menu(props) {
     return (
-        <TouchableHighlight onPress={() => changeCompletion}>
+        <TouchableOpacity activeOpacity={0.6} onPress={() => changeCompletion}>
             <Image style={styles.menu} source={require('../resources/images/Menu.png')}/>
-        </TouchableHighlight>
+        </TouchableOpacity>
     );
 }
 

@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, TouchableHighlight} from 'react-native';
+import {View, TouchableOpacity} from 'react-native';
 
 import styles from '../styling/Habits';
 
@@ -8,16 +8,16 @@ function DayPicker(props) {
     //Check for the day
     if (1) {
         return (
-                <TouchableHighlight style={styles.circle} onPress={() => changeCompletion}>
+                <TouchableOpacity activeOpacity={0.6} style={styles.circle} onPress={() => changeCompletion}>
                 <View />
-                </TouchableHighlight>
+                </TouchableOpacity>
         );
     }
 
     return (
-        <TouchableHighlight style={styles.todayCircle} onPress={() => changeCompletion}>
+        <TouchableOpacity activeOpacity={0.6} style={styles.todayCircle} onPress={() => changeCompletion}>
             <View />
-        </TouchableHighlight>
+        </TouchableOpacity>
     );
 }
 
