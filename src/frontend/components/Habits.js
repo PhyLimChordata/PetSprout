@@ -19,7 +19,6 @@ function Habits(props) {
             </View>
             <View style={styles.container}>
                 <Ellipsis/>
-                <Checkmark/>
             </View>
         </View>
     );

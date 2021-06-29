@@ -5,12 +5,12 @@ export default StyleSheet.create({
     horizontalContainer: {
         flexDirection: 'row',
         borderRadius: 8,
-        backgroundColor: ColorSet.SecondaryGreen,
-        marginBottom: 15
+        backgroundColor: ColorSet.SecondaryGreen
     },
     leftContainer: {
         flex: 2,
-        padding: 15
+        padding: 20,
+        paddingBottom: 30
     },
     container: {
         backgroundColor: ColorSet.SecondaryGreen,
@@ -56,7 +56,7 @@ export default StyleSheet.create({
         borderRadius: 3,
         backgroundColor: ColorSet.QuaternaryGreen
     },
-    checkmark: {
+    swipeIcon: {
         width: 30,
         height: 30
     },

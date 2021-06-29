@@ -10,7 +10,8 @@ const ColorSet = {
     QuaternaryGreen: '#9CC69B',
     QuinaryGreen: '#6E8F6D',
     BackgroundGrey: '#505050',
-    SecondaryBlue: '#95D1D4'
+    TertiaryBlue: '#95D1D4',
+    TertiaryRed: '#FF8D8D'
 }
 
 export default ColorSet;
