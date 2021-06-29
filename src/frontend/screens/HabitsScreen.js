@@ -1,15 +1,54 @@
 import React, { useState, useEffect} from 'react';
-import { View, Image, Animated } from 'react-native';
+import { View, Image, Animated, ScrollView } from 'react-native';
 
 import styles from '../styling/HabitsScreen'
 import Habits from '../components/Habits'
 import Menu from '../components/Menu'
 import ExperienceBar from '../components/ExperienceBar'
+import Checkmark from '../components/Checkmark';
+import Trash from '../components/Trash';
+
+import Swipeable from 'react-native-gesture-handler/Swipeable';
+import ColorSet from '../resources/themes/Global';
+
 
 function HabitsScreen(props) {
     const [habits, setHabits] = useState([]);
     const [hearts, setHearts] = useState([]); 
     const scrolling = React.useRef(new Animated.Value(0)).current;
+
+    const leftSwipe = (progress, dragX)=> {
+        const scale = dragX.interpolate({
+            inputRange: [0, 100],
+            outputRange: [0, 1],
+            extrapolate: 'clamp'
+        });
+
+        return(
+            <View style={{backgroundColor: ColorSet.TertiaryRed, borderRadius: 8, height: "100%", width: "100%", justifyContent: "center",alignItems:"flex-start", padding: 20}}>
+                <Animated.View style={{transform:[{scale}]}}>
+                    <Trash/>
+                </Animated.View>
+            </View>
+        )   
+    }
+
+    
+    const rightSwipe = (progress, dragX)=> {
+        const scale = dragX.interpolate({
+            inputRange: [-100, 0],
+            outputRange: [1, 0],
+            extrapolate: 'clamp'
+        });
+
+        return(
+            <View style={{backgroundColor: ColorSet.TertiaryBlue, borderRadius: 8, height: "100%", width: "100%", justifyContent: "center", alignItems:"flex-end", padding:20}}>
+                <Animated.View style={{transform:[{scale}]}}>
+                    <Checkmark/>
+                </Animated.View>
+            </View>
+        )   
+    }
     
     useEffect(() => {
         if (habits.length == 0) 
@@ -45,7 +84,8 @@ function HabitsScreen(props) {
                     onScroll={Animated.event(
                         [{ nativeEvent: { contentOffset: { y: scrolling }}}],
                         {useNativeDriver:true},
-                    )}>
+                    )}
+                    decelerationRate={'normal'}>
                     
                     {habits.map((data, index) => {
                             const scale = scrolling.interpolate ({
@@ -59,9 +99,20 @@ function HabitsScreen(props) {
                             })
 
                         return (
-                            <Animated.View style={{opacity, transform: [{scale}]}}>
-                                <Habits name={data.extra} arr={[1, 2, 3, 4, 5, 6, 7]}/>
-                            </Animated.View>
+                                <View>
+                                    <Swipeable
+                                    renderLeftActions={leftSwipe}
+                                    renderRightActions={rightSwipe}
+                                    // onSwipeableLeftOpen={}
+                                    // onSwipeableRightOpen={}>
+                                    >
+                                        <Animated.View style={{opacity, transform: [{scale}]}}>
+                                            <Habits name={data.extra} arr={[1, 2, 3, 4, 5, 6, 7]}/>
+                                        </Animated.View>  
+                                    </Swipeable>
+                                    <View style={{height:15}}></View>
+                                </View>
+                               
                         )
                     })}
                 </Animated.ScrollView>
