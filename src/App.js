@@ -35,7 +35,7 @@ export default function App() {
       <Tab.Navigator  initialRouteName="TabOne" backBehavior="order" tabBarOptions={{
           activeTintColor: ColorSet.QuinaryGreen,
           inactiveTintColor: ColorSet.white,
-          style: { backgroundColor: ColorSet.SecondaryGreen}
+          style: { backgroundColor: ColorSet.TertiaryGreen}
 
       }}>
         <Tab.Screen name="Calendar" component={TabOne} options={{
