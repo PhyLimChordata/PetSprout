@@ -49,6 +49,14 @@ function HabitsScreen(props) {
             </View>
         )   
     }
+
+    const deleteHabit = () => {
+        console.log("it works!");
+    }
+
+    const completeHabit = () => {
+        console.log("it works!");
+    }
     
     useEffect(() => {
         if (habits.length == 0) 
@@ -103,9 +111,8 @@ function HabitsScreen(props) {
                                     <Swipeable
                                     renderLeftActions={leftSwipe}
                                     renderRightActions={rightSwipe}
-                                    // onSwipeableLeftOpen={}
-                                    // onSwipeableRightOpen={}>
-                                    >
+                                    onSwipeableLeftOpen={deleteHabit}
+                                    onSwipeableRightOpen={completeHabit}>
                                         <Animated.View style={{opacity, transform: [{scale}]}}>
                                             <Habits name={data.extra} arr={[1, 2, 3, 4, 5, 6, 7]}/>
                                         </Animated.View>  
