@@ -7,16 +7,19 @@ const jwt = require("jsonwebtoken")
 module.exports = async(req,res) => {
     try{
         let{userName,email,password}=req.body
-      
+
         let errors = validationResult(req)
         if(!errors.isEmpty())
             return res.status(400).json({error:error.array()})
 
+        if(userName === "") res.status(400).json("username is required");
+        if(email === "") res.status(400).json("email is required");
+        
         let user = await User.findOne({email}).select('-password')
         if(user)
             return res.statu(401).send("User exists")
 
-        let fetchUserName = await User.findOne({userName}).send('-password')
+        let fetchUserName = await User.findOne({userName}).select('-password')
         if(fetchUserName===userName)
             return res.status(401).send("User Name exists")
 
@@ -49,11 +52,9 @@ module.exports = async(req,res) => {
                 res.json({token})
             }
         )
-
-        res.send('User is created successfully')
     }
     catch(error){
-        console.log(error.message)
+        console.log(error)
         return res.status(500).send("Server error")
     }
 }
