@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import {View, Image, TouchableOpacity} from 'react-native';
+import {View, TouchableOpacity, Animated} from 'react-native';
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -20,6 +20,15 @@ const CustomTabBarButton = ({children, onPress}) => (
         </View>
     </TouchableOpacity>)
 
+
+const animation = new Animated.Value(0);
+
+
+const rotate = animation.interpolate({
+    inputRange: [0, 1],
+    outputRange: ['0deg', '360deg'],
+});
+
 export default function App() {
   return (
     <NavigationContainer>
@@ -38,16 +47,31 @@ export default function App() {
                           tabBarIcon: ({ color, size }) => (<MaterialCommunityIcons name="home" color={color} size={size} />)}}
           />
         <Tab.Screen name={'TabMiddle'} component={TabTwo}
+                    listeners={{
+                        tabPress: e => {
+                            // rotate
+                            Animated.timing(animation, {
+                                toValue: 1,
+                                duration: 800,
+                                useNativeDriver: false,
+                            }).start(() => {
+                                animation.setValue(0);
+                            });
+                            // Prevent default action
+                            e.preventDefault();
+                        }
+                    }}
                     options={{
                         tabBarLabel:() => {return null},
                         tabBarIcon: ({focused}) => (
-                            <Image
+                            <Animated.Image
                             source={require("./frontend/resources/assets/plus-sign.png")}
                             resizeMode="contain"
                             style={{
                                 width:35,
                                 height:35,
-                                tintColor: focused ? ColorSet.QuinaryGreen :ColorSet.white
+                                tintColor: ColorSet.white,
+                                transform: [ { rotate: rotate }]
                             }}
                             />
                         ),
