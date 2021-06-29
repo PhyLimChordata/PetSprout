@@ -10,7 +10,7 @@ function ExperienceBar(props) {
     var experience = {
         width: props.width,
         height: 15,
-        backgroundColor: ColorSet.SecondaryBlue,
+        backgroundColor: ColorSet.TertiaryBlue,
         borderRadius: 10
     }
     return (

@@ -108,16 +108,17 @@ function HabitsScreen(props) {
 
                         return (
                                 <View>
-                                    <Swipeable
-                                    renderLeftActions={leftSwipe}
-                                    renderRightActions={rightSwipe}
-                                    onSwipeableLeftOpen={deleteHabit}
-                                    onSwipeableRightOpen={completeHabit}>
-                                        <Animated.View style={{opacity, transform: [{scale}]}}>
+                                    <Animated.View style={{opacity, transform: [{scale}]}}>
+                                        <Swipeable
+                                        renderLeftActions={leftSwipe}
+                                        renderRightActions={rightSwipe}
+                                        onSwipeableLeftOpen={deleteHabit}
+                                        onSwipeableRightOpen={completeHabit}>
                                             <Habits name={data.extra} arr={[1, 2, 3, 4, 5, 6, 7]}/>
-                                        </Animated.View>  
-                                    </Swipeable>
-                                    <View style={{height:15}}></View>
+                                        </Swipeable>
+                                        <View style={{height:15}}></View>
+                                    </Animated.View>  
+
                                 </View>
                                
                         )

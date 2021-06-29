@@ -78,11 +78,5 @@ export default StyleSheet.create({
         height: 15,
         backgroundColor: ColorSet.lightgrey,
         borderRadius: 10
-    },
-    expBars: {
-        width: "28%",
-        height: 15,
-        backgroundColor: ColorSet.SecondaryBlue,
-        borderRadius: 10
     }
 });
