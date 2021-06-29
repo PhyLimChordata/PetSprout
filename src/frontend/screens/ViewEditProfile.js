@@ -1,49 +1,68 @@
-import React from 'react';
-import { createMuiTheme } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
-import ColorSet from '../resources/themes/Global.js';
-import { Colors } from 'react-native/Libraries/NewAppScreen';
-import { Typography } from '@material-ui/core';
-import { ThemeProvider } from '@react-navigation/native';
+import React, { useEffect } from 'react';
+import {View, Text, ColorPropType} from 'react-native';
+import styles from '../styling/ViewEditBox'
+import { SafeAreaView, StyleSheet, TextInput } from "react-native";
+import { onChange } from 'react-native-reanimated';
+import ColorSet from '../resources/themes/Global';
 
-const theme = createMuiTheme({
-    typography: {
-        fontFamily: 'Roboto',
-    },
-    palette: {
-        primary: {
-            main: ColorSet.PrimaryGreen,
-        },
-        secondary: {
-            main: ColorSet.SecondaryGreen,
-        },
-        background: {
-            main: 'white',
-            dark: Colors.BackgroundGrey,
-        }
-    }
-});
-
-function ProfileEdit(props){
+const ProfileEdit = (props) => {
     return(
-        <View>
-           <EditBox tag="Username" defaultValue="My username"/> 
+        <View style={styles.container}>
+            <EditBox tag="Username" def="Example" place="Username"/>
+            <EditBox tag="Email" def="Example@gmail.com" place="Email"/>
+            <EditBox tag="About" def="" mult={true} numLines={3} backColor={true}/>
+            <View style={styles.formContainer}>
+            <Text style={styles.textTitle}>
+                Account Created On
+            </Text>
+            <Text style={styles.textInput}>
+                Date
+            </Text>
+            </View>
         </View>
         
     );
 }
 
 const EditBox = (props) => {
+    const [text, onChangeText] = React.useState(props.def);
+    const [focused, onSelected] = React.useState(false);
+
+    var color = ColorSet.white;
+
+    const handleSelect = () => {
+        console.log("Focused");
+        color = ColorSet.PrimaryGreen
+        onSelected(true);
+    }
+
+    const handleDeselect = () => {
+        console.log("Not focused");
+        color = ColorSet.PrimaryGreen
+        onSelected(false);
+    }
+
+    useEffect(() => {
+
+    }, [focused])
+
     return(
-        <ThemeProvider theme={theme}>
-            <Typography>{props.tag}</Typography>
-            <TextField
-                variant="standard"
-                size="small"
-                defaultValue={props.defaultValue}
-                {...props.multiline}
-                />
-        </ThemeProvider>
+        <View style={styles.formContainer}>
+            <Text style={styles.textTitle}>
+                {props.tag}
+            </Text>
+            <TextInput
+                onFocus={handleSelect}
+                onBlur={handleDeselect}
+                onChangeText={onChangeText}
+                value={text}
+                placeholder={props.place}
+                style={props.mult ? styles.textMultiInput : styles.textInput }
+                multiline={props.mult}
+                numberOfLines={props.numLines}
+            />
+        </View>
+
     );
 };
 
