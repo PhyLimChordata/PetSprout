@@ -9,3 +9,11 @@ module.exports.registerUserValidator = [
 module.exports.loginUserValidator = [
     check('userName','User Name is empty').not().isEmpty()
 ]
+
+module.exports.userCreateHabitValidator = [
+    check('title', 'Title is empty').not().isEmpty()
+]
+
+module.exports.markTodoValidator = [
+    check('expValue',"Exp value must be provided").isNumeric()
+]

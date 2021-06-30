@@ -29,6 +29,7 @@ connection.once('open', () => {
 //app.use('/example', exampleRouter);
 
 app.use('/api/v1.0.0/user', require('./routes/userRoute'));
+app.use('/api/v1.0.0/habit',require('./routes/habitRoute'));
 
 app.listen(port, () => {
     console.log(`Server is running on port: ${port}`);
