@@ -52,7 +52,7 @@ export default function App() {
                             // rotate
                             Animated.timing(animation, {
                                 toValue: 1,
-                                duration: 800,
+                                duration: 275,
                                 useNativeDriver: false,
                             }).start(() => {
                                 animation.setValue(0);
