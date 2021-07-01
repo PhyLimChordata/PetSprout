@@ -1,1 +1,1 @@
-# HabitStudyApp
+# HabiPets
