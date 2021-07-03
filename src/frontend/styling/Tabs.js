@@ -2,16 +2,14 @@ import { StyleSheet, Platform } from 'react-native';
 import ColorSet from '../resources/themes/Global';
 
 export default StyleSheet.create({
-    headcontainer: {
-        flex: 19,
-        backgroundColor: ColorSet.white,
-        padding: 20
+    headContainer: {
+        flex: 1,
+        backgroundColor: ColorSet.white
     },
     container: {
-        flex: 19,
-        backgroundColor: ColorSet.white,
-        alignItems: "center",
-        justifyContent: "center"
+        flex: 10,
+        alignItems: 'center',
+        justifyContent: 'center',
     },
     textInput: {
         flex: 0.1,
