@@ -2,9 +2,12 @@ import { StyleSheet, Platform } from 'react-native';
 import ColorSet from '../resources/themes/Global';
 
 export default StyleSheet.create({
-    container: {
+    headContainer: {
         flex: 1,
-        backgroundColor: ColorSet.white,
+        backgroundColor: ColorSet.white
+    },
+    container: {
+        flex: 10,
         alignItems: 'center',
         justifyContent: 'center',
     },

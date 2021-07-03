@@ -65,7 +65,7 @@ export default function App() {
                         tabBarLabel:() => {return null},
                         tabBarIcon: ({focused}) => (
                             <Animated.Image
-                            source={require("./frontend/resources/assets/plus-sign.png")}
+                            source={require("./frontend/resources/images/plus-sign.png")}
                             resizeMode="contain"
                             style={{
                                 width:35,
