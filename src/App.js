@@ -1,47 +1,36 @@
-import React, {useState, useEffect} from 'react';
-import {Image, Animated} from 'react-native';
-
+import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
+import {View, TouchableOpacity, Animated} from 'react-native';
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import {createStackNavigator} from "@react-navigation/stack";
-
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import TabOne from './frontend/screens/TabOne';
 import TabTwo from './frontend/screens/TabTwo';
 import TabThree from './frontend/screens/TabThree';
-import HabitScreen from './frontend/screens/HabitsScreen';
+import HabitsScreen from './frontend/screens/HabitsScreen';
 
-import ColorSet from './frontend/resources/themes/Global';
-
-import AsyncStorage from '@react-native-async-storage/async-storage';
-
+import ColorSet from './frontend/resources/themes/Global'
 
 const Tab = createBottomTabNavigator();
 
-const Stack = createStackNavigator();
+const CustomTabBarButton = ({children, onPress}) => (
+    <TouchableOpacity activeOpacity={1} style={{top:-30, width:70, height:70, justifyContent:"center", alignItems:"center"}} onPress={onPress}>
+        <View style={{ backgroundColor:ColorSet.QuaternaryGreen, width:70, height:70,borderRadius:35}}>
+            {children}
+        </View>
+    </TouchableOpacity>)
+
+
+const animation = new Animated.Value(0);
+
+
+const rotate = animation.interpolate({
+    inputRange: [0, 1],
+    outputRange: ['0deg', '360deg'],
+});
 
 export default function App() {
-  const [isloggedin, setlogged] = useState(false);
-
-  const detectLogin = async () => {
-    try {
-      const token = await AsyncStorage.getItem('token');
-      if (token) {
-        setlogged(true);
-      } else {
-        setlogged(false);
-      }
-    }
-    catch (e) {
-    }
-  }
-
-  useEffect(()=>{
-    detectLogin()
-  },[])
-
   return (
     <NavigationContainer>
       <Tab.Navigator  initialRouteName="TabOne" backBehavior="order" tabBarOptions={{
@@ -50,7 +39,7 @@ export default function App() {
           style: { backgroundColor: ColorSet.TertiaryGreen}
 
       }}>
-        <Tab.Screen name="Calendar" component={TabOne} options={{
+        <Tab.Screen name="Calendar" component={HabitsScreen} options={{
           tabBarLabel: 'Calendar',
           tabBarIcon: ({ color, size }) => (<MaterialCommunityIcons name="calendar" color={color} size={size} />)}}/>
           <Tab.Screen name="Tab" component={TabThree}
@@ -87,9 +76,9 @@ export default function App() {
                             }}
                             />
                         ),
-                        // tabBarButton: (props) => (
-                        //     <CustomTabBarButton {... props}/>
-                        // ),
+                        tabBarButton: (props) => (
+                            <CustomTabBarButton {... props}/>
+                        ),
                     }}
 
         />
@@ -106,19 +95,4 @@ export default function App() {
         </Tab.Navigator>
     </NavigationContainer>
   );
-}
-
-function HomeScreen(props) {
-  return (
-   <NavigationContainer independent={true}>
-      <Tab.Navigator  initialRouteName="TabOne" backBehavior="order" tabBarOptions={{
-            activeTintColor: ColorSet.examplePrimary}}>
-        <Tab.Screen name="TabOne" component={HabitScreen} options={{
-          tabBarLabel: 'TabOne',
-          tabBarIcon: ({ color, size }) => (<MaterialCommunityIcons name="home" color={color} size={size} />)}}/>
-        <Tab.Screen name="TabTwo" component={TabTwo} />
-        <Tab.Screen name="TabThree" component={TabThree} />
-        </Tab.Navigator>    
-    </NavigationContainer>
-  )
 }
