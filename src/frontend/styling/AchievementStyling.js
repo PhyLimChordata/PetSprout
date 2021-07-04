@@ -2,7 +2,7 @@ import { StyleSheet, Platform } from 'react-native';
 import ColorSet from '../resources/themes/Global';
 
 export default StyleSheet.create({
-    achivementIcon: {
+    achievementIcon: {
         height: 100,
         width: 100,
         borderRadius: 50,

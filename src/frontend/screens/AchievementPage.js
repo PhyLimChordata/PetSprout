@@ -11,7 +11,7 @@ function AchievementPage(props) {
     return(
         <View>
             <Text>Acheivements</Text>
-            <Image styles={styles.achievementIcon} source={require('../resources/assets/splash.png')}/>
+            <Image source={require('../resources/assets/icon.png')}/>
 
         </View>
     );
