@@ -8,6 +8,7 @@ import TabOne from './frontend/screens/TabOne';
 import TabTwo from './frontend/screens/TabTwo';
 import TabThree from './frontend/screens/TabThree';
 import ProfileEdit from './frontend/screens/ViewEditProfile';
+import AchievementPage from './frontend/screens/AchievementPage';
 
 import ColorSet from './frontend/resources/themes/Global'
 
@@ -23,7 +24,7 @@ export default function App() {
           tabBarIcon: ({ color, size }) => (<MaterialCommunityIcons name="home" color={color} size={size} />)}}/>
         <Tab.Screen name="TabTwo" component={TabTwo} />
         <Tab.Screen name="TabThree" component={TabThree} />
-        <Tab.Screen name="Account" component={ProfileEdit} />
+        <Tab.Screen name="Account" component={AchievementPage} />
         </Tab.Navigator>    
     </NavigationContainer>
   );

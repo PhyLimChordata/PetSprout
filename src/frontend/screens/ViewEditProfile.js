@@ -5,7 +5,7 @@ import { SafeAreaView, StyleSheet, TextInput } from "react-native";
 import { onChange } from 'react-native-reanimated';
 import ColorSet from '../resources/themes/Global';
 
-const ProfileEdit = (props) => {
+function ProfileEdit (props) {
     return(
         <View style={styles.container}>
             <EditBox tag="Username" def="Example" place="Username"/>
