@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const authentication = require("../middleware/authentication");
+const mailingValidation = require("../middleware/mailingValidation");
 
 const registerUser = require("../function/user/registerUser");
 const loginUser = require("../function/user/loginUser");
@@ -11,7 +12,7 @@ const {
 } = require("../middleware/express-validator/expressValidator");
 
 // User router
-router.post("/register", registerUserValidator,registerUser);
+router.post("/register", registerUserValidator,mailingValidation,registerUser);
 router.post("/login",loginUserValidator,loginUser);
 router.get("/user_account_info",getuserAccount);
 
