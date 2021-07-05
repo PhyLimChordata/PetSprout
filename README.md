@@ -1,8 +1,19 @@
-# HabitStudyApp
+# HabiPets
+
+## Overview
+
+HabiPets is a mobile application which aims to provide a gamification of CBT(Cognitive Behavioural Therapy) and DBT (Dialectical Behavioural Therapy).
+
+HabiPets is a portmanteau of the words Habits and Pets
+and as the name suggests, the app focuses on building sustainable and healthy habits. Similar to that of a tamagotchi, each user will have a pet that will evolve and lose life points depending on the consistency of daily habits. Users will also have the ability to evolve and customize their companion gamifying the process.
+
+Other features of interest are tutorials, methods and/or worksheets commonly used in DBT and CBT while having the pet react positively or negatively depending on the user's activity.
+
+This project has achieved the recognition and guidance of the University of Toronto’s Psychology Professor: Steve Joordens.
 
 ## How To Run It Yourself:
 
-Upon cloning the HabitStudyApp folder.
+Upon cloning,
 There are dependencies that are required to be installed.
 Follow the steps carefully to ensure the code runs correctly on your respective devices.
 

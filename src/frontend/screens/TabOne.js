@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {View, Button, Text, TextInput} from 'react-native';
 
 import styles from '../styling/Tabs';
+import MenuHeader from '../components/MenuHeader';
 
 function TabOne(props) {
     const [content, setContent] = useState('');
@@ -26,11 +27,14 @@ function TabOne(props) {
     }
 
     return (
-        <View style={styles.container}>
-            <Text style={styles.textTitle}>Let's add an example!</Text>
-            <TextInput style={styles.textInput} value={content} onChangeText={(text)=>setContent(text)}></TextInput>
-            <TextInput defaultValue="Extra" style={styles.textInput} value={extra} onChangeText={(text)=>setExtra(text)}></TextInput>
-            <Button title="Add it to the Database" onPress = {() => inputExample()}></Button>
+        <View style={styles.headContainer}>
+            <MenuHeader text='Example'/>
+            <View style={styles.container}>
+                <Text style={styles.textTitle}>Let's add an example!</Text>
+                <TextInput style={styles.textInput} value={content} onChangeText={(text)=>setContent(text)}></TextInput>
+                <TextInput defaultValue="Extra" style={styles.textInput} value={extra} onChangeText={(text)=>setExtra(text)}></TextInput>
+                <Button title="Add it to the Database" onPress = {() => inputExample()}></Button>
+            </View>
         </View>
     );
 }
