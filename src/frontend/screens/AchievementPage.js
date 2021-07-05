@@ -2,25 +2,25 @@ import React, { useEffect } from 'react';
 import {View, Text, ColorPropType} from 'react-native';
 import styles from '../styling/AchievementStyling'
 import { Image, StyleSheet, TextInput } from "react-native";
-import { onChange } from 'react-native-reanimated';
-import ColorSet from '../resources/themes/Global';
-
-import icon from '../resources/assets/icon.png'
 
 function AchievementPage(props) {
     return(
-        <View>
+        <View style={styles.headContainer}>
             <Text>Acheivements</Text>
-            <Image source={require('../resources/assets/icon.png')}/>
+            <OneAchievement progress={0.5}/>
 
         </View>
     );
 }
 
 const OneAchievement = (props) => {
-    const sty = (props.progress > 33) ? (props.progress > 66 ? styles.achievementGold : styles.achievementSilver) : styles.achievementBronze;
+    const sty = (props.progress > 0.33) ? (props.progress > 0.66 ? styles.achievementGold : styles.achievementSilver) : styles.achievementBronze;
     return(
-        <Image source={props.icon} styles={[styles.achivementIcon, sty]}/>
+        <View>
+            <Image style={[styles.achievementIcon, sty]} source={require('../resources/assets/icon.png')}/>
+
+        </View>
+        
     );
 }
 
