@@ -1,17 +1,28 @@
 import { StyleSheet, Platform } from 'react-native';
 import ColorSet from '../resources/themes/Global';
 
+const iconWdith = '10vh';
+
 export default StyleSheet.create({
     headContainer: {
         flex: 1,
+        alignItems: 'center',
         backgroundColor: ColorSet.white
     },
+    achivementContainer: {
+        width: iconWdith,
+        margin: '2vw'
+    },  
+    achivementRow: {
+        display: 'flex',
+        flexDirection: 'row',
+    }, 
     achievementIcon: {
         resizeMode: 'contain',
-        width: '10vh',
-        height: '10vh',
+        width: iconWdith,
+        height: iconWdith,
         borderRadius: '50%',
-        borderWidth: '1vh',
+        borderWidth: '1.5vh',
     },
     achievementBronze: {
         borderColor: '#C6895E'
@@ -22,4 +33,9 @@ export default StyleSheet.create({
     achievementGold: {
         borderColor: '#FFC93E'
     },
+    progresBar: {
+        height: '1vh',
+        borderRadius: 10,
+        marginTop: '2vh',
+    }
 });
