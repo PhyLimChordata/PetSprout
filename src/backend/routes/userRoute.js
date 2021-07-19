@@ -1,6 +1,5 @@
 const router = require("express").Router();
 const authentication = require("../middleware/authentication");
-const mailingValidation = require("../middleware/mailingValidation");
 
 const registerUser = require("../function/user/registerUser");
 const loginUser = require("../function/user/loginUser");
@@ -8,13 +7,16 @@ const getuserAccount = require("../function/user/getUserAccount");
 
 const {
     registerUserValidator,
-    loginUserValidator
+    loginUserValidator,
+    sendActivationEmailValidator
 } = require("../middleware/express-validator/expressValidator");
 
 // User router
-router.post("/register", registerUserValidator,mailingValidation,registerUser);
+router.post("/register", registerUserValidator,registerUser.user_regist);
+router.post("/activation/:code/:email",registerUser.user_activation);
+router.post("/send_activate_email",sendActivationEmailValidator,registerUser.send_activate_email);
 router.post("/login",loginUserValidator,loginUser);
 router.get("/user_account_info",getuserAccount);
 
 
-module.exports = router
+module.exports = router;

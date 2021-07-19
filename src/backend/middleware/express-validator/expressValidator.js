@@ -17,3 +17,7 @@ module.exports.userCreateHabitValidator = [
 module.exports.markTodoValidator = [
     check('expValue',"Exp value must be provided").isNumeric()
 ]
+
+module.exports.sendActivationEmailValidator = [
+    check('email',"E-mail is empty").isEmail()
+]

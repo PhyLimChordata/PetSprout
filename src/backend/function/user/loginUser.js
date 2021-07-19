@@ -7,6 +7,7 @@ const jwt = require("jsonwebtoken");
 
 module.exports = async (req,res) => {
     try {
+        
         let{userName,password} = req.body;
 
         let errors = validationResult(req);
@@ -17,10 +18,11 @@ module.exports = async (req,res) => {
         if(!user)
             return res.status(404).json("User has not been created");
 
+        if(user.status===0) return res.status(400).json("User hasn't been activated");
+
         let matching=await bcryptjs.compare(password,user.password);
         if(!matching)
             return res.status(401).json("Wrong password");
-
             
         if(user.lastlogin!==null){
             let lastLoginYear = user.lastlogin.getFullYear();

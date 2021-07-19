@@ -3,12 +3,18 @@ const Schema = mongoose.Schema;
 
 const MailingValidationSchema = new Schema({
     email: {
-      type: String
+      type: String,
+      required: true
     },
     veri_code: {
-      type: String
+      type: String,
+      required: true
+    },
+    time:{
+      type: Date,
+      default: Date.now()
     }
 });
 
-  const mailingValidationSchema = mongoose.model("user", MailingValidationSchema);
+  const mailingValidationSchema = mongoose.model("mailing validation", MailingValidationSchema);
   module.exports = mailingValidationSchema;
