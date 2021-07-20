@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react';
-import {View, Text, ColorPropType} from 'react-native';
+import {View, Text } from 'react-native';
 import styles from '../styling/ViewEditBox'
-import { SafeAreaView, StyleSheet, TextInput } from "react-native";
-import { onChange } from 'react-native-reanimated';
+import { TextInput } from "react-native";
 import ColorSet from '../resources/themes/Global';
 
 function ProfileEdit (props) {
