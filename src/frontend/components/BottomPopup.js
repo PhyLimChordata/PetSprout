@@ -1,6 +1,7 @@
 import React from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
 import Modal from 'react-native-modal';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import ColorSet from "../resources/themes/Global";
 const TitledIcon = ({icon, onPress, title}) => (
@@ -14,9 +15,6 @@ const TitledIcon = ({icon, onPress, title}) => (
 )
 
 function BottomPopup(props) {
-    console.log(props)
-
-    console.log("changed");
     return (
             <Modal
                 swipeDirection="down"
@@ -32,8 +30,15 @@ function BottomPopup(props) {
                     backgroundColor:ColorSet.TertiaryGreen,
                     borderRadius:30,
                 }}>
-                    <View style={{marginHorizontal:30, marginTop:20}}>
-                        <Text style={{fontSize: 24, fontWeight: "bold", color:ColorSet.white, marginBottom:20}}>Create</Text>
+                    <View style={{marginHorizontal:30}}>
+                        <View style={{flexDirection:'row', justifyContent: 'space-between', alignItem:'center', marginTop:15}}>
+                            <Text style={{fontSize: 24, fontWeight: "bold", color:ColorSet.white, marginBottom:20}}>Create</Text>
+                            <TouchableOpacity style={{height:25}}onPress={() => props.setModalVisible(false)}>
+                            <MaterialCommunityIcons name="close-thick" color={"white"} size={25} />
+                            </TouchableOpacity>
+                        </View>
+
+
                         <View style={{flexDirection:"row", justifyContent:"space-around"}}>
                             <TitledIcon onPress={() => console.log("hi")} title={"Habits"}/>
                             <TitledIcon onPress={() => console.log("hey")} title={"Calender Entry"}/>

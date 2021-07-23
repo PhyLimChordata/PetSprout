@@ -90,7 +90,7 @@ export default function App() {
           <Tab.Screen name="TabFour" component={TabThree}
                       options={{
                           tabBarLabel: 'Temp2',
-                          tabBarIcon: ({ color, size }) => (<MaterialCommunityIcons name="home" color={color} size={size} />)}}
+                          tabBarIcon: ({ color, size }) => (<MaterialCommunityIcons name="close-thick" color={color} size={size} />)}}
           />
         <Tab.Screen name="TabThree" component={TabThree}
                     options={{
