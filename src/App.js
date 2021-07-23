@@ -1,6 +1,6 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import {View, TouchableOpacity, Animated} from 'react-native';
+import {Image, View, TouchableOpacity, Animated} from 'react-native';
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -8,6 +8,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import TabOne from './frontend/screens/TabOne';
 import TabTwo from './frontend/screens/TabTwo';
 import TabThree from './frontend/screens/TabThree';
+import BottomPopup from "./frontend/components/BottomPopup";
 
 import ColorSet from './frontend/resources/themes/Global'
 
@@ -21,16 +22,18 @@ const CustomTabBarButton = ({children, onPress}) => (
     </TouchableOpacity>)
 
 
-const animation = new Animated.Value(0);
-
-
-const rotate = animation.interpolate({
-    inputRange: [0, 1],
-    outputRange: ['0deg', '360deg'],
-});
+// const animation = new Animated.Value(0);
+//
+//
+// const rotate = animation.interpolate({
+//     inputRange: [0, 1],
+//     outputRange: ['0deg', '360deg'],
+// });
 
 export default function App() {
+    const [modalVisible, setModalVisible] = useState(false);
   return (
+      <>
     <NavigationContainer>
       <Tab.Navigator  initialRouteName="TabOne" backBehavior="order" tabBarOptions={{
           activeTintColor: ColorSet.QuinaryGreen,
@@ -50,13 +53,15 @@ export default function App() {
                     listeners={{
                         tabPress: e => {
                             // rotate
-                            Animated.timing(animation, {
-                                toValue: 1,
-                                duration: 275,
-                                useNativeDriver: false,
-                            }).start(() => {
-                                animation.setValue(0);
-                            });
+                            // Animated.timing(animation, {
+                            //     toValue: 1,
+                            //     duration: 500,
+                            //     useNativeDriver: false,
+                            // }).start(() => {
+                            //     animation.setValue(0);
+                            // });
+                            setModalVisible(true);
+                            // console.log('bud');
                             // Prevent default action
                             e.preventDefault();
                         }
@@ -64,14 +69,15 @@ export default function App() {
                     options={{
                         tabBarLabel:() => {return null},
                         tabBarIcon: ({focused}) => (
-                            <Animated.Image
+                            // <Animated.Image
+                            <Image
                             source={require("./frontend/resources/images/plus-sign.png")}
                             resizeMode="contain"
                             style={{
                                 width:35,
                                 height:35,
                                 tintColor: ColorSet.white,
-                                transform: [ { rotate: rotate }]
+                                // transform: [ { rotate: rotate }]
                             }}
                             />
                         ),
@@ -93,5 +99,7 @@ export default function App() {
         />
         </Tab.Navigator>
     </NavigationContainer>
+          <BottomPopup modalVisible={modalVisible} setModalVisible={setModalVisible}/>
+      </>
   );
 }
