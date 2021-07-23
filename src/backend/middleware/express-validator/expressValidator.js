@@ -21,3 +21,7 @@ module.exports.markTodoValidator = [
 module.exports.sendActivationEmailValidator = [
     check('email',"E-mail is empty").isEmail()
 ]
+
+module.exports.sendReportValidator = [
+    check('message',"Message is empty").not().isEmpty()
+]

@@ -12,8 +12,7 @@ const HabitSchema = new Schema({
     },
     heart: {
         type: Number,
-        default: 3,
-        max: 3
+        default: 3
     },
     habitList: [
         {
