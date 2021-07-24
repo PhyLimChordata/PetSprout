@@ -48,7 +48,6 @@ const CustomTabBarButton = ({ children, onPress }) => (
 const animation = new Animated.Value(0);
 
 export default function App() {
-	const [isloggedin, setlogged] = useState(null);
 	const [token, setToken] = useState(null);
 
 	const authContext = useMemo(() => {
@@ -57,7 +56,7 @@ export default function App() {
 				setToken(token);
 			},
 			signUp: () => {
-				setToken('asdf');
+				setToken('temporaryToken');
 			},
 			signOut: () => {
 				setToken(null);

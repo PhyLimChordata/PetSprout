@@ -5,7 +5,6 @@ const User = require('../../schemas/UserSchema');
 const Habit = require('../../schemas/HabitSchema');
 const Mailing = require('../../schemas/mailingValidationSchema');
 const bcryptjs = require('bcryptjs');
-//const jwt = require("jsonwebtoken");
 
 const user_regist = async (req, res) => {
 	try {
