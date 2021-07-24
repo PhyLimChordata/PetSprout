@@ -6,7 +6,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import ColorSet from "../resources/themes/Global";
 const TitledIcon = ({icon, onPress, title}) => (
         <View style={{width:75}}>
-    <TouchableOpacity activeOpacity={1} style={{justifyContent:"center", alignItems:"center"}} onPress={onPress}>
+    <TouchableOpacity style={{justifyContent:"center", alignItems:"center"}} onPress={onPress}>
         <View style={{ backgroundColor:ColorSet.white, width:36, height:36,borderRadius:18}}>
         </View>
     </TouchableOpacity>
@@ -19,7 +19,6 @@ function BottomPopup(props) {
             <Modal
                 swipeDirection="down"
                 onSwipeComplete={(e) => {props.setModalVisible(false)}}
-                animationType="slide"
                 transparent={true}
                 backdropOpacity={0.2}
                 style={{ justifyContent: 'flex-end', margin: 0}}
