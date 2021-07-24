@@ -10,7 +10,26 @@ function LoginScreen(props) {
 	const [primaryInfo, setPrimaryInfo] = useState('');
 	const [password, setPassword] = useState('');
 
-	const { signIn } = useContext(AuthContext);
+	const { logIn } = useContext(AuthContext);
+
+	const attemptLogin = () => {
+		fetch('http://localhost:5000/api/v1.0.0/user/login', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				userName: primaryInfo,
+				password: password,
+			}),
+		})
+			.then((res) => {
+				res.json().then((data) => {
+					logIn(data.token);
+				});
+			})
+			.catch();
+	};
 
 	return (
 		<View style={styles.container}>
@@ -35,7 +54,7 @@ function LoginScreen(props) {
 			</View>
 			<TouchableHighlight
 				style={styles.AuthenticationButton}
-				onPress={() => signIn()}
+				onPress={() => attemptLogin()}
 			>
 				<Text style={styles.AuthenticationButtonText}>Login</Text>
 			</TouchableHighlight>

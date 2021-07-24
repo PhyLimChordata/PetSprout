@@ -53,11 +53,11 @@ export default function App() {
 
 	const authContext = useMemo(() => {
 		return {
-			signIn: () => {
-				setToken('asdf');
+			logIn: (token) => {
+				setToken(token);
 			},
 			signUp: () => {
-				setToken('');
+				setToken('asdf');
 			},
 			signOut: () => {
 				setToken(null);

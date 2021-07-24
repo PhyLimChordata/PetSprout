@@ -18,7 +18,8 @@ module.exports = async (req,res) => {
         if(!user)
             return res.status(404).json("User has not been created");
 
-        if(user.status===0) return res.status(400).json("User hasn't been activated");
+        if(user.status===0) 
+            return res.status(400).json("User hasn't been activated");
 
         let matching=await bcryptjs.compare(password,user.password);
         if(!matching)
@@ -53,14 +54,13 @@ module.exports = async (req,res) => {
                 id: user._id
             }
         };
-
         jwt.sign(
             payload,
             process.env.JSONWEBTOKEN,
             {expiresIn: 3600},
             (err,token) =>{
                 if(err) throw err
-                res.json({token})
+                res.status(200).json({"token": token});
             }
         );   
 

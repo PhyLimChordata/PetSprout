@@ -15,7 +15,7 @@ const {
 
 // User router
 router.post('/register', registerUserValidator, registerUser.user_regist);
-router.post('/activation/:code/:email', registerUser.user_activation);
+router.get('/activation/:code/:email', registerUser.user_activation);
 router.post(
 	'/send_activate_email',
 	sendActivationEmailValidator,

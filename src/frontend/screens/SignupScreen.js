@@ -11,15 +11,36 @@ function SignupScreen(props) {
 	const [password, setPassword] = useState('');
 	const [reEnterPassword, setreEnterPassword] = useState('');
 
-	const inputExample = async () => {
-		//signupstuff
-	};
-
-	const navigateToLogin = () => {
-		props.navigation.navigate('LoginScreen');
-	};
-
 	const { signUp } = useContext(AuthContext);
+
+	const attemptSignup = () => {
+		console.log(
+			JSON.stringify({
+				username: userName,
+				email: email,
+				password: password,
+			})
+		);
+		fetch('http://localhost:5000/api/v1.0.0/user/register', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				userName: userName,
+				email: email,
+				password: password,
+			}),
+		})
+			.then((res) => {
+				res.json();
+			})
+			.then((data) => {
+				console.log(data);
+				signUp();
+			})
+			.catch();
+	};
 
 	return (
 		<View style={styles.container}>
@@ -50,13 +71,14 @@ function SignupScreen(props) {
 				<Text style={styles.AuthenticationText}>ReEnter Password</Text>
 				<TextInput
 					style={styles.AuthenticationInput}
+					secureTextEntry={true}
 					value={reEnterPassword}
 					onChangeText={(text) => setreEnterPassword(text)}
 				></TextInput>
 			</View>
 			<TouchableHighlight
 				style={styles.AuthenticationButton}
-				onPress={() => inputExample()}
+				onPress={() => attemptSignup()}
 			>
 				<Text style={styles.AuthenticationButtonText}>Sign Up</Text>
 			</TouchableHighlight>
