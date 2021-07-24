@@ -39,7 +39,7 @@ function SideMenu(props) {
     const [toggleValue, setToggleValue] = useState(false);
     return (
         <Modal
-            swipeDirection="left"
+            swipeDirection="up"
             onSwipeComplete={(e) => {props.setModalVisible(false)}}
             transparent={true}
             backdropOpacity={0.2}
@@ -55,8 +55,7 @@ function SideMenu(props) {
                 backgroundColor:ColorSet.BackgroundGrey,
             }}>
                 <SafeAreaView>
-
-                <View style={{marginHorizontal:10}}>
+                <View style={{marginHorizontal:10, height:"100%"}}>
                     <View style={{flexDirection:'row', justifyContent: 'space-between',  alignItems:'center', marginBottom:20}}>
                         <View style={{flexDirection:'row', alignItems:'center', flex:1}}>
                                 <TouchableOpacity style={{justifyContent:"center", marginRight:20}} onPress={() => console.log('dsauda')}>
@@ -89,21 +88,28 @@ function SideMenu(props) {
                         <ThemeCircle color={"#B493CE"} selected={color == 'purple'} onPress={() => setColor("purple")}/>
                         <ThemeCircle color={"#FF8D8D"} selected={color == 'red'} onPress={() => setColor("red")}/>
                     </View>
-                </View>
                     <View>
-                        {/*<Toggle value={toggleValue} onPress={(val) => setToggleValue(val)} />*/}
+                        {/*<Toggle*/}
+                        {/*    value={toggleValue}*/}
+                        {/*    onPress={(newState) => setToggleValue(newState)}*/}
+                        {/*    disabled*/}
+                        {/*    leftComponent={*/}
+                        {/*        <MaterialCommunityIcons name={"star"} color={ColorSet.TertiaryGreen} size={30} />*/}
+                        {/*    }*/}
+                        {/*    rightComponent={*/}
+                        {/*        <MaterialCommunityIcons name={"bug"} color={ColorSet.TertiaryGreen} size={30} />*/}
+                        {/*    }*/}
+                        {/*/>*/}
                     </View>
-                    {/*<Toggle*/}
-                    {/*    value={toggleValue}*/}
-                    {/*    onPress={(newState) => setToggleValue(newState)}*/}
-                    {/*    disabled*/}
-                    {/*    leftComponent={*/}
-                    {/*        <MaterialCommunityIcons name={"star"} color={ColorSet.TertiaryGreen} size={30} />*/}
-                    {/*    }*/}
-                    {/*    rightComponent={*/}
-                    {/*        <MaterialCommunityIcons name={"bug"} color={ColorSet.TertiaryGreen} size={30} />*/}
-                    {/*    }*/}
-                    {/*/>*/}
+                    <View style={{ justifyContent:'flex-end', flex:1, marginHorizontal:20}}>
+                        <TouchableOpacity>
+                        <Text style={{fontSize: 20, fontWeight: "bold", color:ColorSet.TertiaryGreen,}}>Log Out</Text>
+                        </TouchableOpacity>
+                    </View>
+                </View>
+
+
+
 
             </SafeAreaView>
         </View>

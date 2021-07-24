@@ -22,6 +22,7 @@
     "react-native-reanimated": "^2.1.0",
     "react-native-safe-area-context": "^3.2.0",
     "react-native-screens": "^3.0.0",
+    "react-native-toggle-element": "^1.0.1",
     "react-native-web": "~0.13.12"
   },
   "devDependencies": {
