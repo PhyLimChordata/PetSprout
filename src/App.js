@@ -8,6 +8,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import TabOne from './frontend/screens/TabOne';
 import TabTwo from './frontend/screens/TabTwo';
 import TabThree from './frontend/screens/TabThree';
+import Collaborators from './frontend/screens/Collaborators';
 
 import ColorSet from './frontend/resources/themes/Global'
 
@@ -41,7 +42,7 @@ export default function App() {
         <Tab.Screen name="Calendar" component={TabOne} options={{
           tabBarLabel: 'Calendar',
           tabBarIcon: ({ color, size }) => (<MaterialCommunityIcons name="calendar" color={color} size={size} />)}}/>
-          <Tab.Screen name="Tab" component={TabThree}
+        <Tab.Screen name="Tab" component={TabThree}
                       options={{
                           tabBarLabel: 'Temp1',
                           tabBarIcon: ({ color, size }) => (<MaterialCommunityIcons name="home" color={color} size={size} />)}}
@@ -81,9 +82,9 @@ export default function App() {
                     }}
 
         />
-          <Tab.Screen name="TabFour" component={TabThree}
+          <Tab.Screen name="Collaborators" component={Collaborators}
                       options={{
-                          tabBarLabel: 'Temp2',
+                          tabBarLabel: 'Collaborators',
                           tabBarIcon: ({ color, size }) => (<MaterialCommunityIcons name="home" color={color} size={size} />)}}
           />
         <Tab.Screen name="TabThree" component={TabThree}
