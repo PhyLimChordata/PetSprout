@@ -47,7 +47,7 @@ module.exports = async (req,res) => {
         }
 
         user.lastlogin = new Date();
-        user.save();
+        await user.save();
 
         const payload = {
             user: {

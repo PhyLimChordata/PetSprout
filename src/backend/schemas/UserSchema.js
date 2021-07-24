@@ -17,6 +17,11 @@ const UserSchema = new Schema(
 			type: Number,
 			required: true,
 		},
+		resetPassword: {
+			type: Number,
+			require: true,
+			default: 0
+		},
 		password: {
 			type: String,
 			required: true,
