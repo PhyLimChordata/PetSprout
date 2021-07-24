@@ -1,7 +1,9 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {View, Button, Text} from 'react-native';
 
 import styles from '../styling/Tabs'
+
+import { AuthContext } from './context';
 
 function TabThree(props) {
     const get = () => {
@@ -11,9 +13,11 @@ function TabThree(props) {
         .catch();
     }
 
+    const {signOut} = useContext(AuthContext);
+
     return (
         <View style={styles.container}>
-            <Button title="Get stuff from Database" onPress={() => get()}/>
+            <Button title="Get stuff from Database" onPress={() => signOut()}/>
             <Text style={styles.textTitle}>Check Console!</Text>
         </View>
     );
