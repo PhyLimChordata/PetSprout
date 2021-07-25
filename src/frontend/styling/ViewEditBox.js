@@ -12,6 +12,10 @@ export default StyleSheet.create({
         width: '80%',
         alignItems: 'center'
     },
+    text:{
+        fontStyle: "normal",
+        fontWeight: "700",
+    },
     textInput: {
         flex: 0.1,
         width: '96%',
@@ -30,7 +34,8 @@ export default StyleSheet.create({
         paddingRight: 10,
         borderWidth: 1,
         borderColor: ColorSet.white,
-        color: ColorSet.white,
+        color: ColorSet.black,
+        fontWeight: "300",
         backgroundColor: ColorSet.SecondaryGreen
     },
     baseText: {

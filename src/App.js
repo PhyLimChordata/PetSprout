@@ -40,7 +40,7 @@ export default function App() {
           style: { backgroundColor: ColorSet.TertiaryGreen}
 
       }}>
-        <Tab.Screen name="Calendar" component={TabOne} options={{
+        <Tab.Screen name="Calendar" component={AchievementPage} options={{
           tabBarLabel: 'Calendar',
           tabBarIcon: ({ color, size }) => (<MaterialCommunityIcons name="calendar" color={color} size={size} />)}}/>
           <Tab.Screen name="Tab" component={TabThree}
@@ -48,7 +48,7 @@ export default function App() {
                           tabBarLabel: 'Temp1',
                           tabBarIcon: ({ color, size }) => (<MaterialCommunityIcons name="home" color={color} size={size} />)}}
           />
-        <Tab.Screen name={'TabMiddle'} component={TabTwo}
+        <Tab.Screen name={'TabMiddle'} component={ProfileEdit}
                     listeners={{
                         tabPress: e => {
                             // rotate
@@ -88,7 +88,7 @@ export default function App() {
                           tabBarLabel: 'Temp2',
                           tabBarIcon: ({ color, size }) => (<MaterialCommunityIcons name="home" color={color} size={size} />)}}
           />
-        <Tab.Screen name="TabThree" component={TabThree}
+        <Tab.Screen name="TabThree" component={ProfileEdit}
                     options={{
                         tabBarLabel: 'Habit',
                         tabBarIcon: ({ color, size }) => (<MaterialCommunityIcons name="clipboard-check" color={color} size={size} />)}}

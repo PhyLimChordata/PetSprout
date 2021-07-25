@@ -7,14 +7,13 @@ export default StyleSheet.create({
     headContainer: {
         flex: 1,
         alignItems: 'center',
-        backgroundColor: ColorSet.white
     },
-    achivementContainer: {
+    achievementContainer: {
         width: iconWdith,
         margin: '2.5vw',
         marginTop: '1vw'
     },  
-    achivementRow: {
+    achievementRow: {
         display: 'flex',
         flexDirection: 'row',
     }, 
@@ -39,11 +38,17 @@ export default StyleSheet.create({
         borderRadius: 10,
         marginTop: '2vh',
     },
-    achievementName: {
+    textStyles:{
         fontStyle: "normal",
         fontWeight: "700",
         color: ColorSet.QuinaryGreen,
+    },
+    achievementName: {
         alignSelf: 'center',
         marginTop: '4vh'
+    },
+    achievementHeader: {
+        fontSize: 24,
+        alignSelf: 'left'
     }
 });
