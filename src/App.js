@@ -12,6 +12,8 @@ import TabTwo from './frontend/screens/TabTwo';
 import TabThree from './frontend/screens/TabThree';
 import LoginScreen from './frontend/screens/LoginScreen';
 import SignupScreen from './frontend/screens/SignupScreen';
+import PasswordScreen from './frontend/screens/PasswordScreen';
+import NewPasswordScreen from './frontend/screens/NewPasswordScreen';
 
 import { AuthContext } from './frontend/screens/context';
 import ColorSet from './frontend/resources/themes/Global';
@@ -49,11 +51,13 @@ const animation = new Animated.Value(0);
 
 export default function App() {
 	const [token, setToken] = useState(null);
+	const [email, setEmail] = useState('');
 
 	const authContext = useMemo(() => {
 		return {
-			logIn: (token) => {
-				setToken(token);
+			logIn: (tokens) => {
+				setToken(tokens);
+				console.log(token);
 			},
 			signUp: () => {
 				setToken('temporaryToken');
@@ -61,8 +65,12 @@ export default function App() {
 			signOut: () => {
 				setToken(null);
 			},
+			forgotPassword: (providedEmail) => {
+				setEmail(providedEmail);
+			},
+			resetPassword: email,
 		};
-	}, []);
+	}, [email, setEmail, token, setToken]);
 
 	return (
 		<AuthContext.Provider value={authContext}>
@@ -82,6 +90,16 @@ export default function App() {
 							name="SignupScreen"
 							component={SignupScreen}
 							options={{ title: 'Sign up' }}
+						/>
+						<Stack.Screen
+							name="PasswordScreen"
+							component={PasswordScreen}
+							options={{ title: 'Forgot Password' }}
+						/>
+						<Stack.Screen
+							name="NewPasswordScreen"
+							component={NewPasswordScreen}
+							options={{ title: 'New Password' }}
 						/>
 					</Stack.Navigator>
 				)}

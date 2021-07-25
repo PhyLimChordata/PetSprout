@@ -9,6 +9,10 @@ const jwt = require("jsonwebtoken");
 const send_forget_password_email = async(req,res)=>{
     try {
         let {email,userName} = req.body;
+        console.log(email);
+        console.log(userName);
+        if (email === undefined) email = "";
+        if (userName === undefined) userName = "";
         
         if(email===""&&userName==="") res.status(400).json("Email or user name should be provided");
 

@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { View, Text, TextInput, Image, TouchableHighlight } from 'react-native';
 
-import styles from '../styling/Tabs';
+import styles from '../styling/Authentication';
 
 import { AuthContext } from './context';
 

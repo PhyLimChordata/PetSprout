@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 
 import { View, Text, TextInput, Image, TouchableHighlight } from 'react-native';
 
-import styles from '../styling/Tabs';
+import styles from '../styling/Authentication';
 
 import { AuthContext } from './context';
 
@@ -51,6 +51,13 @@ function LoginScreen(props) {
 					value={password}
 					onChangeText={(text) => setPassword(text)}
 				></TextInput>
+				<View style={styles.forgotView}>
+					<TouchableHighlight
+						onPress={() => props.navigation.push('PasswordScreen')}
+					>
+						<Text style={styles.forgotPassword}>Forgot Password?</Text>
+					</TouchableHighlight>
+				</View>
 			</View>
 			<TouchableHighlight
 				style={styles.AuthenticationButton}
