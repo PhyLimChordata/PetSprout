@@ -26,7 +26,7 @@ function BottomPopup(props) {
             >
                 <View style={{
                     height: 200,
-                    backgroundColor:ColorSet.TertiaryGreen,
+                    backgroundColor:ColorSet.Green.Tertiary,
                     borderRadius:30,
                 }}>
                     <View style={{marginHorizontal:30}}>
