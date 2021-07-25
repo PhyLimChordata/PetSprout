@@ -1,8 +1,7 @@
 import React, {useState, useEffect, useMemo} from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import {Image, View, TouchableOpacity, Animated} from 'react-native';
+import {Image, View, TouchableOpacity} from 'react-native';
 
-import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
@@ -17,7 +16,6 @@ import SignupScreen from './frontend/screens/SignupScreen';
 
 import { AuthContext } from './frontend/screens/context';
 import ColorSet from './frontend/resources/themes/Global';
-import Animated from 'react-native-reanimated';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -30,7 +28,6 @@ const CustomTabBarButton = ({children, onPress}) => (
     </TouchableOpacity>)
 
 export default function App() {
-  const [modalVisible, setModalVisible] = useState(false);
   const [token, setToken] = useState(null);
 
 	const authContext = useMemo(() => {
@@ -73,9 +70,9 @@ export default function App() {
 	);
 }
   function HomeScreen(props) {
-    return (
+      const [modalVisible, setModalVisible] = useState(false);
+      return (
       <>
-    <NavigationContainer>
       <Tab.Navigator  initialRouteName="TabOne" backBehavior="order" tabBarOptions={{
           activeTintColor: ColorSet.Green.QuinaryGreen,
           inactiveTintColor: ColorSet.white,
@@ -127,7 +124,6 @@ export default function App() {
                         tabBarIcon: ({ color, size }) => (<MaterialCommunityIcons name="clipboard-check" color={color} size={size} />)}}
         />
         </Tab.Navigator>
-    </NavigationContainer>
           <BottomPopup modalVisible={modalVisible} setModalVisible={setModalVisible}/>
       </>
   );
