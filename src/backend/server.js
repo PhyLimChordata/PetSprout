@@ -17,17 +17,24 @@ app.use(express.json());
 const uri = process.env.URI;
 
 //mongoose starts the connection
-mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true });
+mongoose.connect(uri, {
+	useNewUrlParser: true,
+	useCreateIndex: true,
+	useUnifiedTopology: true,
+});
 const connection = mongoose.connection;
 connection.once('open', () => {
-  console.log("MongoDB database connection established successfully");
-})
+	console.log('MongoDB database connection established successfully');
+});
 
 //Adds routes for express to use
 //Example route: http://localhost:5000/example/get
-const exampleRouter = require('./routes/example');
-app.use('/example', exampleRouter);
+//const exampleRouter = require('./routes/example');
+//app.use('/example', exampleRouter);
+
+app.use('/api/v1.0.0/user', require('./routes/userRoute'));
+app.use('/api/v1.0.0/habit', require('./routes/habitRoute'));
 
 app.listen(port, () => {
-    console.log(`Server is running on port: ${port}`);
+	console.log(`Server is running on port: ${port}`);
 });

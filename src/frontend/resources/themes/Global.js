@@ -39,14 +39,6 @@ const ColorSet = {
         Quaternary: '#E37272',
         Quinary: '#A75B5B',
     }
-
-
-
-
-
-
-
-
 }
 
 export default ColorSet;

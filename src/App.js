@@ -1,18 +1,26 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect, useMemo} from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import {Image, View, TouchableOpacity, Animated} from 'react-native';
 
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import TabOne from './frontend/screens/TabOne';
 import TabTwo from './frontend/screens/TabTwo';
 import TabThree from './frontend/screens/TabThree';
 import BottomPopup from "./frontend/components/BottomPopup";
+import LoginScreen from './frontend/screens/LoginScreen';
+import SignupScreen from './frontend/screens/SignupScreen';
 
-import ColorSet from './frontend/resources/themes/Global'
+import { AuthContext } from './frontend/screens/context';
+import ColorSet from './frontend/resources/themes/Global';
+import Animated from 'react-native-reanimated';
 
 const Tab = createBottomTabNavigator();
+const Stack = createStackNavigator();
 
 const CustomTabBarButton = ({children, onPress}) => (
     <TouchableOpacity activeOpacity={1} style={{top:-30, width:70, height:70, justifyContent:"center", alignItems:"center"}} onPress={onPress}>
@@ -21,18 +29,51 @@ const CustomTabBarButton = ({children, onPress}) => (
         </View>
     </TouchableOpacity>)
 
-
-// const animation = new Animated.Value(0);
-//
-//
-// const rotate = animation.interpolate({
-//     inputRange: [0, 1],
-//     outputRange: ['0deg', '360deg'],
-// });
-
 export default function App() {
-    const [modalVisible, setModalVisible] = useState(false);
-  return (
+  const [modalVisible, setModalVisible] = useState(false);
+  const [token, setToken] = useState(null);
+
+	const authContext = useMemo(() => {
+		return {
+			logIn: (token) => {
+				setToken(token);
+			},
+			signUp: () => {
+				setToken('temporaryToken');
+			},
+			signOut: () => {
+				setToken(null);
+			},
+		};
+	}, []);
+
+	return (
+		<AuthContext.Provider value={authContext}>
+			<NavigationContainer>
+				{token ? (
+					<Stack.Navigator headerMode="none">
+						<Stack.Screen name="HomeScreen" component={HomeScreen} />
+					</Stack.Navigator>
+				) : (
+					<Stack.Navigator headerMode="none">
+						<Stack.Screen
+							name="LoginScreen"
+							component={LoginScreen}
+							options={{ title: 'Login' }}
+						/>
+						<Stack.Screen
+							name="SignupScreen"
+							component={SignupScreen}
+							options={{ title: 'Sign up' }}
+						/>
+					</Stack.Navigator>
+				)}
+			</NavigationContainer>
+		</AuthContext.Provider>
+	);
+}
+  function HomeScreen(props) {
+    return (
       <>
     <NavigationContainer>
       <Tab.Navigator  initialRouteName="TabOne" backBehavior="order" tabBarOptions={{
@@ -52,24 +93,13 @@ export default function App() {
         <Tab.Screen name={'TabMiddle'} component={TabTwo}
                     listeners={{
                         tabPress: e => {
-                            // rotate
-                            // Animated.timing(animation, {
-                            //     toValue: 1,
-                            //     duration: 500,
-                            //     useNativeDriver: false,
-                            // }).start(() => {
-                            //     animation.setValue(0);
-                            // });
                             setModalVisible(true);
-                            // console.log('bud');
-                            // Prevent default action
                             e.preventDefault();
                         }
                     }}
                     options={{
                         tabBarLabel:() => {return null},
                         tabBarIcon: ({focused}) => (
-                            // <Animated.Image
                             <Image
                             source={require("./frontend/resources/images/plus-sign.png")}
                             resizeMode="contain"
@@ -77,7 +107,6 @@ export default function App() {
                                 width:35,
                                 height:35,
                                 tintColor: ColorSet.white,
-                                // transform: [ { rotate: rotate }]
                             }}
                             />
                         ),
