@@ -25,13 +25,13 @@ export default StyleSheet.create({
         borderWidth: '1vh',
     },
     achievementBronze: {
-        borderColor: '#C6895E'
+        borderColor: ColorSet.Bronze,
     },
     achievementSilver: {
-        borderColor: '#A7BFCA'
+        borderColor: ColorSet.Silver,
     },
     achievementGold: {
-        borderColor: '#FFC93E'
+        borderColor: ColorSet.Gold
     },
     progressBar: {
         height: '1vh',

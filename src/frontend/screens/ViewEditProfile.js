@@ -1,13 +1,24 @@
 import React, { useEffect } from 'react';
-import {View, Text, Button } from 'react-native';
+import {View, Text, Button, Pressable } from 'react-native';
 import styles from '../styling/ViewEditBox'
 import { TextInput } from "react-native";
-import ColorSet from '../resources/themes/Global';
 import MenuHeader from '../components/MenuHeader'
+import ColorSet from '../resources/themes/Global'
 
 function ProfileEdit (props) {
-    const handleChange = (e) => {
-        
+
+    let data = {
+        userName: 'Example',
+        email: 'Example@gmail.com',
+        about: '',
+    }
+
+    const handleChange = (id, e) => {
+        data[id] = e.target.value
+    }
+
+    const onSubmit = () => {
+        console.log(data)
     }
 
     return(
@@ -16,9 +27,9 @@ function ProfileEdit (props) {
                 <MenuHeader text="Account"/>
             </View>
             <View style={styles.container}>
-                <EditBox tag="Username" def="Example" place="Username"/>
-                <EditBox tag="Email" def="Example@gmail.com" place="Email"/>
-                <EditBox tag="About" def="" mult={true} numLines={5} backColor={true}/>
+                <EditBox id="userName" tag="Username" def={data.userName} place="Username" handle={handleChange}/>
+                <EditBox id="email" tag="Email" def={data.email} place="Email" handle={handleChange}/>
+                <EditBox id="about" tag="About" def="" mult={true} numLines={5} backColor={true} handle={handleChange}/>
                 <View style={styles.formContainer}>
                 <Text style={[styles.textTitle, styles.text]}>
                     Account Created On
@@ -27,6 +38,7 @@ function ProfileEdit (props) {
                     Date
                 </Text>
                 </View>
+                <SubmitButton submit={onSubmit}/>
             </View>
         </View>
         
@@ -38,18 +50,9 @@ const EditBox = (props) => {
     const [text, onChangeText] = React.useState(props.def);
     const [focused, onSelected] = React.useState(false);
 
-    var color = ColorSet.white;
-
-    const handleSelect = () => {
-        console.log("Focused");
-        color = ColorSet.PrimaryGreen
-        onSelected(true);
-    }
-
-    const handleDeselect = () => {
-        console.log("Not focused");
-        color = ColorSet.PrimaryGreen
-        onSelected(false);
+    const handleChange = (e) => {
+        onChangeText(e.target.value)
+        props.handle(props.id, e)
     }
 
     useEffect(() => {
@@ -62,12 +65,12 @@ const EditBox = (props) => {
                 {props.tag}
             </Text>
             <TextInput
-                onFocus={handleSelect}
-                onBlur={handleDeselect}
-                onChangeText={onChangeText}
+                onFocus={() => onSelected(true)}
+                onBlur={() => onSelected(false)}
+                onChange={e => handleChange((props.id, e))}
                 value={text}
-                placeholder={props.place}
-                style={props.mult ? styles.textMultiInput : [styles.textInput, styles.text]}
+                defaultValue={props.place}
+                style={props.mult ? styles.textMultiInput : [styles.textInput, styles.text, (focused ? styles.textInputSelected : null)]}
                 multiline={props.mult}
                 numberOfLines={props.numLines}
             />
@@ -76,11 +79,14 @@ const EditBox = (props) => {
     );
 };
 
-const SubmitButton = ()=> {
+const SubmitButton = (props) => {
     return(
-        <View>
-            <Button
-                title="SUBMIT"/>
+        <View style={styles.submitButtonPosition}>
+            <Pressable
+                style={styles.submitButton}
+                onPress={() => props.submit()}>
+                    <Text style={styles.submitButtonText}>SUBMIT</Text>
+                </Pressable>
         </View>
     )
 }

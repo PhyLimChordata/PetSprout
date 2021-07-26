@@ -4,7 +4,6 @@ import ColorSet from '../resources/themes/Global';
 export default StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: ColorSet.white,
         alignItems: 'center',
         paddingTop: '10%'
     },
@@ -15,6 +14,7 @@ export default StyleSheet.create({
     text:{
         fontStyle: "normal",
         fontWeight: "700",
+        fontSize: 13,
     },
     textInput: {
         flex: 0.1,
@@ -23,8 +23,12 @@ export default StyleSheet.create({
         paddingLeft: 10,
         paddingRight: 10,
         borderWidth: 0,
-        borderColor: ColorSet.white,
+        borderColor: ColorSet.QuaternaryGreen,
         color: ColorSet.QuinaryGreen,
+        fontSize: 13,
+    },
+    textInputSelected: {
+        borderBottomWidth: 2,
     },
     textMultiInput: {
         flex: 0.1,
@@ -54,6 +58,27 @@ export default StyleSheet.create({
         fontSize: 13,
         textAlign: 'left',
         color: ColorSet.TertiaryGreen
+    },
+    submitButton: {
+        color: ColorSet.white,
+        backgroundColor: ColorSet.QuaternaryGreen,
+        borderRadius: 30,
+        width: 110,
+        height: 26,
+        alignItems: 'center',
+    },
+    submitButtonText: {
+        color: ColorSet.white,
+        fontWeight: '900',
+        fontSize: 18,
+        textAlign: 'center',
+        textAlignVertical: 'center',
+    },
+    submitButtonPosition: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
+        marginRight: '5vw',
+        width: '80%',
     }
-
 })

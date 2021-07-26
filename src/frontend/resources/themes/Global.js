@@ -8,7 +8,11 @@ const ColorSet = {
     TertiaryGreen: '#B9E8A0',
     QuaternaryGreen: '#9CC69B',
     QuinaryGreen: '#6E8F6D',
-    BackgroundGrey: '#505050'
+    BackgroundGrey: '#505050',
+    ButtonGrey: '#C4C4C4',
+    Bronze: '#C6895E',
+    Silver: '#A7BFCA',
+    Gold: '#FFC93E'
 }
 
 export default ColorSet;

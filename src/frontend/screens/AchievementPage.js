@@ -4,6 +4,60 @@ import styles from '../styling/AchievementStyling'
 import { ProgressBar, Colors } from 'react-native-paper';
 import MenuHeader from '../components/MenuHeader'
 
+let achievements = [
+    {
+        category: 'Streaks',
+        progresses: [
+            {
+                progress: 0.3,
+                iconSrc: require('../resources/assets/icon.png'),
+            },
+            {
+                progress: 0.5,
+                iconSrc: require('../resources/assets/icon.png'),
+            },
+            {
+                progress: 0.8,
+                iconSrc: require('../resources/assets/icon.png'),
+            },
+        ]
+    },
+    {
+        category: 'Creature',
+        progresses: [
+            {
+                progress: 0.3,
+                iconSrc: require('../resources/assets/icon.png'),
+            },
+            {
+                progress: 0.3,
+                iconSrc: require('../resources/assets/icon.png'),
+            },
+            {
+                progress: 0.3,
+                iconSrc: require('../resources/assets/icon.png'),
+            },
+        ]
+    },
+    {
+        category: 'Accountability',
+        progresses: [
+            {
+                progress: 0.3,
+                iconSrc: require('../resources/assets/icon.png'),
+            },
+            {
+                progress: 0.8,
+                iconSrc: require('../resources/assets/icon.png'),
+            },
+            {
+                progress: 0.5,
+                iconSrc: require('../resources/assets/icon.png'),
+            },
+        ]
+    },
+]
+
 function AchievementPage() {
     return(
         <View>
@@ -12,19 +66,26 @@ function AchievementPage() {
             </View>
             
             <View style={styles.headContainer}>
-                <View>
-                <Text style={[styles.achievementName, styles.textStyles]}>Streaks</Text>
-                    <View style={styles.achievementRow}>
-                        <OneAchievement progress={0.3} srcPath={require('../resources/assets/icon.png')}/>
-                        <OneAchievement progress={0.8} srcPath={require('../resources/assets/icon.png')}/>
-                        <OneAchievement progress={0.6} srcPath={require('../resources/assets/icon.png')}/>
-                    </View>
-                </View>
-
+                {achievements.map(item => (
+                    <OneCategory key={item.category} category={item.category} progresses={item.progresses}/>
+                ))}
             </View>  
         </View>
         
     );
+}
+
+const OneCategory = (props) => {
+    return(
+        <View key={props.key}>
+        <Text style={[styles.achievementName, styles.textStyles]}>{props.category}</Text>
+            <View style={styles.achievementRow}>
+                {(props.progresses).map(item => (
+                    <OneAchievement key={item} progress={item.progress} srcPath={item.iconSrc}/>
+                ))}
+            </View>
+        </View>
+    )
 }
 
 const OneAchievement = (props) => {
