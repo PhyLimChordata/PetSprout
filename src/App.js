@@ -10,6 +10,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import TabOne from './frontend/screens/TabOne';
 import TabTwo from './frontend/screens/TabTwo';
 import TabThree from './frontend/screens/TabThree';
+import Collaborators from './frontend/screens/Collaborators';
 import LoginScreen from './frontend/screens/LoginScreen';
 import SignupScreen from './frontend/screens/SignupScreen';
 
@@ -166,16 +167,11 @@ function HomeScreen(props) {
 						tabBarButton: (props) => <CustomTabBarButton {...props} />,
 					}}
 				/>
-				<Tab.Screen
-					name="TabFour"
-					component={TabThree}
-					options={{
-						tabBarLabel: 'Temp2',
-						tabBarIcon: ({ color, size }) => (
-							<MaterialCommunityIcons name="home" color={color} size={size} />
-						),
-					}}
-				/>
+				<Tab.Screen name="Collaborators" component={Collaborators}
+                      options={{
+                          tabBarLabel: 'Collaborators',
+                          tabBarIcon: ({ color, size }) => (<MaterialCommunityIcons name="home" color={color} size={size} />)}}
+        />
 				<Tab.Screen
 					name="TabThree"
 					component={TabThree}

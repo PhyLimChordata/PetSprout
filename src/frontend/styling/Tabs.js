@@ -1,5 +1,7 @@
-import { StyleSheet, Platform } from 'react-native';
+import { StyleSheet, Platform, PixelRatio } from 'react-native';
 import ColorSet from '../resources/themes/Global';
+//npm install --save react-native-responsive-dimensions
+//https://www.npmjs.com/package/react-native-responsive-dimensions
 
 export default StyleSheet.create({
     headContainer: {
@@ -20,8 +22,10 @@ export default StyleSheet.create({
         borderWidth: 1,
         color: ColorSet.someColor,
     },
-    textTitle: {
-        fontSize: 20,
-        fontWeight: "bold"
+    menuImg: {
+        width: 100,
+        height: 100,
+        flex: 1,
+        alignItems: "flex-start"
     }
 });
