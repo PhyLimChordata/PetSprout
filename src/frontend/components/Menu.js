@@ -1,5 +1,5 @@
 import React from 'react';
-import {Image, TouchableOpacity} from 'react-native';
+import { Image, TouchableOpacity } from 'react-native';
 
 function Menu(props) {
     const menuClicked = () => {
