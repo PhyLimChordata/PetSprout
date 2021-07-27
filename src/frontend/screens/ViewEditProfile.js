@@ -28,15 +28,22 @@ function ProfileEdit (props) {
             </View>
             <View style={styles.container}>
                 <EditBox id="userName" tag="Username" def={data.userName} place="Username" handle={handleChange}/>
-                <EditBox id="email" tag="Email" def={data.email} place="Email" handle={handleChange}/>
+                <View style={styles.formContainer}>
+                    <Text style={[styles.textTitle, styles.text]}>
+                        Email
+                    </Text>
+                    <Text style={[styles.textInput, styles.text]}>
+                        Example@gmail.com
+                    </Text>
+                    </View>
                 <EditBox id="about" tag="About" def="" mult={true} numLines={5} backColor={true} handle={handleChange}/>
                 <View style={styles.formContainer}>
-                <Text style={[styles.textTitle, styles.text]}>
-                    Account Created On
-                </Text>
-                <Text style={[styles.textInput, styles.text]}>
-                    Date
-                </Text>
+                    <Text style={[styles.textTitle, styles.text]}>
+                        Account Created On
+                    </Text>
+                    <Text style={[styles.textInput, styles.text]}>
+                        Date
+                    </Text>
                 </View>
                 <SubmitButton submit={onSubmit}/>
             </View>
