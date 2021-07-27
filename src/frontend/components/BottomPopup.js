@@ -21,6 +21,7 @@ function BottomPopup(props) {
                 onSwipeComplete={(e) => {props.setModalVisible(false)}}
                 transparent={true}
                 backdropOpacity={0.2}
+                onBackdropPress={() => props.setModalVisible(false)}
                 style={{ justifyContent: 'flex-end', margin: 0}}
                 isVisible={props.modalVisible}
             >

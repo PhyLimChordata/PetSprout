@@ -1,8 +1,8 @@
-import React, {useState, useEffect} from 'react';
-import { AsyncStorage } from 'react-native';
+import React, {useState, useEffect, useContext} from 'react';
 import Toggle from 'react-native-toggle-element';
+import { AuthContext } from '../screens/context';
 
-import {View, Text, TouchableOpacity, SafeAreaView, Image} from 'react-native';
+import {View, Text, TouchableOpacity, SafeAreaView, Image, AsyncStorage} from 'react-native';
 import Modal from 'react-native-modal';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
@@ -73,6 +73,7 @@ function SideMenu(props) {
     const [color, setColor] = useState("green");
     const [toggleValue, setToggleValue] = useState(false);
     const [colorTheme, setColorTheme] = useState(ColorSet.Green);
+    const { signOut } = useContext(AuthContext);
     useEffect( () => {
         UpdateTheme(setColorTheme).then(r => InitializeColor(r, setColor));
 
@@ -118,6 +119,7 @@ function SideMenu(props) {
             }}
             transparent={true}
             backdropOpacity={0.2}
+            onBackdropPress={() => props.setModalVisible(false)}
             style={{margin: 0}}
             isVisible={props.modalVisible}
             animationIn="slideInLeft"
@@ -166,7 +168,6 @@ function SideMenu(props) {
                                 fontSize: 18,
                                 color: colorTheme.Tertiary,
                                 textAlign: 'center',
-                                marginBottom: 10
                             }}>"What you choose to struggle in is what you’ll ultimately become.”</Text>
                             <Text style={{fontSize: 18, color: colorTheme.Tertiary, textAlign: 'right',}}> -
                                 Mark Manson </Text>
@@ -209,7 +210,7 @@ function SideMenu(props) {
                                     width: 100,
                                     height: 50,
                                     radius: 25,
-                                    activeBackgroundColor: '#FF9900',
+                                    activeBackgroundColor: '#3c4145',
                                     inActiveBackgroundColor: '#3c4145',
                                 }}
                                 leftComponent={
@@ -223,10 +224,10 @@ function SideMenu(props) {
                             />
                         </View>
                         <View style={{justifyContent: 'flex-end', flex: 1, marginHorizontal: "6%"}}>
-                            <TouchableOpacity>
-                                <Text style={{fontSize: 20, fontWeight: "bold", color: colorTheme.Tertiary,}}>Log
-                                    Out</Text>
-                            </TouchableOpacity>
+                            <Tab color={colorTheme.Tertiary} icon={"logout"} title={'Log Out'} onPress={() => {
+                                props.setModalVisible(false)
+                                signOut()
+                            }}/>
                         </View>
                     </View>
 

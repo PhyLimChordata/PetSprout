@@ -73,11 +73,10 @@ export default function App() {
       const [modalVisible, setModalVisible] = useState(false);
       return (
       <>
-      <Tab.Navigator  initialRouteName="TabOne" backBehavior="order" tabBarOptions={{
-          activeTintColor: ColorSet.Green.QuinaryGreen,
+      <Tab.Navigator  initialRouteName="TabOne" backBehavior="order"  tabBarOptions={{
+          activeTintColor: ColorSet.Green.Quinary,
           inactiveTintColor: ColorSet.white,
           style: { backgroundColor: ColorSet.Green.Tertiary}
-
       }}>
         <Tab.Screen name="Calendar" component={TabOne} options={{
           tabBarLabel: 'Calendar',
