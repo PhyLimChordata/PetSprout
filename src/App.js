@@ -10,11 +10,16 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import TabOne from './frontend/screens/TabOne';
 import TabTwo from './frontend/screens/TabTwo';
 import TabThree from './frontend/screens/TabThree';
+
+import ProfileEdit from './frontend/screens/ViewEditProfile';
+import AchievementPage from './frontend/screens/AchievementPage';
 import BottomPopup from './frontend/components/BottomPopup';
 import HabitsScreen from './frontend/screens/HabitsScreen';
 import Collaborators from './frontend/screens/Collaborators';
+
 import LoginScreen from './frontend/screens/LoginScreen';
 import SignupScreen from './frontend/screens/SignupScreen';
+
 
 import { AuthContext } from './frontend/screens/context';
 import ColorSet from './frontend/resources/themes/Global';

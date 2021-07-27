@@ -4,6 +4,12 @@ const ColorSet = {
     grey: '#B7BEB0',
     lightgrey: '#E7E7E7',
     someColor: '#EF2723',
+  
+    ButtonGrey: '#C4C4C4',
+    Bronze: '#C6895E',
+    Silver: '#A7BFCA',
+    Gold: '#FFC93E',
+
     BackgroundGrey: '#505050',
     Green: {
         Primary: '#F5FEEC',
