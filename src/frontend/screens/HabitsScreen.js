@@ -27,7 +27,7 @@ function HabitsScreen(props) {
         });
 
         return(
-            <View style={{backgroundColor: ColorSet.TertiaryRed, borderRadius: 8, height: "100%", width: "100%", justifyContent: "center",alignItems:"flex-start", padding: 20}}>
+            <View style={{backgroundColor: ColorSet.Red.Tertiary, borderRadius: 8, height: "100%", width: "100%", justifyContent: "center",alignItems:"flex-start", padding: 20}}>
                 <Animated.View style={{transform:[{scale}]}}>
                     <Trash/>
                 </Animated.View>
@@ -44,7 +44,7 @@ function HabitsScreen(props) {
         });
 
         return(
-            <View style={{backgroundColor: ColorSet.TertiaryBlue, borderRadius: 8, height: "100%", width: "100%", justifyContent: "center", alignItems:"flex-end", padding:20}}>
+            <View style={{backgroundColor: ColorSet.Blue.Tertiary, borderRadius: 8, height: "100%", width: "100%", justifyContent: "center", alignItems:"flex-end", padding:20}}>
                 <Animated.View style={{transform:[{scale}]}}>
                     <Checkmark/>
                 </Animated.View>
@@ -78,7 +78,7 @@ function HabitsScreen(props) {
 
     return (
         <View style={styles.headContainer}>
-            <MenuHeader text=''/>
+            <MenuHeader text='' stack={props.navigation}/>
             <View style={styles.verticalContainer}>
                 <Image style={styles.creature} source={require('../resources/images/Egg.gif')}/>
                 <ExperienceBar width='28%'/>
