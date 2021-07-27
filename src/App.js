@@ -11,6 +11,8 @@ import TabOne from './frontend/screens/TabOne';
 import TabTwo from './frontend/screens/TabTwo';
 import TabThree from './frontend/screens/TabThree';
 import BottomPopup from "./frontend/components/BottomPopup";
+import HabitsScreen from './frontend/screens/HabitsScreen';
+import Collaborators from './frontend/screens/Collaborators';
 import LoginScreen from './frontend/screens/LoginScreen';
 import SignupScreen from './frontend/screens/SignupScreen';
 
@@ -29,7 +31,6 @@ const CustomTabBarButton = ({children, onPress}) => (
 
 export default function App() {
   const [token, setToken] = useState(null);
-
 	const authContext = useMemo(() => {
 		return {
 			logIn: (token) => {
@@ -72,7 +73,6 @@ export default function App() {
   function HomeScreen(props) {
       const [modalVisible, setModalVisible] = useState(false);
       return (
-      <>
       <Tab.Navigator  initialRouteName="TabOne" backBehavior="order"  tabBarOptions={{
           activeTintColor: ColorSet.Green.Quinary,
           inactiveTintColor: ColorSet.white,
@@ -110,7 +110,6 @@ export default function App() {
                             <CustomTabBarButton {... props}/>
                         ),
                     }}
-
         />
           <Tab.Screen name="Pomodoro" component={TabThree}
                       options={{
@@ -124,6 +123,5 @@ export default function App() {
         />
         </Tab.Navigator>
           <BottomPopup modalVisible={modalVisible} setModalVisible={setModalVisible}/>
-      </>
   );
 }

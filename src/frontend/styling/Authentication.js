@@ -27,7 +27,7 @@ export default StyleSheet.create({
 		marginBottom: 50,
 	},
 	AuthenticationInput: {
-		backgroundColor: ColorSet.Green.Secondary,
+		backgroundColor: ColorSet.SecondaryGreen,
 		padding: 10,
 		borderWidth: 0,
 		borderStyle: 'solid',
@@ -40,13 +40,13 @@ export default StyleSheet.create({
 		fontSize: 20,
 		fontWeight: 'bold',
 		paddingBottom: 5,
-		color: ColorSet.Green.Quaternary,
+		color: ColorSet.QuaternaryGreen,
 	},
 	inputContainer: {
 		alignItems: 'flex-start',
 	},
 	AuthenticationButton: {
-		backgroundColor: ColorSet.Green.Quaternary,
+		backgroundColor: ColorSet.QuaternaryGreen,
 		borderRadius: 30,
 		padding: 10,
 		paddingLeft: 40,
@@ -59,7 +59,7 @@ export default StyleSheet.create({
 		color: ColorSet.white,
 	},
 	SignupText: {
-		color: ColorSet.Green.Quaternary,
+		color: ColorSet.QuaternaryGreen,
 		fontWeight: 'bold',
 	},
 	subText: {
