@@ -1,10 +1,12 @@
 import React, { useState, useEffect} from 'react';
 import { View, Image, Animated, ScrollView } from 'react-native';
 
-import styles from '../styling/HabitsScreen'
-import Habits from '../components/Habits'
-import Menu from '../components/Menu'
-import ExperienceBar from '../components/ExperienceBar'
+import styles from '../styling/HabitsScreen';
+import Habits from '../components/Habits';
+import Menu from '../components/Menu';
+import MenuHeader from "../components/MenuHeader";
+
+import ExperienceBar from '../components/ExperienceBar';
 import Checkmark from '../components/Checkmark';
 import Trash from '../components/Trash';
 
@@ -76,13 +78,7 @@ function HabitsScreen(props) {
 
     return (
         <View style={styles.headContainer}>
-            <View style={styles.header}>
-                <Menu/>
-                <View style={styles.middleComponent}/>
-                {/* {hearts.map((data, index) => {
-                    return (<Hearts>)
-                })} */}
-            </View>
+            <MenuHeader text=''/>
             <View style={styles.verticalContainer}>
                 <Image style={styles.creature} source={require('../resources/images/Egg.gif')}/>
                 <ExperienceBar width='28%'/>

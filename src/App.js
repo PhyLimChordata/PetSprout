@@ -108,7 +108,7 @@ function HomeScreen(props) {
 			>
 				<Tab.Screen
 					name="Habit"
-					component={TabOne}
+					component={HabitsScreen}
 					options={{
 						tabBarLabel: 'Habit',
 						tabBarIcon: ({ color, size }) => (
