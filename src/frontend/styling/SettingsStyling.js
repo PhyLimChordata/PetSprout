@@ -25,17 +25,19 @@ export default StyleSheet.create({
         width: '100%',
         flexDirection: 'row',
         justifyContent: 'space-between',
+        marginTop: '1vh',
+        marginBottom: '1vh',
     },
     text:{
         fontStyle: "normal",
         fontWeight: "700",
         fontSize: fontSize,
-        marginTop: '2vh',
     },
     textDisplayMargin: {
         paddingLeft: '7vw',
         marginRight: 100,
         marginTop: 0,
+        marginBottom: '2vh',
     },
     textDisplay: {
         fontStyle: "normal",

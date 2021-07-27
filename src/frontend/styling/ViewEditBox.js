@@ -1,6 +1,8 @@
 import { StyleSheet } from "react-native";
 import ColorSet from '../resources/themes/Global';
 
+const fontSize = 13
+
 export default StyleSheet.create({
     container: {
         flex: 1,
@@ -14,7 +16,7 @@ export default StyleSheet.create({
     text:{
         fontStyle: "normal",
         fontWeight: "700",
-        fontSize: 13,
+        fontSize: fontSize,
     },
     textInput: {
         flex: 0.1,
@@ -23,12 +25,14 @@ export default StyleSheet.create({
         paddingLeft: 10,
         paddingRight: 10,
         borderWidth: 0,
-        borderColor: ColorSet.QuaternaryGreen,
+        paddingBottom: 2,
         color: ColorSet.QuinaryGreen,
-        fontSize: 13,
+        fontSize: fontSize,
     },
     textInputSelected: {
         borderBottomWidth: 2,
+        paddingBottom: 0,
+        borderColor: ColorSet.QuaternaryGreen,
     },
     textMultiInput: {
         flex: 0.1,
@@ -48,14 +52,14 @@ export default StyleSheet.create({
         fontWeight: "900"
     },
     textTitle: {
-        fontSize: 13,
+        fontSize: fontSize,
         width: '100%',
         textAlign: 'left',
         color: ColorSet.QuaternaryGreen
         
     },
     textNormal: {
-        fontSize: 13,
+        fontSize: fontSize,
         textAlign: 'left',
         color: ColorSet.TertiaryGreen
     },
