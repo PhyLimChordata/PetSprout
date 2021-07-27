@@ -78,13 +78,13 @@ export default function App() {
           inactiveTintColor: ColorSet.white,
           style: { backgroundColor: ColorSet.Green.Tertiary}
       }}>
-        <Tab.Screen name="Calendar" component={TabOne} options={{
-          tabBarLabel: 'Calendar',
-          tabBarIcon: ({ color, size }) => (<MaterialCommunityIcons name="calendar" color={color} size={size} />)}}/>
-          <Tab.Screen name="Tab" component={TabThree}
+        <Tab.Screen name="Habit" component={TabOne} options={{
+          tabBarLabel: 'Habit',
+          tabBarIcon: ({ color, size }) => (<MaterialCommunityIcons name="clipboard-check" color={color} size={size} />)}}/>
+          <Tab.Screen name="Calender" component={TabThree}
                       options={{
-                          tabBarLabel: 'Temp1',
-                          tabBarIcon: ({ color, size }) => (<MaterialCommunityIcons name="home" color={color} size={size} />)}}
+                          tabBarLabel: 'Calender',
+                          tabBarIcon: ({ color, size }) => (<MaterialCommunityIcons name="calendar" color={color} size={size} />)}}
           />
         <Tab.Screen name={'TabMiddle'} component={TabTwo}
                     listeners={{
@@ -112,15 +112,15 @@ export default function App() {
                     }}
 
         />
-          <Tab.Screen name="TabFour" component={TabThree}
+          <Tab.Screen name="Pomodoro" component={TabThree}
                       options={{
-                          tabBarLabel: 'Temp2',
-                          tabBarIcon: ({ color, size }) => (<MaterialCommunityIcons name="close-thick" color={color} size={size} />)}}
+                          tabBarLabel: 'Pomodoro',
+                          tabBarIcon: ({ color, size }) => (<MaterialCommunityIcons name="clock" color={color} size={size} />)}}
           />
-        <Tab.Screen name="TabThree" component={TabThree}
+        <Tab.Screen name="Reflect" component={TabThree}
                     options={{
-                        tabBarLabel: 'Habit',
-                        tabBarIcon: ({ color, size }) => (<MaterialCommunityIcons name="clipboard-check" color={color} size={size} />)}}
+                        tabBarLabel: 'Reflect',
+                        tabBarIcon: ({ color, size }) => (<MaterialCommunityIcons name="notebook" color={color} size={size} />)}}
         />
         </Tab.Navigator>
           <BottomPopup modalVisible={modalVisible} setModalVisible={setModalVisible}/>
