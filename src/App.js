@@ -10,6 +10,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import TabOne from './frontend/screens/TabOne';
 import TabTwo from './frontend/screens/TabTwo';
 import TabThree from './frontend/screens/TabThree';
+import HabitsScreen from './frontend/screens/HabitsScreen';
 import Collaborators from './frontend/screens/Collaborators';
 import LoginScreen from './frontend/screens/LoginScreen';
 import SignupScreen from './frontend/screens/SignupScreen';
@@ -50,7 +51,6 @@ const animation = new Animated.Value(0);
 
 export default function App() {
 	const [token, setToken] = useState(null);
-
 	const authContext = useMemo(() => {
 		return {
 			logIn: (token) => {
