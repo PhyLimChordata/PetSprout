@@ -13,4 +13,15 @@ export default StyleSheet.create({
 	middleComponent: {
 		flex: 8,
 	},
+	headerText: {
+		fontSize: 18,
+		color: ColorSet.QuaternaryGreen,
+		fontWeight: "700",
+		marginLeft: 15,
+	},
+	menuTitle: {
+		flex: 1,
+		flexDirection: 'row',
+		alignItems: 'flex-start',
+	},
 });

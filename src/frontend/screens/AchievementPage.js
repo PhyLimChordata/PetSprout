@@ -3,6 +3,9 @@ import {View, Text, Image } from 'react-native';
 import styles from '../styling/AchievementStyling'
 import { ProgressBar, Colors } from 'react-native-paper';
 import MenuHeader from '../components/MenuHeader'
+import {SafeAreaView} from 'react-native';
+
+// data from database
 
 let achievements = [
     {
@@ -60,9 +63,11 @@ let achievements = [
 
 function AchievementPage() {
     return(
-        <View>
+        <SafeAreaView>
             <View style={styles.achievementRow}>
-                <MenuHeader text="Acheivement"/>
+                <MenuHeader text="Acheivement">
+                    <Text>AchiIcon</Text>
+                </MenuHeader>
             </View>
             
             <View style={styles.headContainer}>
@@ -70,8 +75,7 @@ function AchievementPage() {
                     <OneCategory key={item.category} category={item.category} progresses={item.progresses}/>
                 ))}
             </View>  
-        </View>
-        
+        </SafeAreaView>
     );
 }
 

@@ -3,6 +3,9 @@ import styles from '../styling/SettingsStyling'
 import headerStyles from '../styling/Header'
 import ColorSet from '../resources/themes/Global'
 import { View, Switch, Text, Image, TouchableOpacity } from 'react-native'
+import {SafeAreaView} from 'react-native';
+
+// setting data from database
 
 function SettingsPage() {
 
@@ -11,7 +14,7 @@ function SettingsPage() {
     }
 
     return(
-        <View>
+        <SafeAreaView>
             <View>
                 <TopBar/>
             </View>
@@ -37,7 +40,7 @@ function SettingsPage() {
                     </View>
                 </View>
             </View>
-        </View>
+        </SafeAreaView>
     )
 }
 

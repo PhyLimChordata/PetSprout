@@ -7,8 +7,11 @@ import Menu from './Menu';
 function Header(props) {
 	return (
 		<View style={styles.header}>
-			<Menu />
-			<Text style={styles.Text}>{props.text}</Text>
+			<View style={styles.menuTitle}>
+				<Menu />
+				<Text style={styles.headerText}>{props.text}</Text>	
+			</View>
+			{props.children}
 			<View style={styles.MiddleComponent} />
 		</View>
 	);

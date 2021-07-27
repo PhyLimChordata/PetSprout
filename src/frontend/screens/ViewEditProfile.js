@@ -4,6 +4,7 @@ import styles from '../styling/ViewEditBox'
 import { TextInput } from "react-native";
 import MenuHeader from '../components/MenuHeader'
 import ColorSet from '../resources/themes/Global'
+import {SafeAreaView} from 'react-native';
 
 function ProfileEdit (props) {
 
@@ -22,9 +23,11 @@ function ProfileEdit (props) {
     }
 
     return(
-        <View>
+        <SafeAreaView>
             <View>
-                <MenuHeader text="Account"/>
+                <MenuHeader text="Account">
+                    <Text>Account icon</Text>
+                </MenuHeader>
             </View>
             <View style={styles.container}>
                 <EditBox id="userName" tag="Username" def={data.userName} place="Username" handle={handleChange}/>
@@ -47,9 +50,7 @@ function ProfileEdit (props) {
                 </View>
                 <SubmitButton submit={onSubmit}/>
             </View>
-        </View>
-        
-        
+        </SafeAreaView>        
     );
 }
 

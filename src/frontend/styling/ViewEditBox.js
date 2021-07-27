@@ -7,7 +7,7 @@ export default StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'center',
-        paddingTop: '10%'
+        paddingTop: '10%',
     },
     formContainer: {
         width: '80%',
