@@ -8,7 +8,7 @@ const ColorSet = {
     ButtonGrey: '#C4C4C4',
     Bronze: '#C6895E',
     Silver: '#A7BFCA',
-    Gold: '#FFC93E'
+    Gold: '#FFC93E',
 
     BackgroundGrey: '#505050',
     Green: {
