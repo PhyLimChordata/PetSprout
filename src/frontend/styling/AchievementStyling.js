@@ -21,8 +21,8 @@ export default StyleSheet.create({
         resizeMode: 'contain',
         width: iconWdith,
         height: iconWdith,
-        borderRadius: '50%',
-        borderWidth: '1vh',
+        borderRadius: 50,
+        borderWidth: 5,
     },
     achievementBronze: {
         borderColor: ColorSet.Bronze,
@@ -48,7 +48,6 @@ export default StyleSheet.create({
         marginTop: '4vh'
     },
     achievementHeader: {
-        fontSize: 24,
-        alignSelf: 'left'
+        fontSize: 24
     }
 });
