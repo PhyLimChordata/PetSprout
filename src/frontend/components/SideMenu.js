@@ -163,7 +163,7 @@ function SideMenu(props) {
                                 <MaterialCommunityIcons name="cog" color={"white"} size={40}/>
                             </TouchableOpacity>
                         </View>
-                        <View style={{marginHorizontal: "6%", marginBottom: "6%"}}>
+                        <TouchableOpacity style={{marginHorizontal: "6%", marginBottom: "6%"}}>
                             <Text style={{
                                 fontSize: 18,
                                 color: colorTheme.Tertiary,
@@ -171,7 +171,7 @@ function SideMenu(props) {
                             }}>"What you choose to struggle in is what you’ll ultimately become.”</Text>
                             <Text style={{fontSize: 18, color: colorTheme.Tertiary, textAlign: 'right',}}> -
                                 Mark Manson </Text>
-                        </View>
+                        </TouchableOpacity>
                         <View style={{marginLeft: "6%", height: "50%", justifyContent: 'space-between', marginBottom: "12%"}}>
                             <Tab color={colorTheme.Tertiary} icon={'star'} title={'Achievements'}/>
                             <Tab color={colorTheme.Tertiary} icon={'account-circle'} title={'Account'}/>
