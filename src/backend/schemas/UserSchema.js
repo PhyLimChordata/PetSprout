@@ -17,10 +17,8 @@ const UserSchema = new Schema(
 			type: Number,
 			required: true,
 		},
-		resetPassword: {
-			type: Number,
-			require: true,
-			default: 0
+		pending_password: {
+			type: String
 		},
 		password: {
 			type: String,

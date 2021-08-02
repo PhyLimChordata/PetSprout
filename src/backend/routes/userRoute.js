@@ -47,17 +47,17 @@ router.get('/viewAccount', getUserAccount.viewAccount);
 router.put('/modifyAccount', getUserAccount.modifyAccount);
 
 router.post(
-    '/send_forget_password_email', 
-    forgetPassword.send_forget_password_email);
+    '/pending_password', 
+    forgetPassword.pending_password);
 
 router.get(
-    '/allow_reset_password/:code/:email',
-    forgetPassword.allow_reset_password);
+    '/reset_password/:code/:email',
+    forgetPassword.reset_password);
 
 router.post(
-    '/reset_password',
+    '/check_user',
     resetPasswordValidator,
-    forgetPassword.reset_password
+    forgetPassword.checkUserExistl
 );
 
 
