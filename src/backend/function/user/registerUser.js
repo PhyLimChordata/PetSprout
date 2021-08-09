@@ -4,6 +4,7 @@ const smtpTransport = require('nodemailer-smtp-transport');
 const User = require('../../schemas/UserSchema');
 const Habit = require('../../schemas/HabitSchema');
 const Mailing = require('../../schemas/mailingValidationSchema');
+const Setting = require("../../schemas/SettingSchema");
 const bcryptjs = require('bcryptjs');
 
 const user_regist = async (req, res) => {
@@ -46,10 +47,16 @@ const user_regist = async (req, res) => {
 
 		// create user habit
 		let newUserHabit = new Habit({
-			user: newUser._id,
+			user: newUser._id
 		});
 
 		await newUserHabit.save();
+
+		// create setting
+		let newUserSetting = new Setting({
+			user:newUser._id
+		});
+		await newUserSetting.save();
 
 		const code = require('crypto').randomBytes(16).toString('hex');
 		sendUserEmail(email, code);

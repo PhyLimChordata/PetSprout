@@ -1,6 +1,5 @@
 const User = require("../../schemas/UserSchema");
 const Mailing = require("../../schemas/mailingValidationSchema");
-const { validationResult } = require('express-validator');
 const nodemailer = require('nodemailer');
 const smtpTransport = require('nodemailer-smtp-transport');
 const bcryptjs = require('bcryptjs');
@@ -98,12 +97,19 @@ const reset_password = async(req,res) => {
 
         await user.save();
         await Mailing.deleteMany({ email });
-        res.status(200).json("Success");             
+
+        res.setHeader("Content-Type", 'text/html')
+        res.sendfile(`${__dirname}/html_page/forget_password.html`) 
+        res.status(200)           
     } catch (error) {
         console.error(error);
         res.status(500).json("Server error");
     }
 }
+
+
+
+
 
 const regEmail = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/
 
