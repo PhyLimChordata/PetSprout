@@ -29,7 +29,7 @@ const HabitSchema = new Schema(
 					default: '',
 				},
 				schedule: {
-					type: String,
+					type: [String],
 				},
 				repeat: {
 					type: String,

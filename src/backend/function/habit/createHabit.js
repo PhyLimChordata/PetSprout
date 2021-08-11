@@ -26,7 +26,7 @@ module.exports = async (req, res) => {
 		if (!userHabit) return res.status(404).json("User's habit could not found");
 
 		// setting default
-		if (schedule === '' && repeat === '') schedule = '1';
+		if (schedule === [] && repeat === '') schedule = ["0"];
 		if (times === '') times = '1';
 		if (alarm === '') alarm = '12:00';
 
