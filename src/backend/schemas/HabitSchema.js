@@ -61,3 +61,17 @@ const HabitSchema = new Schema(
 
 const habitSchema = mongoose.model('habit', HabitSchema);
 module.exports = habitSchema;
+
+
+// CONFLICT (add/add): Merge conflict in src/frontend/styling/Authentication.js
+// Auto-merging src/frontend/styling/Authentication.js
+// Auto-merging src/frontend/screens/SignupScreen.js
+// CONFLICT (content): Merge conflict in src/frontend/screens/SignupScreen.js
+// Auto-merging src/frontend/screens/LoginScreen.js
+// CONFLICT (content): Merge conflict in src/frontend/screens/LoginScreen.js
+// Auto-merging src/frontend/resources/themes/Global.js
+// CONFLICT (content): Merge conflict in src/frontend/resources/themes/Global.js
+// Auto-merging src/App.js
+// CONFLICT (content): Merge conflict in src/App.js
+// Automatic merge failed; fix conflicts and then commit the result.
+

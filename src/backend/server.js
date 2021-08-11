@@ -29,9 +29,7 @@ connection.once('open', () => {
 
 //Adds routes for express to use
 //Example route: http://localhost:5000/example/get
-//const exampleRouter = require('./routes/example');
-//app.use('/example', exampleRouter);
-
+app.use('/example', require('./routes/example'));
 app.use('/api/v1.0.0/user', require('./routes/userRoute'));
 app.use('/api/v1.0.0/habit', require('./routes/habitRoute'));
 

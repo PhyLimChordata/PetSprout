@@ -51,13 +51,6 @@ function LoginScreen(props) {
 					value={password}
 					onChangeText={(text) => setPassword(text)}
 				></TextInput>
-				<View style={styles.forgotView}>
-					<TouchableHighlight
-						onPress={() => props.navigation.push('PasswordScreen')}
-					>
-						<Text style={styles.forgotPassword}>Forgot Password?</Text>
-					</TouchableHighlight>
-				</View>
 			</View>
 			<TouchableHighlight
 				style={styles.AuthenticationButton}
