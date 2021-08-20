@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 
-import { View, Text, TextInput, Image, TouchableHighlight } from 'react-native';
+import { View, Text, TextInput, Image, TouchableOpacity } from 'react-native';
 
 import styles from '../styling/Authentication';
 
@@ -38,10 +38,11 @@ function LoginScreen(props) {
 				source={require('../resources/images/Logo.png')}
 			/>
 			<View style={styles.inputContainer}>
-				<Text style={styles.AuthenticationText}>Email/Username</Text>
+				<Text style={styles.AuthenticationText}>Primary Information</Text>
 				<TextInput
 					style={styles.AuthenticationInput}
 					value={primaryInfo}
+					placeholder="Please enter an Email or Username"
 					onChangeText={(text) => setPrimaryInfo(text)}
 				></TextInput>
 				<Text style={styles.AuthenticationText}>Password</Text>
@@ -49,29 +50,30 @@ function LoginScreen(props) {
 					style={styles.AuthenticationInput}
 					secureTextEntry={true}
 					value={password}
+					placeholder="*********"
 					onChangeText={(text) => setPassword(text)}
 				></TextInput>
 				<View style={styles.forgotView}>
-					<TouchableHighlight
+					<TouchableOpacity activeOpacity={0.6}
 						onPress={() => props.navigation.push('PasswordScreen')}
 					>
-						<Text style={styles.forgotPassword}>Forgot Password?</Text>
-					</TouchableHighlight>
+						<Text style={styles.forgotPassword}>Need help logging in?</Text>
+					</TouchableOpacity>
 				</View>
 			</View>
-			<TouchableHighlight
+			<TouchableOpacity activeOpacity={0.6}
 				style={styles.AuthenticationButton}
 				onPress={() => attemptLogin()}
 			>
 				<Text style={styles.AuthenticationButtonText}>Login</Text>
-			</TouchableHighlight>
+			</TouchableOpacity>
 			<Text style={styles.subText}>
 				New User?
-				<TouchableHighlight
+				<TouchableOpacity activeOpacity={0.6}
 					onPress={() => props.navigation.push('SignupScreen')}
 				>
 					<Text style={styles.SignupText}> Sign up</Text>
-				</TouchableHighlight>
+				</TouchableOpacity>
 			</Text>
 		</View>
 	);

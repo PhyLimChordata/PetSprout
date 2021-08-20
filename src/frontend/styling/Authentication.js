@@ -24,7 +24,11 @@ export default StyleSheet.create({
 	},
 	explanationText: {
 		fontSize: 15,
-		color: ColorSet.QuaternaryGreen
+		color: ColorSet.QuaternaryGreen,
+		textAlign: 'center',
+		marginBottom: 15,
+		paddingLeft: 50,
+		paddingRight: 50
 	},
 	AuthenticationLogo: {
 		height: 200,
@@ -49,6 +53,9 @@ export default StyleSheet.create({
 	},
 	inputContainer: {
 		alignItems: 'flex-start',
+	},
+	header: {
+		alignItems: 'center'
 	},
 	AuthenticationButton: {
 		backgroundColor: ColorSet.QuaternaryGreen,
@@ -85,7 +92,8 @@ export default StyleSheet.create({
 		fontWeight: 'bold',
 	},
 	forgotView: {
-		alignItems: 'flex-end',
+		// alignItems: 'flex-end',
+		alignItems: 'center',
 		width: "100%",
 		marginBottom: 20
 	}
