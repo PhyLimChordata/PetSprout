@@ -10,9 +10,12 @@ module.exports = async (req, res) => {
 		if (!userHabitInfo)
 			return res.status(404).json("User's habits could not found");
 
-		// need to change to the user's time	
-		const date = new Date();
+		// need to change to the client's time	
+		const date = new Date(); // server time
+		date.setMinutes(date.getMinutes() - date.getTimezoneOffset());
 		const day = date.getDay();
+		console.log(day);
+		console.log(date);
 
 		let habitShow = userHabitInfo.habitList.filter(
 			function(habit) {

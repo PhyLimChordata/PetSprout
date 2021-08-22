@@ -3,20 +3,9 @@ import React, { useState, useContext } from 'react';
 import { View, Text, TextInput, Image, TouchableOpacity } from 'react-native';
 
 import styles from '../styling/Authentication';
-import ColorSet from '../resources/themes/Global';
 
 function PasswordScreen(props) {
 	const [primaryInfo, setPrimaryInfo] = useState('');
-	const [inputStyle, setInputStyle] = useState({
-		backgroundColor: ColorSet.Green.Secondary,
-		padding: 10,
-		borderWidth: 0,
-		borderStyle: 'solid',
-		fontSize: 15,
-		borderRadius: 5,
-		marginBottom: 15,
-		width: 300,
-	});
 
 	const forgetPassword = () => {
 		fetch('http://localhost:5000/api/v1.0.0/user/check_user', {
@@ -32,19 +21,6 @@ function PasswordScreen(props) {
 				if (res.status == 200) {
 					res.json().then((data) => {
 						props.navigation.push('NewPasswordScreen', { email: data.email });
-					});
-				} else {
-					console.log(res);
-					setInputStyle({
-						backgroundColor: ColorSet.Green.Secondary,
-						padding: 10,
-						borderWidth: 2,
-						borderColor: 'red',
-						borderStyle: 'solid',
-						fontSize: 15,
-						borderRadius: 5,
-						marginBottom: 15,
-						width: 300,
 					});
 				}
 			})
@@ -66,7 +42,7 @@ function PasswordScreen(props) {
 				</Text>
 
 				<TextInput
-					style={inputStyle}
+					style={styles.AuthenticationInput}
 					value={primaryInfo}
 					placeholder="Please enter an Email or Username"
 					onChangeText={(text) => setPrimaryInfo(text)}

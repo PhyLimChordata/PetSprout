@@ -8,7 +8,7 @@ const jwt = require("jsonwebtoken");
 module.exports = async (req,res) => {
     try {
         // email for login
-        let{userName,password} = req.body;
+        let{userName,password,date} = req.body;
 
         let errors = validationResult(req);
         if(!errors.isEmpty())
@@ -29,7 +29,9 @@ module.exports = async (req,res) => {
             let lastLoginYear = user.lastlogin.getFullYear();
             let lastLoginMonth = user.lastlogin.getMonth();
             let lastLoginDate = user.lastlogin.getDate();
-            var current = new Date();
+
+            // var current = new Date();
+            var current = new Date(date);
             var currentYear = current.getFullYear();
             var currentMonth = current.getMonth();
             var currentDate = current.getDate();
