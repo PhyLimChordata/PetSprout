@@ -11,8 +11,6 @@ function SignupScreen(props) {
 	const [password, setPassword] = useState('');
 	const [reEnterPassword, setreEnterPassword] = useState('');
 
-	const { signUp } = useContext(AuthContext);
-
 	const attemptSignup = () => {
 		console.log(
 			JSON.stringify({
@@ -36,10 +34,7 @@ function SignupScreen(props) {
 				res.json();
 			})
 			.then((data) => {
-				console.log(data);
-				console.log(email);
-				signUp();
-				props.navigation.push("VerifyEmailScreen", {email: email});
+				props.navigation.push("VerifyEmailSignUpScreen", {email: email});
 			})
 			.catch();
 	};

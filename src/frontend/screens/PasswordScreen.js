@@ -4,36 +4,11 @@ import { View, Text, TextInput, Image, TouchableOpacity } from 'react-native';
 
 import styles from '../styling/Authentication';
 
-import { AuthContext } from './context';
-
 function PasswordScreen(props) {
-	const [email, setEmail] = useState('');
-	const [userName, setUserName] = useState('');
 	const [primaryInfo, setPrimaryInfo] = useState('');
 
-	const { forgotPassword } = useContext(AuthContext);
-
-	// const forgetPassword = () => {
-	// 	fetch('http://localhost:5000/api/v1.0.0/user/send_forget_password_email', {
-	// 		method: 'POST',
-	// 		headers: {
-	// 			'Content-Type': 'application/json',
-	// 		},
-	// 		body: JSON.stringify({
-	// 			userName: userName,
-	// 			email: email
-	// 		}),
-	// 	})
-	// 		.then((res) => {
-	// 			res.json().then((data) => {
-	// 				forgotPassword(data.email);
-	// 				props.navigation.push("NewPasswordScreen");
-	// 			});
-	// 		})
-	// 		.catch((data) => console.log(data));
-	// }
-
 	const forgetPassword = () => {
+		console.log("okay");
 		fetch('http://localhost:5000/api/v1.0.0/user/check_user', {
 			method: 'POST',
 			headers: {
@@ -45,8 +20,7 @@ function PasswordScreen(props) {
 		})
 			.then((res) => {
 				res.json().then((data) => {
-					// forgotPassword(data.email);
-					props.navigation.push('NewPasswordScreen');
+					props.navigation.push('NewPasswordScreen', {email: data.email});
 				});
 			})
 			.catch((data) => console.log(data));
@@ -72,19 +46,6 @@ function PasswordScreen(props) {
 					placeholder="Please enter an Email or Username"
 					onChangeText={(text) => setPrimaryInfo(text)}
 				></TextInput>
-
-				{/* <Text style={styles.AuthenticationText}>Email</Text>
-				<TextInput
-					style={styles.AuthenticationInput}
-					value={email}
-					onChangeText={(text) => setEmail(text)}
-				></TextInput>
-				<Text style={styles.AuthenticationText}>Username</Text>
-				<TextInput
-					style={styles.AuthenticationInput}
-					value={userName}
-					onChangeText={(text) => setUserName(text)}
-				></TextInput> */}
 			</View>
 			<TouchableOpacity
 				activeOpacity={0.6}

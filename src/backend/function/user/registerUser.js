@@ -148,10 +148,14 @@ function sendUserEmail(cnd, code) {
 					},
 				})
 			);
-
-			var html = 'Click the link to activate your account and return back to app page'
+			var html =
+				'<b>Click the link to allow resetting password and return back to app page</b>' +
 				'<div>http://127.0.0.1:5000/api/v1.0.0/user/activation/' +
-				code + '/' + cnd + '</div>';
+				code +
+				'/' +
+				cnd +
+				'/' +
+				'</div>';
 			console.log(html);
 			var data = {
 				from: 'habipetshelp@gmail.com',

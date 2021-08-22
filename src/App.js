@@ -12,9 +12,10 @@ import TabTwo from './frontend/screens/TabTwo';
 import TabThree from './frontend/screens/TabThree';
 import LoginScreen from './frontend/screens/LoginScreen';
 import SignupScreen from './frontend/screens/SignupScreen';
-import VerifyEmailScreen from './frontend/screens/VerifyEmailScreen';
+import VerifyEmailSignUpScreen from './frontend/screens/VerifyEmailSignUpScreen';
 import PasswordScreen from './frontend/screens/PasswordScreen';
 import NewPasswordScreen from './frontend/screens/NewPasswordScreen';
+import VerifyEmailPasswordScreen from './frontend/screens/VerifyEmailPasswordScreen';
 
 import { AuthContext } from './frontend/screens/context';
 import ColorSet from './frontend/resources/themes/Global';
@@ -85,9 +86,9 @@ export default function App() {
 							options={{ title: 'Sign up' }}
 						/>
 						<Stack.Screen
-							name="VerifyEmailScreen"
-							component={VerifyEmailScreen}
-							options={{ title: 'Verify Email' }}
+							name="VerifyEmailSignUpScreen"
+							component={VerifyEmailSignUpScreen}
+							options={{ title: 'Verify Email Sign Up' }}
 						/>
 						<Stack.Screen
 							name="PasswordScreen"
@@ -98,6 +99,11 @@ export default function App() {
 							name="NewPasswordScreen"
 							component={NewPasswordScreen}
 							options={{ title: 'New Password' }}
+						/>
+							<Stack.Screen
+							name="VerifyEmailPasswordScreen"
+							component={VerifyEmailPasswordScreen}
+							options={{ title: 'Verify Email Password' }}
 						/>
 					</Stack.Navigator>
 				)}

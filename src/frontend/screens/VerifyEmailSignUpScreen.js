@@ -4,14 +4,10 @@ import { View, Text, TextInput, Image, TouchableOpacity } from 'react-native';
 
 import styles from '../styling/Authentication';
 
-import { AuthContext } from './context';
-
-function VerifyEmailScreen(props) {
+function VerifyEmailSignUpScreen(props) {
 	console.log(props);
-	const { resendMail } = useContext(AuthContext);
 
 	const resend = () => {
-		console.log(props.route.params.email);
 		fetch('http://localhost:5000/api/v1.0.0/user/send_activate_email', {
 			method: 'POST',
 			headers: {
@@ -62,4 +58,4 @@ function VerifyEmailScreen(props) {
 	);
 }
 
-export default VerifyEmailScreen;
+export default VerifyEmailSignUpScreen;

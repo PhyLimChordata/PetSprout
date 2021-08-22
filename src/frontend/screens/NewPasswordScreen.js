@@ -12,23 +12,25 @@ function NewPasswordScreen(props) {
 
 	const { resetPassword } = useContext(AuthContext);
 
-	const forgetPassword = () => {
+	const attemptSetNewPassword = () => {
 		console.log(resetPassword);
-        console.log(password);
-		fetch('http://localhost:5000/api/v1.0.0/user/reset_password', {
+		console.log(password);
+		fetch('http://localhost:5000/api/v1.0.0/user/pending_password', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
 			},
 			body: JSON.stringify({
 				newPassword: password,
-				// reEnteredPassword: reEnteredPassword,
-				email: resetPassword,
+				email: props.route.params.email,
 			}),
 		})
 			.then((res) => {
 				res.json().then((data) => {
-					props.navigation.push('LoginScreen');
+					props.navigation.push('VerifyEmailPasswordScreen', {
+						password: password,
+						email: props.route.params.email,
+					});
 				});
 			})
 			.catch(console.log('oh no'));
@@ -40,24 +42,32 @@ function NewPasswordScreen(props) {
 				style={styles.AuthenticationLogo}
 				source={require('../resources/images/Logo.png')}
 			/>
-			<View style={styles.inputContainer}>
+			<View style={styles.header}>
 				<Text style={styles.textTitle}>Enter a new Password</Text>
+			</View>
+
+			<View style={styles.inputContainer}>
 				<Text style={styles.AuthenticationText}>Password</Text>
 				<TextInput
 					style={styles.AuthenticationInput}
 					value={password}
+					secureTextEntry={true}
+					placeholder="*********"
 					onChangeText={(text) => setPassword(text)}
 				></TextInput>
 				<Text style={styles.AuthenticationText}>ReEnter Password</Text>
 				<TextInput
 					style={styles.AuthenticationInput}
 					value={reEnteredPassword}
+					secureTextEntry={true}
+					placeholder="*********"
 					onChangeText={(text) => setReEnteredPassword(text)}
 				></TextInput>
 			</View>
+
 			<TouchableHighlight
 				style={styles.AuthenticationButton}
-				onPress={() => forgetPassword()}
+				onPress={() => attemptSetNewPassword()}
 			>
 				<Text style={styles.AuthenticationButtonText}>Send Email</Text>
 			</TouchableHighlight>

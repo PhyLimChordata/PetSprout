@@ -55,7 +55,8 @@ export default StyleSheet.create({
 		alignItems: 'flex-start',
 	},
 	header: {
-		alignItems: 'center'
+		alignItems: 'center',
+		marginBottom: 20
 	},
 	AuthenticationButton: {
 		backgroundColor: ColorSet.QuaternaryGreen,
