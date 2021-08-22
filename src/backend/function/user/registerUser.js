@@ -34,7 +34,6 @@ const user_regist = async (req, res) => {
 			password,
 			lastlogin: null,
 		});
-		console.log('ok5');
 
 		// hashedpassword (security)
 		const salt = await bcryptjs.genSalt(10);
@@ -59,8 +58,6 @@ const user_regist = async (req, res) => {
 			email,
 			veri_code: code,
 		});
-		console.log('pole');
-		console.log(newEmail);
 		await newEmail.save();
 		res.status(200).json('Success');
 	} catch (error) {

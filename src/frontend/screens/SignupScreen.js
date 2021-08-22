@@ -37,7 +37,9 @@ function SignupScreen(props) {
 			})
 			.then((data) => {
 				console.log(data);
+				console.log(email);
 				signUp();
+				props.navigation.push("VerifyEmailScreen", {email: email});
 			})
 			.catch();
 	};
@@ -68,7 +70,7 @@ function SignupScreen(props) {
 					value={password}
 					onChangeText={(text) => setPassword(text)}
 				></TextInput>
-				<Text style={styles.AuthenticationText}>ReEnter Password</Text>
+				<Text style={styles.AuthenticationText}>Re-enter Password</Text>
 				<TextInput
 					style={styles.AuthenticationInput}
 					secureTextEntry={true}

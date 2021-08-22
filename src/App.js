@@ -12,6 +12,7 @@ import TabTwo from './frontend/screens/TabTwo';
 import TabThree from './frontend/screens/TabThree';
 import LoginScreen from './frontend/screens/LoginScreen';
 import SignupScreen from './frontend/screens/SignupScreen';
+import VerifyEmailScreen from './frontend/screens/VerifyEmailScreen';
 import PasswordScreen from './frontend/screens/PasswordScreen';
 import NewPasswordScreen from './frontend/screens/NewPasswordScreen';
 
@@ -51,7 +52,6 @@ const animation = new Animated.Value(0);
 
 export default function App() {
 	const [token, setToken] = useState(null);
-	const [email, setEmail] = useState('');
 
 	const authContext = useMemo(() => {
 		return {
@@ -59,18 +59,11 @@ export default function App() {
 				setToken(tokens);
 				console.log(token);
 			},
-			signUp: () => {
-				setToken('temporaryToken');
-			},
 			signOut: () => {
 				setToken(null);
 			},
-			forgotPassword: (providedEmail) => {
-				setEmail(providedEmail);
-			},
-			resetPassword: email,
 		};
-	}, [email, setEmail, token, setToken]);
+	}, [token, setToken]);
 
 	return (
 		<AuthContext.Provider value={authContext}>
@@ -90,6 +83,11 @@ export default function App() {
 							name="SignupScreen"
 							component={SignupScreen}
 							options={{ title: 'Sign up' }}
+						/>
+						<Stack.Screen
+							name="VerifyEmailScreen"
+							component={VerifyEmailScreen}
+							options={{ title: 'Verify Email' }}
 						/>
 						<Stack.Screen
 							name="PasswordScreen"
