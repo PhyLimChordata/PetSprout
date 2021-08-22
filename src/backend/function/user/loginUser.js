@@ -7,14 +7,14 @@ const jwt = require("jsonwebtoken");
 
 module.exports = async (req,res) => {
     try {
-        // email for login
-        let{userName,password,date} = req.body;
+        
+        let{email,password,date} = req.body;
 
         let errors = validationResult(req);
         if(!errors.isEmpty())
             return res.status(400).json({errors: errors.array()});
 
-        let user = await User.findOne({userName});
+        let user = await User.findOne({email});
         if(!user)
             return res.status(404).json("User has not been created");
 
@@ -32,6 +32,7 @@ module.exports = async (req,res) => {
 
             // var current = new Date();
             var current = new Date(date);
+            console.log(current);
             var currentYear = current.getFullYear();
             var currentMonth = current.getMonth();
             var currentDate = current.getDate();

@@ -13,14 +13,16 @@ function LoginScreen(props) {
 	const { logIn } = useContext(AuthContext);
 
 	const attemptLogin = () => {
+		const date = new Date();
 		fetch('http://localhost:5000/api/v1.0.0/user/login', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
 			},
 			body: JSON.stringify({
-				userName: primaryInfo,
+				email: primaryInfo,
 				password: password,
+				date: date,
 			}),
 		})
 			.then((res) => {
