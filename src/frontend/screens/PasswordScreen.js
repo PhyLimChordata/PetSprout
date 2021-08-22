@@ -8,7 +8,7 @@ import ColorSet from '../resources/themes/Global';
 function PasswordScreen(props) {
 	const [primaryInfo, setPrimaryInfo] = useState('');
 	const [inputStyle, setInputStyle] = useState({
-		backgroundColor: ColorSet.SecondaryGreen,
+		backgroundColor: ColorSet.Green.Secondary,
 		padding: 10,
 		borderWidth: 0,
 		borderStyle: 'solid',
@@ -36,7 +36,7 @@ function PasswordScreen(props) {
 				} else {
 					console.log(res);
 					setInputStyle({
-						backgroundColor: ColorSet.SecondaryGreen,
+						backgroundColor: ColorSet.Green.Secondary,
 						padding: 10,
 						borderWidth: 2,
 						borderColor: 'red',

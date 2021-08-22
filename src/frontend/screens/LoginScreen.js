@@ -13,6 +13,7 @@ function LoginScreen(props) {
 	const { logIn } = useContext(AuthContext);
 
 	const attemptLogin = () => {
+		const date = new Date();
 		fetch('http://localhost:5000/api/v1.0.0/user/login', {
 			method: 'POST',
 			headers: {
@@ -21,6 +22,7 @@ function LoginScreen(props) {
 			body: JSON.stringify({
 				userName: primaryInfo,
 				password: password,
+				date: date
 			}),
 		})
 			.then((res) => {
@@ -38,7 +40,7 @@ function LoginScreen(props) {
 				source={require('../resources/images/Logo.png')}
 			/>
 			<View style={styles.inputContainer}>
-				<Text style={styles.AuthenticationText}>Primary Information</Text>
+				<Text style={styles.AuthenticationText}>Email or Username</Text>
 				<TextInput
 					style={styles.AuthenticationInput}
 					value={primaryInfo}
@@ -54,14 +56,16 @@ function LoginScreen(props) {
 					onChangeText={(text) => setPassword(text)}
 				></TextInput>
 				<View style={styles.forgotView}>
-					<TouchableOpacity activeOpacity={0.6}
+					<TouchableOpacity
+						activeOpacity={0.6}
 						onPress={() => props.navigation.push('PasswordScreen')}
 					>
 						<Text style={styles.forgotPassword}>Need help logging in?</Text>
 					</TouchableOpacity>
 				</View>
 			</View>
-			<TouchableOpacity activeOpacity={0.6}
+			<TouchableOpacity
+				activeOpacity={0.6}
 				style={styles.AuthenticationButton}
 				onPress={() => attemptLogin()}
 			>
@@ -69,7 +73,8 @@ function LoginScreen(props) {
 			</TouchableOpacity>
 			<Text style={styles.subText}>
 				New User?
-				<TouchableOpacity activeOpacity={0.6}
+				<TouchableOpacity
+					activeOpacity={0.6}
 					onPress={() => props.navigation.push('SignupScreen')}
 				>
 					<Text style={styles.SignupText}> Sign up</Text>

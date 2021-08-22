@@ -20,11 +20,11 @@ export default StyleSheet.create({
 	textTitle: {
 		fontSize: 20,
 		fontWeight: 'bold',
-		color: ColorSet.QuaternaryGreen
+		color: ColorSet.Green.Quaternary
 	},
 	explanationText: {
 		fontSize: 15,
-		color: ColorSet.QuaternaryGreen,
+		color: ColorSet.Green.Quaternary,
 		textAlign: 'center',
 		marginBottom: 15,
 		paddingLeft: 50,
@@ -66,6 +66,9 @@ export default StyleSheet.create({
 		paddingRight: 40,
 		marginBottom: 20,
 	},
+	AuthenticationSpecialButton: {
+
+	},
 	AuthenticationButtonText: {
 		fontSize: 20,
 		fontWeight: 'bold',
@@ -80,7 +83,7 @@ export default StyleSheet.create({
 		fontWeight: 'bold',
 	},
 	forgotPassword: {
-		color: ColorSet.QuaternaryGreen,
+		color: ColorSet.Green.Quaternary,
 		fontSize: 14,
 		fontWeight: 'bold',
 	},
