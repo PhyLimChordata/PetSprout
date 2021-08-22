@@ -15,7 +15,7 @@ export default StyleSheet.create({
 	},
 	headerText: {
 		fontSize: 18,
-		color: ColorSet.QuaternaryGreen,
+		color: ColorSet.Green.Quaternary,
 		fontWeight: "700",
 		marginLeft: 15,
 	},

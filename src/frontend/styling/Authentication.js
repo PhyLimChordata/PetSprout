@@ -20,11 +20,11 @@ export default StyleSheet.create({
 	textTitle: {
 		fontSize: 20,
 		fontWeight: 'bold',
-		color: ColorSet.QuaternaryGreen
+		color: ColorSet.Green.Quaternary
 	},
 	explanationText: {
 		fontSize: 15,
-		color: ColorSet.QuaternaryGreen,
+		color: ColorSet.Green.Quaternary,
 		textAlign: 'center',
 		marginBottom: 15,
 		paddingLeft: 50,
@@ -80,7 +80,7 @@ export default StyleSheet.create({
 		fontWeight: 'bold',
 	},
 	forgotPassword: {
-		color: ColorSet.QuaternaryGreen,
+		color: ColorSet.Green.Quaternary,
 		fontSize: 14,
 		fontWeight: 'bold',
 	},

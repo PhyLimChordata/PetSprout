@@ -41,7 +41,7 @@ export default StyleSheet.create({
     textStyles:{
         fontStyle: "normal",
         fontWeight: "700",
-        color: ColorSet.QuinaryGreen,
+        color: ColorSet.Green.Quinary,
     },
     achievementName: {
         alignSelf: 'center',
