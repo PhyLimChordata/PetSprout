@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { View, Text, TextInput, Image, TouchableHighlight } from 'react-native';
+import { View, Text, TextInput, Image, TouchableOpacity } from 'react-native';
 
 import styles from '../styling/Authentication';
 
@@ -31,10 +31,11 @@ function SignupScreen(props) {
 			}),
 		})
 			.then((res) => {
-				res.json();
-			})
-			.then((data) => {
-				props.navigation.push("VerifyEmailSignUpScreen", {email: email});
+				if (res.status == 200) {
+					res.json().then((data) => {
+						props.navigation.push('VerifyEmailSignUpScreen', { email: email });
+					});
+				}
 			})
 			.catch();
 	};
@@ -73,19 +74,21 @@ function SignupScreen(props) {
 					onChangeText={(text) => setreEnterPassword(text)}
 				></TextInput>
 			</View>
-			<TouchableHighlight
+			<TouchableOpacity
+				activeOpacity={0.6}
 				style={styles.AuthenticationButton}
 				onPress={() => attemptSignup()}
 			>
 				<Text style={styles.AuthenticationButtonText}>Sign Up</Text>
-			</TouchableHighlight>
+			</TouchableOpacity>
 			<Text style={styles.subText}>
 				Already have an account?
-				<TouchableHighlight
+				<TouchableOpacity
+					activeOpacity={0.6}
 					onPress={() => props.navigation.push('LoginScreen')}
 				>
 					<Text style={styles.SignupText}> Log in</Text>
-				</TouchableHighlight>
+				</TouchableOpacity>
 			</Text>
 		</View>
 	);

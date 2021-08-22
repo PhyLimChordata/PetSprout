@@ -19,11 +19,13 @@ function VerifyEmailPasswordScreen(props) {
 			}),
 		})
 			.then((res) => {
-				res.json();
+				if (res.status == 200) {
+					res.json().then((data) => {
+						console.log(data);
+					});
+				}
 			})
-			.then((data) => {
-				console.log(data);
-			})
+
 			.catch();
 	};
 
@@ -37,7 +39,8 @@ function VerifyEmailPasswordScreen(props) {
 				<Text style={styles.textTitle}>Resetting your Password</Text>
 				<Text style={styles.explanationText}>
 					{' '}
-					An email has been sent which will contain a link to reset your password.{' '}
+					An email has been sent which will contain a link to reset your
+					password.{' '}
 				</Text>
 			</View>
 			<TouchableOpacity

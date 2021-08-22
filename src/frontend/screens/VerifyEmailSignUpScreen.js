@@ -18,10 +18,11 @@ function VerifyEmailSignUpScreen(props) {
 			}),
 		})
 			.then((res) => {
-				res.json();
-			})
-			.then((data) => {
-				console.log(data);
+				if (res.status == 200) {
+					res.json().then((data) => {
+						console.log(data);
+					});
+				}
 			})
 			.catch();
 	};

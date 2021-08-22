@@ -8,7 +8,6 @@ function PasswordScreen(props) {
 	const [primaryInfo, setPrimaryInfo] = useState('');
 
 	const forgetPassword = () => {
-		console.log("okay");
 		fetch('http://localhost:5000/api/v1.0.0/user/check_user', {
 			method: 'POST',
 			headers: {
@@ -19,9 +18,11 @@ function PasswordScreen(props) {
 			}),
 		})
 			.then((res) => {
-				res.json().then((data) => {
-					props.navigation.push('NewPasswordScreen', {email: data.email});
-				});
+				if (res.status == 200) {
+					res.json().then((data) => {
+						props.navigation.push('NewPasswordScreen', { email: data.email });
+					});
+				}
 			})
 			.catch((data) => console.log(data));
 	};

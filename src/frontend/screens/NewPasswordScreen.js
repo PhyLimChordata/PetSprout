@@ -26,12 +26,14 @@ function NewPasswordScreen(props) {
 			}),
 		})
 			.then((res) => {
-				res.json().then((data) => {
-					props.navigation.push('VerifyEmailPasswordScreen', {
-						password: password,
-						email: props.route.params.email,
+				if (res.status == 200) {
+					res.json().then((data) => {
+						props.navigation.push('VerifyEmailPasswordScreen', {
+							password: password,
+							email: props.route.params.email,
+						});
 					});
-				});
+				}
 			})
 			.catch(console.log('oh no'));
 	};
