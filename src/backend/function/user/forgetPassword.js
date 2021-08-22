@@ -104,7 +104,7 @@ const reset_password = async (req, res) => {
         await Mailing.deleteMany({ email });
 
         res.setHeader("Content-Type", 'text/html')
-        res.sendfile(`${__dirname}/html_page/forget_password.html`) 
+        res.sendfile(`${__dirname}/html_page/forgetPasswordSuccess.html`) 
         res.status(200)           
     } catch (error) {
         console.error(error);
@@ -132,13 +132,8 @@ function sendUserEmail(cnd, code) {
 			);
 
 			var html =
-				'<b>Click the link to allow resetting password and return back to app page</b>' +
-				'<div>http://127.0.0.1:5000/api/v1.0.0/user/reset_password/' +
-				code +
-				'/' +
-				cnd +
-				'/' +
-				'</div>';
+			    '<a href="http://127.0.0.1:5000/api/v1.0.0/user/reset_password/' + code +'/' + cnd + '/' + '">' 
+			    + 'Click to allow resetting password and return back to app page </a>';
 			console.log(html);
 			var data = {
 				from: 'habipetshelp@gmail.com',
