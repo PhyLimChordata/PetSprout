@@ -53,6 +53,7 @@ function LoginScreen(props) {
 					placeholder="*********"
 					onChangeText={(text) => setPassword(text)}
 				></TextInput>
+<<<<<<< HEAD
 				<View style={styles.forgotView}>
 					<TouchableOpacity activeOpacity={0.6}
 						onPress={() => props.navigation.push('PasswordScreen')}
@@ -60,6 +61,8 @@ function LoginScreen(props) {
 						<Text style={styles.forgotPassword}>Need help logging in?</Text>
 					</TouchableOpacity>
 				</View>
+=======
+>>>>>>> Setting-Save-Backend
 			</View>
 			<TouchableOpacity activeOpacity={0.6}
 				style={styles.AuthenticationButton}
