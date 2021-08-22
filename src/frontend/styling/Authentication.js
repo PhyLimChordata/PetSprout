@@ -20,7 +20,7 @@ export default StyleSheet.create({
 	textTitle: {
 		fontSize: 20,
 		fontWeight: 'bold',
-		color: ColorSet.Green.Quaternary
+		color: ColorSet.Green.Quaternary,
 	},
 	explanationText: {
 		fontSize: 15,
@@ -28,7 +28,7 @@ export default StyleSheet.create({
 		textAlign: 'center',
 		marginBottom: 15,
 		paddingLeft: 50,
-		paddingRight: 50
+		paddingRight: 50,
 	},
 	AuthenticationLogo: {
 		height: 200,
@@ -56,10 +56,18 @@ export default StyleSheet.create({
 	},
 	header: {
 		alignItems: 'center',
-		marginBottom: 20
+		marginBottom: 20,
 	},
 	AuthenticationButton: {
 		backgroundColor: ColorSet.Green.Quaternary,
+		borderRadius: 30,
+		padding: 10,
+		paddingLeft: 40,
+		paddingRight: 40,
+		marginBottom: 20,
+	},
+	AuthenticationSpecialButton: {
+		backgroundColor: ColorSet.Blue.Authentication,
 		borderRadius: 30,
 		padding: 10,
 		paddingLeft: 40,
@@ -87,7 +95,7 @@ export default StyleSheet.create({
 	forgotView: {
 		// alignItems: 'flex-end',
 		alignItems: 'center',
-		width: "100%",
-		marginBottom: 20
-	}
+		width: '100%',
+		marginBottom: 20,
+	},
 });

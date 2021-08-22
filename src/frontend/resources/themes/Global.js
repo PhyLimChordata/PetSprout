@@ -31,6 +31,7 @@ const ColorSet = {
         Tertiary: '#95D1D4',
         Quaternary: '#8EBDBF',
         Quinary: '#738E8F',
+        Authentication: '#6081C4'
     },
     Purple: {
         Primary: '#F8F0FF',
