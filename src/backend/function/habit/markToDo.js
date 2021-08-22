@@ -1,5 +1,6 @@
 const Habit = require('../../schemas/HabitSchema');
 const User = require('../../schemas/UserSchema');
+const Analyze = require('../../schemas/AnalyzeSchema');
 const { validationResult } = require('express-validator');
 
 /**
@@ -35,7 +36,29 @@ module.exports = async (req, res) => {
 		habitFromDB.todo = numberOfFinish + 1;
 		userHabit.expValue = expValue;
 
+		let anaylzeId = habitFromDB.analyze;
+		let analyze = await Analyze.findById(anaylzeId);
+		if (!analyze) return res.status(404).json("User habit's analyze not found");
+
+		// need to change to user time
+		const date = new Date();
+		let analyze_data = analyze.freq.find(
+			(data) => data.date.toString() === date.toString()
+		)
+
+		if (!analyze_data) {
+			let newData = {
+				date: date,
+				frequency: 1
+			}
+			analyze.freq.push(newData);
+		} else {
+			analyze_data.freq = analyze_data.freq + 1
+		}
+
+		await analyze.save();
 		await userHabit.save();
+
 		res.json(userHabit);
 	} catch (error) {
 		console.error(error);

@@ -3,9 +3,9 @@ import { Image, TouchableOpacity } from 'react-native';
 
 function Menu(props) {
 	return (
-		<TouchableOpacity activeOpacity={0.6} onPress={() => menuClicked}>
+		<TouchableOpacity activeOpacity={0.6} onPress={props.menuClicked}>
 			<Image
-				style={{ flex: 1, width: 30, height: 25 }}
+				style={{ width: 30, height: 25 }}
 				source={require('../resources/images/Menu.png')}
 			/>
 		</TouchableOpacity>

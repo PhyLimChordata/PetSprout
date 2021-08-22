@@ -4,6 +4,7 @@ const smtpTransport = require('nodemailer-smtp-transport');
 const User = require('../../schemas/UserSchema');
 const Habit = require('../../schemas/HabitSchema');
 const Mailing = require('../../schemas/mailingValidationSchema');
+const Setting = require("../../schemas/SettingSchema");
 const bcryptjs = require('bcryptjs');
 
 const user_regist = async (req, res) => {
@@ -45,10 +46,16 @@ const user_regist = async (req, res) => {
 
 		// create user habit
 		let newUserHabit = new Habit({
-			user: newUser._id,
+			user: newUser._id
 		});
 
 		await newUserHabit.save();
+
+		// create setting
+		let newUserSetting = new Setting({
+			user:newUser._id
+		});
+		await newUserSetting.save();
 
 		const code = require('crypto').randomBytes(16).toString('hex');
 		sendUserEmail(email, code);
@@ -58,6 +65,7 @@ const user_regist = async (req, res) => {
 			email,
 			veri_code: code,
 		});
+		console.log(newEmail);
 		await newEmail.save();
 		res.status(200).json('Success');
 	} catch (error) {
@@ -149,13 +157,8 @@ function sendUserEmail(cnd, code) {
 				})
 			);
 			var html =
-				'<b>Click the link to allow resetting password and return back to app page</b>' +
-				'<div>http://127.0.0.1:5000/api/v1.0.0/user/activation/' +
-				code +
-				'/' +
-				cnd +
-				'/' +
-				'</div>';
+				'<a href="http://127.0.0.1:5000/api/v1.0.0/user/activation/' + code +'/' + cnd + '/' + '">' 
+				+ 'Click to allow resetting password and return back to app page </a>';
 			console.log(html);
 			var data = {
 				from: 'habipetshelp@gmail.com',

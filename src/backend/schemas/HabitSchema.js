@@ -17,6 +17,10 @@ const HabitSchema = new Schema(
 		},
 		habitList: [
 			{
+				analyze: {
+					type: mongoose.Schema.Types.ObjectId,
+					ref: 'analyze'
+				},
 				title: {
 					type: String,
 				},
@@ -29,19 +33,13 @@ const HabitSchema = new Schema(
 					default: '',
 				},
 				schedule: {
-					type: String,
-				},
-				repeat: {
-					type: String,
+					type: [String],
 				},
 				times: {
 					type: String,
 				},
 				alarm: {
-					type: String,
-				},
-				tag: {
-					type: String,
+					type: [String],
 				},
 				date: {
 					type: Date,
@@ -61,3 +59,5 @@ const HabitSchema = new Schema(
 
 const habitSchema = mongoose.model('habit', HabitSchema);
 module.exports = habitSchema;
+
+
