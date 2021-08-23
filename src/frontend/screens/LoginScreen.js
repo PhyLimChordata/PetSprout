@@ -38,7 +38,7 @@ function LoginScreen(props) {
 				source={require('../resources/images/Logo.png')}
 			/>
 			<View style={styles.inputContainer}>
-				<Text style={styles.AuthenticationText}>Primary Information</Text>
+				<Text style={styles.AuthenticationText}>Email or Username</Text>
 				<TextInput
 					style={styles.AuthenticationInput}
 					value={primaryInfo}
