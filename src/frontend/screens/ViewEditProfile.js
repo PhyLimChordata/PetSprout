@@ -1,12 +1,21 @@
 import React, { useEffect } from 'react';
-import {View, Text, Button, Pressable } from 'react-native';
-import styles from '../styling/ViewEditBox'
+import {View, Text, Button, Pressable, Dimensions } from 'react-native';
+import StyleSheetFactory from '../styling/ViewEditBox'
 import { TextInput } from "react-native";
 import MenuHeader from '../components/MenuHeader'
-import ColorSet from '../resources/themes/Global'
 import {SafeAreaView} from 'react-native';
+import {
+    useFonts,
+    Roboto_900Black,
+  } from '@expo-google-fonts/roboto';
+
+let styles = StyleSheetFactory.getSheet(Dimensions.get('screen').width,
+    Dimensions.get('screen').height
+    );
 
 function ProfileEdit (props) {
+    
+    console.log("profile 14: " + typeof styles);
 
     let data = {
         userName: 'Example',
@@ -14,54 +23,60 @@ function ProfileEdit (props) {
         about: '',
     }
 
+    
+
     const handleChange = (id, e) => {
-        data[id] = e.target.value
+        data[id] = e
     }
 
     const onSubmit = () => {
         console.log(data)
     }
 
-    return(
-        <SafeAreaView>
-            <View>
-                <MenuHeader text="Account">
-                    <Text>Account icon</Text>
-                </MenuHeader>
-            </View>
-            <View style={styles.container}>
-                <EditBox id="userName" tag="Username" def={data.userName} place="Username" handle={handleChange}/>
-                <View style={styles.formContainer}>
-                    <Text style={[styles.textTitle, styles.text]}>
-                        Email
-                    </Text>
-                    <Text style={[styles.textInput, styles.text]}>
-                        Example@gmail.com
-                    </Text>
-                    </View>
-                <EditBox id="about" tag="About" def="" mult={true} numLines={5} backColor={true} handle={handleChange}/>
-                <View style={styles.formContainer}>
-                    <Text style={[styles.textTitle, styles.text]}>
-                        Account Created On
-                    </Text>
-                    <Text style={[styles.textInput, styles.text]}>
-                        Date
-                    </Text>
+        return(
+            <SafeAreaView>
+                <View>
+                    <MenuHeader text="Account  ">
+                        <Text>Account  </Text>
+                    </MenuHeader>
                 </View>
-                <SubmitButton submit={onSubmit}/>
-            </View>
-        </SafeAreaView>        
-    );
+                <View style={styles.container}>
+                    <EditBox id="userName" tag="Username" def={data.userName} place="Username" handle={handleChange}/>
+                    <View style={styles.formContainer}>
+                        <Text style={[styles.textTitle, styles.text, { fontFamily: 'Roboto_900Black', fontWeight: '900' }]}>
+                            Email
+                        </Text>
+                        <Text style={[styles.textInput, styles.text]}>
+                            Example@gmail.com
+                        </Text>
+                        </View>
+                    <EditBox id="about" tag="About" def="" mult={true} numLines={5} backColor={true} handle={handleChange}/>
+                    <View style={styles.formContainer}>
+                        <Text style={[styles.textTitle, styles.text, { fontFamily: 'Roboto_900Black', fontWeight: '900' }]}>
+                            Account Created On
+                        </Text>
+                        <Text style={[styles.textInput, styles.text]}>
+                            Date
+                        </Text>
+                    </View>
+                    <SubmitButton submit={onSubmit}/>
+                </View>
+            </SafeAreaView>        
+        );
 }
 
 const EditBox = (props) => {
     const [text, onChangeText] = React.useState(props.def);
     const [focused, onSelected] = React.useState(false);
 
-    const handleChange = (e) => {
-        onChangeText(e.target.value)
-        props.handle(props.id, e)
+    const handleChange = (text) => {
+        console.log("handleChange " + text)
+        onChangeText(text)
+        props.handle(props.id, text)
     }
+
+    console.log("def =  " + text);
+    console.log(props.def);
 
     useEffect(() => {
 
@@ -69,31 +84,34 @@ const EditBox = (props) => {
 
     return(
         <View style={styles.formContainer}>
-            <Text style={[styles.textTitle, styles.text]}>
+            <Text style={[styles.textTitle, styles.text, { fontFamily: 'Roboto_900Black', fontWeight: '900' }]}>
                 {props.tag}
             </Text>
             <TextInput
+                id={props.id}
                 onFocus={() => onSelected(true)}
                 onBlur={() => onSelected(false)}
-                onChange={e => handleChange((props.id, e))}
+                onChangeText={(text) => handleChange((props.id, text))}
                 value={text}
-                defaultValue={props.place}
-                style={props.mult ? styles.textMultiInput : [styles.textInput, styles.text, (focused ? styles.textInputSelected : null)]}
+                style={props.mult ? styles.textMultiInput 
+                    : [styles.textInput, styles.text, (focused ? styles.textInputSelected : null)]}
                 multiline={props.mult}
                 numberOfLines={props.numLines}
             />
         </View>
 
+
     );
 };
 
 const SubmitButton = (props) => {
+
     return(
         <View style={styles.submitButtonPosition}>
             <Pressable
                 style={styles.submitButton}
                 onPress={() => props.submit()}>
-                    <Text style={styles.submitButtonText}>SUBMIT</Text>
+                    <Text style={[styles.submitButtonText, { fontFamily: 'Roboto_900Black', fontWeight: '900' }]}>SUBMIT</Text>
                 </Pressable>
         </View>
     )

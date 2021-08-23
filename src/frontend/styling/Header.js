@@ -9,13 +9,14 @@ export default StyleSheet.create({
 		paddingLeft: 20,
 		paddingRight: 20,
 		paddingTop: 50,
+		display: 'flex',
 	},
 	middleComponent: {
 		flex: 8,
 	},
 	headerText: {
 		fontSize: 18,
-		color: ColorSet.QuaternaryGreen,
+		color: ColorSet.Green.Quaternary,
 		fontWeight: "700",
 		marginLeft: 15,
 	},
