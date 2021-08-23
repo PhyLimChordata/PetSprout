@@ -5,17 +5,12 @@ module.exports = async (req, res) => {
 	try {
 		let user = await User.findById(req.user.id).select('-password');
 		if (!user) return res.status(404).json('User could not found');
-
+		
+		let {day} = req.body;
+		
 		let userHabitInfo = await Habit.findOne({ user: req.user.id });
 		if (!userHabitInfo)
 			return res.status(404).json("User's habits could not found");
-
-		// need to change to the client's time	
-		const date = new Date(); // server time
-		date.setMinutes(date.getMinutes() - date.getTimezoneOffset());
-		const day = date.getDay();
-		console.log(day);
-		console.log(date);
 
 		let habitShow = userHabitInfo.habitList.filter(
 			function(habit) {

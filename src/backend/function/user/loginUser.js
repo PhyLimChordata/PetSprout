@@ -7,17 +7,36 @@ const jwt = require("jsonwebtoken");
 
 module.exports = async (req,res) => {
     try {
-        
-        let{email,password,date} = req.body;
 
         let errors = validationResult(req);
         if(!errors.isEmpty())
             return res.status(400).json({errors: errors.array()});
 
-        let user = await User.findOne({email});
-        if(!user)
-            return res.status(404).json("User has not been created");
+        let{primaryInfo,password,date} = req.body;
 
+		let email = '';
+		let userName = '';
+
+		if (primaryInfo === undefined) primaryInfo = '';
+
+		if (regEmail.test(primaryInfo)) {
+			email = primaryInfo;
+		} else if (primaryInfo != '') {
+			userName = primaryInfo;
+		} else {
+			res.status(400).json('Email or user name should be provided');
+		}
+
+        let user = null;
+		if (email === '') {
+			user = await User.findOne({ userName });
+			if (!user) return res.status(404).json("User has not been created");
+			email = user.email;
+		} else {
+			user = await User.findOne({ email });
+			if (!user) return res.status(404).json("User has not been created");
+		}
+        
         if(user.status===0) 
             return res.status(400).json("User hasn't been activated");
 
@@ -32,7 +51,6 @@ module.exports = async (req,res) => {
 
             // var current = new Date();
             var current = new Date(date);
-            console.log(current);
             var currentYear = current.getFullYear();
             var currentMonth = current.getMonth();
             var currentDate = current.getDate();
@@ -49,7 +67,7 @@ module.exports = async (req,res) => {
                 }
         }
 
-        user.lastlogin = new Date();
+        user.lastlogin = date;
         await user.save();
 
         const payload = {
@@ -72,3 +90,6 @@ module.exports = async (req,res) => {
         return res.status(500).json("server error");
     }
 }
+
+const regEmail =
+	/^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
