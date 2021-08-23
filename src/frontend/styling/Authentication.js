@@ -91,6 +91,7 @@ export default StyleSheet.create({
 		color: ColorSet.Green.Quaternary,
 		fontSize: 14,
 		fontWeight: 'bold',
+		textAlign:'center'
 	},
 	forgotView: {
 		// alignItems: 'flex-end',
@@ -98,4 +99,13 @@ export default StyleSheet.create({
 		width: '100%',
 		marginBottom: 20,
 	},
+	errorView: {
+		alignItems:'flex-end',
+		width: '100%',
+	},
+	errorMessage: {
+		textAlign: 'center',
+		color: "red",
+		fontWeight: 500
+	}
 });
