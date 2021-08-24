@@ -26,9 +26,10 @@ function BottomPopup(props) {
                 isVisible={props.modalVisible}
             >
                 <View style={{
-                    height: 200,
+                    height: 175,
                     backgroundColor:ColorSet.Green.Tertiary,
-                    borderRadius:30,
+                    borderTopRightRadius:30,
+                    borderTopLeftRadius:30
                 }}>
                     <View style={{marginHorizontal:30}}>
                         <View style={{flexDirection:'row', justifyContent: 'space-between', alignItem:'center', marginTop:15}}>
