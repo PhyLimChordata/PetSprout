@@ -5,7 +5,7 @@ export default StyleSheet.create({
     horizontalContainer: {
         flexDirection: 'row',
         borderRadius: 8,
-        backgroundColor: ColorSet.SecondaryGreen
+        backgroundColor: ColorSet.Green.Secondary
     },
     leftContainer: {
         flex: 2,
@@ -13,7 +13,7 @@ export default StyleSheet.create({
         paddingBottom: 30
     },
     container: {
-        backgroundColor: ColorSet.SecondaryGreen,
+        backgroundColor: ColorSet.Green.Secondary,
         margin: 20,
     },
     experienceContainer: {
@@ -31,14 +31,14 @@ export default StyleSheet.create({
         fontSize: 15,
         fontWeight: "bold",
         marginBottom: 20,
-        color: ColorSet.QuinaryGreen
+        color: ColorSet.Green.Quinary
     },
     circle: {
         width: 10,
         height: 10,
         marginRight: 5,
         borderRadius: 5,
-        backgroundColor: ColorSet.QuaternaryGreen
+        backgroundColor: ColorSet.Green.Quaternary
     },
     todayCircle: {
         width: 10,
@@ -46,15 +46,15 @@ export default StyleSheet.create({
         marginRight: 5,
         borderRadius: 5,
         borderWidth: 2, 
-        borderColor: ColorSet.QuinaryGreen,
-        backgroundColor: ColorSet.QuaternaryGreen
+        borderColor: ColorSet.Green.Quinary,
+        backgroundColor: ColorSet.Green.Quaternary
     },
     ellipsisCircle: {
         width: 6,
         height: 6,
         marginRight: 3,
         borderRadius: 3,
-        backgroundColor: ColorSet.QuaternaryGreen
+        backgroundColor: ColorSet.Green.Quaternary
     },
     swipeIcon: {
         width: 30,
@@ -64,13 +64,13 @@ export default StyleSheet.create({
         fontSize: 20,
         flex: 1,
         fontWeight: "bold",
-        color: ColorSet.QuaternaryGreen
+        color: ColorSet.Green.Quaternary
     },
     rightText: {
         alignItems: 'flex-end',
     },
     expText: {
-        color: ColorSet.QuaternaryGreen,
+        color: ColorSet.Green.Quaternary,
         fontSize: 20
     },
     expBar: {

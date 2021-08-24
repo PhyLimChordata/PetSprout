@@ -10,21 +10,15 @@ function Header(props) {
 	const [modalVisible, setModalVisible] = useState(false);
 
 	return (
-		<View style={{
-			display: 'flex',
-			flexDirection: 'row',
-		}}>
-			<View style={styles.header}>
-				<View style={styles.menuTitle}>
-					<Menu menuClicked={() => setModalVisible(true)} />
-					<Text style={styles.headerText}>{props.text}</Text>
-				</View>
-				<SideMenu modalVisible={modalVisible} setModalVisible={setModalVisible} />
-				{props.children}
-				<View style={styles.MiddleComponent} />
+		<View style={styles.header}>
+			<View style={styles.menuTitle}>
+				<Menu menuClicked={() => setModalVisible(true)} />
+				<Text style={styles.headerText}>{props.text}</Text>
 			</View>
+			<SideMenu modalVisible={modalVisible} setModalVisible={setModalVisible} />
+			{props.children}
+			<View style={styles.MiddleComponent} />
 		</View>
-		
 	);
 }
 

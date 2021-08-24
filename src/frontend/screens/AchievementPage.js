@@ -117,8 +117,6 @@ const OneCategory = (props) => {
     )
 }
 
-// 
-
 const OneAchievement = (props) => {
     const sty = (props.progress > 0.33) ? (props.progress > 0.66 ? styles.achievementGold : styles.achievementSilver) : styles.achievementBronze;
     return(

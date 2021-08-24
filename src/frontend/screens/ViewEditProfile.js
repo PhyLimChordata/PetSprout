@@ -100,12 +100,10 @@ const EditBox = (props) => {
             />
         </View>
 
-
     );
 };
 
 const SubmitButton = (props) => {
-
     return(
         <View style={styles.submitButtonPosition}>
             <Pressable

@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useContext} from 'react';
-import Toggle from 'react-native-toggle-element';
+// import Toggle from 'react-native-toggle-element';
 import { AuthContext } from '../screens/context';
 
 import {View, Text, TouchableOpacity, SafeAreaView, Image, AsyncStorage} from 'react-native';
@@ -128,6 +128,8 @@ function SideMenu(props) {
             <View style={{
                 height: "100%",
                 width: "80%",
+                paddingTop: "10%",
+                paddingLeft: "5%",
                 backgroundColor: ColorSet.BackgroundGrey,
             }}>
                 <SafeAreaView>
@@ -199,7 +201,7 @@ function SideMenu(props) {
                                          onPress={() => colorChange("red")}/>
                         </View>
                         <View style={{alignItems: 'center'}}>
-                            <Toggle
+                            {/* <Toggle
                                 value={toggleValue}
                                 onPress={(newState) => setToggleValue(newState)}
                                 thumbButton={{
@@ -221,7 +223,7 @@ function SideMenu(props) {
                                     <MaterialCommunityIcons name={"moon-waning-crescent"} color={ColorSet.white}
                                                             size={30}/>
                                 }
-                            />
+                            /> */}
                         </View>
                         <View style={{justifyContent: 'flex-end', flex: 1, marginHorizontal: "6%"}}>
                             <Tab color={colorTheme.Tertiary} icon={"logout"} title={'Log Out'} onPress={() => {

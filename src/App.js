@@ -15,6 +15,7 @@ import ProfileEdit from './frontend/screens/ViewEditProfile';
 import AchievementPage from './frontend/screens/AchievementPage';
 import BottomPopup from './frontend/components/BottomPopup';
 import HabitsScreen from './frontend/screens/HabitsScreen';
+import ComingSoon from './frontend/screens/ComingSoon';
 import Collaborators from './frontend/screens/Collaborators';
 
 import LoginScreen from './frontend/screens/LoginScreen';
@@ -108,7 +109,7 @@ function HomeScreen(props) {
 			>
 				<Tab.Screen
 					name="Habit"
-					component={TabOne}
+					component={HabitsScreen}
 					options={{
 						tabBarLabel: 'Habit',
 						tabBarIcon: ({ color, size }) => (
@@ -122,7 +123,7 @@ function HomeScreen(props) {
 				/>
 				<Tab.Screen
 					name="Calender"
-					component={TabThree}
+					component={Calendar}
 					options={{
 						tabBarLabel: 'Calender',
 						tabBarIcon: ({ color, size }) => (
@@ -163,7 +164,7 @@ function HomeScreen(props) {
 				/>
 				<Tab.Screen
 					name="Pomodoro"
-					component={TabThree}
+					component={Pomodoro}
 					options={{
 						tabBarLabel: 'Pomodoro',
 						tabBarIcon: ({ color, size }) => (
@@ -173,7 +174,7 @@ function HomeScreen(props) {
 				/>
 				<Tab.Screen
 					name="Reflect"
-					component={TabThree}
+					component={Reflect}
 					options={{
 						tabBarLabel: 'Reflect',
 						tabBarIcon: ({ color, size }) => (
@@ -192,4 +193,15 @@ function HomeScreen(props) {
 			/>
 		</>
 	);
+}
+function Calendar(props) {
+	return <ComingSoon title="Calendar"></ComingSoon>;
+}
+
+function Pomodoro(props) {
+	return <ComingSoon title="Pomodoro"></ComingSoon>;
+}
+
+function Reflect(props) {
+	return <ComingSoon title="Reflect"></ComingSoon>;
 }
