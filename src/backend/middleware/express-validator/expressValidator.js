@@ -11,7 +11,7 @@ module.exports.resetPasswordValidator = [
 ]
 
 module.exports.loginUserValidator = [
-    check('userName','User Name is empty').not().isEmpty()
+    check('primaryInfo','Primary Information should be provided').not().isEmpty()
 ]
 
 module.exports.userCreateHabitValidator = [
