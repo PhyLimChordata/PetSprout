@@ -40,7 +40,11 @@ function BottomPopup(props) {
 
 
                         <View style={{flexDirection:"row", justifyContent:"space-around"}}>
-                            <TitledIcon onPress={() => console.log("hi")} title={"Habits"}/>
+                            <TitledIcon title={"Habits"} onPress={() => {
+                                props.setModalVisible(false)
+                                props.navigation.navigate("CreateHabitScreen")
+                                }
+                            } />
                             <TitledIcon onPress={() => console.log("hey")} title={"Calender Entry"}/>
                             <TitledIcon onPress={() => console.log("bye")} title={"Calender Entry"}/>
                             <TitledIcon onPress={() => console.log("see ya")} title={"Reflection"}/>

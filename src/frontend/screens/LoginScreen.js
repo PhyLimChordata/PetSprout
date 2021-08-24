@@ -40,6 +40,7 @@ function LoginScreen(props) {
 			<View style={styles.inputContainer}>
 				<Text style={styles.AuthenticationText}>Email/Username</Text>
 				<TextInput
+					autoCapitalize={"none"}
 					style={styles.AuthenticationInput}
 					value={primaryInfo}
 					onChangeText={(text) => setPrimaryInfo(text)}

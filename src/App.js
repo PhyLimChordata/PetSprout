@@ -18,11 +18,13 @@ import HabitsScreen from './frontend/screens/HabitsScreen';
 import ComingSoon from './frontend/screens/ComingSoon';
 import Collaborators from './frontend/screens/Collaborators';
 
+import CreateHabitScreen from './frontend/screens/CreateHabitScreen';
 import LoginScreen from './frontend/screens/LoginScreen';
 import SignupScreen from './frontend/screens/SignupScreen';
 
 import { AuthContext } from './frontend/screens/context';
 import ColorSet from './frontend/resources/themes/Global';
+import SettingsPage from "./frontend/screens/SettingsPage";
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -74,6 +76,8 @@ export default function App() {
 				{token ? (
 					<Stack.Navigator headerMode="none">
 						<Stack.Screen name="HomeScreen" component={HomeScreen} />
+						<Stack.Screen name="SettingsScreen" component={SettingsPage} />
+						<Stack.Screen name="CreateHabitScreen" component={CreateHabitScreen} />
 					</Stack.Navigator>
 				) : (
 					<Stack.Navigator headerMode="none">
@@ -187,6 +191,7 @@ function HomeScreen(props) {
 				/>
 			</Tab.Navigator>
 			<BottomPopup
+				navigation={props.navigation}
 				modalVisible={modalVisible}
 				setModalVisible={setModalVisible}
 			/>

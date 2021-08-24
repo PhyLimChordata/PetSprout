@@ -65,7 +65,7 @@ function AchievementPage() {
     return(
         <SafeAreaView>
             <View style={styles.achievementRow}>
-                <MenuHeader text="Acheivement">
+                <MenuHeader text="Achievement" navigation={props.navigation}>
                     <Text>AchiIcon</Text>
                 </MenuHeader>
             </View>

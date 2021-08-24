@@ -1,5 +1,5 @@
 import React, { useState, useEffect} from 'react';
-import { View, Image, Animated, ScrollView } from 'react-native';
+import { View, Image, Animated, SafeAreaView } from 'react-native';
 
 import styles from '../styling/HabitsScreen';
 import Habits from '../components/Habits';
@@ -77,8 +77,8 @@ function HabitsScreen(props) {
     }
 
     return (
-        <View style={styles.headContainer}>
-            <MenuHeader text='' stack={props.navigation}/>
+        <SafeAreaView style={styles.headContainer}>
+            <MenuHeader text='' navigation={props.navigation}/>
             <View style={styles.verticalContainer}>
                 <Image style={styles.creature} source={require('../resources/images/Egg.gif')}/>
                 <ExperienceBar width='28%'/>
@@ -121,7 +121,7 @@ function HabitsScreen(props) {
                     })}
                 </Animated.ScrollView>
             </View>
-        </View>
+        </SafeAreaView>
     );
 }
 

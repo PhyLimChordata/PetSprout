@@ -161,7 +161,11 @@ function SideMenu(props) {
                                 </View>
                             </View>
                             <TouchableOpacity style={{height: 40, justifyContent: 'center'}}
-                                              onPress={() => props.setModalVisible(false)}>
+                                              onPress={() => {
+                                                  props.setModalVisible(false);
+                                                  // console.log(props);
+                                                  // props.navigation.navigate('SettingsScreen');
+                                              }}>
                                 <MaterialCommunityIcons name="cog" color={"white"} size={40}/>
                             </TouchableOpacity>
                         </View>
