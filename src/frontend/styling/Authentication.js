@@ -106,6 +106,6 @@ export default StyleSheet.create({
 	errorMessage: {
 		textAlign: 'center',
 		color: "red",
-		fontWeight: 500
+		fontWeight: "500"
 	}
 });

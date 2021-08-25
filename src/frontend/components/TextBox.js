@@ -3,16 +3,15 @@ import React, {useState} from "react";
 import styles from "../styling/Authentication";
 
 function TextBox(props) {
-    const [text, setText] = useState('');
     const {containerStyle, boxStyle = styles.AuthenticationInput, TextStyle= styles.AuthenticationText, multiline = false } = props
     return (
         <View style={containerStyle}>
-            <Text style={TextStyle}>{props.text}</Text>
+            <Text style={TextStyle}>{props.header}</Text>
             <TextInput
                 multiline={multiline}
                 style={boxStyle}
-                value={text}
-                onChangeText={(content) => setText(content)}
+                value={props.text}
+                onChangeText={(content) => props.setText(content)}
             ></TextInput>
         </View>
     );

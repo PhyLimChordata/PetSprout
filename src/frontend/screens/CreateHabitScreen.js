@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useContext} from 'react'
 import ColorSet from '../resources/themes/Global'
 import { View, Text, TouchableOpacity, ScrollView } from 'react-native'
 import {SafeAreaView} from 'react-native';
@@ -7,7 +7,7 @@ import styles from "../styling/Header";
 import TextBox from "../components/TextBox";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import TimeTab from "../components/TimeTab";
-
+import { AuthContext } from "./context"
 const Day = ({selected, letter, onPress}) => (
     <TouchableOpacity onPress={onPress} style={{alignItems:"center", width:40, height:40,
         backgroundColor: selected ? ColorSet.Green.Tertiary : ColorSet.white,
@@ -17,30 +17,65 @@ const Day = ({selected, letter, onPress}) => (
     </TouchableOpacity>
 )
 
-
 function CreateHabitScreen(props) {
-    const [Days, setDays] = useState([false,false,false,false,false,false,false]);
-    const [Alarms, setAlarms] = useState([]);
+    const [days, setDays] = useState([false,false,false,false,false,false,false]);
+    const [alarms, setAlarms] = useState([]);
     const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
+    const [title, setTitle] = useState('');
+    const [description, setDescription] = useState('');
+    const [reason, setReason] = useState('');
+    const { getToken } = useContext(AuthContext);
+
+    const createHabit = () => {
+        fetch('http://localhost:5000/api/v1.0.0/create_habit', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'token': getToken
+            },
+            body: JSON.stringify({
+                title: title,
+                description: description,
+                reason:reason,
+                schedule: days,
+                date: new Date(),
+                times:alarms.length,
+                alarms: alarms,
+            }),
+        })
+            .then((res) => {
+                res.json().then((data) => {
+                    console.log(data)
+                });
+            })
+            .catch();
+    };
+
+
 
     function flipDay(index) {
-        let newArr = [...Days];
+        let newArr = [...days];
         newArr[index] = !newArr[index];
         setDays(newArr);
     }
 
     function addAlarm(time) {
         console.log('adding')
-        setAlarms([...Alarms, time]);
+        setAlarms([...alarms, time]);
     }
     function removeAlarm(index) {
         console.log('removing')
         setAlarms([
-            ...Alarms.slice(0, index),
-            ...Alarms.slice(index + 1)]);
+            ...alarms.slice(0, index),
+            ...alarms.slice(index + 1)]);
     }
 
     function getPrettyDate(time){
+        console.log(time)
+        // console.log(getToken)
+        // console.log(title)
+        // console.log(description)
+        // console.log(reason)
         var localeSpecificTime = time.toLocaleTimeString();
         return localeSpecificTime.replace(/:\d+ /, ' ');
     }
@@ -68,24 +103,24 @@ function CreateHabitScreen(props) {
         <SafeAreaView style={styles.headContainer}>
             <MenuHeader back={true} text={"Create Habit"} navigation={props.navigation}
                         right={
-                <TouchableOpacity onPress={() => console.log('create habit')}>
+                <TouchableOpacity onPress={() => createHabit()}>
                     <Text style={styles.headerText}> Create</Text>
                 </TouchableOpacity>}
             />
             <ScrollView>
             <View style={{marginHorizontal:30, marginTop:10}}>
-                <TextBox text={"Title"} boxStyle={textboxSmallStyle} multiline={true}/>
-                <TextBox text={"Description"} boxStyle={textboxBigStyle} multiline={true}/>
-                <TextBox text={"Your Why"} boxStyle={textboxSmallStyle} multiline={true}/>
+                <TextBox header={"Title"} boxStyle={textboxSmallStyle} multiline={true} text={title} setText={setTitle}/>
+                <TextBox header={"Description"} boxStyle={textboxBigStyle} multiline={true} text={description} setText={setDescription}/>
+                <TextBox header={"Your Why"} boxStyle={textboxSmallStyle} multiline={true} text={reason} setText={setReason}/>
                 <Text style={{fontSize: 20, fontWeight: 'bold', color: ColorSet.Green.Quaternary}}>Schedule</Text>
                 <View style={{flexDirection:'row', justifyContent:'space-between'}}>
-                    <Day letter={'S'} selected={Days[0]} onPress={() => flipDay(0)}/>
-                    <Day letter={'M'} selected={Days[1]} onPress={() => flipDay(1)}/>
-                    <Day letter={'T'} selected={Days[2]} onPress={() => flipDay(2)}/>
-                    <Day letter={'W'} selected={Days[3]} onPress={() => flipDay(3)}/>
-                    <Day letter={'T'} selected={Days[4]} onPress={() => flipDay(4)}/>
-                    <Day letter={'F'} selected={Days[5]} onPress={() => flipDay(5)}/>
-                    <Day letter={'S'} selected={Days[6]} onPress={() => flipDay(6)}/>
+                    <Day letter={'S'} selected={days[0]} onPress={() => flipDay(0)}/>
+                    <Day letter={'M'} selected={days[1]} onPress={() => flipDay(1)}/>
+                    <Day letter={'T'} selected={days[2]} onPress={() => flipDay(2)}/>
+                    <Day letter={'W'} selected={days[3]} onPress={() => flipDay(3)}/>
+                    <Day letter={'T'} selected={days[4]} onPress={() => flipDay(4)}/>
+                    <Day letter={'F'} selected={days[5]} onPress={() => flipDay(5)}/>
+                    <Day letter={'S'} selected={days[6]} onPress={() => flipDay(6)}/>
                 </View>
                 <View style={{alignItems:'center', marginVertical:20}}>
                     <TouchableOpacity style={{width:200,height:50, backgroundColor:ColorSet.Green.Tertiary,
@@ -94,7 +129,7 @@ function CreateHabitScreen(props) {
                     </TouchableOpacity>
                 </View>
                 <View>
-                    {Alarms.map((time, index) => {
+                    {alarms.map((time, index) => {
                         // console.log(time)
                         return (
                             <TimeTab key={index} time={getPrettyDate(time)} onPress={() => removeAlarm(index)}/>
