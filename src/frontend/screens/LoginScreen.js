@@ -60,8 +60,9 @@ function LoginScreen(props) {
 				'Content-Type': 'application/json',
 			},
 			body: JSON.stringify({
-				userName: primaryInfo,
+				primaryInfo: primaryInfo,
 				password: password,
+				date: new Date(),
 			}),
 		})
 			.then((res) => {
