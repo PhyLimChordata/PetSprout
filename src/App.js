@@ -68,6 +68,7 @@ export default function App() {
 			signOut: () => {
 				setToken(null);
 			},
+			getToken: token
 		};
 	}, [token, setToken]);
 

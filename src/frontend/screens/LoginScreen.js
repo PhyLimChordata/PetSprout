@@ -74,13 +74,12 @@ function LoginScreen(props) {
 					});
 				} else if (res.status == 404 || res.status == 401) {
 					setError('The provided information is incorrect');
-				}
-				else if (res.status == 400) {
+				} else if (res.status == 400) {
 					setError('User has not been verified');
 				} else if (res.status == 500) {
-					setError('Something wrong happened internally...')
+					setError('Something wrong happened internally...');
 				}
- 				setInputStyle({
+				setInputStyle({
 					backgroundColor: ColorSet.Green.Secondary,
 					padding: 10,
 					borderWidth: 3,
@@ -109,7 +108,7 @@ function LoginScreen(props) {
 					placeholder="Please enter an Email or Username"
 					onChangeText={(text) => updatingPrimaryInput(text)}
 				></TextInput>
-			
+
 				<Text style={styles.AuthenticationText}>Password</Text>
 				<TextInput
 					style={inputStyle}
@@ -124,9 +123,8 @@ function LoginScreen(props) {
 						onPress={() => props.navigation.push('PasswordScreen')}
 					>
 						<Text style={styles.forgotPassword}>Need help logging in?</Text>
-						
+
 						<Text style={styles.errorMessage}>{error}</Text>
-		
 					</TouchableOpacity>
 				</View>
 			</View>
