@@ -24,14 +24,14 @@ module.exports = async (req, res) => {
 		await newAnalyze.save();
 
 		let user = await User.findById(req.user.id).select('-password');
-		if (!user) return res.status(404).json('User could not found');
+		if (!user) return res.status(404).json('User not found');
 
 		let userHabit = await Habit.findOne({user:req.user.id});
-		if (!userHabit) return res.status(404).json("User's habit could not found");
+		if (!userHabit) return res.status(404).json("User's habit information not found");
 
 		if(schedule === [false,false,false,false,false,false,false] 
 			&& (alarm === [] || times.toString() === '0')){
-				return res.status(403).json("Incorrect request param");
+				return res.status(403).json("Incorrect/Invalid request param");
 			}
 				
 		let newSchedule = [];

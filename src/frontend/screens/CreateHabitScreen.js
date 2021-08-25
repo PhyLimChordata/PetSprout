@@ -61,7 +61,7 @@ function CreateHabitScreen(props) {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
-				token: getToken,
+				'authentication-token': getToken,
 			},
 			body: JSON.stringify({
 				title: title,
