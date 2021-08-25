@@ -14,7 +14,7 @@ const {
 } = require('../middleware/express-validator/expressValidator');
 
 router.post(
-	'/create_habit/:user_habit_id',
+	'/create_habit',
 	authentication,
 	userCreateHabitValidator,
 	createHabit
