@@ -47,12 +47,12 @@ export default StyleSheet.create({
     textTitle: {
         width: '100%',
         textAlign: 'left',
-        color: ColorSet.TertiaryGreen
+        color: ColorSet.Green.Tertiary
         
     },
     textNormal: {
         textAlign: 'left',
-        color: ColorSet.QuaternaryGreen
+        color: ColorSet.Green.Quaternary
     },
     switchStyling: {
         justifyContent: "center",

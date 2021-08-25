@@ -66,6 +66,9 @@ function HabitsScreen(props) {
     });
 
     const get = () => {
+        const date = new Date();
+        console.log(date.getDay());
+        console.log(date);
         fetch('http://localhost:5000/example/get')
             .then(res => res.json())
             .then(data => {

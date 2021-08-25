@@ -53,7 +53,7 @@ const OneSetting = (props) => {
             <Text style={[styles.text, styles.textNormal]}>{props.tag}</Text>
             <Switch
                 style={styles.switchStyling}
-                trackColor={{ false: ColorSet.QuaternaryGreen, true: ColorSet.TertiaryGreen}}
+                trackColor={{ false: ColorSet.Green.Quaternary, true: ColorSet.Green.Tertiary}}
                 thumbColor={thumbColor}
                 activeThumbColor={thumbColor}
                 value={enabled}

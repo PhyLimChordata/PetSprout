@@ -21,6 +21,10 @@ import Collaborators from './frontend/screens/Collaborators';
 import CreateHabitScreen from './frontend/screens/CreateHabitScreen';
 import LoginScreen from './frontend/screens/LoginScreen';
 import SignupScreen from './frontend/screens/SignupScreen';
+import VerifyEmailSignUpScreen from './frontend/screens/VerifyEmailSignUpScreen';
+import PasswordScreen from './frontend/screens/PasswordScreen';
+import NewPasswordScreen from './frontend/screens/NewPasswordScreen';
+import VerifyEmailPasswordScreen from './frontend/screens/VerifyEmailPasswordScreen';
 
 import { AuthContext } from './frontend/screens/context';
 import ColorSet from './frontend/resources/themes/Global';
@@ -61,14 +65,11 @@ export default function App() {
 			logIn: (token) => {
 				setToken(token);
 			},
-			signUp: () => {
-				setToken('temporaryToken');
-			},
 			signOut: () => {
 				setToken(null);
 			},
 		};
-	}, []);
+	}, [token, setToken]);
 
 	return (
 		<AuthContext.Provider value={authContext}>
@@ -90,6 +91,26 @@ export default function App() {
 							name="SignupScreen"
 							component={SignupScreen}
 							options={{ title: 'Sign up' }}
+						/>
+						<Stack.Screen
+							name="VerifyEmailSignUpScreen"
+							component={VerifyEmailSignUpScreen}
+							options={{ title: 'Verify Email Sign Up' }}
+						/>
+						<Stack.Screen
+							name="PasswordScreen"
+							component={PasswordScreen}
+							options={{ title: 'Forgot Password' }}
+						/>
+						<Stack.Screen
+							name="NewPasswordScreen"
+							component={NewPasswordScreen}
+							options={{ title: 'New Password' }}
+						/>
+							<Stack.Screen
+							name="VerifyEmailPasswordScreen"
+							component={VerifyEmailPasswordScreen}
+							options={{ title: 'Verify Email Password' }}
 						/>
 					</Stack.Navigator>
 				)}
