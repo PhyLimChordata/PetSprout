@@ -15,7 +15,7 @@ function Header(props) {
 				<Menu menuClicked={() => setModalVisible(true)} />
 				<Text style={styles.headerText}>{props.text}</Text>
 			</View>
-			<SideMenu modalVisible={modalVisible} setModalVisible={setModalVisible} />
+			<SideMenu modalVisible={modalVisible} setModalVisible={setModalVisible} stack={props.stack}/>
 			{props.children}
 			<View style={styles.MiddleComponent} />
 		</View>

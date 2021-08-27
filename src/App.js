@@ -72,9 +72,10 @@ export default function App() {
 	return (
 		<AuthContext.Provider value={authContext}>
 			<NavigationContainer>
-				{token ? (
+				{true ? (
 					<Stack.Navigator headerMode="none">
 						<Stack.Screen name="HomeScreen" component={HomeScreen} />
+						<Stack.Screen name="AchievementPage" component={AchievementPage} />
 					</Stack.Navigator>
 				) : (
 					<Stack.Navigator headerMode="none">

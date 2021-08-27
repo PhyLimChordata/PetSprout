@@ -8,6 +8,9 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 
 import ColorSet from "../resources/themes/Global";
 
+import AchievementPage from "../screens/AchievementPage"
+import ProfileEdit from "../screens/ViewEditProfile"
+
 async function setLocalInfoTheme(color) {
     try {
         return await AsyncStorage.setItem('@ColorTheme:key', JSON.stringify(color));
@@ -175,8 +178,9 @@ function SideMenu(props) {
                                 Mark Manson </Text>
                         </TouchableOpacity>
                         <View style={{marginLeft: "6%", height: "50%", justifyContent: 'space-between', marginBottom: "12%"}}>
-                            <Tab color={colorTheme.Tertiary} icon={'star'} title={'Achievements'}/>
-                            <Tab color={colorTheme.Tertiary} icon={'account-circle'} title={'Account'}/>
+                            <Tab color={colorTheme.Tertiary} icon={'star'} title={'Achievements'} onPress={() => {
+                                props.stack.push("AchievementPage");}}/>
+                            <Tab color={colorTheme.Tertiary} icon={'account-circle'} title={'Account'} />
                             <Tab color={colorTheme.Tertiary} icon={'bullhorn'} title={'Feedback'}/>
                             <Tab color={colorTheme.Tertiary} icon={'bug'} title={'Report a Bug'}/>
                             <Tab color={colorTheme.Tertiary} icon={'account-group'} title={'Collaborators'}/>
