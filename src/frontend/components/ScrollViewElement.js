@@ -18,67 +18,89 @@ function Capitalize(str) {
 }
 
 function ScrollViewElement(props) {
+	const leftSwipe = (progress, dragX) => {
+		const scale = dragX.interpolate({
+			inputRange: [0, 100],
+			outputRange: [0, 1],
+			extrapolate: 'clamp',
+		});
+
+		return (
+			<View
+				style={{
+					backgroundColor: ColorSet.Red.Tertiary,
+					borderRadius: 8,
+					height: '100%',
+					width: '100%',
+					justifyContent: 'center',
+					alignItems: 'flex-start',
+					padding: 20,
+				}}
+			>
+				<Animated.View style={{ transform: [{ scale }] }}>
+					<Trash />
+				</Animated.View>
+			</View>
+		);
+	};
+
+	const rightSwipe = (progress, dragX) => {
+		const scale = dragX.interpolate({
+			inputRange: [-100, 0],
+			outputRange: [1, 0],
+			extrapolate: 'clamp',
+		});
+
+		return (
+			<View
+				style={{
+					backgroundColor: ColorSet.Blue.Tertiary,
+					borderRadius: 8,
+					height: '100%',
+					width: '100%',
+					justifyContent: 'center',
+					alignItems: 'flex-end',
+					padding: 20,
+				}}
+			>
+				<Animated.View style={{ transform: [{ scale }] }}>
+					<Checkmark />
+				</Animated.View>
+			</View>
+		);
+	};
+
 	if (props.leftFunction != undefined && props.rightFunction != undefined) {
 		return (
 			<Swipeable
-				renderLeftActions={props.leftSwipe}
-				renderRightActions={props.rightSwipe}
+				renderLeftActions={leftSwipe}
+				renderRightActions={rightSwipe}
 				onSwipeableLeftOpen={props.leftFunction}
 				onSwipeableRightOpen={props.rightFunction}
 			>
-				<View style={styles.horizontalContainer}>
-					<View style={styles.leftContainer}>
-						<Text style={styles.textTitle}>{Capitalize(props.text)}</Text>
-					</View>
-					<View style={styles.container}>
-						<Ellipsis />
-					</View>
-				</View>
+				{props.content}
 			</Swipeable>
 		);
 	} else if (props.leftFunction != undefined) {
 		return (
 			<Swipeable
-				renderLeftActions={props.leftSwipe}
+				renderLeftActions={leftSwipe}
 				onSwipeableLeftOpen={props.leftFunction}
 			>
-				<View style={styles.horizontalContainer}>
-					<View style={styles.leftContainer}>
-						<Text style={styles.textTitle}>{Capitalize(props.text)}</Text>
-					</View>
-					<View style={styles.container}>
-						<Ellipsis />
-					</View>
-				</View>
+				{props.content}
 			</Swipeable>
 		);
 	} else if (props.rightFunction != undefined) {
 		return (
 			<Swipeable
-				renderRightActions={props.rightSwipe}
+				renderRightActions={rightSwipe}
 				onSwipeableRightOpen={props.rightFunction}
 			>
-				<View style={styles.horizontalContainer}>
-					<View style={styles.leftContainer}>
-						<Text style={styles.textTitle}>{Capitalize(props.text)}</Text>
-					</View>
-					<View style={styles.container}>
-						<Ellipsis />
-					</View>
-				</View>
+				{props.content}
 			</Swipeable>
 		);
 	}
-	return (
-		<View style={styles.horizontalContainer}>
-			<View style={styles.leftContainer}>
-				<Text style={styles.textTitle}>{Capitalize(props.text)}</Text>
-			</View>
-			<View style={styles.container}>
-				<Ellipsis />
-			</View>
-		</View>
-	);
+	return <View>{props.content}</View>;
 }
 
 export default ScrollViewElement;

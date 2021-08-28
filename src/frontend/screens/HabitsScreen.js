@@ -23,58 +23,6 @@ function HabitsScreen(props) {
 
 	const { getToken } = useContext(AuthContext);
 
-	const leftSwipe = (progress, dragX) => {
-		const scale = dragX.interpolate({
-			inputRange: [0, 100],
-			outputRange: [0, 1],
-			extrapolate: 'clamp',
-		});
-
-		return (
-			<View
-				style={{
-					backgroundColor: ColorSet.Red.Tertiary,
-					borderRadius: 8,
-					height: '100%',
-					width: '100%',
-					justifyContent: 'center',
-					alignItems: 'flex-start',
-					padding: 20,
-				}}
-			>
-				<Animated.View style={{ transform: [{ scale }] }}>
-					<Trash />
-				</Animated.View>
-			</View>
-		);
-	};
-
-	const rightSwipe = (progress, dragX) => {
-		const scale = dragX.interpolate({
-			inputRange: [-100, 0],
-			outputRange: [1, 0],
-			extrapolate: 'clamp',
-		});
-
-		return (
-			<View
-				style={{
-					backgroundColor: ColorSet.Blue.Tertiary,
-					borderRadius: 8,
-					height: '100%',
-					width: '100%',
-					justifyContent: 'center',
-					alignItems: 'flex-end',
-					padding: 20,
-				}}
-			>
-				<Animated.View style={{ transform: [{ scale }] }}>
-					<Checkmark />
-				</Animated.View>
-			</View>
-		);
-	};
-
 	const deleteHabit = () => {
 		console.log('it works!');
 	};
@@ -136,11 +84,10 @@ function HabitsScreen(props) {
 							<View>
 								<Animated.View style={{ opacity, transform: [{ scale }] }}>
 									<ScrollViewElement
-										leftSwipe={leftSwipe}
 										leftFunction={deleteHabit}
-										rightSwipe={rightSwipe}
 										rightFunction={completeHabit}
 										text={data.extra}
+										content={<Habits name={data.extra}></Habits>}
 									/>
 
 									<View style={{ height: 15 }}></View>
