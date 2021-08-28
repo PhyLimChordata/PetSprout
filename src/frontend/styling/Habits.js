@@ -28,26 +28,10 @@ export default StyleSheet.create({
         height: 25
     },
     textTitle: {
-        fontSize: 15,
+        fontSize: 25,
         fontWeight: "bold",
         marginBottom: 20,
         color: ColorSet.Green.Quinary
-    },
-    circle: {
-        width: 10,
-        height: 10,
-        marginRight: 5,
-        borderRadius: 5,
-        backgroundColor: ColorSet.Green.Quaternary
-    },
-    todayCircle: {
-        width: 10,
-        height: 10,
-        marginRight: 5,
-        borderRadius: 5,
-        borderWidth: 2, 
-        borderColor: ColorSet.Green.Quinary,
-        backgroundColor: ColorSet.Green.Quaternary
     },
     ellipsisCircle: {
         width: 6,

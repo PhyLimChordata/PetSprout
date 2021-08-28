@@ -9,6 +9,7 @@ import MenuHeader from '../components/MenuHeader';
 import ExperienceBar from '../components/ExperienceBar';
 import Checkmark from '../components/Checkmark';
 import Trash from '../components/Trash';
+import ScrollViewElement from '../components/ScrollViewElement';
 
 import Swipeable from 'react-native-gesture-handler/Swipeable';
 import ColorSet from '../resources/themes/Global';
@@ -134,14 +135,14 @@ function HabitsScreen(props) {
 						return (
 							<View>
 								<Animated.View style={{ opacity, transform: [{ scale }] }}>
-									<Swipeable
-										renderLeftActions={leftSwipe}
-										renderRightActions={rightSwipe}
-										onSwipeableLeftOpen={deleteHabit}
-										onSwipeableRightOpen={completeHabit}
-									>
-										<Habits name={data.extra} arr={[1, 2, 3, 4, 5, 6, 7]} />
-									</Swipeable>
+									<ScrollViewElement
+										leftSwipe={leftSwipe}
+										leftFunction={deleteHabit}
+										rightSwipe={rightSwipe}
+										rightFunction={completeHabit}
+										text={data.extra}
+									/>
+
 									<View style={{ height: 15 }}></View>
 								</Animated.View>
 							</View>

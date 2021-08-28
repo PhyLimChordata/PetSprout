@@ -59,7 +59,7 @@ const CustomTabBarButton = ({ children, onPress }) => (
 );
 
 export default function App() {
-	const [token, setToken] = useState(null);
+	const [token, setToken] = useState('a');
 	const authContext = useMemo(() => {
 		return {
 			logIn: (token) => {
