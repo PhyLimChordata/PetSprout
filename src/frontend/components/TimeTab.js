@@ -4,12 +4,12 @@ import ColorSet from "../resources/themes/Global";
 import Trash from "./Trash";
 
 function TimeTab(props) {
+
+    let time_index = Math.max(props.time.search('AM'), props.time.search('PM'))
     return (
-        <View style={{flexDirection:'row',backgroundColor:ColorSet.Green.Quaternary, marginHorizontal:5, alignItems:'center', marginVertical:7, borderRadius:10}}>
-            <Text style={{fontSize:50, fontWeight:'bold', flex:1, color:ColorSet.white}}> {props.time} </Text>
-            <View style={{marginRight:10}}>
-            <Trash onPress={props.onPress}/>
-            </View>
+        <View style={{flexDirection:'row',backgroundColor:ColorSet.Green.Quaternary, paddingHorizontal:5, flex:1, alignItems:'flex-end', borderRadius:10, height:60}}>
+            <Text style={{fontSize:50, fontWeight:'bold',color:ColorSet.white, marginRight:-5}}> {props.time.slice(0,time_index-1)} </Text>
+            <Text style={{fontSize:20, fontWeight:'bold',color:ColorSet.white, marginBottom:9}}> {props.time.slice(time_index-1)} </Text>
         </View>
     );
 }

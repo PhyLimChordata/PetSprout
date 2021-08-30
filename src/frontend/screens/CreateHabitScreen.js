@@ -8,6 +8,7 @@ import TextBox from "../components/TextBox";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import TimeTab from "../components/TimeTab";
 import { AuthContext } from "./context"
+import ScrollViewElement from "../components/ScrollViewElement";
 const Day = ({selected, letter, onPress}) => (
     <TouchableOpacity onPress={onPress} style={{alignItems:"center", width:40, height:40,
         backgroundColor: selected ? ColorSet.Green.Tertiary : ColorSet.white,
@@ -141,9 +142,14 @@ function CreateHabitScreen(props) {
                     </View>
                     <View>
                         {alarms.map((time, index) => {
-                            // console.log(time)
-                            return (
-                                <TimeTab key={index} time={getPrettyDate(time)} onPress={() => removeAlarm(index)}/>
+                            console.log(index)
+                            return (<View key={index}>
+                                <ScrollViewElement
+                                    leftFunction={() => removeAlarm(index)}
+                                    leftClose={true}
+                                    content={<TimeTab time={getPrettyDate(time)}/>}/>
+                                    <View style={{marginVertical:7}}/>
+                                </View>
                             )
                         })}
                     </View>

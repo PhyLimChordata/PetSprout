@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { View, Text, Image, Animated, TouchableOpacity } from 'react-native';
 
 import Checkmark from '../components/Checkmark';
@@ -18,13 +18,18 @@ function Capitalize(str) {
 }
 
 function ScrollViewElement(props) {
+	const swipeableRef = useRef(null);
 	const leftSwipe = (progress, dragX) => {
 		const scale = dragX.interpolate({
 			inputRange: [0, 100],
 			outputRange: [0, 1],
 			extrapolate: 'clamp',
 		});
-
+		let left = () => {
+			props.leftFunction()
+			if (props.leftClose && swipeableRef.current != null)
+				swipeableRef.current.close()
+		}
 		return (
 			<View
 				style={{
@@ -38,7 +43,7 @@ function ScrollViewElement(props) {
 				}}
 			>
 				<Animated.View style={{ transform: [{ scale }] }}>
-					<Trash />
+					<Trash onPress={left}/>
 				</Animated.View>
 			</View>
 		);
@@ -50,7 +55,11 @@ function ScrollViewElement(props) {
 			outputRange: [1, 0],
 			extrapolate: 'clamp',
 		});
-
+		let right = () => {
+			props.rightFunction()
+			if (props.rightClose && swipeableRef.current != null)
+				swipeableRef.current.close()
+		}
 		return (
 			<View
 				style={{
@@ -64,7 +73,7 @@ function ScrollViewElement(props) {
 				}}
 			>
 				<Animated.View style={{ transform: [{ scale }] }}>
-					<Checkmark />
+					<Checkmark onPress={right}/>
 				</Animated.View>
 			</View>
 		);
@@ -73,10 +82,13 @@ function ScrollViewElement(props) {
 	if (props.leftFunction != undefined && props.rightFunction != undefined) {
 		return (
 			<Swipeable
+				ref={swipeableRef}
 				renderLeftActions={leftSwipe}
 				renderRightActions={rightSwipe}
-				onSwipeableLeftOpen={props.leftFunction}
-				onSwipeableRightOpen={props.rightFunction}
+				leftThreshold={80}
+				rightThreshold={80}
+				// onSwipeableLeftOpen={props.leftFunction}
+				// onSwipeableRightOpen={props.rightFunction}
 			>
 				{props.content}
 			</Swipeable>
@@ -84,8 +96,10 @@ function ScrollViewElement(props) {
 	} else if (props.leftFunction != undefined) {
 		return (
 			<Swipeable
+				ref={swipeableRef}
 				renderLeftActions={leftSwipe}
-				onSwipeableLeftOpen={props.leftFunction}
+				leftThreshold={80}
+				// onSwipeableLeftOpen={props.leftFunction}
 			>
 				{props.content}
 			</Swipeable>
@@ -93,8 +107,10 @@ function ScrollViewElement(props) {
 	} else if (props.rightFunction != undefined) {
 		return (
 			<Swipeable
+				ref={swipeableRef}
 				renderRightActions={rightSwipe}
-				onSwipeableRightOpen={props.rightFunction}
+				rightThreshold={80}
+				// onSwipeableRightOpen={props.rightFunction}
 			>
 				{props.content}
 			</Swipeable>
