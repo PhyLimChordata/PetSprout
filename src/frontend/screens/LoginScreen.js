@@ -107,6 +107,7 @@ function LoginScreen(props) {
 					value={primaryInfo}
 					placeholder="Please enter an Email or Username"
 					onChangeText={(text) => updatingPrimaryInput(text)}
+					autoCapitalize={"none"}
 				></TextInput>
 
 				<Text style={styles.AuthenticationText}>Password</Text>

@@ -29,8 +29,8 @@ module.exports = async (req, res) => {
 		let userHabit = await Habit.findOne({user:req.user.id});
 		if (!userHabit) return res.status(404).json("User's habit information not found");
 
-		if(schedule === [false,false,false,false,false,false,false] 
-			&& (alarm === [] || times.toString() === '0')){
+		if(schedule === [false,false,false,false,false,false,false]
+			|| alarm === [] || times.toString() === '0'){
 				return res.status(403).json("Incorrect/Invalid request param");
 			}
 				
