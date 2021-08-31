@@ -13,7 +13,7 @@ import TabThree from './frontend/screens/TabThree';
 
 import ProfileEdit from './frontend/screens/ViewEditProfile';
 import AchievementPage from './frontend/screens/AchievementPage';
-import BottomPopup from './frontend/components/BottomPopup';
+import BottomMenu from './frontend/components/BottomMenu';
 import HabitsScreen from './frontend/screens/HabitsScreen';
 import ComingSoon from './frontend/screens/ComingSoon';
 import Collaborators from './frontend/screens/Collaborators';
@@ -59,7 +59,7 @@ const CustomTabBarButton = ({ children, onPress }) => (
 );
 
 export default function App() {
-	const [token, setToken] = useState('a');
+	const [token, setToken] = useState('');
 	const authContext = useMemo(() => {
 		return {
 			logIn: (token) => {
@@ -212,7 +212,7 @@ function HomeScreen(props) {
 					}}
 				/>
 			</Tab.Navigator>
-			<BottomPopup
+			<BottomMenu
 				navigation={props.navigation}
 				modalVisible={modalVisible}
 				setModalVisible={setModalVisible}

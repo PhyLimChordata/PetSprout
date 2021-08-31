@@ -9,6 +9,7 @@ import DateTimePickerModal from "react-native-modal-datetime-picker";
 import TimeTab from "../components/TimeTab";
 import { AuthContext } from "./context"
 import ScrollViewElement from "../components/ScrollViewElement";
+import BottomPopup from "../components/BottomPopup";
 const Day = ({selected, letter, onPress}) => (
     <TouchableOpacity onPress={onPress} style={{alignItems:"center", width:40, height:40,
         backgroundColor: selected ? ColorSet.Green.Tertiary : ColorSet.white,
@@ -20,6 +21,7 @@ const Day = ({selected, letter, onPress}) => (
 
 
 function CreateHabitScreen(props) {
+    let popup = React.useRef();
     const [days, setDays] = useState([
         false,
         false,
@@ -59,6 +61,8 @@ function CreateHabitScreen(props) {
                     console.log(res.status)
                     if (res.status == 200) {
                         props.navigation.goBack(null)
+                    } else {
+                        popup.current?.togglePopup()
                     }
                 });
             })
@@ -82,8 +86,7 @@ function CreateHabitScreen(props) {
     }
 
     function getPrettyDate(time) {
-        console.log(time);
-        var localeSpecificTime = time.toLocaleTimeString();
+        let localeSpecificTime = time.toLocaleTimeString();
         return localeSpecificTime.replace(/:\d+ /, ' ');
     }
 
@@ -142,7 +145,6 @@ function CreateHabitScreen(props) {
                     </View>
                     <View>
                         {alarms.map((time, index) => {
-                            console.log(index)
                             return (<View key={index}>
                                 <ScrollViewElement
                                     leftFunction={() => removeAlarm(index)}
@@ -155,6 +157,7 @@ function CreateHabitScreen(props) {
                     </View>
                 </View>
             </ScrollView>
+            <BottomPopup ref={popup} text={'The provided information cannot be saved'}/>
             <DateTimePickerModal
                 isVisible={isDatePickerVisible}
                 mode="time"
@@ -165,6 +168,7 @@ function CreateHabitScreen(props) {
                 }}
                 onCancel={() => setDatePickerVisibility(false)}
             />
+
         </SafeAreaView>
     )
 }
