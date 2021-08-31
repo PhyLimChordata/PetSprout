@@ -2,26 +2,41 @@ import React, { useState, useEffect } from 'react';
 import { View, Image, Text } from 'react-native';
 
 import styles from '../styling/Habits';
-import DayPicker from '../components/DayPicker';
-import Ellipsis from '../components/Ellipsis';
-import Checkmark from '../components/Checkmark';
+import Ellipsis from './Ellipsis';
+import Streaks from './Streaks';
+import ScrollViewElement from './ScrollViewElement';
 
 function Habits(props) {
-    return (
-        <View style={styles.horizontalContainer}>
-            <View style={styles.leftContainer}>
-                <Text style={styles.textTitle}>{Capitalize(props.name)}</Text>
-                <View style={styles.horizontalContainer}>
-                    {props.arr.map((data, index) => {
-                        return (<DaysOfTheWeek/>)
-                    })}
-                </View>
-            </View>
-            <View style={styles.container}>
-                <Ellipsis/>
-            </View>
-        </View>
-    );
+	const [streak, setStreak] = useState(props.streak);
+	const deleteHabit = () => {
+		setStreak(streak - 1);
+	};
+
+	const completeHabit = () => {
+		console.log('it works!');
+	};
+
+	return (
+		<ScrollViewElement
+			leftFunction={deleteHabit}
+			rightFunction={completeHabit}
+			text={props.name}
+			content={
+				<View style={styles.horizontalContainer}>
+					<View style={styles.leftContainer}>
+						<Text style={styles.textTitle}>{Capitalize(props.name)}</Text>
+					</View>
+					<View style={styles.container}>
+						<Ellipsis />
+						<View style={styles.horizontalContainerBottom}>
+							<Streaks quantity={streak} />
+                            <Streaks quantity={streak} />
+						</View>
+					</View>
+				</View>
+			}
+		/>
+	);
 }
 
 function Capitalize(str){

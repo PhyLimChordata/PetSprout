@@ -21,66 +21,6 @@ function HabitsScreen(props) {
 	const scrolling = React.useRef(new Animated.Value(0)).current;
 	const { getToken } = useContext(AuthContext);
 
-	const leftSwipe = (progress, dragX) => {
-		const scale = dragX.interpolate({
-			inputRange: [0, 100],
-			outputRange: [0, 1],
-			extrapolate: 'clamp',
-		});
-
-		return (
-			<View
-				style={{
-					backgroundColor: ColorSet.Red.Tertiary,
-					borderRadius: 8,
-					height: '100%',
-					width: '100%',
-					justifyContent: 'center',
-					alignItems: 'flex-start',
-					padding: 20,
-				}}
-			>
-				<Animated.View style={{ transform: [{ scale }] }}>
-					<Trash />
-				</Animated.View>
-			</View>
-		);
-	};
-
-	const rightSwipe = (progress, dragX) => {
-		const scale = dragX.interpolate({
-			inputRange: [-100, 0],
-			outputRange: [1, 0],
-			extrapolate: 'clamp',
-		});
-
-		return (
-			<View
-				style={{
-					backgroundColor: ColorSet.Blue.Tertiary,
-					borderRadius: 8,
-					height: '100%',
-					width: '100%',
-					justifyContent: 'center',
-					alignItems: 'flex-end',
-					padding: 20,
-				}}
-			>
-				<Animated.View style={{ transform: [{ scale }] }}>
-					<Checkmark />
-				</Animated.View>
-			</View>
-		);
-	};
-
-	const deleteHabit = () => {
-		console.log('it works!');
-	};
-
-	const completeHabit = () => {
-		console.log('it works!');
-	};
-
 	useEffect(() => {
 		if (habits.length == 0) get();
 	});
@@ -100,6 +40,8 @@ function HabitsScreen(props) {
 			})
 			.catch();
 	};
+
+	const [streak, setStreak] = useState('1');
 
 	return (
 		<View style={styles.headContainer}>
@@ -134,14 +76,8 @@ function HabitsScreen(props) {
 						return (
 							<View>
 								<Animated.View style={{ opacity, transform: [{ scale }] }}>
-									<Swipeable
-										renderLeftActions={leftSwipe}
-										renderRightActions={rightSwipe}
-										onSwipeableLeftOpen={deleteHabit}
-										onSwipeableRightOpen={completeHabit}
-									>
-										<Habits name={data.extra} arr={[1, 2, 3, 4, 5, 6, 7]} />
-									</Swipeable>
+									<Habits name={data.extra} streak={1}></Habits>
+									{/* Need to change to data.streak */}
 									<View style={{ height: 15 }}></View>
 								</Animated.View>
 							</View>
