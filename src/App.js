@@ -79,7 +79,7 @@ export default function App() {
 				{true ? (
 					<Stack.Navigator headerMode="none">
 						<Stack.Screen name="HomeScreen" component={HomeScreen} />
-						<Stack.Screen name="AchievementPage" component={AchievementScreen} />
+						<Stack.Screen name="AchievementScreen" component={AchievementScreen} />
 						<Stack.Screen name="SettingsScreen" component={SettingsPage} />
 						<Stack.Screen name="CreateHabitScreen" component={CreateHabitScreen} />
 					</Stack.Navigator>

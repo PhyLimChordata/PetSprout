@@ -183,7 +183,7 @@ function SideMenu(props) {
                         <View style={{marginLeft: "6%", height: "50%", justifyContent: 'space-between', marginBottom: "12%"}}>
                             <Tab color={colorTheme.Tertiary} icon={'star'} title={'Achievements'} onPress={() => {
                                 props.setModalVisible(false)
-                                props.navigation.navigate("AchievementPage");
+                                props.navigation.navigate("AchievementScreen");
                             }}/>
                             <Tab color={colorTheme.Tertiary} icon={'account-circle'} title={'Account'} />
                             <Tab color={colorTheme.Tertiary} icon={'bullhorn'} title={'Feedback'}/>
