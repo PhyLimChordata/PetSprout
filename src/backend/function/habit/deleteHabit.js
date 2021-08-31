@@ -1,5 +1,6 @@
 const Habit = require('../../schemas/HabitSchema');
 const User = require('../../schemas/UserSchema');
+const Analyze = require('../../schemas/AnalyzeSchema');
 
 /**
  *
@@ -17,10 +18,17 @@ module.exports = async (req, res) => {
 		let userHabit = await Habit.findById(req.params.user_habit_id);
 		if (!userHabit) return res.status(404).json("User's habits could not find");
 
+		const deleteHabitList = userHabit.habitList.filter(
+			(habit) => habit._id.toString() === req.params.habit_id.toString()
+		);
+		
+		let analyzeId = deleteHabitList[0].analyze;
+
+		await Analyze.findByIdAndDelete(analyzeId);
+
 		const habitFromDB = userHabit.habitList.filter(
 			(habit) => habit._id.toString() !== req.params.habit_id.toString()
 		);
-		console.log(habitFromDB);
 		userHabit.habitList = habitFromDB;
 		await userHabit.save();
 		res.json(userHabit);

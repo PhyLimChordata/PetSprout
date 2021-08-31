@@ -29,17 +29,15 @@ module.exports = async (req, res) => {
 		if (!errors.isEmpty())
 			return res.status(400).json({ error: error.array() });
 
-		let { title, description, reason, schedule, repeat, times, alarm, tag } =
+		let { title, description, reason, schedule, times, alarm } =
 			req.body;
 
 		habitFromDB.title = title;
 		habitFromDB.description = description;
 		habitFromDB.reason = reason;
 		habitFromDB.schedule = schedule;
-		habitFromDB.repeat = repeat;
 		habitFromDB.times = times;
 		habitFromDB.alarm = alarm;
-		habitFromDB.tag = tag;
 
 		await userHabit.save();
 		res.json(habitFromDB);

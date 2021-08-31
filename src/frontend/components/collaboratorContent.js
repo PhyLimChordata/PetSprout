@@ -14,14 +14,14 @@ function CollaboratorContent(props) {
         minPaddingBottom: 10,
         fontWeight: "bold",
         fontSize: useResponsiveHeight(3),
-        color: ColorSet.QuaternaryGreen
+        color: ColorSet.Green.Quaternary
     }
     var textTitle = {
         paddingBottom: useResponsiveHeight(2),
         flex: 3,
         fontWeight: "bold",
         fontSize: useResponsiveHeight(5),
-        color: ColorSet.QuaternaryGreen
+        color: ColorSet.Green.Quaternary
     }
     var collabImg = {
         width: useResponsiveHeight(20),

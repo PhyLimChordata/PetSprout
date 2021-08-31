@@ -6,7 +6,7 @@ const fontSize = 13;
 export default StyleSheet.create({
     container: {
         display: 'flex',
-        flexDirection: 'col',
+        // flexDirection: 'col',
         alignItems: 'center',
         justifyContent: 'center',
     },
@@ -47,12 +47,12 @@ export default StyleSheet.create({
     textTitle: {
         width: '100%',
         textAlign: 'left',
-        color: ColorSet.TertiaryGreen
+        color: ColorSet.Green.Tertiary
         
     },
     textNormal: {
         textAlign: 'left',
-        color: ColorSet.QuaternaryGreen
+        color: ColorSet.Green.Quaternary
     },
     switchStyling: {
         justifyContent: "center",

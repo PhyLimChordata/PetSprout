@@ -26,13 +26,13 @@ export default StyleSheet.create({
         paddingRight: 10,
         borderWidth: 0,
         paddingBottom: 2,
-        color: ColorSet.QuinaryGreen,
+        color: ColorSet.Green.Quinary,
         fontSize: fontSize,
     },
     textInputSelected: {
         borderBottomWidth: 2,
         paddingBottom: 0,
-        borderColor: ColorSet.QuaternaryGreen,
+        borderColor: ColorSet.Green.Quaternary,
     },
     textMultiInput: {
         flex: 0.1,
@@ -44,7 +44,7 @@ export default StyleSheet.create({
         borderColor: ColorSet.white,
         color: ColorSet.black,
         fontWeight: "300",
-        backgroundColor: ColorSet.SecondaryGreen
+        backgroundColor: ColorSet.Green.Secondary
     },
     baseText: {
         fontFamily: "Roboto",
@@ -55,17 +55,17 @@ export default StyleSheet.create({
         fontSize: fontSize,
         width: '100%',
         textAlign: 'left',
-        color: ColorSet.QuaternaryGreen
+        color: ColorSet.Green.Quaternary
         
     },
     textNormal: {
         fontSize: fontSize,
         textAlign: 'left',
-        color: ColorSet.TertiaryGreen
+        color: ColorSet.Green.Tertiary
     },
     submitButton: {
         color: ColorSet.white,
-        backgroundColor: ColorSet.QuaternaryGreen,
+        backgroundColor: ColorSet.Green.Quaternary,
         borderRadius: 30,
         width: 110,
         height: 26,
