@@ -70,7 +70,7 @@ let styles = StyleSheetFactory.getSheet(Dimensions.get('screen').width,
 Dimensions.get('screen').height
 );
 
-function AchievementPage(props) {
+function AchievementScreen(props) {
     let [fontsLoaded] = useFonts({
         Roboto_900Black,
       });
@@ -123,4 +123,4 @@ const OneAchievement = (props) => {
     );
 }
 
-export default AchievementPage
+export default AchievementScreen

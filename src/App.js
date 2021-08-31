@@ -12,7 +12,7 @@ import TabTwo from './frontend/screens/TabTwo';
 import TabThree from './frontend/screens/TabThree';
 
 import ProfileEdit from './frontend/screens/ViewEditProfile';
-import AchievementPage from './frontend/screens/AchievementPage';
+import AchievementScreen from './frontend/screens/AchievementScreen';
 import BottomMenu from './frontend/components/BottomMenu';
 import HabitsScreen from './frontend/screens/HabitsScreen';
 import ComingSoon from './frontend/screens/ComingSoon';
@@ -79,7 +79,7 @@ export default function App() {
 				{true ? (
 					<Stack.Navigator headerMode="none">
 						<Stack.Screen name="HomeScreen" component={HomeScreen} />
-						<Stack.Screen name="AchievementPage" component={AchievementPage} />
+						<Stack.Screen name="AchievementPage" component={AchievementScreen} />
 						<Stack.Screen name="SettingsScreen" component={SettingsPage} />
 						<Stack.Screen name="CreateHabitScreen" component={CreateHabitScreen} />
 					</Stack.Navigator>
