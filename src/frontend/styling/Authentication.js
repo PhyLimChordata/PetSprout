@@ -20,6 +20,15 @@ export default StyleSheet.create({
 	textTitle: {
 		fontSize: 20,
 		fontWeight: 'bold',
+		color: ColorSet.Green.Quaternary,
+	},
+	explanationText: {
+		fontSize: 15,
+		color: ColorSet.Green.Quaternary,
+		textAlign: 'center',
+		marginBottom: 15,
+		paddingLeft: 50,
+		paddingRight: 50,
 	},
 	AuthenticationLogo: {
 		height: 200,
@@ -27,7 +36,7 @@ export default StyleSheet.create({
 		marginBottom: 50,
 	},
 	AuthenticationInput: {
-		backgroundColor: ColorSet.SecondaryGreen,
+		backgroundColor: ColorSet.Green.Secondary,
 		padding: 10,
 		borderWidth: 0,
 		borderStyle: 'solid',
@@ -40,13 +49,25 @@ export default StyleSheet.create({
 		fontSize: 20,
 		fontWeight: 'bold',
 		paddingBottom: 5,
-		color: ColorSet.QuaternaryGreen,
+		color: ColorSet.Green.Quaternary,
 	},
 	inputContainer: {
 		alignItems: 'flex-start',
 	},
+	header: {
+		alignItems: 'center',
+		marginBottom: 20,
+	},
 	AuthenticationButton: {
-		backgroundColor: ColorSet.QuaternaryGreen,
+		backgroundColor: ColorSet.Green.Quaternary,
+		borderRadius: 30,
+		padding: 10,
+		paddingLeft: 40,
+		paddingRight: 40,
+		marginBottom: 20,
+	},
+	AuthenticationSpecialButton: {
+		backgroundColor: ColorSet.Blue.Authentication,
 		borderRadius: 30,
 		padding: 10,
 		paddingLeft: 40,
@@ -59,11 +80,32 @@ export default StyleSheet.create({
 		color: ColorSet.white,
 	},
 	SignupText: {
-		color: ColorSet.QuaternaryGreen,
+		color: ColorSet.Green.Quaternary,
 		fontWeight: 'bold',
 	},
 	subText: {
 		color: ColorSet.grey,
 		fontWeight: 'bold',
 	},
+	forgotPassword: {
+		color: ColorSet.Green.Quaternary,
+		fontSize: 14,
+		fontWeight: 'bold',
+		textAlign:'center'
+	},
+	forgotView: {
+		// alignItems: 'flex-end',
+		alignItems: 'center',
+		width: '100%',
+		marginBottom: 20,
+	},
+	errorView: {
+		alignItems:'flex-end',
+		width: '100%',
+	},
+	errorMessage: {
+		textAlign: 'center',
+		color: "red",
+		fontWeight: "500"
+	}
 });

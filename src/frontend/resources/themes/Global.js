@@ -1,17 +1,62 @@
+import {AsyncStorage} from "react-native";
+
 const ColorSet = {
     examplePrimary: '#FF5733',
     white: '#ffffff',
     grey: '#B7BEB0',
     lightgrey: '#E7E7E7',
     someColor: '#EF2723',
-    PrimaryGreen: '#F5FEEC',
-    SecondaryGreen: '#D7F2BA',
-    TertiaryGreen: '#B9E8A0',
-    QuaternaryGreen: '#9CC69B',
-    QuinaryGreen: '#6E8F6D',
+  
+    ButtonGrey: '#C4C4C4',
+    Bronze: '#C6895E',
+    Silver: '#A7BFCA',
+    Gold: '#FFC93E',
+
     BackgroundGrey: '#505050',
-    TertiaryBlue: '#95D1D4',
-    TertiaryRed: '#FF8D8D'
+    Green: {
+        Primary: '#F5FEEC',
+        Secondary: '#D7F2BA',
+        Tertiary: '#B9E8A0',
+        Quaternary: '#9CC69B',
+        Quinary: '#6E8F6D',
+    },
+    Yellow: {
+        Primary: '#FFF8ED',
+        Secondary: '#FFE3B9',
+        Tertiary: '#FFC977',
+        Quaternary: '#DEAD63',
+        Quinary: '#A68350',
+    },
+    Blue: {
+        Primary: '#EFFDFE',
+        Secondary: '#BAE0E2',
+        Tertiary: '#95D1D4',
+        Quaternary: '#8EBDBF',
+        Quinary: '#738E8F',
+        Authentication: '#6081C4'
+    },
+    Purple: {
+        Primary: '#F8F0FF',
+        Secondary: '#D4C2E2',
+        Tertiary: '#B493CE',
+        Quaternary: '#9983AB',
+        Quinary: '#7C6D89',
+    },
+    Red: {
+        Primary: '#FFECEC',
+        Secondary: '#FFBEBE',
+        Tertiary: '#FF8D8D',
+        Quaternary: '#E37272',
+        Quinary: '#A75B5B',
+    }
 }
 
+async function getTheme() {
+    let colorTheme = JSON.parse(await AsyncStorage.getItem('@ColorTheme:key'));
+    if (colorTheme != null) {
+        await AsyncStorage.setItem('@ColorTheme:key', JSON.stringify(ColorSet.Green));
+        return ColorSet.Green;
+    }
+    return colorTheme;
+}
 export default ColorSet;
