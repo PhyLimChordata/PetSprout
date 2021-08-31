@@ -1,3 +1,5 @@
+import {AsyncStorage} from "react-native";
+
 const ColorSet = {
     examplePrimary: '#FF5733',
     white: '#ffffff',
@@ -49,4 +51,12 @@ const ColorSet = {
     }
 }
 
+async function getTheme() {
+    let colorTheme = JSON.parse(await AsyncStorage.getItem('@ColorTheme:key'));
+    if (colorTheme != null) {
+        await AsyncStorage.setItem('@ColorTheme:key', JSON.stringify(ColorSet.Green));
+        return ColorSet.Green;
+    }
+    return colorTheme;
+}
 export default ColorSet;

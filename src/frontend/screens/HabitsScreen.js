@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { View, Image, Animated, ScrollView } from 'react-native';
+import { View, Image, Animated, SafeAreaView } from 'react-native';
 
 import styles from '../styling/HabitsScreen';
 import Habits from '../components/Habits';
@@ -9,6 +9,7 @@ import MenuHeader from '../components/MenuHeader';
 import ExperienceBar from '../components/ExperienceBar';
 import Checkmark from '../components/Checkmark';
 import Trash from '../components/Trash';
+import ScrollViewElement from '../components/ScrollViewElement';
 
 import Swipeable from 'react-native-gesture-handler/Swipeable';
 import ColorSet from '../resources/themes/Global';
@@ -19,7 +20,16 @@ function HabitsScreen(props) {
 	const [habits, setHabits] = useState([]);
 	const [hearts, setHearts] = useState([]);
 	const scrolling = React.useRef(new Animated.Value(0)).current;
+
 	const { getToken } = useContext(AuthContext);
+
+	const deleteHabit = () => {
+		console.log('it works!');
+	};
+
+	const completeHabit = () => {
+		console.log('it works!');
+	};
 
 	useEffect(() => {
 		if (habits.length == 0) get();
@@ -34,18 +44,15 @@ function HabitsScreen(props) {
 			.then((data) => {
 				setHabits(data.ex);
 				//setHearts(data.heart);
-				console.log();
 				console.log(habits);
 				console.log(getToken);
 			})
 			.catch();
 	};
 
-	const [streak, setStreak] = useState('1');
-
 	return (
-		<View style={styles.headContainer}>
-			<MenuHeader text="" stack={props.navigation} />
+		<SafeAreaView style={styles.headContainer}>
+			<MenuHeader text="" navigation={props.navigation} />
 			<View style={styles.verticalContainer}>
 				<Image
 					style={styles.creature}
@@ -85,7 +92,7 @@ function HabitsScreen(props) {
 					})}
 				</Animated.ScrollView>
 			</View>
-		</View>
+		</SafeAreaView>
 	);
 }
 

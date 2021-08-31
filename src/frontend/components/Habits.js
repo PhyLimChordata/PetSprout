@@ -39,17 +39,11 @@ function Habits(props) {
 	);
 }
 
-function Capitalize(str){
-    if (str != null) {
-        return str.charAt(0).toUpperCase() + str.slice(1);
-    }
-    return "";
-}
-
-function DaysOfTheWeek(arr) {
-    return (
-        <DayPicker/>
-    );
+function Capitalize(str) {
+	if (str != null) {
+		return str.charAt(0).toUpperCase() + str.slice(1);
+	}
+	return '';
 }
 
 export default Habits;

@@ -6,7 +6,7 @@ const fontSize = 13;
 export default StyleSheet.create({
     container: {
         display: 'flex',
-        flexDirection: 'col',
+        // flexDirection: 'col',
         alignItems: 'center',
         justifyContent: 'center',
     },

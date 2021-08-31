@@ -53,47 +53,45 @@ function LoginScreen(props) {
 	};
 
 	const attemptLogin = () => {
-		if (primaryInfo == '' || password == '') {
-			setError('Please enter all parameters');
-		} else {
-			fetch('http://localhost:5000/api/v1.0.0/user/login', {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-				body: JSON.stringify({
-					primaryInfo: primaryInfo,
-					password: password,
-					date: new Date()
-				}),
-			})
-				.then((res) => {
-					if (res.status == 200) {
-						res.json().then((data) => {
-							logIn(data.token);
-						});
-					} else if (res.status == 404 || res.status == 401) {
-						setError('The provided information is incorrect');
-					} else if (res.status == 400) {
-						setError('User has not been verified');
-					} else if (res.status == 500) {
-						setError('Something wrong happened internally...');
-					}
-					setInputStyle({
-						backgroundColor: ColorSet.Green.Secondary,
-						padding: 10,
-						borderWidth: 3,
-						borderColor: 'red',
-						borderStyle: 'solid',
-						fontSize: 15,
-						borderRadius: 5,
-						marginBottom: 20,
-						width: 300,
+		fetch('http://localhost:5000/api/v1.0.0/user/login', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				primaryInfo: primaryInfo,
+				password: password,
+				date: new Date(),
+			}),
+		})
+			.then((res) => {
+				if (primaryInfo == '' || password == '') {
+					setError('Please enter all parameters');
+				} else if (res.status == 200) {
+					res.json().then((data) => {
+						logIn(data.token);
 					});
-				})
+				} else if (res.status == 404 || res.status == 401) {
+					setError('The provided information is incorrect');
+				} else if (res.status == 400) {
+					setError('User has not been verified');
+				} else if (res.status == 500) {
+					setError('Something wrong happened internally...');
+				}
+				setInputStyle({
+					backgroundColor: ColorSet.Green.Secondary,
+					padding: 10,
+					borderWidth: 3,
+					borderColor: 'red',
+					borderStyle: 'solid',
+					fontSize: 15,
+					borderRadius: 5,
+					marginBottom: 20,
+					width: 300,
+				});
+			})
 				.catch();
-		}
-	};
+		};
 
 	return (
 		<View style={styles.container}>
@@ -108,6 +106,7 @@ function LoginScreen(props) {
 					value={primaryInfo}
 					placeholder="Please enter an Email or Username"
 					onChangeText={(text) => updatingPrimaryInput(text)}
+					autoCapitalize={"none"}
 				></TextInput>
 
 				<Text style={styles.AuthenticationText}>Password</Text>

@@ -7,8 +7,6 @@ const jwt = require('jsonwebtoken');
 module.exports = async (req, res) => {
 	try {
 		let errors = validationResult(req);
-		console.log(errors);
-		console.log(!errors.isEmpty());
 		if (!errors.isEmpty())
 			return res.status(400).json({ errors: errors.array() });
 
