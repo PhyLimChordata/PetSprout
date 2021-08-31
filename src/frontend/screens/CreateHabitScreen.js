@@ -37,6 +37,8 @@ function CreateHabitScreen(props) {
     const [description, setDescription] = useState('');
     const [reason, setReason] = useState('');
     const {getToken} = useContext(AuthContext);
+    const [popupText, setPopupText] = useState('');
+
 
     const createHabit = () => {
         fetch('http://localhost:5000/api/v1.0.0/habit/create_habit', {
@@ -62,6 +64,7 @@ function CreateHabitScreen(props) {
                     if (res.status == 200) {
                         props.navigation.goBack(null)
                     } else {
+                        setPopupText( 'The provided information cannot be saved');
                         popup.current?.togglePopup()
                     }
                 });
@@ -76,8 +79,17 @@ function CreateHabitScreen(props) {
     }
 
     function addAlarm(time) {
-        console.log('adding');
-        setAlarms([...alarms, time]);
+        time.setSeconds(0,0)
+        for (const alarm of alarms) {
+            if (alarm.getTime() == time.getTime()) {
+                setPopupText( 'Alarm Already Exists');
+                popup.current?.togglePopup()
+                return
+            } else if (alarm.getTime() > time.getTime()) {
+                break;
+            }
+        }
+            setAlarms([...alarms, time].sort());
     }
 
     function removeAlarm(index) {
@@ -157,11 +169,11 @@ function CreateHabitScreen(props) {
                     </View>
                 </View>
             </ScrollView>
-            <BottomPopup ref={popup} text={'The provided information cannot be saved'}/>
+            <BottomPopup ref={popup} text={popupText}/>
             <DateTimePickerModal
                 isVisible={isDatePickerVisible}
                 mode="time"
-                date={new Date()}
+                date={new Date('Aug 29 2020 23:00:00 EST')}
                 onConfirm={(time) => {
                     addAlarm(time)
                     setDatePickerVisibility(false)
