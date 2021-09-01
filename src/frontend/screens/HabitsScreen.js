@@ -20,6 +20,8 @@ function HabitsScreen(props) {
 	const [habits, setHabits] = useState([]);
 	const [hearts, setHearts] = useState([]);
 	const [userHabitId, setUserHabitId] = useState('');
+	const [experience, setExperience] =  useState('');
+	const [level, setLevel] = useState('');
 	const scrolling = React.useRef(new Animated.Value(0)).current;
 
 	const { getToken } = useContext(AuthContext);
@@ -39,23 +41,33 @@ function HabitsScreen(props) {
 		})
 			.then((res) =>
 				res.json().then((data) => {
+					const expValue = parseInt(data.expValue);
 					setHabits(data.habitList);
 					setUserHabitId(data._id);
-					//setHearts(data.heart);
+					setExperience((expValue % 100).toString());
+					setLevel((Math.floor(expValue / 100)).toString());
+					
+					//Displaying purposes
+					const heartValue = [];
+					for (var i = 0; i < data.heart; i++) {
+						heartValue.push(i);
+					}
+					setHearts(heartValue);
+
+					console.log(data);
 				})
 			)
 			.catch();
 	};
-
 	return (
 		<SafeAreaView style={styles.headContainer}>
-			<MenuHeader text="" navigation={props.navigation} />
+			<MenuHeader text="" navigation={props.navigation} hp={hearts}/>
 			<View style={styles.verticalContainer}>
 				<Image
 					style={styles.creature}
 					source={require('../resources/images/Egg.gif')}
 				/>
-				<ExperienceBar width="28%" />
+				<ExperienceBar level={level} exp={experience} width= {experience + "%"} />
 			</View>
 			<View style={styles.scrollViewContainer}>
 				<Animated.ScrollView

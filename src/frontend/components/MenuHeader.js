@@ -8,6 +8,8 @@ import SideMenu from './SideMenu';
 
 function MenuHeader(props) {
 	const [modalVisible, setModalVisible] = useState(false);
+	var hp = props.hp != undefined ? props.hp : [];
+	
 	return (
 		<View style={styles.header}>
 			<View style={styles.menuTitle}>
@@ -18,9 +20,21 @@ function MenuHeader(props) {
 			</View>
 			{!props.back && <SideMenu modalVisible={modalVisible} setModalVisible={setModalVisible} navigation={props.navigation} />}
 			{props.children}
+			{hp.map (() => {
+				return (
+					<View style={{alignContent:'flex-end', height:30, width:30, margin: 2}}>
+						<Image
+						style={{ height: 30, width: 30, resizeMode: 'contain',
+					}}
+						source={require('../resources/images/Heart.png')}
+				/> </View>
+				);
+			})}
 			<View style={{alignContent:'flex-end', height:25}}>
 				{props.right}
 			</View>
+
+
 		</View>
 	);
 }
