@@ -46,7 +46,6 @@ function LoginScreen(props) {
 			padding: 10,
 			borderWidth: 0,
 			borderStyle: 'solid',
-			fontSize: 15,
 			borderRadius: 5,
 			marginBottom: 20,
 			width: 300,
@@ -91,8 +90,8 @@ function LoginScreen(props) {
 					width: 300,
 				});
 			})
-			.catch();
-	};
+				.catch();
+		};
 
 	return (
 		<View style={styles.container}>
