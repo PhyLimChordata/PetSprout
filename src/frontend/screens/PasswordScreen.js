@@ -19,6 +19,21 @@ function PasswordScreen(props) {
 	});
 	const [error, setError] = useState('');
 
+	const updatingPrimaryInfo = (text) => {
+		setPrimaryInfo(text);
+		setError('');
+		setInputStyle({
+			backgroundColor: ColorSet.Green.Secondary,
+			padding: 10,
+			borderWidth: 0,
+			borderStyle: 'solid',
+			fontSize: 15,
+			borderRadius: 5,
+			marginBottom: 20,
+			width: 300,
+		});
+	};
+
 	const forgetPassword = () => {
 		fetch('http://localhost:5000/api/v1.0.0/user/check_user', {
 			method: 'POST',
@@ -30,12 +45,19 @@ function PasswordScreen(props) {
 			}),
 		})
 			.then((res) => {
+				if (primaryInfo == '') {
+					setError('This is a required field');
+				}
 				if (res.status == 200) {
 					res.json().then((data) => {
 						props.navigation.push('NewPasswordScreen', { email: data.email });
 					});
 				} else if (res.status == 500) {
 					setError('Something wrong happened internally...');
+				} else if (res.status == 404) {
+					setError('User does not exist');
+				} else if (res.status == 403) {
+					setError('The user has not activated their account');
 				}
 				setInputStyle({
 					backgroundColor: ColorSet.Green.Secondary,
@@ -45,7 +67,6 @@ function PasswordScreen(props) {
 					borderStyle: 'solid',
 					fontSize: 15,
 					borderRadius: 5,
-					marginBottom: 20,
 					width: 300,
 				});
 			})
@@ -66,14 +87,17 @@ function PasswordScreen(props) {
 					instructions.{' '}
 				</Text>
 
-				<TextInput
-					style={inputStyle}
-					value={primaryInfo}
-					placeholder="Please enter an Email or Username"
-					onChangeText={(text) => setPrimaryInfo(text)}
-				></TextInput>
-				<Text style={styles.errorMessage}>{error}</Text>
+				<View style={styles.inputContainer}>
+					<TextInput
+						style={inputStyle}
+						value={primaryInfo}
+						placeholder="Please enter an Email or Username"
+						onChangeText={(text) => updatingPrimaryInfo(text)}
+					></TextInput>
+					<Text style={styles.errorMessageRight}>{error}</Text>
+				</View>
 			</View>
+
 			<TouchableOpacity
 				activeOpacity={0.6}
 				style={styles.AuthenticationButton}

@@ -3,12 +3,42 @@ import React, { useState, useContext } from 'react';
 import { View, Text, TextInput, Image, TouchableHighlight } from 'react-native';
 
 import styles from '../styling/Authentication';
+import ColorSet from '../resources/themes/Global';
 
 import { AuthContext } from './context';
 
 function NewPasswordScreen(props) {
 	const [password, setPassword] = useState('');
 	const [reEnteredPassword, setReEnteredPassword] = useState('');
+	const normalInputStyle = {
+		backgroundColor: ColorSet.Green.Secondary,
+		padding: 10,
+		borderWidth: 0,
+		borderStyle: 'solid',
+		fontSize: 15,
+		borderRadius: 5,
+		marginBottom: 20,
+		width: 300,
+	};
+
+	const [inputStyle, setInputStyle] = useState(normalInputStyle);
+
+	const [error, setError] = useState('');
+	const [spaceAfterError, setSpaceAfterError] = useState({});
+
+	const updatingPassword = (text) => {
+		setPassword(text);
+		setError('');
+		setSpaceAfterError({});
+		setInputStyle(normalInputStyle);
+	};
+
+	const updatingReEnteredPassword = (text) => {
+		setReEnteredPassword(text);
+		setError('');
+		setSpaceAfterError({});
+		setInputStyle(normalInputStyle);
+	};
 
 	const { resetPassword } = useContext(AuthContext);
 
@@ -26,14 +56,31 @@ function NewPasswordScreen(props) {
 			}),
 		})
 			.then((res) => {
-				if (res.status == 200) {
-					res.json().then((data) => {
-						props.navigation.push('VerifyEmailPasswordScreen', {
-							password: password,
-							email: props.route.params.email,
+				if (password == '' || reEnteredPassword) {
+					setError('Please enter all parameters');
+				} else if (password != reEnteredPassword) {
+					setError('Passwords do not match');
+				} else {
+					if (res.status == 200) {
+						res.json().then((data) => {
+							props.navigation.push('VerifyEmailPasswordScreen', {
+								password: password,
+								email: props.route.params.email,
+							});
 						});
-					});
+					}
 				}
+				setSpaceAfterError({ height: 20 });
+				setInputStyle({
+					backgroundColor: ColorSet.Green.Secondary,
+					padding: 10,
+					borderWidth: 3,
+					borderColor: 'red',
+					borderStyle: 'solid',
+					fontSize: 15,
+					borderRadius: 5,
+					width: 300,
+				});
 			})
 			.catch(console.log('oh no'));
 	};
@@ -51,22 +98,24 @@ function NewPasswordScreen(props) {
 			<View style={styles.inputContainer}>
 				<Text style={styles.AuthenticationText}>Password</Text>
 				<TextInput
-					style={styles.AuthenticationInput}
+					style={inputStyle}
 					value={password}
 					secureTextEntry={true}
 					placeholder="*********"
-					onChangeText={(text) => setPassword(text)}
+					onChangeText={(text) => updatingPassword(text)}
 				></TextInput>
+				<View style={spaceAfterError} />
 				<Text style={styles.AuthenticationText}>ReEnter Password</Text>
 				<TextInput
-					style={styles.AuthenticationInput}
+					style={inputStyle}
 					value={reEnteredPassword}
 					secureTextEntry={true}
 					placeholder="*********"
-					onChangeText={(text) => setReEnteredPassword(text)}
+					onChangeText={(text) => updatingReEnteredPassword(text)}
 				></TextInput>
+				<Text style={styles.errorMessageRight}>{error}</Text>
 			</View>
-
+			<View style={{ height: 10 }} />
 			<TouchableHighlight
 				style={styles.AuthenticationButton}
 				onPress={() => attemptSetNewPassword()}

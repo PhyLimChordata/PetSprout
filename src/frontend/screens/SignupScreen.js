@@ -164,7 +164,7 @@ function SignupScreen(props) {
 					setReEnterPasswordError('This is a required field');
 					setReEnterPasswordInputStyle(errorIndicator);
 				} else if (password != '' && reEnterPassword != password) {
-					setReEnterPasswordError('The passwords does not match');
+					setReEnterPasswordError('Passwords do not match');
 					setPasswordInputStyle(errorIndicator);
 					setReEnterPasswordInputStyle(errorIndicator);
 				}
