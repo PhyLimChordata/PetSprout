@@ -7,7 +7,7 @@ import styles from "../styling/Header";
 import TextBox from "../components/TextBox";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import TimeTab from "../components/TimeTab";
-import { AuthContext } from "./context"
+import { AuthContext } from "../context"
 import ScrollViewElement from "../components/ScrollViewElement";
 import BottomPopup from "../components/BottomPopup";
 const Day = ({selected, letter, onPress}) => (

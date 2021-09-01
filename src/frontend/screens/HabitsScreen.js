@@ -14,7 +14,7 @@ import ScrollViewElement from '../components/ScrollViewElement';
 import Swipeable from 'react-native-gesture-handler/Swipeable';
 import ColorSet from '../resources/themes/Global';
 
-import { AuthContext } from './context';
+import { AuthContext } from '../context';
 
 function HabitsScreen(props) {
 	const [habits, setHabits] = useState([]);

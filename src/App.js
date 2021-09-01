@@ -26,7 +26,7 @@ import PasswordScreen from './frontend/screens/PasswordScreen';
 import NewPasswordScreen from './frontend/screens/NewPasswordScreen';
 import VerifyEmailPasswordScreen from './frontend/screens/VerifyEmailPasswordScreen';
 
-import { AuthContext } from './frontend/screens/context';
+import { AuthContext } from './frontend/context';
 import ColorSet from './frontend/resources/themes/Global';
 import SettingsPage from "./frontend/screens/SettingsPage";
 
