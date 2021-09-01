@@ -18,8 +18,6 @@ module.exports = async (req, res) => {
 		if (!errors.isEmpty())
 			return res.status(400).json({ error: errors.array() });
 
-		let { expValue } = req.body;
-
 		let user = await User.findById(req.user.id).select('-password');
 		if (!user) return res.status(404).json('User could not found');
 

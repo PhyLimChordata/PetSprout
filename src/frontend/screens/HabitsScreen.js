@@ -97,6 +97,7 @@ function HabitsScreen(props) {
 										streak={data.times}
 										habitId={data._id}
 										userHabitId={userHabitId}
+										exp = {experience}
 									></Habits>
 									<View style={{ height: 15 }}></View>
 								</Animated.View>
