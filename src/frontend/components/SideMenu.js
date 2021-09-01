@@ -1,6 +1,6 @@
 import React, {useState, useEffect, useContext} from 'react';
 // import Toggle from 'react-native-toggle-element';
-import { AuthContext } from '../screens/context';
+import { AuthContext } from '../context';
 
 import {View, Text, TouchableOpacity, SafeAreaView, Image, AsyncStorage} from 'react-native';
 import Modal from 'react-native-modal';

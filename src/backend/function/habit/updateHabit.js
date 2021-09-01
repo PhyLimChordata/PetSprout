@@ -1,5 +1,6 @@
 const Habit = require('../../schemas/HabitSchema');
 const User = require('../../schemas/UserSchema');
+const { validationResult } = require('express-validator');
 
 /**
  *
@@ -32,10 +33,22 @@ module.exports = async (req, res) => {
 		let { title, description, reason, schedule, times, alarm } =
 			req.body;
 
+		if(schedule === [false,false,false,false,false,false,false]
+			|| alarm === [] || times.toString() === '0'){
+				return res.status(403).json("Incorrect/Invalid request param");
+			}
+				
+		let newSchedule = [];
+		let i = 0;
+		for (const element of schedule) {
+			if (element === true) newSchedule.push(i.toString());
+			i++;
+		 }
+
 		habitFromDB.title = title;
 		habitFromDB.description = description;
 		habitFromDB.reason = reason;
-		habitFromDB.schedule = schedule;
+		habitFromDB.schedule = newSchedule;
 		habitFromDB.times = times;
 		habitFromDB.alarm = alarm;
 

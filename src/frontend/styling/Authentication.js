@@ -107,5 +107,10 @@ export default StyleSheet.create({
 		textAlign: 'center',
 		color: "red",
 		fontWeight: "500"
+	},
+	errorMessageRight: {
+		alignSelf: 'flex-end',
+		color: "red",
+		fontWeight: "500",
 	}
 });

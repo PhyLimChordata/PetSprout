@@ -14,7 +14,7 @@ import ScrollViewElement from '../components/ScrollViewElement';
 import Swipeable from 'react-native-gesture-handler/Swipeable';
 import ColorSet from '../resources/themes/Global';
 
-import { AuthContext } from './context';
+import { AuthContext } from '../context';
 
 function HabitsScreen(props) {
 	const [habits, setHabits] = useState([]);
@@ -83,13 +83,8 @@ function HabitsScreen(props) {
 						return (
 							<View>
 								<Animated.View style={{ opacity, transform: [{ scale }] }}>
-									<ScrollViewElement
-										leftFunction={deleteHabit}
-										rightFunction={completeHabit}
-										text={data.extra}
-										content={<Habits name={data.extra}></Habits>}
-									/>
-
+									<Habits name={data.extra} streak={1}></Habits>
+									{/* Need to change to data.streak */}
 									<View style={{ height: 15 }}></View>
 								</Animated.View>
 							</View>
