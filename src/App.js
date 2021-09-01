@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import { View, TouchableOpacity } from 'react-native';
-
 import { NavigationContainer } from '@react-navigation/native';
+import { Image, View, TouchableOpacity } from 'react-native';
+
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
@@ -10,14 +10,25 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import TabOne from './frontend/screens/TabOne';
 import TabTwo from './frontend/screens/TabTwo';
 import TabThree from './frontend/screens/TabThree';
+
+import ProfileEdit from './frontend/screens/ViewEditProfile';
+import AchievementPage from './frontend/screens/AchievementPage';
+import BottomMenu from './frontend/components/BottomMenu';
 import HabitsScreen from './frontend/screens/HabitsScreen';
+import ComingSoon from './frontend/screens/ComingSoon';
 import Collaborators from './frontend/screens/Collaborators';
+
+import CreateHabitScreen from './frontend/screens/CreateHabitScreen';
 import LoginScreen from './frontend/screens/LoginScreen';
 import SignupScreen from './frontend/screens/SignupScreen';
+import VerifyEmailSignUpScreen from './frontend/screens/VerifyEmailSignUpScreen';
+import PasswordScreen from './frontend/screens/PasswordScreen';
+import NewPasswordScreen from './frontend/screens/NewPasswordScreen';
+import VerifyEmailPasswordScreen from './frontend/screens/VerifyEmailPasswordScreen';
 
 import { AuthContext } from './frontend/screens/context';
 import ColorSet from './frontend/resources/themes/Global';
-import Animated from 'react-native-reanimated';
+import SettingsPage from "./frontend/screens/SettingsPage";
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -36,7 +47,7 @@ const CustomTabBarButton = ({ children, onPress }) => (
 	>
 		<View
 			style={{
-				backgroundColor: ColorSet.QuaternaryGreen,
+				backgroundColor: ColorSet.Green.Quaternary,
 				width: 70,
 				height: 70,
 				borderRadius: 35,
@@ -47,8 +58,6 @@ const CustomTabBarButton = ({ children, onPress }) => (
 	</TouchableOpacity>
 );
 
-const animation = new Animated.Value(0);
-
 export default function App() {
 	const [token, setToken] = useState(null);
 	const authContext = useMemo(() => {
@@ -56,14 +65,12 @@ export default function App() {
 			logIn: (token) => {
 				setToken(token);
 			},
-			signUp: () => {
-				setToken('temporaryToken');
-			},
 			signOut: () => {
 				setToken(null);
 			},
+			getToken: token
 		};
-	}, []);
+	}, [token, setToken]);
 
 	return (
 		<AuthContext.Provider value={authContext}>
@@ -71,6 +78,8 @@ export default function App() {
 				{token ? (
 					<Stack.Navigator headerMode="none">
 						<Stack.Screen name="HomeScreen" component={HomeScreen} />
+						<Stack.Screen name="SettingsScreen" component={SettingsPage} />
+						<Stack.Screen name="CreateHabitScreen" component={CreateHabitScreen} />
 					</Stack.Navigator>
 				) : (
 					<Stack.Navigator headerMode="none">
@@ -84,97 +93,48 @@ export default function App() {
 							component={SignupScreen}
 							options={{ title: 'Sign up' }}
 						/>
+						<Stack.Screen
+							name="VerifyEmailSignUpScreen"
+							component={VerifyEmailSignUpScreen}
+							options={{ title: 'Verify Email Sign Up' }}
+						/>
+						<Stack.Screen
+							name="PasswordScreen"
+							component={PasswordScreen}
+							options={{ title: 'Forgot Password' }}
+						/>
+						<Stack.Screen
+							name="NewPasswordScreen"
+							component={NewPasswordScreen}
+							options={{ title: 'New Password' }}
+						/>
+							<Stack.Screen
+							name="VerifyEmailPasswordScreen"
+							component={VerifyEmailPasswordScreen}
+							options={{ title: 'Verify Email Password' }}
+						/>
 					</Stack.Navigator>
 				)}
 			</NavigationContainer>
 		</AuthContext.Provider>
 	);
 }
-
 function HomeScreen(props) {
-	const rotate = animation.interpolate({
-		inputRange: [0, 1],
-		outputRange: ['0deg', '360deg'],
-	});
+	const [modalVisible, setModalVisible] = useState(false);
 	return (
-		<NavigationContainer independent={true}>
+		<>
 			<Tab.Navigator
 				initialRouteName="TabOne"
 				backBehavior="order"
 				tabBarOptions={{
-					activeTintColor: ColorSet.QuinaryGreen,
+					activeTintColor: ColorSet.Green.Quinary,
 					inactiveTintColor: ColorSet.white,
-					style: { backgroundColor: ColorSet.TertiaryGreen },
+					style: { backgroundColor: ColorSet.Green.Tertiary },
 				}}
 			>
 				<Tab.Screen
-					name="Calendar"
-					component={TabOne}
-					options={{
-						tabBarLabel: 'Calendar',
-						tabBarIcon: ({ color, size }) => (
-							<MaterialCommunityIcons
-								name="calendar"
-								color={color}
-								size={size}
-							/>
-						),
-					}}
-				/>
-				<Tab.Screen
-					name="Tab"
-					component={TabThree}
-					options={{
-						tabBarLabel: 'Temp1',
-						tabBarIcon: ({ color, size }) => (
-							<MaterialCommunityIcons name="home" color={color} size={size} />
-						),
-					}}
-				/>
-				<Tab.Screen
-					name={'TabMiddle'}
-					component={TabTwo}
-					listeners={{
-						tabPress: (e) => {
-							// rotate
-							Animated.timing(animation, {
-								toValue: 1,
-								duration: 275,
-								useNativeDriver: false,
-							}).start(() => {
-								animation.setValue(0);
-							});
-							// Prevent default action
-							e.preventDefault();
-						},
-					}}
-					options={{
-						tabBarLabel: () => {
-							return null;
-						},
-						tabBarIcon: ({ focused }) => (
-							<Animated.Image
-								source={require('./frontend/resources/images/plus-sign.png')}
-								resizeMode="contain"
-								style={{
-									width: 35,
-									height: 35,
-									tintColor: ColorSet.white,
-									transform: [{ rotate: rotate }],
-								}}
-							/>
-						),
-						tabBarButton: (props) => <CustomTabBarButton {...props} />,
-					}}
-				/>
-				<Tab.Screen name="Collaborators" component={Collaborators}
-                      options={{
-                          tabBarLabel: 'Collaborators',
-                          tabBarIcon: ({ color, size }) => (<MaterialCommunityIcons name="home" color={color} size={size} />)}}
-        />
-				<Tab.Screen
-					name="TabThree"
-					component={TabThree}
+					name="Habit"
+					component={HabitsScreen}
 					options={{
 						tabBarLabel: 'Habit',
 						tabBarIcon: ({ color, size }) => (
@@ -186,7 +146,88 @@ function HomeScreen(props) {
 						),
 					}}
 				/>
+				<Tab.Screen
+					name="Calender"
+					component={Calendar}
+					options={{
+						tabBarLabel: 'Calender',
+						tabBarIcon: ({ color, size }) => (
+							<MaterialCommunityIcons
+								name="calendar"
+								color={color}
+								size={size}
+							/>
+						),
+					}}
+				/>
+				<Tab.Screen
+					name={'TabMiddle'}
+					component={TabTwo}
+					listeners={{
+						tabPress: (e) => {
+							setModalVisible(true);
+							e.preventDefault();
+						},
+					}}
+					options={{
+						tabBarLabel: () => {
+							return null;
+						},
+						tabBarIcon: ({ focused }) => (
+							<Image
+								source={require('./frontend/resources/images/plus-sign.png')}
+								resizeMode="contain"
+								style={{
+									width: 35,
+									height: 35,
+									tintColor: ColorSet.white,
+								}}
+							/>
+						),
+						tabBarButton: (props) => <CustomTabBarButton {...props} />,
+					}}
+				/>
+				<Tab.Screen
+					name="Pomodoro"
+					component={Pomodoro}
+					options={{
+						tabBarLabel: 'Pomodoro',
+						tabBarIcon: ({ color, size }) => (
+							<MaterialCommunityIcons name="clock" color={color} size={size} />
+						),
+					}}
+				/>
+				<Tab.Screen
+					name="Reflect"
+					component={Reflect}
+					options={{
+						tabBarLabel: 'Reflect',
+						tabBarIcon: ({ color, size }) => (
+							<MaterialCommunityIcons
+								name="notebook"
+								color={color}
+								size={size}
+							/>
+						),
+					}}
+				/>
 			</Tab.Navigator>
-		</NavigationContainer>
+			<BottomMenu
+				navigation={props.navigation}
+				modalVisible={modalVisible}
+				setModalVisible={setModalVisible}
+			/>
+		</>
 	);
+}
+function Calendar(props) {
+	return <ComingSoon title="Calendar"></ComingSoon>;
+}
+
+function Pomodoro(props) {
+	return <ComingSoon title="Pomodoro"></ComingSoon>;
+}
+
+function Reflect(props) {
+	return <ComingSoon title="Reflect"></ComingSoon>;
 }

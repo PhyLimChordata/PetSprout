@@ -2,81 +2,79 @@ import { StyleSheet, Platform } from 'react-native';
 import ColorSet from '../resources/themes/Global';
 
 export default StyleSheet.create({
-    horizontalContainer: {
-        flexDirection: 'row',
-        borderRadius: 8,
-        backgroundColor: ColorSet.SecondaryGreen
-    },
-    leftContainer: {
-        flex: 2,
-        padding: 20,
-        paddingBottom: 30
-    },
-    container: {
-        backgroundColor: ColorSet.SecondaryGreen,
-        margin: 20,
-    },
-    experienceContainer: {
-        width: "60%",
-    },
-    horizontalExperienceContainer: {
-        flexDirection: 'row'
-    },
-    menu: {
-        flex:1, 
-        width: 30,
-        height: 25
-    },
-    textTitle: {
-        fontSize: 15,
-        fontWeight: "bold",
-        marginBottom: 20,
-        color: ColorSet.QuinaryGreen
-    },
-    circle: {
-        width: 10,
-        height: 10,
-        marginRight: 5,
-        borderRadius: 5,
-        backgroundColor: ColorSet.QuaternaryGreen
-    },
-    todayCircle: {
-        width: 10,
-        height: 10,
-        marginRight: 5,
-        borderRadius: 5,
-        borderWidth: 2, 
-        borderColor: ColorSet.QuinaryGreen,
-        backgroundColor: ColorSet.QuaternaryGreen
-    },
-    ellipsisCircle: {
-        width: 6,
-        height: 6,
-        marginRight: 3,
-        borderRadius: 3,
-        backgroundColor: ColorSet.QuaternaryGreen
-    },
-    swipeIcon: {
-        width: 30,
-        height: 30
-    },
-    levelText: {
-        fontSize: 20,
-        flex: 1,
-        fontWeight: "bold",
-        color: ColorSet.QuaternaryGreen
-    },
-    rightText: {
-        alignItems: 'flex-end',
-    },
-    expText: {
-        color: ColorSet.QuaternaryGreen,
-        fontSize: 20
-    },
-    expBar: {
-        width: "100%",
-        height: 15,
-        backgroundColor: ColorSet.lightgrey,
-        borderRadius: 10
-    }
+	horizontalContainer: {
+		flexDirection: 'row',
+		borderRadius: 8,
+		backgroundColor: ColorSet.Green.Secondary,
+	},
+	horizontalContainerBottom: {
+		flexDirection: 'row',
+        position: 'absolute',
+        bottom: 0,
+		borderRadius: 8,
+		backgroundColor: ColorSet.Green.Secondary,
+	},
+    horizontalContainerPaddingRight: {
+		flexDirection: 'row',
+		borderRadius: 8,
+		backgroundColor: ColorSet.Green.Secondary,
+        paddingRight: 20
+	},
+	leftContainer: {
+		flex: 2,
+		padding: 20,
+		paddingBottom: 30,
+	},
+	container: {
+		backgroundColor: ColorSet.Green.Secondary,
+		margin: 20,
+		alignItems: 'center',
+	},
+	experienceContainer: {
+		width: '60%',
+	},
+	horizontalExperienceContainer: {
+		flexDirection: 'row',
+	},
+	menu: {
+		flex: 1,
+		width: 30,
+		height: 25,
+	},
+	textTitle: {
+		fontSize: 25,
+		fontWeight: 'bold',
+		marginBottom: 20,
+		color: ColorSet.Green.Quinary,
+	},
+	ellipsisCircle: {
+		width: 6,
+		height: 6,
+		marginRight: 3,
+		borderRadius: 3,
+		backgroundColor: ColorSet.Green.Quaternary,
+	},
+	swipeIcon: {
+		width: 30,
+		height: 30,
+	},
+	levelText: {
+		fontSize: 20,
+		flex: 1,
+		fontWeight: 'bold',
+		color: ColorSet.Green.Quaternary,
+	},
+	rightText: {
+		alignItems: 'flex-end',
+	},
+	expText: {
+		color: ColorSet.Green.Quaternary,
+		fontSize: 20,
+	},
+	expBar: {
+		width: '100%',
+		height: 15,
+		backgroundColor: ColorSet.lightgrey,
+		borderRadius: 10,
+	},
 });

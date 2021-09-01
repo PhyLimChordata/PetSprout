@@ -1,10 +1,10 @@
 const router = require('express').Router();
-let example = require('../models/example');
+let example = require('../schemas/example');
 
 router.route('/get').get((req, res) => {
 	example
 		.find()
-		.then((resultQuery) => res.json(resultQuery))
+		.then((resultQuery) => res.json({ex: resultQuery}))
 		.catch((error) => res.status(400).json('Error: ' + error));
 });
 
