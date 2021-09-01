@@ -56,7 +56,7 @@ function NewPasswordScreen(props) {
 			}),
 		})
 			.then((res) => {
-				if (password == '' || reEnteredPassword) {
+				if (password == '' || reEnteredPassword == '') {
 					setError('Please enter all parameters');
 				} else if (password != reEnteredPassword) {
 					setError('Passwords do not match');
@@ -70,17 +70,20 @@ function NewPasswordScreen(props) {
 						});
 					}
 				}
-				setSpaceAfterError({ height: 20 });
-				setInputStyle({
-					backgroundColor: ColorSet.Green.Secondary,
-					padding: 10,
-					borderWidth: 3,
-					borderColor: 'red',
-					borderStyle: 'solid',
-					fontSize: 15,
-					borderRadius: 5,
-					width: 300,
-				});
+
+				if (res.status != 200) {
+					setSpaceAfterError({ height: 20 });
+					setInputStyle({
+						backgroundColor: ColorSet.Green.Secondary,
+						padding: 10,
+						borderWidth: 3,
+						borderColor: 'red',
+						borderStyle: 'solid',
+						fontSize: 15,
+						borderRadius: 5,
+						width: 300,
+					});
+				}
 			})
 			.catch(console.log('oh no'));
 	};

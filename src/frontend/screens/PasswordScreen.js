@@ -59,16 +59,19 @@ function PasswordScreen(props) {
 				} else if (res.status == 403) {
 					setError('The user has not activated their account');
 				}
-				setInputStyle({
-					backgroundColor: ColorSet.Green.Secondary,
-					padding: 10,
-					borderWidth: 3,
-					borderColor: 'red',
-					borderStyle: 'solid',
-					fontSize: 15,
-					borderRadius: 5,
-					width: 300,
-				});
+
+				if (res.status != 200) {
+					setInputStyle({
+						backgroundColor: ColorSet.Green.Secondary,
+						padding: 10,
+						borderWidth: 3,
+						borderColor: 'red',
+						borderStyle: 'solid',
+						fontSize: 15,
+						borderRadius: 5,
+						width: 300,
+					});
+				}
 			})
 			.catch((data) => console.log(data));
 	};

@@ -78,17 +78,20 @@ function LoginScreen(props) {
 				} else if (res.status == 500) {
 					setError('Something wrong happened internally...');
 				}
-				setInputStyle({
-					backgroundColor: ColorSet.Green.Secondary,
-					padding: 10,
-					borderWidth: 3,
-					borderColor: 'red',
-					borderStyle: 'solid',
-					fontSize: 15,
-					borderRadius: 5,
-					marginBottom: 20,
-					width: 300,
-				});
+
+				if (res.status != 200) {
+					setInputStyle({
+						backgroundColor: ColorSet.Green.Secondary,
+						padding: 10,
+						borderWidth: 3,
+						borderColor: 'red',
+						borderStyle: 'solid',
+						fontSize: 15,
+						borderRadius: 5,
+						marginBottom: 20,
+						width: 300,
+					});
+				}
 			})
 				.catch();
 		};
