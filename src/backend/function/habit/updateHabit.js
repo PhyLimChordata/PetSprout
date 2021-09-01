@@ -28,7 +28,7 @@ module.exports = async (req, res) => {
 
 		let errors = validationResult(req);
 		if (!errors.isEmpty())
-			return res.status(400).json({ error: error.array() });
+			return res.status(400).json({ error: errors.array() });
 
 		let { title, description, reason, schedule, times, alarm } =
 			req.body;
