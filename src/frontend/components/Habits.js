@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import { View, Image, Text } from 'react-native';
 
 import styles from '../styling/Habits';
@@ -6,10 +6,42 @@ import Ellipsis from './Ellipsis';
 import Streaks from './Streaks';
 import ScrollViewElement from './ScrollViewElement';
 
+import { AuthContext } from '../context';
+
 function Habits(props) {
 	const [streak, setStreak] = useState(props.streak);
+	const { getToken } = useContext(AuthContext);
+
+	//useState
+
 	const deleteHabit = () => {
 		setStreak(streak - 1);
+
+		fetch(
+			'http://localhost:5000/api/v1.0.0/habit/mark_TODO/' +
+				props.userHabitId +
+				'/' +
+				props.habitId,
+			{
+				method: 'PUT',
+				headers: {
+					'Content-Type': 'application/json',
+					'authentication-token': getToken,
+				},
+				body: {
+					expValue: 3,
+				},
+			}
+		)
+			.then((res) =>
+				res.json().then((data) => {
+					//update useState
+					console.log(data);
+				})
+			)
+			.catch();
+
+		//Check if times is zero, update
 	};
 
 	const completeHabit = () => {
@@ -30,7 +62,7 @@ function Habits(props) {
 						<Ellipsis />
 						<View style={styles.horizontalContainerBottom}>
 							<Streaks quantity={streak} />
-                            <Streaks quantity={streak} />
+							<Streaks quantity={streak} />
 						</View>
 					</View>
 				</View>

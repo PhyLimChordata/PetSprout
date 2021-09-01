@@ -19,34 +19,31 @@ import { AuthContext } from '../context';
 function HabitsScreen(props) {
 	const [habits, setHabits] = useState([]);
 	const [hearts, setHearts] = useState([]);
+	const [userHabitId, setUserHabitId] = useState('');
 	const scrolling = React.useRef(new Animated.Value(0)).current;
 
 	const { getToken } = useContext(AuthContext);
 
-	const deleteHabit = () => {
-		console.log('it works!');
-	};
-
-	const completeHabit = () => {
-		console.log('it works!');
-	};
-
 	useEffect(() => {
-		if (habits.length == 0) get();
+		if (habits.length == 0) displayHabits();
 	});
 
-	const get = () => {
-		const date = new Date();
-		console.log(date.getDay());
-		console.log(date);
-		fetch('http://localhost:5000/example/get')
-			.then((res) => res.json())
-			.then((data) => {
-				setHabits(data.ex);
-				//setHearts(data.heart);
-				console.log(habits);
-				console.log(getToken);
-			})
+	const displayHabits = () => {
+		const date = new Date().getDay();
+		fetch('http://localhost:5000/api/v1.0.0/habit/show_user_habit/' + date, {
+			method: 'GET',
+			headers: {
+				'Content-Type': 'application/json',
+				'authentication-token': getToken,
+			},
+		})
+			.then((res) =>
+				res.json().then((data) => {
+					setHabits(data.habitList);
+					setUserHabitId(data._id);
+					//setHearts(data.heart);
+				})
+			)
 			.catch();
 	};
 
@@ -83,8 +80,12 @@ function HabitsScreen(props) {
 						return (
 							<View>
 								<Animated.View style={{ opacity, transform: [{ scale }] }}>
-									<Habits name={data.extra} streak={1}></Habits>
-									{/* Need to change to data.streak */}
+									<Habits
+										name={data.title}
+										streak={data.times}
+										habitId={data._id}
+										userHabitId={userHabitId}
+									></Habits>
 									<View style={{ height: 15 }}></View>
 								</Animated.View>
 							</View>
