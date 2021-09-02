@@ -6,7 +6,7 @@ module.exports = async (req, res) => {
 		let user = await User.findById(req.user.id).select('-password');
 		if (!user) return res.status(404).json('User could not found');
 		
-		let {day} = req.body;
+		let day = req.params.day;
 		
 		let userHabitInfo = await Habit.findOne({ user: req.user.id });
 		if (!userHabitInfo)
@@ -14,7 +14,7 @@ module.exports = async (req, res) => {
 
 		let habitShow = userHabitInfo.habitList.filter(
 			function(habit) {
-				return habit.schedule.includes(day.toString())
+				return habit.schedule.includes(day)
 			}
 		);
 		

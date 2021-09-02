@@ -16,7 +16,7 @@ module.exports = async (req, res) => {
 	try {
 		let errors = validationResult(req);
 		if (!errors.isEmpty())
-			return res.status(400).json({ error: error.array() });
+			return res.status(400).json({ error: errors.array() });
 
 		let { expValue } = req.body;
 
@@ -44,16 +44,16 @@ module.exports = async (req, res) => {
 		const date = new Date();
 		let analyze_data = analyze.freq.find(
 			(data) => data.date.toString() === date.toString()
-		)
+		);
 
 		if (!analyze_data) {
 			let newData = {
 				date: date,
-				frequency: 1
-			}
+				frequency: 1,
+			};
 			analyze.freq.push(newData);
 		} else {
-			analyze_data.freq = analyze_data.freq + 1
+			analyze_data.freq = analyze_data.freq + 1;
 		}
 
 		await analyze.save();

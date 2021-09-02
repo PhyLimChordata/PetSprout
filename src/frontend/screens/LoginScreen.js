@@ -5,7 +5,7 @@ import { View, Text, TextInput, Image, TouchableOpacity } from 'react-native';
 import styles from '../styling/Authentication';
 import ColorSet from '../resources/themes/Global';
 
-import { AuthContext } from './context';
+import { AuthContext } from '../context';
 
 function LoginScreen(props) {
 	const [primaryInfo, setPrimaryInfo] = useState('');

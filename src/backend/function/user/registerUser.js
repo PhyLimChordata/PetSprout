@@ -15,10 +15,8 @@ const user_regist = async (req, res) => {
 		console.log({ password });
 
 		let errors = validationResult(req);
-		console.log({ errors });
-
 		if (!errors.isEmpty())
-			return res.status(400).json({ error: error.array() });
+			return res.status(400).json({ error: errors.array() });
 
 		let user = await User.findOne({ email }).select('-password');
 

@@ -14,51 +14,60 @@ import ScrollViewElement from '../components/ScrollViewElement';
 import Swipeable from 'react-native-gesture-handler/Swipeable';
 import ColorSet from '../resources/themes/Global';
 
-import { AuthContext } from './context';
+import { AuthContext } from '../context';
 
 function HabitsScreen(props) {
 	const [habits, setHabits] = useState([]);
 	const [hearts, setHearts] = useState([]);
+	const [userHabitId, setUserHabitId] = useState('');
+	const [experience, setExperience] =  useState('');
+	const [level, setLevel] = useState('');
 	const scrolling = React.useRef(new Animated.Value(0)).current;
 
 	const { getToken } = useContext(AuthContext);
 
-	const deleteHabit = () => {
-		console.log('it works!');
-	};
-
-	const completeHabit = () => {
-		console.log('it works!');
-	};
-
 	useEffect(() => {
-		if (habits.length == 0) get();
+		if (habits.length == 0) displayHabits();
 	});
 
-	const get = () => {
-		const date = new Date();
-		console.log(date.getDay());
-		console.log(date);
-		fetch('http://localhost:5000/example/get')
-			.then((res) => res.json())
-			.then((data) => {
-				setHabits(data.ex);
-				//setHearts(data.heart);
-				console.log(habits);
-				console.log(getToken);
-			})
+	const displayHabits = () => {
+		const date = new Date().getDay();
+		fetch('http://localhost:5000/api/v1.0.0/habit/show_user_habit/' + date, {
+			method: 'GET',
+			headers: {
+				'Content-Type': 'application/json',
+				'authentication-token': getToken,
+			},
+		})
+			.then((res) =>
+				res.json().then((data) => {
+					const expValue = parseInt(data.expValue);
+					setHabits(data.habitList);
+					setUserHabitId(data._id);
+					setExperience((expValue % 100).toString());
+					setLevel((Math.floor(expValue / 100)).toString());
+					
+					//Displaying purposes
+					const heartValue = [];
+					for (var i = 0; i < data.heart; i++) {
+						heartValue.push(i);
+					}
+					setHearts(heartValue);
+
+					console.log(data);
+				})
+			)
 			.catch();
 	};
-
 	return (
 		<SafeAreaView style={styles.headContainer}>
-			<MenuHeader text="" navigation={props.navigation} />
+			<MenuHeader text="" navigation={props.navigation} hp={hearts}/>
 			<View style={styles.verticalContainer}>
 				<Image
 					style={styles.creature}
 					source={require('../resources/images/Egg.gif')}
 				/>
-				<ExperienceBar width="28%" />
+				<ExperienceBar level={level} exp={experience} width= {experience + "%"} />
 			</View>
 			<View style={styles.scrollViewContainer}>
 				<Animated.ScrollView
@@ -83,8 +92,13 @@ function HabitsScreen(props) {
 						return (
 							<View>
 								<Animated.View style={{ opacity, transform: [{ scale }] }}>
-									<Habits name={data.extra} streak={1}></Habits>
-									{/* Need to change to data.streak */}
+									<Habits
+										name={data.title}
+										streak={data.times}
+										habitId={data._id}
+										userHabitId={userHabitId}
+										exp = {experience}
+									></Habits>
 									<View style={{ height: 15 }}></View>
 								</Animated.View>
 							</View>
