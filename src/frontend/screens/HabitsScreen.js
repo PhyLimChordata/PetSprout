@@ -21,6 +21,7 @@ function HabitsScreen(props) {
 	const [hearts, setHearts] = useState([]);
 	const [userHabitId, setUserHabitId] = useState('');
 	const [experience, setExperience] = useState('');
+  
 	const [level, setLevel] = useState('');
 	const scrolling = React.useRef(new Animated.Value(0)).current;
 
@@ -61,7 +62,7 @@ function HabitsScreen(props) {
 	};
 	return (
 		<SafeAreaView style={styles.headContainer}>
-			<MenuHeader text="" navigation={props.navigation} hp={hearts} />
+			<MenuHeader text="" navigation={props.navigation} hp={hearts}/>
 			<View style={styles.verticalContainer}>
 				<Image
 					style={styles.creature}
@@ -72,6 +73,7 @@ function HabitsScreen(props) {
 					exp={experience}
 					width={experience + '%'}
 				/>
+
 			</View>
 			<View style={styles.scrollViewContainer}>
 				<Animated.ScrollView
@@ -94,6 +96,7 @@ function HabitsScreen(props) {
 								outputRange: [1, 1, 1, 0],
 							});
 
+
 							return (
 								<View>
 									<Animated.View style={{ opacity, transform: [{ scale }] }}>
@@ -110,6 +113,7 @@ function HabitsScreen(props) {
 								</View>
 							);
 						}
+
 					})}
 				</Animated.ScrollView>
 			</View>

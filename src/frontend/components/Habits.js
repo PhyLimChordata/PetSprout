@@ -12,11 +12,9 @@ import ColorSet from '../resources/themes/Global';
 function Habits(props) {
 	const [streak, setStreak] = useState(props.streak);
 	const [frequency, setFrequency] = useState(props.frequency);
-
+  
 	const [completed, setCompleted] = useState(false);
 	const { getToken } = useContext(AuthContext);
-
-	//useState
 
 	const completeHabit = () => {
 		setFrequency(frequency - 1);
