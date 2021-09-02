@@ -10,6 +10,7 @@ import { AuthContext } from '../context';
 
 function Habits(props) {
 	const [streak, setStreak] = useState(props.streak);
+	const [completed, setCompleted] = useState(false);
 	const { getToken } = useContext(AuthContext);
 
 	//useState
@@ -28,15 +29,18 @@ function Habits(props) {
 					'Content-Type': 'application/json',
 					'authentication-token': getToken,
 				},
-				body: {
+				body: JSON.stringify({
 					expValue: 3,
-				},
+				}),
 			}
 		)
 			.then((res) =>
 				res.json().then((data) => {
 					//update useState
 					console.log(data);
+					if (data.times == data.todo) {
+
+					}
 				})
 			)
 			.catch();
