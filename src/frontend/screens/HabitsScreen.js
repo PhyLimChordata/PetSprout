@@ -20,7 +20,8 @@ function HabitsScreen(props) {
 	const [habits, setHabits] = useState([]);
 	const [hearts, setHearts] = useState([]);
 	const [userHabitId, setUserHabitId] = useState('');
-	const [experience, setExperience] =  useState('');
+	const [experience, setExperience] = useState('');
+  
 	const [level, setLevel] = useState('');
 	const scrolling = React.useRef(new Animated.Value(0)).current;
 
@@ -45,8 +46,8 @@ function HabitsScreen(props) {
 					setHabits(data.habitList);
 					setUserHabitId(data._id);
 					setExperience((expValue % 100).toString());
-					setLevel((Math.floor(expValue / 100)).toString());
-					
+					setLevel(Math.floor(expValue / 100).toString());
+
 					//Displaying purposes
 					const heartValue = [];
 					for (var i = 0; i < data.heart; i++) {
@@ -67,7 +68,12 @@ function HabitsScreen(props) {
 					style={styles.creature}
 					source={require('../resources/images/Egg.gif')}
 				/>
-				<ExperienceBar level={level} exp={experience} width= {experience + "%"} />
+				<ExperienceBar
+					level={level}
+					exp={experience}
+					width={experience + '%'}
+				/>
+
 			</View>
 			<View style={styles.scrollViewContainer}>
 				<Animated.ScrollView
@@ -79,30 +85,35 @@ function HabitsScreen(props) {
 					decelerationRate={'normal'}
 				>
 					{habits.map((data, index) => {
-						const scale = scrolling.interpolate({
-							inputRange: [-1, 0, 100 * index, 100 * (index + 1)],
-							outputRange: [1, 1, 1, 0],
-						});
+						if (data.times - data.todo > 0) {
+							const scale = scrolling.interpolate({
+								inputRange: [-1, 0, 100 * index, 100 * (index + 1)],
+								outputRange: [1, 1, 1, 0],
+							});
 
-						const opacity = scrolling.interpolate({
-							inputRange: [-1, 0, 100 * index, 100 * (index + 0.8)],
-							outputRange: [1, 1, 1, 0],
-						});
+							const opacity = scrolling.interpolate({
+								inputRange: [-1, 0, 100 * index, 100 * (index + 0.8)],
+								outputRange: [1, 1, 1, 0],
+							});
 
-						return (
-							<View>
-								<Animated.View style={{ opacity, transform: [{ scale }] }}>
-									<Habits
-										name={data.title}
-										streak={data.times}
-										habitId={data._id}
-										userHabitId={userHabitId}
-										exp = {experience}
-									></Habits>
-									<View style={{ height: 15 }}></View>
-								</Animated.View>
-							</View>
-						);
+
+							return (
+								<View>
+									<Animated.View style={{ opacity, transform: [{ scale }] }}>
+										<Habits
+											name={data.title}
+											streak={1}
+											frequency={data.times - data.todo}
+											habitId={data._id}
+											userHabitId={userHabitId}
+											exp={experience}
+										></Habits>
+										<View style={{ height: 15 }}></View>
+									</Animated.View>
+								</View>
+							);
+						}
+
 					})}
 				</Animated.ScrollView>
 			</View>
