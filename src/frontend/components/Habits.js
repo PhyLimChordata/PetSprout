@@ -3,20 +3,23 @@ import { View, Image, Text } from 'react-native';
 
 import styles from '../styling/Habits';
 import Ellipsis from './Ellipsis';
-import Streaks from './Streaks';
+import Counter from './Counter';
 import ScrollViewElement from './ScrollViewElement';
 
 import { AuthContext } from '../context';
+import ColorSet from '../resources/themes/Global';
 
 function Habits(props) {
 	const [streak, setStreak] = useState(props.streak);
+	const [frequency, setFrequency] = useState(props.frequency);
+
 	const [completed, setCompleted] = useState(false);
 	const { getToken } = useContext(AuthContext);
 
 	//useState
 
-	const deleteHabit = () => {
-		setStreak(streak - 1);
+	const completeHabit = () => {
+		setFrequency(frequency - 1);
 
 		fetch(
 			'http://localhost:5000/api/v1.0.0/habit/mark_TODO/' +
@@ -36,42 +39,55 @@ function Habits(props) {
 		)
 			.then((res) =>
 				res.json().then((data) => {
-					//update useState
-					console.log(data);
-					if (data.times == data.todo) {
-
+					if (frequency - 1 == 0) {
+						setCompleted(true);
 					}
 				})
 			)
 			.catch();
-
-		//Check if times is zero, update
-	};
-
-	const completeHabit = () => {
-		console.log('it works!');
 	};
 
 	return (
-		<ScrollViewElement
-			leftFunction={deleteHabit}
-			rightFunction={completeHabit}
-			text={props.name}
-			content={
-				<View style={styles.horizontalContainer}>
-					<View style={styles.leftContainer}>
-						<Text style={styles.textTitle}>{Capitalize(props.name)}</Text>
-					</View>
-					<View style={styles.container}>
-						<Ellipsis />
-						<View style={styles.horizontalContainerBottom}>
-							<Streaks quantity={streak} />
-							<Streaks quantity={streak} />
+		<View>
+			{!completed ? (
+				<ScrollViewElement
+					rightFunction={completeHabit}
+					text={props.name}
+					content={
+						<View style={styles.horizontalContainer}>
+							<View style={styles.leftContainer}>
+								<Text style={styles.textTitle}>{Capitalize(props.name)}</Text>
+							</View>
+							<View style={styles.container}>
+								<Ellipsis />
+								<View style={styles.horizontalContainerBottom}>
+									<Counter
+										quantity={streak}
+										supplementalInfo={
+											<Image
+												source={require('../resources/images/Streak.png')}
+												resizeMode="contain"
+												style={{
+													height: 20,
+													width: 20,
+													tintColor: ColorSet.Green.Quaternary,
+													marginTop: 'auto',
+												}}
+											/>
+										}
+									/>
+									<Counter
+										quantity={frequency}
+										supplementalInfo={<Text style={styles.expText}>x</Text>}
+										last={true}
+									/>
+								</View>
+							</View>
 						</View>
-					</View>
-				</View>
-			}
-		/>
+					}
+				/>
+			) : null}
+		</View>
 	);
 }
 
