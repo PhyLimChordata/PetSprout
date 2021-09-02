@@ -3,7 +3,7 @@ import {View, Text, Button, Pressable } from 'react-native';
 import styles from '../styling/ViewEditBox'
 import { TextInput } from "react-native";
 import MenuHeader from '../components/MenuHeader'
-import ColorSet from '../resources/themes/Global'
+import ColorSet from '../resources/global/themes'
 import {SafeAreaView} from 'react-native';
 
 function ProfileEdit (props) {

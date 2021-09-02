@@ -12,7 +12,7 @@ import Trash from '../components/Trash';
 import ScrollViewElement from '../components/ScrollViewElement';
 
 import Swipeable from 'react-native-gesture-handler/Swipeable';
-import ColorSet from '../resources/themes/Global';
+import ColorSet from '../resources/global/themes';
 
 import { AuthContext } from '../context';
 

@@ -3,7 +3,7 @@ import React, { useState, useContext } from 'react';
 import { View, Text, TextInput, Image, TouchableHighlight } from 'react-native';
 
 import styles from '../styling/Authentication';
-import ColorSet from '../resources/themes/Global';
+import ColorSet from '../resources/global/themes';
 
 import { AuthContext } from '../context';
 

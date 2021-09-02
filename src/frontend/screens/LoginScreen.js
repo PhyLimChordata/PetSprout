@@ -3,7 +3,7 @@ import React, { useState, useContext } from 'react';
 import { View, Text, TextInput, Image, TouchableOpacity } from 'react-native';
 
 import styles from '../styling/Authentication';
-import ColorSet from '../resources/themes/Global';
+import ColorSet from '../resources/global/themes';
 
 import { AuthContext } from '../context';
 
@@ -11,6 +11,7 @@ function LoginScreen(props) {
 	const [primaryInfo, setPrimaryInfo] = useState('');
 	const [password, setPassword] = useState('');
 	const [error, setError] = useState('');
+	
 	const [inputStyle, setInputStyle] = useState({
 		backgroundColor: ColorSet.Green.Secondary,
 		padding: 10,

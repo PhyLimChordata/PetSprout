@@ -27,7 +27,8 @@ import NewPasswordScreen from './frontend/screens/NewPasswordScreen';
 import VerifyEmailPasswordScreen from './frontend/screens/VerifyEmailPasswordScreen';
 
 import { AuthContext } from './frontend/context';
-import ColorSet from './frontend/resources/themes/Global';
+import ColorSet from './frontend/resources/global/themes';
+
 import SettingsPage from "./frontend/screens/SettingsPage";
 
 const Tab = createBottomTabNavigator();
@@ -73,16 +74,22 @@ export default function App() {
 	}, [token, setToken]);
 
 	return (
+		
 		<AuthContext.Provider value={authContext}>
 			<NavigationContainer>
+			
 				{token ? (
+					
 					<Stack.Navigator headerMode="none">
 						<Stack.Screen name="HomeScreen" component={HomeScreen} />
 						<Stack.Screen name="SettingsScreen" component={SettingsPage} />
 						<Stack.Screen name="CreateHabitScreen" component={CreateHabitScreen} />
 					</Stack.Navigator>
+					
 				) : (
+					
 					<Stack.Navigator headerMode="none">
+					
 						<Stack.Screen
 							name="LoginScreen"
 							component={LoginScreen}
@@ -114,9 +121,12 @@ export default function App() {
 							options={{ title: 'Verify Email Password' }}
 						/>
 					</Stack.Navigator>
+					
 				)}
+				
 			</NavigationContainer>
 		</AuthContext.Provider>
+		
 	);
 }
 function HomeScreen(props) {

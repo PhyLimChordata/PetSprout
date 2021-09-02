@@ -3,7 +3,7 @@ import {View, Text, Image, Platform} from 'react-native';
 import { useResponsiveHeight } from 'react-native-responsive-dimensions';
 
 import styles from '../styling/Tabs';
-import ColorSet from '../resources/themes/Global';
+import ColorSet from '../resources/global/themes';
 
 // Similar to a screen, however components will be contained within a screen
 function CollaboratorContent(props) {

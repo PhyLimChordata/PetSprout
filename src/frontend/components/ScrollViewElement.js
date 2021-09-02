@@ -5,7 +5,7 @@ import Checkmark from '../components/Checkmark';
 import Trash from '../components/Trash';
 
 import Swipeable from 'react-native-gesture-handler/Swipeable';
-import ColorSet from '../resources/themes/Global';
+import ColorSet from '../resources/global/themes';
 
 import styles from '../styling/Habits';
 import Ellipsis from './Ellipsis';

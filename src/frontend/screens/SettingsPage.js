@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from '../styling/SettingsStyling'
 import headerStyles from '../styling/Header'
-import ColorSet from '../resources/themes/Global'
+import ColorSet from '../resources/global/themes'
 import { View, Switch, Text, Image, TouchableOpacity } from 'react-native'
 import {SafeAreaView} from 'react-native';
 

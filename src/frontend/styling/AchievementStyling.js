@@ -1,5 +1,5 @@
 import { StyleSheet, Platform } from 'react-native';
-import ColorSet from '../resources/themes/Global';
+import ColorSet from '../resources/global/themes';
 
 const iconWdith = '8vh';
 

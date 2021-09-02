@@ -1,6 +1,6 @@
 import {Image, Text, TextInput, TouchableOpacity, View} from "react-native";
 import React from "react";
-import ColorSet from "../resources/themes/Global";
+import ColorSet from "../resources/global/themes";
 import Trash from "./Trash";
 
 function TimeTab(props) {

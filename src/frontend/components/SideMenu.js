@@ -6,7 +6,7 @@ import {View, Text, TouchableOpacity, SafeAreaView, Image, AsyncStorage} from 'r
 import Modal from 'react-native-modal';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
-import ColorSet from "../resources/themes/Global";
+import ColorSet from "../resources/global/themes";
 
 async function setLocalInfoTheme(color) {
     try {

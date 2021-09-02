@@ -1,6 +1,6 @@
 import React, {useRef, useImperativeHandle} from 'react';
 import {Text, Animated} from 'react-native';
-import ColorSet from "../resources/themes/Global";
+import ColorSet from "../resources/global/themes";
 
 const  BottomPopup = React.forwardRef( (props, ref) => {
     let showPopup = useRef(new Animated.Value(100)).current;

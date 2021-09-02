@@ -3,7 +3,7 @@ import {View, Text, TouchableOpacity} from 'react-native';
 import Modal from 'react-native-modal';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
-import ColorSet from "../resources/themes/Global";
+import ColorSet from "../resources/global/themes";
 const TitledIcon = ({icon, onPress, title}) => (
         <View style={{width:75}}>
     <TouchableOpacity style={{justifyContent:"center", alignItems:"center"}} onPress={onPress}>

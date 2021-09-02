@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import {View, Text} from 'react-native';
 
 import styles from '../styling/Habits';
-import ColorSet from '../resources/themes/Global';
+import ColorSet from '../resources/global/themes';
 
 function ExperienceBar(props) {
 

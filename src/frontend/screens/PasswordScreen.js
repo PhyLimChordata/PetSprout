@@ -3,7 +3,7 @@ import React, { useState, useContext } from 'react';
 import { View, Text, TextInput, Image, TouchableOpacity } from 'react-native';
 
 import styles from '../styling/Authentication';
-import ColorSet from '../resources/themes/Global';
+import ColorSet from '../resources/global/themes';
 
 function PasswordScreen(props) {
 	const [primaryInfo, setPrimaryInfo] = useState('');

@@ -7,7 +7,7 @@ import Counter from './Counter';
 import ScrollViewElement from './ScrollViewElement';
 
 import { AuthContext } from '../context';
-import ColorSet from '../resources/themes/Global';
+import ColorSet from '../resources/global/themes';
 
 function Habits(props) {
 	const [streak, setStreak] = useState(props.streak);

@@ -1,5 +1,5 @@
 import React, {useState, useContext} from 'react'
-import ColorSet from '../resources/themes/Global'
+import ColorSet from '../resources/global/themes'
 import { View, Text, TouchableOpacity, ScrollView } from 'react-native'
 import {SafeAreaView} from 'react-native';
 import MenuHeader from "../components/MenuHeader";
