@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { Image, View, TouchableOpacity } from 'react-native';
+import { Image, View, TouchableOpacity, Settings } from 'react-native';
 
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -13,6 +13,7 @@ import TabThree from './frontend/screens/TabThree';
 
 import ProfileEdit from './frontend/screens/ViewEditProfile';
 import AchievementPage from './frontend/screens/AchievementPage';
+import SettingPage from './frontend/screens/SettingsPage';
 import BottomPopup from './frontend/components/BottomPopup';
 import HabitsScreen from './frontend/screens/HabitsScreen';
 import ComingSoon from './frontend/screens/ComingSoon';
@@ -24,6 +25,7 @@ import SignupScreen from './frontend/screens/SignupScreen';
 
 import { AuthContext } from './frontend/screens/context';
 import ColorSet from './frontend/resources/themes/Global';
+import SettingsPage from './frontend/screens/SettingsPage';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -110,7 +112,7 @@ function HomeScreen(props) {
 			>
 				<Tab.Screen
 					name="Habit"
-					component={HabitsScreen}
+					component={AchievementPage}
 					options={{
 						tabBarLabel: 'Habit',
 						tabBarIcon: ({ color, size }) => (
@@ -124,7 +126,7 @@ function HomeScreen(props) {
 				/>
 				<Tab.Screen
 					name="Calender"
-					component={Calendar}
+					component={SettingsPage}
 					options={{
 						tabBarLabel: 'Calender',
 						tabBarIcon: ({ color, size }) => (

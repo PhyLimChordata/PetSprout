@@ -11,7 +11,6 @@ export default class StyleSheetFactory {
                 display: 'flex',
                 alignItems: 'center',
                 flexDirection: 'column',
-                marginTop: '4%',
             },
             achievementContainer: {
                 width: iconWidth,

@@ -1,11 +1,15 @@
 import React from 'react'
-import styles from '../styling/SettingsStyling'
+import StyleSheetFactory from '../styling/SettingsStyling'
 import headerStyles from '../styling/Header'
 import ColorSet from '../resources/themes/Global'
-import { View, Switch, Text, Image, TouchableOpacity } from 'react-native'
-import {SafeAreaView} from 'react-native';
+import { View, Switch, Text, Image, TouchableOpacity, Dimensions } from 'react-native'
+import {SafeAreaView} from 'react-native'; 
 
 // setting data from database
+
+let styles = StyleSheetFactory.getSheet(
+    Dimensions.get('screen').width,
+    Dimensions.get('screen').height);
 
 function SettingsPage() {
 
@@ -13,13 +17,17 @@ function SettingsPage() {
 
     }
 
+    console.log("setting styles  = " + styles);
+
     return(
         <SafeAreaView>
             <View>
-                <TopBar/>
+                
             </View>
             <View style={styles.container}>
+                
                 <View style = {styles.settingContainer}>
+                    <TopBar/>
                     <Text style={[styles.textTitle, styles.text]}>Notifications</Text>
                     <OneSetting id="pushNotif"  tag="Use Push Notifications" enabled={false} handle={handleSettingChange}/>
                     <OneSetting id="emailNotif"  tag="Use Email Notifications" enabled={false} handle={handleSettingChange}/>
@@ -49,28 +57,21 @@ const OneSetting = (props) => {
     const toggleSwitch = () => setEnabled(previousState => !previousState)
     const thumbColor = ColorSet.ButtonGrey;
     return(
-        <View style={styles.oneSettingContainer}>
-            <Text style={[styles.text, styles.textNormal]}>{props.tag}</Text>
+        <SafeAreaView style={styles.oneSettingContainer}>
+            <Text style={[styles.text, styles.textNormal, { flex: 1 }]}>{props.tag}</Text>
             <Switch
-                style={styles.switchStyling}
                 trackColor={{ false: ColorSet.QuaternaryGreen, true: ColorSet.TertiaryGreen}}
                 thumbColor={thumbColor}
                 activeThumbColor={thumbColor}
                 value={enabled}
                 onValueChange={toggleSwitch}/>
-        </View>
+        </SafeAreaView>
     )
 }
 
 const TopBar = () => {
     return(
         <View style={headerStyles.header}>
-            <TouchableOpacity activeOpacity={0.6} onPress={() => menuClicked}>
-			<Image
-                    style={{ flex: 1, width: 30, height: 25 }}
-                    source={require('../resources/images/back-button.png')}
-                />
-            </TouchableOpacity>
             <Text style={headerStyles.textNormal}>Settings</Text>
         </View>
     )
