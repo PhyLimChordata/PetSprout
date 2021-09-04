@@ -29,9 +29,16 @@ import VerifyEmailPasswordScreen from './frontend/screens/VerifyEmailPasswordScr
 import { AuthContext } from './frontend/context';
 import ColorSet from './frontend/resources/global/themes';
 import Theme from './frontend/resources/global/Theme';
-import greenTheme from './frontend/resources/themes/greenTheme';
-import orangeTheme from './frontend/resources/themes/orangeTheme';
-
+import greenLightTheme from './frontend/resources/themes/light/greenTheme';
+import orangeLightTheme from './frontend/resources/themes/light/orangeTheme';
+import blueLightTheme from './frontend/resources/themes/light/blueTheme';
+import purpleLightTheme from './frontend/resources/themes/light/purpleTheme';
+import redTheme from './frontend/resources/themes/light/redTheme';
+import greenDarkTheme from './frontend/resources/themes/dark/orangeTheme';
+import orangeDarkTheme from './frontend/resources/themes/dark/orangeTheme';
+import blueDarkTheme from './frontend/resources/themes/dark/blueTheme';
+import purpleDarkTheme from './frontend/resources/themes/dark/purpleTheme';
+import redDarkTheme from './frontend/resources/themes/dark/redTheme';
 
 import SettingsPage from "./frontend/screens/SettingsPage";
 
@@ -65,6 +72,7 @@ const CustomTabBarButton = ({ children, onPress }) => (
 
 export default function App() {
 	const [token, setToken] = useState(null);
+	const [color, setColor] = useState('green');
 	const authContext = useMemo(() => {
 		return {
 			logIn: (token) => {
@@ -72,6 +80,9 @@ export default function App() {
 			},
 			signOut: () => {
 				setToken(null);
+			},
+			changeColorTheme: (selectedColor) => {
+				setColor(selectedColor);
 			},
 			getToken: token
 		};
