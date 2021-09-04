@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
 import { Image, View, TouchableOpacity } from 'react-native';
 
 import { createStackNavigator } from '@react-navigation/stack';
@@ -28,6 +28,10 @@ import VerifyEmailPasswordScreen from './frontend/screens/VerifyEmailPasswordScr
 
 import { AuthContext } from './frontend/context';
 import ColorSet from './frontend/resources/global/themes';
+import Theme from './frontend/resources/global/Theme';
+import greenTheme from './frontend/resources/themes/greenTheme';
+import orangeTheme from './frontend/resources/themes/orangeTheme';
+
 
 import SettingsPage from "./frontend/screens/SettingsPage";
 
@@ -73,10 +77,16 @@ export default function App() {
 		};
 	}, [token, setToken]);
 
+	// const MyTheme = {
+	// 	colors: {
+	// 	  ...DefaultTheme.colors,
+	// 	  primary: 'rgb(255, 45, 85)',
+	// 	},
+	//   };
 	return (
 		
 		<AuthContext.Provider value={authContext}>
-			<NavigationContainer>
+			<NavigationContainer theme={orangeTheme}>
 			
 				{token ? (
 					

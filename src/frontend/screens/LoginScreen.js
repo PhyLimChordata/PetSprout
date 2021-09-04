@@ -6,14 +6,19 @@ import styles from '../styling/Authentication';
 import ColorSet from '../resources/global/themes';
 
 import { AuthContext } from '../context';
+import {useTheme} from '@react-navigation/native';
 
 function LoginScreen(props) {
 	const [primaryInfo, setPrimaryInfo] = useState('');
 	const [password, setPassword] = useState('');
 	const [error, setError] = useState('');
+
+	const {colors} = useTheme();
 	
+	console.log(colors.Secondary);
+
 	const [inputStyle, setInputStyle] = useState({
-		backgroundColor: ColorSet.Green.Secondary,
+		backgroundColor: colors.Secondary,
 		padding: 10,
 		borderWidth: 0,
 		borderStyle: 'solid',
