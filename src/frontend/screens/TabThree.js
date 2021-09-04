@@ -3,7 +3,7 @@ import { View, Button, Text } from 'react-native';
 
 import styles from '../styling/Tabs';
 
-import { AuthContext } from './context';
+import { AuthContext } from '../context';
 
 function TabThree(props) {
 	const get = () => {

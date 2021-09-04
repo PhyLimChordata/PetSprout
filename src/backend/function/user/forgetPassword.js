@@ -1,5 +1,5 @@
-const User = require("../../schemas/UserSchema");
-const Mailing = require("../../schemas/mailingValidationSchema");
+const User = require('../../schemas/UserSchema');
+const Mailing = require('../../schemas/mailingValidationSchema');
 const nodemailer = require('nodemailer');
 const smtpTransport = require('nodemailer-smtp-transport');
 const bcryptjs = require('bcryptjs');
@@ -100,17 +100,17 @@ const reset_password = async (req, res) => {
 		let hashedPassword = await bcryptjs.hash(newPassword, salt);
 		user.password = hashedPassword;
 
-        await user.save();
-        await Mailing.deleteMany({ email });
+		await user.save();
+		await Mailing.deleteMany({ email });
 
-        res.setHeader("Content-Type", 'text/html')
-        res.sendfile(`${__dirname}/html_page/forgetPasswordSuccess.html`) 
-        res.status(200)           
-    } catch (error) {
-        console.error(error);
-        res.status(500).json("Server error");
-    }
-}
+		res.setHeader('Content-Type', 'text/html');
+		res.sendfile(`${__dirname}/html_page/forgetPasswordSuccess.html`);
+		res.status(200);
+	} catch (error) {
+		console.error(error);
+		res.status(500).json('Server error');
+	}
+};
 
 const regEmail =
 	/^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
@@ -132,8 +132,13 @@ function sendUserEmail(cnd, code) {
 			);
 
 			var html =
-			    '<a href="http://127.0.0.1:5000/api/v1.0.0/user/reset_password/' + code +'/' + cnd + '/' + '">' 
-			    + 'Click to allow resetting password and return back to app page </a>';
+				'<a href="http://127.0.0.1:5000/api/v1.0.0/user/reset_password/' +
+				code +
+				'/' +
+				cnd +
+				'/' +
+				'">' +
+				'Click to allow resetting password and return back to app page </a>';
 			console.log(html);
 			var data = {
 				from: 'habipetshelp@gmail.com',

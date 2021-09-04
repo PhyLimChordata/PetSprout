@@ -5,7 +5,7 @@ import { View, Text, TextInput, Image, TouchableOpacity } from 'react-native';
 import styles from '../styling/Authentication';
 import ColorSet from '../resources/themes/Global';
 
-import { AuthContext } from './context';
+import { AuthContext } from '../context';
 
 function LoginScreen(props) {
 	const [primaryInfo, setPrimaryInfo] = useState('');
@@ -46,7 +46,6 @@ function LoginScreen(props) {
 			padding: 10,
 			borderWidth: 0,
 			borderStyle: 'solid',
-			fontSize: 15,
 			borderRadius: 5,
 			marginBottom: 20,
 			width: 300,
@@ -79,20 +78,23 @@ function LoginScreen(props) {
 				} else if (res.status == 500) {
 					setError('Something wrong happened internally...');
 				}
-				setInputStyle({
-					backgroundColor: ColorSet.Green.Secondary,
-					padding: 10,
-					borderWidth: 3,
-					borderColor: 'red',
-					borderStyle: 'solid',
-					fontSize: 15,
-					borderRadius: 5,
-					marginBottom: 20,
-					width: 300,
-				});
+
+				if (res.status != 200) {
+					setInputStyle({
+						backgroundColor: ColorSet.Green.Secondary,
+						padding: 10,
+						borderWidth: 3,
+						borderColor: 'red',
+						borderStyle: 'solid',
+						fontSize: 15,
+						borderRadius: 5,
+						marginBottom: 20,
+						width: 300,
+					});
+				}
 			})
-			.catch();
-	};
+				.catch();
+		};
 
 	return (
 		<View style={styles.container}>

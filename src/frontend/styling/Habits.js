@@ -7,12 +7,18 @@ export default StyleSheet.create({
 		borderRadius: 8,
 		backgroundColor: ColorSet.Green.Secondary,
 	},
-	horizontalContainers: {
+	horizontalContainerBottom: {
 		flexDirection: 'row',
-        flex: 1,
-  justifyContent: 'flex-end',
+        position: 'absolute',
+        bottom: 0,
 		borderRadius: 8,
 		backgroundColor: ColorSet.Green.Secondary,
+	},
+    horizontalContainerPaddingRight: {
+		flexDirection: 'row',
+		borderRadius: 8,
+		backgroundColor: ColorSet.Green.Secondary,
+        paddingRight: 20
 	},
 	leftContainer: {
 		flex: 2,
@@ -23,8 +29,6 @@ export default StyleSheet.create({
 		backgroundColor: ColorSet.Green.Secondary,
 		margin: 20,
 		alignItems: 'center',
-		borderColor: 'red',
-		borderWidth: 5,
 	},
 	experienceContainer: {
 		width: '60%',

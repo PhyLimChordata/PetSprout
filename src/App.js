@@ -26,8 +26,7 @@ import PasswordScreen from './frontend/screens/PasswordScreen';
 import NewPasswordScreen from './frontend/screens/NewPasswordScreen';
 import VerifyEmailPasswordScreen from './frontend/screens/VerifyEmailPasswordScreen';
 
-
-import { AuthContext } from './frontend/screens/context';
+import { AuthContext } from './frontend/context';
 import ColorSet from './frontend/resources/themes/Global';
 import SettingsPage from "./frontend/screens/SettingsPage";
 
@@ -60,7 +59,7 @@ const CustomTabBarButton = ({ children, onPress }) => (
 );
 
 export default function App() {
-	const [token, setToken] = useState('');
+	const [token, setToken] = useState(null);
 	const authContext = useMemo(() => {
 		return {
 			logIn: (token) => {
