@@ -74,11 +74,11 @@ module.exports = async (req, res) => {
 		if (!analyze_data) {
 			let newData = {
 				date: date,
-				frequency: 1
-			}
+				frequency: 1,
+			};
 			analyze.freq.push(newData);
 		} else {
-			analyze_data.freq = analyze_data.freq + 1
+			analyze_data.freq = analyze_data.freq + 1;
 		}
 
 		await analyze.save();
