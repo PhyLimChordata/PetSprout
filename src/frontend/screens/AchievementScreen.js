@@ -70,7 +70,7 @@ let styles = StyleSheetFactory.getSheet(Dimensions.get('screen').width,
 Dimensions.get('screen').height
 );
 
-function AchievementPage() {
+function AchievementScreen(props) {
     let [fontsLoaded] = useFonts({
         Roboto_900Black,
       });
@@ -80,16 +80,11 @@ function AchievementPage() {
             <View></View>
         )
       } else {
+          console.log(props)
         return(
             <SafeAreaView>
-                <View>
-                    <MenuHeader text="Acheivement  ">
-                        <Text style={{
-                            fontFamily: 'Roboto_900Black',
-                        }}>AchiIcons</Text>
-                    </MenuHeader>
-                </View>
-                
+                    <MenuHeader text="Achievement" navigation={props.navigation}/>
+
                 <View style={styles.headContainer}>
                     {achievements.map(item => (
                         <OneCategory key={item.category} category={item.category} progresses={item.progresses}/>
@@ -128,4 +123,4 @@ const OneAchievement = (props) => {
     );
 }
 
-export default AchievementPage
+export default AchievementScreen

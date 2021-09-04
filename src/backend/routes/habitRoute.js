@@ -14,7 +14,7 @@ const {
 } = require('../middleware/express-validator/expressValidator');
 
 router.post(
-	'/create_habit/:user_habit_id',
+	'/create_habit',
 	authentication,
 	userCreateHabitValidator,
 	createHabit
@@ -36,7 +36,8 @@ router.delete(
 	authentication,
 	deleteHabit
 );
-router.get('/show_user_habit', authentication, showUserHabit);
+router.get('/show_user_habit/:day', authentication, showUserHabit);
 router.get('/show_habit/:user_habit_id/:habit_id', authentication, showHabit);
+
 
 module.exports = router;

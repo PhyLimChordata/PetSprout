@@ -60,7 +60,8 @@ const OneSetting = (props) => {
         <SafeAreaView style={styles.oneSettingContainer}>
             <Text style={[styles.text, styles.textNormal, { flex: 1 }]}>{props.tag}</Text>
             <Switch
-                trackColor={{ false: ColorSet.QuaternaryGreen, true: ColorSet.TertiaryGreen}}
+                style={styles.switchStyling}
+                trackColor={{ false: ColorSet.Green.Quaternary, true: ColorSet.Green.Tertiary}}
                 thumbColor={thumbColor}
                 activeThumbColor={thumbColor}
                 value={enabled}

@@ -1,13 +1,13 @@
 import React from 'react';
-import { View, Text, Image } from 'react-native';
+import { View, Text, Image, SafeAreaView } from 'react-native';
 
 import styles from '../styling/ComingSoon';
 import MenuHeader from '../components/MenuHeader';
 
 function ComingSoon(props) {
 	return (
-		<View style={styles.headContainer}>
-            <MenuHeader text={props.title} stack={props.navigation} />
+		<SafeAreaView style={styles.headContainer}>
+            <MenuHeader text={props.title} navigation={props.navigation} />
             <View style={styles.container}>
                 <Image
                     style={styles.Logo}
@@ -20,7 +20,7 @@ function ComingSoon(props) {
 				style={styles.Creature}
 				source={require('../resources/images/ComingSoon.png')}
 			/>
-		</View>
+		</SafeAreaView>
 	);
 }
 

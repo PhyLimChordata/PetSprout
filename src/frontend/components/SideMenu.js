@@ -1,6 +1,6 @@
 import React, {useState, useEffect, useContext} from 'react';
 // import Toggle from 'react-native-toggle-element';
-import { AuthContext } from '../screens/context';
+import { AuthContext } from '../context';
 
 import {View, Text, TouchableOpacity, SafeAreaView, Image, AsyncStorage} from 'react-native';
 import Modal from 'react-native-modal';
@@ -8,7 +8,6 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 
 import ColorSet from "../resources/themes/Global";
 
-import AchievementPage from "../screens/AchievementPage"
 import ProfileEdit from "../screens/ViewEditProfile"
 
 async function setLocalInfoTheme(color) {
@@ -164,7 +163,11 @@ function SideMenu(props) {
                                 </View>
                             </View>
                             <TouchableOpacity style={{height: 40, justifyContent: 'center'}}
-                                              onPress={() => props.setModalVisible(false)}>
+                                              onPress={() => {
+                                                  props.setModalVisible(false);
+                                                  // console.log(props);
+                                                  // props.navigation.navigate('SettingsScreen');
+                                              }}>
                                 <MaterialCommunityIcons name="cog" color={"white"} size={40}/>
                             </TouchableOpacity>
                         </View>
@@ -179,7 +182,9 @@ function SideMenu(props) {
                         </TouchableOpacity>
                         <View style={{marginLeft: "6%", height: "50%", justifyContent: 'space-between', marginBottom: "12%"}}>
                             <Tab color={colorTheme.Tertiary} icon={'star'} title={'Achievements'} onPress={() => {
-                                props.stack.push("AchievementPage");}}/>
+                                props.setModalVisible(false)
+                                props.navigation.navigate("AchievementScreen");
+                            }}/>
                             <Tab color={colorTheme.Tertiary} icon={'account-circle'} title={'Account'} />
                             <Tab color={colorTheme.Tertiary} icon={'bullhorn'} title={'Feedback'}/>
                             <Tab color={colorTheme.Tertiary} icon={'bug'} title={'Report a Bug'}/>

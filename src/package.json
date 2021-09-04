@@ -10,6 +10,7 @@
   "dependencies": {
     "@expo-google-fonts/roboto": "^0.2.0",
     "@react-native-async-storage/async-storage": "^1.15.5",
+    "@react-native-community/datetimepicker": "^3.5.2",
     "@react-native-community/masked-view": "^0.1.10",
     "@react-navigation/bottom-tabs": "^5.11.10",
     "@react-navigation/native": "^5.9.4",
@@ -22,6 +23,7 @@
     "react-native": "https://github.com/expo/react-native/archive/sdk-41.0.0.tar.gz",
     "react-native-gesture-handler": "^1.10.3",
     "react-native-modal": "^12.0.2",
+    "react-native-modal-datetime-picker": "^10.2.0",
     "react-native-paper": "^4.9.2",
     "react-native-reanimated": "^2.1.0",
     "react-native-responsive-dimensions": "^3.1.1",

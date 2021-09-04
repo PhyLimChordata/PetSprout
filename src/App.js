@@ -12,20 +12,23 @@ import TabTwo from './frontend/screens/TabTwo';
 import TabThree from './frontend/screens/TabThree';
 
 import ProfileEdit from './frontend/screens/ViewEditProfile';
-import AchievementPage from './frontend/screens/AchievementPage';
-import SettingPage from './frontend/screens/SettingsPage';
-import BottomPopup from './frontend/components/BottomPopup';
+import AchievementScreen from './frontend/screens/AchievementScreen';
+import BottomMenu from './frontend/components/BottomMenu';
 import HabitsScreen from './frontend/screens/HabitsScreen';
 import ComingSoon from './frontend/screens/ComingSoon';
 import Collaborators from './frontend/screens/Collaborators';
 
+import CreateHabitScreen from './frontend/screens/CreateHabitScreen';
 import LoginScreen from './frontend/screens/LoginScreen';
 import SignupScreen from './frontend/screens/SignupScreen';
+import VerifyEmailSignUpScreen from './frontend/screens/VerifyEmailSignUpScreen';
+import PasswordScreen from './frontend/screens/PasswordScreen';
+import NewPasswordScreen from './frontend/screens/NewPasswordScreen';
+import VerifyEmailPasswordScreen from './frontend/screens/VerifyEmailPasswordScreen';
 
-
-import { AuthContext } from './frontend/screens/context';
+import { AuthContext } from './frontend/context';
 import ColorSet from './frontend/resources/themes/Global';
-import SettingsPage from './frontend/screens/SettingsPage';
+import SettingsPage from "./frontend/screens/SettingsPage";
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -62,14 +65,12 @@ export default function App() {
 			logIn: (token) => {
 				setToken(token);
 			},
-			signUp: () => {
-				setToken('temporaryToken');
-			},
 			signOut: () => {
 				setToken(null);
 			},
+			getToken: token
 		};
-	}, []);
+	}, [token, setToken]);
 
 	return (
 		<AuthContext.Provider value={authContext}>
@@ -77,7 +78,9 @@ export default function App() {
 				{true ? (
 					<Stack.Navigator headerMode="none">
 						<Stack.Screen name="HomeScreen" component={HomeScreen} />
-						<Stack.Screen name="AchievementPage" component={AchievementPage} />
+						<Stack.Screen name="AchievementScreen" component={AchievementScreen} />
+						<Stack.Screen name="SettingsScreen" component={SettingsPage} />
+						<Stack.Screen name="CreateHabitScreen" component={CreateHabitScreen} />
 					</Stack.Navigator>
 				) : (
 					<Stack.Navigator headerMode="none">
@@ -90,6 +93,26 @@ export default function App() {
 							name="SignupScreen"
 							component={SignupScreen}
 							options={{ title: 'Sign up' }}
+						/>
+						<Stack.Screen
+							name="VerifyEmailSignUpScreen"
+							component={VerifyEmailSignUpScreen}
+							options={{ title: 'Verify Email Sign Up' }}
+						/>
+						<Stack.Screen
+							name="PasswordScreen"
+							component={PasswordScreen}
+							options={{ title: 'Forgot Password' }}
+						/>
+						<Stack.Screen
+							name="NewPasswordScreen"
+							component={NewPasswordScreen}
+							options={{ title: 'New Password' }}
+						/>
+							<Stack.Screen
+							name="VerifyEmailPasswordScreen"
+							component={VerifyEmailPasswordScreen}
+							options={{ title: 'Verify Email Password' }}
 						/>
 					</Stack.Navigator>
 				)}
@@ -190,7 +213,8 @@ function HomeScreen(props) {
 					}}
 				/>
 			</Tab.Navigator>
-			<BottomPopup
+			<BottomMenu
+				navigation={props.navigation}
 				modalVisible={modalVisible}
 				setModalVisible={setModalVisible}
 			/>
