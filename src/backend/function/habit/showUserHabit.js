@@ -14,7 +14,7 @@ module.exports = async (req, res) => {
 
 		let habitShow = userHabitInfo.habitList.filter(
 			function(habit) {
-				return habit.schedule.includes(day);
+				return habit.schedule.includes(day)
 			}
 		);
 		

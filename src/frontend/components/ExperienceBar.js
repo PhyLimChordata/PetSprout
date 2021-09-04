@@ -5,7 +5,6 @@ import styles from '../styling/Habits';
 import ColorSet from '../resources/themes/Global';
 
 function ExperienceBar(props) {
-    // const [experience, setExperience] = useState({});
 
     var experience = {
         width: props.width,
@@ -16,9 +15,9 @@ function ExperienceBar(props) {
     return (
         <View style={styles.experienceContainer}>
             <View style={styles.horizontalExperienceContainer}>
-                <Text style={styles.levelText}>Level x</Text>
+                <Text style={styles.levelText}>Level {props.level}</Text>
                 <View style={styles.rightText}>
-                    <Text style={styles.expText}>0/0</Text>
+                    <Text style={styles.expText}>{props.exp}/100</Text>
                 </View>
             </View>
             <View style={styles.expBar}>

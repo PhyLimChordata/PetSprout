@@ -65,20 +65,17 @@ module.exports = async (req, res) => {
 		// need to change to user time
 		// const date = new Date();
 		let analyze_data = analyze.freq.find(
-			(data) => 
-			data.date.getFullYear().toString() === date.getFullYear().toString() &&
-			data.date.getMonth().toString() === date.getMonth().toString() &&
-			data.date.getDate().toString() === date.getDate().toString()
-		)
+			(data) => data.date.toString() === date.toString()
+		);
 
 		if (!analyze_data) {
 			let newData = {
 				date: date,
-				frequency: 1
-			}
+				frequency: 1,
+			};
 			analyze.freq.push(newData);
 		} else {
-			analyze_data.freq = analyze_data.freq + 1
+			analyze_data.freq = analyze_data.freq + 1;
 		}
 
 		await analyze.save();

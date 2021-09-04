@@ -9,16 +9,17 @@ export default StyleSheet.create({
 	},
 	horizontalContainerBottom: {
 		flexDirection: 'row',
-        position: 'absolute',
-        bottom: 0,
+		position: 'absolute',
+		bottom: 0,
 		borderRadius: 8,
 		backgroundColor: ColorSet.Green.Secondary,
 	},
-    horizontalContainerPaddingRight: {
+	horizontalContainerPaddingRight: {
 		flexDirection: 'row',
 		borderRadius: 8,
 		backgroundColor: ColorSet.Green.Secondary,
-        paddingRight: 20
+		paddingRight: 20,
+		paddingTop: 10,
 	},
 	leftContainer: {
 		flex: 2,

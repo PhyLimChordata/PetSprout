@@ -18,7 +18,7 @@ function Capitalize(str) {
 }
 
 function ScrollViewElement(props) {
-	const swipeableRef = useRef(null);
+	const swipeableRef = useRef(props.swipe);
 	const leftSwipe = (progress, dragX) => {
 		const scale = dragX.interpolate({
 			inputRange: [0, 100],
@@ -26,10 +26,11 @@ function ScrollViewElement(props) {
 			extrapolate: 'clamp',
 		});
 		let left = () => {
-			props.leftFunction()
-			if (props.leftClose && swipeableRef.current != null)
-				swipeableRef.current.close()
-		}
+			props.leftFunction();
+			swipeableRef.current.close();
+			// if (props.leftClose && swipeableRef.current != null)
+			// 	swipeableRef.current.close();
+		};
 		return (
 			<View
 				style={{
@@ -43,7 +44,7 @@ function ScrollViewElement(props) {
 				}}
 			>
 				<Animated.View style={{ transform: [{ scale }] }}>
-					<Trash onPress={left}/>
+					<Trash onPress={left} />
 				</Animated.View>
 			</View>
 		);
@@ -56,10 +57,11 @@ function ScrollViewElement(props) {
 			extrapolate: 'clamp',
 		});
 		let right = () => {
-			props.rightFunction()
-			if (props.rightClose && swipeableRef.current != null)
-				swipeableRef.current.close()
-		}
+			props.rightFunction();
+			swipeableRef.current.close();
+			// if (props.rightClose && swipeableRef.current != null)
+			// 	swipeableRef.current.close()
+		};
 		return (
 			<View
 				style={{
@@ -73,7 +75,7 @@ function ScrollViewElement(props) {
 				}}
 			>
 				<Animated.View style={{ transform: [{ scale }] }}>
-					<Checkmark onPress={right}/>
+					<Checkmark onPress={right} />
 				</Animated.View>
 			</View>
 		);
@@ -110,7 +112,6 @@ function ScrollViewElement(props) {
 				ref={swipeableRef}
 				renderRightActions={rightSwipe}
 				rightThreshold={80}
-				// onSwipeableRightOpen={props.rightFunction}
 			>
 				{props.content}
 			</Swipeable>
