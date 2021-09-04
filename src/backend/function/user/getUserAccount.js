@@ -2,6 +2,7 @@ const User = require("../../schemas/UserSchema")
 
 const viewAccount = async(req,res) => {
     try {
+        console.log(req.user.id);
         let user = await User.findById(req.user.id).select('-password');
         if(!user) return res.status(404).json("User not found");
         res.json(user);    
