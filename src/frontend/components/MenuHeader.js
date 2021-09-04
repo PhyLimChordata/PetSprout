@@ -24,7 +24,7 @@ function MenuHeader(props) {
 				return (
 					<View style={{alignContent:'flex-end', height:30, width:30, margin: 2}}>
 						<Image
-						style={{ height: 30, width: 30, resizeMode: 'contain',
+						style={{ height: 30, width: 30, resizeMode: 'contain', borderWidth: 3, borderColor: props.hpColor
 					}}
 						source={require('../resources/images/Heart.png')}
 				/> </View>

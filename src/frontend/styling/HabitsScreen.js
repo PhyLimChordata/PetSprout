@@ -1,10 +1,10 @@
 import { StyleSheet, Platform } from 'react-native';
 import ColorSet from '../resources/global/themes';
 
-export default StyleSheet.create({
+const styles = (theme) => StyleSheet.create({
     headContainer: {
         flex: 1,
-        backgroundColor: ColorSet.white
+        backgroundColor: theme.white
     },
     header: {
         flex: 1.5,
@@ -17,7 +17,7 @@ export default StyleSheet.create({
     },
     verticalContainer: {
         flex: 10,
-        backgroundColor: ColorSet.white,
+        backgroundColor: theme.white,
         alignItems: "center",
         justifyContent: "center",
         marginBottom: 10
@@ -37,3 +37,5 @@ export default StyleSheet.create({
        marginRight: 60
     }
 });
+
+export default styles;

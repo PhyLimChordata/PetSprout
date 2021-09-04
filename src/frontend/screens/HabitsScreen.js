@@ -14,6 +14,9 @@ import ScrollViewElement from '../components/ScrollViewElement';
 import Swipeable from 'react-native-gesture-handler/Swipeable';
 import ColorSet from '../resources/global/themes';
 
+import {useTheme} from '@react-navigation/native';
+
+
 import { AuthContext } from '../context';
 
 function HabitsScreen(props) {
@@ -21,6 +24,8 @@ function HabitsScreen(props) {
 	const [hearts, setHearts] = useState([]);
 	const [userHabitId, setUserHabitId] = useState('');
 	const [experience, setExperience] = useState('');
+
+	const {colors} = useTheme();
   
 	const [level, setLevel] = useState('');
 	const scrolling = React.useRef(new Animated.Value(0)).current;
@@ -61,11 +66,11 @@ function HabitsScreen(props) {
 			.catch();
 	};
 	return (
-		<SafeAreaView style={styles.headContainer}>
-			<MenuHeader text="" navigation={props.navigation} hp={hearts}/>
-			<View style={styles.verticalContainer}>
+		<SafeAreaView style={styles(colors).headContainer}>
+			<MenuHeader text="" navigation={props.navigation} hp={hearts} hpColor={colors.Primary}/>
+			<View style={styles(colors).verticalContainer}>
 				<Image
-					style={styles.creature}
+					style={styles(colors).creature}
 					source={require('../resources/images/Egg.gif')}
 				/>
 				<ExperienceBar
@@ -75,7 +80,7 @@ function HabitsScreen(props) {
 				/>
 
 			</View>
-			<View style={styles.scrollViewContainer}>
+			<View style={styles(colors).scrollViewContainer}>
 				<Animated.ScrollView
 					showsVerticalScrollIndicator={false}
 					onScroll={Animated.event(

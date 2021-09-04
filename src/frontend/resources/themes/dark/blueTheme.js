@@ -1,4 +1,4 @@
-const blueDarkTheme = {
+const blueTheme = {
     colors: {
         
             examplePrimary: '#FF5733',

@@ -1,10 +1,10 @@
 import { StyleSheet, Platform } from 'react-native';
-import ColorSet from '../resources/global/themes';
+// import ColorSet from '../resources/global/themes';
 
-export default StyleSheet.create({
+const styles = (theme) => StyleSheet.create({
 	container: {
 		flex: 1,
-		backgroundColor: ColorSet.white,
+		backgroundColor: theme.white,
 		alignItems: 'center',
 		justifyContent: 'center',
 	},
@@ -15,16 +15,16 @@ export default StyleSheet.create({
 		paddingLeft: 10,
 		paddingRight: 10,
 		borderWidth: 1,
-		color: ColorSet.someColor,
+		color: theme.someColor,
 	},
 	textTitle: {
 		fontSize: 20,
 		fontWeight: 'bold',
-		color: ColorSet.Green.Quaternary,
+		color: theme.Quaternary,
 	},
 	explanationText: {
 		fontSize: 15,
-		color: ColorSet.Green.Quaternary,
+		color: theme.Quaternary,
 		textAlign: 'center',
 		marginBottom: 15,
 		paddingLeft: 50,
@@ -36,7 +36,7 @@ export default StyleSheet.create({
 		marginBottom: 50,
 	},
 	AuthenticationInput: {
-		backgroundColor: ColorSet.Green.Secondary,
+		backgroundColor: theme.Secondary,
 		padding: 10,
 		borderWidth: 0,
 		borderStyle: 'solid',
@@ -49,7 +49,7 @@ export default StyleSheet.create({
 		fontSize: 20,
 		fontWeight: 'bold',
 		paddingBottom: 5,
-		color: ColorSet.Green.Quaternary,
+		color: theme.Quaternary,
 	},
 	inputContainer: {
 		alignItems: 'flex-start',
@@ -59,7 +59,7 @@ export default StyleSheet.create({
 		marginBottom: 20,
 	},
 	AuthenticationButton: {
-		backgroundColor: ColorSet.Green.Quaternary,
+		backgroundColor: theme.Quaternary,
 		borderRadius: 30,
 		padding: 10,
 		paddingLeft: 40,
@@ -67,7 +67,7 @@ export default StyleSheet.create({
 		marginBottom: 20,
 	},
 	AuthenticationSpecialButton: {
-		backgroundColor: ColorSet.Blue.Authentication,
+		backgroundColor: theme.Authentication,
 		borderRadius: 30,
 		padding: 10,
 		paddingLeft: 40,
@@ -77,18 +77,18 @@ export default StyleSheet.create({
 	AuthenticationButtonText: {
 		fontSize: 20,
 		fontWeight: 'bold',
-		color: ColorSet.white,
+		color: theme.white,
 	},
 	SignupText: {
-		color: ColorSet.Green.Quaternary,
+		color: theme.Quaternary,
 		fontWeight: 'bold',
 	},
 	subText: {
-		color: ColorSet.grey,
+		color: theme.grey,
 		fontWeight: 'bold',
 	},
 	forgotPassword: {
-		color: ColorSet.Green.Quaternary,
+		color: theme.Quaternary,
 		fontSize: 14,
 		fontWeight: 'bold',
 		textAlign:'center'
@@ -113,4 +113,6 @@ export default StyleSheet.create({
 		color: "red",
 		fontWeight: "500",
 	}
-});
+})
+
+export default styles;

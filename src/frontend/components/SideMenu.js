@@ -72,13 +72,18 @@ const Tab = ({color, icon, onPress, title, isImage = false}) => (
 function SideMenu(props) {
     const [color, setColor] = useState("green");
     const [toggleValue, setToggleValue] = useState(false);
+
+    const { signOut, changeColorTheme } = useContext(AuthContext);
+    
     const [colorTheme, setColorTheme] = useState(ColorSet.Green);
-    const { signOut } = useContext(AuthContext);
+    
     useEffect( () => {
         UpdateTheme(setColorTheme).then(r => InitializeColor(r, setColor));
 
     }, []);
     function colorChange(color) {
+        changeColorTheme(color);
+
         if (color == "yellow") {
             setLocalInfoTheme(ColorSet.Yellow).then(r => {
                 console.log(r)
@@ -92,14 +97,19 @@ function SideMenu(props) {
                 console.log(r)
             })
         } else if (color == "red") {
+           
+
             setLocalInfoTheme(ColorSet.Red).then(r => {
                 console.log(r)
             })
         } else if (color == "green") {
+            
+
             setLocalInfoTheme(ColorSet.Green).then(r => {
                 console.log(r)
             })
         } else {
+
             setLocalInfoTheme(ColorSet.Green).then(r => {
                 console.log(r)
             })

@@ -1,23 +1,23 @@
 import { StyleSheet, Platform } from 'react-native';
 import ColorSet from '../resources/global/themes';
 
-export default StyleSheet.create({
+const styles = (theme) => StyleSheet.create({
 	horizontalContainer: {
 		flexDirection: 'row',
 		borderRadius: 8,
-		backgroundColor: ColorSet.Green.Secondary,
+		backgroundColor: theme.Secondary,
 	},
 	horizontalContainerBottom: {
 		flexDirection: 'row',
 		position: 'absolute',
 		bottom: 0,
 		borderRadius: 8,
-		backgroundColor: ColorSet.Green.Secondary,
+		backgroundColor: theme.Secondary,
 	},
 	horizontalContainerPaddingRight: {
 		flexDirection: 'row',
 		borderRadius: 8,
-		backgroundColor: ColorSet.Green.Secondary,
+		backgroundColor: theme.Secondary,
 		paddingRight: 20,
 		paddingTop: 10,
 	},
@@ -27,7 +27,7 @@ export default StyleSheet.create({
 		paddingBottom: 30,
 	},
 	container: {
-		backgroundColor: ColorSet.Green.Secondary,
+		backgroundColor: theme.Secondary,
 		margin: 20,
 		alignItems: 'center',
 	},
@@ -46,14 +46,14 @@ export default StyleSheet.create({
 		fontSize: 25,
 		fontWeight: 'bold',
 		marginBottom: 20,
-		color: ColorSet.Green.Quinary,
+		color: theme.Quinary,
 	},
 	ellipsisCircle: {
 		width: 6,
 		height: 6,
 		marginRight: 3,
 		borderRadius: 3,
-		backgroundColor: ColorSet.Green.Quaternary,
+		backgroundColor: theme.Quaternary,
 	},
 	swipeIcon: {
 		width: 30,
@@ -63,19 +63,21 @@ export default StyleSheet.create({
 		fontSize: 20,
 		flex: 1,
 		fontWeight: 'bold',
-		color: ColorSet.Green.Quaternary,
+		color: theme.Quaternary,
 	},
 	rightText: {
 		alignItems: 'flex-end',
 	},
 	expText: {
-		color: ColorSet.Green.Quaternary,
+		color: theme.Quaternary,
 		fontSize: 20,
 	},
 	expBar: {
 		width: '100%',
 		height: 15,
-		backgroundColor: ColorSet.lightgrey,
+		backgroundColor: theme.lightgrey,
 		borderRadius: 10,
 	},
 });
+
+export default styles;
