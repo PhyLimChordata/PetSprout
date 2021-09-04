@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, Image, TouchableOpacity } from 'react-native';
 
 import styles from '../styling/Authentication';
-import ColorSet from '../resources/global/themes';
+import {useTheme} from '@react-navigation/native';
 
 function SignupScreen(props) {
 	const [userName, setusername] = useState('');
@@ -15,8 +15,10 @@ function SignupScreen(props) {
 	const [passwordError, setPasswordError] = useState('');
 	const [reEnterPasswordError, setReEnterPasswordError] = useState('');
 
+	const {colors} = useTheme();
+
 	const [usernameInputStyle, setUsernameInputStyle] = useState({
-		backgroundColor: ColorSet.Green.Secondary,
+		backgroundColor: colors.Secondary,
 		padding: 10,
 		borderWidth: 0,
 		borderStyle: 'solid',
@@ -27,7 +29,7 @@ function SignupScreen(props) {
 	});
 
 	const [emailInputStyle, setEmailInputStyle] = useState({
-		backgroundColor: ColorSet.Green.Secondary,
+		backgroundColor: colors.Secondary,
 		padding: 10,
 		borderWidth: 0,
 		borderStyle: 'solid',
@@ -38,7 +40,7 @@ function SignupScreen(props) {
 	});
 
 	const [passwordInputStyle, setPasswordInputStyle] = useState({
-		backgroundColor: ColorSet.Green.Secondary,
+		backgroundColor: colors.Secondary,
 		padding: 10,
 		borderWidth: 0,
 		borderStyle: 'solid',
@@ -49,7 +51,7 @@ function SignupScreen(props) {
 	});
 
 	const [reEnterPasswordInputStyle, setReEnterPasswordInputStyle] = useState({
-		backgroundColor: ColorSet.Green.Secondary,
+		backgroundColor: colors.Secondary,
 		padding: 10,
 		borderWidth: 0,
 		borderStyle: 'solid',
@@ -60,7 +62,7 @@ function SignupScreen(props) {
 	});
 
 	const errorIndicator = {
-		backgroundColor: ColorSet.Green.Secondary,
+		backgroundColor: colors.Secondary,
 		padding: 10,
 		borderWidth: 3,
 		borderColor: 'red',
@@ -74,7 +76,7 @@ function SignupScreen(props) {
 		setusername(text);
 		setUserNameError('');
 		setUsernameInputStyle({
-			backgroundColor: ColorSet.Green.Secondary,
+			backgroundColor: colors.Secondary,
 			padding: 10,
 			borderWidth: 0,
 			borderStyle: 'solid',
@@ -89,7 +91,7 @@ function SignupScreen(props) {
 		setEmail(text);
 		setEmailError('');
 		setEmailInputStyle({
-			backgroundColor: ColorSet.Green.Secondary,
+			backgroundColor: colors.Secondary,
 			padding: 10,
 			borderWidth: 0,
 			borderStyle: 'solid',
@@ -104,7 +106,7 @@ function SignupScreen(props) {
 		setPassword(text);
 		setPasswordError('');
 		setPasswordInputStyle({
-			backgroundColor: ColorSet.Green.Secondary,
+			backgroundColor: colors.Secondary,
 			padding: 10,
 			borderWidth: 0,
 			borderStyle: 'solid',
@@ -118,7 +120,7 @@ function SignupScreen(props) {
 		setReEnterPassword(text);
 		setReEnterPasswordError('');
 		setReEnterPasswordInputStyle({
-			backgroundColor: ColorSet.Green.Secondary,
+			backgroundColor: colors.Secondary,
 			padding: 10,
 			borderWidth: 0,
 			borderStyle: 'solid',
@@ -185,60 +187,60 @@ function SignupScreen(props) {
 	};
 
 	return (
-		<View style={styles.container}>
+		<View style={styles(colors).container}>
 			<Image
-				style={styles.AuthenticationLogo}
+				style={styles(colors).AuthenticationLogo}
 				source={require('../resources/images/Logo.png')}
 			/>
-			<View style={styles.inputContainer}>
-				<Text style={styles.AuthenticationText}>Username</Text>
+			<View style={styles(colors).inputContainer}>
+				<Text style={styles(colors).AuthenticationText}>Username</Text>
 				<TextInput
 					style={usernameInputStyle}
 					value={userName}
 					onChangeText={(text) => updatingUsernameInput(text)}
 				></TextInput>
-				<Text style={styles.errorMessageRight}>{userNameError}</Text>
-				<Text style={styles.AuthenticationText}>Email</Text>
+				<Text style={styles(colors).errorMessageRight}>{userNameError}</Text>
+				<Text style={styles(colors).AuthenticationText}>Email</Text>
 				<TextInput
 					style={emailInputStyle}
 					value={email}
 					onChangeText={(text) => updatingEmailInput(text)}
 				></TextInput>
-				<Text style={styles.errorMessageRight}>{emailError}</Text>
+				<Text style={styles(colors).errorMessageRight}>{emailError}</Text>
 
-				<Text style={styles.AuthenticationText}>Password</Text>
+				<Text style={styles(colors).AuthenticationText}>Password</Text>
 				<TextInput
 					style={passwordInputStyle}
 					secureTextEntry={true}
 					value={password}
 					onChangeText={(text) => updatingPasswordInput(text)}
 				></TextInput>
-				<Text style={styles.errorMessageRight}>{passwordError}</Text>
+				<Text style={styles(colors).errorMessageRight}>{passwordError}</Text>
 
-				<Text style={styles.AuthenticationText}>Re-enter Password</Text>
+				<Text style={styles(colors).AuthenticationText}>Re-enter Password</Text>
 				<TextInput
 					style={reEnterPasswordInputStyle}
 					secureTextEntry={true}
 					value={reEnterPassword}
 					onChangeText={(text) => updatingReEnterPasswordInput(text)}
 				></TextInput>
-				<Text style={styles.errorMessageRight}>{reEnterPasswordError}</Text>
+				<Text style={styles(colors).errorMessageRight}>{reEnterPasswordError}</Text>
 			</View>
 			<View style={{ height: 10 }} />
 			<TouchableOpacity
 				activeOpacity={0.6}
-				style={styles.AuthenticationButton}
+				style={styles(colors).AuthenticationButton}
 				onPress={() => attemptSignup()}
 			>
-				<Text style={styles.AuthenticationButtonText}>Sign Up</Text>
+				<Text style={styles(colors).AuthenticationButtonText}>Sign Up</Text>
 			</TouchableOpacity>
-			<Text style={styles.subText}>
+			<Text style={styles(colors).subText}>
 				Already have an account?
 				<TouchableOpacity
 					activeOpacity={0.6}
 					onPress={() => props.navigation.push('LoginScreen')}
 				>
-					<Text style={styles.SignupText}> Log in</Text>
+					<Text style={styles(colors).SignupText}> Log in</Text>
 				</TouchableOpacity>
 			</Text>
 		</View>

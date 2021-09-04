@@ -10,6 +10,8 @@ import TimeTab from "../components/TimeTab";
 import { AuthContext } from "../context"
 import ScrollViewElement from "../components/ScrollViewElement";
 import BottomPopup from "../components/BottomPopup";
+import {useTheme} from "@react-navigation/native";
+
 const Day = ({selected, letter, onPress}) => (
     <TouchableOpacity onPress={onPress} style={{alignItems:"center", width:40, height:40,
         backgroundColor: selected ? ColorSet.Green.Tertiary : ColorSet.white,
@@ -18,7 +20,6 @@ const Day = ({selected, letter, onPress}) => (
         <Text style={{color:ColorSet.Green.Quinary, fontSize: 20, fontWeight: "bold"}}> {letter} </Text>
     </TouchableOpacity>
 )
-
 
 function CreateHabitScreen(props) {
     let popup = React.useRef();
@@ -37,6 +38,8 @@ function CreateHabitScreen(props) {
     const [description, setDescription] = useState('');
     const [reason, setReason] = useState('');
     const {getToken} = useContext(AuthContext);
+
+    const {colors} = useTheme();
 
     const createHabit = () => {
         fetch('http://localhost:5000/api/v1.0.0/habit/create_habit', {
@@ -91,7 +94,7 @@ function CreateHabitScreen(props) {
     }
 
     const textboxSmallStyle = {
-        backgroundColor: ColorSet.Green.Secondary,
+        backgroundColor: colors.Secondary,
         padding: 10,
         borderWidth: 0,
         height: 50,
@@ -101,7 +104,7 @@ function CreateHabitScreen(props) {
         marginBottom: 20
     }
     const textboxBigStyle = {
-        backgroundColor: ColorSet.Green.Secondary,
+        backgroundColor: colors.Secondary,
         padding: 10,
         borderWidth: 0,
         height: 100,
@@ -111,11 +114,11 @@ function CreateHabitScreen(props) {
         marginBottom: 20
     }
     return (
-        <SafeAreaView style={styles.headContainer}>
+        <SafeAreaView style={styles(colors).headContainer}>
             <MenuHeader back={true} text={"Create Habit"} navigation={props.navigation}
                         right={
                             <TouchableOpacity onPress={() => createHabit()}>
-                                <Text style={styles.headerText}> Create</Text>
+                                <Text style={styles(colors).headerText}> Create</Text>
                             </TouchableOpacity>}
             />
             <ScrollView>

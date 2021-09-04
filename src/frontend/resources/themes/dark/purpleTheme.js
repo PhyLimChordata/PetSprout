@@ -18,6 +18,8 @@ const purpleTheme = {
             Tertiary: '#B493CE',
             Quaternary: '#9983AB',
             Quinary: '#7C6D89',
+
+            Authentication: '#6081C4'
     }
 };
 

@@ -18,6 +18,8 @@ const redTheme = {
             Tertiary: '#FF8D8D',
             Quaternary: '#E37272',
             Quinary: '#A75B5B',
+
+            Authentication: '#6081C4'
     }
 };
 

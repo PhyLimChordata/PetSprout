@@ -1,7 +1,5 @@
 import React, {useState} from 'react';
 import {View} from 'react-native';
-
-import styles from '../styling/Tabs';
 import Header from '../components/MenuHeader';
 import CollaboratorContent from '../components/collaboratorContent';
 

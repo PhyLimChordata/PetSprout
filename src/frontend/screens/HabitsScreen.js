@@ -28,15 +28,17 @@ function HabitsScreen(props) {
 	const {colors} = useTheme();
   
 	const [level, setLevel] = useState('');
+	const [displayed, setDisplayed] = useState(false);
 	const scrolling = React.useRef(new Animated.Value(0)).current;
 
 	const { getToken } = useContext(AuthContext);
 
 	useEffect(() => {
-		if (habits.length == 0) displayHabits();
+		if (habits.length == 0 && !displayed) displayHabits();
 	});
 
 	const displayHabits = () => {
+		setDisplayed(true);
 		const date = new Date().getDay();
 		fetch('http://localhost:5000/api/v1.0.0/habit/show_user_habit/' + date, {
 			method: 'GET',
@@ -65,9 +67,10 @@ function HabitsScreen(props) {
 			)
 			.catch();
 	};
+
 	return (
 		<SafeAreaView style={styles(colors).headContainer}>
-			<MenuHeader text="" navigation={props.navigation} hp={hearts} hpColor={colors.Primary}/>
+			<MenuHeader text="" navigation={props.navigation} hp={hearts}/>
 			<View style={styles(colors).verticalContainer}>
 				<Image
 					style={styles(colors).creature}

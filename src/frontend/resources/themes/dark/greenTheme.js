@@ -18,7 +18,9 @@ const greenTheme = {
             Secondary: '#D7F2BA',
             Tertiary: '#B9E8A0',
             Quaternary: '#9CC69B',
-            Quinary: '#6E8F6D'
+            Quinary: '#6E8F6D',
+
+            Authentication: '#6081C4'
         }
 };
 

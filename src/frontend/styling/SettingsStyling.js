@@ -1,9 +1,8 @@
 import { StyleSheet } from "react-native";
-import ColorSet from '../resources/global/themes';
 
 const fontSize = 13;
 
-export default StyleSheet.create({
+const styles = (theme) => StyleSheet.create({
     container: {
         display: 'flex',
         // flexDirection: 'col',
@@ -60,3 +59,5 @@ export default StyleSheet.create({
     }
 
 })
+
+export default styles;

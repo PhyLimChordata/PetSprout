@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
 import ColorSet from '../resources/global/themes';
 
-export default StyleSheet.create({
+const styles = (theme) => StyleSheet.create({
 	headContainer: {
 		flex: 1,
 		backgroundColor: ColorSet.white
@@ -27,3 +27,5 @@ export default StyleSheet.create({
 		alignItems: 'flex-start',
 	},
 });
+
+export default styles;

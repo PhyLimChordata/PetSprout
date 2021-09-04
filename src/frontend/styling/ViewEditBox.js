@@ -1,9 +1,8 @@
 import { StyleSheet } from "react-native";
-import ColorSet from '../resources/global/themes';
 
 const fontSize = 13
 
-export default StyleSheet.create({
+const styles = (theme) => StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'center',
@@ -26,13 +25,13 @@ export default StyleSheet.create({
         paddingRight: 10,
         borderWidth: 0,
         paddingBottom: 2,
-        color: ColorSet.Green.Quinary,
+        color: theme.Quinary,
         fontSize: fontSize,
     },
     textInputSelected: {
         borderBottomWidth: 2,
         paddingBottom: 0,
-        borderColor: ColorSet.Green.Quaternary,
+        borderColor: theme.Quaternary,
     },
     textMultiInput: {
         flex: 0.1,
@@ -41,10 +40,10 @@ export default StyleSheet.create({
         paddingLeft: 10,
         paddingRight: 10,
         borderWidth: 1,
-        borderColor: ColorSet.white,
-        color: ColorSet.black,
+        borderColor: theme.white,
+        color: theme.black,
         fontWeight: "300",
-        backgroundColor: ColorSet.Green.Secondary
+        backgroundColor: theme.Secondary
     },
     baseText: {
         fontFamily: "Roboto",
@@ -55,24 +54,24 @@ export default StyleSheet.create({
         fontSize: fontSize,
         width: '100%',
         textAlign: 'left',
-        color: ColorSet.Green.Quaternary
+        color: theme.Quaternary
         
     },
     textNormal: {
         fontSize: fontSize,
         textAlign: 'left',
-        color: ColorSet.Green.Tertiary
+        color: theme.Tertiary
     },
     submitButton: {
-        color: ColorSet.white,
-        backgroundColor: ColorSet.Green.Quaternary,
+        color: themewhite,
+        backgroundColor: theme.Quaternary,
         borderRadius: 30,
         width: 110,
         height: 26,
         alignItems: 'center',
     },
     submitButtonText: {
-        color: ColorSet.white,
+        color: themewhite,
         fontWeight: '900',
         fontSize: 18,
         textAlign: 'center',
@@ -86,3 +85,5 @@ export default StyleSheet.create({
         width: '80%',
     }
 })
+
+export default styles;

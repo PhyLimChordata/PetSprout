@@ -1,5 +1,4 @@
-import { StyleSheet, Platform } from 'react-native';
-import ColorSet from '../resources/global/themes';
+import { StyleSheet } from 'react-native';
 
 const styles = (theme) => StyleSheet.create({
 	horizontalContainer: {

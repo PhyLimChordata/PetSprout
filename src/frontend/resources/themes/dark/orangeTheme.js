@@ -18,6 +18,8 @@ const orangeTheme = {
         Tertiary: '#FFC977',
         Quaternary: '#DEAD63',
         Quinary: '#A68350',
+
+        Authentication: '#6081C4'
         }
 };
 
