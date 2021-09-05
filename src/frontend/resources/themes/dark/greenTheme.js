@@ -1,8 +1,7 @@
 const greenTheme = {
     colors: {
-            background: '#FFFFFF',
             examplePrimary: '#FF5733',
-            white: '#ffffff',
+            background: '#505050',
             grey: '#B7BEB0',
             lightgrey: '#E7E7E7',
             someColor: '#EF2723',

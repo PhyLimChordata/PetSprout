@@ -2,7 +2,7 @@ const blueTheme = {
     colors: {
         
             examplePrimary: '#FF5733',
-            white: '#ffffff',
+            background: '#ffffff',
             grey: '#B7BEB0',
             lightgrey: '#E7E7E7',
             someColor: '#EF2723',

@@ -29,7 +29,7 @@ import orangeLightTheme from './frontend/resources/themes/light/orangeTheme';
 import blueLightTheme from './frontend/resources/themes/light/blueTheme';
 import purpleLightTheme from './frontend/resources/themes/light/purpleTheme';
 import redLightTheme from './frontend/resources/themes/light/redTheme';
-import greenDarkTheme from './frontend/resources/themes/dark/orangeTheme';
+import greenDarkTheme from './frontend/resources/themes/dark/greenTheme';
 import orangeDarkTheme from './frontend/resources/themes/dark/orangeTheme';
 import blueDarkTheme from './frontend/resources/themes/dark/blueTheme';
 import purpleDarkTheme from './frontend/resources/themes/dark/purpleTheme';
@@ -56,22 +56,21 @@ export default function App() {
 			},
 			changeColorTheme: (selectedColor) => {
 				setColor(selectedColor);
-				console.log(selectedColor);
 			},
 			changeModeTheme: (selectedMode) => {
 				setMode(selectedMode);
 			},
 			getToken: token,
 			getColor: color,
+			getMode: mode
 		};
-	}, [token, setToken, color, setColor]);
+	}, [token, setToken, color, setColor, mode, setMode]);
 
 	return (
 		
 		<AuthContext.Provider value={authContext}>
-			{mode == 'light' ? (color == 'green' ? <NavContainer token={token} theme={greenLightTheme}/> : color == 'orange' ? <NavContainer token={token} theme={orangeLightTheme}/> :  color == 'blue' ? <NavContainer token={token} theme={blueLightTheme}/> :  color == 'purple' ? <NavContainer token={token} theme={purpleLightTheme}/> : color == 'red' ? <NavContainer token={token} theme={redLightTheme}/> : <NavContainer token={token} theme={greenLightTheme}/>) 
-			: mode == 'dark' ?  (color == 'green' ? <NavContainer token={token} theme={greenDarkTheme}/> : color == 'orange' ? <NavContainer token={token} theme={orangeDarkTheme}/> :  color == 'blue' ? <NavContainer token={token} theme={blueDarkTheme}/> :  color == 'purple' ? <NavContainer token={token} theme={purpleDarkTheme}/> : color == 'red' ? <NavContainer token={token} theme={redDarkTheme}/> : <NavContainer token={token} theme={greenDarkTheme}/>) 
-			: <NavContainer token={token} theme={greenLightTheme}/>}
+			{mode ? (color == 'green' ? <NavContainer token={token} theme={greenLightTheme}/> : color == 'orange' ? <NavContainer token={token} theme={orangeLightTheme}/> :  color == 'blue' ? <NavContainer token={token} theme={blueLightTheme}/> :  color == 'purple' ? <NavContainer token={token} theme={purpleLightTheme}/> : color == 'red' ? <NavContainer token={token} theme={redLightTheme}/> : <NavContainer token={token} theme={greenLightTheme}/>) 
+			: (color == 'green' ? <NavContainer token={token} theme={greenDarkTheme}/> : color == 'orange' ? <NavContainer token={token} theme={orangeDarkTheme}/> :  color == 'blue' ? <NavContainer token={token} theme={blueDarkTheme}/> :  color == 'purple' ? <NavContainer token={token} theme={purpleDarkTheme}/> : color == 'red' ? <NavContainer token={token} theme={redDarkTheme}/> : <NavContainer token={token} theme={greenDarkTheme}/>)}
 		</AuthContext.Provider>
 	);
 }
@@ -136,7 +135,7 @@ function HomeScreen(props) {
 				backBehavior="order"
 				tabBarOptions={{
 					activeTintColor: colors.Quinary,
-					inactiveTintColor: colors.white,
+					inactiveTintColor: colors.background,
 					style: { backgroundColor: colors.Tertiary },
 				}}
 			>
@@ -188,7 +187,7 @@ function HomeScreen(props) {
 								style={{
 									width: 35,
 									height: 35,
-									tintColor: colors.white,
+									tintColor: colors.background,
 								}}
 							/>
 						),

@@ -16,7 +16,7 @@ function Day (selected, letter, onPress){
     const {colors}  = useTheme();
     return (
 <TouchableOpacity onPress={onPress} style={{alignItems:"center", width:40, height:40,
-        backgroundColor: selected ? colors.Tertiary : colors.white,
+        backgroundColor: selected ? colors.Tertiary : colors.background,
         borderRadius:20, justifyContent:'center', marginVertical:5, borderWidth: 2,
         borderColor:colors.Quaternary}} activeOpacity={0.6}>
         <Text style={{color:colors.Quinary, fontSize: 20, fontWeight: "bold"}}> {letter} </Text>

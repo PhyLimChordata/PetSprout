@@ -75,11 +75,11 @@ const Tab = ({color, icon, onPress, title, isImage = false}) => (
 
 
 function SideMenu(props) {
-    const { signOut, changeColorTheme, getColor } = useContext(AuthContext);
+    const { signOut, changeColorTheme, getColor, changeModeTheme, getMode } = useContext(AuthContext);
 
     const {colors} = useTheme();
     const [color, setColor] = useState(getColor);
-    const [toggleValue, setToggleValue] = useState(false);
+    const [toggleValue, setToggleValue] = useState(getMode);
 
     
     const [colorTheme, setColorTheme] = useState(colors);
@@ -227,10 +227,10 @@ function SideMenu(props) {
                         <View style={{alignItems: 'center'}}>
                             {/* <Toggle
                                 value={toggleValue}
-                                onPress={(newState) => setToggleValue(newState)}
+                                onPress={(newState) => changeModeTheme(newState)}
                                 thumbButton={{
-                                    activeBackgroundColor: ColorSet.white,
-                                    inActiveBackgroundColor: ColorSet.white
+                                    activeBackgroundColor: colors.background,
+                                    inActiveBackgroundColor: colors.background
                                 }}
                                 trackBar={{
                                     width: 100,
@@ -240,11 +240,11 @@ function SideMenu(props) {
                                     inActiveBackgroundColor: '#3c4145',
                                 }}
                                 leftComponent={
-                                    <MaterialCommunityIcons name={"weather-sunny"} color={ColorSet.white} size={30}/>
+                                    <MaterialCommunityIcons name={"weather-sunny"} color={colors.background} size={30}/>
 
                                 }
                                 rightComponent={
-                                    <MaterialCommunityIcons name={"moon-waning-crescent"} color={ColorSet.white}
+                                    <MaterialCommunityIcons name={"moon-waning-crescent"} color={colors.white}
                                                             size={30}/>
                                 }
                             /> */}
