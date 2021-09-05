@@ -38,6 +38,8 @@ import redDarkTheme from './frontend/resources/themes/dark/redTheme';
 
 import SettingsPage from "./frontend/screens/SettingsPage";
 
+import {useTheme} from '@react-navigation/native';
+
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 
@@ -126,6 +128,7 @@ function NavContainer(props) {
 }
 
 function HomeScreen(props) {
+	const {colors} = useTheme();
 	const [modalVisible, setModalVisible] = useState(false);
 	return (
 		<>
@@ -133,9 +136,9 @@ function HomeScreen(props) {
 				initialRouteName="TabOne"
 				backBehavior="order"
 				tabBarOptions={{
-					activeTintColor: ColorSet.Green.Quinary,
-					inactiveTintColor: ColorSet.white,
-					style: { backgroundColor: ColorSet.Green.Tertiary },
+					activeTintColor: colors.Quinary,
+					inactiveTintColor: colors.white,
+					style: { backgroundColor: colors.Tertiary },
 				}}
 			>
 				<Tab.Screen
@@ -186,7 +189,7 @@ function HomeScreen(props) {
 								style={{
 									width: 35,
 									height: 35,
-									tintColor: ColorSet.white,
+									tintColor: colors.white,
 								}}
 							/>
 						),
