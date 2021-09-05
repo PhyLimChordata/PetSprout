@@ -242,8 +242,10 @@ function Reflect(props) {
 	return <ComingSoon title="Reflect"></ComingSoon>;
 }
 
-const CustomTabBarButton = ({ children, onPress }) => (
-	<TouchableOpacity
+function CustomTabBarButton({ children, onPress}) {
+	const {colors} = useTheme();
+	return (
+		<TouchableOpacity
 		activeOpacity={1}
 		style={{
 			top: -30,
@@ -256,7 +258,7 @@ const CustomTabBarButton = ({ children, onPress }) => (
 	>
 		<View
 			style={{
-				backgroundColor: ColorSet.Green.Quaternary,
+				backgroundColor: colors.Quaternary,
 				width: 70,
 				height: 70,
 				borderRadius: 35,
@@ -265,4 +267,5 @@ const CustomTabBarButton = ({ children, onPress }) => (
 			{children}
 		</View>
 	</TouchableOpacity>
-);
+	);
+}
