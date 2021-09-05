@@ -73,9 +73,14 @@ const Tab = ({color, icon, onPress, title, isImage = false}) => (
         </TouchableOpacity>
 )
 
+function changeMode(newState) {
+    const {changeModeTheme} = useContext(AuthContext);
+    newState ? changeModeTheme('light') : changeModeTheme('dark');
+    setToggleValue(newState);
+}
 
 function SideMenu(props) {
-    const { signOut, changeColorTheme, getColor, changeModeTheme, getMode } = useContext(AuthContext);
+    const { signOut, changeColorTheme, getColor, getMode } = useContext(AuthContext);
 
     const {colors} = useTheme();
     const [color, setColor] = useState(getColor);
@@ -227,7 +232,7 @@ function SideMenu(props) {
                         <View style={{alignItems: 'center'}}>
                             {/* <Toggle
                                 value={toggleValue}
-                                onPress={(newState) => changeModeTheme(newState)}
+                                onPress={(newState) => changeMode(newState)}
                                 thumbButton={{
                                     activeBackgroundColor: colors.background,
                                     inActiveBackgroundColor: colors.background

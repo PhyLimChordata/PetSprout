@@ -69,8 +69,9 @@ export default function App() {
 	return (
 		
 		<AuthContext.Provider value={authContext}>
-			{mode ? (color == 'green' ? <NavContainer token={token} theme={greenLightTheme}/> : color == 'orange' ? <NavContainer token={token} theme={orangeLightTheme}/> :  color == 'blue' ? <NavContainer token={token} theme={blueLightTheme}/> :  color == 'purple' ? <NavContainer token={token} theme={purpleLightTheme}/> : color == 'red' ? <NavContainer token={token} theme={redLightTheme}/> : <NavContainer token={token} theme={greenLightTheme}/>) 
-			: (color == 'green' ? <NavContainer token={token} theme={greenDarkTheme}/> : color == 'orange' ? <NavContainer token={token} theme={orangeDarkTheme}/> :  color == 'blue' ? <NavContainer token={token} theme={blueDarkTheme}/> :  color == 'purple' ? <NavContainer token={token} theme={purpleDarkTheme}/> : color == 'red' ? <NavContainer token={token} theme={redDarkTheme}/> : <NavContainer token={token} theme={greenDarkTheme}/>)}
+			{mode == 'light' ? (color == 'green' ? <NavContainer token={token} theme={greenLightTheme}/> : color == 'orange' ? <NavContainer token={token} theme={orangeLightTheme}/> :  color == 'blue' ? <NavContainer token={token} theme={blueLightTheme}/> :  color == 'purple' ? <NavContainer token={token} theme={purpleLightTheme}/> : color == 'red' ? <NavContainer token={token} theme={redLightTheme}/> : <NavContainer token={token} theme={greenLightTheme}/>) 
+			: mode == 'dark' ?  (color == 'green' ? <NavContainer token={token} theme={greenDarkTheme}/> : color == 'orange' ? <NavContainer token={token} theme={orangeDarkTheme}/> :  color == 'blue' ? <NavContainer token={token} theme={blueDarkTheme}/> :  color == 'purple' ? <NavContainer token={token} theme={purpleDarkTheme}/> : color == 'red' ? <NavContainer token={token} theme={redDarkTheme}/> : <NavContainer token={token} theme={greenDarkTheme}/>) 
+			: <NavContainer token={token} theme={greenLightTheme}/>}
 		</AuthContext.Provider>
 	);
 }
