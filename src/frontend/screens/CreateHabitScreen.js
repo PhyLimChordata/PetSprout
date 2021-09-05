@@ -12,14 +12,17 @@ import ScrollViewElement from "../components/ScrollViewElement";
 import BottomPopup from "../components/BottomPopup";
 import {useTheme} from "@react-navigation/native";
 
-const Day = ({selected, letter, onPress}) => (
-    <TouchableOpacity onPress={onPress} style={{alignItems:"center", width:40, height:40,
-        backgroundColor: selected ? ColorSet.Green.Tertiary : ColorSet.white,
+function Day (selected, letter, onPress){
+    const {colors}  = useTheme();
+    return (
+<TouchableOpacity onPress={onPress} style={{alignItems:"center", width:40, height:40,
+        backgroundColor: selected ? colors.Tertiary : colors.white,
         borderRadius:20, justifyContent:'center', marginVertical:5, borderWidth: 2,
-        borderColor:ColorSet.Green.Quaternary}} activeOpacity={0.6}>
-        <Text style={{color:ColorSet.Green.Quinary, fontSize: 20, fontWeight: "bold"}}> {letter} </Text>
-    </TouchableOpacity>
-)
+        borderColor:colors.Quaternary}} activeOpacity={0.6}>
+        <Text style={{color:colors.Quinary, fontSize: 20, fontWeight: "bold"}}> {letter} </Text>
+    </TouchableOpacity>);
+}
+    
 
 function CreateHabitScreen(props) {
     let popup = React.useRef();
@@ -127,7 +130,7 @@ function CreateHabitScreen(props) {
                     <TextBox header={"Description"} boxStyle={textboxBigStyle} multiline={true}
                              setText={setDescription}/>
                     <TextBox header={"Your Why"} boxStyle={textboxSmallStyle} multiline={true} setText={setReason}/>
-                    <Text style={{fontSize: 20, fontWeight: 'bold', color: ColorSet.Green.Quaternary}}>Schedule</Text>
+                    <Text style={{fontSize: 20, fontWeight: 'bold', color: colors.Quaternary}}>Schedule</Text>
                     <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
                         <Day letter={'S'} selected={days[0]} onPress={() => flipDay(0)}/>
                         <Day letter={'M'} selected={days[1]} onPress={() => flipDay(1)}/>

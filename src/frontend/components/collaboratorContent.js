@@ -5,8 +5,11 @@ import { useResponsiveHeight } from 'react-native-responsive-dimensions';
 import styles from '../styling/Tabs';
 import ColorSet from '../resources/global/themes';
 
+import {useTheme} from '@react-navigation/native';
+
 // Similar to a screen, however components will be contained within a screen
 function CollaboratorContent(props) {
+    const {colors} = useTheme();
     var text = {
         marginTop: Platform.OS === 'ios' ? 0 : 5,
         paddingTop: useResponsiveHeight(1),
@@ -14,14 +17,14 @@ function CollaboratorContent(props) {
         minPaddingBottom: 10,
         fontWeight: "bold",
         fontSize: useResponsiveHeight(3),
-        color: ColorSet.Green.Quaternary
+        color: colors.Quaternary
     }
     var textTitle = {
         paddingBottom: useResponsiveHeight(2),
         flex: 3,
         fontWeight: "bold",
         fontSize: useResponsiveHeight(5),
-        color: ColorSet.Green.Quaternary
+        color: colors.Quaternary
     }
     var collabImg = {
         width: useResponsiveHeight(20),

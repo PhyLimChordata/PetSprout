@@ -61,7 +61,7 @@ export default function App() {
 				setMode(selectedMode);
 			},
 			getToken: token,
-			getColorTheme: color,
+			getColor: color,
 		};
 	}, [token, setToken, color, setColor]);
 

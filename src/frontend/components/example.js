@@ -3,9 +3,12 @@ import { View } from 'react-native';
 
 import styles from '../styling/Tabs';
 
+import {useTheme} from '@react-navigation/native';
+
 // Similar to a screen, however components will be contained within a screen
 function example(props) {
-	return <View style={styles.container}></View>;
+	const {colors} = useTheme();
+	return <View style={styles(colors).container}></View>;
 }
 
 export default example;

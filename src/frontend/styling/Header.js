@@ -4,7 +4,7 @@ import ColorSet from '../resources/global/themes';
 const styles = (theme) => StyleSheet.create({
 	headContainer: {
 		flex: 1,
-		backgroundColor: ColorSet.white
+		backgroundColor: theme.white
 	},
 	header: {
 		flexDirection: 'row',
@@ -17,7 +17,7 @@ const styles = (theme) => StyleSheet.create({
 	headerText: {
 		fontSize: 18,
 		height:25,
-		color: ColorSet.Green.Quaternary,
+		color: theme.Quaternary,
 		fontWeight: "700",
 		marginLeft: 15,
 	},

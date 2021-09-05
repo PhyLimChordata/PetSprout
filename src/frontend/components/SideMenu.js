@@ -205,8 +205,8 @@ function SideMenu(props) {
                         }}>
                             <ThemeCircle colorTheme={ColorSet.Green} selected={color == 'green'}
                                          onPress={() => colorChange("green")}/>
-                            <ThemeCircle colorTheme={ColorSet.Yellow} selected={color == 'yellow'}
-                                         onPress={() => colorChange("yellow")}/>
+                            <ThemeCircle colorTheme={ColorSet.Yellow} selected={color == 'orange'}
+                                         onPress={() => colorChange("orange")}/>
                             <ThemeCircle colorTheme={ColorSet.Blue} selected={color == 'blue'}
                                          onPress={() => colorChange("blue")}/>
                             <ThemeCircle colorTheme={ColorSet.Purple} selected={color == 'purple'}

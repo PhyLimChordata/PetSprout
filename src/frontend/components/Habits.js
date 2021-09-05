@@ -9,12 +9,16 @@ import ScrollViewElement from './ScrollViewElement';
 import { AuthContext } from '../context';
 import ColorSet from '../resources/global/themes';
 
+import {useTheme} from '@react-navigation/native';
+
 function Habits(props) {
 	const [streak, setStreak] = useState(props.streak);
 	const [frequency, setFrequency] = useState(props.frequency);
   
 	const [completed, setCompleted] = useState(false);
 	const { getToken } = useContext(AuthContext);
+
+	const {colors} = useTheme();
 
 	const completeHabit = () => {
 		setFrequency(frequency - 1);
@@ -52,13 +56,13 @@ function Habits(props) {
 					rightFunction={completeHabit}
 					text={props.name}
 					content={
-						<View style={styles.horizontalContainer}>
-							<View style={styles.leftContainer}>
-								<Text style={styles.textTitle}>{Capitalize(props.name)}</Text>
+						<View style={styles(colors).horizontalContainer}>
+							<View style={styles(colors).leftContainer}>
+								<Text style={styles(colors).textTitle}>{Capitalize(props.name)}</Text>
 							</View>
-							<View style={styles.container}>
+							<View style={styles(colors).container}>
 								<Ellipsis />
-								<View style={styles.horizontalContainerBottom}>
+								<View style={styles(colors).horizontalContainerBottom}>
 									<Counter
 										quantity={streak}
 										supplementalInfo={
@@ -68,7 +72,7 @@ function Habits(props) {
 												style={{
 													height: 20,
 													width: 20,
-													tintColor: ColorSet.Green.Quaternary,
+													tintColor: colors.Quaternary,
 													marginTop: 'auto',
 												}}
 											/>
@@ -76,7 +80,7 @@ function Habits(props) {
 									/>
 									<Counter
 										quantity={frequency}
-										supplementalInfo={<Text style={styles.expText}>x</Text>}
+										supplementalInfo={<Text style={styles(colors).expText}>x</Text>}
 										last={true}
 									/>
 								</View>

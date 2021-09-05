@@ -2,8 +2,11 @@ import { Text, TextInput, View} from "react-native";
 import React, {useState} from "react";
 import styles from "../styling/Authentication";
 
+import {useTheme} from '@react-navigation/native';
+
 function TextBox(props) {
-    const {containerStyle, boxStyle = styles.AuthenticationInput, TextStyle= styles.AuthenticationText, multiline = false } = props
+    const {colors} = useTheme();
+    const {containerStyle, boxStyle = styles(colors).AuthenticationInput, TextStyle= styles(colors).AuthenticationText, multiline = false } = props
     const [text, setText] = useState('');
 
     return (
