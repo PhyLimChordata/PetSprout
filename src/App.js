@@ -24,7 +24,6 @@ import VerifyEmailPasswordScreen from './frontend/screens/VerifyEmailPasswordScr
 
 import { AuthContext } from './frontend/context';
 
-import ColorSet from './frontend/resources/global/themes';
 import greenLightTheme from './frontend/resources/themes/light/greenTheme';
 import orangeLightTheme from './frontend/resources/themes/light/orangeTheme';
 import blueLightTheme from './frontend/resources/themes/light/blueTheme';

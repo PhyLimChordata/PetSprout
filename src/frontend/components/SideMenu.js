@@ -8,6 +8,8 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 
 import ColorSet from "../resources/global/themes";
 
+import {useTheme} from '@react-navigation/native';
+
 async function setLocalInfoTheme(color) {
     try {
         return await AsyncStorage.setItem('@ColorTheme:key', JSON.stringify(color));
@@ -42,13 +44,16 @@ function InitializeColor(colorTheme, setColor) {
         setColor("green")
     }
 }
-const ThemeCircle = ({colorTheme, onPress, selected}) => (
-    <View>
+
+function ThemeCircle ({colorTheme, onPress, selected}) {
+    const { getColor } = useContext(AuthContext);
+    return (<View>
         <TouchableOpacity style={{alignItems:"center", justifyContent:'center', flexDirection:'row', height:44,width:44,borderRadius:22,backgroundColor:selected ? colorTheme.Quinary:colorTheme.Tertiary}} onPress={onPress}>
             {selected ? <View style={{alignItems:"center", flexDirection:'row', height:30,width:30,borderRadius:15,backgroundColor: colorTheme.Tertiary}}/>:<></>}
         </TouchableOpacity>
-    </View>
-)
+    </View>);
+}
+
 const Tab = ({color, icon, onPress, title, isImage = false}) => (
         <TouchableOpacity style={{alignItems:"center", flexDirection:'row',width:"100%"}} onPress={onPress}>
             {isImage ?
@@ -70,55 +75,59 @@ const Tab = ({color, icon, onPress, title, isImage = false}) => (
 
 
 function SideMenu(props) {
-    const [color, setColor] = useState("green");
+    const { signOut, changeColorTheme, getColor } = useContext(AuthContext);
+
+    const {colors} = useTheme();
+    const [color, setColor] = useState(getColor);
     const [toggleValue, setToggleValue] = useState(false);
 
-    const { signOut, changeColorTheme } = useContext(AuthContext);
     
-    const [colorTheme, setColorTheme] = useState(ColorSet.Green);
+    const [colorTheme, setColorTheme] = useState(colors);
     
-    useEffect( () => {
-        UpdateTheme(setColorTheme).then(r => InitializeColor(r, setColor));
+    // useEffect( () => {
+    //     UpdateTheme(setColorTheme).then(r => InitializeColor(r, setColor));
 
-    }, []);
+    // }, []);
+
     function colorChange(color) {
         changeColorTheme(color);
+        setColor(color);
 
-        if (color == "yellow") {
-            setLocalInfoTheme(ColorSet.Yellow).then(r => {
-                console.log(r)
-            })
-        } else if (color == "blue") {
-            setLocalInfoTheme(ColorSet.Blue).then(r => {
-                console.log(r)
-            })
-        } else if (color == "purple") {
-            setLocalInfoTheme(ColorSet.Purple).then(r => {
-                console.log(r)
-            })
-        } else if (color == "red") {
+        // if (color == "yellow") {
+        //     setLocalInfoTheme(ColorSet.Yellow).then(r => {
+        //         console.log(r)
+        //     })
+        // } else if (color == "blue") {
+        //     setLocalInfoTheme(ColorSet.Blue).then(r => {
+        //         console.log(r)
+        //     })
+        // } else if (color == "purple") {
+        //     setLocalInfoTheme(ColorSet.Purple).then(r => {
+        //         console.log(r)
+        //     })
+        // } else if (color == "red") {
            
 
-            setLocalInfoTheme(ColorSet.Red).then(r => {
-                console.log(r)
-            })
-        } else if (color == "green") {
+        //     setLocalInfoTheme(ColorSet.Red).then(r => {
+        //         console.log(r)
+        //     })
+        // } else if (color == "green") {
             
 
-            setLocalInfoTheme(ColorSet.Green).then(r => {
-                console.log(r)
-            })
-        } else {
+        //     setLocalInfoTheme(ColorSet.Green).then(r => {
+        //         console.log(r)
+        //     })
+        // } else {
 
-            setLocalInfoTheme(ColorSet.Green).then(r => {
-                console.log(r)
-            })
-            UpdateTheme(setColorTheme)
-            setColor("green")
-            return;
-        }
-        setColor(color)
-        UpdateTheme(setColorTheme)
+        //     setLocalInfoTheme(ColorSet.Green).then(r => {
+        //         console.log(r)
+        //     })
+        //     UpdateTheme(setColorTheme)
+        //     setColor("green")
+        //     return;
+        // }
+        // setColor(color)
+        // UpdateTheme(setColorTheme)
     }
 
     return (
@@ -140,7 +149,7 @@ function SideMenu(props) {
                 width: "80%",
                 paddingTop: "10%",
                 paddingLeft: "5%",
-                backgroundColor: ColorSet.BackgroundGrey,
+                backgroundColor: colors.BackgroundGrey,
             }}>
                 <SafeAreaView>
                     <View style={{marginHorizontal: "6%", height: "100%"}}>
@@ -154,7 +163,7 @@ function SideMenu(props) {
                                 <TouchableOpacity style={{justifyContent: "center"}}
                                                   onPress={() => console.log('dsauda')}>
                                     <View style={{
-                                        backgroundColor: colorTheme.Tertiary,
+                                        backgroundColor: colors.Tertiary,
                                         width: 50,
                                         height: 50,
                                         borderRadius: 25
@@ -165,9 +174,10 @@ function SideMenu(props) {
                                 <Text numberOfLines={1} style={{
                                     fontSize: 20,
                                     fontWeight: "bold",
-                                    color: colorTheme.Tertiary,
+                                    color: colors.Tertiary,
                                     textAlign: 'center',
                                 }}>PhyLimChordata</Text>
+                                {/* TODO: Needs to not be hard coded */}
                                 </View>
                             </View>
                             <TouchableOpacity style={{height: 40, justifyContent: 'center'}}
@@ -182,20 +192,20 @@ function SideMenu(props) {
                         <TouchableOpacity style={{marginHorizontal: "6%", marginBottom: "6%"}}>
                             <Text style={{
                                 fontSize: 18,
-                                color: colorTheme.Tertiary,
+                                color: colors.Tertiary,
                                 textAlign: 'center',
                             }}>"What you choose to struggle in is what you’ll ultimately become.”</Text>
-                            <Text style={{fontSize: 18, color: colorTheme.Tertiary, textAlign: 'right',}}> -
+                            <Text style={{fontSize: 18, color: colors.Tertiary, textAlign: 'right',}}> -
                                 Mark Manson </Text>
                         </TouchableOpacity>
                         <View style={{marginLeft: "6%", height: "50%", justifyContent: 'space-between', marginBottom: "12%"}}>
-                            <Tab color={colorTheme.Tertiary} icon={'star'} title={'Achievements'}/>
-                            <Tab color={colorTheme.Tertiary} icon={'account-circle'} title={'Account'}/>
-                            <Tab color={colorTheme.Tertiary} icon={'bullhorn'} title={'Feedback'}/>
-                            <Tab color={colorTheme.Tertiary} icon={'bug'} title={'Report a Bug'}/>
-                            <Tab color={colorTheme.Tertiary} icon={'account-group'} title={'Collaborators'}/>
-                            <Tab color={colorTheme.Tertiary} icon={'hand-heart'} title={'Support Us!'}/>
-                            <Tab color={colorTheme.Tertiary} icon={require("../resources/images/icon.png")} title={'About'} isImage={true}/>
+                            <Tab color={colors.Tertiary} icon={'star'} title={'Achievements'}/>
+                            <Tab color={colors.Tertiary} icon={'account-circle'} title={'Account'}/>
+                            <Tab color={colors.Tertiary} icon={'bullhorn'} title={'Feedback'}/>
+                            <Tab color={colors.Tertiary} icon={'bug'} title={'Report a Bug'}/>
+                            <Tab color={colors.Tertiary} icon={'account-group'} title={'Collaborators'}/>
+                            <Tab color={colors.Tertiary} icon={'hand-heart'} title={'Support Us!'}/>
+                            <Tab color={colors.Tertiary} icon={require("../resources/images/icon.png")} title={'About'} isImage={true}/>
                         </View>
                         <View style={{
                             flexDirection: 'row',
@@ -240,7 +250,7 @@ function SideMenu(props) {
                             /> */}
                         </View>
                         <View style={{justifyContent: 'flex-end', flex: 1, marginHorizontal: "6%"}}>
-                            <Tab color={colorTheme.Tertiary} icon={"logout"} title={'Log Out'} onPress={() => {
+                            <Tab color={colors.Tertiary} icon={"logout"} title={'Log Out'} onPress={() => {
                                 props.setModalVisible(false)
                                 signOut()
                             }}/>
