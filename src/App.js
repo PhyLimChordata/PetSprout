@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { NavigationContainer} from '@react-navigation/native';
+import { NavigationContainer } from '@react-navigation/native';
 import { Image, View, TouchableOpacity } from 'react-native';
 
 import { createStackNavigator } from '@react-navigation/stack';
@@ -35,15 +35,15 @@ import blueDarkTheme from './frontend/resources/themes/dark/blueTheme';
 import purpleDarkTheme from './frontend/resources/themes/dark/purpleTheme';
 import redDarkTheme from './frontend/resources/themes/dark/redTheme';
 
-import SettingsPage from "./frontend/screens/SettingsPage";
+import SettingsPage from './frontend/screens/SettingsPage';
 
-import {useTheme} from '@react-navigation/native';
+import { useTheme } from '@react-navigation/native';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 
 export default function App() {
-	const [token, setToken] = useState(null);
+	const [token, setToken] = useState('a');
 	const [color, setColor] = useState('green');
 	const [mode, setMode] = useState('light');
 	const authContext = useMemo(() => {
@@ -62,12 +62,11 @@ export default function App() {
 			},
 			getToken: token,
 			getColor: color,
-			getMode: mode
+			getMode: mode,
 		};
 	}, [token, setToken, color, setColor, mode, setMode]);
 
 	return (
-		
 		<AuthContext.Provider value={authContext}>
 			{mode == 'light' ? (color == 'green' ? <NavContainer token={token} theme={greenLightTheme}/> : color == 'orange' ? <NavContainer token={token} theme={orangeLightTheme}/> :  color == 'blue' ? <NavContainer token={token} theme={blueLightTheme}/> :  color == 'purple' ? <NavContainer token={token} theme={purpleLightTheme}/> : color == 'red' ? <NavContainer token={token} theme={redLightTheme}/> : <NavContainer token={token} theme={greenLightTheme}/>) 
 			: mode == 'dark' ?  (color == 'green' ? <NavContainer token={token} theme={greenDarkTheme}/> : color == 'orange' ? <NavContainer token={token} theme={orangeDarkTheme}/> :  color == 'blue' ? <NavContainer token={token} theme={blueDarkTheme}/> :  color == 'purple' ? <NavContainer token={token} theme={purpleDarkTheme}/> : color == 'red' ? <NavContainer token={token} theme={redDarkTheme}/> : <NavContainer token={token} theme={greenDarkTheme}/>) 
@@ -77,57 +76,57 @@ export default function App() {
 }
 
 function NavContainer(props) {
-	return (<NavigationContainer theme={props.theme}>
-		{props.token ? (
-			
-			<Stack.Navigator headerMode="none">
-				<Stack.Screen name="HomeScreen" component={HomeScreen} />
-				<Stack.Screen name="SettingsScreen" component={SettingsPage} />
-				<Stack.Screen name="CreateHabitScreen" component={CreateHabitScreen} />
-			</Stack.Navigator>
-			
-		) : (
-			
-			<Stack.Navigator headerMode="none">
-				<Stack.Screen
-					name="LoginScreen"
-					component={LoginScreen}
-					options={{ title: 'Login' }}
-				/>
-				<Stack.Screen
-					name="SignupScreen"
-					component={SignupScreen}
-					options={{ title: 'Sign up' }}
-				/>
-				<Stack.Screen
-					name="VerifyEmailSignUpScreen"
-					component={VerifyEmailSignUpScreen}
-					options={{ title: 'Verify Email Sign Up' }}
-				/>
-				<Stack.Screen
-					name="PasswordScreen"
-					component={PasswordScreen}
-					options={{ title: 'Forgot Password' }}
-				/>
-				<Stack.Screen
-					name="NewPasswordScreen"
-					component={NewPasswordScreen}
-					options={{ title: 'New Password' }}
-				/>
+	return (
+		<NavigationContainer theme={props.theme}>
+			{props.token ? (
+				<Stack.Navigator headerMode="none">
+					<Stack.Screen name="HomeScreen" component={HomeScreen} />
+					<Stack.Screen name="SettingsScreen" component={SettingsPage} />
 					<Stack.Screen
-					name="VerifyEmailPasswordScreen"
-					component={VerifyEmailPasswordScreen}
-					options={{ title: 'Verify Email Password' }}
-				/>
-			</Stack.Navigator>
-			
-		)}
-		
-	</NavigationContainer>);
+						name="CreateHabitScreen"
+						component={CreateHabitScreen}
+					/>
+				</Stack.Navigator>
+			) : (
+				<Stack.Navigator headerMode="none">
+					<Stack.Screen
+						name="LoginScreen"
+						component={LoginScreen}
+						options={{ title: 'Login' }}
+					/>
+					<Stack.Screen
+						name="SignupScreen"
+						component={SignupScreen}
+						options={{ title: 'Sign up' }}
+					/>
+					<Stack.Screen
+						name="VerifyEmailSignUpScreen"
+						component={VerifyEmailSignUpScreen}
+						options={{ title: 'Verify Email Sign Up' }}
+					/>
+					<Stack.Screen
+						name="PasswordScreen"
+						component={PasswordScreen}
+						options={{ title: 'Forgot Password' }}
+					/>
+					<Stack.Screen
+						name="NewPasswordScreen"
+						component={NewPasswordScreen}
+						options={{ title: 'New Password' }}
+					/>
+					<Stack.Screen
+						name="VerifyEmailPasswordScreen"
+						component={VerifyEmailPasswordScreen}
+						options={{ title: 'Verify Email Password' }}
+					/>
+				</Stack.Navigator>
+			)}
+		</NavigationContainer>
+	);
 }
 
 function HomeScreen(props) {
-	const {colors} = useTheme();
+	const { colors } = useTheme();
 	const [modalVisible, setModalVisible] = useState(false);
 	return (
 		<>
@@ -241,30 +240,30 @@ function Reflect(props) {
 	return <ComingSoon title="Reflect"></ComingSoon>;
 }
 
-function CustomTabBarButton({ children, onPress}) {
-	const {colors} = useTheme();
+function CustomTabBarButton({ children, onPress }) {
+	const { colors } = useTheme();
 	return (
 		<TouchableOpacity
-		activeOpacity={1}
-		style={{
-			top: -30,
-			width: 70,
-			height: 70,
-			justifyContent: 'center',
-			alignItems: 'center',
-		}}
-		onPress={onPress}
-	>
-		<View
+			activeOpacity={1}
 			style={{
-				backgroundColor: colors.Quaternary,
+				top: -30,
 				width: 70,
 				height: 70,
-				borderRadius: 35,
+				justifyContent: 'center',
+				alignItems: 'center',
 			}}
+			onPress={onPress}
 		>
-			{children}
-		</View>
-	</TouchableOpacity>
+			<View
+				style={{
+					backgroundColor: colors.Quaternary,
+					width: 70,
+					height: 70,
+					borderRadius: 35,
+				}}
+			>
+				{children}
+			</View>
+		</TouchableOpacity>
 	);
 }

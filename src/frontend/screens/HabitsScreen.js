@@ -3,19 +3,11 @@ import { View, Image, Animated, SafeAreaView } from 'react-native';
 
 import styles from '../styling/HabitsScreen';
 import Habits from '../components/Habits';
-import Menu from '../components/Menu';
 import MenuHeader from '../components/MenuHeader';
 
 import ExperienceBar from '../components/ExperienceBar';
-import Checkmark from '../components/Checkmark';
-import Trash from '../components/Trash';
-import ScrollViewElement from '../components/ScrollViewElement';
 
-import Swipeable from 'react-native-gesture-handler/Swipeable';
-import ColorSet from '../resources/global/themes';
-
-import {useTheme} from '@react-navigation/native';
-
+import { useTheme } from '@react-navigation/native';
 
 import { AuthContext } from '../context';
 
@@ -25,8 +17,8 @@ function HabitsScreen(props) {
 	const [userHabitId, setUserHabitId] = useState('');
 	const [experience, setExperience] = useState('');
 
-	const {colors} = useTheme();
-  
+	const { colors } = useTheme();
+
 	const [level, setLevel] = useState('');
 	const [displayed, setDisplayed] = useState(false);
 	const scrolling = React.useRef(new Animated.Value(0)).current;
@@ -70,7 +62,7 @@ function HabitsScreen(props) {
 
 	return (
 		<SafeAreaView style={styles(colors).headContainer}>
-			<MenuHeader text="" navigation={props.navigation} hp={hearts}/>
+			<MenuHeader text="" navigation={props.navigation} hp={hearts} />
 			<View style={styles(colors).verticalContainer}>
 				<Image
 					style={styles(colors).creature}
@@ -81,7 +73,6 @@ function HabitsScreen(props) {
 					exp={experience}
 					width={experience + '%'}
 				/>
-
 			</View>
 			<View style={styles(colors).scrollViewContainer}>
 				<Animated.ScrollView
@@ -104,7 +95,6 @@ function HabitsScreen(props) {
 								outputRange: [1, 1, 1, 0],
 							});
 
-
 							return (
 								<View>
 									<Animated.View style={{ opacity, transform: [{ scale }] }}>
@@ -121,7 +111,6 @@ function HabitsScreen(props) {
 								</View>
 							);
 						}
-
 					})}
 				</Animated.ScrollView>
 			</View>
