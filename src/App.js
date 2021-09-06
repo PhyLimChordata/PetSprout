@@ -18,7 +18,7 @@ import HabitsScreen from './frontend/screens/HabitsScreen';
 import ComingSoon from './frontend/screens/ComingSoon';
 import Collaborators from './frontend/screens/Collaborators';
 
-import CreateHabitScreen from './frontend/screens/CreateHabitScreen';
+import CreateHabitScreen from './frontend/screens/PutHabits/CreateHabitScreen';
 import LoginScreen from './frontend/screens/LoginScreen';
 import SignupScreen from './frontend/screens/SignupScreen';
 import VerifyEmailSignUpScreen from './frontend/screens/VerifyEmailSignUpScreen';
