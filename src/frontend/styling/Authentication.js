@@ -77,7 +77,7 @@ const styles = (theme) => StyleSheet.create({
 	AuthenticationButtonText: {
 		fontSize: 20,
 		fontWeight: 'bold',
-		color: theme.white,
+		color: theme.background,
 	},
 	SignupText: {
 		color: theme.Quaternary,

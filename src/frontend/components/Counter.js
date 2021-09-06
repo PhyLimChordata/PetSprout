@@ -18,14 +18,14 @@ function Counter(props) {
 					backgroundColor: colors.Secondary,
 				}}
 			>
-				<Text style={styles.levelText}>{props.quantity}</Text>
+				<Text style={styles(colors).levelText}>{props.quantity}</Text>
 				{props.supplementalInfo}
 			</View>
 		);
 	}
 	return (
-		<View style={styles.horizontalContainerPaddingRight}>
-			<Text style={styles.levelText}>{props.quantity}</Text>
+		<View style={styles(colors).horizontalContainerPaddingRight}>
+			<Text style={styles(colors).levelText}>{props.quantity}</Text>
 			{props.supplementalInfo}
 		</View>
 	);
