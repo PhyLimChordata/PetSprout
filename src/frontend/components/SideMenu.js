@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useContext } from 'react';
-import Toggle from 'react-native-toggle-element';
+import React, { useState, useContext } from 'react';
+// import Toggle from 'react-native-toggle-element';
 import { AuthContext } from '../context';
 
 import {
@@ -255,7 +255,11 @@ function SideMenu(props) {
 									// props.navigation.navigate('SettingsScreen');
 								}}
 							>
-								<MaterialCommunityIcons name="cog" color={'white'} size={40} />
+								<MaterialCommunityIcons
+									name="cog"
+									color={colors.Quaternary}
+									size={40}
+								/>
 							</TouchableOpacity>
 						</View>
 						<TouchableOpacity
@@ -362,7 +366,7 @@ function SideMenu(props) {
 							/>
 						</View>
 						<View style={{ alignItems: 'center' }}>
-							<Toggle
+							{/* <Toggle
 								value={toggleValue}
 								onPress={(newState) => {
 									newState ? changeModeTheme('dark') : changeModeTheme('light');
@@ -393,7 +397,7 @@ function SideMenu(props) {
 										size={30}
 									/>
 								}
-							/>
+							/> */}
 						</View>
 						<View
 							style={{
