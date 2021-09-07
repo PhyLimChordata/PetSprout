@@ -43,7 +43,7 @@ const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 
 export default function App() {
-	const [token, setToken] = useState('a');
+	const [token, setToken] = useState(null);
 	const [color, setColor] = useState('green');
 	const [mode, setMode] = useState('light');
 	const authContext = useMemo(() => {
