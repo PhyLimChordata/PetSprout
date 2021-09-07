@@ -1,55 +1,19 @@
 import React, { useState, useContext } from 'react';
 // import Toggle from 'react-native-toggle-element';
-import { AuthContext } from '../context';
-
+import { AuthContext } from '../Context';
 import {
 	View,
 	Text,
 	TouchableOpacity,
 	SafeAreaView,
 	Image,
-	AsyncStorage,
 } from 'react-native';
 import Modal from 'react-native-modal';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
-import ColorSet from '../resources/global/themes';
+import ColorSet from '../resources/themes/colours';
 
 import { useTheme } from '@react-navigation/native';
-
-async function setLocalInfoTheme(color) {
-	try {
-		return await AsyncStorage.setItem('@ColorTheme:key', JSON.stringify(color));
-	} catch (error) {
-		console.log(error);
-		// Error saving data
-	}
-}
-async function UpdateTheme(setColorTheme) {
-	try {
-		let colorTheme = JSON.parse(await AsyncStorage.getItem('@ColorTheme:key'));
-		if (colorTheme != null) setColorTheme(colorTheme);
-		return colorTheme;
-	} catch (error) {
-		console.log(error);
-		// Error saving data
-	}
-}
-
-function InitializeColor(colorTheme, setColor) {
-	const a = JSON.stringify(colorTheme);
-	if (a == JSON.stringify(ColorSet.Yellow)) {
-		setColor('yellow');
-	} else if (a == JSON.stringify(ColorSet.Blue)) {
-		setColor('blue');
-	} else if (a == JSON.stringify(ColorSet.Purple)) {
-		setColor('purple');
-	} else if (a == JSON.stringify(ColorSet.Red)) {
-		setColor('red');
-	} else if (a == JSON.stringify(ColorSet.Green)) {
-		setColor('green');
-	}
-}
 
 function ThemeCircle({ colorTheme, onPress, selected }) {
 	const { getColor } = useContext(AuthContext);
@@ -65,8 +29,7 @@ function ThemeCircle({ colorTheme, onPress, selected }) {
 					borderRadius: 22,
 					backgroundColor: selected ? colorTheme.Quinary : colorTheme.Tertiary,
 				}}
-				onPress={onPress}
-			>
+				onPress={onPress}>
 				{selected ? (
 					<View
 						style={{
@@ -89,12 +52,11 @@ function ThemeCircle({ colorTheme, onPress, selected }) {
 const Tab = ({ color, icon, onPress, title, isImage = false }) => (
 	<TouchableOpacity
 		style={{ alignItems: 'center', flexDirection: 'row', width: '100%' }}
-		onPress={onPress}
-	>
+		onPress={onPress}>
 		{isImage ? (
 			<Image
 				source={icon}
-				resizeMode="contain"
+				resizeMode='contain'
 				style={{
 					width: 40,
 					height: 40,
@@ -111,8 +73,7 @@ const Tab = ({ color, icon, onPress, title, isImage = false }) => (
 				color: color,
 				fontSize: 20,
 				fontWeight: 'bold',
-			}}
-		>
+			}}>
 			{' '}
 			{title}{' '}
 		</Text>
@@ -133,53 +94,14 @@ function SideMenu(props) {
 
 	const [colorTheme, setColorTheme] = useState(colors);
 
-	// useEffect( () => {
-	//     UpdateTheme(setColorTheme).then(r => InitializeColor(r, setColor));
-
-	// }, []);
-
 	function colorChange(color) {
 		changeColorTheme(color);
 		setColor(color);
-
-		// if (color == "yellow") {
-		//     setLocalInfoTheme(ColorSet.Yellow).then(r => {
-		//         console.log(r)
-		//     })
-		// } else if (color == "blue") {
-		//     setLocalInfoTheme(ColorSet.Blue).then(r => {
-		//         console.log(r)
-		//     })
-		// } else if (color == "purple") {
-		//     setLocalInfoTheme(ColorSet.Purple).then(r => {
-		//         console.log(r)
-		//     })
-		// } else if (color == "red") {
-
-		//     setLocalInfoTheme(ColorSet.Red).then(r => {
-		//         console.log(r)
-		//     })
-		// } else if (color == "green") {
-
-		//     setLocalInfoTheme(ColorSet.Green).then(r => {
-		//         console.log(r)
-		//     })
-		// } else {
-
-		//     setLocalInfoTheme(ColorSet.Green).then(r => {
-		//         console.log(r)
-		//     })
-		//     UpdateTheme(setColorTheme)
-		//     setColor("green")
-		//     return;
-		// }
-		// setColor(color)
-		// UpdateTheme(setColorTheme)
 	}
 
 	return (
 		<Modal
-			swipeDirection="left"
+			swipeDirection='left'
 			onSwipeComplete={(e) => {
 				props.setModalVisible(false);
 			}}
@@ -188,9 +110,8 @@ function SideMenu(props) {
 			onBackdropPress={() => props.setModalVisible(false)}
 			style={{ margin: 0 }}
 			isVisible={props.modalVisible}
-			animationIn="slideInLeft"
-			animationOut="slideOutLeft"
-		>
+			animationIn='slideInLeft'
+			animationOut='slideOutLeft'>
 			<View
 				style={{
 					height: '100%',
@@ -198,8 +119,7 @@ function SideMenu(props) {
 					paddingTop: '10%',
 					paddingLeft: '5%',
 					backgroundColor: colors.background,
-				}}
-			>
+				}}>
 				<SafeAreaView>
 					<View style={{ marginHorizontal: '6%', height: '100%' }}>
 						<View
@@ -208,31 +128,26 @@ function SideMenu(props) {
 								justifyContent: 'space-between',
 								alignItems: 'center',
 								marginBottom: '6%',
-							}}
-						>
+							}}>
 							<View
-								style={{ flexDirection: 'row', alignItems: 'center', flex: 1 }}
-							>
+								style={{ flexDirection: 'row', alignItems: 'center', flex: 1 }}>
 								<TouchableOpacity
 									style={{ justifyContent: 'center' }}
-									onPress={() => console.log('dsauda')}
-								>
+									onPress={() => console.log('dsauda')}>
 									<View
 										style={{
 											backgroundColor: colors.Quaternary,
 											width: 50,
 											height: 50,
 											borderRadius: 25,
-										}}
-									></View>
+										}}></View>
 								</TouchableOpacity>
 								<View
 									style={{
 										flexDirection: 'row',
 										flex: 1,
 										marginHorizontal: '4%',
-									}}
-								>
+									}}>
 									<Text
 										numberOfLines={1}
 										style={{
@@ -240,8 +155,7 @@ function SideMenu(props) {
 											fontWeight: 'bold',
 											color: colors.Quaternary,
 											textAlign: 'center',
-										}}
-									>
+										}}>
 										PhyLimChordata
 									</Text>
 									{/* TODO: Needs to not be hard coded */}
@@ -253,25 +167,22 @@ function SideMenu(props) {
 									props.setModalVisible(false);
 									// console.log(props);
 									// props.navigation.navigate('SettingsScreen');
-								}}
-							>
+								}}>
 								<MaterialCommunityIcons
-									name="cog"
+									name='cog'
 									color={colors.Quaternary}
 									size={40}
 								/>
 							</TouchableOpacity>
 						</View>
 						<TouchableOpacity
-							style={{ marginHorizontal: '6%', marginBottom: '6%' }}
-						>
+							style={{ marginHorizontal: '6%', marginBottom: '6%' }}>
 							<Text
 								style={{
 									fontSize: 18,
 									color: colors.Quaternary,
 									textAlign: 'center',
-								}}
-							>
+								}}>
 								"What you choose to struggle in is what you’ll ultimately
 								become.”
 							</Text>
@@ -280,8 +191,7 @@ function SideMenu(props) {
 									fontSize: 18,
 									color: colors.Quaternary,
 									textAlign: 'right',
-								}}
-							>
+								}}>
 								{' '}
 								- Mark Manson{' '}
 							</Text>
@@ -292,8 +202,7 @@ function SideMenu(props) {
 								height: '50%',
 								justifyContent: 'space-between',
 								marginBottom: '12%',
-							}}
-						>
+							}}>
 							<Tab
 								color={colors.Quaternary}
 								icon={'star'}
@@ -326,7 +235,7 @@ function SideMenu(props) {
 							/>
 							<Tab
 								color={colors.Quaternary}
-								icon={require('../resources/images/icon.png')}
+								icon={require('../resources/images/Icon.png')}
 								title={'About'}
 								isImage={true}
 							/>
@@ -337,8 +246,7 @@ function SideMenu(props) {
 								justifyContent: 'space-between',
 								marginHorizontal: '6%',
 								marginBottom: '6%',
-							}}
-						>
+							}}>
 							<ThemeCircle
 								colorTheme={ColorSet.Green}
 								selected={color == 'green'}
@@ -404,8 +312,7 @@ function SideMenu(props) {
 								justifyContent: 'flex-end',
 								flex: 1,
 								marginHorizontal: '6%',
-							}}
-						>
+							}}>
 							<Tab
 								color={colors.Quaternary}
 								icon={'logout'}

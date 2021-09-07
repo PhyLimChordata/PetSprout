@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const HabitSchema = new Schema(
+const habitSchema = new Schema(
 	{
 		user: {
 			type: mongoose.Schema.Types.ObjectId,
@@ -57,7 +57,7 @@ const HabitSchema = new Schema(
 	}
 );
 
-const habitSchema = mongoose.model('habit', HabitSchema);
+const habitSchema = mongoose.model('habit', habitSchema);
 module.exports = habitSchema;
 
 

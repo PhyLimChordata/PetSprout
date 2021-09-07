@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, Image, TouchableOpacity } from 'react-native';
 
 import styles from '../styling/Authentication';
-import {useTheme} from '@react-navigation/native';
+import { useTheme } from '@react-navigation/native';
 
 function SignupScreen(props) {
 	const [userName, setusername] = useState('');
@@ -15,7 +15,7 @@ function SignupScreen(props) {
 	const [passwordError, setPasswordError] = useState('');
 	const [reEnterPasswordError, setReEnterPasswordError] = useState('');
 
-	const {colors} = useTheme();
+	const { colors } = useTheme();
 
 	const [usernameInputStyle, setUsernameInputStyle] = useState({
 		backgroundColor: colors.Secondary,
@@ -172,7 +172,7 @@ function SignupScreen(props) {
 				}
 				if (res.status == 200) {
 					res.json().then((data) => {
-						props.navigation.push('VerifyEmailSignUpScreen', { email: email });
+						props.navigation.push('VerifyEmailSignUp', { email: email });
 					});
 				} else if (res.status == 401) {
 					console.log(res);
@@ -189,58 +189,56 @@ function SignupScreen(props) {
 	return (
 		<View style={styles(colors).container}>
 			<Image
-				style={styles(colors).AuthenticationLogo}
+				style={styles(colors).authenticationLogo}
 				source={require('../resources/images/Logo.png')}
 			/>
 			<View style={styles(colors).inputContainer}>
-				<Text style={styles(colors).AuthenticationText}>Username</Text>
+				<Text style={styles(colors).authenticationText}>Username</Text>
 				<TextInput
 					style={usernameInputStyle}
 					value={userName}
-					onChangeText={(text) => updatingUsernameInput(text)}
-				></TextInput>
+					onChangeText={(text) => updatingUsernameInput(text)}></TextInput>
 				<Text style={styles(colors).errorMessageRight}>{userNameError}</Text>
-				<Text style={styles(colors).AuthenticationText}>Email</Text>
+				<Text style={styles(colors).authenticationText}>Email</Text>
 				<TextInput
 					style={emailInputStyle}
 					value={email}
-					onChangeText={(text) => updatingEmailInput(text)}
-				></TextInput>
+					onChangeText={(text) => updatingEmailInput(text)}></TextInput>
 				<Text style={styles(colors).errorMessageRight}>{emailError}</Text>
 
-				<Text style={styles(colors).AuthenticationText}>Password</Text>
+				<Text style={styles(colors).authenticationText}>Password</Text>
 				<TextInput
 					style={passwordInputStyle}
 					secureTextEntry={true}
 					value={password}
-					onChangeText={(text) => updatingPasswordInput(text)}
-				></TextInput>
+					onChangeText={(text) => updatingPasswordInput(text)}></TextInput>
 				<Text style={styles(colors).errorMessageRight}>{passwordError}</Text>
 
-				<Text style={styles(colors).AuthenticationText}>Re-enter Password</Text>
+				<Text style={styles(colors).authenticationText}>Re-enter Password</Text>
 				<TextInput
 					style={reEnterPasswordInputStyle}
 					secureTextEntry={true}
 					value={reEnterPassword}
-					onChangeText={(text) => updatingReEnterPasswordInput(text)}
-				></TextInput>
-				<Text style={styles(colors).errorMessageRight}>{reEnterPasswordError}</Text>
+					onChangeText={(text) =>
+						updatingReEnterPasswordInput(text)
+					}></TextInput>
+				<Text style={styles(colors).errorMessageRight}>
+					{reEnterPasswordError}
+				</Text>
 			</View>
 			<View style={{ height: 10 }} />
 			<TouchableOpacity
 				activeOpacity={0.6}
-				style={styles(colors).AuthenticationButton}
-				onPress={() => attemptSignup()}
-			>
-				<Text style={styles(colors).AuthenticationButtonText}>Sign Up</Text>
+				style={styles(colors).authenticationButton}
+				onPress={() => attemptSignup()}>
+				<Text style={styles(colors).authenticationButtonText}>Sign Up</Text>
 			</TouchableOpacity>
 			<Text style={styles(colors).subText}>
 				Already have an account?
 				<TouchableOpacity
 					activeOpacity={0.6}
-					onPress={() => props.navigation.push('LoginScreen')}
-				>
-					<Text style={styles(colors).SignupText}> Log in</Text>
+					onPress={() => props.navigation.push('LoginScreen')}>
+					<Text style={styles(colors).signupText}> Log in</Text>
 				</TouchableOpacity>
 			</Text>
 		</View>

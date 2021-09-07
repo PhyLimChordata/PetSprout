@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const MailingValidationSchema = new Schema({
+const mailingValidationSchema = new Schema({
 	email: {
 		type: String,
 		required: true,
@@ -18,6 +18,6 @@ const MailingValidationSchema = new Schema({
 
 const mailingValidationSchema = mongoose.model(
 	'mailing validation',
-	MailingValidationSchema
+	mailingValidationSchema
 );
 module.exports = mailingValidationSchema;

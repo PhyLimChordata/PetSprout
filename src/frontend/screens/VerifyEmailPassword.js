@@ -4,9 +4,9 @@ import { View, Text, TextInput, Image, TouchableOpacity } from 'react-native';
 
 import styles from '../styling/Authentication';
 
-import {useTheme} from '@react-navigation/native';
+import { useTheme } from '@react-navigation/native';
 
-function VerifyEmailPasswordScreen(props) {
+function VerifyEmailPassword(props) {
 	console.log(props);
 
 	const resend = () => {
@@ -34,8 +34,8 @@ function VerifyEmailPasswordScreen(props) {
 	return (
 		<View style={styles(colors).container}>
 			<Image
-				style={styles(colors).AuthenticationLogo}
-				source={require('../resources/images/EmailLogo.png')}
+				style={styles(colors).authenticationLogo}
+				source={require('../resources/images/Email.png')}
 			/>
 			<View style={styles(colors).header}>
 				<Text style={styles(colors).textTitle}>Resetting your Password</Text>
@@ -47,20 +47,22 @@ function VerifyEmailPasswordScreen(props) {
 			</View>
 			<TouchableOpacity
 				activeOpacity={0.6}
-				style={styles(colors).AuthenticationButton}
-				onPress={() => resend()}
-			>
-				<Text style={styles(colors).AuthenticationButtonText}>Resend Email</Text>
+				style={styles(colors).authenticationButton}
+				onPress={() => resend()}>
+				<Text style={styles(colors).authenticationButtonText}>
+					Resend Email
+				</Text>
 			</TouchableOpacity>
 			<TouchableOpacity
 				activeOpacity={0.6}
-				style={styles(colors).AuthenticationSpecialButton}
-				onPress={() => props.navigation.push('LoginScreen')}
-			>
-				<Text style={styles(colors).AuthenticationButtonText}>Back to Login</Text>
+				style={styles(colors).authenticationSpecialButton}
+				onPress={() => props.navigation.push('LoginScreen')}>
+				<Text style={styles(colors).authenticationButtonText}>
+					Back to Login
+				</Text>
 			</TouchableOpacity>
 		</View>
 	);
 }
 
-export default VerifyEmailPasswordScreen;
+export default VerifyEmailPassword;

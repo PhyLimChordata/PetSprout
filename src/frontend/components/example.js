@@ -1,7 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
 
-import styles from '../styling/Tabs';
+import styles from '../styling/Example';
 
 import {useTheme} from '@react-navigation/native';
 

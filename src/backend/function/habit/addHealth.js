@@ -1,5 +1,6 @@
-const Habit = require('../../schemas/HabitSchema');
-const User = require('../../schemas/UserSchema');
+const Habit = require('../../schemas/habitSchema');
+const User = require('../../schemas/userSchema');
+
 const { validationResult } = require('express-validator');
 
 module.exports = async (req, res) => {
