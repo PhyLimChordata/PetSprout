@@ -4,7 +4,7 @@ let example = require('../schemas/example');
 router.route('/get').get((req, res) => {
 	example
 		.find()
-		.then((resultQuery) => res.json({ex: resultQuery}))
+		.then((resultQuery) => res.json({ ex: resultQuery }))
 		.catch((error) => res.status(400).json('Error: ' + error));
 });
 
@@ -16,8 +16,6 @@ router.route('/get/:id').get((req, res) => {
 });
 
 router.route('/add').post((req, res) => {
-	// const content = req.body.content;
-	// const extra = req.body.extra;
 	const { content, extra } = req.body;
 
 	const exampleToAdd = new example({ content, extra });

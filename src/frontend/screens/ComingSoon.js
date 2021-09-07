@@ -13,14 +13,14 @@ function ComingSoon(props) {
             <MenuHeader text={props.title} navigation={props.navigation} />
             <View style={styles(colors).container}>
                 <Image
-                    style={styles(colors).Logo}
+                    style={styles(colors).logo}
                     source={require('../resources/images/Logo.png')}
                 />
-                <Text style={styles(colors).ComingSoonText}>Coming Soon...</Text>
+                <Text style={styles(colors).comingSoonText}>Coming Soon...</Text>
             </View>
 			
             <Image
-				style={styles(colors).Creature}
+				style={styles(colors).creature}
 				source={require('../resources/images/ComingSoon.png')}
 			/>
 		</SafeAreaView>

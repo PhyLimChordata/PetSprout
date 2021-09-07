@@ -3,13 +3,13 @@ import React, { useState, useContext } from 'react';
 import { View, Text, TextInput, Image, TouchableHighlight } from 'react-native';
 
 import styles from '../styling/Authentication';
-import ColorSet from '../resources/global/themes';
+import ColorSet from '../resources/themes/colours';
 
 import {useTheme} from '@react-navigation/native';
 
-import { AuthContext } from '../context';
+import { AuthContext } from '../Context';
 
-function NewPasswordScreen(props) {
+function NewPassword(props) {
 	const [password, setPassword] = useState('');
 	const [reEnteredPassword, setReEnteredPassword] = useState('');
 	const {colors} = useTheme();
@@ -68,7 +68,7 @@ function NewPasswordScreen(props) {
 				} else {
 					if (res.status == 200) {
 						res.json().then((data) => {
-							props.navigation.push('VerifyEmailPasswordScreen', {
+							props.navigation.push('VerifyEmailPassword', {
 								password: password,
 								email: props.route.params.email,
 							});
@@ -97,7 +97,7 @@ function NewPasswordScreen(props) {
 	return (
 		<View style={styles(colors).container}>
 			<Image
-				style={styles(colors).AuthenticationLogo}
+				style={styles(colors).authenticationLogo}
 				source={require('../resources/images/Logo.png')}
 			/>
 			<View style={styles(colors).header}>
@@ -105,7 +105,7 @@ function NewPasswordScreen(props) {
 			</View>
 
 			<View style={styles(colors).inputContainer}>
-				<Text style={styles(colors).AuthenticationText}>Password</Text>
+				<Text style={styles(colors).authenticationText}>Password</Text>
 				<TextInput
 					style={inputStyle}
 					value={password}
@@ -114,7 +114,7 @@ function NewPasswordScreen(props) {
 					onChangeText={(text) => updatingPassword(text)}
 				></TextInput>
 				<View style={spaceAfterError} />
-				<Text style={styles(colors).AuthenticationText}>ReEnter Password</Text>
+				<Text style={styles(colors).authenticationText}>ReEnter Password</Text>
 				<TextInput
 					style={inputStyle}
 					value={reEnteredPassword}
@@ -126,19 +126,19 @@ function NewPasswordScreen(props) {
 			</View>
 			<View style={{ height: 10 }} />
 			<TouchableHighlight
-				style={styles(colors).AuthenticationButton}
+				style={styles(colors).authenticationButton}
 				onPress={() => attemptSetNewPassword()}
 			>
-				<Text style={styles(colors).AuthenticationButtonText}>Send Email</Text>
+				<Text style={styles(colors).authenticationButtonText}>Send Email</Text>
 			</TouchableHighlight>
 			<TouchableHighlight
-				style={styles(colors).AuthenticationSpecialButton}
+				style={styles(colors).authenticationSpecialButton}
 				onPress={() => props.navigation.push('LoginScreen')}
 			>
-				<Text style={styles(colors).AuthenticationButtonText}>Back to Login</Text>
+				<Text style={styles(colors).authenticationButtonText}>Back to Login</Text>
 			</TouchableHighlight>
 		</View>
 	);
 }
 
-export default NewPasswordScreen;
+export default NewPassword;

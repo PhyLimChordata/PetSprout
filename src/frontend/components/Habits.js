@@ -6,8 +6,8 @@ import Ellipsis from './Ellipsis';
 import Counter from './Counter';
 import ScrollViewElement from './ScrollViewElement';
 
-import { AuthContext } from '../context';
-import ColorSet from '../resources/global/themes';
+import { AuthContext } from '../Context';
+import ColorSet from '../resources/themes/colours';
 
 import {useTheme} from '@react-navigation/native';
 

@@ -1,7 +1,6 @@
 import { StyleSheet } from 'react-native';
-import ColorSet from '../resources/global/themes';
 
-const styles = (theme) => StyleSheet.create({
+const headerStyles = (theme) => StyleSheet.create({
 	headContainer: {
 		flex: 1,
 		backgroundColor: theme.white
@@ -28,4 +27,4 @@ const styles = (theme) => StyleSheet.create({
 	},
 });
 
-export default styles;
+export default headerStyles;

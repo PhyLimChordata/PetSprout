@@ -1,23 +1,15 @@
 import React, { useRef } from 'react';
-import { View, Animated } from 'react-native';
-
-import Checkmark from '../components/Checkmark';
-import Trash from '../components/Trash';
+import { View, Animated, TouchableOpacity, Image } from 'react-native';
 
 import Swipeable from 'react-native-gesture-handler/Swipeable';
-import ColorSet from '../resources/global/themes';
+import ColorSet from '../resources/themes/Colours';
 
-import {useTheme} from '@react-navigation/native';
+import { useTheme } from '@react-navigation/native';
 
-function Capitalize(str) {
-	if (str != null) {
-		return str.charAt(0).toUpperCase() + str.slice(1);
-	}
-	return '';
-}
+import styles from '../styling/Habits';
 
 function ScrollViewElement(props) {
-	const {colors} = useTheme();
+	const { colors } = useTheme();
 	const swipeableRef = useRef(props.swipe);
 	const leftSwipe = (progress, dragX) => {
 		const scale = dragX.interpolate({
@@ -41,8 +33,7 @@ function ScrollViewElement(props) {
 					justifyContent: 'center',
 					alignItems: 'flex-start',
 					padding: 20,
-				}}
-			>
+				}}>
 				<Animated.View style={{ transform: [{ scale }] }}>
 					<Trash onPress={left} />
 				</Animated.View>
@@ -72,8 +63,7 @@ function ScrollViewElement(props) {
 					justifyContent: 'center',
 					alignItems: 'flex-end',
 					padding: 20,
-				}}
-			>
+				}}>
 				<Animated.View style={{ transform: [{ scale }] }}>
 					<Checkmark onPress={right} />
 				</Animated.View>
@@ -111,13 +101,37 @@ function ScrollViewElement(props) {
 			<Swipeable
 				ref={swipeableRef}
 				renderRightActions={rightSwipe}
-				rightThreshold={80}
-			>
+				rightThreshold={80}>
 				{props.content}
 			</Swipeable>
 		);
 	}
 	return <View>{props.content}</View>;
+}
+
+function Checkmark(props) {
+	const { colors } = useTheme();
+	return (
+		<TouchableOpacity activeOpacity={0.6} onPress={props.onPress}>
+			<Image
+				style={styles(colors).swipeIcon}
+				source={require('../resources/images/Checkmark.png')}
+			/>
+		</TouchableOpacity>
+	);
+}
+
+function Trash(props) {
+	const { colors } = useTheme();
+	return (
+		<TouchableOpacity activeOpacity={0.6} onPress={props.onPress}>
+			<Image
+				style={styles(colors).swipeIcon}
+				resizeMode={'contain'}
+				source={require('../resources/images/Trash.png')}
+			/>
+		</TouchableOpacity>
+	);
 }
 
 export default ScrollViewElement;

@@ -6,7 +6,7 @@ import styles from '../styling/Authentication';
 
 import {useTheme} from '@react-navigation/native';
 
-function VerifyEmailSignUpScreen(props) {
+function VerifyEmailSignUp(props) {
 	const {colors} = useTheme();
 
 	const resend = () => {
@@ -32,8 +32,8 @@ function VerifyEmailSignUpScreen(props) {
 	return (
 		<View style={styles(colors).container}>
 			<Image
-				style={styles(colors).AuthenticationLogo}
-				source={require('../resources/images/EmailLogo.png')}
+				style={styles(colors).authenticationLogo}
+				source={require('../resources/images/Email.png')}
 			/>
 			<View style={styles(colors).header}>
 				<Text style={styles(colors).textTitle}>Verify your Email</Text>
@@ -45,20 +45,20 @@ function VerifyEmailSignUpScreen(props) {
 			</View>
 			<TouchableOpacity
 				activeOpacity={0.6}
-				style={styles(colors).AuthenticationButton}
+				style={styles(colors).authenticationButton}
 				onPress={() => resend()}
 			>
-				<Text style={styles(colors).AuthenticationButtonText}>Resend Email</Text>
+				<Text style={styles(colors).authenticationButtonText}>Resend Email</Text>
 			</TouchableOpacity>
 			<TouchableOpacity
 				activeOpacity={0.6}
-				style={styles(colors).AuthenticationSpecialButton}
+				style={styles(colors).authenticationSpecialButton}
 				onPress={() => props.navigation.push('LoginScreen')}
 			>
-				<Text style={styles(colors).AuthenticationButtonText}>Back to Login</Text>
+				<Text style={styles(colors).authenticationButtonText}>Back to Login</Text>
 			</TouchableOpacity>
 		</View>
 	);
 }
 
-export default VerifyEmailSignUpScreen;
+export default VerifyEmailSignUp;

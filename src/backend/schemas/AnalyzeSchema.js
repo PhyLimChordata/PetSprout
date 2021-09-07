@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const AnalyzeSchema = new Schema(
+const analyzeSchema = new Schema(
     {
       freq:[
         {
@@ -12,5 +12,5 @@ const AnalyzeSchema = new Schema(
     }
 )
 
-const analyzeSchema = mongoose.model('analyze', AnalyzeSchema);
+const analyzeSchema = mongoose.model('analyze', analyzeSchema);
 module.exports = analyzeSchema;

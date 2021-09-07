@@ -3,12 +3,11 @@ import React, { useState, useContext } from 'react';
 import { View, Text, TextInput, Image, TouchableOpacity } from 'react-native';
 
 import styles from '../styling/Authentication';
-// import ColorSet from '../resources/global/themes';
 
-import { AuthContext } from '../context';
+import { AuthContext } from '../Context';
 import {useTheme} from '@react-navigation/native';
 
-function LoginScreen(props) {
+function Login(props) {
 	const [primaryInfo, setPrimaryInfo] = useState('');
 	const [password, setPassword] = useState('');
 	const [error, setError] = useState('');
@@ -103,11 +102,11 @@ function LoginScreen(props) {
 	return (
 		<View style={styles(colors).container}>
 			<Image
-				style={styles(colors).AuthenticationLogo}
+				style={styles(colors).authenticationLogo}
 				source={require('../resources/images/Logo.png')}
 			/>
 			<View style={styles(colors).inputContainer}>
-				<Text style={styles(colors).AuthenticationText}>Email or Username</Text>
+				<Text style={styles(colors).authenticationText}>Email or Username</Text>
 				<TextInput
 					style={inputStyle}
 					value={primaryInfo}
@@ -116,7 +115,7 @@ function LoginScreen(props) {
 					autoCapitalize={"none"}
 				></TextInput>
 
-				<Text style={styles(colors).AuthenticationText}>Password</Text>
+				<Text style={styles(colors).authenticationText}>Password</Text>
 				<TextInput
 					style={inputStyle}
 					secureTextEntry={true}
@@ -137,10 +136,10 @@ function LoginScreen(props) {
 			</View>
 			<TouchableOpacity
 				activeOpacity={0.6}
-				style={styles(colors).AuthenticationButton}
+				style={styles(colors).authenticationButton}
 				onPress={() => attemptLogin()}
 			>
-				<Text style={styles(colors).AuthenticationButtonText}>Login</Text>
+				<Text style={styles(colors).authenticationButtonText}>Login</Text>
 			</TouchableOpacity>
 			<Text style={styles(colors).subText}>
 				New User?
@@ -148,11 +147,11 @@ function LoginScreen(props) {
 					activeOpacity={0.6}
 					onPress={() => props.navigation.push('SignupScreen')}
 				>
-					<Text style={styles(colors).SignupText}> Sign up</Text>
+					<Text style={styles(colors).signupText}> Sign up</Text>
 				</TouchableOpacity>
 			</Text>
 		</View>
 	);
 }
 
-export default LoginScreen;
+export default Login;

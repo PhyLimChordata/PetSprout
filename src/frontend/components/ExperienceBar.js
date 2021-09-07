@@ -1,16 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { View, Text } from 'react-native';
+import { useTheme } from '@react-navigation/native';
 
 import styles from '../styling/Habits';
-import ColorSet from '../resources/global/themes';
-
-import { useTheme } from '@react-navigation/native';
 
 function ExperienceBar(props) {
 	const { colors } = useTheme();
 
 	var experience = {
-		// This is for debugging purposes
+		// DEBUGGING PURPOSES
 		// width: 20,
 		width: props.width,
 		height: 15,

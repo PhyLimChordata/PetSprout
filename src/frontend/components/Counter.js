@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, Image } from 'react-native';
 
 import styles from '../styling/Habits';
-import ColorSet from '../resources/global/themes';
+import ColorSet from '../resources/themes/colours';
 
 import {useTheme} from '@react-navigation/native';
 

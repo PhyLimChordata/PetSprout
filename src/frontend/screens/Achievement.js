@@ -1,11 +1,14 @@
+// React
 import React from 'react';
 import {View, Text, Image } from 'react-native';
-import styles from '../styling/AchievementStyling'
-import { ProgressBar, Colors } from 'react-native-paper';
-import MenuHeader from '../components/MenuHeader'
-import {SafeAreaView} from 'react-native';
+import { ProgressBar, SafeAreaView } from 'react-native-paper';
 import {useTheme} from '@react-navigation/native';
-// data from database
+
+// Stylesheet
+import styles from '../styling/Achievement'
+
+// Components
+import MenuHeader from '../components/MenuHeader'
 
 let achievements = [
     {
@@ -61,7 +64,7 @@ let achievements = [
     },
 ]
 
-function AchievementPage() {
+function Achievement() {
     const {colors} = useTheme();
     return(
         <SafeAreaView>
@@ -106,4 +109,4 @@ const OneAchievement = (props) => {
     );
 }
 
-export default AchievementPage
+export default Achievement;

@@ -9,7 +9,7 @@ import ExperienceBar from '../components/ExperienceBar';
 
 import { useTheme } from '@react-navigation/native';
 
-import { AuthContext } from '../context';
+import { AuthContext } from '../Context';
 
 function HabitsScreen(props) {
 	const [habits, setHabits] = useState([]);
@@ -65,7 +65,7 @@ function HabitsScreen(props) {
 			<View style={styles(colors).verticalContainer}>
 				<Image
 					style={styles(colors).creature}
-					source={require('../resources/images/Egg.gif')}
+					source={require('../resources/animations/Egg.gif')}
 				/>
 				<ExperienceBar
 					level={level}

@@ -7,7 +7,7 @@ import {useTheme} from '@react-navigation/native';
 
 // setting data from database
 
-function SettingsPage() {
+function SettingsScreen() {
 
     const handleSettingChange = () => {
 
@@ -72,7 +72,7 @@ const TopBar = () => {
             <TouchableOpacity activeOpacity={0.6} onPress={() => menuClicked}>
 			<Image
                     style={{ flex: 1, width: 30, height: 25 }}
-                    source={require('../resources/images/back-button.png')}
+                    source={require('../resources/images/BackButton.png')}
                 />
             </TouchableOpacity>
             <Text style={headerStyles(colors).textNormal}>Settings</Text>
@@ -80,4 +80,4 @@ const TopBar = () => {
     )
 }
 
-export default SettingsPage
+export default SettingsScreen;
