@@ -16,7 +16,6 @@ function HabitsScreen(props) {
 	const [hearts, setHearts] = useState([]);
 	const [userHabitId, setUserHabitId] = useState('');
 	const [experience, setExperience] = useState('');
-
 	const { colors } = useTheme();
 
 	const [level, setLevel] = useState('');
@@ -53,7 +52,7 @@ function HabitsScreen(props) {
 						heartValue.push(i);
 					}
 					setHearts(heartValue);
-
+					setDisplayed(true);
 					console.log(data);
 				})
 			)
