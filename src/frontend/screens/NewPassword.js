@@ -1,12 +1,8 @@
 import React, { useState, useContext } from 'react';
-
 import { View, Text, TextInput, Image, TouchableHighlight } from 'react-native';
 
 import styles from '../styling/Authentication';
-import ColorSet from '../resources/themes/colours';
-
 import { useTheme } from '@react-navigation/native';
-
 import { AuthContext } from '../Context';
 
 function NewPassword(props) {
@@ -46,9 +42,28 @@ function NewPassword(props) {
 
 	const { resetPassword } = useContext(AuthContext);
 
+	function displayError() {
+		setSpaceAfterError({ height: 20 });
+		setInputStyle({
+			backgroundColor: colors.Secondary,
+			padding: 10,
+			borderWidth: 3,
+			borderColor: 'red',
+			borderStyle: 'solid',
+			fontSize: 15,
+			borderRadius: 5,
+			width: 300,
+		});
+	};
+
 	const attemptSetNewPassword = () => {
-		console.log(resetPassword);
-		console.log(password);
+		if (password == '' || reEnteredPassword == '') {
+			setError('Please enter all parameters');
+			displayError();
+		} else if (password != reEnteredPassword) {
+			setError('Passwords do not match');
+			displayError();
+		} else {
 		fetch('http://localhost:5000/api/v1.0.0/user/pending_password', {
 			method: 'POST',
 			headers: {
@@ -60,37 +75,20 @@ function NewPassword(props) {
 			}),
 		})
 			.then((res) => {
-				if (password == '' || reEnteredPassword == '') {
-					setError('Please enter all parameters');
-				} else if (password != reEnteredPassword) {
-					setError('Passwords do not match');
-				} else {
-					if (res.status == 200) {
-						res.json().then((data) => {
-							props.navigation.push('VerifyEmailPassword', {
-								password: password,
-								email: props.route.params.email,
-							});
+				if (res.status == 200) {
+					res.json().then((data) => {
+						props.navigation.push('VerifyEmailPassword', {
+							password: password,
+							email: props.route.params.email,
 						});
-					}
-				}
-
-				if (res.status != 200) {
-					setSpaceAfterError({ height: 20 });
-					setInputStyle({
-						backgroundColor: colors.Secondary,
-						padding: 10,
-						borderWidth: 3,
-						borderColor: 'red',
-						borderStyle: 'solid',
-						fontSize: 15,
-						borderRadius: 5,
-						width: 300,
 					});
+				}
+				else {
+					displayError();
 				}
 			})
 			.catch(console.log('oh no'));
-	};
+	}};
 
 	return (
 		<View style={styles(colors).container}>

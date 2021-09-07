@@ -14,7 +14,7 @@ import BottomMenu from './frontend/components/BottomMenu';
 import LoginScreen from './frontend/screens/Login';
 import SignupScreen from './frontend/screens/Signup';
 import VerifyEmailSignUpScreen from './frontend/screens/VerifyEmailSignUp';
-import PasswordScreen from './frontend/screens/PasswordScreen';
+import PasswordScreen from './frontend/screens/Password';
 import NewPasswordScreen from './frontend/screens/NewPassword';
 import VerifyEmailPasswordScreen from './frontend/screens/VerifyEmailPassword';
 
@@ -24,7 +24,7 @@ import AchievementScreen from './frontend/screens/Achievement';
 import CollaboratorsScreen from './frontend/screens/Collaborators';
 
 import HabitsScreen from './frontend/screens/HabitsScreen';
-import CreateHabitScreen from './frontend/screens/CreateHabitScreen';
+import CreateHabitScreen from './frontend/screens/CreateHabit';
 import ComingSoonScreen from './frontend/screens/ComingSoon';
 
 // Colour Themes

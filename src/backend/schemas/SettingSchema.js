@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const settingSchema = new Schema(
+const SettingSchema = new Schema(
 	{
 		user: {
 			type: mongoose.Schema.Types.ObjectId,
@@ -48,5 +48,5 @@ const settingSchema = new Schema(
 	}
 );
 
-const settingSchema = mongoose.model('setting', settingSchema);
+const settingSchema = mongoose.model('setting', SettingSchema);
 module.exports = settingSchema;
