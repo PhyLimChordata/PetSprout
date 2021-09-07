@@ -4,7 +4,7 @@ import { View, Text, TextInput, Image, TouchableOpacity } from 'react-native';
 
 import styles from '../styling/Authentication';
 
-import {useTheme} from '@react-navigation/native';
+import { useTheme } from '@react-navigation/native';
 
 function VerifyEmailPassword(props) {
 	console.log(props);
@@ -48,16 +48,18 @@ function VerifyEmailPassword(props) {
 			<TouchableOpacity
 				activeOpacity={0.6}
 				style={styles(colors).authenticationButton}
-				onPress={() => resend()}
-			>
-				<Text style={styles(colors).authenticationButtonText}>Resend Email</Text>
+				onPress={() => resend()}>
+				<Text style={styles(colors).authenticationButtonText}>
+					Resend Email
+				</Text>
 			</TouchableOpacity>
 			<TouchableOpacity
 				activeOpacity={0.6}
 				style={styles(colors).authenticationSpecialButton}
-				onPress={() => props.navigation.push('LoginScreen')}
-			>
-				<Text style={styles(colors).authenticationButtonText}>Back to Login</Text>
+				onPress={() => props.navigation.push('LoginScreen')}>
+				<Text style={styles(colors).authenticationButtonText}>
+					Back to Login
+				</Text>
 			</TouchableOpacity>
 		</View>
 	);

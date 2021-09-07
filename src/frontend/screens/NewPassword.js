@@ -5,14 +5,14 @@ import { View, Text, TextInput, Image, TouchableHighlight } from 'react-native';
 import styles from '../styling/Authentication';
 import ColorSet from '../resources/themes/colours';
 
-import {useTheme} from '@react-navigation/native';
+import { useTheme } from '@react-navigation/native';
 
 import { AuthContext } from '../Context';
 
 function NewPassword(props) {
 	const [password, setPassword] = useState('');
 	const [reEnteredPassword, setReEnteredPassword] = useState('');
-	const {colors} = useTheme();
+	const { colors } = useTheme();
 
 	const normalInputStyle = {
 		backgroundColor: colors.Secondary,
@@ -45,7 +45,6 @@ function NewPassword(props) {
 	};
 
 	const { resetPassword } = useContext(AuthContext);
-
 
 	const attemptSetNewPassword = () => {
 		console.log(resetPassword);
@@ -93,7 +92,6 @@ function NewPassword(props) {
 			.catch(console.log('oh no'));
 	};
 
-	
 	return (
 		<View style={styles(colors).container}>
 			<Image
@@ -110,32 +108,30 @@ function NewPassword(props) {
 					style={inputStyle}
 					value={password}
 					secureTextEntry={true}
-					placeholder="*********"
-					onChangeText={(text) => updatingPassword(text)}
-				></TextInput>
+					placeholder='*********'
+					onChangeText={(text) => updatingPassword(text)}></TextInput>
 				<View style={spaceAfterError} />
 				<Text style={styles(colors).authenticationText}>ReEnter Password</Text>
 				<TextInput
 					style={inputStyle}
 					value={reEnteredPassword}
 					secureTextEntry={true}
-					placeholder="*********"
-					onChangeText={(text) => updatingReEnteredPassword(text)}
-				></TextInput>
+					placeholder='*********'
+					onChangeText={(text) => updatingReEnteredPassword(text)}></TextInput>
 				<Text style={styles(colors).errorMessageRight}>{error}</Text>
 			</View>
 			<View style={{ height: 10 }} />
 			<TouchableHighlight
 				style={styles(colors).authenticationButton}
-				onPress={() => attemptSetNewPassword()}
-			>
+				onPress={() => attemptSetNewPassword()}>
 				<Text style={styles(colors).authenticationButtonText}>Send Email</Text>
 			</TouchableHighlight>
 			<TouchableHighlight
 				style={styles(colors).authenticationSpecialButton}
-				onPress={() => props.navigation.push('LoginScreen')}
-			>
-				<Text style={styles(colors).authenticationButtonText}>Back to Login</Text>
+				onPress={() => props.navigation.push('LoginScreen')}>
+				<Text style={styles(colors).authenticationButtonText}>
+					Back to Login
+				</Text>
 			</TouchableHighlight>
 		</View>
 	);

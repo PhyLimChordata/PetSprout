@@ -1,5 +1,4 @@
 import React, { useState, useContext } from 'react';
-import ColorSet from '../resources/themes/Colours';
 import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native';
 import MenuHeader from '../components/MenuHeader';
@@ -12,7 +11,7 @@ import ScrollViewElement from '../components/ScrollViewElement';
 import BottomPopup from '../components/BottomPopup';
 import { useTheme } from '@react-navigation/native';
 
-function Day(selected, letter, onPress) {
+function Day({ selected, letter, onPress }) {
 	const { colors } = useTheme();
 	return (
 		<TouchableOpacity
@@ -29,7 +28,12 @@ function Day(selected, letter, onPress) {
 				borderColor: colors.Quaternary,
 			}}
 			activeOpacity={0.6}>
-			<Text style={{ color: colors.Quinary, fontSize: 20, fontWeight: 'bold' }}>
+			<Text
+				style={{
+					color: colors.Quinary,
+					fontSize: 20,
+					fontWeight: 'bold',
+				}}>
 				{' '}
 				{letter}{' '}
 			</Text>
@@ -54,7 +58,6 @@ function CreateHabitScreen(props) {
 	const [description, setDescription] = useState('');
 	const [reason, setReason] = useState('');
 	const { getToken } = useContext(AuthContext);
-
 	const { colors } = useTheme();
 
 	const createHabit = () => {
@@ -184,7 +187,7 @@ function CreateHabitScreen(props) {
 							style={{
 								width: 200,
 								height: 50,
-								backgroundColor: ColorSet.Green.Tertiary,
+								backgroundColor: colors.Tertiary,
 								alignItems: 'center',
 								justifyContent: 'center',
 								borderRadius: 20,
@@ -194,7 +197,7 @@ function CreateHabitScreen(props) {
 								style={{
 									fontSize: 20,
 									fontWeight: 'bold',
-									color: ColorSet.Green.Quinary,
+									color: colors.Quinary,
 								}}>
 								Add An Alarm
 							</Text>

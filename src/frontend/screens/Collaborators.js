@@ -1,35 +1,35 @@
-import React, {useState} from 'react';
-import {View} from 'react-native';
+import React, { useState } from 'react';
+import { View } from 'react-native';
 import Header from '../components/MenuHeader';
 import CollaboratorContent from '../components/CollaboratorContent';
 
 function Collaborators(props) {
-    const [content, setContent] = useState('name');
-    const[extra, setExtra] = useState('extra');
-   
-    const inputExample = () => {
-        fetch("http://localhost:5000/collaborators/add",
-        {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                "name": content
-            })
-        }).then(res => res.json())
-        .then(data => console.log(data))
-        .catch();
+	const [content, setContent] = useState('name');
+	const [extra, setExtra] = useState('extra');
 
-        props.navigation.navigate("TabTwo");
-    }
+	const inputExample = () => {
+		fetch('http://localhost:5000/collaborators/add', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				name: content,
+			}),
+		})
+			.then((res) => res.json())
+			.then((data) => console.log(data))
+			.catch();
 
-    return (
-        <View>
-            <Header text="Collaborators"></Header>
-            <CollaboratorContent></CollaboratorContent>
-        </View>
-    );
+		props.navigation.navigate('TabTwo');
+	};
+
+	return (
+		<View>
+			<Header text='Collaborators'></Header>
+			<CollaboratorContent></CollaboratorContent>
+		</View>
+	);
 }
 
 //https://reactnative.dev/docs/pixelratio

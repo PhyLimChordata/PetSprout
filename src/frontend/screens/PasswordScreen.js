@@ -4,11 +4,11 @@ import { View, Text, TextInput, Image, TouchableOpacity } from 'react-native';
 
 import styles from '../styling/Authentication';
 
-import {useTheme} from '@react-navigation/native';
+import { useTheme } from '@react-navigation/native';
 import ColorSet from '../resources/themes/colours';
 
 function PasswordScreen(props) {
-	const {colors} = useTheme();
+	const { colors } = useTheme();
 	const [primaryInfo, setPrimaryInfo] = useState('');
 	const [inputStyle, setInputStyle] = useState({
 		backgroundColor: colors.Secondary,
@@ -97,9 +97,8 @@ function PasswordScreen(props) {
 					<TextInput
 						style={inputStyle}
 						value={primaryInfo}
-						placeholder="Please enter an Email or Username"
-						onChangeText={(text) => updatingPrimaryInfo(text)}
-					></TextInput>
+						placeholder='Please enter an Email or Username'
+						onChangeText={(text) => updatingPrimaryInfo(text)}></TextInput>
 					<Text style={styles(colors).errorMessageRight}>{error}</Text>
 				</View>
 			</View>
@@ -107,16 +106,16 @@ function PasswordScreen(props) {
 			<TouchableOpacity
 				activeOpacity={0.6}
 				style={styles(colors).authenticationButton}
-				onPress={() => forgetPassword()}
-			>
+				onPress={() => forgetPassword()}>
 				<Text style={styles(colors).authenticationButtonText}>Continue</Text>
 			</TouchableOpacity>
 			<TouchableOpacity
 				activeOpacity={0.6}
 				style={styles(colors).authenticationSpecialButton}
-				onPress={() => props.navigation.push('LoginScreen')}
-			>
-				<Text style={styles(colors).authenticationButtonText}>Back to Login</Text>
+				onPress={() => props.navigation.push('LoginScreen')}>
+				<Text style={styles(colors).authenticationButtonText}>
+					Back to Login
+				</Text>
 			</TouchableOpacity>
 		</View>
 	);

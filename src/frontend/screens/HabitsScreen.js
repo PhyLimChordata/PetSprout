@@ -61,7 +61,7 @@ function HabitsScreen(props) {
 
 	return (
 		<SafeAreaView style={styles(colors).headContainer}>
-			<MenuHeader text="" navigation={props.navigation} hp={hearts} />
+			<MenuHeader text='' navigation={props.navigation} hp={hearts} />
 			<View style={styles(colors).verticalContainer}>
 				<Image
 					style={styles(colors).creature}
@@ -80,8 +80,7 @@ function HabitsScreen(props) {
 						[{ nativeEvent: { contentOffset: { y: scrolling } } }],
 						{ useNativeDriver: true }
 					)}
-					decelerationRate={'normal'}
-				>
+					decelerationRate={'normal'}>
 					{habits.map((data, index) => {
 						if (data.times - data.todo > 0) {
 							const scale = scrolling.interpolate({
@@ -103,8 +102,7 @@ function HabitsScreen(props) {
 											frequency={data.times - data.todo}
 											habitId={data._id}
 											userHabitId={userHabitId}
-											exp={experience}
-										></Habits>
+											exp={experience}></Habits>
 										<View style={{ height: 15 }}></View>
 									</Animated.View>
 								</View>

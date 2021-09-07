@@ -1,6 +1,6 @@
 // React
 import React, { useEffect } from 'react';
-import { View, Text, TextInput, Pressable, SafeAreaView} from 'react-native';
+import { View, Text, TextInput, Pressable, SafeAreaView } from 'react-native';
 import { useTheme } from '@react-navigation/native';
 
 // Stylesheet
