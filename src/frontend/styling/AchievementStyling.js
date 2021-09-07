@@ -1,15 +1,14 @@
-import { StyleSheet, Platform } from 'react-native';
-import ColorSet from '../resources/themes/Global';
+import { StyleSheet } from 'react-native';
 
-const iconWdith = '8vh';
+const iconWidth = '8vh';
 
-export default StyleSheet.create({
+const styles = (theme) => StyleSheet.create({
     headContainer: {
         flex: 1,
         alignItems: 'center',
     },
     achievementContainer: {
-        width: iconWdith,
+        width: iconWidth,
         margin: '2.5vw',
         marginTop: '1vw'
     },  
@@ -19,19 +18,19 @@ export default StyleSheet.create({
     }, 
     achievementIcon: {
         resizeMode: 'contain',
-        width: iconWdith,
-        height: iconWdith,
+        width: iconWidth,
+        height: iconWidth,
         borderRadius: 50,
         borderWidth: 5,
     },
     achievementBronze: {
-        borderColor: ColorSet.Bronze,
+        borderColor: theme.Bronze,
     },
     achievementSilver: {
-        borderColor: ColorSet.Silver,
+        borderColor: theme.Silver,
     },
     achievementGold: {
-        borderColor: ColorSet.Gold
+        borderColor: theme.Gold
     },
     progressBar: {
         height: '1vh',
@@ -41,7 +40,7 @@ export default StyleSheet.create({
     textStyles:{
         fontStyle: "normal",
         fontWeight: "700",
-        color: ColorSet.Green.Quinary,
+        color: theme.Quinary,
     },
     achievementName: {
         alignSelf: 'center',
@@ -51,3 +50,5 @@ export default StyleSheet.create({
         fontSize: 24
     }
 });
+
+export default styles;

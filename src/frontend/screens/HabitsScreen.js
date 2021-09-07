@@ -3,16 +3,11 @@ import { View, Image, Animated, SafeAreaView } from 'react-native';
 
 import styles from '../styling/HabitsScreen';
 import Habits from '../components/Habits';
-import Menu from '../components/Menu';
 import MenuHeader from '../components/MenuHeader';
 
 import ExperienceBar from '../components/ExperienceBar';
-import Checkmark from '../components/Checkmark';
-import Trash from '../components/Trash';
-import ScrollViewElement from '../components/ScrollViewElement';
 
-import Swipeable from 'react-native-gesture-handler/Swipeable';
-import ColorSet from '../resources/themes/Global';
+import { useTheme } from '@react-navigation/native';
 
 import { AuthContext } from '../context';
 
@@ -21,9 +16,10 @@ function HabitsScreen(props) {
 	const [hearts, setHearts] = useState([]);
 	const [userHabitId, setUserHabitId] = useState('');
 	const [experience, setExperience] = useState('');
-	const [displayed, setDisplayed] = useState(false);
+	const { colors } = useTheme();
 
 	const [level, setLevel] = useState('');
+	const [displayed, setDisplayed] = useState(false);
 	const scrolling = React.useRef(new Animated.Value(0)).current;
 
 	const { getToken } = useContext(AuthContext);
@@ -33,6 +29,7 @@ function HabitsScreen(props) {
 	});
 
 	const displayHabits = () => {
+		setDisplayed(true);
 		const date = new Date().getDay();
 		fetch('http://localhost:5000/api/v1.0.0/habit/show_user_habit/' + date, {
 			method: 'GET',
@@ -61,12 +58,13 @@ function HabitsScreen(props) {
 			)
 			.catch();
 	};
+
 	return (
-		<SafeAreaView style={styles.headContainer}>
+		<SafeAreaView style={styles(colors).headContainer}>
 			<MenuHeader text="" navigation={props.navigation} hp={hearts} />
-			<View style={styles.verticalContainer}>
+			<View style={styles(colors).verticalContainer}>
 				<Image
-					style={styles.creature}
+					style={styles(colors).creature}
 					source={require('../resources/images/Egg.gif')}
 				/>
 				<ExperienceBar
@@ -75,7 +73,7 @@ function HabitsScreen(props) {
 					width={experience + '%'}
 				/>
 			</View>
-			<View style={styles.scrollViewContainer}>
+			<View style={styles(colors).scrollViewContainer}>
 				<Animated.ScrollView
 					showsVerticalScrollIndicator={false}
 					onScroll={Animated.event(

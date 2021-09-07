@@ -4,7 +4,7 @@ import styles from '../styling/AchievementStyling'
 import { ProgressBar, Colors } from 'react-native-paper';
 import MenuHeader from '../components/MenuHeader'
 import {SafeAreaView} from 'react-native';
-
+import {useTheme} from '@react-navigation/native';
 // data from database
 
 let achievements = [
@@ -62,15 +62,16 @@ let achievements = [
 ]
 
 function AchievementPage() {
+    const {colors} = useTheme();
     return(
         <SafeAreaView>
-            <View style={styles.achievementRow}>
+            <View style={styles(colors).achievementRow}>
                 <MenuHeader text="Achievement" navigation={props.navigation}>
                     <Text>AchiIcon</Text>
                 </MenuHeader>
             </View>
             
-            <View style={styles.headContainer}>
+            <View style={styles(colors).headContainer}>
                 {achievements.map(item => (
                     <OneCategory key={item.category} category={item.category} progresses={item.progresses}/>
                 ))}
@@ -80,10 +81,11 @@ function AchievementPage() {
 }
 
 const OneCategory = (props) => {
+    const {colors} = useTheme();
     return(
         <View key={props.key}>
-        <Text style={[styles.achievementName, styles.textStyles]}>{props.category}</Text>
-            <View style={styles.achievementRow}>
+        <Text style={[styles(colors).achievementName, styles(colors).textstyles(colors)]}>{props.category}</Text>
+            <View style={styles(colors).achievementRow}>
                 {(props.progresses).map(item => (
                     <OneAchievement key={item} progress={item.progress} srcPath={item.iconSrc}/>
                 ))}
@@ -93,11 +95,12 @@ const OneCategory = (props) => {
 }
 
 const OneAchievement = (props) => {
-    const sty = (props.progress > 0.33) ? (props.progress > 0.66 ? styles.achievementGold : styles.achievementSilver) : styles.achievementBronze;
+    const {colors} = useTheme();
+    const sty = (props.progress > 0.33) ? (props.progress > 0.66 ? styles(colors).achievementGold : styles(colors).achievementSilver) : styles(colors).achievementBronze;
     return(
-        <View style={styles.achievementContainer}>
-            <Image style={[styles.achievementIcon, sty]} source={props.srcPath}/>
-            <ProgressBar progress={props.progress} style={styles.progressBar} color='#75D6FF' />
+        <View style={styles(colors).achievementContainer}>
+            <Image style={[styles(colors).achievementIcon, sty]} source={props.srcPath}/>
+            <ProgressBar progress={props.progress} style={styles(colors).progressBar} color='#75D6FF' />
         </View>
         
     );

@@ -5,6 +5,8 @@ import styles from '../styling/Tabs';
 
 import { AuthContext } from '../context';
 
+import {useTheme} from '@react-navigation/native';
+
 function TabThree(props) {
 	const get = () => {
 		fetch('http://localhost:5000/example/get')
@@ -14,11 +16,12 @@ function TabThree(props) {
 	};
 
 	const { signOut } = useContext(AuthContext);
+	const {colors} = useTheme();
 
 	return (
-		<View style={styles.container}>
+		<View style={styles(colors).container}>
 			<Button title="Get stuff from Database" onPress={() => signOut()} />
-			<Text style={styles.textTitle}>Check Console!</Text>
+			<Text style={styles(colors).textTitle}>Check Console!</Text>
 		</View>
 	);
 }

@@ -1,10 +1,10 @@
 import { StyleSheet } from 'react-native';
-import ColorSet from '../resources/themes/Global';
+import ColorSet from '../resources/global/themes';
 
-export default StyleSheet.create({
+const styles = (theme) => StyleSheet.create({
 	headContainer: {
 		flex: 1,
-		backgroundColor: ColorSet.white
+		backgroundColor: theme.white
 	},
 	header: {
 		flexDirection: 'row',
@@ -17,7 +17,7 @@ export default StyleSheet.create({
 	headerText: {
 		fontSize: 18,
 		height:25,
-		color: ColorSet.Green.Quaternary,
+		color: theme.Quaternary,
 		fontWeight: "700",
 		marginLeft: 15,
 	},
@@ -27,3 +27,5 @@ export default StyleSheet.create({
 		alignItems: 'flex-start',
 	},
 });
+
+export default styles;

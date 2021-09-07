@@ -1,7 +1,7 @@
 import { StyleSheet, Platform } from 'react-native';
-import ColorSet from '../resources/themes/Global';
+import redTheme from '../resources/themes/light/redTheme';
 
-export default StyleSheet.create({
+const styles = (theme) => StyleSheet.create({
 	headContainer: {
 		flex: 1,
 		backgroundColor: ColorSet.white,
@@ -18,7 +18,7 @@ export default StyleSheet.create({
 		paddingLeft: 10,
 		paddingRight: 10,
 		borderWidth: 1,
-		color: ColorSet.someColor,
+		color: theme.someColor,
 	},
 	textTitle: {
 		fontSize: 20,
@@ -30,7 +30,7 @@ export default StyleSheet.create({
 		marginBottom: 50,
 	},
 	AuthenticationInput: {
-		backgroundColor: ColorSet.Green.Secondary,
+		backgroundColor: theme.Secondary,
 		padding: 10,
 		borderWidth: 0,
 		borderStyle: 'solid',
@@ -43,13 +43,13 @@ export default StyleSheet.create({
 		fontSize: 20,
 		fontWeight: 'bold',
 		paddingBottom: 5,
-		color: ColorSet.Green.Quaternary,
+		color: theme.Quaternary,
 	},
 	inputContainer: {
 		alignItems: 'flex-start',
 	},
 	AuthenticationButton: {
-		backgroundColor: ColorSet.Green.Quaternary,
+		backgroundColor: theme.Quaternary,
 		borderRadius: 30,
 		padding: 10,
 		paddingLeft: 40,
@@ -59,14 +59,14 @@ export default StyleSheet.create({
 	AuthenticationButtonText: {
 		fontSize: 20,
 		fontWeight: 'bold',
-		color: ColorSet.white,
+		color: theme.white,
 	},
 	SignupText: {
-		color: ColorSet.Green.Quaternary,
+		color: theme.Quaternary,
 		fontWeight: 'bold',
 	},
 	subText: {
-		color: ColorSet.grey,
+		color: theme.grey,
 		fontWeight: 'bold',
 	},
 	Creature: {
@@ -88,3 +88,5 @@ export default StyleSheet.create({
 		marginRight: 60,
 	},
 });
+
+export default styles;

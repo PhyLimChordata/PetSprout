@@ -1,10 +1,9 @@
 import { StyleSheet } from 'react-native';
-import ColorSet from '../resources/themes/Global';
 
-export default StyleSheet.create({
+const styles = (theme) => StyleSheet.create({
 	headContainer: {
 		flex: 1,
-		backgroundColor: ColorSet.white,
+		backgroundColor: theme.white,
 	},
 	container: {
 		flex: 10,
@@ -25,6 +24,8 @@ export default StyleSheet.create({
 		fontSize: 50,
 		fontWeight: 'bold',
 		paddingBottom: 5,
-		color: ColorSet.Green.Quaternary,
+		color: theme.Quaternary,
 	},
 });
+
+export default styles;

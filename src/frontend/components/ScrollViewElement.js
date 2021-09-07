@@ -1,14 +1,13 @@
-import React, { useState, useRef } from 'react';
-import { View, Text, Image, Animated, TouchableOpacity } from 'react-native';
+import React, { useRef } from 'react';
+import { View, Animated } from 'react-native';
 
 import Checkmark from '../components/Checkmark';
 import Trash from '../components/Trash';
 
 import Swipeable from 'react-native-gesture-handler/Swipeable';
-import ColorSet from '../resources/themes/Global';
+import ColorSet from '../resources/global/themes';
 
-import styles from '../styling/Habits';
-import Ellipsis from './Ellipsis';
+import {useTheme} from '@react-navigation/native';
 
 function Capitalize(str) {
 	if (str != null) {
@@ -18,6 +17,7 @@ function Capitalize(str) {
 }
 
 function ScrollViewElement(props) {
+	const {colors} = useTheme();
 	const swipeableRef = useRef(props.swipe);
 	const leftSwipe = (progress, dragX) => {
 		const scale = dragX.interpolate({

@@ -3,15 +3,19 @@ import React, { useState, useContext } from 'react';
 import { View, Text, TextInput, Image, TouchableHighlight } from 'react-native';
 
 import styles from '../styling/Authentication';
-import ColorSet from '../resources/themes/Global';
+import ColorSet from '../resources/global/themes';
+
+import {useTheme} from '@react-navigation/native';
 
 import { AuthContext } from '../context';
 
 function NewPasswordScreen(props) {
 	const [password, setPassword] = useState('');
 	const [reEnteredPassword, setReEnteredPassword] = useState('');
+	const {colors} = useTheme();
+
 	const normalInputStyle = {
-		backgroundColor: ColorSet.Green.Secondary,
+		backgroundColor: colors.Secondary,
 		padding: 10,
 		borderWidth: 0,
 		borderStyle: 'solid',
@@ -41,6 +45,7 @@ function NewPasswordScreen(props) {
 	};
 
 	const { resetPassword } = useContext(AuthContext);
+
 
 	const attemptSetNewPassword = () => {
 		console.log(resetPassword);
@@ -74,7 +79,7 @@ function NewPasswordScreen(props) {
 				if (res.status != 200) {
 					setSpaceAfterError({ height: 20 });
 					setInputStyle({
-						backgroundColor: ColorSet.Green.Secondary,
+						backgroundColor: colors.Secondary,
 						padding: 10,
 						borderWidth: 3,
 						borderColor: 'red',
@@ -88,18 +93,19 @@ function NewPasswordScreen(props) {
 			.catch(console.log('oh no'));
 	};
 
+	
 	return (
-		<View style={styles.container}>
+		<View style={styles(colors).container}>
 			<Image
-				style={styles.AuthenticationLogo}
+				style={styles(colors).AuthenticationLogo}
 				source={require('../resources/images/Logo.png')}
 			/>
-			<View style={styles.header}>
-				<Text style={styles.textTitle}>Enter a new Password</Text>
+			<View style={styles(colors).header}>
+				<Text style={styles(colors).textTitle}>Enter a new Password</Text>
 			</View>
 
-			<View style={styles.inputContainer}>
-				<Text style={styles.AuthenticationText}>Password</Text>
+			<View style={styles(colors).inputContainer}>
+				<Text style={styles(colors).AuthenticationText}>Password</Text>
 				<TextInput
 					style={inputStyle}
 					value={password}
@@ -108,7 +114,7 @@ function NewPasswordScreen(props) {
 					onChangeText={(text) => updatingPassword(text)}
 				></TextInput>
 				<View style={spaceAfterError} />
-				<Text style={styles.AuthenticationText}>ReEnter Password</Text>
+				<Text style={styles(colors).AuthenticationText}>ReEnter Password</Text>
 				<TextInput
 					style={inputStyle}
 					value={reEnteredPassword}
@@ -116,20 +122,20 @@ function NewPasswordScreen(props) {
 					placeholder="*********"
 					onChangeText={(text) => updatingReEnteredPassword(text)}
 				></TextInput>
-				<Text style={styles.errorMessageRight}>{error}</Text>
+				<Text style={styles(colors).errorMessageRight}>{error}</Text>
 			</View>
 			<View style={{ height: 10 }} />
 			<TouchableHighlight
-				style={styles.AuthenticationButton}
+				style={styles(colors).AuthenticationButton}
 				onPress={() => attemptSetNewPassword()}
 			>
-				<Text style={styles.AuthenticationButtonText}>Send Email</Text>
+				<Text style={styles(colors).AuthenticationButtonText}>Send Email</Text>
 			</TouchableHighlight>
 			<TouchableHighlight
-				style={styles.AuthenticationSpecialButton}
+				style={styles(colors).AuthenticationSpecialButton}
 				onPress={() => props.navigation.push('LoginScreen')}
 			>
-				<Text style={styles.AuthenticationButtonText}>Back to Login</Text>
+				<Text style={styles(colors).AuthenticationButtonText}>Back to Login</Text>
 			</TouchableHighlight>
 		</View>
 	);

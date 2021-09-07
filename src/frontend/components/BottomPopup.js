@@ -1,10 +1,13 @@
 import React, {useRef, useImperativeHandle} from 'react';
 import {Text, Animated} from 'react-native';
-import ColorSet from "../resources/themes/Global";
+import ColorSet from "../resources/global/themes";
+import {useTheme} from '@react-navigation/native';
 
 const  BottomPopup = React.forwardRef( (props, ref) => {
     let showPopup = useRef(new Animated.Value(100)).current;
+    const {colors} = useTheme();
     const {text, color=ColorSet.Red.Quaternary} = props
+    //TODO: should be color=colors.error or something
     useImperativeHandle(ref, () => ({
         togglePopup() {
             Animated.spring(

@@ -3,11 +3,13 @@ import {View, Text, Button, Pressable } from 'react-native';
 import styles from '../styling/ViewEditBox'
 import { TextInput } from "react-native";
 import MenuHeader from '../components/MenuHeader'
-import ColorSet from '../resources/themes/Global'
+import ColorSet from '../resources/global/themes'
 import {SafeAreaView} from 'react-native';
+import {useTheme} from '@react-navigation/native';
 
 function ProfileEdit (props) {
 
+    const {colors} = useTheme();
     let data = {
         userName: 'Example',
         email: 'Example@gmail.com',
@@ -29,22 +31,22 @@ function ProfileEdit (props) {
                     <Text>Account icon</Text>
                 </MenuHeader>
             </View>
-            <View style={styles.container}>
+            <View style={styles(colors).container}>
                 <EditBox id="userName" tag="Username" def={data.userName} place="Username" handle={handleChange}/>
-                <View style={styles.formContainer}>
-                    <Text style={[styles.textTitle, styles.text]}>
+                <View style={styles(colors).formContainer}>
+                    <Text style={[styles(colors).textTitle, styles(colors).text]}>
                         Email
                     </Text>
-                    <Text style={[styles.textInput, styles.text]}>
+                    <Text style={[styles(colors).textInput, styles(colors).text]}>
                         Example@gmail.com
                     </Text>
                     </View>
                 <EditBox id="about" tag="About" def="" mult={true} numLines={5} backColor={true} handle={handleChange}/>
-                <View style={styles.formContainer}>
-                    <Text style={[styles.textTitle, styles.text]}>
+                <View style={styles(colors).formContainer}>
+                    <Text style={[styles(colors).textTitle, styles(colors).text]}>
                         Account Created On
                     </Text>
-                    <Text style={[styles.textInput, styles.text]}>
+                    <Text style={[styles(colors).textInput, styles(colors).text]}>
                         Date
                     </Text>
                 </View>
@@ -68,8 +70,8 @@ const EditBox = (props) => {
     }, [focused])
 
     return(
-        <View style={styles.formContainer}>
-            <Text style={[styles.textTitle, styles.text]}>
+        <View style={styles(colors).formContainer}>
+            <Text style={[styles(colors).textTitle, styles(colors).text]}>
                 {props.tag}
             </Text>
             <TextInput
@@ -78,7 +80,7 @@ const EditBox = (props) => {
                 onChange={e => handleChange((props.id, e))}
                 value={text}
                 defaultValue={props.place}
-                style={props.mult ? styles.textMultiInput : [styles.textInput, styles.text, (focused ? styles.textInputSelected : null)]}
+                style={props.mult ? styles(colors).textMultiInput : [styles(colors).textInput, styles(colors).text, (focused ? styles(colors).textInputSelected : null)]}
                 multiline={props.mult}
                 numberOfLines={props.numLines}
             />
@@ -89,11 +91,11 @@ const EditBox = (props) => {
 
 const SubmitButton = (props) => {
     return(
-        <View style={styles.submitButtonPosition}>
+        <View style={styles(colors).submitButtonPosition}>
             <Pressable
-                style={styles.submitButton}
+                style={styles(colors).submitButton}
                 onPress={() => props.submit()}>
-                    <Text style={styles.submitButtonText}>SUBMIT</Text>
+                    <Text style={styles(colors).submitButtonText}>SUBMIT</Text>
                 </Pressable>
         </View>
     )

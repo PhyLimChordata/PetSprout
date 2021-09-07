@@ -4,9 +4,13 @@ import {View, Button, Text, TextInput} from 'react-native';
 import styles from '../styling/Tabs';
 import MenuHeader from '../components/MenuHeader';
 
+import {useTheme} from '@react-navigation/native';
+
+
 function TabOne(props) {
     const [content, setContent] = useState('');
     const[extra, setExtra] = useState('extra');
+    const {colors} = useTheme();
    
     const inputExample = () => {
         fetch("http://localhost:5000/example/add",
@@ -27,12 +31,12 @@ function TabOne(props) {
     }
 
     return (
-        <View style={styles.headContainer}>
+        <View style={styles(colors).headContainer}>
             <MenuHeader text='Example'/>
-            <View style={styles.container}>
-                <Text style={styles.textTitle}>Let's add an example!</Text>
-                <TextInput style={styles.textInput} value={content} onChangeText={(text)=>setContent(text)}></TextInput>
-                <TextInput defaultValue="Extra" style={styles.textInput} value={extra} onChangeText={(text)=>setExtra(text)}></TextInput>
+            <View style={styles(colors).container}>
+                <Text style={styles(colors).textTitle}>Let's add an example!</Text>
+                <TextInput style={styles(colors).textInput} value={content} onChangeText={(text)=>setContent(text)}></TextInput>
+                <TextInput defaultValue="Extra" style={styles(colors).textInput} value={extra} onChangeText={(text)=>setExtra(text)}></TextInput>
                 <Button title="Add it to the Database" onPress = {() => inputExample()}></Button>
             </View>
         </View>

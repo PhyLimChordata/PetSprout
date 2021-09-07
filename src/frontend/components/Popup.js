@@ -1,6 +1,5 @@
-import React, {useRef, useImperativeHandle} from 'react';
-import {Text, Animated, View} from 'react-native';
-import ColorSet from "../resources/themes/Global";
+import React from 'react';
+import {View} from 'react-native';
 import Modal from "react-native-modal";
 
 function Popup(props) {

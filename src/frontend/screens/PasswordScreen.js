@@ -3,12 +3,15 @@ import React, { useState, useContext } from 'react';
 import { View, Text, TextInput, Image, TouchableOpacity } from 'react-native';
 
 import styles from '../styling/Authentication';
-import ColorSet from '../resources/themes/Global';
+
+import {useTheme} from '@react-navigation/native';
+import ColorSet from '../resources/global/themes';
 
 function PasswordScreen(props) {
+	const {colors} = useTheme();
 	const [primaryInfo, setPrimaryInfo] = useState('');
 	const [inputStyle, setInputStyle] = useState({
-		backgroundColor: ColorSet.Green.Secondary,
+		backgroundColor: colors.Secondary,
 		padding: 10,
 		borderWidth: 0,
 		borderStyle: 'solid',
@@ -23,7 +26,7 @@ function PasswordScreen(props) {
 		setPrimaryInfo(text);
 		setError('');
 		setInputStyle({
-			backgroundColor: ColorSet.Green.Secondary,
+			backgroundColor: colors.Secondary,
 			padding: 10,
 			borderWidth: 0,
 			borderStyle: 'solid',
@@ -62,7 +65,7 @@ function PasswordScreen(props) {
 
 				if (res.status != 200) {
 					setInputStyle({
-						backgroundColor: ColorSet.Green.Secondary,
+						backgroundColor: colors.Secondary,
 						padding: 10,
 						borderWidth: 3,
 						borderColor: 'red',
@@ -77,43 +80,43 @@ function PasswordScreen(props) {
 	};
 
 	return (
-		<View style={styles.container}>
+		<View style={styles(colors).container}>
 			<Image
-				style={styles.AuthenticationLogo}
+				style={styles(colors).AuthenticationLogo}
 				source={require('../resources/images/Logo.png')}
 			/>
-			<View style={styles.header}>
-				<Text style={styles.textTitle}>Forgot your Password?</Text>
-				<Text style={styles.explanationText}>
+			<View style={styles(colors).header}>
+				<Text style={styles(colors).textTitle}>Forgot your Password?</Text>
+				<Text style={styles(colors).explanationText}>
 					{' '}
 					Enter either your Email or Username and an email will be sent with
 					instructions.{' '}
 				</Text>
 
-				<View style={styles.inputContainer}>
+				<View style={styles(colors).inputContainer}>
 					<TextInput
 						style={inputStyle}
 						value={primaryInfo}
 						placeholder="Please enter an Email or Username"
 						onChangeText={(text) => updatingPrimaryInfo(text)}
 					></TextInput>
-					<Text style={styles.errorMessageRight}>{error}</Text>
+					<Text style={styles(colors).errorMessageRight}>{error}</Text>
 				</View>
 			</View>
 
 			<TouchableOpacity
 				activeOpacity={0.6}
-				style={styles.AuthenticationButton}
+				style={styles(colors).AuthenticationButton}
 				onPress={() => forgetPassword()}
 			>
-				<Text style={styles.AuthenticationButtonText}>Continue</Text>
+				<Text style={styles(colors).AuthenticationButtonText}>Continue</Text>
 			</TouchableOpacity>
 			<TouchableOpacity
 				activeOpacity={0.6}
-				style={styles.AuthenticationSpecialButton}
+				style={styles(colors).AuthenticationSpecialButton}
 				onPress={() => props.navigation.push('LoginScreen')}
 			>
-				<Text style={styles.AuthenticationButtonText}>Back to Login</Text>
+				<Text style={styles(colors).AuthenticationButtonText}>Back to Login</Text>
 			</TouchableOpacity>
 		</View>
 	);
