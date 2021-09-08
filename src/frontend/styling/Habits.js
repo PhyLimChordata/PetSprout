@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import Colours from '../resources/themes/Colours';
+import Colours from '../resources/themes/Colourss';
 
 const habitsStyles = (theme) =>
 	StyleSheet.create({

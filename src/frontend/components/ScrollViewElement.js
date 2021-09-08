@@ -4,7 +4,7 @@ import Swipeable from 'react-native-gesture-handler/Swipeable';
 
 import styles from '../styling/Habits';
 
-import Colours from '../resources/themes/Colours';
+import Colours from '../resources/themes/Colourss';
 import { useTheme } from '@react-navigation/native';
 
 function ScrollViewElement(props) {

@@ -4,7 +4,7 @@ import headerStyles from '../styling/Header';
 import { View, Switch, Text, Image, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native';
 import { useTheme } from '@react-navigation/native';
-import Colours from '../resources/themes/Colours';
+import Colours from '../resources/themes/Colourss';
 
 // setting data from database
 
