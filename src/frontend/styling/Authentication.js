@@ -16,7 +16,7 @@ const authenticationStyles = (theme) =>
 			paddingLeft: 10,
 			paddingRight: 10,
 			borderWidth: 1,
-			color: theme.someColor,
+			color: Colours.Grey.TextInput,
 		},
 		textTitle: {
 			fontSize: 20,
@@ -85,7 +85,7 @@ const authenticationStyles = (theme) =>
 			fontWeight: 'bold',
 		},
 		subText: {
-			color: theme.grey,
+			color: Colours.Grey.Default,
 			fontWeight: 'bold',
 		},
 		forgotPassword: {

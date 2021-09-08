@@ -1,4 +1,5 @@
 import { StyleSheet, Platform } from 'react-native';
+import Colours from '../resources/themes/Colours';
 
 const exampleStyles = (theme) =>
 	StyleSheet.create({
@@ -18,7 +19,7 @@ const exampleStyles = (theme) =>
 			paddingLeft: 10,
 			paddingRight: 10,
 			borderWidth: 1,
-			color: theme.someColor,
+			color: Colours.Grey.TextInput,
 		},
 		textTitle: {
 			fontSize: 20,
@@ -66,7 +67,7 @@ const exampleStyles = (theme) =>
 			fontWeight: 'bold',
 		},
 		subText: {
-			color: theme.grey,
+			color: Colours.Grey.Default,
 			fontWeight: 'bold',
 		},
 		creature: {

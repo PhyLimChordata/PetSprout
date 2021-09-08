@@ -4,6 +4,7 @@ import headerStyles from '../styling/Header';
 import { View, Switch, Text, Image, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native';
 import { useTheme } from '@react-navigation/native';
+import Colours from '../resources/themes/Colours';
 
 // setting data from database
 
@@ -89,7 +90,7 @@ const OneSetting = (props) => {
 	const { colors } = useTheme();
 	const [enabled, setEnabled] = React.useState(props.enabled);
 	const toggleSwitch = () => setEnabled((previousState) => !previousState);
-	const thumbColor = colors.ButtonGrey;
+	const thumbColor = Colours.Grey.Button;
 	return (
 		<View style={styles(colors).oneSettingContainer}>
 			<Text style={[styles(colors).text, styles(colors).textNormal]}>

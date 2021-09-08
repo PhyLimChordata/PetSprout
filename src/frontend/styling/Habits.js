@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import Colours from '../resources/themes/Colours';
 
 const habitsStyles = (theme) =>
 	StyleSheet.create({
@@ -64,7 +65,7 @@ const habitsStyles = (theme) =>
 		expBar: {
 			width: '100%',
 			height: 15,
-			backgroundColor: theme.lightgrey,
+			backgroundColor: Colours.Grey.ExpBarBackground,
 			borderRadius: 10,
 		},
 		ellipsisCircle: {

@@ -9,10 +9,10 @@ const settingStyles = (theme) =>
 			alignItems: 'center',
 			justifyContent: 'center',
 		},
-        settingContainer: {
+		settingContainer: {
 			width: '80vw',
 		},
-        oneSettingContainer: {
+		oneSettingContainer: {
 			width: '100%',
 			flexDirection: 'row',
 			justifyContent: 'space-between',

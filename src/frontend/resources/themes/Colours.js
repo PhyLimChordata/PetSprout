@@ -24,6 +24,17 @@ const Colours = {
 		Selected: '#E37272',
 		Error: '#E37272',
 	},
+	Grey: {
+		Default: '#B7BEB0',
+		ExpBarBackground: '#E7E7E7',
+		Button: '#C4C4C4',
+		TextInput: '#EF2723',
+	},
+	Unique: {
+		Bronze: '#C6895E',
+		Silver: '#A7BFCA',
+		Gold: '#FFC93E',
+	},
 };
 
 export default Colours;
