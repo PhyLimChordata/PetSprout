@@ -1,6 +1,5 @@
 const redTheme = {
 	colors: {
-		examplePrimary: '#FF5733',
 		background: '#ffffff',
 		opposite: '#272727',
 

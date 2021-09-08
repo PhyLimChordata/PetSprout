@@ -1,8 +1,5 @@
-import Colours from '../Colours';
-
 const greenTheme = {
 	colors: {
-		examplePrimary: '#FF5733',
 		background: '#ffffff',
 		opposite: '#272727',
 

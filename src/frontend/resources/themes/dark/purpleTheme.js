@@ -1,6 +1,5 @@
 const purpleTheme = {
 	colors: {
-		examplePrimary: '#FF5733',
 		background: '#505050',
 		opposite: '#ffffff',
 
