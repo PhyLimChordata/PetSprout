@@ -1,13 +1,13 @@
 import React, { useRef, useImperativeHandle } from 'react';
 import { Text, Animated } from 'react-native';
 //TODO: add error to theme
-import ColorSet from '../resources/themes/colours';
+import Colours from '../resources/themes/colours';
 import { useTheme } from '@react-navigation/native';
 
 const BottomPopup = React.forwardRef((props, ref) => {
 	let showPopup = useRef(new Animated.Value(100)).current;
 	const { colors } = useTheme();
-	const { text, color = ColorSet.Red.Quaternary } = props;
+	const { text, color = Colours.Red.Error } = props;
 	//TODO: should be color=colors.error or something
 	useImperativeHandle(ref, () => ({
 		togglePopup() {

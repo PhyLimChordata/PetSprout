@@ -1,4 +1,5 @@
 import { StyleSheet, Platform } from 'react-native';
+import Colours from '../resources/themes/Colours';
 
 const authenticationStyles = (theme) =>
 	StyleSheet.create({
@@ -67,7 +68,7 @@ const authenticationStyles = (theme) =>
 			marginBottom: 20,
 		},
 		authenticationSpecialButton: {
-			backgroundColor: theme.Authentication,
+			backgroundColor: Colours.Blue.Authentication,
 			borderRadius: 30,
 			padding: 10,
 			paddingLeft: 40,

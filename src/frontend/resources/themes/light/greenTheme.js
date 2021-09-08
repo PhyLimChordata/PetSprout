@@ -1,3 +1,5 @@
+import Colours from '../Colours';
+
 const greenTheme = {
 	colors: {
 		examplePrimary: '#FF5733',
@@ -20,8 +22,6 @@ const greenTheme = {
 		Tertiary: '#B9E8A0',
 		Quaternary: '#9CC69B',
 		Quinary: '#6E8F6D',
-
-		Authentication: '#6081C4',
 	},
 };
 
