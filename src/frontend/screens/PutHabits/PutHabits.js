@@ -21,6 +21,7 @@ const Day = ({selected, letter, onPress}) => (
 
 
 function PutHabits(props) {
+    // console.log("REEEEEEEEEEEEEEE")
     console.log(props)
     let popup = React.useRef();
     const [days, setDays] = useState(props.days);
@@ -50,8 +51,8 @@ function PutHabits(props) {
         })
             .then((res) => {
                 res.json().then((data) => {
-                    console.log(data);
-                    console.log(res.status)
+                    // console.log(data);
+                    // console.log(res.status)
                     if (res.status == 200) {
                         props.navigation.goBack(null)
                     } else {
@@ -62,7 +63,37 @@ function PutHabits(props) {
             })
             .catch();
     };
-    const modifyHabit = () => {}
+    const modifyHabit = () => {
+        fetch('http://localhost:5000/api/v1.0.0/habit/change_habit/' + props.userHabitId + '/' + props.habitId, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'authentication-token': getToken,
+            },
+            body: JSON.stringify({
+                title: title,
+                description: description,
+                reason: reason,
+                schedule: days,
+                date: new Date(),
+                times: alarms.length,
+                alarm: alarms,
+            }),
+        })
+            .then((res) => {
+                res.json().then((data) => {
+                    // console.log(data);
+                    // console.log(res.status)
+                    if (res.status == 200) {
+                        props.navigation.goBack(null)
+                    } else {
+                        setPopupText( 'The provided information cannot be saved');
+                        popup.current?.togglePopup()
+                    }
+                });
+            })
+            .catch();
+    };
     const onPress = props.isCreate ? () => createHabit() : () => modifyHabit()
 
     function flipDay(index) {
@@ -91,7 +122,7 @@ function PutHabits(props) {
     }
 
     function getPrettyDate(time) {
-        let localeSpecificTime = time.toLocaleTimeString();
+        let localeSpecificTime = new Date(time).toLocaleTimeString();
         return localeSpecificTime.replace(/:\d+ /, ' ');
     }
 
@@ -115,6 +146,7 @@ function PutHabits(props) {
         borderRadius: 5,
         marginBottom: 20
     }
+    // console.log(title)
     return (
         <SafeAreaView style={styles.headContainer}>
             <MenuHeader back={true} text={props.header} navigation={props.navigation}

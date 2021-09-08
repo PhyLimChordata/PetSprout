@@ -29,6 +29,7 @@ import VerifyEmailPasswordScreen from './frontend/screens/VerifyEmailPasswordScr
 import { AuthContext } from './frontend/context';
 import ColorSet from './frontend/resources/themes/Global';
 import SettingsPage from "./frontend/screens/SettingsPage";
+import ModifyHabitScreen from "./frontend/screens/PutHabits/ModifyHabitScreen";
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -75,12 +76,14 @@ export default function App() {
 	return (
 		<AuthContext.Provider value={authContext}>
 			<NavigationContainer>
-				{true ? (
+				{token ? (
 					<Stack.Navigator headerMode="none">
 						<Stack.Screen name="HomeScreen" component={HomeScreen} />
 						<Stack.Screen name="AchievementScreen" component={AchievementScreen} />
 						<Stack.Screen name="SettingsScreen" component={SettingsPage} />
 						<Stack.Screen name="CreateHabitScreen" component={CreateHabitScreen} />
+						<Stack.Screen name="ModifyHabitScreen" component={ModifyHabitScreen} />
+
 					</Stack.Navigator>
 				) : (
 					<Stack.Navigator headerMode="none">
