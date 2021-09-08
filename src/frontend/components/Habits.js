@@ -7,16 +7,16 @@ import Counter from './Counter';
 import ScrollViewElement from './ScrollViewElement';
 
 import { AuthContext } from '../Context';
-import {useTheme} from '@react-navigation/native';
+import { useTheme } from '@react-navigation/native';
 
 function Habits(props) {
 	const [streak, setStreak] = useState(props.streak);
 	const [frequency, setFrequency] = useState(props.frequency);
-  
+
 	const [completed, setCompleted] = useState(false);
 	const { getToken } = useContext(AuthContext);
 
-	const {colors} = useTheme();
+	const { colors } = useTheme();
 
 	const completeHabit = () => {
 		setFrequency(frequency - 1);
@@ -56,7 +56,9 @@ function Habits(props) {
 					content={
 						<View style={styles(colors).horizontalContainer}>
 							<View style={styles(colors).leftContainer}>
-								<Text style={styles(colors).textTitle}>{Capitalize(props.name)}</Text>
+								<Text style={styles(colors).textTitle}>
+									{Capitalize(props.name)}
+								</Text>
 							</View>
 							<View style={styles(colors).container}>
 								<Ellipsis />
@@ -66,7 +68,7 @@ function Habits(props) {
 										supplementalInfo={
 											<Image
 												source={require('../resources/images/Streak.png')}
-												resizeMode="contain"
+												resizeMode='contain'
 												style={{
 													height: 20,
 													width: 20,
@@ -78,7 +80,9 @@ function Habits(props) {
 									/>
 									<Counter
 										quantity={frequency}
-										supplementalInfo={<Text style={styles(colors).expText}>x</Text>}
+										supplementalInfo={
+											<Text style={styles(colors).expText}>x</Text>
+										}
 										last={true}
 									/>
 								</View>

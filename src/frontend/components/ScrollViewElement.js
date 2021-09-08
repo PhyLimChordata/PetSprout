@@ -9,7 +9,6 @@ import Colours from '../resources/themes/Colours';
 import styles from '../styling/Habits';
 
 function ScrollViewElement(props) {
-	const { colors } = useTheme();
 	const swipeableRef = useRef(props.swipe);
 	const leftSwipe = (progress, dragX) => {
 		const scale = dragX.interpolate({

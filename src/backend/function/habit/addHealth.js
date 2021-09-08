@@ -1,5 +1,5 @@
-const Habit = require('../../schemas/HabitSchemas');
-const User = require('../../schemas/UserSchemas');
+const Habit = require('../../schemas/habitSchema');
+const User = require('../../schemas/userSchema');
 
 const { validationResult } = require('express-validator');
 

@@ -1,4 +1,4 @@
-const User = require('../../schemas/UserSchemas');
+const User = require('../../schemas/userSchema');
 
 const viewAccount = async (req, res) => {
 	try {

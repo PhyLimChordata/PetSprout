@@ -1,10 +1,9 @@
 import React from 'react';
-import { View, Text, Image, Platform } from 'react-native';
+import { Platform } from 'react-native';
 import { useResponsiveHeight } from 'react-native-responsive-dimensions';
 
 import { useTheme } from '@react-navigation/native';
 
-// Similar to a screen, however components will be contained within a screen
 function CollaboratorContent(props) {
 	const { colors } = useTheme();
 	var text = {
