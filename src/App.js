@@ -6,7 +6,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 // Navigation
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, useTheme } from '@react-navigation/native';
 
 //Screens
 import BottomMenu from './frontend/components/BottomMenu';
@@ -39,8 +39,6 @@ import BlueDarkTheme from './frontend/resources/themes/dark/BlueTheme';
 import PurpleDarkTheme from './frontend/resources/themes/dark/PurpleTheme';
 import RedDarkTheme from './frontend/resources/themes/dark/RedTheme';
 
-import { useTheme } from '@react-navigation/native';
-
 import { AuthContext } from './frontend/Context';
 
 const Tab = createBottomTabNavigator();
@@ -53,8 +51,8 @@ export default function App() {
 	const [mode, setMode] = useState('light');
 	const authContext = useMemo(() => {
 		return {
-			logIn: (token) => {
-				setToken(token);
+			logIn: (generatedToken) => {
+				setToken(generatedToken);
 			},
 			signOut: () => {
 				setToken(null);

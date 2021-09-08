@@ -8,7 +8,7 @@ import { useTheme } from '@react-navigation/native';
 
 function VerifyEmailPassword(props) {
 	console.log(props);
-	const {colors} = useTheme();
+	const { colors } = useTheme();
 
 	const resend = () => {
 		fetch('http://localhost:5000/api/v1.0.0/user/pending_password', {

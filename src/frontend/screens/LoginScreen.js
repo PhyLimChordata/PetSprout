@@ -3,17 +3,16 @@ import React, { useState, useContext } from 'react';
 import { View, Text, TextInput, Image, TouchableOpacity } from 'react-native';
 
 import styles from '../styling/Authentication';
-// import ColorSet from '../resources/global/themes';
 
 import { AuthContext } from '../Context';
-import {useTheme} from '@react-navigation/native';
+import { useTheme } from '@react-navigation/native';
 
 function LoginScreen(props) {
 	const [primaryInfo, setPrimaryInfo] = useState('');
 	const [password, setPassword] = useState('');
 	const [error, setError] = useState('');
 
-	const {colors} = useTheme();
+	const { colors } = useTheme();
 
 	const [inputStyle, setInputStyle] = useState({
 		backgroundColor: colors.Secondary,
@@ -97,8 +96,8 @@ function LoginScreen(props) {
 					});
 				}
 			})
-				.catch();
-		};
+			.catch();
+	};
 
 	return (
 		<View style={styles(colors).container}>
@@ -111,25 +110,24 @@ function LoginScreen(props) {
 				<TextInput
 					style={inputStyle}
 					value={primaryInfo}
-					placeholder="Please enter an Email or Username"
+					placeholder='Please enter an Email or Username'
 					onChangeText={(text) => updatingPrimaryInput(text)}
-					autoCapitalize={"none"}
-				></TextInput>
+					autoCapitalize={'none'}></TextInput>
 
 				<Text style={styles(colors).AuthenticationText}>Password</Text>
 				<TextInput
 					style={inputStyle}
 					secureTextEntry={true}
 					value={password}
-					placeholder="*********"
-					onChangeText={(text) => updatingPasswordInput(text)}
-				></TextInput>
+					placeholder='*********'
+					onChangeText={(text) => updatingPasswordInput(text)}></TextInput>
 				<View style={styles(colors).forgotView}>
 					<TouchableOpacity
 						activeOpacity={0.6}
-						onPress={() => props.navigation.push('PasswordScreen')}
-					>
-						<Text style={styles(colors).forgotPassword}>Need help logging in?</Text>
+						onPress={() => props.navigation.push('PasswordScreen')}>
+						<Text style={styles(colors).forgotPassword}>
+							Need help logging in?
+						</Text>
 
 						<Text style={styles(colors).errorMessage}>{error}</Text>
 					</TouchableOpacity>
@@ -138,16 +136,14 @@ function LoginScreen(props) {
 			<TouchableOpacity
 				activeOpacity={0.6}
 				style={styles(colors).AuthenticationButton}
-				onPress={() => attemptLogin()}
-			>
+				onPress={() => attemptLogin()}>
 				<Text style={styles(colors).AuthenticationButtonText}>Login</Text>
 			</TouchableOpacity>
 			<Text style={styles(colors).subText}>
 				New User?
 				<TouchableOpacity
 					activeOpacity={0.6}
-					onPress={() => props.navigation.push('SignupScreen')}
-				>
+					onPress={() => props.navigation.push('SignupScreen')}>
 					<Text style={styles(colors).SignupText}> Sign up</Text>
 				</TouchableOpacity>
 			</Text>

@@ -54,7 +54,7 @@ function NewPassword(props) {
 			borderRadius: 5,
 			width: 300,
 		});
-	};
+	}
 
 	const attemptSetNewPassword = () => {
 		if (password == '' || reEnteredPassword == '') {
@@ -64,31 +64,31 @@ function NewPassword(props) {
 			setError('Passwords do not match');
 			displayError();
 		} else {
-		fetch('http://localhost:5000/api/v1.0.0/user/pending_password', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify({
-				newPassword: password,
-				email: props.route.params.email,
-			}),
-		})
-			.then((res) => {
-				if (res.status == 200) {
-					res.json().then((data) => {
-						props.navigation.push('VerifyEmailPassword', {
-							password: password,
-							email: props.route.params.email,
-						});
-					});
-				}
-				else {
-					displayError();
-				}
+			fetch('http://localhost:5000/api/v1.0.0/user/pending_password', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify({
+					newPassword: password,
+					email: props.route.params.email,
+				}),
 			})
-			.catch(console.log('oh no'));
-	}};
+				.then((res) => {
+					if (res.status == 200) {
+						res.json().then((data) => {
+							props.navigation.push('VerifyEmailPassword', {
+								password: password,
+								email: props.route.params.email,
+							});
+						});
+					} else {
+						displayError();
+					}
+				})
+				.catch(console.log('oh no'));
+		}
+	};
 
 	return (
 		<View style={styles(colors).container}>
