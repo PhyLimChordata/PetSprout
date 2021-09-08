@@ -7,8 +7,6 @@ import Counter from './Counter';
 import ScrollViewElement from './ScrollViewElement';
 
 import { AuthContext } from '../Context';
-import ColorSet from '../resources/themes/colours';
-
 import {useTheme} from '@react-navigation/native';
 
 function Habits(props) {

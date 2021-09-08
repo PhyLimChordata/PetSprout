@@ -46,11 +46,11 @@ const settingStyles = (theme) =>
 		textTitle: {
 			width: '100%',
 			textAlign: 'left',
-			color: ColorSet.Green.Tertiary,
+			color: theme.Tertiary,
 		},
 		textNormal: {
 			textAlign: 'left',
-			color: ColorSet.Green.Quaternary,
+			color: theme.Quaternary,
 		},
 		switchStyling: {
 			justifyContent: 'center',

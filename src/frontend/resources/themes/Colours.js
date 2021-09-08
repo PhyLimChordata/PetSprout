@@ -1,18 +1,4 @@
-import { AsyncStorage } from 'react-native';
-
-const ColorSet = {
-	examplePrimary: '#FF5733',
-	white: '#ffffff',
-	grey: '#B7BEB0',
-	lightgrey: '#E7E7E7',
-	someColor: '#EF2723',
-
-	ButtonGrey: '#C4C4C4',
-	Bronze: '#C6895E',
-	Silver: '#A7BFCA',
-	Gold: '#FFC93E',
-
-	BackgroundGrey: '#505050',
+const Colours = {
 	Green: {
 		Primary: '#F5FEEC',
 		Secondary: '#D7F2BA',
@@ -51,15 +37,4 @@ const ColorSet = {
 	},
 };
 
-async function getTheme() {
-	let colorTheme = JSON.parse(await AsyncStorage.getItem('@ColorTheme:key'));
-	if (colorTheme != null) {
-		await AsyncStorage.setItem(
-			'@ColorTheme:key',
-			JSON.stringify(ColorSet.Green)
-		);
-		return ColorSet.Green;
-	}
-	return colorTheme;
-}
-export default ColorSet;
+export default Colours;

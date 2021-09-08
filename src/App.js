@@ -28,16 +28,16 @@ import CreateHabitScreen from './frontend/screens/CreateHabit';
 import ComingSoonScreen from './frontend/screens/ComingSoon';
 
 // Colour Themes
-import greenLightTheme from './frontend/resources/themes/light/GreenTheme';
-import orangeLightTheme from './frontend/resources/themes/light/OrangeTheme';
-import blueLightTheme from './frontend/resources/themes/light/BlueTheme';
-import purpleLightTheme from './frontend/resources/themes/light/PurpleTheme';
-import redLightTheme from './frontend/resources/themes/light/RedTheme';
-import greenDarkTheme from './frontend/resources/themes/dark/GreenTheme';
-import orangeDarkTheme from './frontend/resources/themes/dark/OrangeTheme';
-import blueDarkTheme from './frontend/resources/themes/dark/BlueTheme';
-import purpleDarkTheme from './frontend/resources/themes/dark/PurpleTheme';
-import redDarkTheme from './frontend/resources/themes/dark/RedTheme';
+import GreenLightTheme from './frontend/resources/themes/light/GreenTheme';
+import OrangeLightTheme from './frontend/resources/themes/light/OrangeTheme';
+import BlueLightTheme from './frontend/resources/themes/light/BlueTheme';
+import PurpleLightTheme from './frontend/resources/themes/light/PurpleTheme';
+import RedLightTheme from './frontend/resources/themes/light/RedTheme';
+import GreenDarkTheme from './frontend/resources/themes/dark/GreenTheme';
+import OrangeDarkTheme from './frontend/resources/themes/dark/OrangeTheme';
+import BlueDarkTheme from './frontend/resources/themes/dark/BlueTheme';
+import PurpleDarkTheme from './frontend/resources/themes/dark/PurpleTheme';
+import RedDarkTheme from './frontend/resources/themes/dark/RedTheme';
 
 import { useTheme } from '@react-navigation/native';
 
@@ -76,34 +76,34 @@ export default function App() {
 		<AuthContext.Provider value={authContext}>
 			{mode == 'light' ? (
 				color == 'green' ? (
-					<NavContainer token={token} theme={greenLightTheme} />
+					<NavContainer token={token} theme={GreenLightTheme} />
 				) : color == 'orange' ? (
-					<NavContainer token={token} theme={orangeLightTheme} />
+					<NavContainer token={token} theme={OrangeLightTheme} />
 				) : color == 'blue' ? (
-					<NavContainer token={token} theme={blueLightTheme} />
+					<NavContainer token={token} theme={BlueLightTheme} />
 				) : color == 'purple' ? (
-					<NavContainer token={token} theme={purpleLightTheme} />
+					<NavContainer token={token} theme={PurpleLightTheme} />
 				) : color == 'red' ? (
-					<NavContainer token={token} theme={redLightTheme} />
+					<NavContainer token={token} theme={RedLightTheme} />
 				) : (
-					<NavContainer token={token} theme={greenLightTheme} />
+					<NavContainer token={token} theme={GreenLightTheme} />
 				)
 			) : mode == 'dark' ? (
 				color == 'green' ? (
-					<NavContainer token={token} theme={greenDarkTheme} />
+					<NavContainer token={token} theme={GreenDarkTheme} />
 				) : color == 'orange' ? (
-					<NavContainer token={token} theme={orangeDarkTheme} />
+					<NavContainer token={token} theme={OrangeDarkTheme} />
 				) : color == 'blue' ? (
-					<NavContainer token={token} theme={blueDarkTheme} />
+					<NavContainer token={token} theme={BlueDarkTheme} />
 				) : color == 'purple' ? (
-					<NavContainer token={token} theme={purpleDarkTheme} />
+					<NavContainer token={token} theme={PurpleDarkTheme} />
 				) : color == 'red' ? (
-					<NavContainer token={token} theme={redDarkTheme} />
+					<NavContainer token={token} theme={RedDarkTheme} />
 				) : (
-					<NavContainer token={token} theme={greenDarkTheme} />
+					<NavContainer token={token} theme={GreenDarkTheme} />
 				)
 			) : (
-				<NavContainer token={token} theme={greenLightTheme} />
+				<NavContainer token={token} theme={GreenLightTheme} />
 			)}
 		</AuthContext.Provider>
 	);
