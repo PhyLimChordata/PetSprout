@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import Colours from '../resources/themes/Colours';
 
 const iconWidth = '8vh';
 
@@ -25,13 +26,13 @@ const achievementStyles = (theme) =>
 			borderWidth: 5,
 		},
 		achievementBronze: {
-			borderColor: theme.Bronze,
+			borderColor: Colours.Unique.Bronze,
 		},
 		achievementSilver: {
-			borderColor: theme.Silver,
+			borderColor: Colours.Unique.Silver,
 		},
 		achievementGold: {
-			borderColor: theme.Gold,
+			borderColor: Colours.Unique.Gold,
 		},
 		progressBar: {
 			height: '1vh',

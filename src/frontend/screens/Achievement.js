@@ -1,14 +1,11 @@
-// React
 import React from 'react';
 import { View, Text, Image } from 'react-native';
 import { ProgressBar, SafeAreaView } from 'react-native-paper';
-import { useTheme } from '@react-navigation/native';
 
-// Stylesheet
 import styles from '../styling/Achievement';
-
-// Components
 import MenuHeader from '../components/MenuHeader';
+
+import { useTheme } from '@react-navigation/native';
 
 let achievements = [
 	{

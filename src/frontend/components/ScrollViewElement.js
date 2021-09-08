@@ -2,14 +2,13 @@ import React, { useRef } from 'react';
 import { View, Animated, TouchableOpacity, Image } from 'react-native';
 
 import Swipeable from 'react-native-gesture-handler/Swipeable';
-import ColorSet from '../resources/themes/Colours';
 
 import { useTheme } from '@react-navigation/native';
+import Colours from '../resources/themes/Colours';
 
 import styles from '../styling/Habits';
 
 function ScrollViewElement(props) {
-	const { colors } = useTheme();
 	const swipeableRef = useRef(props.swipe);
 	const leftSwipe = (progress, dragX) => {
 		const scale = dragX.interpolate({
@@ -26,7 +25,7 @@ function ScrollViewElement(props) {
 		return (
 			<View
 				style={{
-					backgroundColor: ColorSet.Red.Tertiary,
+					backgroundColor: Colours.Red.Delete,
 					borderRadius: 8,
 					height: '100%',
 					width: '100%',
@@ -56,7 +55,7 @@ function ScrollViewElement(props) {
 		return (
 			<View
 				style={{
-					backgroundColor: ColorSet.Blue.Tertiary,
+					backgroundColor: Colours.Blue.Confirm,
 					borderRadius: 8,
 					height: '100%',
 					width: '100%',

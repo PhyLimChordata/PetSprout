@@ -1,4 +1,5 @@
 import { StyleSheet, Platform } from 'react-native';
+import Colours from '../resources/themes/Colours';
 
 const authenticationStyles = (theme) =>
 	StyleSheet.create({
@@ -15,7 +16,7 @@ const authenticationStyles = (theme) =>
 			paddingLeft: 10,
 			paddingRight: 10,
 			borderWidth: 1,
-			color: theme.someColor,
+			color: Colours.Grey.TextInput,
 		},
 		textTitle: {
 			fontSize: 20,
@@ -67,7 +68,7 @@ const authenticationStyles = (theme) =>
 			marginBottom: 20,
 		},
 		authenticationSpecialButton: {
-			backgroundColor: theme.Authentication,
+			backgroundColor: Colours.Blue.Authentication,
 			borderRadius: 30,
 			padding: 10,
 			paddingLeft: 40,
@@ -84,7 +85,7 @@ const authenticationStyles = (theme) =>
 			fontWeight: 'bold',
 		},
 		subText: {
-			color: theme.grey,
+			color: Colours.Grey.Default,
 			fontWeight: 'bold',
 		},
 		forgotPassword: {

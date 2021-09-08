@@ -11,7 +11,7 @@ import {
 import Modal from 'react-native-modal';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
-import ColorSet from '../resources/themes/colours';
+import Colours from '../resources/themes/colours';
 
 import { useTheme } from '@react-navigation/native';
 
@@ -27,7 +27,9 @@ function ThemeCircle({ colorTheme, onPress, selected }) {
 					height: 44,
 					width: 44,
 					borderRadius: 22,
-					backgroundColor: selected ? colorTheme.Quinary : colorTheme.Tertiary,
+					backgroundColor: selected
+						? colorTheme.Selected
+						: colorTheme.NotSelected,
 				}}
 				onPress={onPress}>
 				{selected ? (
@@ -38,7 +40,7 @@ function ThemeCircle({ colorTheme, onPress, selected }) {
 							height: 30,
 							width: 30,
 							borderRadius: 15,
-							backgroundColor: colorTheme.Tertiary,
+							backgroundColor: colorTheme.NotSelected,
 						}}
 					/>
 				) : (
@@ -248,27 +250,27 @@ function SideMenu(props) {
 								marginBottom: '6%',
 							}}>
 							<ThemeCircle
-								colorTheme={ColorSet.Green}
+								colorTheme={Colours.Green}
 								selected={color == 'green'}
 								onPress={() => colorChange('green')}
 							/>
 							<ThemeCircle
-								colorTheme={ColorSet.Yellow}
+								colorTheme={Colours.Yellow}
 								selected={color == 'orange'}
 								onPress={() => colorChange('orange')}
 							/>
 							<ThemeCircle
-								colorTheme={ColorSet.Blue}
+								colorTheme={Colours.Blue}
 								selected={color == 'blue'}
 								onPress={() => colorChange('blue')}
 							/>
 							<ThemeCircle
-								colorTheme={ColorSet.Purple}
+								colorTheme={Colours.Purple}
 								selected={color == 'purple'}
 								onPress={() => colorChange('purple')}
 							/>
 							<ThemeCircle
-								colorTheme={ColorSet.Red}
+								colorTheme={Colours.Red}
 								selected={color == 'red'}
 								onPress={() => colorChange('red')}
 							/>

@@ -5,7 +5,6 @@ import { View, Text, TextInput, Image, TouchableOpacity } from 'react-native';
 import styles from '../styling/Authentication';
 
 import { useTheme } from '@react-navigation/native';
-import ColorSet from '../resources/themes/colours';
 
 function PasswordScreen(props) {
 	const { colors } = useTheme();
