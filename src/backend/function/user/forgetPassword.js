@@ -1,4 +1,4 @@
-const User = require('../../schemas/userSchema');
+const User = require('../../schemas/UserSchemas');
 const Mailing = require('../../schemas/mailingValidationSchema');
 
 const nodemailer = require('nodemailer');

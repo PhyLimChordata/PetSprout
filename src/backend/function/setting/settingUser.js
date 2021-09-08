@@ -1,4 +1,4 @@
-const Setting = require('../../schemas/settingSchema');
+const Setting = require('../../schemas/SettingSchemas');
 
 const get_user_setting = async (req, res) => {
 	try {

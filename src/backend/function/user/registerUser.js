@@ -1,10 +1,10 @@
 const { validationResult } = require('express-validator');
 const nodemailer = require('nodemailer');
 const smtpTransport = require('nodemailer-smtp-transport');
-const User = require('../../schemas/userSchema');
-const Habit = require('../../schemas/habitSchema');
+const User = require('../../schemas/UserSchemas');
+const Habit = require('../../schemas/HabitSchemas');
 const Mailing = require('../../schemas/mailingValidationSchema');
-const Setting = require('../../schemas/settingSchema');
+const Setting = require('../../schemas/SettingSchemas');
 const bcryptjs = require('bcryptjs');
 
 const user_regist = async (req, res) => {

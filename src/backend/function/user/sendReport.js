@@ -1,4 +1,4 @@
-const User = require('../../schemas/userSchema');
+const User = require('../../schemas/UserSchemas');
 
 const nodemailer = require('nodemailer');
 const smtpTransport = require('nodemailer-smtp-transport');
