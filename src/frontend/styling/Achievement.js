@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import Colours from '../resources/themes/Colourss';
+import Colours from '../resources/themes/Colours';
 
 const iconWidth = '8vh';
 

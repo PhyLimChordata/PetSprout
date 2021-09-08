@@ -10,7 +10,7 @@ import {
 import Modal from 'react-native-modal';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
-import Colours from '../resources/themes/Colourss';
+import Colours from '../resources/themes/Colours';
 import { useTheme } from '@react-navigation/native';
 
 function ThemeCircle({ colorTheme, onPress, selected }) {
