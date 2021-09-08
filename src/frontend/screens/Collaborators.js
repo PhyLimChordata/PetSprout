@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View } from 'react-native';
 import Header from '../components/MenuHeader';
-import CollaboratorContent from '../components/CollaboratorContent';
+import CollaboratorContent from '../components/collaboratorContents';
 
 function Collaborators(props) {
 	const [content, setContent] = useState('name');

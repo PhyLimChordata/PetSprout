@@ -27,7 +27,9 @@ function ThemeCircle({ colorTheme, onPress, selected }) {
 					height: 44,
 					width: 44,
 					borderRadius: 22,
-					backgroundColor: selected ? colorTheme.Selected : colorTheme.NotSelected,
+					backgroundColor: selected
+						? colorTheme.Selected
+						: colorTheme.NotSelected,
 				}}
 				onPress={onPress}>
 				{selected ? (

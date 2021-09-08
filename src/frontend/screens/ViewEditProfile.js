@@ -1,15 +1,11 @@
-// React
 import React, { useEffect } from 'react';
 import { View, Text, TextInput, Pressable, SafeAreaView } from 'react-native';
 import { useTheme } from '@react-navigation/native';
 
-// Stylesheet
 import styles from '../styling/ViewEditBox';
 
-// Components
 import MenuHeader from '../components/MenuHeader';
 
-// Profile of the user
 function ViewEditProfile(props) {
 	const { colors } = useTheme();
 	let data = {
