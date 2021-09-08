@@ -6,7 +6,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 // Navigation
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, useTheme } from '@react-navigation/native';
 
 //Screens
 import BottomMenu from './frontend/components/BottomMenu';
@@ -28,20 +28,18 @@ import CreateHabitScreen from './frontend/screens/CreateHabit';
 import ComingSoonScreen from './frontend/screens/ComingSoon';
 
 // Colour Themes
-import GreenLightTheme from './frontend/resources/themes/light/GreenTheme';
-import OrangeLightTheme from './frontend/resources/themes/light/OrangeTheme';
-import BlueLightTheme from './frontend/resources/themes/light/BlueTheme';
-import PurpleLightTheme from './frontend/resources/themes/light/PurpleTheme';
-import RedLightTheme from './frontend/resources/themes/light/RedTheme';
-import GreenDarkTheme from './frontend/resources/themes/dark/GreenTheme';
-import OrangeDarkTheme from './frontend/resources/themes/dark/OrangeTheme';
-import BlueDarkTheme from './frontend/resources/themes/dark/BlueTheme';
-import PurpleDarkTheme from './frontend/resources/themes/dark/PurpleTheme';
-import RedDarkTheme from './frontend/resources/themes/dark/RedTheme';
+import GreenLightTheme from './frontend/resources/themes/light/GreenThemes';
+import OrangeLightTheme from './frontend/resources/themes/light/OrangeThemes';
+import BlueLightTheme from './frontend/resources/themes/light/BlueThemes';
+import PurpleLightTheme from './frontend/resources/themes/light/PurpleThemes';
+import RedLightTheme from './frontend/resources/themes/light/RedThemes';
+import GreenDarkTheme from './frontend/resources/themes/dark/GreenThemes';
+import OrangeDarkTheme from './frontend/resources/themes/dark/OrangeThemes';
+import BlueDarkTheme from './frontend/resources/themes/dark/BlueThemes';
+import PurpleDarkTheme from './frontend/resources/themes/dark/PurpleThemes';
+import RedDarkTheme from './frontend/resources/themes/dark/RedThemes';
 
-import { useTheme } from '@react-navigation/native';
-
-import { AuthContext } from './frontend/Context';
+import { AuthContext } from './frontend/Contexts';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -53,8 +51,8 @@ export default function App() {
 	const [mode, setMode] = useState('light');
 	const authContext = useMemo(() => {
 		return {
-			logIn: (token) => {
-				setToken(token);
+			logIn: (generatedToken) => {
+				setToken(generatedToken);
 			},
 			signOut: () => {
 				setToken(null);

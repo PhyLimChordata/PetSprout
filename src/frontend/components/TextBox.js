@@ -1,5 +1,6 @@
 import { Text, TextInput, View } from 'react-native';
 import React, { useState } from 'react';
+
 import styles from '../styling/Authentication';
 
 import { useTheme } from '@react-navigation/native';

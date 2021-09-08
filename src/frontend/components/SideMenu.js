@@ -1,6 +1,5 @@
 import React, { useState, useContext } from 'react';
-// import Toggle from 'react-native-toggle-element';
-import { AuthContext } from '../Context';
+import { AuthContext } from '../Contexts';
 import {
 	View,
 	Text,
@@ -12,11 +11,9 @@ import Modal from 'react-native-modal';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import Colours from '../resources/themes/colours';
-
 import { useTheme } from '@react-navigation/native';
 
 function ThemeCircle({ colorTheme, onPress, selected }) {
-	const { getColor } = useContext(AuthContext);
 	return (
 		<View>
 			<TouchableOpacity

@@ -1,12 +1,11 @@
 import React, { useRef } from 'react';
 import { View, Animated, TouchableOpacity, Image } from 'react-native';
-
 import Swipeable from 'react-native-gesture-handler/Swipeable';
 
-import { useTheme } from '@react-navigation/native';
-import Colours from '../resources/themes/Colours';
-
 import styles from '../styling/Habits';
+
+import Colours from '../resources/themes/Colours';
+import { useTheme } from '@react-navigation/native';
 
 function ScrollViewElement(props) {
 	const swipeableRef = useRef(props.swipe);
