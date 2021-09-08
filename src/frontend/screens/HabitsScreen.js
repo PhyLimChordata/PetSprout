@@ -9,7 +9,7 @@ import ExperienceBar from '../components/ExperienceBar';
 
 import { useTheme } from '@react-navigation/native';
 
-import { AuthContext } from '../Contexts';
+import { AuthContext } from '../Context';
 
 function HabitsScreen(props) {
 	const [habits, setHabits] = useState([]);

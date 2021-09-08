@@ -6,7 +6,7 @@ import Ellipsis from './Ellipsis';
 import Counter from './Counter';
 import ScrollViewElement from './ScrollViewElement';
 
-import { AuthContext } from '../Contexts';
+import { AuthContext } from '../Context';
 import { useTheme } from '@react-navigation/native';
 
 function Habits(props) {

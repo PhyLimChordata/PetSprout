@@ -3,7 +3,7 @@ import { View, Text, TextInput, Image, TouchableHighlight } from 'react-native';
 
 import styles from '../styling/Authentication';
 import { useTheme } from '@react-navigation/native';
-import { AuthContext } from '../Contexts';
+import { AuthContext } from '../Context';
 
 function NewPassword(props) {
 	const [password, setPassword] = useState('');

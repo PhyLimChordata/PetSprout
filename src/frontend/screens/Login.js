@@ -4,7 +4,7 @@ import { View, Text, TextInput, Image, TouchableOpacity } from 'react-native';
 
 import styles from '../styling/Authentication';
 
-import { AuthContext } from '../Contexts';
+import { AuthContext } from '../Context';
 import { useTheme } from '@react-navigation/native';
 
 function Login(props) {
