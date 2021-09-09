@@ -1,15 +1,15 @@
 import React, {useState, useContext} from 'react'
-import ColorSet from '../resources/themes/Global'
+import ColorSet from '../../resources/themes/Global'
 import { View, Text, TouchableOpacity, ScrollView } from 'react-native'
 import {SafeAreaView} from 'react-native';
-import MenuHeader from "../components/MenuHeader";
-import styles from "../styling/Header";
-import TextBox from "../components/TextBox";
+import MenuHeader from "../../components/MenuHeader";
+import styles from "../../styling/Header";
+import TextBox from "../../components/TextBox";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
-import TimeTab from "../components/TimeTab";
-import { AuthContext } from "../context"
-import ScrollViewElement from "../components/ScrollViewElement";
-import BottomPopup from "../components/BottomPopup";
+import TimeTab from "../../components/TimeTab";
+import { AuthContext } from "../../context"
+import ScrollViewElement from "../../components/ScrollViewElement";
+import BottomPopup from "../../components/BottomPopup";
 const Day = ({selected, letter, onPress}) => (
     <TouchableOpacity onPress={onPress} style={{alignItems:"center", width:40, height:40,
         backgroundColor: selected ? ColorSet.Green.Tertiary : ColorSet.white,
@@ -20,26 +20,18 @@ const Day = ({selected, letter, onPress}) => (
 )
 
 
-function CreateHabitScreen(props) {
+function PutHabits(props) {
+    // console.log("REEEEEEEEEEEEEEE")
+    console.log(props)
     let popup = React.useRef();
-    const [days, setDays] = useState([
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-    ]);
-    const [alarms, setAlarms] = useState([]);
+    const [days, setDays] = useState(props.days);
+    const [alarms, setAlarms] = useState(props.alarms);
     const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
-    const [title, setTitle] = useState('');
-    const [description, setDescription] = useState('');
-    const [reason, setReason] = useState('');
+    const [title, setTitle] = useState(props.title);
+    const [description, setDescription] = useState(props.description);
+    const [reason, setReason] = useState(props.reason);
     const {getToken} = useContext(AuthContext);
     const [popupText, setPopupText] = useState('');
-
-
     const createHabit = () => {
         fetch('http://localhost:5000/api/v1.0.0/habit/create_habit', {
             method: 'POST',
@@ -59,8 +51,8 @@ function CreateHabitScreen(props) {
         })
             .then((res) => {
                 res.json().then((data) => {
-                    console.log(data);
-                    console.log(res.status)
+                    // console.log(data);
+                    // console.log(res.status)
                     if (res.status == 200) {
                         props.navigation.goBack(null)
                     } else {
@@ -71,6 +63,38 @@ function CreateHabitScreen(props) {
             })
             .catch();
     };
+    const modifyHabit = () => {
+        fetch('http://localhost:5000/api/v1.0.0/habit/change_habit/' + props.userHabitId + '/' + props.habitId, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'authentication-token': getToken,
+            },
+            body: JSON.stringify({
+                title: title,
+                description: description,
+                reason: reason,
+                schedule: days,
+                date: new Date(),
+                times: alarms.length,
+                alarm: alarms,
+            }),
+        })
+            .then((res) => {
+                res.json().then((data) => {
+                    // console.log(data);
+                    // console.log(res.status)
+                    if (res.status == 200) {
+                        props.navigation.goBack(null)
+                    } else {
+                        setPopupText( 'The provided information cannot be saved');
+                        popup.current?.togglePopup()
+                    }
+                });
+            })
+            .catch();
+    };
+    const onPress = props.isCreate ? () => createHabit() : () => modifyHabit()
 
     function flipDay(index) {
         let newArr = [...days];
@@ -89,7 +113,7 @@ function CreateHabitScreen(props) {
                 break;
             }
         }
-            setAlarms([...alarms, time].sort());
+        setAlarms([...alarms, time].sort());
     }
 
     function removeAlarm(index) {
@@ -98,7 +122,7 @@ function CreateHabitScreen(props) {
     }
 
     function getPrettyDate(time) {
-        let localeSpecificTime = time.toLocaleTimeString();
+        let localeSpecificTime = new Date(time).toLocaleTimeString();
         return localeSpecificTime.replace(/:\d+ /, ' ');
     }
 
@@ -122,20 +146,21 @@ function CreateHabitScreen(props) {
         borderRadius: 5,
         marginBottom: 20
     }
+    // console.log(title)
     return (
         <SafeAreaView style={styles.headContainer}>
-            <MenuHeader back={true} text={"Create Habit"} navigation={props.navigation}
+            <MenuHeader back={true} text={props.header} navigation={props.navigation}
                         right={
-                            <TouchableOpacity onPress={() => createHabit()}>
-                                <Text style={styles.headerText}> Create</Text>
+                            <TouchableOpacity onPress={() => onPress()}>
+                                <Text style={styles.headerText}> {props.buttonText} </Text>
                             </TouchableOpacity>}
             />
             <ScrollView>
                 <View style={{marginHorizontal: 30, marginTop: 10}}>
-                    <TextBox header={"Title"} boxStyle={textboxSmallStyle} multiline={true} setText={setTitle}/>
+                    <TextBox header={"Title"} boxStyle={textboxSmallStyle} multiline={true} setText={setTitle} text={title}/>
                     <TextBox header={"Description"} boxStyle={textboxBigStyle} multiline={true}
-                             setText={setDescription}/>
-                    <TextBox header={"Your Why"} boxStyle={textboxSmallStyle} multiline={true} setText={setReason}/>
+                             setText={setDescription} text={description}/>
+                    <TextBox header={"Your Why"} boxStyle={textboxSmallStyle} multiline={true} setText={setReason} text={reason}/>
                     <Text style={{fontSize: 20, fontWeight: 'bold', color: ColorSet.Green.Quaternary}}>Schedule</Text>
                     <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
                         <Day letter={'S'} selected={days[0]} onPress={() => flipDay(0)}/>
@@ -158,10 +183,10 @@ function CreateHabitScreen(props) {
                     <View>
                         {alarms.map((time, index) => {
                             return (<View key={index}>
-                                <ScrollViewElement
-                                    leftFunction={() => removeAlarm(index)}
-                                    leftClose={true}
-                                    content={<TimeTab time={getPrettyDate(time)}/>}/>
+                                    <ScrollViewElement
+                                        leftFunction={() => removeAlarm(index)}
+                                        leftClose={true}
+                                        content={<TimeTab time={getPrettyDate(time)}/>}/>
                                     <View style={{marginVertical:7}}/>
                                 </View>
                             )
@@ -185,4 +210,4 @@ function CreateHabitScreen(props) {
     )
 }
 
-export default CreateHabitScreen;
+export default PutHabits;

@@ -22,19 +22,16 @@ function MenuHeader(props) {
 			{props.children}
 			{hp.map (() => {
 				return (
-					<View style={{alignContent:'flex-end', height:30, width:30, margin: 2}}>
 						<Image
-						style={{ height: 30, width: 30, resizeMode: 'contain',
+						style={{ height: 30, width: 30, resizeMode: 'contain',margin: 2
 					}}
 						source={require('../resources/images/Heart.png')}
-				/> </View>
+				/>
 				);
 			})}
 			<View style={{alignContent:'flex-end', height:25}}>
 				{props.right}
 			</View>
-
-
 		</View>
 	);
 }

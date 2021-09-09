@@ -42,9 +42,10 @@ router.post(
 	sendReport.sendFeedbackReport
 );
 
-router.get('/viewAccount', getUserAccount.viewAccount);
+router.get('/viewAccount', authentication, getUserAccount.viewAccount);
 
-router.put('/modifyAccount', getUserAccount.modifyAccount);
+router.put('/modifyAccount', authentication, getUserAccount.modifyAccount);
+
 
 router.post(
     '/pending_password', 

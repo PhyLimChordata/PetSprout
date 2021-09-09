@@ -3,8 +3,11 @@ import React, {useState} from "react";
 import styles from "../styling/Authentication";
 
 function TextBox(props) {
+    // console.log(props)
+    // console.log("BRUH")
+    // console.log(props.text)
     const {containerStyle, boxStyle = styles.AuthenticationInput, TextStyle= styles.AuthenticationText, multiline = false } = props
-    const [text, setText] = useState('');
+    const [text, setText] = useState(props.text);
 
     return (
         <View style={containerStyle}>

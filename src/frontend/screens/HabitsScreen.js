@@ -21,14 +21,15 @@ function HabitsScreen(props) {
 	const [hearts, setHearts] = useState([]);
 	const [userHabitId, setUserHabitId] = useState('');
 	const [experience, setExperience] = useState('');
-  
+	const [displayed, setDisplayed] = useState(false);
+
 	const [level, setLevel] = useState('');
 	const scrolling = React.useRef(new Animated.Value(0)).current;
 
 	const { getToken } = useContext(AuthContext);
 
 	useEffect(() => {
-		if (habits.length == 0) displayHabits();
+		if (habits.length == 0 && !displayed) displayHabits();
 	});
 
 	const displayHabits = () => {
@@ -54,7 +55,7 @@ function HabitsScreen(props) {
 						heartValue.push(i);
 					}
 					setHearts(heartValue);
-
+					setDisplayed(true);
 					console.log(data);
 				})
 			)
@@ -62,7 +63,7 @@ function HabitsScreen(props) {
 	};
 	return (
 		<SafeAreaView style={styles.headContainer}>
-			<MenuHeader text="" navigation={props.navigation} hp={hearts}/>
+			<MenuHeader text="" navigation={props.navigation} hp={hearts} />
 			<View style={styles.verticalContainer}>
 				<Image
 					style={styles.creature}
@@ -73,7 +74,6 @@ function HabitsScreen(props) {
 					exp={experience}
 					width={experience + '%'}
 				/>
-
 			</View>
 			<View style={styles.scrollViewContainer}>
 				<Animated.ScrollView
@@ -85,6 +85,8 @@ function HabitsScreen(props) {
 					decelerationRate={'normal'}
 				>
 					{habits.map((data, index) => {
+						console.log(habits)
+						console.log('dud')
 						if (data.times - data.todo > 0) {
 							const scale = scrolling.interpolate({
 								inputRange: [-1, 0, 100 * index, 100 * (index + 1)],
@@ -96,11 +98,12 @@ function HabitsScreen(props) {
 								outputRange: [1, 1, 1, 0],
 							});
 
-
 							return (
 								<View>
 									<Animated.View style={{ opacity, transform: [{ scale }] }}>
 										<Habits
+											navigation={props.navigation}
+											habitId={data._id}
 											name={data.title}
 											streak={1}
 											frequency={data.times - data.todo}
@@ -113,7 +116,6 @@ function HabitsScreen(props) {
 								</View>
 							);
 						}
-
 					})}
 				</Animated.ScrollView>
 			</View>

@@ -32,6 +32,7 @@ connection.once('open', () => {
 app.use('/example', require('./routes/example'));
 app.use('/api/v1.0.0/user', require('./routes/userRoute'));
 app.use('/api/v1.0.0/habit', require('./routes/habitRoute'));
+//localhost:5000/api/v1.0.0/user
 
 app.listen(port, () => {
 	console.log(`Server is running on port: ${port}`);

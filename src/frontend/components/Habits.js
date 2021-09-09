@@ -57,7 +57,7 @@ function Habits(props) {
 								<Text style={styles.textTitle}>{Capitalize(props.name)}</Text>
 							</View>
 							<View style={styles.container}>
-								<Ellipsis />
+								<Ellipsis onPress={() => props.navigation.navigate('ModifyHabitScreen', {habitId:props.habitId, userHabitId:props.userHabitId} )}/>
 								<View style={styles.horizontalContainerBottom}>
 									<Counter
 										quantity={streak}
