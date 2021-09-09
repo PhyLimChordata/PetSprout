@@ -12,7 +12,7 @@ import styles from '../../styling/Header';
 import TextBox from '../../components/TextBox';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import TimeTab from '../../components/TimeTab';
-import { AuthContext } from '../../context';
+import { AuthContext } from '../../Context';
 import ScrollViewElement from '../../components/ScrollViewElement';
 import BottomPopup from '../../components/BottomPopup';
 
@@ -60,7 +60,7 @@ function PutHabits(props) {
 	const { getToken } = useContext(AuthContext);
 	const [popupText, setPopupText] = useState('');
 
-    const {colors} = useTheme();
+	const { colors } = useTheme();
 	const createHabit = () => {
 		fetch('http://localhost:5000/api/v1.0.0/habit/create_habit', {
 			method: 'POST',
@@ -117,7 +117,7 @@ function PutHabits(props) {
 		)
 			.then((res) => {
 				res.json().then((data) => {
-					// console.log(data);
+					console.log(data);
 					// console.log(res.status)
 					if (res.status == 200) {
 						props.navigation.goBack(null);
@@ -220,7 +220,7 @@ function PutHabits(props) {
 						style={{
 							fontSize: 20,
 							fontWeight: 'bold',
-							color: ColorSet.Green.Quaternary,
+							color: colors.Quaternary,
 						}}>
 						Schedule
 					</Text>
@@ -239,7 +239,7 @@ function PutHabits(props) {
 							style={{
 								width: 200,
 								height: 50,
-								backgroundColor: ColorSet.Green.Tertiary,
+								backgroundColor: colors.Tertiary,
 								alignItems: 'center',
 								justifyContent: 'center',
 								borderRadius: 20,
@@ -249,7 +249,7 @@ function PutHabits(props) {
 								style={{
 									fontSize: 20,
 									fontWeight: 'bold',
-									color: ColorSet.Green.Quinary,
+									color: colors.Quinary,
 								}}>
 								Add An Alarm
 							</Text>
