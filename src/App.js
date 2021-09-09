@@ -41,6 +41,8 @@ import RedDarkTheme from './frontend/resources/themes/dark/RedTheme';
 
 import { AuthContext } from './frontend/Context';
 
+import * as Linking from 'expo-linking';
+
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 
@@ -68,6 +70,18 @@ export default function App() {
 			getMode: mode,
 		};
 	}, [token, setToken, color, setColor, mode, setMode]);
+
+	//TODO
+	const prefix = "habipets";
+	const linking = {
+		prefixes: [prefix],
+		config: {
+			screens: {
+				SignupScreen: '*',
+				LoginScreen: 'login',
+			},
+		},
+	};
 
 	// "Main" or start of program
 	return (
