@@ -15,10 +15,11 @@ const { validationResult } = require('express-validator');
 module.exports = async (req, res) => {
 	try {
 		let errors = validationResult(req);
+		console.log(errors);
 		if (!errors.isEmpty())
 			return res.status(400).json({ error: errors.array() });
 
-		let { expValue } = req.body;
+		let { expValue, date } = req.body;
 
 		let user = await User.findById(req.user.id).select('-password');
 		if (!user) return res.status(404).json('User could not found');
@@ -32,19 +33,43 @@ module.exports = async (req, res) => {
 		if (!habitFromDB)
 			return res.status(404).json("Habit could not find in user's habits");
 
-		let numberOfFinish = habitFromDB.todo;
-		habitFromDB.todo = numberOfFinish + 1;
+		habitFromDB.todo = habitFromDB.todo + 1;
 		userHabit.expValue = expValue;
+
+		if(habitFromDB.todo === habitFromDB.times) {
+			habitFromDB.continuous = habitFromDB.continuous + 1;
+			let current = new Date(date);
+		    let current_date = current.getDate();
+		    let current_day = current.getDay();
+		    let nextSignInDate = null;
+		    if (newSchedule.includes(current_day.toString())) {
+		    	nextSignInDate = current;
+		    } else {
+		    	let index = current_day;
+		    	let interval = 0;
+		    	while (!newSchedule.includes(index.toString())) {
+		    		if (index === 6) index = 0;
+		    		else index ++;
+		    		interval ++;
+		    	}
+			    nextSignInDate = current.setDate(current_date + interval);
+			    nextSignInDate = new Date(nextSignInDate);
+		    }
+		}
 
 		let anaylzeId = habitFromDB.analyze;
 		let analyze = await Analyze.findById(anaylzeId);
 		if (!analyze) return res.status(404).json("User habit's analyze not found");
 
+		console.log(analyze);
 		// need to change to user time
-		const date = new Date();
+		// const date = new Date();
 		let analyze_data = analyze.freq.find(
-			(data) => data.date.toString() === date.toString()
-		);
+			(data) =>
+			data.date.getFullYear().toString() === date.getFullYear().toString() &&
+			data.date.getMonth().toString() === date.getMonth().toString() &&
+			data.date.getDate().toString() === date.getDate().toString()
+		)
 
 		if (!analyze_data) {
 			let newData = {

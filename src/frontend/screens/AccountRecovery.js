@@ -85,7 +85,7 @@ function PasswordScreen(props) {
 				source={require('../resources/images/Logo.png')}
 			/>
 			<View style={styles(colors).header}>
-				<Text style={styles(colors).textTitle}>Forgot your Password?</Text>
+				<Text style={styles(colors).textTitle}>Account Recovery</Text>
 				<Text style={styles(colors).explanationText}>
 					{' '}
 					Enter either your Email or Username and an email will be sent with

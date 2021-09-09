@@ -18,7 +18,8 @@ module.exports = async (req, res) => {
 		if (!errors.isEmpty())
 			return res.status(400).json({ error: errors.array() });
 
-		let { title, description, reason, schedule, times, alarm } = req.body;
+		let { title, description, reason, schedule, times, alarm, date } =
+			req.body;
 
 		let newAnalyze = new Analyze({});
 		await newAnalyze.save();
@@ -43,8 +44,26 @@ module.exports = async (req, res) => {
 		for (const element of schedule) {
 			if (element === true) newSchedule.push(i.toString());
 			i++;
-		}
+ 	    }
 
+		let current = new Date(date);
+		let current_date = current.getDate();
+		let current_day = current.getDay();
+		let nextSignInDate = null;
+		if (newSchedule.includes(current_day.toString())) {
+			nextSignInDate = current;
+		} else {
+			let index = current_day;
+			let interval = 0;
+			while (!newSchedule.includes(index.toString())) {
+				if (index === 6) index = 0;
+				else index ++;
+				interval ++;
+			}
+			nextSignInDate = current.setDate(current_date + interval);
+			nextSignInDate = new Date(nextSignInDate);
+		}
+	
 		let newHabit = {
 			analyze: newAnalyze._id,
 			title,
@@ -53,6 +72,7 @@ module.exports = async (req, res) => {
 			schedule: newSchedule,
 			times,
 			alarm,
+			nextSignInDate
 		};
 
 		userHabit.habitList.push(newHabit);

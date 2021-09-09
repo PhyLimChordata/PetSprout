@@ -30,7 +30,7 @@ module.exports = async (req, res) => {
 		if (!errors.isEmpty())
 			return res.status(400).json({ error: errors.array() });
 
-		let { title, description, reason, schedule, times, alarm } = req.body;
+		let { title, description, reason, schedule, times, alarm, date } = req.body;
 
 		if (
 			schedule === [false, false, false, false, false, false, false] ||
@@ -47,12 +47,31 @@ module.exports = async (req, res) => {
 			i++;
 		}
 
+		let current = new Date(date);
+		let current_date = current.getDate();
+		let current_day = current.getDay();
+		let nextSignInDate = null;
+		if (newSchedule.includes(current_day.toString())) {
+			nextSignInDate = current;
+		} else {
+			let index = current_day;
+			let interval = 0;
+			while (!newSchedule.includes(index.toString())) {
+				if (index === 6) index = 0;
+				else index ++;
+				interval ++;
+			}
+			nextSignInDate = current.setDate(current_date + interval);
+			nextSignInDate = new Date(nextSignInDate);
+		}
+
 		habitFromDB.title = title;
 		habitFromDB.description = description;
 		habitFromDB.reason = reason;
 		habitFromDB.schedule = newSchedule;
 		habitFromDB.times = times;
 		habitFromDB.alarm = alarm;
+		habitFromDB.nextSignInDate = nextSignInDate;
 
 		await userHabit.save();
 		res.json(habitFromDB);

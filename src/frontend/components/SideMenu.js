@@ -162,8 +162,7 @@ function SideMenu(props) {
 								style={{ height: 40, justifyContent: 'center' }}
 								onPress={() => {
 									props.setModalVisible(false);
-									// console.log(props);
-									// props.navigation.navigate('SettingsScreen');
+									props.navigation.navigate('SettingsScreen');
 								}}>
 								<MaterialCommunityIcons
 									name='cog'
@@ -204,11 +203,19 @@ function SideMenu(props) {
 								color={colors.Quaternary}
 								icon={'star'}
 								title={'Achievements'}
+								onPress={() => {
+									props.setModalVisible(false);
+									props.navigation.navigate('AchievementScreen');
+								}}
 							/>
 							<Tab
 								color={colors.Quaternary}
 								icon={'account-circle'}
 								title={'Account'}
+								onPress={() => {
+									props.setModalVisible(false);
+									props.navigation.navigate('ProfileScreen');
+								}}
 							/>
 							<Tab
 								color={colors.Quaternary}

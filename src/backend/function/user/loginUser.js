@@ -13,6 +13,8 @@ module.exports = async (req, res) => {
 
 		let { primaryInfo, password, date } = req.body;
 
+		
+
 		let email = '';
 		let userName = '';
 
@@ -49,6 +51,7 @@ module.exports = async (req, res) => {
 
 			// var current = new Date();
 			var current = new Date(date);
+			let userHabit = await Habit.findOne({ user: user._id });
 			var currentYear = current.getFullYear();
 			var currentMonth = current.getMonth();
 			var currentDate = current.getDate();
@@ -57,14 +60,22 @@ module.exports = async (req, res) => {
 				lastLoginMonth !== currentMonth ||
 				lastLoginYear !== currentYear
 			) {
-				let userHabit = await Habit.findOne({ user: user._id });
 				if (userHabit.habitList !== null) {
 					for (const habit of userHabit.habitList) {
 						habit.todo = 0;
 					}
-				}
-				userHabit.save();
+				}	
 			}
+			if(userHabit.habitList !== null) {
+				for(const habit of userHabit.habitList){
+					let next = new Date(habit.nextSignInDate);
+			        var nextDate = next.getDate();
+					if(next < current && nextDate !== currentDate) {
+						habit.continuous = 0;
+					}
+				}
+			}
+			userHabit.save();
 		}
 
 		user.lastlogin = date;

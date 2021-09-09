@@ -49,6 +49,13 @@ const HabitSchema = new Schema(
 					type: Number,
 					default: 0,
 				},
+				continuous: {
+					type: Number,
+					default: 0,
+				},
+				nextSignInDate: {
+					type: Date,
+				}
 			},
 		],
 	},

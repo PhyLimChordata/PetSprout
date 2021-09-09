@@ -61,7 +61,7 @@ function Habits(props) {
 								</Text>
 							</View>
 							<View style={styles(colors).container}>
-								<Ellipsis />
+							<Ellipsis onPress={() => props.navigation.navigate('ModifyHabitScreen', {habitId:props.habitId, userHabitId:props.userHabitId} )}/>
 								<View style={styles(colors).horizontalContainerBottom}>
 									<Counter
 										quantity={streak}

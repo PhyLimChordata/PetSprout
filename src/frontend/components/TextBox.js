@@ -13,7 +13,7 @@ function TextBox(props) {
 		TextStyle = styles(colors).authenticationText,
 		multiline = false,
 	} = props;
-	const [text, setText] = useState('');
+	const [text, setText] = useState(props.text);
 
 	return (
 		<View style={containerStyle}>

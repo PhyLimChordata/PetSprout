@@ -2,60 +2,67 @@ import { StyleSheet } from 'react-native';
 
 const fontSize = 13;
 
-const settingStyles = (theme) =>
-	StyleSheet.create({
-		container: {
-			display: 'flex',
-			alignItems: 'center',
-			justifyContent: 'center',
-		},
-		settingContainer: {
-			width: '80vw',
-		},
-		oneSettingContainer: {
-			width: '100%',
-			flexDirection: 'row',
-			justifyContent: 'space-between',
-			marginTop: '1vh',
-			marginBottom: '1vh',
-		},
-		header: {
-			flex: 1.5,
-			flexDirection: 'row',
-			alignItems: 'flex-start',
-			paddingLeft: 20,
-			paddingRight: 20,
-			paddingTop: 50,
-		},
-		text: {
-			fontStyle: 'normal',
-			fontWeight: '700',
-			fontSize: fontSize,
-		},
-		textDisplayMargin: {
-			paddingLeft: '7vw',
-			marginRight: 100,
-			marginTop: 0,
-			marginBottom: '2vh',
-		},
-		textDisplay: {
-			fontStyle: 'normal',
-			fontWeight: '700',
-			fontSize: fontSize,
-		},
-		textTitle: {
-			width: '100%',
-			textAlign: 'left',
-			color: theme.Tertiary,
-		},
-		textNormal: {
-			textAlign: 'left',
-			color: theme.Quaternary,
-		},
-		switchStyling: {
-			justifyContent: 'center',
-			height: '3vh',
-		},
-	});
-
-export default settingStyles;
+export default class StyleSheetFactory {
+    
+    static getSheet(width, height) {
+        console.log("settings screen width = " + width)
+        return StyleSheet.create({
+            container: {
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+            },
+            header: {
+                flex: 1.5,
+                flexDirection: 'row',
+                alignItems: 'flex-start',
+                paddingLeft: 20,
+                paddingRight: 20,
+                paddingTop: 50,
+            },
+            settingContainer: {
+                marginRight: '5%',
+                marginLeft: '5%',
+                width: width * 0.8,
+            },
+            oneSettingContainer: {
+                display: 'flex',
+                flexDirection: 'row',
+                justifyContent: 'center',
+                marginTop: '7%',
+                marginBottom: '2%',
+            },
+            text:{
+                fontStyle: "normal",
+                fontWeight: "700",
+                fontSize: fontSize,
+            },
+            textDisplayMargin: {
+                paddingLeft: '7%',
+                marginRight: 100,
+                marginTop: 0,
+                marginBottom: '2%',
+            },
+            textDisplay: {
+                fontStyle: "normal",
+                fontWeight: "700",
+                fontSize: fontSize,
+            },
+            textTitle: {
+                width: '100%',
+                textAlign: 'left',
+                // color: ColorSet.Green.Tertiary
+                color: 'red'
+            },
+            textNormal: {
+                textAlign: 'left',
+                width: '100%',
+                // color: ColorSet.Green.Quaternary
+				color: 'red'
+            },
+            switchStyling: {
+                height: '3%',
+            }
+        })
+    }
+}

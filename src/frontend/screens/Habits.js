@@ -46,6 +46,7 @@ function HabitsScreen(props) {
 					setExperience((expValue % 100).toString());
 					setLevel(Math.floor(expValue / 100).toString());
 
+					console.log(getToken);
 					//Displaying purposes
 					const heartValue = [];
 					for (var i = 0; i < data.heart; i++) {
@@ -82,6 +83,8 @@ function HabitsScreen(props) {
 					)}
 					decelerationRate={'normal'}>
 					{habits.map((data, index) => {
+						console.log(habits);
+						console.log('dud');
 						if (data.times - data.todo > 0) {
 							const scale = scrolling.interpolate({
 								inputRange: [-1, 0, 100 * index, 100 * (index + 1)],
@@ -97,6 +100,8 @@ function HabitsScreen(props) {
 								<View>
 									<Animated.View style={{ opacity, transform: [{ scale }] }}>
 										<Habits
+											navigation={props.navigation}
+											habitId={data._id}
 											name={data.title}
 											streak={1}
 											frequency={data.times - data.todo}
