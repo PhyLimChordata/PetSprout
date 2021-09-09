@@ -80,6 +80,7 @@ export default function App() {
 					<Stack.Navigator headerMode="none">
 						<Stack.Screen name="HomeScreen" component={HomeScreen} />
 						<Stack.Screen name="AchievementScreen" component={AchievementScreen} />
+						<Stack.Screen name="ProfileScreen" component={ProfileEdit} />
 						<Stack.Screen name="SettingsScreen" component={SettingsPage} />
 						<Stack.Screen name="CreateHabitScreen" component={CreateHabitScreen} />
 						<Stack.Screen name="ModifyHabitScreen" component={ModifyHabitScreen} />
@@ -138,7 +139,7 @@ function HomeScreen(props) {
 			>
 				<Tab.Screen
 					name="Habit"
-					component={AchievementPage}
+					component={HabitsScreen}
 					options={{
 						tabBarLabel: 'Habit',
 						tabBarIcon: ({ color, size }) => (
@@ -152,7 +153,7 @@ function HomeScreen(props) {
 				/>
 				<Tab.Screen
 					name="Calender"
-					component={SettingsPage}
+					component={ComingSoon}
 					options={{
 						tabBarLabel: 'Calender',
 						tabBarIcon: ({ color, size }) => (

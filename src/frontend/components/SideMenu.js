@@ -8,8 +8,6 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 
 import ColorSet from "../resources/themes/Global";
 
-import ProfileEdit from "../screens/ViewEditProfile"
-
 async function setLocalInfoTheme(color) {
     try {
         return await AsyncStorage.setItem('@ColorTheme:key', JSON.stringify(color));
@@ -166,7 +164,7 @@ function SideMenu(props) {
                                               onPress={() => {
                                                   props.setModalVisible(false);
                                                   // console.log(props);
-                                                  // props.navigation.navigate('SettingsScreen');
+                                                  props.navigation.navigate('SettingsScreen');
                                               }}>
                                 <MaterialCommunityIcons name="cog" color={"white"} size={40}/>
                             </TouchableOpacity>
@@ -185,7 +183,10 @@ function SideMenu(props) {
                                 props.setModalVisible(false)
                                 props.navigation.navigate("AchievementScreen");
                             }}/>
-                            <Tab color={colorTheme.Tertiary} icon={'account-circle'} title={'Account'} />
+                            <Tab color={colorTheme.Tertiary} icon={'account-circle'} title={'Account'} onPress={() => {
+                                props.setModalVisible(false)
+                                props.navigation.navigate("ProfileScreen");
+                            }}/>
                             <Tab color={colorTheme.Tertiary} icon={'bullhorn'} title={'Feedback'}/>
                             <Tab color={colorTheme.Tertiary} icon={'bug'} title={'Report a Bug'}/>
                             <Tab color={colorTheme.Tertiary} icon={'account-group'} title={'Collaborators'}/>

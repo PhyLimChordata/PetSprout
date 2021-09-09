@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 import {View, Text, Button, Pressable, Dimensions } from 'react-native';
 import StyleSheetFactory from '../styling/ViewEditBox'
 import { TextInput } from "react-native";
@@ -8,6 +8,7 @@ import {
     useFonts,
     Roboto_900Black,
   } from '@expo-google-fonts/roboto';
+import { AuthContext } from '../context';
 
 let styles = StyleSheetFactory.getSheet(Dimensions.get('screen').width,
     Dimensions.get('screen').height
@@ -27,8 +28,16 @@ function ProfileEdit (props) {
 		if (state.userName.length == 0) get();
 	});
 
+    const { getToken } = useContext(AuthContext);
+
     const get = () => {
-        fetch('http://localhost:5000/api/v1.0.0/user/viewAccount')
+        fetch('http://localhost:5000/api/v1.0.0/user/viewAccount', {
+			method: 'GET',
+			headers: {
+				'Content-Type': 'application/json',
+				'authentication-token': getToken,
+			},
+		})
         .then((res) => {
             console.log("FETCHING USER DATA")
             console.log(res)

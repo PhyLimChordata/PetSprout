@@ -2,7 +2,7 @@ import React from 'react'
 import StyleSheetFactory from '../styling/SettingsStyling'
 import headerStyles from '../styling/Header'
 import ColorSet from '../resources/themes/Global'
-import { View, Switch, Text, Image, TouchableOpacity, Dimensions } from 'react-native'
+import { View, Switch, Text, Image, Dimensions } from 'react-native'
 import {SafeAreaView} from 'react-native'; 
 
 // setting data from database
