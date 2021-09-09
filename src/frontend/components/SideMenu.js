@@ -1,5 +1,4 @@
 import React, { useState, useContext } from 'react';
-// import Toggle from 'react-native-toggle-element';
 import { AuthContext } from '../Context';
 import {
 	View,
@@ -10,12 +9,11 @@ import {
 } from 'react-native';
 import Modal from 'react-native-modal';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-
-import Colours from '../resources/themes/colours';
+import Toggle from 'react-native-toggle-element';
+import Colours from '../resources/themes/Colours';
 import { useTheme } from '@react-navigation/native';
 
 function ThemeCircle({ colorTheme, onPress, selected }) {
-	const { getColor } = useContext(AuthContext);
 	return (
 		<View>
 			<TouchableOpacity
@@ -91,9 +89,7 @@ function SideMenu(props) {
 	if (getMode == 'dark') {
 		defaultMode = false;
 	}
-	const [toggleValue, setToggleValue] = useState(defaultMode);
-
-	const [colorTheme, setColorTheme] = useState(colors);
+	const [toggleValue, setToggleValue] = useState(!defaultMode);
 
 	function colorChange(color) {
 		changeColorTheme(color);

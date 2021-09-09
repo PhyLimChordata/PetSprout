@@ -1,6 +1,6 @@
 import React, { useRef, useImperativeHandle } from 'react';
 import { Text, Animated } from 'react-native';
-import Colours from '../resources/themes/colours';
+import Colours from '../resources/themes/Colours';
 
 import { useTheme } from '@react-navigation/native';
 

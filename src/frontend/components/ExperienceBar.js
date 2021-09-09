@@ -10,8 +10,8 @@ function ExperienceBar(props) {
 
 	var experience = {
 		// FOR MOBILE DEBUGGING
-		// width: 20,
-		width: props.width,
+		width: 20,
+		// width: props.width,
 		height: 15,
 		backgroundColor: colors.Tertiary,
 		borderRadius: 10,
