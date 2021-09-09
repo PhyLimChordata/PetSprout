@@ -44,7 +44,6 @@ module.exports = async (req, res) => {
 		for (const element of schedule) {
 			if (element === true) newSchedule.push(i.toString());
 			i++;
-<<<<<<< HEAD
  	    }
 
 		let current = new Date(date);
@@ -65,10 +64,6 @@ module.exports = async (req, res) => {
 			nextSignInDate = new Date(nextSignInDate);
 		}
 	
-=======
-		}
-
->>>>>>> 5a739f5554e90397a8570760740572009319391f
 		let newHabit = {
 			analyze: newAnalyze._id,
 			title,
@@ -77,10 +72,7 @@ module.exports = async (req, res) => {
 			schedule: newSchedule,
 			times,
 			alarm,
-<<<<<<< HEAD
 			nextSignInDate
-=======
->>>>>>> 5a739f5554e90397a8570760740572009319391f
 		};
 
 		userHabit.habitList.push(newHabit);
