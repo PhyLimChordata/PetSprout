@@ -17,16 +17,26 @@ function ProfileEdit (props) {
     
     console.log("profile 14: " + typeof styles);
 
-    let data = {
-        userName: 'Example',
-        email: 'Example@gmail.com',
+    let state = {
+        userName: '',
+        email: '',
         about: '',
+    } 
+
+    useEffect(() => {
+		if (state.userName.length == 0) get();
+	});
+
+    const get = () => {
+        fetch('http://localhost:5000/api/v1.0.0/user/viewAccount')
+        .then((res) => {
+            console.log("FETCHING USER DATA")
+            console.log(res)
+        })
     }
 
-    
-
     const handleChange = (id, e) => {
-        data[id] = e
+        state[id] = e
     }
 
     const onSubmit = () => {
@@ -41,13 +51,13 @@ function ProfileEdit (props) {
                     </MenuHeader>
                 </View>
                 <View style={styles.container}>
-                    <EditBox id="userName" tag="Username" def={data.userName} place="Username" handle={handleChange}/>
+                    <EditBox id="userName" tag="Username" def={name} place="Username" handle={handleChange}/>
                     <View style={styles.formContainer}>
                         <Text style={[styles.textTitle, styles.text, { fontFamily: 'Roboto_900Black', fontWeight: '900' }]}>
                             Email
                         </Text>
                         <Text style={[styles.textInput, styles.text]}>
-                            Example@gmail.com
+                            {state.email}
                         </Text>
                         </View>
                     <EditBox id="about" tag="About" def="" mult={true} numLines={5} backColor={true} handle={handleChange}/>
