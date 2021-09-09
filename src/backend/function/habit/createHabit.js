@@ -18,12 +18,8 @@ module.exports = async (req, res) => {
 		if (!errors.isEmpty())
 			return res.status(400).json({ error: errors.array() });
 
-<<<<<<< HEAD
 		let { title, description, reason, schedule, times, alarm, date } =
 			req.body;
-=======
-		let { title, description, reason, schedule, times, alarm } = req.body;
->>>>>>> 5a739f5554e90397a8570760740572009319391f
 
 		let newAnalyze = new Analyze({});
 		await newAnalyze.save();

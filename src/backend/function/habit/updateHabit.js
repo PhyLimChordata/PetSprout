@@ -30,11 +30,7 @@ module.exports = async (req, res) => {
 		if (!errors.isEmpty())
 			return res.status(400).json({ error: errors.array() });
 
-<<<<<<< HEAD
-		let { title, description, reason, schedule, times, alarm, date } =
-			req.body;
-=======
-		let { title, description, reason, schedule, times, alarm } = req.body;
+		let { title, description, reason, schedule, times, alarm, date } = req.body;
 
 		if (
 			schedule === [false, false, false, false, false, false, false] ||
@@ -43,7 +39,6 @@ module.exports = async (req, res) => {
 		) {
 			return res.status(403).json('Incorrect/Invalid request param');
 		}
->>>>>>> 5a739f5554e90397a8570760740572009319391f
 
 		let newSchedule = [];
 		let i = 0;
@@ -51,7 +46,6 @@ module.exports = async (req, res) => {
 			if (element === true) newSchedule.push(i.toString());
 			i++;
 		}
-<<<<<<< HEAD
 
 		let current = new Date(date);
 		let current_date = current.getDate();
@@ -70,8 +64,6 @@ module.exports = async (req, res) => {
 			nextSignInDate = current.setDate(current_date + interval);
 			nextSignInDate = new Date(nextSignInDate);
 		}
-=======
->>>>>>> 5a739f5554e90397a8570760740572009319391f
 
 		habitFromDB.title = title;
 		habitFromDB.description = description;

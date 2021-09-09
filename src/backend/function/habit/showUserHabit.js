@@ -12,7 +12,6 @@ module.exports = async (req, res) => {
 		if (!userHabitInfo)
 			return res.status(404).json("User's habits could not found");
 
-<<<<<<< HEAD
 		let habitShow = userHabitInfo.habitList.filter(
 			function(habit) {
 				return habit.schedule.includes(day);
@@ -20,13 +19,6 @@ module.exports = async (req, res) => {
 		);
 		
 		let habit = {"habitList":habitShow};
-=======
-		let habitShow = userHabitInfo.habitList.filter(function (habit) {
-			return habit.schedule.includes(day);
-		});
-
-		let habit = { habitList: habitShow };
->>>>>>> 5a739f5554e90397a8570760740572009319391f
 
 		let info = {
 			expValue: userHabitInfo.expValue,
