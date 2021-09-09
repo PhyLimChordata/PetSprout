@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import Modal from 'react-native-modal';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import Toggle from 'react-native-toggle-element'
+import Toggle from 'react-native-toggle-element';
 import Colours from '../resources/themes/Colours';
 import { useTheme } from '@react-navigation/native';
 
@@ -89,9 +89,7 @@ function SideMenu(props) {
 	if (getMode == 'dark') {
 		defaultMode = false;
 	}
-	const [toggleValue, setToggleValue] = useState(defaultMode);
-
-	const [colorTheme, setColorTheme] = useState(colors);
+	const [toggleValue, setToggleValue] = useState(!defaultMode);
 
 	function colorChange(color) {
 		changeColorTheme(color);
@@ -273,38 +271,38 @@ function SideMenu(props) {
 							/>
 						</View>
 						<View style={{ alignItems: 'center' }}>
-							{/*<Toggle*/}
-							{/*	value={toggleValue}*/}
-							{/*	onPress={(newState) => {*/}
-							{/*		newState ? changeModeTheme('dark') : changeModeTheme('light');*/}
-							{/*		setToggleValue(newState);*/}
-							{/*	}}*/}
-							{/*	thumbButton={{*/}
-							{/*		activeBackgroundColor: '#ffffff',*/}
-							{/*		inActiveBackgroundColor: '#272727',*/}
-							{/*	}}*/}
-							{/*	trackBar={{*/}
-							{/*		width: 100,*/}
-							{/*		height: 50,*/}
-							{/*		radius: 25,*/}
-							{/*		activeBackgroundColor: '#272727',*/}
-							{/*		inActiveBackgroundColor: '#808080',*/}
-							{/*	}}*/}
-							{/*	leftComponent={*/}
-							{/*		<MaterialCommunityIcons*/}
-							{/*			name={'weather-sunny'}*/}
-							{/*			color={'#ffffff'}*/}
-							{/*			size={30}*/}
-							{/*		/>*/}
-							{/*	}*/}
-							{/*	rightComponent={*/}
-							{/*		<MaterialCommunityIcons*/}
-							{/*			name={'moon-waning-crescent'}*/}
-							{/*			color={'#272727'}*/}
-							{/*			size={30}*/}
-							{/*		/>*/}
-							{/*	}*/}
-							{/*/>*/}
+							{/* <Toggle
+								value={toggleValue}
+								onPress={(newState) => {
+									newState ? changeModeTheme('dark') : changeModeTheme('light');
+									setToggleValue(newState);
+								}}
+								thumbButton={{
+									activeBackgroundColor: '#ffffff',
+									inActiveBackgroundColor: '#272727',
+								}}
+								trackBar={{
+									width: 100,
+									height: 50,
+									radius: 25,
+									activeBackgroundColor: '#272727',
+									inActiveBackgroundColor: '#808080',
+								}}
+								leftComponent={
+									<MaterialCommunityIcons
+										name={'weather-sunny'}
+										color={'#ffffff'}
+										size={30}
+									/>
+								}
+								rightComponent={
+									<MaterialCommunityIcons
+										name={'moon-waning-crescent'}
+										color={'#272727'}
+										size={30}
+									/>
+								}
+							/> */}
 						</View>
 						<View
 							style={{
