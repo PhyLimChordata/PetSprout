@@ -1,150 +1,194 @@
-import React, { useState, useEffect, useMemo } from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-import { Image, View, TouchableOpacity, Settings } from 'react-native';
-
-import { createStackNavigator } from '@react-navigation/stack';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-
+// React
+import React, { useState, useMemo } from 'react';
+import { Image, View, TouchableOpacity } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
-import TabOne from './frontend/screens/TabOne';
-import TabTwo from './frontend/screens/TabTwo';
-import TabThree from './frontend/screens/TabThree';
+// Navigation
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createStackNavigator } from '@react-navigation/stack';
+import { NavigationContainer, useTheme } from '@react-navigation/native';
 
-import ProfileEdit from './frontend/screens/ViewEditProfile';
-import AchievementScreen from './frontend/screens/AchievementScreen';
+//Screens
 import BottomMenu from './frontend/components/BottomMenu';
+
+import LoginScreen from './frontend/screens/Login';
+import SignupScreen from './frontend/screens/Signup';
+import VerifyEmailSignUpScreen from './frontend/screens/VerifyEmailSignUp';
+import PasswordScreen from './frontend/screens/Password';
+import NewPasswordScreen from './frontend/screens/NewPassword';
+import VerifyEmailPasswordScreen from './frontend/screens/VerifyEmailPassword';
+
+import SettingsScreen from './frontend/screens/SettingsPage';
+import ProfileEditScreen from './frontend/screens/ViewEditProfile';
+import AchievementScreen from './frontend/screens/AchievementScreen';
+import CollaboratorsScreen from './frontend/screens/Collaborators';
 import HabitsScreen from './frontend/screens/HabitsScreen';
-import ComingSoon from './frontend/screens/ComingSoon';
-import Collaborators from './frontend/screens/Collaborators';
+import CreateHabitScreen from './frontend/screens/CreateHabit';
+import ComingSoonScreen from './frontend/screens/ComingSoon';
+import ModifyHabitScreen from './frontend/screens/PutHabits/ModifyHabitScreen';
 
-import CreateHabitScreen from './frontend/screens/PutHabits/CreateHabitScreen';
-import LoginScreen from './frontend/screens/LoginScreen';
-import SignupScreen from './frontend/screens/SignupScreen';
-import VerifyEmailSignUpScreen from './frontend/screens/VerifyEmailSignUpScreen';
-import PasswordScreen from './frontend/screens/PasswordScreen';
-import NewPasswordScreen from './frontend/screens/NewPasswordScreen';
-import VerifyEmailPasswordScreen from './frontend/screens/VerifyEmailPasswordScreen';
+// Colour Themes
+import GreenLightTheme from './frontend/resources/themes/light/GreenTheme';
+import OrangeLightTheme from './frontend/resources/themes/light/OrangeTheme';
+import BlueLightTheme from './frontend/resources/themes/light/BlueTheme';
+import PurpleLightTheme from './frontend/resources/themes/light/PurpleTheme';
+import RedLightTheme from './frontend/resources/themes/light/RedTheme';
+import GreenDarkTheme from './frontend/resources/themes/dark/GreenTheme';
+import OrangeDarkTheme from './frontend/resources/themes/dark/OrangeTheme';
+import BlueDarkTheme from './frontend/resources/themes/dark/BlueTheme';
+import PurpleDarkTheme from './frontend/resources/themes/dark/PurpleTheme';
+import RedDarkTheme from './frontend/resources/themes/dark/RedTheme';
 
-import { AuthContext } from './frontend/context';
-import ColorSet from './frontend/resources/themes/Global';
-import SettingsPage from "./frontend/screens/SettingsPage";
-import ModifyHabitScreen from "./frontend/screens/PutHabits/ModifyHabitScreen";
+import { AuthContext } from './frontend/Context';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 
-const CustomTabBarButton = ({ children, onPress }) => (
-	<TouchableOpacity
-		activeOpacity={1}
-		style={{
-			top: -30,
-			width: 70,
-			height: 70,
-			justifyContent: 'center',
-			alignItems: 'center',
-		}}
-		onPress={onPress}
-	>
-		<View
-			style={{
-				backgroundColor: ColorSet.Green.Quaternary,
-				width: 70,
-				height: 70,
-				borderRadius: 35,
-			}}
-		>
-			{children}
-		</View>
-	</TouchableOpacity>
-);
-
 export default function App() {
+	// Global variables within the app
 	const [token, setToken] = useState(null);
+	const [color, setColor] = useState('green');
+	const [mode, setMode] = useState('light');
 	const authContext = useMemo(() => {
 		return {
-			logIn: (token) => {
-				setToken(token);
+			logIn: (generatedToken) => {
+				setToken(generatedToken);
 			},
 			signOut: () => {
 				setToken(null);
 			},
-			getToken: token
+			changeColorTheme: (selectedColor) => {
+				setColor(selectedColor);
+			},
+			changeModeTheme: (selectedMode) => {
+				setMode(selectedMode);
+			},
+			getToken: token,
+			getColor: color,
+			getMode: mode,
 		};
-	}, [token, setToken]);
+	}, [token, setToken, color, setColor, mode, setMode]);
 
+	// "Main" or start of program
 	return (
 		<AuthContext.Provider value={authContext}>
-			<NavigationContainer>
-				{token ? (
-					<Stack.Navigator headerMode="none">
-						<Stack.Screen name="HomeScreen" component={HomeScreen} />
-						<Stack.Screen name="AchievementScreen" component={AchievementScreen} />
-						<Stack.Screen name="ProfileScreen" component={ProfileEdit} />
-						<Stack.Screen name="SettingsScreen" component={SettingsPage} />
-						<Stack.Screen name="CreateHabitScreen" component={CreateHabitScreen} />
-						<Stack.Screen name="ModifyHabitScreen" component={ModifyHabitScreen} />
-
-					</Stack.Navigator>
+			{mode == 'light' ? (
+				color == 'green' ? (
+					<NavContainer token={token} theme={GreenLightTheme} />
+				) : color == 'orange' ? (
+					<NavContainer token={token} theme={OrangeLightTheme} />
+				) : color == 'blue' ? (
+					<NavContainer token={token} theme={BlueLightTheme} />
+				) : color == 'purple' ? (
+					<NavContainer token={token} theme={PurpleLightTheme} />
+				) : color == 'red' ? (
+					<NavContainer token={token} theme={RedLightTheme} />
 				) : (
-					<Stack.Navigator headerMode="none">
-						<Stack.Screen
-							name="LoginScreen"
-							component={LoginScreen}
-							options={{ title: 'Login' }}
-						/>
-						<Stack.Screen
-							name="SignupScreen"
-							component={SignupScreen}
-							options={{ title: 'Sign up' }}
-						/>
-						<Stack.Screen
-							name="VerifyEmailSignUpScreen"
-							component={VerifyEmailSignUpScreen}
-							options={{ title: 'Verify Email Sign Up' }}
-						/>
-						<Stack.Screen
-							name="PasswordScreen"
-							component={PasswordScreen}
-							options={{ title: 'Forgot Password' }}
-						/>
-						<Stack.Screen
-							name="NewPasswordScreen"
-							component={NewPasswordScreen}
-							options={{ title: 'New Password' }}
-						/>
-							<Stack.Screen
-							name="VerifyEmailPasswordScreen"
-							component={VerifyEmailPasswordScreen}
-							options={{ title: 'Verify Email Password' }}
-						/>
-					</Stack.Navigator>
-				)}
-			</NavigationContainer>
+					<NavContainer token={token} theme={GreenLightTheme} />
+				)
+			) : mode == 'dark' ? (
+				color == 'green' ? (
+					<NavContainer token={token} theme={GreenDarkTheme} />
+				) : color == 'orange' ? (
+					<NavContainer token={token} theme={OrangeDarkTheme} />
+				) : color == 'blue' ? (
+					<NavContainer token={token} theme={BlueDarkTheme} />
+				) : color == 'purple' ? (
+					<NavContainer token={token} theme={PurpleDarkTheme} />
+				) : color == 'red' ? (
+					<NavContainer token={token} theme={RedDarkTheme} />
+				) : (
+					<NavContainer token={token} theme={GreenDarkTheme} />
+				)
+			) : (
+				<NavContainer token={token} theme={GreenLightTheme} />
+			)}
 		</AuthContext.Provider>
 	);
 }
+
+// Determines the appropriate stack to use based on token - colour theme and token are provided
+function NavContainer(props) {
+	return (
+		<NavigationContainer theme={props.theme}>
+			{props.token ? (
+				<Stack.Navigator headerMode='none'>
+					<Stack.Screen name='HomeScreen' component={HomeScreen} />
+					<Stack.Screen
+						name='AchievementScreen'
+						component={AchievementScreen}
+					/>
+					<Stack.Screen name='ProfileScreen' component={ProfileEditScreen} />
+					<Stack.Screen name='SettingsScreen' component={SettingsScreen} />
+					<Stack.Screen
+						name='CreateHabitScreen'
+						component={CreateHabitScreen}
+					/>
+					<Stack.Screen
+						name='ModifyHabitScreen'
+						component={ModifyHabitScreen}
+					/>
+				</Stack.Navigator>
+			) : (
+				<Stack.Navigator headerMode='none'>
+					<Stack.Screen
+						name='LoginScreen'
+						component={LoginScreen}
+						options={{ title: 'Login' }}
+					/>
+					<Stack.Screen
+						name='SignupScreen'
+						component={SignupScreen}
+						options={{ title: 'Sign up' }}
+					/>
+					<Stack.Screen
+						name='VerifyEmailSignUp'
+						component={VerifyEmailSignUpScreen}
+						options={{ title: 'Verify Email Sign Up' }}
+					/>
+					<Stack.Screen
+						name='PasswordScreen'
+						component={PasswordScreen}
+						options={{ title: 'Forgot Password' }}
+					/>
+					<Stack.Screen
+						name='NewPassword'
+						component={NewPasswordScreen}
+						options={{ title: 'New Password' }}
+					/>
+					<Stack.Screen
+						name='VerifyEmailPassword'
+						component={VerifyEmailPasswordScreen}
+						options={{ title: 'Verify Email Password' }}
+					/>
+				</Stack.Navigator>
+			)}
+		</NavigationContainer>
+	);
+}
+
+// What the user will see upon logging in
 function HomeScreen(props) {
+	const { colors } = useTheme();
 	const [modalVisible, setModalVisible] = useState(false);
 	return (
 		<>
 			<Tab.Navigator
-				initialRouteName="TabOne"
-				backBehavior="order"
+				initialRouteName='TabOne'
+				backBehavior='order'
 				tabBarOptions={{
-					activeTintColor: ColorSet.Green.Quinary,
-					inactiveTintColor: ColorSet.white,
-					style: { backgroundColor: ColorSet.Green.Tertiary },
-				}}
-			>
+					activeTintColor: colors.Quinary,
+					inactiveTintColor: colors.background,
+					style: { backgroundColor: colors.Tertiary },
+				}}>
 				<Tab.Screen
-					name="Habit"
+					name='Habit'
 					component={HabitsScreen}
 					options={{
 						tabBarLabel: 'Habit',
 						tabBarIcon: ({ color, size }) => (
 							<MaterialCommunityIcons
-								name="clipboard-check"
+								name='clipboard-check'
 								color={color}
 								size={size}
 							/>
@@ -152,13 +196,13 @@ function HomeScreen(props) {
 					}}
 				/>
 				<Tab.Screen
-					name="Calender"
-					component={ComingSoon}
+					name='Calendar'
+					component={Calendar}
 					options={{
-						tabBarLabel: 'Calender',
+						tabBarLabel: 'Calendar',
 						tabBarIcon: ({ color, size }) => (
 							<MaterialCommunityIcons
-								name="calendar"
+								name='calendar'
 								color={color}
 								size={size}
 							/>
@@ -167,7 +211,7 @@ function HomeScreen(props) {
 				/>
 				<Tab.Screen
 					name={'TabMiddle'}
-					component={TabTwo}
+					component={ComingSoonScreen}
 					listeners={{
 						tabPress: (e) => {
 							setModalVisible(true);
@@ -180,12 +224,12 @@ function HomeScreen(props) {
 						},
 						tabBarIcon: ({ focused }) => (
 							<Image
-								source={require('./frontend/resources/images/plus-sign.png')}
-								resizeMode="contain"
+								source={require('./frontend/resources/images/PlusSign.png')}
+								resizeMode='contain'
 								style={{
 									width: 35,
 									height: 35,
-									tintColor: ColorSet.white,
+									tintColor: colors.background,
 								}}
 							/>
 						),
@@ -193,23 +237,23 @@ function HomeScreen(props) {
 					}}
 				/>
 				<Tab.Screen
-					name="Pomodoro"
+					name='Pomodoro'
 					component={Pomodoro}
 					options={{
 						tabBarLabel: 'Pomodoro',
 						tabBarIcon: ({ color, size }) => (
-							<MaterialCommunityIcons name="clock" color={color} size={size} />
+							<MaterialCommunityIcons name='clock' color={color} size={size} />
 						),
 					}}
 				/>
 				<Tab.Screen
-					name="Reflect"
+					name='Reflect'
 					component={Reflect}
 					options={{
 						tabBarLabel: 'Reflect',
 						tabBarIcon: ({ color, size }) => (
 							<MaterialCommunityIcons
-								name="notebook"
+								name='notebook'
 								color={color}
 								size={size}
 							/>
@@ -225,14 +269,43 @@ function HomeScreen(props) {
 		</>
 	);
 }
+
+// TODO: Replace the below with imported screens
 function Calendar(props) {
-	return <ComingSoon title="Calendar"></ComingSoon>;
+	return <ComingSoonScreen title='Calendar' />;
 }
 
 function Pomodoro(props) {
-	return <ComingSoon title="Pomodoro"></ComingSoon>;
+	return <ComingSoonScreen title='Pomodoro' />;
 }
 
 function Reflect(props) {
-	return <ComingSoon title="Reflect"></ComingSoon>;
+	return <ComingSoonScreen title='Reflect' />;
+}
+
+// The 'create' button in the bottom navigation bar
+function CustomTabBarButton({ children, onPress }) {
+	const { colors } = useTheme();
+	return (
+		<TouchableOpacity
+			activeOpacity={1}
+			style={{
+				top: -30,
+				width: 70,
+				height: 70,
+				justifyContent: 'center',
+				alignItems: 'center',
+			}}
+			onPress={onPress}>
+			<View
+				style={{
+					backgroundColor: colors.Quaternary,
+					width: 70,
+					height: 70,
+					borderRadius: 35,
+				}}>
+				{children}
+			</View>
+		</TouchableOpacity>
+	);
 }

@@ -1,5 +1,6 @@
-const Habit = require('../../schemas/HabitSchema');
-const User = require('../../schemas/UserSchema');
+const Habit = require('../../schemas/habitSchema');
+const User = require('../../schemas/userSchema');
+
 const { validationResult } = require('express-validator');
 
 /**
@@ -11,7 +12,6 @@ const { validationResult } = require('express-validator');
  * Modify a particular habit and return back the habit after modification.
  *
  */
-
 module.exports = async (req, res) => {
 	try {
 		let user = await User.findById(req.user.id).select('-password');
@@ -30,20 +30,28 @@ module.exports = async (req, res) => {
 		if (!errors.isEmpty())
 			return res.status(400).json({ error: errors.array() });
 
+<<<<<<< HEAD
 		let { title, description, reason, schedule, times, alarm, date } =
 			req.body;
+=======
+		let { title, description, reason, schedule, times, alarm } = req.body;
 
-		if(schedule === [false,false,false,false,false,false,false]
-			|| alarm === [] || times.toString() === '0'){
-				return res.status(403).json("Incorrect/Invalid request param");
-			}
-				
+		if (
+			schedule === [false, false, false, false, false, false, false] ||
+			alarm === [] ||
+			times.toString() === '0'
+		) {
+			return res.status(403).json('Incorrect/Invalid request param');
+		}
+>>>>>>> 5a739f5554e90397a8570760740572009319391f
+
 		let newSchedule = [];
 		let i = 0;
 		for (const element of schedule) {
 			if (element === true) newSchedule.push(i.toString());
 			i++;
 		}
+<<<<<<< HEAD
 
 		let current = new Date(date);
 		let current_date = current.getDate();
@@ -62,6 +70,8 @@ module.exports = async (req, res) => {
 			nextSignInDate = current.setDate(current_date + interval);
 			nextSignInDate = new Date(nextSignInDate);
 		}
+=======
+>>>>>>> 5a739f5554e90397a8570760740572009319391f
 
 		habitFromDB.title = title;
 		habitFromDB.description = description;

@@ -19,7 +19,7 @@ const HabitSchema = new Schema(
 			{
 				analyze: {
 					type: mongoose.Schema.Types.ObjectId,
-					ref: 'analyze'
+					ref: 'analyze',
 				},
 				title: {
 					type: String,
@@ -66,5 +66,3 @@ const HabitSchema = new Schema(
 
 const habitSchema = mongoose.model('habit', HabitSchema);
 module.exports = habitSchema;
-
-

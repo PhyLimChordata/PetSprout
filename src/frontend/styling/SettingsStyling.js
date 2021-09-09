@@ -1,5 +1,4 @@
-import { StyleSheet } from "react-native";
-import ColorSet from '../resources/themes/Global';
+import { StyleSheet } from 'react-native';
 
 const fontSize = 13;
 
@@ -52,13 +51,14 @@ export default class StyleSheetFactory {
             textTitle: {
                 width: '100%',
                 textAlign: 'left',
-                color: ColorSet.Green.Tertiary
-                
+                // color: ColorSet.Green.Tertiary
+                color: 'red'
             },
             textNormal: {
                 textAlign: 'left',
                 width: '100%',
-                color: ColorSet.Green.Quaternary
+                // color: ColorSet.Green.Quaternary
+				color: 'red'
             },
             switchStyling: {
                 height: '3%',

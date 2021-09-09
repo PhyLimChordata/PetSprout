@@ -18,7 +18,7 @@ const UserSchema = new Schema(
 			required: true,
 		},
 		pending_password: {
-			type: String
+			type: String,
 		},
 		password: {
 			type: String,

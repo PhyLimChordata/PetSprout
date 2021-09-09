@@ -1,6 +1,6 @@
-const Habit = require('../../schemas/HabitSchema');
-const User = require('../../schemas/UserSchema');
-const Analyze = require('../../schemas/AnalyzeSchema');
+const Habit = require('../../schemas/habitSchema');
+const User = require('../../schemas/userSchema');
+const Analyze = require('../../schemas/analyzeSchema');
 
 /**
  *
@@ -21,7 +21,7 @@ module.exports = async (req, res) => {
 		const deleteHabitList = userHabit.habitList.filter(
 			(habit) => habit._id.toString() === req.params.habit_id.toString()
 		);
-		
+
 		let analyzeId = deleteHabitList[0].analyze;
 
 		await Analyze.findByIdAndDelete(analyzeId);

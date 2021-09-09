@@ -3,12 +3,14 @@ import React, { useState, useContext } from 'react';
 import { View, Text, TextInput, Image, TouchableOpacity } from 'react-native';
 
 import styles from '../styling/Authentication';
-import ColorSet from '../resources/themes/Global';
+
+import { useTheme } from '@react-navigation/native';
 
 function PasswordScreen(props) {
+	const { colors } = useTheme();
 	const [primaryInfo, setPrimaryInfo] = useState('');
 	const [inputStyle, setInputStyle] = useState({
-		backgroundColor: ColorSet.Green.Secondary,
+		backgroundColor: colors.Secondary,
 		padding: 10,
 		borderWidth: 0,
 		borderStyle: 'solid',
@@ -23,7 +25,7 @@ function PasswordScreen(props) {
 		setPrimaryInfo(text);
 		setError('');
 		setInputStyle({
-			backgroundColor: ColorSet.Green.Secondary,
+			backgroundColor: colors.Secondary,
 			padding: 10,
 			borderWidth: 0,
 			borderStyle: 'solid',
@@ -50,7 +52,7 @@ function PasswordScreen(props) {
 				}
 				if (res.status == 200) {
 					res.json().then((data) => {
-						props.navigation.push('NewPasswordScreen', { email: data.email });
+						props.navigation.push('NewPassword', { email: data.email });
 					});
 				} else if (res.status == 500) {
 					setError('Something wrong happened internally...');
@@ -62,7 +64,7 @@ function PasswordScreen(props) {
 
 				if (res.status != 200) {
 					setInputStyle({
-						backgroundColor: ColorSet.Green.Secondary,
+						backgroundColor: colors.Secondary,
 						padding: 10,
 						borderWidth: 3,
 						borderColor: 'red',
@@ -77,43 +79,42 @@ function PasswordScreen(props) {
 	};
 
 	return (
-		<View style={styles.container}>
+		<View style={styles(colors).container}>
 			<Image
-				style={styles.AuthenticationLogo}
+				style={styles(colors).authenticationLogo}
 				source={require('../resources/images/Logo.png')}
 			/>
-			<View style={styles.header}>
-				<Text style={styles.textTitle}>Forgot your Password?</Text>
-				<Text style={styles.explanationText}>
+			<View style={styles(colors).header}>
+				<Text style={styles(colors).textTitle}>Forgot your Password?</Text>
+				<Text style={styles(colors).explanationText}>
 					{' '}
 					Enter either your Email or Username and an email will be sent with
 					instructions.{' '}
 				</Text>
 
-				<View style={styles.inputContainer}>
+				<View style={styles(colors).inputContainer}>
 					<TextInput
 						style={inputStyle}
 						value={primaryInfo}
-						placeholder="Please enter an Email or Username"
-						onChangeText={(text) => updatingPrimaryInfo(text)}
-					></TextInput>
-					<Text style={styles.errorMessageRight}>{error}</Text>
+						placeholder='Please enter an Email or Username'
+						onChangeText={(text) => updatingPrimaryInfo(text)}></TextInput>
+					<Text style={styles(colors).errorMessageRight}>{error}</Text>
 				</View>
 			</View>
 
 			<TouchableOpacity
 				activeOpacity={0.6}
-				style={styles.AuthenticationButton}
-				onPress={() => forgetPassword()}
-			>
-				<Text style={styles.AuthenticationButtonText}>Continue</Text>
+				style={styles(colors).authenticationButton}
+				onPress={() => forgetPassword()}>
+				<Text style={styles(colors).authenticationButtonText}>Continue</Text>
 			</TouchableOpacity>
 			<TouchableOpacity
 				activeOpacity={0.6}
-				style={styles.AuthenticationSpecialButton}
-				onPress={() => props.navigation.push('LoginScreen')}
-			>
-				<Text style={styles.AuthenticationButtonText}>Back to Login</Text>
+				style={styles(colors).authenticationSpecialButton}
+				onPress={() => props.navigation.push('LoginScreen')}>
+				<Text style={styles(colors).authenticationButtonText}>
+					Back to Login
+				</Text>
 			</TouchableOpacity>
 		</View>
 	);

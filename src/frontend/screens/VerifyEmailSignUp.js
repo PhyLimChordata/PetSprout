@@ -4,8 +4,10 @@ import { View, Text, TextInput, Image, TouchableOpacity } from 'react-native';
 
 import styles from '../styling/Authentication';
 
-function VerifyEmailSignUpScreen(props) {
-	console.log(props);
+import { useTheme } from '@react-navigation/native';
+
+function VerifyEmailSignUp(props) {
+	const { colors } = useTheme();
 
 	const resend = () => {
 		fetch('http://localhost:5000/api/v1.0.0/user/send_activate_email', {
@@ -28,14 +30,14 @@ function VerifyEmailSignUpScreen(props) {
 	};
 
 	return (
-		<View style={styles.container}>
+		<View style={styles(colors).container}>
 			<Image
-				style={styles.AuthenticationLogo}
-				source={require('../resources/images/EmailLogo.png')}
+				style={styles(colors).authenticationLogo}
+				source={require('../resources/images/Email.png')}
 			/>
-			<View style={styles.header}>
-				<Text style={styles.textTitle}>Verify your Email</Text>
-				<Text style={styles.explanationText}>
+			<View style={styles(colors).header}>
+				<Text style={styles(colors).textTitle}>Verify your Email</Text>
+				<Text style={styles(colors).explanationText}>
 					{' '}
 					To start using HabiPets, we need to verify your email. An email with a
 					verification link has been sent which will activate your account.{' '}
@@ -43,20 +45,22 @@ function VerifyEmailSignUpScreen(props) {
 			</View>
 			<TouchableOpacity
 				activeOpacity={0.6}
-				style={styles.AuthenticationButton}
-				onPress={() => resend()}
-			>
-				<Text style={styles.AuthenticationButtonText}>Resend Email</Text>
+				style={styles(colors).authenticationButton}
+				onPress={() => resend()}>
+				<Text style={styles(colors).authenticationButtonText}>
+					Resend Email
+				</Text>
 			</TouchableOpacity>
 			<TouchableOpacity
 				activeOpacity={0.6}
-				style={styles.AuthenticationSpecialButton}
-				onPress={() => props.navigation.push('LoginScreen')}
-			>
-				<Text style={styles.AuthenticationButtonText}>Back to Login</Text>
+				style={styles(colors).authenticationSpecialButton}
+				onPress={() => props.navigation.push('LoginScreen')}>
+				<Text style={styles(colors).authenticationButtonText}>
+					Back to Login
+				</Text>
 			</TouchableOpacity>
 		</View>
 	);
 }
 
-export default VerifyEmailSignUpScreen;
+export default VerifyEmailSignUp;

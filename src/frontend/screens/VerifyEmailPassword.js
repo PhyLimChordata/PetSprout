@@ -4,8 +4,11 @@ import { View, Text, TextInput, Image, TouchableOpacity } from 'react-native';
 
 import styles from '../styling/Authentication';
 
-function VerifyEmailPasswordScreen(props) {
+import { useTheme } from '@react-navigation/native';
+
+function VerifyEmailPassword(props) {
 	console.log(props);
+	const { colors } = useTheme();
 
 	const resend = () => {
 		fetch('http://localhost:5000/api/v1.0.0/user/pending_password', {
@@ -30,14 +33,14 @@ function VerifyEmailPasswordScreen(props) {
 	};
 
 	return (
-		<View style={styles.container}>
+		<View style={styles(colors).container}>
 			<Image
-				style={styles.AuthenticationLogo}
-				source={require('../resources/images/EmailLogo.png')}
+				style={styles(colors).authenticationLogo}
+				source={require('../resources/images/Email.png')}
 			/>
-			<View style={styles.header}>
-				<Text style={styles.textTitle}>Resetting your Password</Text>
-				<Text style={styles.explanationText}>
+			<View style={styles(colors).header}>
+				<Text style={styles(colors).textTitle}>Resetting your Password</Text>
+				<Text style={styles(colors).explanationText}>
 					{' '}
 					An email has been sent which will contain a link to reset your
 					password.{' '}
@@ -45,20 +48,22 @@ function VerifyEmailPasswordScreen(props) {
 			</View>
 			<TouchableOpacity
 				activeOpacity={0.6}
-				style={styles.AuthenticationButton}
-				onPress={() => resend()}
-			>
-				<Text style={styles.AuthenticationButtonText}>Resend Email</Text>
+				style={styles(colors).authenticationButton}
+				onPress={() => resend()}>
+				<Text style={styles(colors).authenticationButtonText}>
+					Resend Email
+				</Text>
 			</TouchableOpacity>
 			<TouchableOpacity
 				activeOpacity={0.6}
-				style={styles.AuthenticationSpecialButton}
-				onPress={() => props.navigation.push('LoginScreen')}
-			>
-				<Text style={styles.AuthenticationButtonText}>Back to Login</Text>
+				style={styles(colors).authenticationSpecialButton}
+				onPress={() => props.navigation.push('LoginScreen')}>
+				<Text style={styles(colors).authenticationButtonText}>
+					Back to Login
+				</Text>
 			</TouchableOpacity>
 		</View>
 	);
 }
 
-export default VerifyEmailPasswordScreen;
+export default VerifyEmailPassword;
