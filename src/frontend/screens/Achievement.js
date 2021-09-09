@@ -1,11 +1,12 @@
 import React from 'react';
-import { View, Text, Image } from 'react-native';
-import { ProgressBar, SafeAreaView } from 'react-native-paper';
-
-import styles from '../styling/Achievement';
+import { View, Text, Image, Dimensions, SafeAreaView } from 'react-native';
+import StyleSheetFactory from '../styling/AchievementStyling';
+import { ProgressBar } from 'react-native-paper';
 import MenuHeader from '../components/MenuHeader';
 
-import { useTheme } from '@react-navigation/native';
+import { useFonts, Roboto_900Black } from '@expo-google-fonts/roboto';
+
+// data from database
 
 let achievements = [
 	{
@@ -26,7 +27,7 @@ let achievements = [
 		],
 	},
 	{
-		category: 'Creature',
+		category: 'Creatures',
 		progresses: [
 			{
 				progress: 0.3,
@@ -61,44 +62,58 @@ let achievements = [
 	},
 ];
 
-function Achievement(props) {
-	const { colors } = useTheme();
-	return (
-		<SafeAreaView>
-			<View style={styles(colors).achievementRow}>
-				<MenuHeader text='Achievement' navigation={props.navigation}>
-					<Text>AchiIcon</Text>
-				</MenuHeader>
-			</View>
+// https://forums.expo.dev/t/text-cut-off-on-oneplus-device/4999/10
+let styles = StyleSheetFactory.getSheet(
+	Dimensions.get('screen').width,
+	Dimensions.get('screen').height
+);
 
-			<View style={styles(colors).headContainer}>
-				{achievements.map((item) => (
-					<OneCategory
-						key={item.category}
-						category={item.category}
-						progresses={item.progresses}
-					/>
-				))}
-			</View>
-		</SafeAreaView>
-	);
+function AchievementScreen(props) {
+	let [fontsLoaded] = useFonts({
+		Roboto_900Black,
+	});
+
+	if (!fontsLoaded) {
+		return <View></View>;
+	} else {
+		console.log(props);
+		return (
+			<SafeAreaView>
+				<MenuHeader text='Achievement' navigation={props.navigation} />
+
+				<View style={styles.headContainer}>
+					{achievements.map((item) => (
+						<OneCategory
+							key={item.category}
+							category={item.category}
+							progresses={item.progresses}
+						/>
+					))}
+				</View>
+			</SafeAreaView>
+		);
+	}
 }
 
+/*
+    
+*/
+
 const OneCategory = (props) => {
-	const { colors } = useTheme();
 	return (
 		<View key={props.key}>
 			<Text
 				style={[
-					styles(colors).achievementName,
-					styles(colors).textstyles(colors),
+					styles.achievementName,
+					styles.textStyles,
+					{ fontFamily: 'Roboto_900Black' },
 				]}>
 				{props.category}
 			</Text>
-			<View style={styles(colors).achievementRow}>
-				{props.progresses.map((item) => (
+			<View style={styles.achievementRow}>
+				{props.progresses.map((item, index) => (
 					<OneAchievement
-						key={item}
+						key={index}
 						progress={item.progress}
 						srcPath={item.iconSrc}
 					/>
@@ -109,26 +124,22 @@ const OneCategory = (props) => {
 };
 
 const OneAchievement = (props) => {
-	const { colors } = useTheme();
 	const sty =
 		props.progress > 0.33
 			? props.progress > 0.66
-				? styles(colors).achievementGold
-				: styles(colors).achievementSilver
-			: styles(colors).achievementBronze;
+				? styles.achievementGold
+				: styles.achievementSilver
+			: styles.achievementBronze;
 	return (
-		<View style={styles(colors).achievementContainer}>
-			<Image
-				style={[styles(colors).achievementIcon, sty]}
-				source={props.srcPath}
-			/>
+		<View style={styles.achievementContainer}>
+			<Image style={[styles.achievementIcon, sty]} source={props.srcPath} />
 			<ProgressBar
 				progress={props.progress}
-				style={styles(colors).progressBar}
+				style={styles.progressBar}
 				color='#75D6FF'
 			/>
 		</View>
 	);
 };
 
-export default Achievement;
+export default AchievementScreen;

@@ -56,7 +56,7 @@ function ProfileEdit(props) {
 	return (
 		<SafeAreaView>
 			<View>
-				<MenuHeader text='Account  '>
+				<MenuHeader text='Account  ' navigation={props.navigation}>
 					<Text>Account </Text>
 				</MenuHeader>
 			</View>

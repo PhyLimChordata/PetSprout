@@ -1,25 +1,28 @@
 import React from 'react';
-import styles from '../styling/SettingsStyling';
+import StyleSheetFactory from '../styling/SettingsStyling';
 import headerStyles from '../styling/Header';
-import { View, Switch, Text, Image, TouchableOpacity } from 'react-native';
-import { SafeAreaView } from 'react-native';
+import { View, Switch, Text, Dimensions, SafeAreaView } from 'react-native';
 import { useTheme } from '@react-navigation/native';
 import Colours from '../resources/themes/Colours';
 
 // setting data from database
 
-function SettingsScreen() {
+let styles = StyleSheetFactory.getSheet(
+	Dimensions.get('screen').width,
+	Dimensions.get('screen').height
+);
+
+function SettingsPage() {
 	const handleSettingChange = () => {};
 
-	const { colors } = useTheme();
+	console.log('setting styles  = ' + styles);
 
 	return (
 		<SafeAreaView>
-			<View>
-				<TopBar />
-			</View>
+			<View></View>
 			<View style={styles.container}>
 				<View style={styles.settingContainer}>
+					<TopBar />
 					<Text style={[styles.textTitle, styles.text]}>Notifications</Text>
 					<OneSetting
 						id='pushNotif'
@@ -70,37 +73,37 @@ function SettingsScreen() {
 }
 
 const OneSetting = (props) => {
-	const { colors } = useTheme();
 	const [enabled, setEnabled] = React.useState(props.enabled);
 	const toggleSwitch = () => setEnabled((previousState) => !previousState);
+	const { colors } = useTheme();
+
 	const thumbColor = Colours.Grey.Button;
 	return (
-		<View style={styles.oneSettingContainer}>
-			<Text style={[styles.text, styles.textNormal]}>{props.tag}</Text>
+		<SafeAreaView style={styles.oneSettingContainer}>
+			<Text style={[styles.text, styles.textNormal, { flex: 1 }]}>
+				{props.tag}
+			</Text>
 			<Switch
 				style={styles.switchStyling}
-				trackColor={{ false: colors.Quaternary, true: colors.Tertiary }}
+				trackColor={{
+					false: colors.Quaternary,
+					true: colors.Tertiary,
+				}}
 				thumbColor={thumbColor}
 				activeThumbColor={thumbColor}
 				value={enabled}
 				onValueChange={toggleSwitch}
 			/>
-		</View>
+		</SafeAreaView>
 	);
 };
 
 const TopBar = () => {
 	return (
 		<View style={headerStyles.header}>
-			<TouchableOpacity activeOpacity={0.6} onPress={() => menuClicked}>
-				<Image
-					style={{ flex: 1, width: 30, height: 25 }}
-					source={require('../resources/images/BackButton.png')}
-				/>
-			</TouchableOpacity>
 			<Text style={headerStyles.textNormal}>Settings</Text>
 		</View>
 	);
 };
 
-export default SettingsScreen;
+export default SettingsPage;

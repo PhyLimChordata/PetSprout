@@ -14,18 +14,18 @@ import BottomMenu from './frontend/components/BottomMenu';
 import LoginScreen from './frontend/screens/Login';
 import SignupScreen from './frontend/screens/Signup';
 import VerifyEmailSignUpScreen from './frontend/screens/VerifyEmailSignUp';
-import PasswordScreen from './frontend/screens/Password';
+import PasswordScreen from './frontend/screens/AccountRecovery';
 import NewPasswordScreen from './frontend/screens/NewPassword';
 import VerifyEmailPasswordScreen from './frontend/screens/VerifyEmailPassword';
 
-import SettingsScreen from './frontend/screens/SettingsPage';
+import SettingsScreen from './frontend/screens/Settings';
 import ProfileEditScreen from './frontend/screens/ViewEditProfile';
-import AchievementScreen from './frontend/screens/AchievementScreen';
+import AchievementScreen from './frontend/screens/Achievement';
 import CollaboratorsScreen from './frontend/screens/Collaborators';
-import HabitsScreen from './frontend/screens/HabitsScreen';
+import HabitsScreen from './frontend/screens/Habits';
 import CreateHabitScreen from './frontend/screens/CreateHabit';
 import ComingSoonScreen from './frontend/screens/ComingSoon';
-import ModifyHabitScreen from './frontend/screens/PutHabits/ModifyHabitScreen';
+import ModifyHabitScreen from './frontend/screens/PutHabits/ModifyHabit';
 
 // Colour Themes
 import GreenLightTheme from './frontend/resources/themes/light/GreenTheme';
