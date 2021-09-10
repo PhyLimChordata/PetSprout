@@ -19,6 +19,7 @@ const collaboratorsStyles = (theme) =>
             height: 200,
 			width: 200,
 			marginBottom: 25,
+            marginTop: 10,
             resizeMode: "contain"
         },
         container: {
