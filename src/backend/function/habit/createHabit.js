@@ -13,6 +13,8 @@ const { validationResult } = require('express-validator');
  */
 module.exports = async (req, res) => {
 	try {
+		const test = new Date();
+		console.log(test);
 		let errors = validationResult(req);
 		if (!errors.isEmpty())
 			return res.status(400).json({ error: errors.array() });
