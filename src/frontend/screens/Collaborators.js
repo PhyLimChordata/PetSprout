@@ -1,34 +1,33 @@
 import React, { useState } from 'react';
-import { View } from 'react-native';
-import Header from '../components/MenuHeader';
-import CollaboratorContent from '../components/CollaboratorContent';
+import { View, SafeAreaView, Text, Image, Dimensions } from 'react-native';
+
+import MenuHeader from '../components/MenuHeader';
+import styles from '../styling/CollaboratorsStyling';
+
+import { useTheme } from '@react-navigation/native';
 
 function Collaborators(props) {
-	const [content, setContent] = useState('name');
-	const [extra, setExtra] = useState('extra');
-
-	const inputExample = () => {
-		fetch('http://localhost:5000/collaborators/add', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify({
-				name: content,
-			}),
-		})
-			.then((res) => res.json())
-			.then((data) => console.log(data))
-			.catch();
-
-		props.navigation.navigate('TabTwo');
-	};
-
+	const { colors } = useTheme();
+	
 	return (
-		<View>
-			<Header text='Collaborators'></Header>
-			<CollaboratorContent></CollaboratorContent>
-		</View>
+		<SafeAreaView>
+			<MenuHeader text='Collaborators' navigation={props.navigation}></MenuHeader>
+			<View style={styles(colors).container}>
+				<Image
+					style={styles(colors).collabImg}
+					source={require('../resources/images/Collaborators.png')}
+				/>
+				<Text style={styles(colors).textTitle}>A Special Thanks To</Text>
+				<Text style={styles(colors).text}>Manola Yvonet</Text>
+				<Text style={styles(colors).text}>Andy PhyLim</Text>
+				<Text style={styles(colors).text}>Calvin Cheng</Text>
+				<Text style={styles(colors).text}>Katrina Best</Text>
+				<Text style={styles(colors).text}>Cheryl Chen</Text>
+				<Text style={styles(colors).text}>Tuan Zi Li</Text>
+				<Text style={styles(colors).text}>Rachelle Willemsma</Text>
+				<Text style={styles(colors).text}>Prof. Joordens</Text>
+			</View>
+		</SafeAreaView>
 	);
 }
 

@@ -128,6 +128,10 @@ function NavContainer(props) {
 						name='ModifyHabitScreen'
 						component={ModifyHabitScreen}
 					/>
+					<Stack.Screen
+						name="CollaboratorsScreen"
+						component={CollaboratorsScreen}
+					/>
 				</Stack.Navigator>
 			) : (
 				<Stack.Navigator headerMode='none'>

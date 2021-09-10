@@ -231,6 +231,10 @@ function SideMenu(props) {
 								color={colors.Quaternary}
 								icon={'account-group'}
 								title={'Collaborators'}
+								onPress={() => {
+									props.setModalVisible(false);
+									props.navigation.navigate('CollaboratorsScreen');
+								}}
 							/>
 							<Tab
 								color={colors.Quaternary}
