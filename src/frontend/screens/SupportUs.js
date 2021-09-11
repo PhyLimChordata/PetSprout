@@ -2,7 +2,7 @@ import React from 'react';
 import { View, SafeAreaView, Image, Text, ScrollView, TouchableOpacity } from 'react-native';
 
 import MenuHeader from '../components/MenuHeader';
-import styles from "../styling/SupportUsStyling";
+import styles from "../styling/SupportUs";
 
 import { useTheme } from '@react-navigation/native';
 

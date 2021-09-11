@@ -7,15 +7,18 @@ import {
 	TextInput,
 	SafeAreaView,
 } from 'react-native';
-import StyleSheetFactory from '../styling/ViewEditBox';
+import profileStyles from '../styling/Profile';
+
 import MenuHeader from '../components/MenuHeader';
 import { useFonts, Roboto_900Black } from '@expo-google-fonts/roboto';
 import { AuthContext } from '../Context';
 
-let styles = StyleSheetFactory.getSheet(
-	Dimensions.get('screen').width,
-	Dimensions.get('screen').height
-);
+import { useTheme } from '@react-navigation/native';
+
+// let styles = StyleSheetFactory.getSheet(
+// 	Dimensions.get('screen').width,
+// 	Dimensions.get('screen').height
+// );
 
 function ProfileEdit(props) {
 	console.log('profile 14: ' + typeof styles);
@@ -25,6 +28,14 @@ function ProfileEdit(props) {
 		email: '',
 		about: '',
 	};
+
+	const { colors } = useTheme();
+
+	let styles = profileStyles(
+		colors,
+		Dimensions.get('screen').width,
+		Dimensions.get('screen').height
+	);
 
 	useEffect(() => {
 		if (state.userName.length == 0) get();
@@ -67,6 +78,7 @@ function ProfileEdit(props) {
 					def={name}
 					place='Username'
 					handle={handleChange}
+					styles={styles}
 				/>
 				<View style={styles.formContainer}>
 					<Text
@@ -87,6 +99,7 @@ function ProfileEdit(props) {
 					numLines={5}
 					backColor={true}
 					handle={handleChange}
+					styles={styles}
 				/>
 				<View style={styles.formContainer}>
 					<Text
@@ -99,7 +112,7 @@ function ProfileEdit(props) {
 					</Text>
 					<Text style={[styles.textInput, styles.text]}>Date</Text>
 				</View>
-				{/* <SubmitButton submit={onSubmit} /> */}
+				{/* <SubmitButton submit={onSubmit} styles = {styles}/> */}
 			</View>
 		</SafeAreaView>
 	);
@@ -121,11 +134,11 @@ const EditBox = (props) => {
 	useEffect(() => {}, [focused]);
 
 	return (
-		<View style={styles.formContainer}>
+		<View style={props.styles.formContainer}>
 			<Text
 				style={[
-					styles.textTitle,
-					styles.text,
+					props.styles.textTitle,
+					props.styles.text,
 					{ fontFamily: 'Roboto_900Black', fontWeight: '900' },
 				]}>
 				{props.tag}
@@ -138,11 +151,11 @@ const EditBox = (props) => {
 				defaultValue={props.place}
 				style={
 					props.mult
-						? styles.textMultiInput
+						? props.styles.textMultiInput
 						: [
-								styles.textInput,
-								styles.text,
-								focused ? styles.textInputSelected : null,
+								props.styles.textInput,
+								props.styles.text,
+								focused ? props.styles.textInputSelected : null,
 						  ]
 				}
 				multiline={props.mult}
@@ -154,11 +167,11 @@ const EditBox = (props) => {
 
 const SubmitButton = (props) => {
 	return (
-		<View style={styles.submitButtonPosition}>
-			<Pressable style={styles.submitButton} onPress={() => props.submit()}>
+		<View style={props.styles.submitButtonPosition}>
+			<Pressable style={props.styles.submitButton} onPress={() => props.submit()}>
 				<Text
 					style={[
-						styles.submitButtonText,
+						props.styles.submitButtonText,
 						{ fontFamily: 'Roboto_900Black', fontWeight: '900' },
 					]}>
 					SUBMIT
