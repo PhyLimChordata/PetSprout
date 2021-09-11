@@ -21,6 +21,7 @@ import VerifyEmailPasswordScreen from './frontend/screens/VerifyEmailPassword';
 import SettingsScreen from './frontend/screens/Settings';
 import ProfileEditScreen from './frontend/screens/ViewEditProfile';
 import AchievementScreen from './frontend/screens/Achievement';
+import CollaboratorsScreen from './frontend/screens/Collaborators';
 import SupportUsScreen from './frontend/screens/SupportUs';
 import HabitsScreen from './frontend/screens/Habits';
 import CreateHabitScreen from './frontend/screens/CreateHabit';
