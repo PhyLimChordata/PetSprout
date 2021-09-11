@@ -11,47 +11,97 @@ import StyleSheetFactory from '../styling/ViewEditBox';
 import MenuHeader from '../components/MenuHeader';
 import { useFonts, Roboto_900Black } from '@expo-google-fonts/roboto';
 import { AuthContext } from '../Context';
+import { useTheme } from '@react-navigation/native';
+import BottomPopup from '../components/BottomPopup';
 
-let styles = StyleSheetFactory.getSheet(
-	Dimensions.get('screen').width,
-	Dimensions.get('screen').height
-);
 
 function ProfileEdit(props) {
 	console.log('profile 14: ' + typeof styles);
 
-	let state = {
-		userName: '',
-		email: '',
-		about: '',
-	};
-
-	useEffect(() => {
-		if (state.userName.length == 0) get();
-	});
+	const[userName, setUserName] = React.useState('default');
+	const[email, setEmail] = React.useState('');
+	const[about, setAbout] = React.useState('');
+	const[createdAt, setCreatedAt] = React.useState('');
+	const[error, setError] = React.useState('')
+	const[userFocused, setFocused] = React.useState(false)
 
 	const { getToken } = useContext(AuthContext);
+	const { colors } = useTheme();
 
-	const get = () => {
-		fetch('http://localhost:5000/api/v1.0.0/user/viewAccount', {
-			method: 'GET',
+	let popup = React.useRef();
+	let styles = StyleSheetFactory.getSheet(
+		Dimensions.get('screen').width,
+		Dimensions.get('screen').height,
+		colors
+	);
+
+	useEffect(async () => {
+		const get = () => {
+			fetch('http://localhost:5000/api/v1.0.0/user/viewAccount', {
+				method: 'GET',
+				headers: {
+					'Content-Type': 'application/json',
+					'authentication-token': getToken,
+				},
+			})
+			.then((res) => res.json())
+			.then((data) => {
+				console.log(data)
+				setUserName(data.userName)
+				setEmail(data.email)
+				setAbout(data.about)
+				setCreatedAt(data.createdAt)
+				console.log(userName)
+			})
+			.catch();
+		};
+
+		get();
+	}, []);
+
+	const onSubmit = () => {
+		fetch('http://localhost:5000/api/v1.0.0/user/modifyAccount', {
+			method: 'PUT',
 			headers: {
 				'Content-Type': 'application/json',
 				'authentication-token': getToken,
 			},
-		}).then((res) => {
-			console.log('FETCHING USER DATA');
-			console.log(res);
-		});
+			body: JSON.stringify({
+				userName: userName,
+				about: about,
+			}),
+		})
+		.then((res) => {
+			if(userName == '') {
+				setError('Username cannot be empty.');
+			} else if (res.status == 500) {
+				setError('Something wrong happened internally...');
+			}
+			if (res.status != 200) {
+				popup.current?.togglePopup();
+			} else {
+				setError('')
+			}
+			res.json().then((data) => console.log(data))
+		})
+		
+	}
+	
+	const SubmitButton = (props) => {
+		return (
+			<View style={styles.submitButtonPosition}>
+				<Pressable style={styles.submitButton} onPress={() => props.submit()}>
+					<Text
+						style={[
+							styles.submitButtonText,
+							{ fontWeight: '900' },
+						]}>
+						SUBMIT
+					</Text>
+				</Pressable>
+			</View>
+		);
 	};
-
-	const handleChange = (id, e) => {
-		state[id] = e;
-	};
-
-	// const handleChange = (id, e) => {
-	// 	data[id] = e.target.value;
-	// };
 
 	return (
 		<SafeAreaView>
@@ -61,111 +111,76 @@ function ProfileEdit(props) {
 				</MenuHeader>
 			</View>
 			<View style={styles.container}>
-				<EditBox
-					id='userName'
-					tag='Username'
-					def={name}
-					place='Username'
-					handle={handleChange}
-				/>
 				<View style={styles.formContainer}>
 					<Text
 						style={[
 							styles.textTitle,
 							styles.text,
-							{ fontFamily: 'Roboto_900Black', fontWeight: '900' },
+							{ fontWeight: '900' },
+							(error.length != 0) ? styles.textInputError : null
+						]}>
+						Username
+					</Text>
+					<TextInput
+						onFocus={() => setFocused(true)}
+						onBlur={() => setFocused(false)}
+						onChangeText={(text) => setUserName(text)}
+						value={userName}
+						style={[
+								styles.textInput,
+								styles.text,
+								userFocused ? styles.textInputSelected : null,
+								error.length != 0 ? styles.textInputError : null
+							]}
+					/>
+				</View>
+				<View style={styles.formContainer}>
+					<Text
+						style={[
+							styles.textTitle,
+							styles.text,
+							{ fontWeight: '900' },
 						]}>
 						Email
 					</Text>
-					<Text style={[styles.textInput, styles.text]}>{state.email}</Text>
+					<Text style={[styles.textInput, styles.text]}>{email}</Text>
 				</View>
-				<EditBox
-					id='about'
-					tag='About'
-					def=''
-					mult={true}
-					numLines={5}
-					backColor={true}
-					handle={handleChange}
-				/>
 				<View style={styles.formContainer}>
 					<Text
 						style={[
 							styles.textTitle,
 							styles.text,
-							{ fontFamily: 'Roboto_900Black', fontWeight: '900' },
+							{ fontWeight: '900' },
+						]}>
+						About
+					</Text>
+					<TextInput
+						onChangeText={(text) => setAbout(text)}
+						value={about}
+						style={styles.textMultiInput}
+						multiline={true}
+						numberOfLines={5}
+					/>
+				</View>
+				<View style={styles.formContainer}>
+					<Text
+						style={[
+							styles.textTitle,
+							styles.text,
+							{ fontWeight: '900' },
 						]}>
 						Account Created On
 					</Text>
-					<Text style={[styles.textInput, styles.text]}>Date</Text>
+					<Text style={[styles.textInput, styles.text]}>{createdAt}</Text>
 				</View>
-				{/* <SubmitButton submit={onSubmit} /> */}
+				<SubmitButton submit={onSubmit}/>
+				<BottomPopup
+					ref={popup}
+					text={'The provided information cannot be saved'}
+				/>
 			</View>
 		</SafeAreaView>
 	);
 }
-
-const EditBox = (props) => {
-	const [text, onChangeText] = React.useState(props.def);
-	const [focused, onSelected] = React.useState(false);
-
-	const handleChange = (text) => {
-		console.log('handleChange ' + text);
-		onChangeText(text);
-		props.handle(props.id, text);
-	};
-
-	console.log('def =  ' + text);
-	console.log(props.def);
-
-	useEffect(() => {}, [focused]);
-
-	return (
-		<View style={styles.formContainer}>
-			<Text
-				style={[
-					styles.textTitle,
-					styles.text,
-					{ fontFamily: 'Roboto_900Black', fontWeight: '900' },
-				]}>
-				{props.tag}
-			</Text>
-			<TextInput
-				onFocus={() => onSelected(true)}
-				onBlur={() => onSelected(false)}
-				onChangeText={(text) => handleChange((props.id, text))}
-				value={text}
-				defaultValue={props.place}
-				style={
-					props.mult
-						? styles.textMultiInput
-						: [
-								styles.textInput,
-								styles.text,
-								focused ? styles.textInputSelected : null,
-						  ]
-				}
-				multiline={props.mult}
-				numberOfLines={props.numLines}
-			/>
-		</View>
-	);
-};
-
-const SubmitButton = (props) => {
-	return (
-		<View style={styles.submitButtonPosition}>
-			<Pressable style={styles.submitButton} onPress={() => props.submit()}>
-				<Text
-					style={[
-						styles.submitButtonText,
-						{ fontFamily: 'Roboto_900Black', fontWeight: '900' },
-					]}>
-					SUBMIT
-				</Text>
-			</Pressable>
-		</View>
-	);
-};
 
 export default ProfileEdit;
