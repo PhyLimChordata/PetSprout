@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 import Colours from '../resources/themes/Colours';
 import SupportUs from '../screens/SupportUs';
 
-const SupportUsStyle = (theme) =>
+const supportUsStyle = (theme) =>
 	StyleSheet.create({
 		container: {
 			alignItems: 'center',
@@ -30,6 +30,8 @@ const SupportUsStyle = (theme) =>
 			width: 200,
 			marginBottom: 50,
             resizeMode: "contain",
+            // tintColor: theme.Quaternary,
+            // TODO
 		},
         supportUsButton: {
             backgroundColor: theme.Tertiary,
@@ -48,4 +50,4 @@ const SupportUsStyle = (theme) =>
         }
 	});
 
-export default SupportUsStyle;
+export default supportUsStyle;

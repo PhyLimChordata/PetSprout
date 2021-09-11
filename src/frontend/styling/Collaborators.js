@@ -20,7 +20,9 @@ const collaboratorsStyles = (theme) =>
 			width: 200,
 			marginBottom: 25,
             marginTop: 10,
-            resizeMode: "contain"
+            resizeMode: "contain",
+            // tintColor: theme.Quaternary,
+            // TODO
         },
         container: {
             alignItems: 'center',
