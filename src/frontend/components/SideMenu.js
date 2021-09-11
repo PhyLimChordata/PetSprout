@@ -240,6 +240,10 @@ function SideMenu(props) {
 								color={colors.Quaternary}
 								icon={'hand-heart'}
 								title={'Support Us!'}
+								onPress={() => {
+									props.setModalVisible(false);
+									props.navigation.navigate("SupportUsScreen");
+								}}
 							/>
 							<Tab
 								color={colors.Quaternary}
