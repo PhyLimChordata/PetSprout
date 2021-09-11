@@ -7,13 +7,20 @@ import {
 	TextInput,
 	SafeAreaView,
 } from 'react-native';
-import StyleSheetFactory from '../styling/ViewEditBox';
+import profileStyles from '../styling/Profile';
+
 import MenuHeader from '../components/MenuHeader';
 import { useFonts, Roboto_900Black } from '@expo-google-fonts/roboto';
 import { AuthContext } from '../Context';
 import { useTheme } from '@react-navigation/native';
 import BottomPopup from '../components/BottomPopup';
 
+import { useTheme } from '@react-navigation/native';
+
+// let styles = StyleSheetFactory.getSheet(
+// 	Dimensions.get('screen').width,
+// 	Dimensions.get('screen').height
+// );
 
 function ProfileEdit(props) {
 	console.log('profile 14: ' + typeof styles);
