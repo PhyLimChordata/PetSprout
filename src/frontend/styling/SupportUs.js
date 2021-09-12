@@ -1,11 +1,10 @@
 import { StyleSheet } from 'react-native';
-import Colours from '../resources/themes/Colours';
-import SupportUs from '../screens/SupportUs';
 
-const supportUsStyle = (theme) =>
+const SupportUs = (theme) =>
 	StyleSheet.create({
 		container: {
 			alignItems: 'center',
+            textAlign: "center",
 			justifyContent: 'center',
 		},
 		textTitle: {
@@ -19,16 +18,18 @@ const supportUsStyle = (theme) =>
             marginTop: 30,
             marginBottom: 30,
             alignItems: "center",
+            textAlign: "center"
         },
         textFooter: {
             fontSize: 25,
             color: theme.Quaternary,
             marginTop: 20,
+            fontWeight: "bold",
         },
 		supportUsLogo: {
+            marginTop: 20,
 			height: 200,
 			width: 200,
-			marginBottom: 50,
             resizeMode: "contain",
             // tintColor: theme.Quaternary,
             // TODO
@@ -41,7 +42,7 @@ const supportUsStyle = (theme) =>
 			paddingLeft: 40,
 			paddingRight: 40,
 			marginBottom: 20,
-            alignItems: "center"
+            textAlign: "center",
         },
         supportUsButtonText: {
             fontSize: 20,
@@ -50,4 +51,4 @@ const supportUsStyle = (theme) =>
         }
 	});
 
-export default supportUsStyle;
+export default SupportUs;

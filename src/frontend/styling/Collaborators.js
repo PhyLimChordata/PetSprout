@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-const collaboratorsStyles = (theme) =>
+const Collaborators = (theme) =>
 	StyleSheet.create({
 		text: {
             fontSize: 20,
@@ -31,8 +31,9 @@ const collaboratorsStyles = (theme) =>
         headContainer: {
             display: 'flex',
             alignItems: 'center',
+            textAlign: "center",
             flexDirection: 'column',
         },
 	});
 
-export default collaboratorsStyles;
+export default Collaborators;

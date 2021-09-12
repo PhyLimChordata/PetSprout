@@ -22,7 +22,7 @@ import SettingsScreen from './frontend/screens/Settings';
 import ProfileEditScreen from './frontend/screens/Profile';
 import AchievementScreen from './frontend/screens/Achievement';
 import AboutScreen from './frontend/screens/About';
-import CollaboratorsScreen from './frontend/screens/Collaborator';
+import CollaboratorsScreen from './frontend/screens/Collaborators';
 import SupportUsScreen from './frontend/screens/SupportUs';
 import HabitsScreen from './frontend/screens/Habits';
 import CreateHabitScreen from './frontend/screens/CreateHabit';

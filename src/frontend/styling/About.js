@@ -1,11 +1,10 @@
 import { StyleSheet } from 'react-native';
-import Colours from '../resources/themes/Colours';
-import About from '../screens/About';
 
-const AboutUsStyle = (theme) =>
+const About = (theme) =>
 	StyleSheet.create({
 		container: {
 			alignItems: 'center',
+            textAlign: "center",
 			justifyContent: 'center',
 		},
 		textTitle: {
@@ -22,7 +21,7 @@ const AboutUsStyle = (theme) =>
             fontSize: 16,
             color: theme.Quaternary,
             marginBottom: 30,
-            alignItems: "center",
+            textAlign: "center",
             justifyContent: "center",
         },
 		aboutLogo: {
@@ -39,6 +38,7 @@ const AboutUsStyle = (theme) =>
 			paddingLeft: 40,
 			paddingRight: 40,
 			marginBottom: 20,
+            textAlign: "center",
             alignItems: "center",
             justifyContent: "center",
         },
@@ -49,4 +49,4 @@ const AboutUsStyle = (theme) =>
         }
 	});
 
-export default AboutUsStyle;
+export default About;
