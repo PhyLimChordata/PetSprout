@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import Modal from 'react-native-modal';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-// import Toggle from 'react-native-toggle-element';
+import Toggle from 'react-native-toggle-element';
 import Colours from '../resources/themes/Colours';
 import { useTheme } from '@react-navigation/native';
 
@@ -233,7 +233,7 @@ function SideMenu(props) {
 								title={'Collaborators'}
 								onPress={() => {
 									props.setModalVisible(false);
-									props.navigation.navigate("CollaboratorsScreen");
+									props.navigation.navigate('CollaboratorsScreen');
 								}}
 							/>
 							<Tab
@@ -242,7 +242,7 @@ function SideMenu(props) {
 								title={'Support Us!'}
 								onPress={() => {
 									props.setModalVisible(false);
-									props.navigation.navigate("SupportUsScreen");
+									props.navigation.navigate('SupportUsScreen');
 								}}
 							/>
 							<Tab
@@ -252,7 +252,7 @@ function SideMenu(props) {
 								isImage={true}
 								onPress={() => {
 									props.setModalVisible(false);
-									props.navigation.navigate("AboutScreen");
+									props.navigation.navigate('AboutScreen');
 								}}
 							/>
 						</View>
@@ -290,7 +290,7 @@ function SideMenu(props) {
 							/>
 						</View>
 						<View style={{ alignItems: 'center' }}>
-							{/* <Toggle
+							<Toggle
 								value={toggleValue}
 								onPress={(newState) => {
 									newState ? changeModeTheme('dark') : changeModeTheme('light');
@@ -321,7 +321,7 @@ function SideMenu(props) {
 										size={30}
 									/>
 								}
-							/> */}
+							/>
 						</View>
 						<View
 							style={{
