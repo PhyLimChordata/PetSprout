@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-const SupportUs = (theme) =>
+const About = (theme) =>
 	StyleSheet.create({
 		container: {
 			alignItems: 'center',
@@ -12,29 +12,25 @@ const SupportUs = (theme) =>
 			fontWeight: 'bold',
             color: theme.Quaternary,
 		},
+        textSubtitle: {
+            fontSize: 20,
+            color: theme.Quaternary,
+            marginBottom: 30,
+        },
         text: {
             fontSize: 16,
             color: theme.Quaternary,
-            marginTop: 30,
             marginBottom: 30,
-            alignItems: "center",
-            textAlign: "center"
+            textAlign: "center",
+            justifyContent: "center",
         },
-        textFooter: {
-            fontSize: 25,
-            color: theme.Quaternary,
-            marginTop: 20,
-            fontWeight: "bold",
-        },
-		supportUsLogo: {
-            marginTop: 20,
+		aboutLogo: {
 			height: 200,
 			width: 200,
+			marginBottom: 5,
             resizeMode: "contain",
-            // tintColor: theme.Quaternary,
-            // TODO
 		},
-        supportUsButton: {
+        aboutButton: {
             backgroundColor: theme.Tertiary,
 			borderRadius: 10,
             width: 250,
@@ -43,12 +39,14 @@ const SupportUs = (theme) =>
 			paddingRight: 40,
 			marginBottom: 20,
             textAlign: "center",
+            alignItems: "center",
+            justifyContent: "center",
         },
-        supportUsButtonText: {
+        aboutButtonText: {
             fontSize: 20,
 			fontWeight: 'bold',
 			color: theme.background,
         }
 	});
 
-export default SupportUs;
+export default About;

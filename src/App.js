@@ -21,6 +21,7 @@ import VerifyEmailPasswordScreen from './frontend/screens/VerifyEmailPassword';
 import SettingsScreen from './frontend/screens/Settings';
 import ProfileEditScreen from './frontend/screens/Profile';
 import AchievementScreen from './frontend/screens/Achievement';
+import AboutScreen from './frontend/screens/About';
 import CollaboratorsScreen from './frontend/screens/Collaborators';
 import SupportUsScreen from './frontend/screens/SupportUs';
 import HabitsScreen from './frontend/screens/Habits';
@@ -129,10 +130,17 @@ function NavContainer(props) {
 						name='ModifyHabitScreen'
 						component={ModifyHabitScreen}
 					/>
-					<Stack.Screen name='SupportUsScreen' component={SupportUsScreen} />
 					<Stack.Screen
-						name='CollaboratorsScreen'
+						name="AboutScreen"
+						component={AboutScreen}
+					/>
+					<Stack.Screen
+						name="CollaboratorsScreen"
 						component={CollaboratorsScreen}
+					/>
+					<Stack.Screen
+						name="SupportUsScreen"
+						component={SupportUsScreen}
 					/>
 				</Stack.Navigator>
 			) : (
