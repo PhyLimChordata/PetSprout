@@ -1,5 +1,5 @@
 import React from 'react';
-import StyleSheetFactory from '../styling/SettingsStyling';
+import settingStyles from '../styling/Settings';
 import headerStyles from '../styling/Header';
 import { View, Switch, Text, Dimensions, SafeAreaView } from 'react-native';
 import { useTheme } from '@react-navigation/native';
@@ -7,14 +7,16 @@ import Colours from '../resources/themes/Colours';
 
 // setting data from database
 
-let styles = StyleSheetFactory.getSheet(
-	Dimensions.get('screen').width,
-	Dimensions.get('screen').height
-);
-
 function SettingsPage() {
 	const handleSettingChange = () => {};
 
+	const {colors} = useTheme();
+
+	let styles = settingStyles(
+		colors,
+		Dimensions.get('screen').width,
+		Dimensions.get('screen').height
+	);
 	console.log('setting styles  = ' + styles);
 
 	return (
@@ -22,37 +24,42 @@ function SettingsPage() {
 			<View></View>
 			<View style={styles.container}>
 				<View style={styles.settingContainer}>
-					<TopBar />
+					<TopBar/>
 					<Text style={[styles.textTitle, styles.text]}>Notifications</Text>
 					<OneSetting
 						id='pushNotif'
 						tag='Use Push Notifications'
 						enabled={false}
 						handle={handleSettingChange}
+						styles={styles}
 					/>
 					<OneSetting
 						id='emailNotif'
 						tag='Use Email Notifications'
 						enabled={false}
 						handle={handleSettingChange}
+						styles={styles}
 					/>
 					<OneSetting
 						id='voiceNotif'
 						tag='Use Voice Notifications'
 						enabled={false}
 						handle={handleSettingChange}
+						styles={styles}
 					/>
 					<OneSetting
 						id='dailyReminderToggle'
 						tag='Set Daily Reminder'
 						enabled={false}
 						handle={handleSettingChange}
+						styles={styles}
 					/>
 					<OneSetting
 						id='vibration'
 						tag='Vibration'
 						enabled={false}
 						handle={handleSettingChange}
+						styles={styles}
 					/>
 					<Text style={[styles.textTitle, styles.text]}>App version</Text>
 					<View style={styles.textDisplayMargin}>
@@ -79,12 +86,12 @@ const OneSetting = (props) => {
 
 	const thumbColor = Colours.Grey.Button;
 	return (
-		<SafeAreaView style={styles.oneSettingContainer}>
-			<Text style={[styles.text, styles.textNormal, { flex: 1 }]}>
+		<SafeAreaView style={props.styles.oneSettingContainer}>
+			<Text style={[props.styles.text, props.styles.textNormal, { flex: 1 }]}>
 				{props.tag}
 			</Text>
 			<Switch
-				style={styles.switchStyling}
+				style={props.styles.switchStyling}
 				trackColor={{
 					false: colors.Quaternary,
 					true: colors.Tertiary,

@@ -19,7 +19,7 @@ import NewPasswordScreen from './frontend/screens/NewPassword';
 import VerifyEmailPasswordScreen from './frontend/screens/VerifyEmailPassword';
 
 import SettingsScreen from './frontend/screens/Settings';
-import ProfileEditScreen from './frontend/screens/ViewEditProfile';
+import ProfileEditScreen from './frontend/screens/Profile';
 import AchievementScreen from './frontend/screens/Achievement';
 import AboutScreen from './frontend/screens/About';
 import CollaboratorsScreen from './frontend/screens/Collaborator';

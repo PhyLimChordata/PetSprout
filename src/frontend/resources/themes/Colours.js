@@ -34,6 +34,7 @@ const Colours = {
 		Bronze: '#C6895E',
 		Silver: '#A7BFCA',
 		Gold: '#FFC93E',
+		Black: '#000000'
 	},
 };
 
