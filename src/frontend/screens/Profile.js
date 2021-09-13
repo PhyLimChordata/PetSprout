@@ -21,7 +21,7 @@ import BottomPopup from '../components/BottomPopup';
 // );
 
 function ProfileEdit(props) {
-	
+	let popup = React.useRef();
 	console.log('profile 14: ' + typeof styles);
 
 	const[userName, setUserName] = React.useState('default');
@@ -34,7 +34,7 @@ function ProfileEdit(props) {
 	const { getToken } = useContext(AuthContext);
 	const { colors } = useTheme();
 	//let styles= profileStyles(Dimensions.get('screen').width, Dimensions.get('screen').height, colors)
-	let popup = React.useRef();
+	
 	let styles = StyleSheetFactory.getSheet(
 		Dimensions.get('screen').width,
 		Dimensions.get('screen').height,
@@ -62,35 +62,42 @@ function ProfileEdit(props) {
 			.catch();
 		};
 
-		get();
+		if(userName == 'default') get();
 	}, []);
 
+	useEffect(() => console.log("Error = " + error), [error])
+
 	const onSubmit = () => {
-		fetch('http://localhost:5000/api/v1.0.0/user/modifyAccount', {
-			method: 'PUT',
-			headers: {
-				'Content-Type': 'application/json',
-				'authentication-token': getToken,
-			},
-			body: JSON.stringify({
-				userName: userName,
-				about: about,
-			}),
-		})
-		.then((res) => {
-			if(userName == '') {
-				setError('Username cannot be empty.');
-			} else if (res.status == 500) {
-				setError('Something wrong happened internally...');
-			}
-			if (res.status != 200) {
-				popup.current?.togglePopup();
-			} else {
-				setError('')
-			}
-			res.json().then((data) => console.log(data))
-		})
-		
+		if(userName.length == 0) {
+			setError("Username cannot be empty.")
+			popup.current?.togglePopup();
+		} else {
+			fetch('http://localhost:5000/api/v1.0.0/user/modifyAccount', {
+				method: 'PUT',
+				headers: {
+					'Content-Type': 'application/json',
+					'authentication-token': getToken,
+				},
+				body: JSON.stringify({
+					userName: userName,
+					about: about,
+				}),
+			})
+			.then((res) => {
+				if (res.status != 200) {
+					popup.current?.togglePopup();
+					if(res.status == 500){
+						setError('Something wrong happened internally...');
+					}
+				} 
+				res.json().then((data) => {
+					console.log(data)
+					setUserName(data.userName)
+					setAbout(data.about)
+				});
+			})
+			.catch(err => console.log(err))
+		}
 	}
 	
 	const SubmitButton = (props) => {
@@ -123,7 +130,7 @@ function ProfileEdit(props) {
 							styles.textTitle,
 							styles.text,
 							{ fontWeight: '900' },
-							(error.length != 0) ? styles.textInputError : null
+							error.length != 0 ? styles.textInputError : null
 						]}>
 						Username
 					</Text>
@@ -180,11 +187,12 @@ function ProfileEdit(props) {
 					<Text style={[styles.textInput, styles.text]}>{createdAt}</Text>
 				</View>
 				<SubmitButton submit={onSubmit}/>
-				<BottomPopup
-					ref={popup}
-					text={'The provided information cannot be saved'}
-				/>
+				
 			</View>
+			<BottomPopup
+				ref={popup}
+				text={'The provided information cannot be saved'}
+			/>
 		</SafeAreaView>
 	);
 }
