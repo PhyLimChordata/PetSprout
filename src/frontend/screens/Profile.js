@@ -22,7 +22,6 @@ import BottomPopup from '../components/BottomPopup';
 
 function ProfileEdit(props) {
 	let popup = React.useRef();
-	console.log('profile 14: ' + typeof styles);
 
 	const[userName, setUserName] = React.useState('default');
 	const[email, setEmail] = React.useState('');
@@ -57,15 +56,14 @@ function ProfileEdit(props) {
 				setEmail(data.email)
 				setAbout(data.about)
 				setCreatedAt(data.createdAt)
-				console.log(userName)
 			})
-			.catch();
+			.catch(err => console.log(err));
 		};
 
 		if(userName == 'default') get();
 	}, []);
 
-	useEffect(() => console.log("Error = " + error), [error])
+	useEffect(() => console.log("Error = " + error), [error]);
 
 	const onSubmit = () => {
 		if(userName.length == 0) {
