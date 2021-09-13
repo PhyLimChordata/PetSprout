@@ -68,7 +68,7 @@ function ProfileEdit(props) {
 		if (userName == 'default') get();
 	}, []);
 
-	useEffect(() => console.log("Error = " + error), [error])
+	useEffect(() => console.log("Error = " + error), [error]);
 
 	const onSubmit = () => {
 		if (userName.length == 0) {
