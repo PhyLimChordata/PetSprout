@@ -30,6 +30,9 @@ function profileStyles(theme, width, height) {
             color: theme.Quaternary,
             fontSize: fontSize,
         },
+        textInputError: {
+            color: 'red',
+        },
         textInputSelected: {
             borderBottomWidth: 2,
             paddingBottom: 0,
@@ -40,7 +43,6 @@ function profileStyles(theme, width, height) {
             marginBottom: 12,
             padding: 10,
             color: Colours.Unique.Black,
-            color: 'red',
             fontSize: fontSize,
             fontWeight: '300',
             textAlignVertical: 'top',

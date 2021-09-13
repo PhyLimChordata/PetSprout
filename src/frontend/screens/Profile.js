@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 // import profileStyles from '../styling/Profile';
 import StyleSheetFactory from '../styling/ViewEditBox';
+import profileStyles from '../styling/Profile';
 import MenuHeader from '../components/MenuHeader';
 import { useFonts, Roboto_900Black } from '@expo-google-fonts/roboto';
 import { AuthContext } from '../Context';
@@ -34,13 +35,13 @@ function ProfileEdit(props) {
 	const { colors } = useTheme();
 	//let styles= profileStyles(Dimensions.get('screen').width, Dimensions.get('screen').height, colors)
 	
-	let styles = StyleSheetFactory.getSheet(
+	let styles = profileStyles(
+		colors,
 		Dimensions.get('screen').width,
 		Dimensions.get('screen').height,
-		colors
 	);
 
-	useEffect(async () => {
+	useEffect(() => {
 		const get = () => {
 			fetch('http://localhost:5000/api/v1.0.0/user/viewAccount', {
 				method: 'GET',
@@ -115,6 +116,7 @@ function ProfileEdit(props) {
 	};
 
 	return (
+		<>
 		<SafeAreaView>
 			<View>
 				<MenuHeader text='Account  ' navigation={props.navigation}>
@@ -185,13 +187,13 @@ function ProfileEdit(props) {
 					<Text style={[styles.textInput, styles.text]}>{createdAt}</Text>
 				</View>
 				<SubmitButton submit={onSubmit}/>
-				
 			</View>
+		</SafeAreaView>
 			<BottomPopup
 				ref={popup}
 				text={'The provided information cannot be saved'}
 			/>
-		</SafeAreaView>
+		</>
 	);
 }
 
