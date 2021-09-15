@@ -1,16 +1,21 @@
-import React, {useState} from 'react';
-import {View, Image, TouchableHighlight} from 'react-native';
+import React from 'react';
+import { View, TouchableOpacity } from 'react-native';
 
 import styles from '../styling/Habits';
 
+import { useTheme } from '@react-navigation/native';
+
 function Ellipsis(props) {
-    return (
-        <View style={styles.horizontalContainer}>
-            <View style={styles.ellipsisCircle}/>
-            <View style={styles.ellipsisCircle}/>
-            <View style={styles.ellipsisCircle}/>
-        </View>
-    );
+	const { colors } = useTheme();
+	return (
+		<TouchableOpacity
+			style={styles(colors).horizontalContainer}
+			onPress={props.onPress}>
+			<View style={styles(colors).ellipsisCircle} />
+			<View style={styles(colors).ellipsisCircle} />
+			<View style={styles(colors).ellipsisCircle} />
+		</TouchableOpacity>
+	);
 }
 
 export default Ellipsis;

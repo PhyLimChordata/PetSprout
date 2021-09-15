@@ -1,6 +1,7 @@
+const Habit = require('../../schemas/habitSchema');
+const User = require('../../schemas/userSchema');
+
 const { validationResult } = require('express-validator');
-const Habit = require('../../schemas/HabitSchema');
-const User = require('../../schemas/UserSchema');
 const bcryptjs = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 

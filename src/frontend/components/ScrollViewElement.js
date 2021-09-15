@@ -1,21 +1,11 @@
-import React, { useState, useRef } from 'react';
-import { View, Text, Image, Animated, TouchableOpacity } from 'react-native';
-
-import Checkmark from '../components/Checkmark';
-import Trash from '../components/Trash';
-
+import React, { useRef } from 'react';
+import { View, Animated, TouchableOpacity, Image } from 'react-native';
 import Swipeable from 'react-native-gesture-handler/Swipeable';
-import ColorSet from '../resources/themes/Global';
 
 import styles from '../styling/Habits';
-import Ellipsis from './Ellipsis';
 
-function Capitalize(str) {
-	if (str != null) {
-		return str.charAt(0).toUpperCase() + str.slice(1);
-	}
-	return '';
-}
+import Colours from '../resources/themes/Colours';
+import { useTheme } from '@react-navigation/native';
 
 function ScrollViewElement(props) {
 	const swipeableRef = useRef(props.swipe);
@@ -34,15 +24,14 @@ function ScrollViewElement(props) {
 		return (
 			<View
 				style={{
-					backgroundColor: ColorSet.Red.Tertiary,
+					backgroundColor: Colours.Red.Delete,
 					borderRadius: 8,
 					height: '100%',
 					width: '100%',
 					justifyContent: 'center',
 					alignItems: 'flex-start',
 					padding: 20,
-				}}
-			>
+				}}>
 				<Animated.View style={{ transform: [{ scale }] }}>
 					<Trash onPress={left} />
 				</Animated.View>
@@ -65,15 +54,14 @@ function ScrollViewElement(props) {
 		return (
 			<View
 				style={{
-					backgroundColor: ColorSet.Blue.Tertiary,
+					backgroundColor: Colours.Blue.Confirm,
 					borderRadius: 8,
 					height: '100%',
 					width: '100%',
 					justifyContent: 'center',
 					alignItems: 'flex-end',
 					padding: 20,
-				}}
-			>
+				}}>
 				<Animated.View style={{ transform: [{ scale }] }}>
 					<Checkmark onPress={right} />
 				</Animated.View>
@@ -111,13 +99,37 @@ function ScrollViewElement(props) {
 			<Swipeable
 				ref={swipeableRef}
 				renderRightActions={rightSwipe}
-				rightThreshold={80}
-			>
+				rightThreshold={80}>
 				{props.content}
 			</Swipeable>
 		);
 	}
 	return <View>{props.content}</View>;
+}
+
+function Checkmark(props) {
+	const { colors } = useTheme();
+	return (
+		<TouchableOpacity activeOpacity={0.6} onPress={props.onPress}>
+			<Image
+				style={styles(colors).swipeIcon}
+				source={require('../resources/images/Checkmark.png')}
+			/>
+		</TouchableOpacity>
+	);
+}
+
+function Trash(props) {
+	const { colors } = useTheme();
+	return (
+		<TouchableOpacity activeOpacity={0.6} onPress={props.onPress}>
+			<Image
+				style={styles(colors).swipeIcon}
+				resizeMode={'contain'}
+				source={require('../resources/images/Trash.png')}
+			/>
+		</TouchableOpacity>
+	);
 }
 
 export default ScrollViewElement;

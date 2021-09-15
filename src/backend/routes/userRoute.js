@@ -12,7 +12,7 @@ const {
 	loginUserValidator,
 	sendActivationEmailValidator,
 	sendReportValidator,
-    resetPasswordValidator
+	resetPasswordValidator,
 } = require('../middleware/express-validator/expressValidator');
 
 // User router
@@ -42,23 +42,19 @@ router.post(
 	sendReport.sendFeedbackReport
 );
 
-router.get('/viewAccount', getUserAccount.viewAccount);
+router.get('/viewAccount', authentication, getUserAccount.viewAccount);
 
-router.put('/modifyAccount', getUserAccount.modifyAccount);
+router.put('/modifyAccount', authentication, getUserAccount.modifyAccount);
 
-router.post(
-    '/pending_password', 
-    forgetPassword.pending_password);
 
-router.get(
-    '/reset_password/:code/:email',
-    forgetPassword.reset_password);
+router.post('/pending_password', forgetPassword.pending_password);
+
+router.get('/reset_password/:code/:email', forgetPassword.reset_password);
 
 router.post(
-    '/check_user',
-    resetPasswordValidator,
-    forgetPassword.checkUserExistl
+	'/check_user',
+	resetPasswordValidator,
+	forgetPassword.checkUserExistl
 );
-
 
 module.exports = router;

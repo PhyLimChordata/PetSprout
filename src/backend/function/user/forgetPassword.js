@@ -1,5 +1,6 @@
-const User = require('../../schemas/UserSchema');
+const User = require('../../schemas/userSchema');
 const Mailing = require('../../schemas/mailingValidationSchema');
+
 const nodemailer = require('nodemailer');
 const smtpTransport = require('nodemailer-smtp-transport');
 const bcryptjs = require('bcryptjs');

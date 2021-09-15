@@ -1,37 +1,37 @@
-import React, {useState} from 'react';
-import {View} from 'react-native';
+import React, { useState } from 'react';
+import { View, SafeAreaView, Text, Image, Dimensions, ScrollView } from 'react-native';
 
-import styles from '../styling/Tabs';
-import Header from '../components/MenuHeader';
-import CollaboratorContent from '../components/collaboratorContent';
+import MenuHeader from '../components/MenuHeader';
+import styles from '../styling/Collaborators';
+
+import { useTheme } from '@react-navigation/native';
 
 function Collaborators(props) {
-    const [content, setContent] = useState('name');
-    const[extra, setExtra] = useState('extra');
-   
-    const inputExample = () => {
-        fetch("http://localhost:5000/collaborators/add",
-        {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                "name": content
-            })
-        }).then(res => res.json())
-        .then(data => console.log(data))
-        .catch();
-
-        props.navigation.navigate("TabTwo");
-    }
-
-    return (
-        <View>
-            <Header text="Collaborators"></Header>
-            <CollaboratorContent></CollaboratorContent>
-        </View>
-    );
+	const { colors } = useTheme();
+	const style = styles(colors);
+	
+	return (
+		<SafeAreaView>
+			<MenuHeader text='Collaborators' navigation={props.navigation}></MenuHeader>
+			<View style={style.container}>
+				<Image
+					style={style.collabImg}
+					source={require('../resources/images/Collaborators.png')}
+				/>
+				<ScrollView contentContainerStyle={style.container}>
+					<Text style={style.textTitle}>A Special Thanks To</Text>
+					<Text style={style.text}>Manola Yvonet</Text>
+					<Text style={style.text}>Andy PhyLim</Text>
+					<Text style={style.text}>Calvin Cheng</Text>
+					<Text style={style.text}>Katrina Best</Text>
+					<Text style={style.text}>Cheryl Chen</Text>
+					<Text style={style.text}>Tuan Zi Li</Text>
+					<Text style={style.text}>Rachelle Willemsma</Text>
+					<Text style={style.text}>Prof. Joordens</Text>
+				</ScrollView>
+			</View>
+		</SafeAreaView>
+	);
 }
 
 //https://reactnative.dev/docs/pixelratio

@@ -1,6 +1,7 @@
-const Habit = require('../../schemas/HabitSchema');
-const User = require('../../schemas/UserSchema');
-const Analyze = require('../../schemas/AnalyzeSchema');
+const Habit = require('../../schemas/habitSchema');
+const User = require('../../schemas/userSchema');
+const Analyze = require('../../schemas/analyzeSchema');
+
 const { validationResult } = require('express-validator');
 
 /**
@@ -28,14 +29,18 @@ module.exports = async (req, res) => {
 		let user = await User.findById(req.user.id).select('-password');
 		if (!user) return res.status(404).json('User not found');
 
-		let userHabit = await Habit.findOne({user:req.user.id});
-		if (!userHabit) return res.status(404).json("User's habit information not found");
+		let userHabit = await Habit.findOne({ user: req.user.id });
+		if (!userHabit)
+			return res.status(404).json("User's habit information not found");
 
-		if(schedule === [false,false,false,false,false,false,false]
-			|| alarm === [] || times.toString() === '0'){
-				return res.status(403).json("Incorrect/Invalid request param");
-			}
-				
+		if (
+			schedule === [false, false, false, false, false, false, false] ||
+			alarm === [] ||
+			times.toString() === '0'
+		) {
+			return res.status(403).json('Incorrect/Invalid request param');
+		}
+
 		let newSchedule = [];
 		let i = 0;
 		for (const element of schedule) {
@@ -75,7 +80,6 @@ module.exports = async (req, res) => {
 		userHabit.habitList.push(newHabit);
 		await userHabit.save();
 		res.json(newHabit);
-
 	} catch (error) {
 		console.error(error);
 		return res.status(500).json('Server error');

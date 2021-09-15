@@ -1,10 +1,12 @@
 import React from 'react';
-import { View, Text, Image } from 'react-native';
+import { View, Text } from 'react-native';
 
 import styles from '../styling/Habits';
-import ColorSet from '../resources/themes/Global';
+
+import { useTheme } from '@react-navigation/native';
 
 function Counter(props) {
+	const { colors } = useTheme();
 	if (props.last) {
 		return (
 			<View
@@ -12,17 +14,16 @@ function Counter(props) {
 					flexDirection: 'row',
 					marginRight: 60,
 					paddingTop: 10,
-					backgroundColor: ColorSet.Green.Secondary,
-				}}
-			>
-				<Text style={styles.levelText}>{props.quantity}</Text>
+					backgroundColor: colors.Secondary,
+				}}>
+				<Text style={styles(colors).levelText}>{props.quantity}</Text>
 				{props.supplementalInfo}
 			</View>
 		);
 	}
 	return (
-		<View style={styles.horizontalContainerPaddingRight}>
-			<Text style={styles.levelText}>{props.quantity}</Text>
+		<View style={styles(colors).horizontalContainerPaddingRight}>
+			<Text style={styles(colors).levelText}>{props.quantity}</Text>
 			{props.supplementalInfo}
 		</View>
 	);
