@@ -14,7 +14,6 @@ const { validationResult } = require('express-validator');
  */
 module.exports = async (req, res) => {
 	try {
-
 		let { title, description, reason, schedule, times, alarm, date } =
 			req.body;
 

@@ -9,7 +9,6 @@ const showUserHabit = require('../function/habit/showUserHabit');
 const showHabit = require('../function/habit/showHabit');
 
 const {
-	userCreateHabitValidator,
 	markTodoValidator,
 } = require('../middleware/express-validator/expressValidator');
 
@@ -27,7 +26,6 @@ router.put(
 router.put(
 	'/change_habit/:user_habit_id/:habit_id',
 	authentication,
-	userCreateHabitValidator,
 	updateHabit
 );
 router.delete(
