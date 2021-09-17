@@ -31,13 +31,12 @@ module.exports = async (req, res) => {
 		if (!userHabit)
 			return res.status(404).json("User's habit information not found");
 
-		if (
-			schedule === [false, false, false, false, false, false, false] ||
-			alarm === [] ||
-			times.toString() === '0'
-		) {
-			return res.status(403).json('Incorrect/Invalid request param');
-		}
+		if ( schedule === [false, false, false, false, false, false, false] ) 
+			return res.status(403).json('Incorrect schedule');
+
+		if( alarm === [] ) return res.status(403).json('Incorrect alarm');
+
+		if( times === '0') return res.status(403).json('Incorrect times')
 
 		let newSchedule = [];
 		let i = 0;
