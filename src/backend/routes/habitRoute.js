@@ -16,7 +16,6 @@ const {
 router.post(
 	'/create_habit',
 	authentication,
-	userCreateHabitValidator,
 	createHabit
 );
 router.put(

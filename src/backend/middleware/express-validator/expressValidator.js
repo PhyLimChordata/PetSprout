@@ -22,10 +22,6 @@ module.exports.loginUserValidator = [
 		.isEmpty(),
 ];
 
-module.exports.userCreateHabitValidator = [
-	check('title', 'Title is empty').not().isEmpty(),
-];
-
 module.exports.markTodoValidator = [
 	check('expValue', 'Exp value must be provided').isNumeric(),
 ];
