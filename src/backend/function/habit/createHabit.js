@@ -18,13 +18,16 @@ module.exports = async (req, res) => {
 			req.body;
 
 		let errors = [];
-		if (title === '') errors.push('title');
-		if ( schedule === [false, false, false, false, false, false, false] ) {
+		if ( title === '' ) errors.push('title');
+		if ( JSON.stringify(schedule) ==
+		     JSON.stringify([false,false,false,false,false,false,false] )) {
 			errors.push('schedule');
 		}
-		if( alarm === [] ) errors.push('alarm');
-		if( times === '0') errors.push('times');
+		if( alarm.length === 0 ) errors.push('alarm');
+		if( times === 0) errors.push('times');
 		if( date === '') errors.push('date');
+
+		console.log(errors);
 
 		if(errors.length != 0) return res.status(403).json( {error: errors })
 
