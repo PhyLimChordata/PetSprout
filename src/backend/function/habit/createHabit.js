@@ -27,9 +27,7 @@ module.exports = async (req, res) => {
 		if( times === 0) errors.push('times');
 		if( date === '') errors.push('date');
 
-		console.log(errors);
-
-		if(errors.length != 0) return res.status(403).json( {error: errors })
+		if(errors.length != 0) return res.status(403).json( {error: errors });
 
 		let newAnalyze = new Analyze({});
 		await newAnalyze.save();

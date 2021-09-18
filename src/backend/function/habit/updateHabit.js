@@ -15,30 +15,31 @@ const { validationResult } = require('express-validator');
 module.exports = async (req, res) => {
 	try {
 		let user = await User.findById(req.user.id).select('-password');
-		if (!user) return res.status(404).json('User could not found');
+		if (!user) return res.status(404).json({ error: 'User could not found' });
 
 		let userHabit = await Habit.findById(req.params.user_habit_id);
-		if (!userHabit) return res.status(404).json("User's habits could not find");
+		if (!userHabit) return res.status(404).json({ error: "User's habits could not find" });
 
 		const habitFromDB = userHabit.habitList.find(
 			(habit) => habit._id.toString() === req.params.habit_id.toString()
 		);
 		if (!habitFromDB)
-			return res.status(404).json("Habit could not find in user's habits");
+			return res.status(404).json({ error: "Habit could not find in user's habits" });
 
-		let errors = validationResult(req);
-		if (!errors.isEmpty())
-			return res.status(400).json({ error: errors.array() });
 
 		let { title, description, reason, schedule, times, alarm, date } = req.body;
 
-		if (
-			schedule === [false, false, false, false, false, false, false] ||
-			alarm === [] ||
-			times.toString() === '0'
-		) {
-			return res.status(403).json('Incorrect/Invalid request param');
+		let errors = [];
+		if ( title === '' ) errors.push('title');
+		if ( JSON.stringify(schedule) ==
+		     JSON.stringify([false,false,false,false,false,false,false] )) {
+			errors.push('schedule');
 		}
+		if( alarm.length === 0 ) errors.push('alarm');
+		if( times === 0) errors.push('times');
+		if( date === '') errors.push('date');
+
+		if(errors.length != 0) return res.status(403).json({ error: errors });
 
 		let newSchedule = [];
 		let i = 0;
