@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useContext } from 'react';
 import settingStyles from '../styling/Settings';
 import { View, Switch, Text, Dimensions, SafeAreaView, Image, ImageBackground } from 'react-native';
 import { useTheme } from '@react-navigation/native';
@@ -6,17 +6,47 @@ import Colours from '../resources/themes/Colours';
 import MenuHeader from '../components/MenuHeader';
 import TextBox from '../components/TextBox'
 
+import { AuthContext } from '../Context';
+
+
 // setting data from database
 
 function SettingsPage(props) {
+	const[loaded, setLoaded] = React.useState(false);
 	const[notif, setNotif] = React.useState(true);
 	const[emailNotif, setEmailNotif] = React.useState(true);
 	const[voiceNotif, setVoiceNotif] = React.useState(false);
 	const[reminder, setReminder] = React.useState(true);
 	const[vibration, setVibration] = React.useState(false);
 	const[fontSize, setFontSize] = React.useState(13);
+	const { getToken } = useContext(AuthContext);
+	console.log(getToken)
+	useEffect(() => {
+		const get = () => {
+			fetch('http://localhost:5000/api/v1.0.0/setting/getUserSetting', {
+				method: 'GET',
+				headers: {
+					'Content-Type': 'application/json',
+					'authentication-token': getToken,
+				},
+			})
+			.then((res) => res.json())
+			.then((data) => {
+				console.log(data)
+				setNotif(data.pushNotification);
+				setEmailNotif(data.emailNotification);
+				setVoiceNotif(data.voiceNotification);
+				setReminder(data.reminder);
+				setVibration(data.vibration)
+			})
+			.catch(err => console.log(err));
+		};
 
-	const handleSettingChange = () => {};
+		if(!loaded) {
+			get();
+			setLoaded(true);
+		}
+	}, []);
 
 	const {colors} = useTheme();
 
@@ -25,7 +55,91 @@ function SettingsPage(props) {
 		Dimensions.get('screen').width,
 		Dimensions.get('screen').height
 	);
-	console.log('setting styles  = ' + styles);
+
+	const OneSetting = (props) => {
+		const { colors } = useTheme();
+
+		const update = ({ value }) => {
+			console.log("value = " + value);
+			props.handle(value)
+			console.log("notif: " + notif);
+			console.log("emailnotif = " + emailNotif);
+			console.log("voiceNotif = " + voiceNotif);
+			console.log("reminder = " + reminder)
+			console.log("vibration = " + vibration)
+			/*
+			fetch('http://localhost:5000/api/v1.0.0/setting/updateUserSetting', {
+				method: 'PUT',
+				headers: {
+					'Content-Type': 'application/json',
+					'authentication-token': getToken,
+				},
+				body: JSON.stringify({
+					pushNotification: notif,
+					emailNotification: emailNotif,
+					voiceNotification: voiceNotif,
+					vibration: vibration,
+					reminder: reminder
+				}),
+			})
+			.then((res) => {
+				console.log("Updating settings: " + res.status)
+				res.json()
+				.then((data) => {
+					console.log(data)
+					setNotif(data.pushNotification);
+					setEmailNotif(data.emailNotification);
+					setVoiceNotif(data.voiceNotification);
+					setReminder(data.reminder);
+					setVibration(data.vibration)
+				})
+				.catch(err => console.log(err));
+			}
+			)*/
+		}
+	
+		const thumbColor = Colours.Grey.Button;
+		return (
+			<SafeAreaView style={props.styles.oneSettingContainer}>
+				<Text style={[props.styles.text, props.styles.textNormal, { flex: 1 }]}>
+					{props.tag}
+				</Text>
+				<Switch
+					style={props.styles.switchStyling}
+					trackColor={{
+						false: colors.Quaternary,
+						true: colors.Tertiary,
+					}}
+					thumbColor={thumbColor}
+					activeThumbColor={thumbColor}
+					value={props.enabled}
+					onValueChange={(val) => {
+						props.handle(val);
+						console.log(props.enabled)
+						fetch('http://localhost:5000/api/v1.0.0/setting/updateUserSetting', {
+							method: 'PUT',
+							headers: {
+								'Content-Type': 'application/json',
+								'authentication-token': getToken,
+							},
+							body: JSON.stringify({
+								 [props.id]: val,
+							}),
+						})
+						.then((res) => {
+							console.log("Updating settings: " + res.status)
+							res.json()
+							.then((data) => {
+								console.log(data)
+							})
+							.catch(err => console.log(err));
+						}
+						)
+					}}
+				/>
+			</SafeAreaView>
+		);
+	};
 
 	return (
 		<SafeAreaView>
@@ -60,28 +174,28 @@ function SettingsPage(props) {
 				<View style={styles.settingContainer}>
 					<Text style={[styles.textTitle, styles.text]}>Notifications</Text>
 					<OneSetting
-						id='pushNotif'
+						id='pushNotification'
 						tag='Use Push Notifications'
 						enabled={notif}
 						handle={setNotif}
 						styles={styles}
 					/>
 					<OneSetting
-						id='emailNotif'
+						id='emailNotification'
 						tag='Use Email Notifications'
 						enabled={emailNotif}
 						handle={setEmailNotif}
 						styles={styles}
 					/>
 					<OneSetting
-						id='voiceNotif'
+						id='voiceNotification'
 						tag='Use Voice Notifications'
 						enabled={voiceNotif}
 						handle={setVoiceNotif}
 						styles={styles}
 					/>
 					<OneSetting
-						id='dailyReminderToggle'
+						id='reminder'
 						tag='Set Daily Reminder'
 						enabled={reminder}
 						handle={setReminder}
@@ -116,31 +230,5 @@ function SettingsPage(props) {
 		</SafeAreaView>
 	);
 }
-
-const OneSetting = (props) => {
-	const [enabled, setEnabled] = React.useState(props.enabled);
-	const toggleSwitch = () => setEnabled((previousState) => !previousState);
-	const { colors } = useTheme();
-
-	const thumbColor = Colours.Grey.Button;
-	return (
-		<SafeAreaView style={props.styles.oneSettingContainer}>
-			<Text style={[props.styles.text, props.styles.textNormal, { flex: 1 }]}>
-				{props.tag}
-			</Text>
-			<Switch
-				style={props.styles.switchStyling}
-				trackColor={{
-					false: colors.Quaternary,
-					true: colors.Tertiary,
-				}}
-				thumbColor={thumbColor}
-				activeThumbColor={thumbColor}
-				value={enabled}
-				onValueChange={toggleSwitch}
-			/>
-		</SafeAreaView>
-	);
-};
 
 export default SettingsPage;

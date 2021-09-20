@@ -2,7 +2,7 @@ const Setting = require('../../schemas/settingSchema');
 
 const get_user_setting = async (req, res) => {
 	try {
-		let user_id = req.params.id;
+		let user_id = req.user.id;
 
 		let user_setting = await Setting.findOne({ user: user_id });
 
@@ -17,9 +17,16 @@ const get_user_setting = async (req, res) => {
 
 const update_user_setting = async (req, res) => {
 	try {
+		/*
 		let errors = validationResult(req);
 		if (!errors.isEmpty())
-			return res.status(400).json({ error: error.array() });
+			return res.status(400).json({ error: error.array() });*/
+
+		
+		let user_id = req.user.id;
+		let user_setting = await Setting.findOne({ user: user_id });
+
+		if (!user_setting) return res.status(404).json('User not found');
 
 		let {
 			pushNotification,
@@ -28,10 +35,6 @@ const update_user_setting = async (req, res) => {
 			vibration,
 			reminder,
 		} = req.body;
-		let user_id = req.params.id;
-		let user_setting = await Setting.findOne({ user: user_id });
-
-		if (!user_setting) return res.status(404).json('User not found');
 
 		user_setting.pushNotification = pushNotification;
 		user_setting.emailNotification = emailNotification;
