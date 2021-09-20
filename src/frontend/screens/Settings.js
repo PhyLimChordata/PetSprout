@@ -18,6 +18,9 @@ import TextBox from '../components/TextBox';
 
 import { AuthContext } from '../Context';
 
+import { AuthContext } from '../Context';
+
+
 // setting data from database
 
 function SettingsPage(props) {
