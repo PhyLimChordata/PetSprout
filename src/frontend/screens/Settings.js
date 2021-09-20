@@ -4,10 +4,18 @@ import { View, Switch, Text, Dimensions, SafeAreaView, Image, ImageBackground } 
 import { useTheme } from '@react-navigation/native';
 import Colours from '../resources/themes/Colours';
 import MenuHeader from '../components/MenuHeader';
+import TextBox from '../components/TextBox'
 
 // setting data from database
 
 function SettingsPage(props) {
+	const[notif, setNotif] = React.useState(true);
+	const[emailNotif, setEmailNotif] = React.useState(true);
+	const[voiceNotif, setVoiceNotif] = React.useState(false);
+	const[reminder, setReminder] = React.useState(true);
+	const[vibration, setVibration] = React.useState(false);
+	const[fontSize, setFontSize] = React.useState(13);
+
 	const handleSettingChange = () => {};
 
 	const {colors} = useTheme();
@@ -54,46 +62,51 @@ function SettingsPage(props) {
 					<OneSetting
 						id='pushNotif'
 						tag='Use Push Notifications'
-						enabled={false}
-						handle={handleSettingChange}
+						enabled={notif}
+						handle={setNotif}
 						styles={styles}
 					/>
 					<OneSetting
 						id='emailNotif'
 						tag='Use Email Notifications'
-						enabled={false}
-						handle={handleSettingChange}
+						enabled={emailNotif}
+						handle={setEmailNotif}
 						styles={styles}
 					/>
 					<OneSetting
 						id='voiceNotif'
 						tag='Use Voice Notifications'
-						enabled={false}
-						handle={handleSettingChange}
+						enabled={voiceNotif}
+						handle={setVoiceNotif}
 						styles={styles}
 					/>
 					<OneSetting
 						id='dailyReminderToggle'
 						tag='Set Daily Reminder'
-						enabled={false}
-						handle={handleSettingChange}
+						enabled={reminder}
+						handle={setReminder}
 						styles={styles}
 					/>
 					<OneSetting
 						id='vibration'
 						tag='Vibration'
-						enabled={false}
-						handle={handleSettingChange}
+						enabled={vibration}
+						handle={setVibration}
 						styles={styles}
 					/>
+					
 					<Text style={[styles.textTitle, styles.text]}>App version</Text>
 					<View style={styles.textDisplayMargin}>
 						<Text style={[styles.textNormal, styles.textDisplay]}>1.0.0</Text>
 					</View>
-					<Text style={[styles.textTitle, styles.text]}>Font Size</Text>
-					<View style={styles.textDisplayMargin}>
-						<Text style={[styles.textNormal, styles.textDisplay]}>13</Text>
-					</View>
+					<TextBox
+						header="Font size"
+						TextStyle={[styles.textTitle, styles.text]}
+						boxStyle={[styles.textNormal, styles.textDisplay, styles.textDisplayMargin]}
+						text={fontSize}
+						value={fontSize}
+						setText={setFontSize}
+					/>
 					<Text style={[styles.textTitle, styles.text]}>Screen on Launch</Text>
 					<View style={styles.textDisplayMargin}>
 						<Text style={[styles.textNormal, styles.textDisplay]}>Habits</Text>
