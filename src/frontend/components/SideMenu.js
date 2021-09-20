@@ -221,6 +221,10 @@ function SideMenu(props) {
 								color={colors.Quaternary}
 								icon={'bullhorn'}
 								title={'Feedback'}
+								onPress={() => {
+									props.setModalVisible(false);
+									props.navigation.navigate("FeedbackScreen");
+								}}
 							/>
 							<Tab
 								color={colors.Quaternary}
