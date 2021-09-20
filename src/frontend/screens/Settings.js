@@ -1,13 +1,13 @@
 import React from 'react';
 import settingStyles from '../styling/Settings';
-import headerStyles from '../styling/Header';
-import { View, Switch, Text, Dimensions, SafeAreaView } from 'react-native';
+import { View, Switch, Text, Dimensions, SafeAreaView, Image, ImageBackground } from 'react-native';
 import { useTheme } from '@react-navigation/native';
 import Colours from '../resources/themes/Colours';
+import MenuHeader from '../components/MenuHeader';
 
 // setting data from database
 
-function SettingsPage() {
+function SettingsPage(props) {
 	const handleSettingChange = () => {};
 
 	const {colors} = useTheme();
@@ -21,10 +21,35 @@ function SettingsPage() {
 
 	return (
 		<SafeAreaView>
-			<View></View>
+			<MenuHeader
+				back={true}
+				text={'Settings'}
+				navigation={props.navigation}
+				right={
+					<>
+						<ImageBackground
+							style={{
+								width: Dimensions.get('screen').width * 0.1,
+								height: Dimensions.get('screen').width * 0.1,
+								alignItems: 'center',
+								justifyContent: 'center'
+							}}
+							source={require('../resources/images/Background.png')}
+						>
+							<Image
+								style={{
+									width: Dimensions.get('screen').width * 0.08,
+									height: Dimensions.get('screen').width * 0.08,
+									margin: Dimensions.get('screen').width * 0.02
+								}}
+								source={require('../resources/images/SettingIcon.png')}
+							/>
+						</ImageBackground>
+					</>
+				}
+			/>
 			<View style={styles.container}>
 				<View style={styles.settingContainer}>
-					<TopBar/>
 					<Text style={[styles.textTitle, styles.text]}>Notifications</Text>
 					<OneSetting
 						id='pushNotif'
@@ -102,14 +127,6 @@ const OneSetting = (props) => {
 				onValueChange={toggleSwitch}
 			/>
 		</SafeAreaView>
-	);
-};
-
-const TopBar = () => {
-	return (
-		<View style={headerStyles.header}>
-			<Text style={headerStyles.textNormal}>Settings</Text>
-		</View>
 	);
 };
 
