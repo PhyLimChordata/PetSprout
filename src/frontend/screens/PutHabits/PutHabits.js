@@ -49,7 +49,6 @@ function Day({ selected, letter, onPress }) {
 }
 
 function PutHabits(props) {
-	console.log(props);
 	let popup = React.useRef();
 	const [days, setDays] = useState(props.days);
 	const [alarms, setAlarms] = useState(props.alarms);
@@ -129,6 +128,35 @@ function PutHabits(props) {
 			})
 			.catch();
 	};
+
+	const deleteHabit = () => {
+		fetch(
+			'http://localhost:5000/api/v1.0.0/habit/delete_habit/' +
+			props.userHabitId +
+			'/' +
+			props.habitId,
+			{
+				method: 'DELETE',
+				headers: {
+					'Content-Type': 'application/json',
+					'authentication-token': getToken,
+				},
+			}
+		)
+			.then((res) => {
+				res.json().then((data) => {
+					console.log(data);
+					if (res.status == 200) {
+						props.navigation.goBack(null);
+					} else {
+						setPopupText('Error on Delete');
+						popup.current?.togglePopup();
+					}
+				});
+			})
+			.catch();
+	};
+
 	const onPress = props.isCreate ? () => createHabit() : () => modifyHabit();
 
 	function flipDay(index) {
@@ -136,16 +164,18 @@ function PutHabits(props) {
 		newArr[index] = !newArr[index];
 		setDays(newArr);
 	}
-
+	// Gets time not including date in minutes
+	function getTime(time) {
+		return time.getHours() * 60 + time.getMinutes()
+	}
 	function addAlarm(time) {
 		time.setSeconds(0, 0);
-		for (const alarm of alarms) {
-			if (alarm.getTime() == time.getTime()) {
+		for (let alarm of alarms) {
+			alarm = new Date(alarm)
+			if (getTime(alarm) == getTime(time)) {
 				setPopupText('Alarm Already Exists');
 				popup.current?.togglePopup();
 				return;
-			} else if (alarm.getTime() > time.getTime()) {
-				break;
 			}
 		}
 		setAlarms([...alarms, time].sort());
@@ -268,9 +298,18 @@ function PutHabits(props) {
 								</View>
 							);
 						})}
+
 					</View>
 				</View>
 			</ScrollView>
+			{!props.isCreate && <TouchableOpacity onPress={() => deleteHabit()}style={{backgroundColor:'#E37272', alignItems:'center', justifyContent:'center', height:40, marginHorizontal: 30, borderRadius: 10,}}>
+				<Text
+					style={{
+						fontSize: 20,
+						fontWeight: 'bold',
+						color: colors.background,
+					}}>Delete Habit</Text>
+			</TouchableOpacity>}
 			<BottomPopup ref={popup} text={popupText} />
 			<DateTimePickerModal
 				isVisible={isDatePickerVisible}
