@@ -69,24 +69,26 @@ function HabitsScreen(props) {
 			.then((res) =>
 				res.json().then((data) => {
 					const expValue = parseInt(data.expValue);
-					setHabits(data.habitList);
-					setUserHabitId(data._id);
-					setExperience((expValue % 100).toString());
-					setLevel(Math.floor(expValue / 100).toString());
+					setTimeout(() => {
+						setHabits(data.habitList);
+						setUserHabitId(data._id);
+						setExperience((expValue % 100).toString());
+						setLevel(Math.floor(expValue / 100).toString());
 
-					console.log(getToken);
-					//Displaying purposes
-					const heartValue = [];
-					for (var i = 0; i < data.heart; i++) {
-						heartValue.push(i);
-					}
-					setHearts(heartValue);
-					setDisplayed(true);
-					console.log(data);
+						console.log(getToken);
+						//Displaying purposes
+						const heartValue = [];
+						for (var i = 0; i < data.heart; i++) {
+							heartValue.push(i);
+						}
+						setHearts(heartValue);
+						setDisplayed(true);
+						console.log(data);
+						setRefreshing(false)
+					}, 1000)
 				})
 			)
 			.catch();
-		setRefreshing(false);
 	};
 
 	return (
