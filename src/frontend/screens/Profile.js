@@ -84,7 +84,7 @@ function ProfileEdit(props) {
 				} else {
 					console.log("Success")
 					setMessage("Account has been successfully updated.")
-					setColor(Colours.Green.Success)
+					setColor(Colours.Green.Selected)
 					res.json().then((data) => {
 						console.log(data)
 						setUserName(data.userName)
@@ -209,7 +209,7 @@ function ProfileEdit(props) {
 			</SafeAreaView>
 			<BottomPopup
 				ref={popup}
-				color={Colours.Green.Selected}
+				color={color}
 				text={message}
 			/>
 		</>

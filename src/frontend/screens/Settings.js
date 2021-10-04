@@ -59,7 +59,7 @@ function SettingsPage(props) {
 	const OneSetting = (props) => {
 		const { colors } = useTheme();
 
-		const update = ({ value }) => {
+		async function update (value){
 			console.log("value = " + value);
 			props.handle(value)
 			console.log("notif: " + notif);
@@ -67,35 +67,7 @@ function SettingsPage(props) {
 			console.log("voiceNotif = " + voiceNotif);
 			console.log("reminder = " + reminder)
 			console.log("vibration = " + vibration)
-			/*
-			fetch('http://localhost:5000/api/v1.0.0/setting/updateUserSetting', {
-				method: 'PUT',
-				headers: {
-					'Content-Type': 'application/json',
-					'authentication-token': getToken,
-				},
-				body: JSON.stringify({
-					pushNotification: notif,
-					emailNotification: emailNotif,
-					voiceNotification: voiceNotif,
-					vibration: vibration,
-					reminder: reminder
-				}),
-			})
-			.then((res) => {
-				console.log("Updating settings: " + res.status)
-				res.json()
-				.then((data) => {
-					console.log(data)
-					setNotif(data.pushNotification);
-					setEmailNotif(data.emailNotification);
-					setVoiceNotif(data.voiceNotification);
-					setReminder(data.reminder);
-					setVibration(data.vibration)
-				})
-				.catch(err => console.log(err));
-			}
-			)*/
+			return;
 		}
 	
 		const thumbColor = Colours.Grey.Button;
@@ -114,27 +86,29 @@ function SettingsPage(props) {
 					activeThumbColor={thumbColor}
 					value={props.enabled}
 					onValueChange={(val) => {
-						props.handle(val);
-						console.log(props.enabled)
-						fetch('http://localhost:5000/api/v1.0.0/setting/updateUserSetting', {
-							method: 'PUT',
-							headers: {
-								'Content-Type': 'application/json',
-								'authentication-token': getToken,
-							},
-							body: JSON.stringify({
-								 [props.id]: val,
-							}),
-						})
-						.then((res) => {
-							console.log("Updating settings: " + res.status)
-							res.json()
-							.then((data) => {
-								console.log(data)
+						console.log(props.handle)
+						console.log("Previous value for " + props.tag + " = " + props.enabled)
+						console.log("Received value for " + props.tag + " = " + val)
+						props.handle(val, 
+							fetch('http://localhost:5000/api/v1.0.0/setting/updateUserSetting', {
+								method: 'PUT',
+								headers: {
+									'Content-Type': 'application/json',
+									'authentication-token': getToken,
+								},
+								body: JSON.stringify({
+									[props.id]: val
+								}),
 							})
-							.catch(err => console.log(err));
-						}
-						)
+							.then((res) => {
+								console.log("Updating settings: " + res.status)
+								res.json()
+								.then((data) => {
+									console.log(data)
+								})
+								.catch(err => console.log(err));
+							}
+							))
 					}}
 				/>
 			</SafeAreaView>

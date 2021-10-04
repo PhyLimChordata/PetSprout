@@ -36,11 +36,21 @@ const update_user_setting = async (req, res) => {
 			reminder,
 		} = req.body;
 
-		user_setting.pushNotification = pushNotification;
-		user_setting.emailNotification = emailNotification;
-		user_setting.voiceNotification = voiceNotification;
-		user_setting.vibration = vibration;
-		user_setting.reminder = reminder;
+		if(pushNotification != null) {
+			user_setting.pushNotification = pushNotification;	
+		}
+		if(emailNotification != null) {
+			user_setting.emailNotification = emailNotification;
+		}
+		if(voiceNotification != null) {
+			user_setting.voiceNotification = voiceNotification;
+		}
+		if(vibration != null) {
+			user_setting.vibration = vibration;
+		}
+		if(reminder != null) {
+			user_setting.reminder = reminder;
+		}
 
 		await user_setting.save();
 
