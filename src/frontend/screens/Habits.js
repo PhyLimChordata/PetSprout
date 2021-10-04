@@ -1,5 +1,13 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { View, Image, Animated, SafeAreaView } from 'react-native';
+import {
+	View,
+	Image,
+	Animated,
+	SafeAreaView,
+	RefreshControl,
+	ScrollView,
+	Text,
+} from 'react-native';
 
 import styles from '../styling/HabitsScreen';
 import Habits from '../components/Habits';
@@ -20,9 +28,27 @@ function HabitsScreen(props) {
 
 	const [level, setLevel] = useState('');
 	const [displayed, setDisplayed] = useState(false);
+
 	const scrolling = React.useRef(new Animated.Value(0)).current;
 
 	const { getToken } = useContext(AuthContext);
+
+	const [refreshing, setRefreshing] = React.useState(false);
+
+	const onRefresh = React.useCallback(() => {
+		setRefreshing(true);
+		displayHabits();
+	}, []);
+
+	const wait = (timeout) => {
+		return new Promise((resolve) => setTimeout(resolve, timeout));
+	};
+
+	const translateY = scrolling.interpolate({
+		inputRange: [-50, 0],
+		outputRange: [50, 0],
+		extrapolate: 'clamp',
+	});
 
 	useEffect(() => {
 		if (habits.length == 0 && !displayed) displayHabits();
@@ -30,6 +56,8 @@ function HabitsScreen(props) {
 
 	const displayHabits = () => {
 		setDisplayed(true);
+		setRefreshing(true);
+
 		const date = new Date().getDay();
 		fetch('http://localhost:5000/api/v1.0.0/habit/show_user_habit/' + date, {
 			method: 'GET',
@@ -58,6 +86,7 @@ function HabitsScreen(props) {
 				})
 			)
 			.catch();
+		setRefreshing(false);
 	};
 
 	return (
@@ -74,17 +103,19 @@ function HabitsScreen(props) {
 					width={experience + '%'}
 				/>
 			</View>
-			<View style={styles(colors).scrollViewContainer}>
-				<Animated.ScrollView
+			<SafeAreaView style={styles(colors).scrollViewContainer}>
+				<ScrollView
 					showsVerticalScrollIndicator={false}
 					onScroll={Animated.event(
 						[{ nativeEvent: { contentOffset: { y: scrolling } } }],
 						{ useNativeDriver: true }
 					)}
-					decelerationRate={'normal'}>
+					scrollEventThrottle={16}
+					decelerationRate={'normal'}
+					refreshControl={
+						<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+					}>
 					{habits.map((data, index) => {
-						console.log(habits);
-						console.log('dud');
 						if (data.times - data.todo > 0) {
 							const scale = scrolling.interpolate({
 								inputRange: [-1, 0, 100 * index, 100 * (index + 1)],
@@ -114,8 +145,8 @@ function HabitsScreen(props) {
 							);
 						}
 					})}
-				</Animated.ScrollView>
-			</View>
+				</ScrollView>
+			</SafeAreaView>
 		</SafeAreaView>
 	);
 }
