@@ -104,7 +104,7 @@ function HabitsScreen(props) {
 				/>
 			</View>
 			<SafeAreaView style={styles(colors).scrollViewContainer}>
-				<ScrollView
+				<Animated.ScrollView
 					showsVerticalScrollIndicator={false}
 					onScroll={Animated.event(
 						[{ nativeEvent: { contentOffset: { y: scrolling } } }],
@@ -145,7 +145,7 @@ function HabitsScreen(props) {
 							);
 						}
 					})}
-				</ScrollView>
+				</Animated.ScrollView>
 			</SafeAreaView>
 		</SafeAreaView>
 	);
