@@ -56,7 +56,7 @@ function PutHabits(props) {
 	const [title, setTitle] = useState(props.title);
 	const [description, setDescription] = useState(props.description);
 	const [reason, setReason] = useState(props.reason);
-	const { getToken } = useContext(AuthContext);
+	const { getToken, changeRefreshing } = useContext(AuthContext);
 	const [popupText, setPopupText] = useState('');
 	const [invalidParams, setInvalidParams] = useState([]);
 
@@ -84,6 +84,7 @@ function PutHabits(props) {
 					// console.log(res.status)
 					if (res.status == 200) {
 						props.navigation.goBack(null);
+						changeRefreshing(true);
 					} else {
 						setInvalidParams(data.error);
 						setPopupText('The provided information cannot be saved');
