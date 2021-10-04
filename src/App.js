@@ -51,6 +51,8 @@ export default function App() {
 	const [token, setToken] = useState(null);
 	const [color, setColor] = useState('green');
 	const [mode, setMode] = useState('light');
+	const [refreshing, setRefreshing] = useState(false);
+
 	const authContext = useMemo(() => {
 		return {
 			logIn: (generatedToken) => {
@@ -65,11 +67,24 @@ export default function App() {
 			changeModeTheme: (selectedMode) => {
 				setMode(selectedMode);
 			},
+			changeRefreshing: (refreshMode) => {
+				setRefreshing(refreshMode);
+			},
 			getToken: token,
 			getColor: color,
 			getMode: mode,
+			getRefreshing: refreshing,
 		};
-	}, [token, setToken, color, setColor, mode, setMode]);
+	}, [
+		token,
+		setToken,
+		color,
+		setColor,
+		mode,
+		setMode,
+		refreshing,
+		setRefreshing,
+	]);
 
 	// "Main" or start of program
 	return (
@@ -130,18 +145,12 @@ function NavContainer(props) {
 						name='ModifyHabitScreen'
 						component={ModifyHabitScreen}
 					/>
+					<Stack.Screen name='AboutScreen' component={AboutScreen} />
 					<Stack.Screen
-						name="AboutScreen"
-						component={AboutScreen}
-					/>
-					<Stack.Screen
-						name="CollaboratorsScreen"
+						name='CollaboratorsScreen'
 						component={CollaboratorsScreen}
 					/>
-					<Stack.Screen
-						name="SupportUsScreen"
-						component={SupportUsScreen}
-					/>
+					<Stack.Screen name='SupportUsScreen' component={SupportUsScreen} />
 				</Stack.Navigator>
 			) : (
 				<Stack.Navigator headerMode='none'>

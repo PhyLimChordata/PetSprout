@@ -31,12 +31,13 @@ function HabitsScreen(props) {
 
 	const scrolling = React.useRef(new Animated.Value(0)).current;
 
-	const { getToken } = useContext(AuthContext);
+	const { getToken, getRefreshing, changeRefreshing } = useContext(AuthContext);
 
 	const [refreshing, setRefreshing] = React.useState(false);
 
 	const onRefresh = React.useCallback(() => {
 		setRefreshing(true);
+		changeRefreshing(true);
 		displayHabits();
 	}, []);
 
@@ -57,7 +58,6 @@ function HabitsScreen(props) {
 	const displayHabits = () => {
 		setDisplayed(true);
 		setRefreshing(true);
-
 		const date = new Date().getDay();
 		fetch('http://localhost:5000/api/v1.0.0/habit/show_user_habit/' + date, {
 			method: 'GET',
@@ -84,11 +84,13 @@ function HabitsScreen(props) {
 						setHearts(heartValue);
 						setDisplayed(true);
 						console.log(data);
-						setRefreshing(false)
-					}, 1000)
+						setRefreshing(false);
+					}, 1000);
 				})
 			)
 			.catch();
+		setRefreshing(false);
+		changeRefreshing(false);
 	};
 
 	return (
@@ -115,7 +117,7 @@ function HabitsScreen(props) {
 					scrollEventThrottle={16}
 					decelerationRate={'normal'}
 					refreshControl={
-						<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+						<RefreshControl refreshing={getRefreshing} onRefresh={onRefresh} />
 					}>
 					{habits.map((data, index) => {
 						if (data.times - data.todo > 0) {
