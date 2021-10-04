@@ -58,6 +58,7 @@ function PutHabits(props) {
 	const [reason, setReason] = useState(props.reason);
 	const { getToken } = useContext(AuthContext);
 	const [popupText, setPopupText] = useState('');
+	const [invalidParams, setInvalidParams] = useState([]);
 
 	const { colors } = useTheme();
 	const createHabit = () => {
@@ -79,11 +80,12 @@ function PutHabits(props) {
 		})
 			.then((res) => {
 				res.json().then((data) => {
-					// console.log(data);
+					console.log(data);
 					// console.log(res.status)
 					if (res.status == 200) {
 						props.navigation.goBack(null);
 					} else {
+						setInvalidParams(data.error)
 						setPopupText('The provided information cannot be saved');
 						popup.current?.togglePopup();
 					}
@@ -121,6 +123,7 @@ function PutHabits(props) {
 					if (res.status == 200) {
 						props.navigation.goBack(null);
 					} else {
+						setInvalidParams(data.error)
 						setPopupText('The provided information cannot be saved');
 						popup.current?.togglePopup();
 					}
@@ -160,6 +163,9 @@ function PutHabits(props) {
 	const onPress = props.isCreate ? () => createHabit() : () => modifyHabit();
 
 	function flipDay(index) {
+		if (invalidParams.includes('schedule')) {
+			invalidParams.splice(invalidParams.indexOf('schedule'), 1);
+		}
 		let newArr = [...days];
 		newArr[index] = !newArr[index];
 		setDays(newArr);
@@ -211,6 +217,18 @@ function PutHabits(props) {
 		borderRadius: 5,
 		marginBottom: 20,
 	};
+
+	const textboxSmallStyleInvalid = {
+		backgroundColor: colors.Secondary,
+		padding: 10,
+		height: 50,
+		borderWidth: 3,
+		borderColor: 'red',
+		borderStyle: 'solid',
+		fontSize: 15,
+		borderRadius: 5,
+		marginBottom: 20,
+	};
 	return (
 		<SafeAreaView style={styles(colors).headContainer}>
 			<MenuHeader
@@ -226,12 +244,32 @@ function PutHabits(props) {
 			<ScrollView>
 				<View style={{ marginHorizontal: 30, marginTop: 10 }}>
 					<TextBox
+						onPress={() => {
+							console.log('???')
+							console.log(invalidParams.includes('title'))
+							if (invalidParams.includes('title')) {
+								let cloneArray = invalidParams.slice();
+								cloneArray.splice(cloneArray.indexOf('title'), 1);
+								setInvalidParams(cloneArray)
+								// console.log(invalidParams)
+								// invalidParams.splice(invalidParams.indexOf('title'), 1);
+								// console.log(invalidParams)
+							}
+						}}
 						header={'Title'}
-						boxStyle={textboxSmallStyle}
+						boxStyle={invalidParams.includes('title')? textboxSmallStyleInvalid :textboxSmallStyle}
 						multiline={true}
 						setText={setTitle}
 						text={title}
 					/>
+					{invalidParams.includes('title') && <Text
+						style={{
+							marginTop:-10,
+							marginBottom:5,
+							color: 'red',
+							fontSize: 15,
+							fontWeight: 'bold',
+						}}> This is a Required Field </Text>}
 					<TextBox
 						header={'Description'}
 						boxStyle={textboxBigStyle}
@@ -264,6 +302,13 @@ function PutHabits(props) {
 						<Day letter={'F'} selected={days[5]} onPress={() => flipDay(5)} />
 						<Day letter={'S'} selected={days[6]} onPress={() => flipDay(6)} />
 					</View>
+					{invalidParams.includes('schedule') && <Text
+						style={{
+							marginTop:5,
+							color: 'red',
+							fontSize: 15,
+							fontWeight: 'bold',
+						}}> Select a Day of the Week </Text>}
 					<View style={{ alignItems: 'center', marginVertical: 20 }}>
 						<TouchableOpacity
 							style={{
@@ -274,7 +319,12 @@ function PutHabits(props) {
 								justifyContent: 'center',
 								borderRadius: 20,
 							}}
-							onPress={() => setDatePickerVisibility(true)}>
+							onPress={() => {
+								if (invalidParams.includes('alarm')) {
+									invalidParams.splice(invalidParams.indexOf('alarm'), 1);
+								}
+								setDatePickerVisibility(true)
+							}}>
 							<Text
 								style={{
 									fontSize: 20,
@@ -284,6 +334,12 @@ function PutHabits(props) {
 								Add An Alarm
 							</Text>
 						</TouchableOpacity>
+						{invalidParams.includes('alarm') && <Text 				style={{
+							marginTop:10,
+							color: 'red',
+							fontSize: 15,
+							fontWeight: 'bold',
+						}}> Create an Alarm </Text>}
 					</View>
 					<View>
 						{alarms.map((time, index) => {
