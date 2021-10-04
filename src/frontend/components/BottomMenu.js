@@ -72,7 +72,10 @@ function BottomMenu(props) {
 							title={'Calender Entry'}
 						/>
 						<TitledIcon
-							onPress={() => console.log('see ya')}
+							onPress={() => {
+								props.setModalVisible(false);
+								props.navigation.navigate('NamePetScreen');
+							}}
 							title={'Reflection'}
 						/>
 					</View>

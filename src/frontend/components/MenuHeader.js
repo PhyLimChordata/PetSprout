@@ -12,18 +12,17 @@ function MenuHeader(props) {
 	const { colors } = useTheme();
 	const [modalVisible, setModalVisible] = useState(false);
 	var hp = props.hp != undefined ? props.hp : [];
-
 	return (
 		<View style={styles(colors).header}>
 			<View style={styles(colors).menuTitle}>
-				{props.back ? (
+				{!props.hideMenu && (props.back ? (
 					<BackButton navigation={props.navigation} />
 				) : (
 					<Menu menuClicked={() => setModalVisible(true)} />
-				)}
+				))}
 				<Text style={styles(colors).headerText}>{props.text}</Text>
 			</View>
-			{!props.back && (
+			{!props.back && !props.hideMenu && (
 				<SideMenu
 					modalVisible={modalVisible}
 					setModalVisible={setModalVisible}
