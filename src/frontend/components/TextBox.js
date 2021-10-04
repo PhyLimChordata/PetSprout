@@ -19,6 +19,7 @@ function TextBox(props) {
 		<View style={containerStyle}>
 			<Text style={TextStyle}>{props.header}</Text>
 			<TextInput
+				onTouchStart={props.onPress}
 				multiline={multiline}
 				style={boxStyle}
 				value={text}
