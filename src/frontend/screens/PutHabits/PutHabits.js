@@ -122,6 +122,7 @@ function PutHabits(props) {
 					console.log(data);
 					// console.log(res.status)
 					if (res.status == 200) {
+						changeRefreshing(true);
 						props.navigation.goBack(null);
 					} else {
 						setInvalidParams(data.error);
@@ -151,6 +152,7 @@ function PutHabits(props) {
 				res.json().then((data) => {
 					console.log(data);
 					if (res.status == 200) {
+						changeRefreshing(true);
 						props.navigation.goBack(null);
 					} else {
 						setPopupText('Error on Delete');
