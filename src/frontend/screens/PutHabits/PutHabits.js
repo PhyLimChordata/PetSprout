@@ -83,8 +83,8 @@ function PutHabits(props) {
 					console.log(data);
 					// console.log(res.status)
 					if (res.status == 200) {
-						props.navigation.goBack(null);
 						changeRefreshing(true);
+						props.navigation.goBack(null);
 					} else {
 						setInvalidParams(data.error);
 						setPopupText('The provided information cannot be saved');

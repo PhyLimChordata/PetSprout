@@ -55,6 +55,10 @@ function HabitsScreen(props) {
 		if (habits.length == 0 && !displayed) displayHabits();
 	});
 
+	useEffect(() => {
+		if (getRefreshing) displayHabits();
+	}, [getRefreshing]);
+
 	const displayHabits = () => {
 		setDisplayed(true);
 		setRefreshing(true);
