@@ -89,12 +89,11 @@ function HabitsScreen(props) {
 						setDisplayed(true);
 						console.log(data);
 						setRefreshing(false);
+						changeRefreshing(false);
 					}, 1000);
 				})
 			)
 			.catch();
-		setRefreshing(false);
-		changeRefreshing(false);
 	};
 
 	return (
