@@ -226,6 +226,10 @@ function SideMenu(props) {
 								color={colors.Quaternary}
 								icon={'bug'}
 								title={'Report a Bug'}
+								onPress={() => {
+									props.setModalVisible(false);
+									props.navigation.navigate('ReportABugScreen');
+								}}
 							/>
 							<Tab
 								color={colors.Quaternary}
