@@ -100,6 +100,7 @@ function HabitsScreen(props) {
 								<View>
 									<Animated.View style={{ opacity, transform: [{ scale }] }}>
 										<Habits
+											enableRight={true}
 											navigation={props.navigation}
 											habitId={data._id}
 											name={data.title}

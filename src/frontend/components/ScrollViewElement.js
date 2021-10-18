@@ -24,7 +24,7 @@ function ScrollViewElement(props) {
 		return (
 			<View
 				style={{
-					backgroundColor: Colours.Red.Delete,
+					backgroundColor: Colours.Red.Error,
 					borderRadius: 8,
 					height: '100%',
 					width: '100%',
@@ -125,7 +125,6 @@ function Trash(props) {
 		<TouchableOpacity activeOpacity={0.6} onPress={props.onPress}>
 			<Image
 				style={styles(colors).swipeIcon}
-				resizeMode={'contain'}
 				source={require('../resources/images/Trash.png')}
 			/>
 		</TouchableOpacity>
