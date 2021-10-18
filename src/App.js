@@ -24,6 +24,7 @@ import AchievementScreen from './frontend/screens/Achievement';
 import AboutScreen from './frontend/screens/About';
 import CollaboratorsScreen from './frontend/screens/Collaborators';
 import SupportUsScreen from './frontend/screens/SupportUs';
+import ReportABugScreen from './frontend/screens/ReportABug';
 import FeedbackScreen from './frontend/screens/Feedback';
 import HabitsScreen from './frontend/screens/Habits';
 import CreateHabitScreen from './frontend/screens/PutHabits/CreateHabit';
@@ -146,6 +147,10 @@ function NavContainer(props) {
 					<Stack.Screen
 						name="FeedbackScreen"
 						component={FeedbackScreen}
+					/>
+					<Stack.Screen
+						name="ReportABugScreen"
+						component={ReportABugScreen}
 					/>
 				</Stack.Navigator>
 			) : (
