@@ -132,30 +132,14 @@ function NavContainer(props) {
 						name='ModifyHabitScreen'
 						component={ModifyHabitScreen}
 					/>
-					<Stack.Screen 
-						name='SupportUsScreen' 
-						component={SupportUsScreen} 
-					/>
+					<Stack.Screen name='SupportUsScreen' component={SupportUsScreen} />
+					<Stack.Screen name='AboutScreen' component={AboutScreen} />
 					<Stack.Screen
-						name="AboutScreen"
-						component={AboutScreen}
-					/>
-					<Stack.Screen
-						name="CollaboratorsScreen"
+						name='CollaboratorsScreen'
 						component={CollaboratorsScreen}
 					/>
-					<Stack.Screen
-						name="FeedbackScreen"
-						component={FeedbackScreen}
-					/>
-					<Stack.Screen
-						name="ReportABugScreen"
-						component={ReportABugScreen}
-					/>
-					<Stack.Screen
-						name="ReportABugScreen"
-						component={ReportABugScreen}
-					/>
+					<Stack.Screen name='FeedbackScreen' component={FeedbackScreen} />
+					<Stack.Screen name='ReportABugScreen' component={ReportABugScreen} />
 				</Stack.Navigator>
 			) : (
 				<Stack.Navigator headerMode='none'>
