@@ -130,8 +130,7 @@ function SideMenu(props) {
 							<View
 								style={{ flexDirection: 'row', alignItems: 'center', flex: 1 }}>
 								<TouchableOpacity
-									style={{ justifyContent: 'center' }}
-									onPress={() => console.log('dsauda')}>
+									style={{ justifyContent: 'center' }}>
 									<View
 										style={{
 											backgroundColor: colors.Quaternary,

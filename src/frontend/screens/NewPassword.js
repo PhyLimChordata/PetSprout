@@ -86,7 +86,7 @@ function NewPassword(props) {
 						displayError();
 					}
 				})
-				.catch(console.log('oh no'));
+				.catch();
 		}
 	};
 

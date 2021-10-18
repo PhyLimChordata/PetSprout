@@ -86,7 +86,6 @@ function AchievementScreen(props) {
 	if (!fontsLoaded) {
 		return <View></View>;
 	} else {
-		console.log(props);
 		return (
 			<SafeAreaView>
 				<MenuHeader text='Achievement' navigation={props.navigation} />

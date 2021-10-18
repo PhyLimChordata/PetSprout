@@ -20,7 +20,6 @@ function SettingsPage(props) {
 	const[vibration, setVibration] = React.useState(false);
 	const[fontSize, setFontSize] = React.useState(13);
 	const { getToken } = useContext(AuthContext);
-	console.log(getToken)
 	useEffect(() => {
 		const get = () => {
 			fetch('http://localhost:5000/api/v1.0.0/setting/getUserSetting', {
@@ -32,7 +31,6 @@ function SettingsPage(props) {
 			})
 			.then((res) => res.json())
 			.then((data) => {
-				console.log(data)
 				setNotif(data.pushNotification);
 				setEmailNotif(data.emailNotification);
 				setVoiceNotif(data.voiceNotification);

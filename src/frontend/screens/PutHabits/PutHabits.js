@@ -80,8 +80,6 @@ function PutHabits(props) {
 		})
 			.then((res) => {
 				res.json().then((data) => {
-					console.log(data);
-					// console.log(res.status)
 					if (res.status == 200) {
 						changeRefreshing(true);
 						props.navigation.goBack(null);
@@ -119,8 +117,6 @@ function PutHabits(props) {
 		)
 			.then((res) => {
 				res.json().then((data) => {
-					console.log(data);
-					// console.log(res.status)
 					if (res.status == 200) {
 						changeRefreshing(true);
 						props.navigation.goBack(null);
@@ -150,7 +146,6 @@ function PutHabits(props) {
 		)
 			.then((res) => {
 				res.json().then((data) => {
-					console.log(data);
 					if (res.status == 200) {
 						changeRefreshing(true);
 						props.navigation.goBack(null);
@@ -191,7 +186,6 @@ function PutHabits(props) {
 	}
 
 	function removeAlarm(index) {
-		console.log('removing');
 		setAlarms([...alarms.slice(0, index), ...alarms.slice(index + 1)]);
 	}
 

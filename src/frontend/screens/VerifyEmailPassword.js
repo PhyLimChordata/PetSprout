@@ -7,7 +7,6 @@ import styles from '../styling/Authentication';
 import { useTheme } from '@react-navigation/native';
 
 function VerifyEmailPassword(props) {
-	console.log(props);
 	const { colors } = useTheme();
 
 	const resend = () => {

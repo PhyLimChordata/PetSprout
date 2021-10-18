@@ -75,7 +75,7 @@ function PasswordScreen(props) {
 					});
 				}
 			})
-			.catch((data) => console.log(data));
+			.catch();
 	};
 
 	return (

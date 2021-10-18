@@ -71,11 +71,9 @@ function BottomMenu(props) {
 							title={'Calender Entry'}
 						/>
 						<TitledIcon
-							onPress={() => console.log('bye')}
 							title={'Calender Entry'}
 						/>
 						<TitledIcon
-							onPress={() => console.log('see ya')}
 							title={'Reflection'}
 						/>
 					</View>

@@ -63,7 +63,9 @@ function Habits(props) {
 		)
 			.then((res) =>
 				res.json().then((data) => {
-					console.log('missing a refresh?')
+					changeRefreshing(true);
+					props.navigation.navigate(null);
+					//TODOs
 				})
 			)
 			.catch();

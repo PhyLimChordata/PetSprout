@@ -49,7 +49,6 @@ function ProfileEdit(props) {
 			})
 			.then((res) => res.json())
 			.then((data) => {
-				console.log(data)
 				setUserName(data.userName)
 				setEmail(data.email)
 				setAbout(data.about)
@@ -82,18 +81,15 @@ function ProfileEdit(props) {
 					setMessage("The provided information cannot be saved");
 					setColor(Colours.Red.Error)
 				} else {
-					console.log("Success")
 					setMessage("Account has been successfully updated.")
 					setColor(Colours.Green.Selected)
 					res.json().then((data) => {
-						console.log(data)
 						setUserName(data.userName)
 						setAbout(data.about)
 					});
 				}
 			})
 			.then(() => {
-				console.log(message);
 				popup.current?.togglePopup();
 			})
 			.catch(err => console.log(err))

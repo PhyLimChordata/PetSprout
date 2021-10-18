@@ -131,13 +131,6 @@ function SignupScreen(props) {
 	};
 
 	const attemptSignup = () => {
-		console.log(
-			JSON.stringify({
-				username: userName,
-				email: email,
-				password: password,
-			})
-		);
 		fetch('http://localhost:5000/api/v1.0.0/user/register', {
 			method: 'POST',
 			headers: {
@@ -175,7 +168,6 @@ function SignupScreen(props) {
 						props.navigation.push('VerifyEmailSignUp', { email: email });
 					});
 				} else if (res.status == 401) {
-					console.log(res);
 					setUserNameError(res.statusText);
 					if (res.statusText == 'User email exists')
 						setEmailInputStyle(errorIndicator);

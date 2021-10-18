@@ -5,8 +5,6 @@ import {
 	Animated,
 	SafeAreaView,
 	RefreshControl,
-	ScrollView,
-	Text,
 } from 'react-native';
 
 import styles from '../styling/HabitsScreen';
@@ -41,16 +39,6 @@ function HabitsScreen(props) {
 		displayHabits();
 	}, []);
 
-	const wait = (timeout) => {
-		return new Promise((resolve) => setTimeout(resolve, timeout));
-	};
-
-	const translateY = scrolling.interpolate({
-		inputRange: [-50, 0],
-		outputRange: [50, 0],
-		extrapolate: 'clamp',
-	});
-
 	useEffect(() => {
 		if (habits.length == 0 && !displayed) displayHabits();
 	});
@@ -78,16 +66,13 @@ function HabitsScreen(props) {
 						setUserHabitId(data._id);
 						setExperience((expValue % 100).toString());
 						setLevel(Math.floor(expValue / 100).toString());
-
-						console.log(getToken);
-						//Displaying purposes
+						//Displaying purposes TODO
 						const heartValue = [];
 						for (var i = 0; i < data.heart; i++) {
 							heartValue.push(i);
 						}
 						setHearts(heartValue);
 						setDisplayed(true);
-						console.log(data);
 						setRefreshing(false);
 						changeRefreshing(false);
 					}, 1000);
