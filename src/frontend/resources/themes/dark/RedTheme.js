@@ -3,11 +3,11 @@ const redTheme = {
 		background: '#505050',
 		opposite: '#ffffff',
 
-		Primary: '#FFECEC',
-		Secondary: '#FFBEBE',
+		Primary: '#A75B5B',
+		Secondary: '#E37272',
 		Tertiary: '#FF8D8D',
-		Quaternary: '#E37272',
-		Quinary: '#A75B5B',
+		Quaternary: '#FFBEBE',
+		Quinary: '#FFECEC',
 	},
 };
 

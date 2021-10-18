@@ -89,6 +89,7 @@ function SideMenu(props) {
 	if (getMode == 'dark') {
 		defaultMode = false;
 	}
+
 	const [toggleValue, setToggleValue] = useState(!defaultMode);
 
 	function colorChange(color) {
@@ -221,11 +222,19 @@ function SideMenu(props) {
 								color={colors.Quaternary}
 								icon={'bullhorn'}
 								title={'Feedback'}
+								onPress={() => {
+									props.setModalVisible(false);
+									props.navigation.navigate("FeedbackScreen");
+								}}
 							/>
 							<Tab
 								color={colors.Quaternary}
 								icon={'bug'}
 								title={'Report a Bug'}
+								onPress={() => {
+									props.setModalVisible(false);
+									props.navigation.navigate('ReportABugScreen');
+								}}
 							/>
 							<Tab
 								color={colors.Quaternary}
@@ -242,7 +251,7 @@ function SideMenu(props) {
 								title={'Support Us!'}
 								onPress={() => {
 									props.setModalVisible(false);
-									props.navigation.navigate("SupportUsScreen");
+									props.navigation.navigate('SupportUsScreen');
 								}}
 							/>
 							<Tab
@@ -250,6 +259,10 @@ function SideMenu(props) {
 								icon={require('../resources/images/Icon.png')}
 								title={'About'}
 								isImage={true}
+								onPress={() => {
+									props.setModalVisible(false);
+									props.navigation.navigate('AboutScreen');
+								}}
 							/>
 						</View>
 						<View

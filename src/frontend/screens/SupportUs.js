@@ -11,7 +11,7 @@ function SupportUs(props) {
 	const style = styles(colors);
 	return (
 		<SafeAreaView>
-			<MenuHeader text='SupportUs' navigation={props.navigation}></MenuHeader>
+			<MenuHeader text='Support Us' navigation={props.navigation}></MenuHeader>
 			<View style={style.container}>
 				<Image
 					style={style.supportUsLogo}
