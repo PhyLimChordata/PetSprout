@@ -21,6 +21,7 @@ function ReportABug(props) {
                 modalVisible={modalVisible}
                 setModalVisible={setModalVisible}
                 style={style.bugConfirmation}
+                image={require('../resources/images/EmailPopup.png')}
                 title="Thank you for Reporting a Bug!"
                 text="An email has been sent and
                 we will look into it promptly"
@@ -33,6 +34,7 @@ function ReportABug(props) {
                 modalVisible={modalVisible}
                 setModalVisible={setModalVisible}
                 style={style.bugError}
+                image={require('../resources/images/EmailPopup.png')}
                 title="Something went wrong..."
                 text="An email could not be sent. 
                 Please attempt another time."
@@ -68,7 +70,7 @@ function ReportABug(props) {
                         >
                             <Text style={style.reportABugButtonText}>Submit</Text>
 			            </TouchableOpacity>
-                        
+                        {popup}
                     </View>
 				</ScrollView>
 		</SafeAreaView>

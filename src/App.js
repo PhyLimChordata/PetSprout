@@ -152,6 +152,10 @@ function NavContainer(props) {
 						name="ReportABugScreen"
 						component={ReportABugScreen}
 					/>
+					<Stack.Screen
+						name="ReportABugScreen"
+						component={ReportABugScreen}
+					/>
 				</Stack.Navigator>
 			) : (
 				<Stack.Navigator headerMode='none'>
