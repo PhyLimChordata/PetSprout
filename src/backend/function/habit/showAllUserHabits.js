@@ -11,8 +11,8 @@ module.exports = async (req, res) => {
 			return res.status(404).json("User's habits could not found");
 
 		let habitShow = userHabitInfo.habitList;
-		
-		let habit = {"habitList":habitShow};
+
+		let habit = { habitList: habitShow };
 
 		let info = {
 			expValue: userHabitInfo.expValue,

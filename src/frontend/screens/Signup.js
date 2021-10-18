@@ -189,13 +189,15 @@ function SignupScreen(props) {
 				<TextInput
 					style={usernameInputStyle}
 					value={userName}
-					onChangeText={(text) => updatingUsernameInput(text)}></TextInput>
+					onChangeText={(text) => updatingUsernameInput(text)}
+				></TextInput>
 				<Text style={styles(colors).errorMessageRight}>{userNameError}</Text>
 				<Text style={styles(colors).authenticationText}>Email</Text>
 				<TextInput
 					style={emailInputStyle}
 					value={email}
-					onChangeText={(text) => updatingEmailInput(text)}></TextInput>
+					onChangeText={(text) => updatingEmailInput(text)}
+				></TextInput>
 				<Text style={styles(colors).errorMessageRight}>{emailError}</Text>
 
 				<Text style={styles(colors).authenticationText}>Password</Text>
@@ -203,7 +205,8 @@ function SignupScreen(props) {
 					style={passwordInputStyle}
 					secureTextEntry={true}
 					value={password}
-					onChangeText={(text) => updatingPasswordInput(text)}></TextInput>
+					onChangeText={(text) => updatingPasswordInput(text)}
+				></TextInput>
 				<Text style={styles(colors).errorMessageRight}>{passwordError}</Text>
 
 				<Text style={styles(colors).authenticationText}>Re-enter Password</Text>
@@ -211,9 +214,8 @@ function SignupScreen(props) {
 					style={reEnterPasswordInputStyle}
 					secureTextEntry={true}
 					value={reEnterPassword}
-					onChangeText={(text) =>
-						updatingReEnterPasswordInput(text)
-					}></TextInput>
+					onChangeText={(text) => updatingReEnterPasswordInput(text)}
+				></TextInput>
 				<Text style={styles(colors).errorMessageRight}>
 					{reEnterPasswordError}
 				</Text>
@@ -222,14 +224,16 @@ function SignupScreen(props) {
 			<TouchableOpacity
 				activeOpacity={0.6}
 				style={styles(colors).authenticationButton}
-				onPress={() => attemptSignup()}>
+				onPress={() => attemptSignup()}
+			>
 				<Text style={styles(colors).authenticationButtonText}>Sign Up</Text>
 			</TouchableOpacity>
 			<Text style={styles(colors).subText}>
 				Already have an account?
 				<TouchableOpacity
 					activeOpacity={0.6}
-					onPress={() => props.navigation.push('LoginScreen')}>
+					onPress={() => props.navigation.push('LoginScreen')}
+				>
 					<Text style={styles(colors).signupText}> Log in</Text>
 				</TouchableOpacity>
 			</Text>

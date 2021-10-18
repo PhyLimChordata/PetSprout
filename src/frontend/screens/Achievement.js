@@ -80,7 +80,7 @@ function AchievementScreen(props) {
 	let styles = AchievementStyle(
 		colors,
 		Dimensions.get('screen').width,
-		Dimensions.get('screen').height
+		Dimensions.get('screen').height,
 	);
 
 	if (!fontsLoaded) {
@@ -117,7 +117,8 @@ const OneCategory = (props) => {
 					props.styles.achievementName,
 					props.styles.textStyles,
 					{ fontFamily: 'Roboto_900Black' },
-				]}>
+				]}
+			>
 				{props.category}
 			</Text>
 			<View style={props.styles.achievementRow}>

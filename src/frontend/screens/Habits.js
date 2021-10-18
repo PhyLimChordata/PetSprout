@@ -76,7 +76,7 @@ function HabitsScreen(props) {
 						setRefreshing(false);
 						changeRefreshing(false);
 					}, 1000);
-				})
+				}),
 			)
 			.catch();
 	};
@@ -100,13 +100,14 @@ function HabitsScreen(props) {
 					showsVerticalScrollIndicator={false}
 					onScroll={Animated.event(
 						[{ nativeEvent: { contentOffset: { y: scrolling } } }],
-						{ useNativeDriver: true }
+						{ useNativeDriver: true },
 					)}
 					scrollEventThrottle={16}
 					decelerationRate={'normal'}
 					refreshControl={
 						<RefreshControl refreshing={getRefreshing} onRefresh={onRefresh} />
-					}>
+					}
+				>
 					{habits.map((data, index) => {
 						if (data.times - data.todo > 0) {
 							const scale = scrolling.interpolate({
@@ -131,7 +132,8 @@ function HabitsScreen(props) {
 											frequency={data.times - data.todo}
 											habitId={data._id}
 											userHabitId={userHabitId}
-											exp={experience}></Habits>
+											exp={experience}
+										></Habits>
 										<View style={{ height: 15 }}></View>
 									</Animated.View>
 								</View>

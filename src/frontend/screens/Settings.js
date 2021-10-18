@@ -1,24 +1,31 @@
 import React, { useEffect, useContext } from 'react';
 import settingStyles from '../styling/Settings';
-import { View, Switch, Text, Dimensions, SafeAreaView, Image, ImageBackground } from 'react-native';
+import {
+	View,
+	Switch,
+	Text,
+	Dimensions,
+	SafeAreaView,
+	Image,
+	ImageBackground,
+} from 'react-native';
 import { useTheme } from '@react-navigation/native';
 import Colours from '../resources/themes/Colours';
 import MenuHeader from '../components/MenuHeader';
-import TextBox from '../components/TextBox'
+import TextBox from '../components/TextBox';
 
 import { AuthContext } from '../Context';
-
 
 // setting data from database
 
 function SettingsPage(props) {
-	const[loaded, setLoaded] = React.useState(false);
-	const[notif, setNotif] = React.useState(true);
-	const[emailNotif, setEmailNotif] = React.useState(true);
-	const[voiceNotif, setVoiceNotif] = React.useState(false);
-	const[reminder, setReminder] = React.useState(true);
-	const[vibration, setVibration] = React.useState(false);
-	const[fontSize, setFontSize] = React.useState(13);
+	const [loaded, setLoaded] = React.useState(false);
+	const [notif, setNotif] = React.useState(true);
+	const [emailNotif, setEmailNotif] = React.useState(true);
+	const [voiceNotif, setVoiceNotif] = React.useState(false);
+	const [reminder, setReminder] = React.useState(true);
+	const [vibration, setVibration] = React.useState(false);
+	const [fontSize, setFontSize] = React.useState(13);
 	const { getToken } = useContext(AuthContext);
 	useEffect(() => {
 		const get = () => {
@@ -29,45 +36,45 @@ function SettingsPage(props) {
 					'authentication-token': getToken,
 				},
 			})
-			.then((res) => res.json())
-			.then((data) => {
-				setNotif(data.pushNotification);
-				setEmailNotif(data.emailNotification);
-				setVoiceNotif(data.voiceNotification);
-				setReminder(data.reminder);
-				setVibration(data.vibration)
-			})
-			.catch(err => console.log(err));
+				.then((res) => res.json())
+				.then((data) => {
+					setNotif(data.pushNotification);
+					setEmailNotif(data.emailNotification);
+					setVoiceNotif(data.voiceNotification);
+					setReminder(data.reminder);
+					setVibration(data.vibration);
+				})
+				.catch((err) => console.log(err));
 		};
 
-		if(!loaded) {
+		if (!loaded) {
 			get();
 			setLoaded(true);
 		}
 	}, []);
 
-	const {colors} = useTheme();
+	const { colors } = useTheme();
 
 	let styles = settingStyles(
 		colors,
 		Dimensions.get('screen').width,
-		Dimensions.get('screen').height
+		Dimensions.get('screen').height,
 	);
 
 	const OneSetting = (props) => {
 		const { colors } = useTheme();
 
-		async function update (value){
-			console.log("value = " + value);
-			props.handle(value)
-			console.log("notif: " + notif);
-			console.log("emailnotif = " + emailNotif);
-			console.log("voiceNotif = " + voiceNotif);
-			console.log("reminder = " + reminder)
-			console.log("vibration = " + vibration)
+		async function update(value) {
+			console.log('value = ' + value);
+			props.handle(value);
+			console.log('notif: ' + notif);
+			console.log('emailnotif = ' + emailNotif);
+			console.log('voiceNotif = ' + voiceNotif);
+			console.log('reminder = ' + reminder);
+			console.log('vibration = ' + vibration);
 			return;
 		}
-	
+
 		const thumbColor = Colours.Grey.Button;
 		return (
 			<SafeAreaView style={props.styles.oneSettingContainer}>
@@ -84,29 +91,35 @@ function SettingsPage(props) {
 					activeThumbColor={thumbColor}
 					value={props.enabled}
 					onValueChange={(val) => {
-						console.log(props.handle)
-						console.log("Previous value for " + props.tag + " = " + props.enabled)
-						console.log("Received value for " + props.tag + " = " + val)
-						props.handle(val, 
-							fetch('http://localhost:5000/api/v1.0.0/setting/updateUserSetting', {
-								method: 'PUT',
-								headers: {
-									'Content-Type': 'application/json',
-									'authentication-token': getToken,
+						console.log(props.handle);
+						console.log(
+							'Previous value for ' + props.tag + ' = ' + props.enabled,
+						);
+						console.log('Received value for ' + props.tag + ' = ' + val);
+						props.handle(
+							val,
+							fetch(
+								'http://localhost:5000/api/v1.0.0/setting/updateUserSetting',
+								{
+									method: 'PUT',
+									headers: {
+										'Content-Type': 'application/json',
+										'authentication-token': getToken,
+									},
+									body: JSON.stringify({
+										[props.id]: val,
+									}),
 								},
-								body: JSON.stringify({
-									[props.id]: val
-								}),
-							})
-							.then((res) => {
-								console.log("Updating settings: " + res.status)
-								res.json()
-								.then((data) => {
-									console.log(data)
-								})
-								.catch(err => console.log(err));
-							}
-							))
+							).then((res) => {
+								console.log('Updating settings: ' + res.status);
+								res
+									.json()
+									.then((data) => {
+										console.log(data);
+									})
+									.catch((err) => console.log(err));
+							}),
+						);
 					}}
 				/>
 			</SafeAreaView>
@@ -126,7 +139,7 @@ function SettingsPage(props) {
 								width: Dimensions.get('screen').width * 0.1,
 								height: Dimensions.get('screen').width * 0.1,
 								alignItems: 'center',
-								justifyContent: 'center'
+								justifyContent: 'center',
 							}}
 							source={require('../resources/images/Background.png')}
 						>
@@ -134,7 +147,7 @@ function SettingsPage(props) {
 								style={{
 									width: Dimensions.get('screen').width * 0.08,
 									height: Dimensions.get('screen').width * 0.08,
-									margin: Dimensions.get('screen').width * 0.02
+									margin: Dimensions.get('screen').width * 0.02,
 								}}
 								source={require('../resources/images/SettingIcon.png')}
 							/>
@@ -180,15 +193,19 @@ function SettingsPage(props) {
 						handle={setVibration}
 						styles={styles}
 					/>
-					
+
 					<Text style={[styles.textTitle, styles.text]}>App version</Text>
 					<View style={styles.textDisplayMargin}>
 						<Text style={[styles.textNormal, styles.textDisplay]}>1.0.0</Text>
 					</View>
 					<TextBox
-						header="Font size"
+						header='Font size'
 						TextStyle={[styles.textTitle, styles.text]}
-						boxStyle={[styles.textNormal, styles.textDisplay, styles.textDisplayMargin]}
+						boxStyle={[
+							styles.textNormal,
+							styles.textDisplay,
+							styles.textDisplayMargin,
+						]}
 						text={fontSize}
 						value={fontSize}
 						setText={setFontSize}

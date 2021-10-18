@@ -64,7 +64,7 @@ function sendEmail(message, email, type) {
 						user: 'habipetshelp@gmail.com',
 						pass: 'mvpiybwihptcqlgr',
 					},
-				})
+				}),
 			);
 
 			var html =

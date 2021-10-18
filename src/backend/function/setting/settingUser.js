@@ -22,7 +22,6 @@ const update_user_setting = async (req, res) => {
 		if (!errors.isEmpty())
 			return res.status(400).json({ error: error.array() });*/
 
-		
 		let user_id = req.user.id;
 		let user_setting = await Setting.findOne({ user: user_id });
 
@@ -36,19 +35,19 @@ const update_user_setting = async (req, res) => {
 			reminder,
 		} = req.body;
 
-		if(pushNotification != null) {
-			user_setting.pushNotification = pushNotification;	
+		if (pushNotification != null) {
+			user_setting.pushNotification = pushNotification;
 		}
-		if(emailNotification != null) {
+		if (emailNotification != null) {
 			user_setting.emailNotification = emailNotification;
 		}
-		if(voiceNotification != null) {
+		if (voiceNotification != null) {
 			user_setting.voiceNotification = voiceNotification;
 		}
-		if(vibration != null) {
+		if (vibration != null) {
 			user_setting.vibration = vibration;
 		}
-		if(reminder != null) {
+		if (reminder != null) {
 			user_setting.reminder = reminder;
 		}
 

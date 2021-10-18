@@ -55,13 +55,13 @@ const HabitSchema = new Schema(
 				},
 				nextSignInDate: {
 					type: Date,
-				}
+				},
 			},
 		],
 	},
 	{
 		timestamps: true,
-	}
+	},
 );
 
 const habitSchema = mongoose.model('habit', HabitSchema);

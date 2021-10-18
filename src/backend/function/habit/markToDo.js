@@ -28,7 +28,7 @@ module.exports = async (req, res) => {
 		if (!userHabit) return res.status(404).json("User's habits could not find");
 
 		const habitFromDB = userHabit.habitList.find(
-			(habit) => habit._id.toString() === req.params.habit_id.toString()
+			(habit) => habit._id.toString() === req.params.habit_id.toString(),
 		);
 		if (!habitFromDB)
 			return res.status(404).json("Habit could not find in user's habits");
@@ -36,25 +36,25 @@ module.exports = async (req, res) => {
 		habitFromDB.todo = habitFromDB.todo + 1;
 		userHabit.expValue = expValue;
 
-		if(habitFromDB.todo === habitFromDB.times) {
+		if (habitFromDB.todo === habitFromDB.times) {
 			habitFromDB.continuous = habitFromDB.continuous + 1;
 			let current = new Date(date);
-		    let current_date = current.getDate();
-		    let current_day = current.getDay();
-		    let nextSignInDate = null;
-		    if (newSchedule.includes(current_day.toString())) {
-		    	nextSignInDate = current;
-		    } else {
-		    	let index = current_day;
-		    	let interval = 0;
-		    	while (!newSchedule.includes(index.toString())) {
-		    		if (index === 6) index = 0;
-		    		else index ++;
-		    		interval ++;
-		    	}
-			    nextSignInDate = current.setDate(current_date + interval);
-			    nextSignInDate = new Date(nextSignInDate);
-		    }
+			let current_date = current.getDate();
+			let current_day = current.getDay();
+			let nextSignInDate = null;
+			if (newSchedule.includes(current_day.toString())) {
+				nextSignInDate = current;
+			} else {
+				let index = current_day;
+				let interval = 0;
+				while (!newSchedule.includes(index.toString())) {
+					if (index === 6) index = 0;
+					else index++;
+					interval++;
+				}
+				nextSignInDate = current.setDate(current_date + interval);
+				nextSignInDate = new Date(nextSignInDate);
+			}
 		}
 
 		let anaylzeId = habitFromDB.analyze;
@@ -66,10 +66,10 @@ module.exports = async (req, res) => {
 		// const date = new Date();
 		let analyze_data = analyze.freq.find(
 			(data) =>
-			data.date.getFullYear().toString() === date.getFullYear().toString() &&
-			data.date.getMonth().toString() === date.getMonth().toString() &&
-			data.date.getDate().toString() === date.getDate().toString()
-		)
+				data.date.getFullYear().toString() === date.getFullYear().toString() &&
+				data.date.getMonth().toString() === date.getMonth().toString() &&
+				data.date.getDate().toString() === date.getDate().toString(),
+		);
 
 		if (!analyze_data) {
 			let newData = {

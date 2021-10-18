@@ -58,9 +58,9 @@ const user_regist = async (req, res) => {
 
 		// creating achievements
 		let newUserAchievements = new Achievements({
-			user: newUser._id
-		})
-		await newUserAchievements.save()
+			user: newUser._id,
+		});
+		await newUserAchievements.save();
 
 		const code = require('crypto').randomBytes(16).toString('hex');
 		sendUserEmail(email, code);
@@ -159,7 +159,7 @@ function sendUserEmail(cnd, code) {
 						user: 'habipetshelp@gmail.com',
 						pass: 'mvpiybwihptcqlgr',
 					},
-				})
+				}),
 			);
 			var html =
 				'<a href="http://127.0.0.1:5000/api/v1.0.0/user/activation/' +

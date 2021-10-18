@@ -10,7 +10,8 @@ function Ellipsis(props) {
 	return (
 		<TouchableOpacity
 			style={styles(colors).horizontalContainer}
-			onPress={props.onPress}>
+			onPress={props.onPress}
+		>
 			<View style={styles(colors).ellipsisCircle} />
 			<View style={styles(colors).ellipsisCircle} />
 			<View style={styles(colors).ellipsisCircle} />
