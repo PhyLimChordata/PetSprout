@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import Modal from 'react-native-modal';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import Toggle from 'react-native-toggle-element';
+// import Toggle from 'react-native-toggle-element';
 import Colours from '../resources/themes/Colours';
 import { useTheme } from '@react-navigation/native';
 
@@ -89,6 +89,7 @@ function SideMenu(props) {
 	if (getMode == 'dark') {
 		defaultMode = false;
 	}
+
 	const [toggleValue, setToggleValue] = useState(!defaultMode);
 
 	function colorChange(color) {
@@ -290,7 +291,7 @@ function SideMenu(props) {
 							/>
 						</View>
 						<View style={{ alignItems: 'center' }}>
-							<Toggle
+							{/* <Toggle
 								value={toggleValue}
 								onPress={(newState) => {
 									newState ? changeModeTheme('dark') : changeModeTheme('light');
@@ -321,7 +322,7 @@ function SideMenu(props) {
 										size={30}
 									/>
 								}
-							/>
+							/> */}
 						</View>
 						<View
 							style={{
