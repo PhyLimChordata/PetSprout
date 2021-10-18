@@ -49,8 +49,11 @@ function About(props) {
 					<TouchableOpacity
 						activeOpacity={0.6}
 						style={style.aboutButton}
+						onPress={() => {
+							props.navigation.navigate("TermsAndConditionScreen");
+						}}
 					>
-						<Text style={style.aboutButtonText}>Terms and Conditions</Text>
+						<Text style={style.aboutButtonText}>Terms and Condition</Text>
 					</TouchableOpacity>
 				</ScrollView>
 			</View>
