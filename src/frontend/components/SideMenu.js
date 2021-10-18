@@ -237,7 +237,7 @@ function SideMenu(props) {
 								title={'Collaborators'}
 								onPress={() => {
 									props.setModalVisible(false);
-									props.navigation.navigate('CollaboratorsScreen');
+									props.navigation.navigate("CollaboratorsScreen");
 								}}
 							/>
 							<Tab
@@ -254,6 +254,10 @@ function SideMenu(props) {
 								icon={require('../resources/images/Icon.png')}
 								title={'About'}
 								isImage={true}
+								onPress={() => {
+									props.setModalVisible(false);
+									props.navigation.navigate("AboutScreen");
+								}}
 							/>
 						</View>
 						<View
