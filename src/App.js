@@ -26,6 +26,7 @@ import CollaboratorsScreen from './frontend/screens/Collaborators';
 import SupportUsScreen from './frontend/screens/SupportUs';
 import ReportABugScreen from './frontend/screens/ReportABug';
 import FeedbackScreen from './frontend/screens/Feedback';
+import TermsAndConditionScreen from './frontend/screens/TermsAndCondition';
 import HabitsScreen from './frontend/screens/Habits';
 import CreateHabitScreen from './frontend/screens/PutHabits/CreateHabit';
 import ComingSoonScreen from './frontend/screens/ComingSoon';
@@ -145,6 +146,7 @@ function NavContainer(props) {
 						name='AllHabitsScreen'
 						component={AllHabitsScreen}
 					/>
+					<Stack.Screen name='TermsAndConditionScreen' component={TermsAndConditionScreen} />
 				</Stack.Navigator>
 			) : (
 				<Stack.Navigator headerMode='none'>
