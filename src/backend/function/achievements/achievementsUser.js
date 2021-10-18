@@ -15,4 +15,13 @@ const get_user_achievements = async (req, res) => {
     }
 }
 
+const update_user_achievements = async(req, res) => {
+    try {
+        
+    } catch (error) {
+
+    }
+}
+
 exports.get_user_achievements = get_user_achievements;
+exports.update_user_achievements = update_user_achievements;
