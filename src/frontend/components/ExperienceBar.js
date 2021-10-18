@@ -9,7 +9,7 @@ function ExperienceBar(props) {
 	const { colors } = useTheme();
 
 	var experience = {
-		// FOR MOBILE DEBUGGING
+		// FOR MOBILE DEBUGGING TODO: Switch to props.width
 		width: 20,
 		// width: props.width,
 		height: 15,

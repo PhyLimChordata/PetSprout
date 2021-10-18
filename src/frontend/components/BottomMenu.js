@@ -64,7 +64,10 @@ function BottomMenu(props) {
 							}}
 						/>
 						<TitledIcon
-							onPress={() => console.log('hey')}
+							onPress={() => {
+								props.setModalVisible(false);
+								props.navigation.navigate('AllHabitsScreen');
+							}}
 							title={'Calender Entry'}
 						/>
 						<TitledIcon
