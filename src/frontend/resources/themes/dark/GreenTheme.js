@@ -3,11 +3,11 @@ const greenTheme = {
 		background: '#505050',
 		opposite: '#ffffff',
 
-		Primary: '#F5FEEC',
-		Secondary: '#D7F2BA',
+		Primary: '#6E8F6D',
+		Secondary: '#9CC69B',
 		Tertiary: '#B9E8A0',
-		Quaternary: '#9CC69B',
-		Quinary: '#6E8F6D',
+		Quaternary: '#D7F2BA',
+		Quinary: '#F5FEEC',
 	},
 };
 

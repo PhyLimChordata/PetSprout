@@ -89,6 +89,7 @@ function SideMenu(props) {
 	if (getMode == 'dark') {
 		defaultMode = false;
 	}
+
 	const [toggleValue, setToggleValue] = useState(!defaultMode);
 
 	function colorChange(color) {
@@ -241,7 +242,7 @@ function SideMenu(props) {
 								title={'Collaborators'}
 								onPress={() => {
 									props.setModalVisible(false);
-									props.navigation.navigate("CollaboratorsScreen");
+									props.navigation.navigate('CollaboratorsScreen');
 								}}
 							/>
 							<Tab
@@ -250,7 +251,7 @@ function SideMenu(props) {
 								title={'Support Us!'}
 								onPress={() => {
 									props.setModalVisible(false);
-									props.navigation.navigate("SupportUsScreen");
+									props.navigation.navigate('SupportUsScreen');
 								}}
 							/>
 							<Tab
@@ -260,7 +261,7 @@ function SideMenu(props) {
 								isImage={true}
 								onPress={() => {
 									props.setModalVisible(false);
-									props.navigation.navigate("AboutScreen");
+									props.navigation.navigate('AboutScreen');
 								}}
 							/>
 						</View>
