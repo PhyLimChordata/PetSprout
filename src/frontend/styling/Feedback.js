@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
-import Colours from '../resources/themes/Colours';
+import Colours from "../resources/themes/Colours";
 
-const ReportABug = (theme) =>
+const Feedback = (theme) =>
 	StyleSheet.create({
 		text: {
             fontSize: 14,
@@ -21,7 +21,7 @@ const ReportABug = (theme) =>
             fontSize: 15,
             borderRadius: 5,
         },
-        reportABugButton: {
+        feedbackButton: {
 			backgroundColor: theme.Quaternary,
 			borderRadius: 30,
 			padding: 10,
@@ -29,37 +29,19 @@ const ReportABug = (theme) =>
 			paddingRight: 40,
 			marginBottom: 20,
 		},
-        reportABugButtonText: {
+        feedbackButtonText: {
 			fontSize: 20,
 			fontWeight: 'bold',
 			color: theme.background,
 		},
-        reportABugImg: {
-            height: 35,
-			      width: 35,
-            marginTop: 15,
+        feedbackImg: {
+            height: 25,
+			width: 25,
+			marginBottom: 25,
+            marginTop: 10,
             resizeMode: "contain",
             // tintColor: theme.Quaternary,
             // TODO
-        },
-        bugConfirmation: {
-            textAlign: "center",
-            alignItems: "center",
-            justifyContent: "center",
-            backgroundColor: theme.Quaternary,
-            height: 330,
-            width: 300,
-            borderRadius: 30,
-        },
-        bugError: {
-            textAlign: "center",
-            alignItems: "center",
-            justifyContent: "center",
-            backgroundColor: Colours.Red.Error,
-            color: Colours.Red.Error,
-            height: 330,
-            width: 300,
-            borderRadius: 30,
         },
         container: {
             alignItems: 'center',
@@ -68,4 +50,4 @@ const ReportABug = (theme) =>
         }
 	});
 
-export default ReportABug;
+export default Feedback;
