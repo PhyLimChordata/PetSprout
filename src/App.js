@@ -24,6 +24,7 @@ import AchievementScreen from './frontend/screens/Achievement';
 import AboutScreen from './frontend/screens/About';
 import CollaboratorsScreen from './frontend/screens/Collaborators';
 import SupportUsScreen from './frontend/screens/SupportUs';
+import FeedbackScreen from './frontend/screens/Feedback';
 import HabitsScreen from './frontend/screens/Habits';
 import CreateHabitScreen from './frontend/screens/PutHabits/CreateHabit';
 import ComingSoonScreen from './frontend/screens/ComingSoon';
@@ -130,6 +131,10 @@ function NavContainer(props) {
 						name='ModifyHabitScreen'
 						component={ModifyHabitScreen}
 					/>
+					<Stack.Screen 
+						name='SupportUsScreen' 
+						component={SupportUsScreen} 
+					/>
 					<Stack.Screen
 						name="AboutScreen"
 						component={AboutScreen}
@@ -139,8 +144,8 @@ function NavContainer(props) {
 						component={CollaboratorsScreen}
 					/>
 					<Stack.Screen
-						name="SupportUsScreen"
-						component={SupportUsScreen}
+						name="FeedbackScreen"
+						component={FeedbackScreen}
 					/>
 				</Stack.Navigator>
 			) : (
