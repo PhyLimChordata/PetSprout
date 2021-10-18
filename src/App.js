@@ -31,6 +31,7 @@ import HabitsScreen from './frontend/screens/Habits';
 import CreateHabitScreen from './frontend/screens/PutHabits/CreateHabit';
 import ComingSoonScreen from './frontend/screens/ComingSoon';
 import ModifyHabitScreen from './frontend/screens/PutHabits/ModifyHabit';
+import AllHabitsScreen from './frontend/screens/AllHabits'
 
 // Colour Themes
 import GreenLightTheme from './frontend/resources/themes/light/GreenTheme';
@@ -141,6 +142,10 @@ function NavContainer(props) {
 					/>
 					<Stack.Screen name='FeedbackScreen' component={FeedbackScreen} />
 					<Stack.Screen name='ReportABugScreen' component={ReportABugScreen} />
+					<Stack.Screen
+						name='AllHabitsScreen'
+						component={AllHabitsScreen}
+					/>
 					<Stack.Screen name='TermsAndConditionScreen' component={TermsAndConditionScreen} />
 				</Stack.Navigator>
 			) : (

@@ -47,11 +47,34 @@ function Habits(props) {
 			.catch();
 	};
 
+	const deleteHabit = () => {
+		fetch(
+			'http://localhost:5000/api/v1.0.0/habit/delete_habit/' +
+			props.userHabitId +
+			'/' +
+			props.habitId,
+			{
+				method: 'DELETE',
+				headers: {
+					'Content-Type': 'application/json',
+					'authentication-token': getToken,
+				},
+			}
+		)
+			.then((res) =>
+				res.json().then((data) => {
+					console.log('missing a refresh?')
+				})
+			)
+			.catch();
+	};
+
 	return (
 		<View>
 			{!completed ? (
 				<ScrollViewElement
-					rightFunction={completeHabit}
+					rightFunction={props.enableRight ? completeHabit : undefined}
+					leftFunction={props.enableLeft ? deleteHabit: undefined}
 					text={props.name}
 					content={
 						<View style={styles(colors).horizontalContainer}>

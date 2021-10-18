@@ -1,12 +1,13 @@
 import { StyleSheet } from 'react-native';
 const fontSize = 13;
 
-const settingStyles = (theme, width, height) => {
+function settingStyles(theme, width, height) {
     return StyleSheet.create({
         container: {
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
+            marginTop: height * 0.06
         },
         header: {
             flex: 1.5,
@@ -47,7 +48,7 @@ const settingStyles = (theme, width, height) => {
         textTitle: {
             width: '100%',
             textAlign: 'left',
-            color: theme.Tertiary
+            color: theme.Quinary
         },
         textNormal: {
             textAlign: 'left',
@@ -55,7 +56,7 @@ const settingStyles = (theme, width, height) => {
             color: theme.Quaternary
         },
         switchStyling: {
-            height: '3%',
+            
         }
     })
 };

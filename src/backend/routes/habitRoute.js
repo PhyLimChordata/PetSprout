@@ -6,6 +6,7 @@ const markTODO = require('../function/habit/markToDo');
 const updateHabit = require('../function/habit/updateHabit');
 const deleteHabit = require('../function/habit/deleteHabit');
 const showUserHabit = require('../function/habit/showUserHabit');
+const showAllUserHabit = require('../function/habit/showAllUserHabits');
 const showHabit = require('../function/habit/showHabit');
 
 const {
@@ -34,6 +35,7 @@ router.delete(
 	deleteHabit
 );
 router.get('/show_user_habit/:day', authentication, showUserHabit);
+router.get('/show_all_user_habit', authentication, showAllUserHabit);
 router.get('/show_habit/:user_habit_id/:habit_id', authentication, showHabit);
 
 module.exports = router;
