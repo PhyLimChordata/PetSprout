@@ -7,4 +7,6 @@ router.get('/getAchievements', authentication, achievementsUser.get_user_achieve
 
 router.put('/updateAchievements', authentication, achievementsUser.update_user_achievements);
 
+router.put('/updateLoginStreaks', authentication, achievementsUser.update_login_streaks);
+
 module.exports = router;

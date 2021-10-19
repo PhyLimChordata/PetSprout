@@ -7,92 +7,55 @@ const AchievementSchema = new Schema(
 			type: mongoose.Schema.Types.ObjectId,
 			ref: 'user',
 		},
-		achievements: [
+		achievements: 
             {
                 streaks: {
                     longest_streak:{
-                        value: {
-                            type: Number,
-                            default: 0
-                        },
-                        available: {
-                            type: Boolean,
-                            default: false
-                        }
+                        type: Number,
+                        default: 0
                     },
                     habits_with_streaks: {
-                        value: {
-                            type: Number,
-                            default: 0
-                        },
-                        available: {
-                            type: Boolean,
-                            default: false
-                        }
+                        type: Number,
+                        default: 0
                     }
                 },
                 creature: {
                     evolution_stages: {
                         type: Number,
-                        default: 1
+                        default: 0
                     },
                     highest_level: {
                         type: Number,
-                        default: 1
+                        default: 0
                     },
                     cosmetics_num: {
                         type: Number,
-                        default: 1
+                        default: 0
                     },
                     pets_num :{
                         type: Number,
-                        default: 1
+                        default: 0
                     },
                 },
                 accountability: {
                     days_alive: {
-                        value: {
-                            type: Number,
-                            default: 0
-                        },
-                        available: {
-                            type: Boolean,
-                            default: false
-                        }
+                        type: Number,
+                        default: 0
                     },
                     login_streak: {
-                        value: {
-                            type: Number,
-                            default: 0
-                        },
-                        available: {
-                            type: Boolean,
-                            default: false
-                        }
+                        type: Number,
+                        default: 0
                     },
                     friends_number: {
-                        value: {
-                            type: Number,
-                            default: 0
-                        },
-                        available: {
-                            type: Boolean,
-                            default: false
-                        }
+                        type: Number,
+                        default: 0
                     },
                     friends_helped: {
-                        value: {
-                            type: Number,
-                            default: 0
-                        },
-                        available: {
-                            type: Boolean,
-                            default: false
-                        }
+                        type: Number,
+                        default: 0
                     }
                 }
             }
-        ]
     }
 );
 
