@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, {useState, useContext, useEffect} from 'react';
 import { AuthContext } from '../Context';
 import {
 	View,
@@ -92,6 +92,12 @@ function SideMenu(props) {
 	if (getMode == 'dark') {
 		defaultMode = false;
 	}
+
+	useEffect(() => {
+		if (props.modalVisible) {
+			setColor(getColor)
+		}
+	}, [props.modalVisible]);
 
 	const [toggleValue, setToggleValue] = useState(!defaultMode);
 
