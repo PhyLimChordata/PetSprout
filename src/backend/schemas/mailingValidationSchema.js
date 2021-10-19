@@ -18,6 +18,6 @@ const MailingValidationSchema = new Schema({
 
 const mailingValidationSchema = mongoose.model(
 	'mailing validation',
-	MailingValidationSchema
+	MailingValidationSchema,
 );
 module.exports = mailingValidationSchema;

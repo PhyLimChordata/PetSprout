@@ -80,13 +80,12 @@ function AchievementScreen(props) {
 	let styles = AchievementStyle(
 		colors,
 		Dimensions.get('screen').width,
-		Dimensions.get('screen').height
+		Dimensions.get('screen').height,
 	);
 
 	if (!fontsLoaded) {
 		return <View></View>;
 	} else {
-		console.log(props);
 		return (
 			<SafeAreaView>
 				<MenuHeader text='Achievement' navigation={props.navigation} />
@@ -118,7 +117,8 @@ const OneCategory = (props) => {
 					props.styles.achievementName,
 					props.styles.textStyles,
 					{ fontFamily: 'Roboto_900Black' },
-				]}>
+				]}
+			>
 				{props.category}
 			</Text>
 			<View style={props.styles.achievementRow}>

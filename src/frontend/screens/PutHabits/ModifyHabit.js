@@ -22,13 +22,13 @@ function ModifyHabitScreen(props) {
 					'Content-Type': 'application/json',
 					'authentication-token': getToken,
 				},
-			}
+			},
 		)
 			.then((res) =>
 				res.json().then((data) => {
 					setData(data);
 					setLoading(false);
-				})
+				}),
 			)
 			.catch();
 	};

@@ -131,13 +131,6 @@ function SignupScreen(props) {
 	};
 
 	const attemptSignup = () => {
-		console.log(
-			JSON.stringify({
-				username: userName,
-				email: email,
-				password: password,
-			})
-		);
 		fetch('http://localhost:5000/api/v1.0.0/user/register', {
 			method: 'POST',
 			headers: {
@@ -175,7 +168,6 @@ function SignupScreen(props) {
 						props.navigation.push('VerifyEmailSignUp', { email: email });
 					});
 				} else if (res.status == 401) {
-					console.log(res);
 					setUserNameError(res.statusText);
 					if (res.statusText == 'User email exists')
 						setEmailInputStyle(errorIndicator);
@@ -197,13 +189,15 @@ function SignupScreen(props) {
 				<TextInput
 					style={usernameInputStyle}
 					value={userName}
-					onChangeText={(text) => updatingUsernameInput(text)}></TextInput>
+					onChangeText={(text) => updatingUsernameInput(text)}
+				></TextInput>
 				<Text style={styles(colors).errorMessageRight}>{userNameError}</Text>
 				<Text style={styles(colors).authenticationText}>Email</Text>
 				<TextInput
 					style={emailInputStyle}
 					value={email}
-					onChangeText={(text) => updatingEmailInput(text)}></TextInput>
+					onChangeText={(text) => updatingEmailInput(text)}
+				></TextInput>
 				<Text style={styles(colors).errorMessageRight}>{emailError}</Text>
 
 				<Text style={styles(colors).authenticationText}>Password</Text>
@@ -211,7 +205,8 @@ function SignupScreen(props) {
 					style={passwordInputStyle}
 					secureTextEntry={true}
 					value={password}
-					onChangeText={(text) => updatingPasswordInput(text)}></TextInput>
+					onChangeText={(text) => updatingPasswordInput(text)}
+				></TextInput>
 				<Text style={styles(colors).errorMessageRight}>{passwordError}</Text>
 
 				<Text style={styles(colors).authenticationText}>Re-enter Password</Text>
@@ -219,9 +214,8 @@ function SignupScreen(props) {
 					style={reEnterPasswordInputStyle}
 					secureTextEntry={true}
 					value={reEnterPassword}
-					onChangeText={(text) =>
-						updatingReEnterPasswordInput(text)
-					}></TextInput>
+					onChangeText={(text) => updatingReEnterPasswordInput(text)}
+				></TextInput>
 				<Text style={styles(colors).errorMessageRight}>
 					{reEnterPasswordError}
 				</Text>
@@ -230,14 +224,16 @@ function SignupScreen(props) {
 			<TouchableOpacity
 				activeOpacity={0.6}
 				style={styles(colors).authenticationButton}
-				onPress={() => attemptSignup()}>
+				onPress={() => attemptSignup()}
+			>
 				<Text style={styles(colors).authenticationButtonText}>Sign Up</Text>
 			</TouchableOpacity>
 			<Text style={styles(colors).subText}>
 				Already have an account?
 				<TouchableOpacity
 					activeOpacity={0.6}
-					onPress={() => props.navigation.push('LoginScreen')}>
+					onPress={() => props.navigation.push('LoginScreen')}
+				>
 					<Text style={styles(colors).signupText}> Log in</Text>
 				</TouchableOpacity>
 			</Text>

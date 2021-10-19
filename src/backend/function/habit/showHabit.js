@@ -10,7 +10,7 @@ module.exports = async (req, res) => {
 		if (!userHabit) return res.status(404).json("User's habits could not find");
 
 		const habitFromDB = userHabit.habitList.find(
-			(habit) => habit._id.toString() === req.params.habit_id.toString()
+			(habit) => habit._id.toString() === req.params.habit_id.toString(),
 		);
 		if (!habitFromDB)
 			return res.status(404).json("Habit could not find in user's habits");

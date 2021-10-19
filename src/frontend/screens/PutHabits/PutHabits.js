@@ -34,13 +34,15 @@ function Day({ selected, letter, onPress }) {
 				borderWidth: 2,
 				borderColor: colors.Quaternary,
 			}}
-			activeOpacity={0.6}>
+			activeOpacity={0.6}
+		>
 			<Text
 				style={{
 					color: colors.Quinary,
 					fontSize: 20,
 					fontWeight: 'bold',
-				}}>
+				}}
+			>
 				{' '}
 				{letter}{' '}
 			</Text>
@@ -80,8 +82,6 @@ function PutHabits(props) {
 		})
 			.then((res) => {
 				res.json().then((data) => {
-					console.log(data);
-					// console.log(res.status)
 					if (res.status == 200) {
 						changeRefreshing(true);
 						props.navigation.goBack(null);
@@ -115,12 +115,10 @@ function PutHabits(props) {
 					times: alarms.length,
 					alarm: alarms,
 				}),
-			}
+			},
 		)
 			.then((res) => {
 				res.json().then((data) => {
-					console.log(data);
-					// console.log(res.status)
 					if (res.status == 200) {
 						changeRefreshing(true);
 						props.navigation.goBack(null);
@@ -146,11 +144,10 @@ function PutHabits(props) {
 					'Content-Type': 'application/json',
 					'authentication-token': getToken,
 				},
-			}
+			},
 		)
 			.then((res) => {
 				res.json().then((data) => {
-					console.log(data);
 					if (res.status == 200) {
 						changeRefreshing(true);
 						props.navigation.goBack(null);
@@ -191,7 +188,6 @@ function PutHabits(props) {
 	}
 
 	function removeAlarm(index) {
-		console.log('removing');
 		setAlarms([...alarms.slice(0, index), ...alarms.slice(index + 1)]);
 	}
 
@@ -277,7 +273,8 @@ function PutHabits(props) {
 								color: 'red',
 								fontSize: 15,
 								fontWeight: 'bold',
-							}}>
+							}}
+						>
 							{' '}
 							This is a Required Field{' '}
 						</Text>
@@ -301,11 +298,13 @@ function PutHabits(props) {
 							fontSize: 20,
 							fontWeight: 'bold',
 							color: colors.Quaternary,
-						}}>
+						}}
+					>
 						Schedule
 					</Text>
 					<View
-						style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+						style={{ flexDirection: 'row', justifyContent: 'space-between' }}
+					>
 						<Day letter={'S'} selected={days[0]} onPress={() => flipDay(0)} />
 						<Day letter={'M'} selected={days[1]} onPress={() => flipDay(1)} />
 						<Day letter={'T'} selected={days[2]} onPress={() => flipDay(2)} />
@@ -321,7 +320,8 @@ function PutHabits(props) {
 								color: 'red',
 								fontSize: 15,
 								fontWeight: 'bold',
-							}}>
+							}}
+						>
 							{' '}
 							Select a Day of the Week{' '}
 						</Text>
@@ -341,13 +341,15 @@ function PutHabits(props) {
 									invalidParams.splice(invalidParams.indexOf('alarm'), 1);
 								}
 								setDatePickerVisibility(true);
-							}}>
+							}}
+						>
 							<Text
 								style={{
 									fontSize: 20,
 									fontWeight: 'bold',
 									color: colors.Quinary,
-								}}>
+								}}
+							>
 								Add An Alarm
 							</Text>
 						</TouchableOpacity>
@@ -358,7 +360,8 @@ function PutHabits(props) {
 									color: 'red',
 									fontSize: 15,
 									fontWeight: 'bold',
-								}}>
+								}}
+							>
 								{' '}
 								Create an Alarm{' '}
 							</Text>
@@ -390,13 +393,15 @@ function PutHabits(props) {
 						height: 40,
 						marginHorizontal: 30,
 						borderRadius: 10,
-					}}>
+					}}
+				>
 					<Text
 						style={{
 							fontSize: 20,
 							fontWeight: 'bold',
 							color: colors.background,
-						}}>
+						}}
+					>
 						Delete Habit
 					</Text>
 				</TouchableOpacity>

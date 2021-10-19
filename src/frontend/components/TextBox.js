@@ -24,7 +24,8 @@ function TextBox(props) {
 				style={boxStyle}
 				value={text}
 				onChangeText={(content) => setText(content)}
-				onEndEditing={() => props.setText(text)}></TextInput>
+				onEndEditing={() => props.setText(text)}
+			></TextInput>
 		</View>
 	);
 }

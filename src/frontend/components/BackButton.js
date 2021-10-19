@@ -10,7 +10,8 @@ function BackButton(props) {
 			activeOpacity={0.6}
 			onPress={() => {
 				props.navigation.goBack(null);
-			}}>
+			}}
+		>
 			<Image
 				source={require('../resources/images/BackButton.png')}
 				resizeMode='contain'

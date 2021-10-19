@@ -5,8 +5,6 @@ import {
 	Animated,
 	SafeAreaView,
 	RefreshControl,
-	ScrollView,
-	Text,
 } from 'react-native';
 
 import styles from '../styling/HabitsScreen';
@@ -41,16 +39,6 @@ function HabitsScreen(props) {
 		displayHabits();
 	}, []);
 
-	const wait = (timeout) => {
-		return new Promise((resolve) => setTimeout(resolve, timeout));
-	};
-
-	const translateY = scrolling.interpolate({
-		inputRange: [-50, 0],
-		outputRange: [50, 0],
-		extrapolate: 'clamp',
-	});
-
 	useEffect(() => {
 		if (habits.length == 0 && !displayed) displayHabits();
 	});
@@ -78,20 +66,17 @@ function HabitsScreen(props) {
 						setUserHabitId(data._id);
 						setExperience((expValue % 100).toString());
 						setLevel(Math.floor(expValue / 100).toString());
-
-						console.log(getToken);
-						//Displaying purposes
+						//Displaying purposes TODO
 						const heartValue = [];
 						for (var i = 0; i < data.heart; i++) {
 							heartValue.push(i);
 						}
 						setHearts(heartValue);
 						setDisplayed(true);
-						console.log(data);
 						setRefreshing(false);
 						changeRefreshing(false);
 					}, 1000);
-				})
+				}),
 			)
 			.catch();
 	};
@@ -115,13 +100,14 @@ function HabitsScreen(props) {
 					showsVerticalScrollIndicator={false}
 					onScroll={Animated.event(
 						[{ nativeEvent: { contentOffset: { y: scrolling } } }],
-						{ useNativeDriver: true }
+						{ useNativeDriver: true },
 					)}
 					scrollEventThrottle={16}
 					decelerationRate={'normal'}
 					refreshControl={
 						<RefreshControl refreshing={getRefreshing} onRefresh={onRefresh} />
-					}>
+					}
+				>
 					{habits.map((data, index) => {
 						if (data.times - data.todo > 0) {
 							const scale = scrolling.interpolate({
@@ -146,7 +132,8 @@ function HabitsScreen(props) {
 											frequency={data.times - data.todo}
 											habitId={data._id}
 											userHabitId={userHabitId}
-											exp={experience}></Habits>
+											exp={experience}
+										></Habits>
 										<View style={{ height: 15 }}></View>
 									</Animated.View>
 								</View>

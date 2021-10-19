@@ -1,8 +1,12 @@
 const router = require('express').Router();
 const authentication = require('../middleware/authentication');
 
-const achievementsUser = require('../function/achievements/achievementsUser.js')
+const achievementsUser = require('../function/achievements/achievementsUser.js');
 
-router.get('/getAchievements', authentication, achievementsUser.get_user_achievements);
+router.get(
+	'/getAchievements',
+	authentication,
+	achievementsUser.get_user_achievements,
+);
 
 module.exports = router;

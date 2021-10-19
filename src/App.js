@@ -31,7 +31,7 @@ import HabitsScreen from './frontend/screens/Habits';
 import CreateHabitScreen from './frontend/screens/PutHabits/CreateHabit';
 import ComingSoonScreen from './frontend/screens/ComingSoon';
 import ModifyHabitScreen from './frontend/screens/PutHabits/ModifyHabit';
-import AllHabitsScreen from './frontend/screens/AllHabits'
+import AllHabitsScreen from './frontend/screens/AllHabits';
 
 // Colour Themes
 import GreenLightTheme from './frontend/resources/themes/light/GreenTheme';
@@ -157,11 +157,11 @@ function NavContainer(props) {
 					/>
 					<Stack.Screen name='FeedbackScreen' component={FeedbackScreen} />
 					<Stack.Screen name='ReportABugScreen' component={ReportABugScreen} />
+					<Stack.Screen name='AllHabitsScreen' component={AllHabitsScreen} />
 					<Stack.Screen
-						name='AllHabitsScreen'
-						component={AllHabitsScreen}
+						name='TermsAndConditionScreen'
+						component={TermsAndConditionScreen}
 					/>
-					<Stack.Screen name='TermsAndConditionScreen' component={TermsAndConditionScreen} />
 				</Stack.Navigator>
 			) : (
 				<Stack.Navigator headerMode='none'>
@@ -214,7 +214,8 @@ function HomeScreen(props) {
 					activeTintColor: colors.Quinary,
 					inactiveTintColor: colors.background,
 					style: { backgroundColor: colors.Tertiary },
-				}}>
+				}}
+			>
 				<Tab.Screen
 					name='Habit'
 					component={HabitsScreen}
@@ -330,14 +331,16 @@ function CustomTabBarButton({ children, onPress }) {
 				justifyContent: 'center',
 				alignItems: 'center',
 			}}
-			onPress={onPress}>
+			onPress={onPress}
+		>
 			<View
 				style={{
 					backgroundColor: colors.Quaternary,
 					width: 70,
 					height: 70,
 					borderRadius: 35,
-				}}>
+				}}
+			>
 				{children}
 			</View>
 		</TouchableOpacity>

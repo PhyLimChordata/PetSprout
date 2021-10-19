@@ -35,14 +35,14 @@ function Habits(props) {
 				body: JSON.stringify({
 					expValue: 3,
 				}),
-			}
+			},
 		)
 			.then((res) =>
 				res.json().then((data) => {
 					if (frequency - 1 == 0) {
 						setCompleted(true);
 					}
-				})
+				}),
 			)
 			.catch();
 	};
@@ -50,21 +50,23 @@ function Habits(props) {
 	const deleteHabit = () => {
 		fetch(
 			'http://localhost:5000/api/v1.0.0/habit/delete_habit/' +
-			props.userHabitId +
-			'/' +
-			props.habitId,
+				props.userHabitId +
+				'/' +
+				props.habitId,
 			{
 				method: 'DELETE',
 				headers: {
 					'Content-Type': 'application/json',
 					'authentication-token': getToken,
 				},
-			}
+			},
 		)
 			.then((res) =>
 				res.json().then((data) => {
-					console.log('missing a refresh?')
-				})
+					changeRefreshing(true);
+					props.navigation.navigate(null);
+					//TODOs
+				}),
 			)
 			.catch();
 	};
@@ -74,7 +76,7 @@ function Habits(props) {
 			{!completed ? (
 				<ScrollViewElement
 					rightFunction={props.enableRight ? completeHabit : undefined}
-					leftFunction={props.enableLeft ? deleteHabit: undefined}
+					leftFunction={props.enableLeft ? deleteHabit : undefined}
 					text={props.name}
 					content={
 						<View style={styles(colors).horizontalContainer}>
@@ -84,7 +86,14 @@ function Habits(props) {
 								</Text>
 							</View>
 							<View style={styles(colors).container}>
-							<Ellipsis onPress={() => props.navigation.navigate('ModifyHabitScreen', {habitId:props.habitId, userHabitId:props.userHabitId} )}/>
+								<Ellipsis
+									onPress={() =>
+										props.navigation.navigate('ModifyHabitScreen', {
+											habitId: props.habitId,
+											userHabitId: props.userHabitId,
+										})
+									}
+								/>
 								<View style={styles(colors).horizontalContainerBottom}>
 									<Counter
 										quantity={streak}
