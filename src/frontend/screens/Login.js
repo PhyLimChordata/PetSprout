@@ -25,6 +25,7 @@ function Login(props) {
 		width: 300,
 	});
 	const { logIn } = useContext(AuthContext);
+	// const { getToken } = useContext(AuthContext);
 
 	const updatingPrimaryInput = (text) => {
 		setPrimaryInfo(text);
@@ -68,11 +69,26 @@ function Login(props) {
 			}),
 		})
 			.then((res) => {
+				let token = -1;
 				if (primaryInfo == '' || password == '') {
 					setError('Please enter all parameters');
 				} else if (res.status == 200) {
 					res.json().then((data) => {
 						logIn(data.token);
+						fetch('http://localhost:5000/api/v1.0.0/achievements/updateLoginStreaks', {
+							method: 'PUT',
+							headers: {
+								'Content-Type': 'application/json',
+								'authentication-token': data.token
+							},
+						})
+						.then((ret) => {
+							if(ret.status == 404) {
+								console.log("Achievement not found");
+							} else if (res.status == 200) {
+								console.log("Success streak update!");
+							}
+						})
 					});
 				} else if (res.status == 404 || res.status == 401) {
 					setError('The provided information is incorrect');
