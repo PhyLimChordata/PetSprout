@@ -37,7 +37,6 @@ const ReportABug = (theme) =>
 		reportABugImg: {
 			height: 35,
 			width: 35,
-			marginTop: 15,
 			resizeMode: 'contain',
 			// tintColor: theme.Quaternary,
 			// TODO

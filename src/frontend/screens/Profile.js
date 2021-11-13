@@ -2,7 +2,7 @@ import React, { useEffect, useContext } from 'react';
 import {
 	View,
 	Text,
-	Pressable,
+	TouchableOpacity,
 	Dimensions,
 	TextInput,
 	SafeAreaView,
@@ -38,6 +38,10 @@ function ProfileEdit(props) {
 		Dimensions.get('screen').height,
 	);
 
+	function formatDate(date) {
+		return date.getMonth() + 1 + "/" + date.getDate() + "/" + date.getFullYear()
+	}
+
 	useEffect(() => {
 		const get = () => {
 			fetch('http://localhost:5000/api/v1.0.0/user/viewAccount', {
@@ -52,7 +56,7 @@ function ProfileEdit(props) {
 					setUserName(data.userName);
 					setEmail(data.email);
 					setAbout(data.about);
-					setCreatedAt(data.createdAt);
+					setCreatedAt(formatDate(new Date(data.createdAt)));
 				})
 				.catch((err) => console.log(err));
 		};
@@ -99,11 +103,11 @@ function ProfileEdit(props) {
 	const SubmitButton = (props) => {
 		return (
 			<View style={styles.submitButtonPosition}>
-				<Pressable style={styles.submitButton} onPress={() => props.submit()}>
+				<TouchableOpacity style={styles.submitButton} onPress={() => props.submit()}>
 					<Text style={[styles.submitButtonText, { fontWeight: '900' }]}>
 						SUBMIT
 					</Text>
-				</Pressable>
+				</TouchableOpacity>
 			</View>
 		);
 	};

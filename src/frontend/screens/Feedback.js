@@ -4,7 +4,7 @@ import {
 	SafeAreaView,
 	Text,
 	TouchableOpacity,
-	ScrollView,
+	ScrollView, Image,
 } from 'react-native';
 
 import MenuHeader from '../components/MenuHeader';
@@ -21,10 +21,13 @@ function Feedback(props) {
 
 	return (
 		<SafeAreaView>
-			<MenuHeader text='Feedback' navigation={props.navigation}>
-				<Text>Feedback</Text>
+			<MenuHeader text='Feedback' navigation={props.navigation} right={
+				<Image
+					style={style.feedbackImg}
+					source={require('../resources/images/FeedbackLogo.png')}
+				/>
+			}>
 			</MenuHeader>
-			<ScrollView contentContainerStyle={style.container}>
 				<View style={style.container}>
 					<TextBox
 						header={'Message'}
@@ -39,7 +42,6 @@ function Feedback(props) {
 						<Text style={style.feedbackButtonText}>Submit</Text>
 					</TouchableOpacity>
 				</View>
-			</ScrollView>
 		</SafeAreaView>
 	);
 }

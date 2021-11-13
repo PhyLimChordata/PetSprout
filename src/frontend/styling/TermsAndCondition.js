@@ -26,7 +26,7 @@ const TermsAndCondition = (theme) =>
 		container: {
 			flexDirection: 'column',
 			paddingTop: StatusBar.currentHeight,
-			alignItems: 'left',
+			alignItems: 'flex-start',
 			textAlign: 'left',
 		},
 		scrollView: {

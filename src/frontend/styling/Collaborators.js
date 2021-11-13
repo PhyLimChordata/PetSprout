@@ -29,10 +29,10 @@ const Collaborators = (theme) =>
 			flexDirection: 'column',
 		},
 		headContainer: {
-			display: 'flex',
 			alignItems: 'center',
 			textAlign: 'center',
 			flexDirection: 'column',
+			height:'100%'
 		},
 	});
 

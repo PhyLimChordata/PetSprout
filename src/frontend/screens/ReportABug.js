@@ -52,13 +52,14 @@ function ReportABug(props) {
 
 	return (
 		<SafeAreaView>
-			<MenuHeader text='Report a Bug' navigation={props.navigation}>
+			<MenuHeader text='Report a Bug' navigation={props.navigation} right={
 				<Image
-					style={style.reportABugImg}
-					source={require('../resources/images/ReportABug.png')}
+				style={style.reportABugImg}
+				source={require('../resources/images/ReportABug.png')}
 				/>
+			}>
+
 			</MenuHeader>
-			<ScrollView contentContainerStyle={style.container}>
 				<View style={style.container}>
 					<TextBox
 						header={'Message'}
@@ -78,7 +79,6 @@ function ReportABug(props) {
 					</TouchableOpacity>
 					{popup}
 				</View>
-			</ScrollView>
 		</SafeAreaView>
 	);
 }

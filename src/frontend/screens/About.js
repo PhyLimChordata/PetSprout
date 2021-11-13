@@ -25,10 +25,8 @@ function About(props) {
 					style={style.aboutLogo}
 					source={require('../resources/images/Logo.png')}
 				/>
-				<ScrollView contentContainerStyle={style.container}>
-					<Text style={style.textSubtitle}>Version 1.0.0</Text>
 					<Text style={style.textTitle}>HabiPets</Text>
-					<Text style={style.textSubtitle}>HabiPets.com</Text>
+					<Text style={style.textSubtitle}>Version 1.0.0</Text>
 					<Text style={style.text}>
 						The creators of this app wanted to create {'\n'}
 						an application that would guide people to form {'\n'}
@@ -63,7 +61,6 @@ function About(props) {
 					>
 						<Text style={style.aboutButtonText}>Terms and Condition</Text>
 					</TouchableOpacity>
-				</ScrollView>
 			</View>
 		</SafeAreaView>
 	);
