@@ -35,6 +35,9 @@ const Popup = (theme) =>
 			width: 125,
             marginTop: -20,
             resizeMode: "contain",
+            alignContent: "center",
+            justifyContent: "center",
+            alignItems: "center"
             // tintColor: theme.Quaternary,
             // TODO
         },

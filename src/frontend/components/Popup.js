@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { View, Text, Image, TouchableOpacity } from 'react-native';
 import Modal from 'react-native-modal';
 import { useTheme } from '@react-navigation/native';
+import { AuthContext } from '../Context';
 
 import styles from '../styling/Popup';
 
@@ -10,7 +11,7 @@ function Popup(props) {
 	const style = styles(colors);
 	const hasButton = props.button;
 	let button;
-
+	const { signOut } = useContext(AuthContext);
 	
 
 	if(hasButton) {
@@ -18,12 +19,21 @@ function Popup(props) {
 		<View style={style.popupButtonContainer}>
 			<TouchableOpacity
 				activeOpacity={0.6}
-				style={style.popupButton}>
+				style={style.popupButton}
+				onPress={() => {
+					props.setModalVisible(false);
+					signOut();
+				}}
+				>
 				<Text style={style.popupButtonText}>Yes</Text>
 			</TouchableOpacity>
 			<TouchableOpacity
 				activeOpacity={0.6}
-				style={style.popupButton}>
+				style={style.popupButton}
+				onPress={() => {
+					props.setModalVisible(false);
+				}}
+				>
 				<Text style={style.popupButtonText}>No</Text>
 			</TouchableOpacity>
 		</View>);
@@ -50,6 +60,7 @@ function Popup(props) {
 						/>
 						<Text style={style.title}>{props.title}</Text>
 						<Text style={style.text}>{props.text}</Text>
+						{button}
 					</View>
 				</View>
 			</Modal>
