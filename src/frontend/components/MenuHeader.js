@@ -5,12 +5,14 @@ import styles from '../styling/Header';
 import Menu from './Menu';
 import BackButton from './BackButton';
 import SideMenu from './SideMenu';
+import LogoutConfirmation from './LogoutPopup';
 
 import { useTheme } from '@react-navigation/native';
 
 function MenuHeader(props) {
 	const { colors } = useTheme();
 	const [modalVisible, setModalVisible] = useState(false);
+	const [logoutVisible, setLogoutVisible] = useState(false);
 	var hp = props.hp != undefined ? props.hp : [];
 
 	return (
@@ -27,6 +29,8 @@ function MenuHeader(props) {
 				<SideMenu
 					modalVisible={modalVisible}
 					setModalVisible={setModalVisible}
+					logoutVisible={logoutVisible}
+					setLogoutVisible={setLogoutVisible}
 					navigation={props.navigation}
 				/>
 			)}
@@ -41,6 +45,12 @@ function MenuHeader(props) {
 			})}
 			<View style={{ alignContent: 'flex-end', height: 25 }}>
 				{props.right}
+			</View>
+			<View>
+				<LogoutConfirmation
+					logoutVisible={logoutVisible}
+					setLogoutVisible={setLogoutVisible}
+				></LogoutConfirmation>
 			</View>
 		</View>
 	);

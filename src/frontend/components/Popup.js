@@ -1,7 +1,9 @@
-import React from 'react';
+
+import React, { useContext } from 'react';
 import { View, Text, Image, TouchableOpacity } from 'react-native';
 import Modal from 'react-native-modal';
 import { useTheme } from '@react-navigation/native';
+import { AuthContext } from '../Context';
 
 import styles from '../styling/Popup';
 
@@ -10,20 +12,34 @@ function Popup(props) {
 	const style = styles(colors);
 	const hasButton = props.button;
 	let button;
+	const { signOut } = useContext(AuthContext);
+	
 
-	if (hasButton) {
+	if(hasButton) {
 		button = (
-			<View style={style.popupButtonContainer}>
-				<TouchableOpacity activeOpacity={0.6} style={style.popupButton}>
-					<Text style={style.popupButtonText}>Yes</Text>
-				</TouchableOpacity>
-				<TouchableOpacity activeOpacity={0.6} style={style.popupButton}>
-					<Text style={style.popupButtonText}>No</Text>
-				</TouchableOpacity>
-			</View>
-		);
+		<View style={style.popupButtonContainer}>
+			<TouchableOpacity
+				activeOpacity={0.6}
+				style={style.popupButton}
+				onPress={() => {
+					props.setModalVisible(false);
+					signOut();
+				}}
+				>
+				<Text style={style.popupButtonText}>Yes</Text>
+			</TouchableOpacity>
+			<TouchableOpacity
+				activeOpacity={0.6}
+				style={style.popupButton}
+				onPress={() => {
+					props.setModalVisible(false);
+				}}
+				>
+				<Text style={style.popupButtonText}>No</Text>
+			</TouchableOpacity>
+		</View>);
 	} else {
-		button = '';
+		button = "";
 	}
 
 	return (
@@ -36,13 +52,16 @@ function Popup(props) {
 				}}
 				useNativeDriverForBackdrop
 				swipeDirection={['down']}
-				style={{ justifyContent: 'center', alignItems: 'center' }}
-			>
+				style={{ justifyContent: "center", alignItems: "center" }}>
 				<View style={style.container}>
 					<View style={props.style}>
-						<Image style={style.popupImage} source={props.image} />
+						<Image
+							style={style.popupImage}
+							source={props.image}
+						/>
 						<Text style={style.title}>{props.title}</Text>
 						<Text style={style.text}>{props.text}</Text>
+						{button}
 					</View>
 				</View>
 			</Modal>
