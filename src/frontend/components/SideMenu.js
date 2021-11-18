@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import Modal from 'react-native-modal';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import Toggle from 'react-native-toggle-element';
+// import Toggle from 'react-native-toggle-element';
 import Colours from '../resources/themes/Colours';
 import { useTheme } from '@react-navigation/native';
 
@@ -83,12 +83,11 @@ const Tab = ({ color, icon, onPress, title, isImage = false }) => (
 );
 
 function SideMenu(props) {
-	const { changeColorTheme, getColor, changeModeTheme, getMode } =
+	const { signOut, changeColorTheme, getColor, changeModeTheme, getMode } =
 		useContext(AuthContext);
 
 	const { colors } = useTheme();
 	const [color, setColor] = useState(getColor);
-	const [userName, setUserName] = useState('');
 	let defaultMode = true;
 	if (getMode == 'dark') {
 		defaultMode = false;
@@ -99,23 +98,6 @@ function SideMenu(props) {
 			setColor(getColor)
 		}
 	}, [props.modalVisible]);
-
-	useEffect(() => {
-			fetch('http://localhost:5000/api/v1.0.0/user/viewAccount', {
-				method: 'GET',
-				headers: {
-					'Content-Type': 'application/json',
-					'authentication-token': getToken,
-				},
-			})
-				.then((res) => res.json())
-				.then((data) => {
-					setUserName(data.userName);
-				})
-				.catch((err) => console.log(err));
-	}, []);
-	{/* TODO: Change this to a global variable */}
-
 
 	const [toggleValue, setToggleValue] = useState(!defaultMode);
 
@@ -175,7 +157,6 @@ function SideMenu(props) {
 										flexDirection: 'row',
 										flex: 1,
 										marginHorizontal: '4%',
-
 									}}
 								>
 									<Text
@@ -187,8 +168,9 @@ function SideMenu(props) {
 											textAlign: 'center',
 										}}
 									>
-										{ userName }
+										PhyLimChordata
 									</Text>
+									{/* TODO: Needs to not be hard coded */}
 								</View>
 							</View>
 							<TouchableOpacity
@@ -337,7 +319,7 @@ function SideMenu(props) {
 							/>
 						</View>
 						<View style={{ alignItems: 'center' }}>
-							<Toggle
+							{/* <Toggle
 								value={toggleValue}
 								onPress={(newState) => {
 									newState ? changeModeTheme('dark') : changeModeTheme('light');
@@ -368,7 +350,7 @@ function SideMenu(props) {
 										size={30}
 									/>
 								}
-							/>
+							/> */}
 						</View>
 						<View
 							style={{

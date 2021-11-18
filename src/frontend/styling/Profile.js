@@ -9,8 +9,8 @@ function profileStyles(theme, width, height) {
 		container: {
 			display: 'flex',
 			alignItems: 'center',
+			paddingTop: 0.1 * height,
 			flexDirection: 'column',
-			marginTop: 20,
 		},
 		formContainer: {
 			alignItems: 'center',
@@ -72,7 +72,6 @@ function profileStyles(theme, width, height) {
 			width: 110,
 			height: 26,
 			alignItems: 'center',
-			justifyContent: 'center'
 		},
 		submitButtonText: {
 			color: theme.background,

@@ -25,7 +25,7 @@ function SettingsPage(props) {
 	const [voiceNotif, setVoiceNotif] = React.useState(false);
 	const [reminder, setReminder] = React.useState(true);
 	const [vibration, setVibration] = React.useState(false);
-	const [fontSize, setFontSize] = React.useState('13');
+	const [fontSize, setFontSize] = React.useState(13);
 	const { getToken } = useContext(AuthContext);
 	useEffect(() => {
 		const get = () => {
@@ -77,8 +77,8 @@ function SettingsPage(props) {
 
 		const thumbColor = Colours.Grey.Button;
 		return (
-			<View style={props.styles.oneSettingContainer}>
-				<Text style={[props.styles.text, props.styles.textNormal, { flex: 1, paddingLeft: '7%', }]}>
+			<SafeAreaView style={props.styles.oneSettingContainer}>
+				<Text style={[props.styles.text, props.styles.textNormal, { flex: 1 }]}>
 					{props.tag}
 				</Text>
 				<Switch
@@ -122,7 +122,7 @@ function SettingsPage(props) {
 						);
 					}}
 				/>
-			</View>
+			</SafeAreaView>
 		);
 	};
 
@@ -155,9 +155,9 @@ function SettingsPage(props) {
 					</>
 				}
 			/>
-			<View style={[styles.container]}>
+			<View style={styles.container}>
 				<View style={styles.settingContainer}>
-					<Text style={[styles.textTitle, styles.text, {marginBottom:'3%'}]}>Notifications</Text>
+					<Text style={[styles.textTitle, styles.text]}>Notifications</Text>
 					<OneSetting
 						id='pushNotification'
 						tag='Use Push Notifications'

@@ -35,8 +35,10 @@ const Feedback = (theme) =>
 			color: theme.background,
 		},
 		feedbackImg: {
-			height: 35,
-			width: 35,
+			height: 25,
+			width: 25,
+			marginBottom: 25,
+			marginTop: 10,
 			resizeMode: 'contain',
 			// tintColor: theme.Quaternary,
 			// TODO

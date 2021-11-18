@@ -32,7 +32,6 @@ function TermsAndCondition(props) {
 					style={style.scrollView}
 					contentContainerStyle={style.container}
 				>
-					 {/*TODO: WRITE TERMS OF SERVICE*/}
 					<Text style={style.textTitle}>A. Overview</Text>
 					<Text style={style.text}>
 						Please review the terms and conditions ("terms") carefully as the

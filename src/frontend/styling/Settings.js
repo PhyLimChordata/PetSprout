@@ -7,7 +7,7 @@ function settingStyles(theme, width, height) {
 			display: 'flex',
 			flexDirection: 'column',
 			alignItems: 'center',
-			marginTop: 20,
+			marginTop: height * 0.06,
 		},
 		header: {
 			flex: 1.5,
@@ -25,15 +25,14 @@ function settingStyles(theme, width, height) {
 		oneSettingContainer: {
 			display: 'flex',
 			flexDirection: 'row',
-			alignItems: 'center',
-			marginBottom: '3%',
-
+			justifyContent: 'center',
+			marginTop: '7%',
+			marginBottom: '2%',
 		},
 		text: {
 			fontStyle: 'normal',
 			fontWeight: '700',
 			fontSize: fontSize,
-
 		},
 		textDisplayMargin: {
 			paddingLeft: '7%',
@@ -56,7 +55,7 @@ function settingStyles(theme, width, height) {
 			width: '100%',
 			color: theme.Quaternary,
 		},
-		switchStyling: {transform: [{ scaleX: .8 }, { scaleY: .8 }] },
+		switchStyling: {},
 	});
 }
 
