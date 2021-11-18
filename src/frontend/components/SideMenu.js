@@ -83,7 +83,7 @@ const Tab = ({ color, icon, onPress, title, isImage = false }) => (
 );
 
 function SideMenu(props) {
-	const { signOut, changeColorTheme, getColor, changeModeTheme, getMode, getToken } =
+	const { changeColorTheme, getColor, changeModeTheme, getMode } =
 		useContext(AuthContext);
 
 	const { colors } = useTheme();
@@ -382,9 +382,8 @@ function SideMenu(props) {
 								icon={'logout'}
 								title={'Log Out'}
 								onPress={() => {
-									props.setModalVisible(false);
-									signOut();
-								}}
+								props.setLogoutVisible(true);
+							}}
 							/>
 						</View>
 					</View>
