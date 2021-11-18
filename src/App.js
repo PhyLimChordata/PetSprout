@@ -162,10 +162,6 @@ function NavContainer(props) {
 						name='TermsAndConditionScreen'
 						component={TermsAndConditionScreen}
 					/>
-					<Stack.Screen
-						name="ReportABugScreen"
-						component={ReportABugScreen}
-					/>
 				</Stack.Navigator>
 			) : (
 				<Stack.Navigator headerMode='none'>
