@@ -3,6 +3,7 @@ const nodemailer = require('nodemailer');
 const smtpTransport = require('nodemailer-smtp-transport');
 const User = require('../../schemas/userSchema');
 const Habit = require('../../schemas/habitSchema');
+const Achievements = require('../../schemas/achievementSchema');
 const Mailing = require('../../schemas/mailingValidationSchema');
 const Setting = require('../../schemas/settingSchema');
 const bcryptjs = require('bcryptjs');
@@ -54,6 +55,12 @@ const user_regist = async (req, res) => {
 			user: newUser._id,
 		});
 		await newUserSetting.save();
+
+		// creating achievements
+		let newUserAchievements = new Achievements({
+			user: newUser._id,
+		});
+		await newUserAchievements.save();
 
 		const code = require('crypto').randomBytes(16).toString('hex');
 		sendUserEmail(email, code);
@@ -152,7 +159,7 @@ function sendUserEmail(cnd, code) {
 						user: 'habipetshelp@gmail.com',
 						pass: 'mvpiybwihptcqlgr',
 					},
-				})
+				}),
 			);
 			var html =
 				'<a href="http://127.0.0.1:5000/api/v1.0.0/user/activation/' +

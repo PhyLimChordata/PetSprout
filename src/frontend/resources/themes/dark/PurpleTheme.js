@@ -3,11 +3,11 @@ const purpleTheme = {
 		background: '#505050',
 		opposite: '#ffffff',
 
-		Primary: '#F8F0FF',
-		Secondary: '#D4C2E2',
+		Primary: '#7C6D89',
+		Secondary: '#9983AB',
 		Tertiary: '#B493CE',
-		Quaternary: '#9983AB',
-		Quinary: '#7C6D89',
+		Quaternary: '#D4C2E2',
+		Quinary: '#F8F0FF',
 	},
 };
 

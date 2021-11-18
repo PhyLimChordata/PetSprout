@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Image, TouchableOpacity } from 'react-native';
 import { useTheme } from '@react-navigation/native';
 
@@ -8,7 +8,10 @@ function BackButton(props) {
 		<TouchableOpacity
 			style={{ width: 30, height: 25 }}
 			activeOpacity={0.6}
-			onPress={() => props.navigation.goBack(null)}>
+			onPress={() => {
+				props.navigation.goBack(null);
+			}}
+		>
 			<Image
 				source={require('../resources/images/BackButton.png')}
 				resizeMode='contain'

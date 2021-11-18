@@ -129,7 +129,7 @@ function sendUserEmail(cnd, code) {
 						user: 'habipetshelp@gmail.com',
 						pass: 'mvpiybwihptcqlgr',
 					},
-				})
+				}),
 			);
 
 			var html =

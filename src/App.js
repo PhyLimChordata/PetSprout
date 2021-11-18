@@ -25,10 +25,13 @@ import AboutScreen from './frontend/screens/About';
 import CollaboratorsScreen from './frontend/screens/Collaborators';
 import SupportUsScreen from './frontend/screens/SupportUs';
 import ReportABugScreen from './frontend/screens/ReportABug';
+import FeedbackScreen from './frontend/screens/Feedback';
+import TermsAndConditionScreen from './frontend/screens/TermsAndCondition';
 import HabitsScreen from './frontend/screens/Habits';
-import CreateHabitScreen from './frontend/screens/CreateHabit';
+import CreateHabitScreen from './frontend/screens/PutHabits/CreateHabit';
 import ComingSoonScreen from './frontend/screens/ComingSoon';
 import ModifyHabitScreen from './frontend/screens/PutHabits/ModifyHabit';
+import AllHabitsScreen from './frontend/screens/AllHabits';
 
 // Colour Themes
 import GreenLightTheme from './frontend/resources/themes/light/GreenTheme';
@@ -52,6 +55,8 @@ export default function App() {
 	const [token, setToken] = useState(null);
 	const [color, setColor] = useState('green');
 	const [mode, setMode] = useState('light');
+	const [refreshing, setRefreshing] = useState(false);
+
 	const authContext = useMemo(() => {
 		return {
 			logIn: (generatedToken) => {
@@ -66,11 +71,24 @@ export default function App() {
 			changeModeTheme: (selectedMode) => {
 				setMode(selectedMode);
 			},
+			changeRefreshing: (refreshMode) => {
+				setRefreshing(refreshMode);
+			},
 			getToken: token,
 			getColor: color,
 			getMode: mode,
+			getRefreshing: refreshing,
 		};
-	}, [token, setToken, color, setColor, mode, setMode]);
+	}, [
+		token,
+		setToken,
+		color,
+		setColor,
+		mode,
+		setMode,
+		refreshing,
+		setRefreshing,
+	]);
 
 	// "Main" or start of program
 	return (
@@ -131,17 +149,18 @@ function NavContainer(props) {
 						name='ModifyHabitScreen'
 						component={ModifyHabitScreen}
 					/>
+					<Stack.Screen name='SupportUsScreen' component={SupportUsScreen} />
+					<Stack.Screen name='AboutScreen' component={AboutScreen} />
 					<Stack.Screen
-						name="AboutScreen"
-						component={AboutScreen}
-					/>
-					<Stack.Screen
-						name="CollaboratorsScreen"
+						name='CollaboratorsScreen'
 						component={CollaboratorsScreen}
 					/>
+					<Stack.Screen name='FeedbackScreen' component={FeedbackScreen} />
+					<Stack.Screen name='ReportABugScreen' component={ReportABugScreen} />
+					<Stack.Screen name='AllHabitsScreen' component={AllHabitsScreen} />
 					<Stack.Screen
-						name="SupportUsScreen"
-						component={SupportUsScreen}
+						name='TermsAndConditionScreen'
+						component={TermsAndConditionScreen}
 					/>
 					<Stack.Screen
 						name="ReportABugScreen"
@@ -199,7 +218,8 @@ function HomeScreen(props) {
 					activeTintColor: colors.Quinary,
 					inactiveTintColor: colors.background,
 					style: { backgroundColor: colors.Tertiary },
-				}}>
+				}}
+			>
 				<Tab.Screen
 					name='Habit'
 					component={HabitsScreen}
@@ -315,14 +335,16 @@ function CustomTabBarButton({ children, onPress }) {
 				justifyContent: 'center',
 				alignItems: 'center',
 			}}
-			onPress={onPress}>
+			onPress={onPress}
+		>
 			<View
 				style={{
 					backgroundColor: colors.Quaternary,
 					width: 70,
 					height: 70,
 					borderRadius: 35,
-				}}>
+				}}
+			>
 				{children}
 			</View>
 		</TouchableOpacity>

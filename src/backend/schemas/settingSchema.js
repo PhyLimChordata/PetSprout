@@ -45,7 +45,7 @@ const SettingSchema = new Schema(
 	},
 	{
 		timestamps: true,
-	}
+	},
 );
 
 const settingSchema = mongoose.model('setting', SettingSchema);

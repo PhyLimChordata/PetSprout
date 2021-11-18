@@ -46,7 +46,8 @@ function VerifyEmailSignUp(props) {
 			<TouchableOpacity
 				activeOpacity={0.6}
 				style={styles(colors).authenticationButton}
-				onPress={() => resend()}>
+				onPress={() => resend()}
+			>
 				<Text style={styles(colors).authenticationButtonText}>
 					Resend Email
 				</Text>
@@ -54,7 +55,8 @@ function VerifyEmailSignUp(props) {
 			<TouchableOpacity
 				activeOpacity={0.6}
 				style={styles(colors).authenticationSpecialButton}
-				onPress={() => props.navigation.push('LoginScreen')}>
+				onPress={() => props.navigation.push('LoginScreen')}
+			>
 				<Text style={styles(colors).authenticationButtonText}>
 					Back to Login
 				</Text>

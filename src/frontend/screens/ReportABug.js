@@ -11,39 +11,38 @@ import { useTheme } from '@react-navigation/native';
 function ReportABug(props) {
 	const { colors } = useTheme();
 	const style = styles(colors);
-    const [bug, setBug] = useState('');
-    const [modalVisible, setModalVisible] = useState(false);
-    let popup;
+  const [bug, setBug] = useState('');
+  const [modalVisible, setModalVisible] = useState(false);
+  let popup;
 
-    if(bug !== '') {
-        popup = (
-            <Popup
-                modalVisible={modalVisible}
-                setModalVisible={setModalVisible}
-                style={style.bugConfirmation}
-                image={require('../resources/images/EmailPopup.png')}
-                title="Thank you for Reporting a Bug!"
-                text="An email has been sent and
-                we will look into it promptly"
-                button={false}
-            ></Popup>
-        );
-    } else {
-        popup = (
-            <Popup
-                modalVisible={modalVisible}
-                setModalVisible={setModalVisible}
-                style={style.bugError}
-                image={require('../resources/images/EmailPopup.png')}
-                title="Something went wrong..."
-                text="An email could not be sent. 
-                Please attempt another time."
-                button={false}
-            ></Popup>
-        );
-    }
+  if(bug !== '') {
+      popup = (
+          <Popup
+              modalVisible={modalVisible}
+              setModalVisible={setModalVisible}
+              style={style.bugConfirmation}
+              image={require('../resources/images/EmailPopup.png')}
+              title="Thank you for Reporting a Bug!"
+              text="An email has been sent and
+              we will look into it promptly"
+              button={false}
+          ></Popup>
+      );
+  } else {
+      popup = (
+          <Popup
+              modalVisible={modalVisible}
+              setModalVisible={setModalVisible}
+              style={style.bugError}
+              image={require('../resources/images/EmailPopup.png')}
+              title="Something went wrong..."
+              text="An email could not be sent. 
+              Please attempt another time."
+              button={false}
+          ></Popup>
+      );
+  }
     
-	
 	return (
 		<SafeAreaView>
 			<MenuHeader text='Report a Bug' navigation={props.navigation}>
@@ -78,8 +77,3 @@ function ReportABug(props) {
 }
 
 export default ReportABug;
-
-/*
-
-
-*/

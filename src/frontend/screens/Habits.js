@@ -1,5 +1,11 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { View, Image, Animated, SafeAreaView } from 'react-native';
+import {
+	View,
+	Image,
+	Animated,
+	SafeAreaView,
+	RefreshControl,
+} from 'react-native';
 
 import styles from '../styling/HabitsScreen';
 import Habits from '../components/Habits';
@@ -20,16 +26,30 @@ function HabitsScreen(props) {
 
 	const [level, setLevel] = useState('');
 	const [displayed, setDisplayed] = useState(false);
+
 	const scrolling = React.useRef(new Animated.Value(0)).current;
 
-	const { getToken } = useContext(AuthContext);
+	const { getToken, getRefreshing, changeRefreshing } = useContext(AuthContext);
+
+	const [refreshing, setRefreshing] = React.useState(false);
+
+	const onRefresh = React.useCallback(() => {
+		setRefreshing(true);
+		changeRefreshing(true);
+		displayHabits();
+	}, []);
 
 	useEffect(() => {
 		if (habits.length == 0 && !displayed) displayHabits();
 	});
 
+	useEffect(() => {
+		if (getRefreshing) displayHabits();
+	}, [getRefreshing]);
+
 	const displayHabits = () => {
 		setDisplayed(true);
+		setRefreshing(true);
 		const date = new Date().getDay();
 		fetch('http://localhost:5000/api/v1.0.0/habit/show_user_habit/' + date, {
 			method: 'GET',
@@ -41,21 +61,22 @@ function HabitsScreen(props) {
 			.then((res) =>
 				res.json().then((data) => {
 					const expValue = parseInt(data.expValue);
-					setHabits(data.habitList);
-					setUserHabitId(data._id);
-					setExperience((expValue % 100).toString());
-					setLevel(Math.floor(expValue / 100).toString());
-
-					console.log(getToken);
-					//Displaying purposes
-					const heartValue = [];
-					for (var i = 0; i < data.heart; i++) {
-						heartValue.push(i);
-					}
-					setHearts(heartValue);
-					setDisplayed(true);
-					console.log(data);
-				})
+					setTimeout(() => {
+						setHabits(data.habitList);
+						setUserHabitId(data._id);
+						setExperience((expValue % 100).toString());
+						setLevel(Math.floor(expValue / 100).toString());
+						//Displaying purposes TODO
+						const heartValue = [];
+						for (var i = 0; i < data.heart; i++) {
+							heartValue.push(i);
+						}
+						setHearts(heartValue);
+						setDisplayed(true);
+						setRefreshing(false);
+						changeRefreshing(false);
+					}, 1000);
+				}),
 			)
 			.catch();
 	};
@@ -74,17 +95,20 @@ function HabitsScreen(props) {
 					width={experience + '%'}
 				/>
 			</View>
-			<View style={styles(colors).scrollViewContainer}>
+			<SafeAreaView style={styles(colors).scrollViewContainer}>
 				<Animated.ScrollView
 					showsVerticalScrollIndicator={false}
 					onScroll={Animated.event(
 						[{ nativeEvent: { contentOffset: { y: scrolling } } }],
-						{ useNativeDriver: true }
+						{ useNativeDriver: true },
 					)}
-					decelerationRate={'normal'}>
+					scrollEventThrottle={16}
+					decelerationRate={'normal'}
+					refreshControl={
+						<RefreshControl refreshing={getRefreshing} onRefresh={onRefresh} />
+					}
+				>
 					{habits.map((data, index) => {
-						console.log(habits);
-						console.log('dud');
 						if (data.times - data.todo > 0) {
 							const scale = scrolling.interpolate({
 								inputRange: [-1, 0, 100 * index, 100 * (index + 1)],
@@ -100,6 +124,7 @@ function HabitsScreen(props) {
 								<View>
 									<Animated.View style={{ opacity, transform: [{ scale }] }}>
 										<Habits
+											enableRight={true}
 											navigation={props.navigation}
 											habitId={data._id}
 											name={data.title}
@@ -107,7 +132,8 @@ function HabitsScreen(props) {
 											frequency={data.times - data.todo}
 											habitId={data._id}
 											userHabitId={userHabitId}
-											exp={experience}></Habits>
+											exp={experience}
+										></Habits>
 										<View style={{ height: 15 }}></View>
 									</Animated.View>
 								</View>
@@ -115,7 +141,7 @@ function HabitsScreen(props) {
 						}
 					})}
 				</Animated.ScrollView>
-			</View>
+			</SafeAreaView>
 		</SafeAreaView>
 	);
 }

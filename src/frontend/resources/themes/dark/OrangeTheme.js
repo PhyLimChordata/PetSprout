@@ -3,11 +3,11 @@ const orangeTheme = {
 		background: '#505050',
 		opposite: '#ffffff',
 
-		Primary: '#FFF8ED',
-		Secondary: '#FFE3B9',
+		Primary: '#A68350',
+		Secondary: '#DEAD63',
 		Tertiary: '#FFC977',
-		Quaternary: '#DEAD63',
-		Quinary: '#A68350',
+		Quaternary: '#FFE3B9',
+		Quinary: '#FFF8ED',
 	},
 };
 

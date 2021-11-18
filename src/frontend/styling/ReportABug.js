@@ -28,7 +28,8 @@ const ReportABug = (theme) =>
 			paddingRight: 40,
 			marginBottom: 20,
 		},
-        reportABugButtonText: {
+		reportABugButtonText: {
+
 			fontSize: 20,
 			fontWeight: 'bold',
 			color: theme.background,

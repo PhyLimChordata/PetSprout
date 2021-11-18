@@ -19,11 +19,13 @@ function TextBox(props) {
 		<View style={containerStyle}>
 			<Text style={TextStyle}>{props.header}</Text>
 			<TextInput
+				onTouchStart={props.onPress}
 				multiline={multiline}
 				style={boxStyle}
 				value={text}
 				onChangeText={(content) => setText(content)}
-				onEndEditing={() => props.setText(text)}></TextInput>
+				onEndEditing={() => props.setText(text)}
+			></TextInput>
 		</View>
 	);
 }

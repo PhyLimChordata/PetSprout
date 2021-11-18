@@ -14,37 +14,40 @@ const { validationResult } = require('express-validator');
  */
 module.exports = async (req, res) => {
 	try {
-		let errors = validationResult(req);
-		if (!errors.isEmpty())
-			return res.status(400).json({ error: errors.array() });
+		let { title, description, reason, schedule, times, alarm, date } = req.body;
 
-		let { title, description, reason, schedule, times, alarm, date } =
-			req.body;
+		let errors = [];
+		if (title === '') errors.push('title');
+		if (
+			JSON.stringify(schedule) ==
+			JSON.stringify([false, false, false, false, false, false, false])
+		) {
+			errors.push('schedule');
+		}
+		if (alarm.length === 0) errors.push('alarm');
+		if (times === 0) errors.push('times');
+		if (date === '') errors.push('date');
+
+		if (errors.length != 0) return res.status(403).json({ error: errors });
 
 		let newAnalyze = new Analyze({});
 		await newAnalyze.save();
 
 		let user = await User.findById(req.user.id).select('-password');
-		if (!user) return res.status(404).json('User not found');
+		if (!user) return res.status(404).json({ error: ['User not found'] });
 
 		let userHabit = await Habit.findOne({ user: req.user.id });
 		if (!userHabit)
-			return res.status(404).json("User's habit information not found");
-
-		if (
-			schedule === [false, false, false, false, false, false, false] ||
-			alarm === [] ||
-			times.toString() === '0'
-		) {
-			return res.status(403).json('Incorrect/Invalid request param');
-		}
+			return res
+				.status(404)
+				.json({ error: ["User's habit information not found"] });
 
 		let newSchedule = [];
 		let i = 0;
 		for (const element of schedule) {
 			if (element === true) newSchedule.push(i.toString());
 			i++;
- 	    }
+		}
 
 		let current = new Date(date);
 		let current_date = current.getDate();
@@ -57,13 +60,13 @@ module.exports = async (req, res) => {
 			let interval = 0;
 			while (!newSchedule.includes(index.toString())) {
 				if (index === 6) index = 0;
-				else index ++;
-				interval ++;
+				else index++;
+				interval++;
 			}
 			nextSignInDate = current.setDate(current_date + interval);
 			nextSignInDate = new Date(nextSignInDate);
 		}
-	
+
 		let newHabit = {
 			analyze: newAnalyze._id,
 			title,
@@ -72,7 +75,7 @@ module.exports = async (req, res) => {
 			schedule: newSchedule,
 			times,
 			alarm,
-			nextSignInDate
+			nextSignInDate,
 		};
 
 		userHabit.habitList.push(newHabit);

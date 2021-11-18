@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, {useState, useContext, useEffect} from 'react';
 import { AuthContext } from '../Context';
 import {
 	View,
@@ -28,7 +28,8 @@ function ThemeCircle({ colorTheme, onPress, selected }) {
 						? colorTheme.Selected
 						: colorTheme.NotSelected,
 				}}
-				onPress={onPress}>
+				onPress={onPress}
+			>
 				{selected ? (
 					<View
 						style={{
@@ -51,7 +52,8 @@ function ThemeCircle({ colorTheme, onPress, selected }) {
 const Tab = ({ color, icon, onPress, title, isImage = false }) => (
 	<TouchableOpacity
 		style={{ alignItems: 'center', flexDirection: 'row', width: '100%' }}
-		onPress={onPress}>
+		onPress={onPress}
+	>
 		{isImage ? (
 			<Image
 				source={icon}
@@ -72,7 +74,8 @@ const Tab = ({ color, icon, onPress, title, isImage = false }) => (
 				color: color,
 				fontSize: 20,
 				fontWeight: 'bold',
-			}}>
+			}}
+		>
 			{' '}
 			{title}{' '}
 		</Text>
@@ -89,6 +92,13 @@ function SideMenu(props) {
 	if (getMode == 'dark') {
 		defaultMode = false;
 	}
+
+	useEffect(() => {
+		if (props.modalVisible) {
+			setColor(getColor)
+		}
+	}, [props.modalVisible]);
+
 	const [toggleValue, setToggleValue] = useState(!defaultMode);
 
 	function colorChange(color) {
@@ -108,7 +118,8 @@ function SideMenu(props) {
 			style={{ margin: 0 }}
 			isVisible={props.modalVisible}
 			animationIn='slideInLeft'
-			animationOut='slideOutLeft'>
+			animationOut='slideOutLeft'
+		>
 			<View
 				style={{
 					height: '100%',
@@ -116,7 +127,8 @@ function SideMenu(props) {
 					paddingTop: '10%',
 					paddingLeft: '5%',
 					backgroundColor: colors.background,
-				}}>
+				}}
+			>
 				<SafeAreaView>
 					<View style={{ marginHorizontal: '6%', height: '100%' }}>
 						<View
@@ -125,26 +137,28 @@ function SideMenu(props) {
 								justifyContent: 'space-between',
 								alignItems: 'center',
 								marginBottom: '6%',
-							}}>
+							}}
+						>
 							<View
-								style={{ flexDirection: 'row', alignItems: 'center', flex: 1 }}>
-								<TouchableOpacity
-									style={{ justifyContent: 'center' }}
-									onPress={() => console.log('dsauda')}>
+								style={{ flexDirection: 'row', alignItems: 'center', flex: 1 }}
+							>
+								<TouchableOpacity style={{ justifyContent: 'center' }}>
 									<View
 										style={{
 											backgroundColor: colors.Quaternary,
 											width: 50,
 											height: 50,
 											borderRadius: 25,
-										}}></View>
+										}}
+									></View>
 								</TouchableOpacity>
 								<View
 									style={{
 										flexDirection: 'row',
 										flex: 1,
 										marginHorizontal: '4%',
-									}}>
+									}}
+								>
 									<Text
 										numberOfLines={1}
 										style={{
@@ -152,7 +166,8 @@ function SideMenu(props) {
 											fontWeight: 'bold',
 											color: colors.Quaternary,
 											textAlign: 'center',
-										}}>
+										}}
+									>
 										PhyLimChordata
 									</Text>
 									{/* TODO: Needs to not be hard coded */}
@@ -163,7 +178,8 @@ function SideMenu(props) {
 								onPress={() => {
 									props.setModalVisible(false);
 									props.navigation.navigate('SettingsScreen');
-								}}>
+								}}
+							>
 								<MaterialCommunityIcons
 									name='cog'
 									color={colors.Quaternary}
@@ -172,13 +188,15 @@ function SideMenu(props) {
 							</TouchableOpacity>
 						</View>
 						<TouchableOpacity
-							style={{ marginHorizontal: '6%', marginBottom: '6%' }}>
+							style={{ marginHorizontal: '6%', marginBottom: '6%' }}
+						>
 							<Text
 								style={{
 									fontSize: 18,
 									color: colors.Quaternary,
 									textAlign: 'center',
-								}}>
+								}}
+							>
 								"What you choose to struggle in is what you’ll ultimately
 								become.”
 							</Text>
@@ -187,7 +205,8 @@ function SideMenu(props) {
 									fontSize: 18,
 									color: colors.Quaternary,
 									textAlign: 'right',
-								}}>
+								}}
+							>
 								{' '}
 								- Mark Manson{' '}
 							</Text>
@@ -198,7 +217,8 @@ function SideMenu(props) {
 								height: '50%',
 								justifyContent: 'space-between',
 								marginBottom: '12%',
-							}}>
+							}}
+						>
 							<Tab
 								color={colors.Quaternary}
 								icon={'star'}
@@ -221,6 +241,10 @@ function SideMenu(props) {
 								color={colors.Quaternary}
 								icon={'bullhorn'}
 								title={'Feedback'}
+								onPress={() => {
+									props.setModalVisible(false);
+									props.navigation.navigate('FeedbackScreen');
+								}}
 							/>
 							<Tab
 								color={colors.Quaternary}
@@ -237,7 +261,7 @@ function SideMenu(props) {
 								title={'Collaborators'}
 								onPress={() => {
 									props.setModalVisible(false);
-									props.navigation.navigate("CollaboratorsScreen");
+									props.navigation.navigate('CollaboratorsScreen');
 								}}
 							/>
 							<Tab
@@ -246,7 +270,7 @@ function SideMenu(props) {
 								title={'Support Us!'}
 								onPress={() => {
 									props.setModalVisible(false);
-									props.navigation.navigate("SupportUsScreen");
+									props.navigation.navigate('SupportUsScreen');
 								}}
 							/>
 							<Tab
@@ -256,7 +280,7 @@ function SideMenu(props) {
 								isImage={true}
 								onPress={() => {
 									props.setModalVisible(false);
-									props.navigation.navigate("AboutScreen");
+									props.navigation.navigate('AboutScreen');
 								}}
 							/>
 						</View>
@@ -266,7 +290,8 @@ function SideMenu(props) {
 								justifyContent: 'space-between',
 								marginHorizontal: '6%',
 								marginBottom: '6%',
-							}}>
+							}}
+						>
 							<ThemeCircle
 								colorTheme={Colours.Green}
 								selected={color == 'green'}
@@ -332,7 +357,8 @@ function SideMenu(props) {
 								justifyContent: 'flex-end',
 								flex: 1,
 								marginHorizontal: '6%',
-							}}>
+							}}
+						>
 							<Tab
 								color={colors.Quaternary}
 								icon={'logout'}
