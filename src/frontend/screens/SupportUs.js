@@ -24,23 +24,21 @@ function SupportUs(props) {
 					style={style.supportUsLogo}
 					source={require('../resources/images/SupportUs.png')}
 				/>
-				<ScrollView contentContainerStyle={style.container}>
-					<Text style={style.textTitle}>Appreciate the Support!</Text>
-					<Text style={style.text}>
-						We wish to continue our efforts in making{'\n'}
-						your lives better through this app.
-					</Text>
-					<TouchableOpacity activeOpacity={0.6} style={style.supportUsButton}>
-						<Text style={style.supportUsButtonText}>Rate Us</Text>
-					</TouchableOpacity>
-					<TouchableOpacity activeOpacity={0.6} style={style.supportUsButton}>
-						<Text style={style.supportUsButtonText}>Leave a Comment</Text>
-					</TouchableOpacity>
-					<TouchableOpacity activeOpacity={0.6} style={style.supportUsButton}>
-						<Text style={style.supportUsButtonText}>Donate</Text>
-					</TouchableOpacity>
-					<Text style={style.textFooter}>Thank you.</Text>
-				</ScrollView>
+				<Text style={style.textTitle}>Appreciate the Support!</Text>
+				<Text style={style.text}>
+					We wish to continue our efforts in making{'\n'}
+					your lives better through this app.
+				</Text>
+				<Text style={style.textThanks}>Thank you.</Text>
+				<TouchableOpacity activeOpacity={0.6} style={style.supportUsButton}>
+					<Text style={style.supportUsButtonText}>Rate Us</Text>
+				</TouchableOpacity>
+				<TouchableOpacity activeOpacity={0.6} style={style.supportUsButton}>
+					<Text style={style.supportUsButtonText}>Leave a Comment</Text>
+				</TouchableOpacity>
+				<TouchableOpacity activeOpacity={0.6} style={style.supportUsButton}>
+					<Text style={style.supportUsButtonText}>Donate</Text>
+				</TouchableOpacity>
 			</View>
 		</SafeAreaView>
 	);

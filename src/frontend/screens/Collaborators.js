@@ -23,7 +23,7 @@ function Collaborators(props) {
 				text='Collaborators'
 				navigation={props.navigation}
 			></MenuHeader>
-			<View style={style.container}>
+			<View style={style.headContainer}>
 				<Image
 					style={style.collabImg}
 					source={require('../resources/images/Collaborators.png')}

@@ -5,6 +5,7 @@ import {
 	Text,
 	TouchableOpacity,
 	ScrollView,
+	Image,
 } from 'react-native';
 
 import MenuHeader from '../components/MenuHeader';
@@ -21,25 +22,30 @@ function Feedback(props) {
 
 	return (
 		<SafeAreaView>
-			<MenuHeader text='Feedback' navigation={props.navigation}>
-				<Text>Feedback</Text>
-			</MenuHeader>
-			<ScrollView contentContainerStyle={style.container}>
-				<View style={style.container}>
-					<TextBox
-						header={'Message'}
-						boxStyle={style.textbox}
-						multiline={true}
-						setText={setFeedback}
+			<MenuHeader
+				text='Feedback'
+				navigation={props.navigation}
+				right={
+					<Image
+						style={style.feedbackImg}
+						source={require('../resources/images/FeedbackLogo.png')}
 					/>
-					<Text style={style.text}>
-						Send us your feedback! We would love to hear it!
-					</Text>
-					<TouchableOpacity activeOpacity={0.6} style={style.feedbackButton}>
-						<Text style={style.feedbackButtonText}>Submit</Text>
-					</TouchableOpacity>
-				</View>
-			</ScrollView>
+				}
+			/>
+			<View style={style.container}>
+				<TextBox
+					header={'Message'}
+					boxStyle={style.textbox}
+					multiline={true}
+					setText={setFeedback}
+				/>
+				<Text style={style.text}>
+					Send us your feedback! We would love to hear it!
+				</Text>
+				<TouchableOpacity activeOpacity={0.6} style={style.feedbackButton}>
+					<Text style={style.feedbackButtonText}>Submit</Text>
+				</TouchableOpacity>
+			</View>
 		</SafeAreaView>
 	);
 }
