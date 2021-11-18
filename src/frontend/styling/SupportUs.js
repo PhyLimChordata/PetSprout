@@ -8,6 +8,7 @@ const SupportUs = (theme) =>
 			justifyContent: 'center',
 		},
 		textTitle: {
+			marginTop: 20,
 			fontSize: 31,
 			fontWeight: 'bold',
 			color: theme.Quaternary,
@@ -15,15 +16,14 @@ const SupportUs = (theme) =>
 		text: {
 			fontSize: 16,
 			color: theme.Quaternary,
-			marginTop: 30,
-			marginBottom: 30,
+			marginVertical: 20,
 			alignItems: 'center',
 			textAlign: 'center',
 		},
-		textFooter: {
+		textThanks: {
 			fontSize: 25,
 			color: theme.Quaternary,
-			marginTop: 20,
+			marginBottom: 20,
 			fontWeight: 'bold',
 		},
 		supportUsLogo: {
@@ -42,11 +42,11 @@ const SupportUs = (theme) =>
 			paddingLeft: 40,
 			paddingRight: 40,
 			marginBottom: 20,
-			textAlign: 'center',
 		},
 		supportUsButtonText: {
 			fontSize: 20,
 			fontWeight: 'bold',
+			textAlign: 'center',
 			color: theme.background,
 		},
 	});

@@ -37,35 +37,34 @@ const ReportABug = (theme) =>
         reportABugImg: {
             height: 35,
 			width: 35,
-			marginTop: 15,
-			resizeMode: 'contain',
-			// tintColor: theme.Quaternary,
-			// TODO
-		},
-		bugConfirmation: {
-			textAlign: 'center',
-			alignItems: 'center',
-			justifyContent: 'center',
-			backgroundColor: theme.Quaternary,
-			height: 330,
-			width: 300,
-			borderRadius: 30,
-		},
-		bugError: {
-			textAlign: 'center',
-			alignItems: 'center',
-			justifyContent: 'center',
-			backgroundColor: Colours.Red.Error,
-			color: Colours.Red.Error,
-			height: 330,
-			width: 300,
-			borderRadius: 30,
-		},
-		container: {
-			alignItems: 'center',
-			flexDirection: 'column',
-			marginTop: 50,
-		},
+            resizeMode: "contain",
+            // tintColor: theme.Quaternary,
+            // TODO
+        },
+        bugConfirmation: {
+            textAlign: "center",
+            alignItems: "center",
+            justifyContent: "center",
+            backgroundColor: theme.Quaternary,
+            height: 330,
+            width: 300,
+            borderRadius: 30,
+        },
+        bugError: {
+            textAlign: "center",
+            alignItems: "center",
+            justifyContent: "center",
+            backgroundColor: Colours.Red.Error,
+            color: Colours.Red.Error,
+            height: 330,
+            width: 300,
+            borderRadius: 30,
+        },
+        container: {
+            alignItems: 'center',
+            flexDirection: 'column',
+            marginTop: 50
+        }
 	});
 
 export default ReportABug;

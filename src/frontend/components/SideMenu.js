@@ -83,11 +83,14 @@ const Tab = ({ color, icon, onPress, title, isImage = false }) => (
 );
 
 function SideMenu(props) {
-	const { signOut, changeColorTheme, getColor, changeModeTheme, getMode } =
+	const { changeColorTheme, getColor, changeModeTheme, getMode, getToken } =
+
 		useContext(AuthContext);
 
 	const { colors } = useTheme();
 	const [color, setColor] = useState(getColor);
+	const [userName, setUserName] = useState('');
+
 	let defaultMode = true;
 	if (getMode == 'dark') {
 		defaultMode = false;
@@ -98,6 +101,23 @@ function SideMenu(props) {
 			setColor(getColor)
 		}
 	}, [props.modalVisible]);
+
+	useEffect(() => {
+		fetch('http://localhost:5000/api/v1.0.0/user/viewAccount', {
+			method: 'GET',
+			headers: {
+				'Content-Type': 'application/json',
+				'authentication-token': getToken,
+			},
+		})
+		.then((res) => res.json())
+		.then((data) => {
+			setUserName(data.userName);
+		})
+		.catch((err) => console.log(err));
+	}, []);
+	{/* TODO: Change this to a global variable */}
+
 
 	const [toggleValue, setToggleValue] = useState(!defaultMode);
 
@@ -168,9 +188,8 @@ function SideMenu(props) {
 											textAlign: 'center',
 										}}
 									>
-										PhyLimChordata
+										{ userName }
 									</Text>
-									{/* TODO: Needs to not be hard coded */}
 								</View>
 							</View>
 							<TouchableOpacity

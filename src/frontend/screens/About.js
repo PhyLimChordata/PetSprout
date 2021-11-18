@@ -25,45 +25,43 @@ function About(props) {
 					style={style.aboutLogo}
 					source={require('../resources/images/Logo.png')}
 				/>
-				<ScrollView contentContainerStyle={style.container}>
-					<Text style={style.textSubtitle}>Version 1.0.0</Text>
-					<Text style={style.textTitle}>HabiPets</Text>
-					<Text style={style.textSubtitle}>HabiPets.com</Text>
-					<Text style={style.text}>
-						The creators of this app wanted to create {'\n'}
-						an application that would guide people to form {'\n'}
-						realistic and sustainable habits. We believe that {'\n'}
-						forming an identity and reflecting constantly {'\n'}
-						is necessary for doing so.
-					</Text>
-					<TouchableOpacity
-						activeOpacity={0.6}
-						style={style.aboutButton}
-						onPress={() => {
-							props.navigation.navigate('CollaboratorsScreen');
-						}}
-					>
-						<Text style={style.aboutButtonText}>Collaborators</Text>
-					</TouchableOpacity>
-					<TouchableOpacity
-						activeOpacity={0.6}
-						style={style.aboutButton}
-						onPress={() => {
-							props.navigation.navigate('SupportUsScreen');
-						}}
-					>
-						<Text style={style.aboutButtonText}>Support Us</Text>
-					</TouchableOpacity>
-					<TouchableOpacity
-						activeOpacity={0.6}
-						style={style.aboutButton}
-						onPress={() => {
-							props.navigation.navigate('TermsAndConditionScreen');
-						}}
-					>
-						<Text style={style.aboutButtonText}>Terms and Condition</Text>
-					</TouchableOpacity>
-				</ScrollView>
+				<Text style={style.textTitle}>HabiPets</Text>
+				<Text style={style.textSubtitle}>Version 1.0.0</Text>
+
+				<Text style={style.text}>
+					The creators of this app wanted to create {'\n'}
+					an application that would guide people to form {'\n'}
+					realistic and sustainable habits. We believe that {'\n'}
+					forming an identity and reflecting constantly {'\n'}
+					is necessary for doing so.
+				</Text>
+				<TouchableOpacity
+					activeOpacity={0.6}
+					style={style.aboutButton}
+					onPress={() => {
+						props.navigation.navigate('CollaboratorsScreen');
+					}}
+				>
+					<Text style={style.aboutButtonText}>Collaborators</Text>
+				</TouchableOpacity>
+				<TouchableOpacity
+					activeOpacity={0.6}
+					style={style.aboutButton}
+					onPress={() => {
+						props.navigation.navigate('SupportUsScreen');
+					}}
+				>
+					<Text style={style.aboutButtonText}>Support Us</Text>
+				</TouchableOpacity>
+				<TouchableOpacity
+					activeOpacity={0.6}
+					style={style.aboutButton}
+					onPress={() => {
+						props.navigation.navigate('TermsAndConditionScreen');
+					}}
+				>
+					<Text style={style.aboutButtonText}>Terms and Condition</Text>
+				</TouchableOpacity>
 			</View>
 		</SafeAreaView>
 	);

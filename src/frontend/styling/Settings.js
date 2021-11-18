@@ -25,9 +25,8 @@ function settingStyles(theme, width, height) {
 		oneSettingContainer: {
 			display: 'flex',
 			flexDirection: 'row',
-			justifyContent: 'center',
-			marginTop: '7%',
-			marginBottom: '2%',
+			alignItems: 'center',
+			marginBottom: '3%',
 		},
 		text: {
 			fontStyle: 'normal',
@@ -55,7 +54,7 @@ function settingStyles(theme, width, height) {
 			width: '100%',
 			color: theme.Quaternary,
 		},
-		switchStyling: {},
+		switchStyling: {transform: [{ scaleX: .8 }, { scaleY: .8 }] },
 	});
 }
 
