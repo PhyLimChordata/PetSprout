@@ -84,6 +84,7 @@ const Tab = ({ color, icon, onPress, title, isImage = false }) => (
 
 function SideMenu(props) {
 	const { changeColorTheme, getColor, changeModeTheme, getMode, getToken } =
+
 		useContext(AuthContext);
 
 	const { colors } = useTheme();
