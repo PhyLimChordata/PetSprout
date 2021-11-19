@@ -4,11 +4,11 @@ import {
 	SafeAreaView,
 	Image,
 	Text,
-	ScrollView,
 	TouchableOpacity,
 } from 'react-native';
 
 import MenuHeader from '../components/MenuHeader';
+import HomeButton from '../components/HomeButton';
 import styles from '../styling/About';
 
 import { useTheme } from '@react-navigation/native';
@@ -63,6 +63,7 @@ function About(props) {
 					<Text style={style.aboutButtonText}>Terms and Condition</Text>
 				</TouchableOpacity>
 			</View>
+			<HomeButton navigation={props.navigation} colors={colors}/>
 		</SafeAreaView>
 	);
 }

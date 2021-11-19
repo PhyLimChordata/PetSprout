@@ -4,13 +4,13 @@ import {
 	SafeAreaView,
 	Text,
 	TouchableOpacity,
-	ScrollView,
 	Image,
 } from 'react-native';
 
 import MenuHeader from '../components/MenuHeader';
 import styles from '../styling/ReportABug';
 import TextBox from '../components/TextBox';
+import HomeButton from '../components/HomeButton';
 import Popup from '../components/Popup';
 
 import { useTheme } from '@react-navigation/native';
@@ -82,6 +82,8 @@ function ReportABug(props) {
 				</TouchableOpacity>
 				{popup}
 			</View>
+            <HomeButton navigation={props.navigation} colors={colors}/>
+
 		</SafeAreaView>
 	);
 }

@@ -15,6 +15,8 @@ import { AuthContext } from '../Context';
 import { useTheme } from '@react-navigation/native';
 import BottomPopup from '../components/BottomPopup';
 import Colours from '../resources/themes/Colours';
+import MenuPagesStyles from '../styling/MenuPages';
+import HomeButton from '../components/HomeButton';
 
 function ProfileEdit(props) {
 	let popup = React.useRef();
@@ -119,7 +121,7 @@ function ProfileEdit(props) {
 
 	return (
 		<>
-			<SafeAreaView>
+			<SafeAreaView style={{height: "100%"}}>
 				<View>
 					<MenuHeader
 						text='Account  '
@@ -198,6 +200,9 @@ function ProfileEdit(props) {
 					</View>
 					<SubmitButton submit={onSubmit} />
 				</View>
+				<HomeButton navigation={props.navigation} colors={colors}/>
+
+				
 			</SafeAreaView>
 			<BottomPopup ref={popup} color={color} text={message} />
 		</>

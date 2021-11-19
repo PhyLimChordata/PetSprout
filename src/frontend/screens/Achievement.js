@@ -1,8 +1,15 @@
 import React from 'react';
-import { View, Text, Image, Dimensions, SafeAreaView } from 'react-native';
+import {
+	View,
+	Text,
+	Image,
+	Dimensions,
+	SafeAreaView,
+} from 'react-native';
 import AchievementStyle from '../styling/Achievement';
 import { ProgressBar } from 'react-native-paper';
 import MenuHeader from '../components/MenuHeader';
+import HomeButton from '../components/HomeButton';
 
 import { useFonts, Roboto_900Black } from '@expo-google-fonts/roboto';
 import { useTheme } from '@react-navigation/native';
@@ -87,27 +94,27 @@ function AchievementScreen(props) {
 		return <View></View>;
 	} else {
 		return (
-			<SafeAreaView>
-				<MenuHeader text='Achievement' navigation={props.navigation} />
+			<>
+				<SafeAreaView style={{ height: '100%' }}>
+					<MenuHeader text='Achievement' navigation={props.navigation} />
 
-				<View style={styles.headContainer}>
-					{achievements.map((item) => (
-						<OneCategory
-							key={item.category}
-							category={item.category}
-							progresses={item.progresses}
-							styles={styles}
-						/>
-					))}
-				</View>
-			</SafeAreaView>
+					<View style={styles.headContainer}>
+						{achievements.map((item) => (
+							<OneCategory
+								key={item.category}
+								category={item.category}
+								progresses={item.progresses}
+								styles={styles}
+							/>
+						))}
+
+						<HomeButton navigation={props.navigation} colors={colors}/>
+					</View>
+				</SafeAreaView>
+			</>
 		);
 	}
 }
-
-/*
-    
-*/
 
 const OneCategory = (props) => {
 	return (
