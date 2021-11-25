@@ -17,7 +17,7 @@ import VerifyEmailSignUpScreen from './frontend/screens/VerifyEmailSignUp';
 import PasswordScreen from './frontend/screens/AccountRecovery';
 import NewPasswordScreen from './frontend/screens/NewPassword';
 import VerifyEmailPasswordScreen from './frontend/screens/VerifyEmailPassword';
-
+import EvolutionScreen from "./frontend/screens/Evolution"
 import SettingsScreen from './frontend/screens/Settings';
 import ProfileEditScreen from './frontend/screens/Profile';
 import AchievementScreen from './frontend/screens/Achievement';
@@ -161,6 +161,10 @@ function NavContainer(props) {
 					<Stack.Screen
 						name='TermsAndConditionScreen'
 						component={TermsAndConditionScreen}
+					/>
+					<Stack.Screen
+						name='EvolutionScreen'
+						component={EvolutionScreen}
 					/>
 				</Stack.Navigator>
 			) : (
