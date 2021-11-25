@@ -23,7 +23,7 @@ router.get('/activation/:code/:email', registerUser.user_activation);
 router.post(
 	'/send_activate_email',
 	sendActivationEmailValidator,
-	registerUser.send_activate_email
+	registerUser.send_activate_email,
 );
 
 router.post('/login', loginUserValidator, loginUser);
@@ -32,20 +32,19 @@ router.post(
 	'/sendBugReport',
 	authentication,
 	sendReportValidator,
-	sendReport.sendBugReport
+	sendReport.sendBugReport,
 );
 
 router.post(
 	'/sendFeedbackReport',
 	authentication,
 	sendReportValidator,
-	sendReport.sendFeedbackReport
+	sendReport.sendFeedbackReport,
 );
 
 router.get('/viewAccount', authentication, getUserAccount.viewAccount);
 
 router.put('/modifyAccount', authentication, getUserAccount.modifyAccount);
-
 
 router.post('/pending_password', forgetPassword.pending_password);
 
@@ -54,7 +53,7 @@ router.get('/reset_password/:code/:email', forgetPassword.reset_password);
 router.post(
 	'/check_user',
 	resetPasswordValidator,
-	forgetPassword.checkUserExistl
+	forgetPassword.checkUserExistl,
 );
 
 module.exports = router;

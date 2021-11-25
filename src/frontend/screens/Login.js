@@ -112,7 +112,8 @@ function Login(props) {
 					value={primaryInfo}
 					placeholder='Please enter an Email or Username'
 					onChangeText={(text) => updatingPrimaryInput(text)}
-					autoCapitalize={'none'}></TextInput>
+					autoCapitalize={'none'}
+				></TextInput>
 
 				<Text style={styles(colors).authenticationText}>Password</Text>
 				<TextInput
@@ -120,11 +121,13 @@ function Login(props) {
 					secureTextEntry={true}
 					value={password}
 					placeholder='*********'
-					onChangeText={(text) => updatingPasswordInput(text)}></TextInput>
+					onChangeText={(text) => updatingPasswordInput(text)}
+				></TextInput>
 				<View style={styles(colors).forgotView}>
 					<TouchableOpacity
 						activeOpacity={0.6}
-						onPress={() => props.navigation.push('PasswordScreen')}>
+						onPress={() => props.navigation.push('PasswordScreen')}
+					>
 						<Text style={styles(colors).forgotPassword}>
 							Need help logging in?
 						</Text>
@@ -136,14 +139,16 @@ function Login(props) {
 			<TouchableOpacity
 				activeOpacity={0.6}
 				style={styles(colors).authenticationButton}
-				onPress={() => attemptLogin()}>
+				onPress={() => attemptLogin()}
+			>
 				<Text style={styles(colors).authenticationButtonText}>Login</Text>
 			</TouchableOpacity>
 			<Text style={styles(colors).subText}>
 				New User?
 				<TouchableOpacity
 					activeOpacity={0.6}
-					onPress={() => props.navigation.push('SignupScreen')}>
+					onPress={() => props.navigation.push('SignupScreen')}
+				>
 					<Text style={styles(colors).signupText}> Sign up</Text>
 				</TouchableOpacity>
 			</Text>

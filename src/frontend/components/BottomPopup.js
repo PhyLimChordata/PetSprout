@@ -20,7 +20,7 @@ const BottomPopup = React.forwardRef((props, ref) => {
 						toValue: 100,
 						useNativeDriver: true,
 					}).start();
-				}, 1000)
+				}, 1000),
 			);
 		},
 	}));
@@ -41,10 +41,12 @@ const BottomPopup = React.forwardRef((props, ref) => {
 				paddingBottom: 20,
 				justifyContent: 'center',
 				alignItems: 'center',
-			}}>
+			}}
+		>
 			<Text
 				style={{ color: colors.background, fontSize: 20, textAlign: 'center' }}
-				numberOfLines={2}>
+				numberOfLines={2}
+			>
 				{' '}
 				{text}{' '}
 			</Text>

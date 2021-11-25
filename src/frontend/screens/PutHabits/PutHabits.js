@@ -34,13 +34,15 @@ function Day({ selected, letter, onPress }) {
 				borderWidth: 2,
 				borderColor: colors.Quaternary,
 			}}
-			activeOpacity={0.6}>
+			activeOpacity={0.6}
+		>
 			<Text
 				style={{
 					color: colors.Quinary,
 					fontSize: 20,
 					fontWeight: 'bold',
-				}}>
+				}}
+			>
 				{' '}
 				{letter}{' '}
 			</Text>
@@ -56,7 +58,7 @@ function PutHabits(props) {
 	const [title, setTitle] = useState(props.title);
 	const [description, setDescription] = useState(props.description);
 	const [reason, setReason] = useState(props.reason);
-	const { getToken } = useContext(AuthContext);
+	const { getToken, changeRefreshing } = useContext(AuthContext);
 	const [popupText, setPopupText] = useState('');
 	const [invalidParams, setInvalidParams] = useState([]);
 
@@ -80,12 +82,11 @@ function PutHabits(props) {
 		})
 			.then((res) => {
 				res.json().then((data) => {
-					console.log(data);
-					// console.log(res.status)
 					if (res.status == 200) {
+						changeRefreshing(true);
 						props.navigation.goBack(null);
 					} else {
-						setInvalidParams(data.error)
+						setInvalidParams(data.error);
 						setPopupText('The provided information cannot be saved');
 						popup.current?.togglePopup();
 					}
@@ -114,16 +115,15 @@ function PutHabits(props) {
 					times: alarms.length,
 					alarm: alarms,
 				}),
-			}
+			},
 		)
 			.then((res) => {
 				res.json().then((data) => {
-					console.log(data);
-					// console.log(res.status)
 					if (res.status == 200) {
+						changeRefreshing(true);
 						props.navigation.goBack(null);
 					} else {
-						setInvalidParams(data.error)
+						setInvalidParams(data.error);
 						setPopupText('The provided information cannot be saved');
 						popup.current?.togglePopup();
 					}
@@ -135,21 +135,21 @@ function PutHabits(props) {
 	const deleteHabit = () => {
 		fetch(
 			'http://localhost:5000/api/v1.0.0/habit/delete_habit/' +
-			props.userHabitId +
-			'/' +
-			props.habitId,
+				props.userHabitId +
+				'/' +
+				props.habitId,
 			{
 				method: 'DELETE',
 				headers: {
 					'Content-Type': 'application/json',
 					'authentication-token': getToken,
 				},
-			}
+			},
 		)
 			.then((res) => {
 				res.json().then((data) => {
-					console.log(data);
 					if (res.status == 200) {
+						changeRefreshing(true);
 						props.navigation.goBack(null);
 					} else {
 						setPopupText('Error on Delete');
@@ -172,12 +172,12 @@ function PutHabits(props) {
 	}
 	// Gets time not including date in minutes
 	function getTime(time) {
-		return time.getHours() * 60 + time.getMinutes()
+		return time.getHours() * 60 + time.getMinutes();
 	}
 	function addAlarm(time) {
 		time.setSeconds(0, 0);
 		for (let alarm of alarms) {
-			alarm = new Date(alarm)
+			alarm = new Date(alarm);
 			if (getTime(alarm) == getTime(time)) {
 				setPopupText('Alarm Already Exists');
 				popup.current?.togglePopup();
@@ -188,7 +188,6 @@ function PutHabits(props) {
 	}
 
 	function removeAlarm(index) {
-		console.log('removing');
 		setAlarms([...alarms.slice(0, index), ...alarms.slice(index + 1)]);
 	}
 
@@ -245,31 +244,41 @@ function PutHabits(props) {
 				<View style={{ marginHorizontal: 30, marginTop: 10 }}>
 					<TextBox
 						onPress={() => {
-							console.log('???')
-							console.log(invalidParams.includes('title'))
+							console.log('???');
+							console.log(invalidParams.includes('title'));
 							if (invalidParams.includes('title')) {
 								let cloneArray = invalidParams.slice();
 								cloneArray.splice(cloneArray.indexOf('title'), 1);
-								setInvalidParams(cloneArray)
+								setInvalidParams(cloneArray);
 								// console.log(invalidParams)
 								// invalidParams.splice(invalidParams.indexOf('title'), 1);
 								// console.log(invalidParams)
 							}
 						}}
 						header={'Title'}
-						boxStyle={invalidParams.includes('title')? textboxSmallStyleInvalid :textboxSmallStyle}
+						boxStyle={
+							invalidParams.includes('title')
+								? textboxSmallStyleInvalid
+								: textboxSmallStyle
+						}
 						multiline={true}
 						setText={setTitle}
 						text={title}
 					/>
-					{invalidParams.includes('title') && <Text
-						style={{
-							marginTop:-10,
-							marginBottom:5,
-							color: 'red',
-							fontSize: 15,
-							fontWeight: 'bold',
-						}}> This is a Required Field </Text>}
+					{invalidParams.includes('title') && (
+						<Text
+							style={{
+								marginTop: -10,
+								marginBottom: 5,
+								color: 'red',
+								fontSize: 15,
+								fontWeight: 'bold',
+							}}
+						>
+							{' '}
+							This is a Required Field{' '}
+						</Text>
+					)}
 					<TextBox
 						header={'Description'}
 						boxStyle={textboxBigStyle}
@@ -289,11 +298,13 @@ function PutHabits(props) {
 							fontSize: 20,
 							fontWeight: 'bold',
 							color: colors.Quaternary,
-						}}>
+						}}
+					>
 						Schedule
 					</Text>
 					<View
-						style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+						style={{ flexDirection: 'row', justifyContent: 'space-between' }}
+					>
 						<Day letter={'S'} selected={days[0]} onPress={() => flipDay(0)} />
 						<Day letter={'M'} selected={days[1]} onPress={() => flipDay(1)} />
 						<Day letter={'T'} selected={days[2]} onPress={() => flipDay(2)} />
@@ -302,13 +313,19 @@ function PutHabits(props) {
 						<Day letter={'F'} selected={days[5]} onPress={() => flipDay(5)} />
 						<Day letter={'S'} selected={days[6]} onPress={() => flipDay(6)} />
 					</View>
-					{invalidParams.includes('schedule') && <Text
-						style={{
-							marginTop:5,
-							color: 'red',
-							fontSize: 15,
-							fontWeight: 'bold',
-						}}> Select a Day of the Week </Text>}
+					{invalidParams.includes('schedule') && (
+						<Text
+							style={{
+								marginTop: 5,
+								color: 'red',
+								fontSize: 15,
+								fontWeight: 'bold',
+							}}
+						>
+							{' '}
+							Select a Day of the Week{' '}
+						</Text>
+					)}
 					<View style={{ alignItems: 'center', marginVertical: 20 }}>
 						<TouchableOpacity
 							style={{
@@ -323,23 +340,32 @@ function PutHabits(props) {
 								if (invalidParams.includes('alarm')) {
 									invalidParams.splice(invalidParams.indexOf('alarm'), 1);
 								}
-								setDatePickerVisibility(true)
-							}}>
+								setDatePickerVisibility(true);
+							}}
+						>
 							<Text
 								style={{
 									fontSize: 20,
 									fontWeight: 'bold',
 									color: colors.Quinary,
-								}}>
+								}}
+							>
 								Add An Alarm
 							</Text>
 						</TouchableOpacity>
-						{invalidParams.includes('alarm') && <Text 				style={{
-							marginTop:10,
-							color: 'red',
-							fontSize: 15,
-							fontWeight: 'bold',
-						}}> Create an Alarm </Text>}
+						{invalidParams.includes('alarm') && (
+							<Text
+								style={{
+									marginTop: 10,
+									color: 'red',
+									fontSize: 15,
+									fontWeight: 'bold',
+								}}
+							>
+								{' '}
+								Create an Alarm{' '}
+							</Text>
+						)}
 					</View>
 					<View>
 						{alarms.map((time, index) => {
@@ -354,18 +380,32 @@ function PutHabits(props) {
 								</View>
 							);
 						})}
-
 					</View>
 				</View>
 			</ScrollView>
-			{!props.isCreate && <TouchableOpacity onPress={() => deleteHabit()}style={{backgroundColor:'#E37272', alignItems:'center', justifyContent:'center', height:40, marginHorizontal: 30, borderRadius: 10,}}>
-				<Text
+			{!props.isCreate && (
+				<TouchableOpacity
+					onPress={() => deleteHabit()}
 					style={{
-						fontSize: 20,
-						fontWeight: 'bold',
-						color: colors.background,
-					}}>Delete Habit</Text>
-			</TouchableOpacity>}
+						backgroundColor: '#E37272',
+						alignItems: 'center',
+						justifyContent: 'center',
+						height: 40,
+						marginHorizontal: 30,
+						borderRadius: 10,
+					}}
+				>
+					<Text
+						style={{
+							fontSize: 20,
+							fontWeight: 'bold',
+							color: colors.background,
+						}}
+					>
+						Delete Habit
+					</Text>
+				</TouchableOpacity>
+			)}
 			<BottomPopup ref={popup} text={popupText} />
 			<DateTimePickerModal
 				isVisible={isDatePickerVisible}

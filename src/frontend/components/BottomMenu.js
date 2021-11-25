@@ -18,14 +18,16 @@ function BottomMenu(props) {
 			backdropOpacity={0.2}
 			onBackdropPress={() => props.setModalVisible(false)}
 			style={{ justifyContent: 'flex-end', margin: 0 }}
-			isVisible={props.modalVisible}>
+			isVisible={props.modalVisible}
+		>
 			<View
 				style={{
 					height: 175,
 					backgroundColor: colors.Tertiary,
 					borderTopRightRadius: 30,
 					borderTopLeftRadius: 30,
-				}}>
+				}}
+			>
 				<View style={{ marginHorizontal: 30 }}>
 					<View
 						style={{
@@ -33,19 +35,22 @@ function BottomMenu(props) {
 							justifyContent: 'space-between',
 							alignItem: 'center',
 							marginTop: 15,
-						}}>
+						}}
+					>
 						<Text
 							style={{
 								fontSize: 24,
 								fontWeight: 'bold',
 								color: colors.background,
 								marginBottom: 20,
-							}}>
+							}}
+						>
 							Create
 						</Text>
 						<TouchableOpacity
 							style={{ height: 25 }}
-							onPress={() => props.setModalVisible(false)}>
+							onPress={() => props.setModalVisible(false)}
+						>
 							<MaterialCommunityIcons
 								name='close-thick'
 								color={'white'}
@@ -55,7 +60,8 @@ function BottomMenu(props) {
 					</View>
 
 					<View
-						style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
+						style={{ flexDirection: 'row', justifyContent: 'space-around' }}
+					>
 						<TitledIcon
 							title={'Habits'}
 							onPress={() => {
@@ -64,11 +70,10 @@ function BottomMenu(props) {
 							}}
 						/>
 						<TitledIcon
-							onPress={() => console.log('hey')}
-							title={'Calender Entry'}
-						/>
-						<TitledIcon
-							onPress={() => console.log('bye')}
+							onPress={() => {
+								props.setModalVisible(false);
+								props.navigation.navigate('AllHabitsScreen');
+							}}
 							title={'Calender Entry'}
 						/>
 						<TitledIcon
@@ -78,6 +83,9 @@ function BottomMenu(props) {
 							}}
 							title={'Reflection'}
 						/>
+								props.navigation.navigate('EvolutionScreen');
+							}}
+							title={'Calender Entry'} />
 					</View>
 				</View>
 			</View>
@@ -91,14 +99,16 @@ function TitledIcon({ icon, onPress, title }) {
 		<View style={{ width: 75 }}>
 			<TouchableOpacity
 				style={{ justifyContent: 'center', alignItems: 'center' }}
-				onPress={onPress}>
+				onPress={onPress}
+			>
 				<View
 					style={{
 						backgroundColor: colors.background,
 						width: 36,
 						height: 36,
 						borderRadius: 18,
-					}}></View>
+					}}
+				></View>
 			</TouchableOpacity>
 			<Text
 				style={{
@@ -106,7 +116,8 @@ function TitledIcon({ icon, onPress, title }) {
 					fontWeight: 'bold',
 					color: colors.background,
 					textAlign: 'center',
-				}}>
+				}}
+			>
 				{' '}
 				{title}{' '}
 			</Text>

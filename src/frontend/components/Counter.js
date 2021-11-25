@@ -15,7 +15,8 @@ function Counter(props) {
 					marginRight: 60,
 					paddingTop: 10,
 					backgroundColor: colors.Secondary,
-				}}>
+				}}
+			>
 				<Text style={styles(colors).levelText}>{props.quantity}</Text>
 				{props.supplementalInfo}
 			</View>

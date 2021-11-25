@@ -13,8 +13,6 @@ module.exports = async (req, res) => {
 
 		let { primaryInfo, password, date } = req.body;
 
-		
-
 		let email = '';
 		let userName = '';
 
@@ -64,13 +62,13 @@ module.exports = async (req, res) => {
 					for (const habit of userHabit.habitList) {
 						habit.todo = 0;
 					}
-				}	
+				}
 			}
-			if(userHabit.habitList !== null) {
-				for(const habit of userHabit.habitList){
+			if (userHabit.habitList !== null) {
+				for (const habit of userHabit.habitList) {
 					let next = new Date(habit.nextSignInDate);
-			        var nextDate = next.getDate();
-					if(next < current && nextDate !== currentDate) {
+					var nextDate = next.getDate();
+					if (next < current && nextDate !== currentDate) {
 						habit.continuous = 0;
 					}
 				}
@@ -93,7 +91,7 @@ module.exports = async (req, res) => {
 			(err, token) => {
 				if (err) throw err;
 				res.status(200).json({ token: token });
-			}
+			},
 		);
 	} catch (error) {
 		console.error(error);

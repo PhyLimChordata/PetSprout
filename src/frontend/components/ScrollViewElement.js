@@ -24,14 +24,15 @@ function ScrollViewElement(props) {
 		return (
 			<View
 				style={{
-					backgroundColor: Colours.Red.Delete,
+					backgroundColor: Colours.Red.Error,
 					borderRadius: 8,
 					height: '100%',
 					width: '100%',
 					justifyContent: 'center',
 					alignItems: 'flex-start',
 					padding: 20,
-				}}>
+				}}
+			>
 				<Animated.View style={{ transform: [{ scale }] }}>
 					<Trash onPress={left} />
 				</Animated.View>
@@ -61,7 +62,8 @@ function ScrollViewElement(props) {
 					justifyContent: 'center',
 					alignItems: 'flex-end',
 					padding: 20,
-				}}>
+				}}
+			>
 				<Animated.View style={{ transform: [{ scale }] }}>
 					<Checkmark onPress={right} />
 				</Animated.View>
@@ -99,7 +101,8 @@ function ScrollViewElement(props) {
 			<Swipeable
 				ref={swipeableRef}
 				renderRightActions={rightSwipe}
-				rightThreshold={80}>
+				rightThreshold={80}
+			>
 				{props.content}
 			</Swipeable>
 		);
@@ -125,7 +128,6 @@ function Trash(props) {
 		<TouchableOpacity activeOpacity={0.6} onPress={props.onPress}>
 			<Image
 				style={styles(colors).swipeIcon}
-				resizeMode={'contain'}
 				source={require('../resources/images/Trash.png')}
 			/>
 		</TouchableOpacity>

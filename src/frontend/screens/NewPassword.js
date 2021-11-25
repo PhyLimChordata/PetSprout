@@ -86,7 +86,7 @@ function NewPassword(props) {
 						displayError();
 					}
 				})
-				.catch(console.log('oh no'));
+				.catch();
 		}
 	};
 
@@ -107,7 +107,8 @@ function NewPassword(props) {
 					value={password}
 					secureTextEntry={true}
 					placeholder='*********'
-					onChangeText={(text) => updatingPassword(text)}></TextInput>
+					onChangeText={(text) => updatingPassword(text)}
+				></TextInput>
 				<View style={spaceAfterError} />
 				<Text style={styles(colors).authenticationText}>ReEnter Password</Text>
 				<TextInput
@@ -115,18 +116,21 @@ function NewPassword(props) {
 					value={reEnteredPassword}
 					secureTextEntry={true}
 					placeholder='*********'
-					onChangeText={(text) => updatingReEnteredPassword(text)}></TextInput>
+					onChangeText={(text) => updatingReEnteredPassword(text)}
+				></TextInput>
 				<Text style={styles(colors).errorMessageRight}>{error}</Text>
 			</View>
 			<View style={{ height: 10 }} />
 			<TouchableHighlight
 				style={styles(colors).authenticationButton}
-				onPress={() => attemptSetNewPassword()}>
+				onPress={() => attemptSetNewPassword()}
+			>
 				<Text style={styles(colors).authenticationButtonText}>Send Email</Text>
 			</TouchableHighlight>
 			<TouchableHighlight
 				style={styles(colors).authenticationSpecialButton}
-				onPress={() => props.navigation.push('LoginScreen')}>
+				onPress={() => props.navigation.push('LoginScreen')}
+			>
 				<Text style={styles(colors).authenticationButtonText}>
 					Back to Login
 				</Text>
