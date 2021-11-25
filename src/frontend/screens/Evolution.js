@@ -94,15 +94,15 @@ function Evolution(props) {
             <MenuHeader hideRight={true} text={"Evolution"} navigation={props.navigation} />
             <TouchableOpacity disabled={selected != null} style={{position:"absolute", top:height*0.20, left:width*0.35}} onPress={() => handleAnimation('0%', height*0.10, 1)}>
                 <Animated.Image
-                    style={selected == 1 ? {transform: [{ scale: zoomValue}, {translateX: xValue}, {translateY: yValue}], resizeMode:'stretch' } : selected != null && {opacity:petOpacity}} source={require('../resources/images/Evolutions/LegsSilhouette.png')}/>
+                    style={[{tintColor: colors.opposite}, selected == 1 ? {transform: [{ scale: zoomValue}, {translateX: xValue}, {translateY: yValue}], resizeMode:'stretch' } : selected != null && {opacity:petOpacity}]} source={require('../resources/images/Evolutions/LegsSilhouette.png')}/>
             </TouchableOpacity>
             <TouchableOpacity disabled={selected != null} style={{position:"absolute", top:height*0.5, left:width*0.05}} onPress={() => handleAnimation(width*0.15, height* -0.05, 2)}>
                 <Animated.Image
-                    style={selected == 2 ? {transform: [{ scale: zoomValue}, {translateX: xValue}, {translateY: yValue}],resizeMode:'stretch'  }: selected != null && {opacity:petOpacity}} source={require('../resources/images/Evolutions/FinSilhouette.png')}/>
+                    style={[{tintColor: colors.opposite}, selected == 2 ? {transform: [{ scale: zoomValue}, {translateX: xValue}, {translateY: yValue}],resizeMode:'stretch' }: selected != null && {opacity:petOpacity}]} source={require('../resources/images/Evolutions/FinSilhouette.png')}/>
             </TouchableOpacity>
             <TouchableOpacity disabled={selected != null} style={{position:"absolute", top:height*0.5, right:width*0.05}} onPress={() => handleAnimation(width*-0.13, height* -0.05, 3)}>
                 <Animated.Image
-                    style={selected == 3 ? {transform: [{ scale: zoomValue}, {translateX: xValue}, {translateY: yValue}],resizeMode:'stretch', zIndex:1 }: selected != null && {opacity:petOpacity}} source={require('../resources/images/Evolutions/WingSilhouette.png')}/>
+                    style={[{tintColor: colors.opposite}, selected == 3 ? {transform: [{ scale: zoomValue}, {translateX: xValue}, {translateY: yValue}],resizeMode:'stretch' }: selected != null && {opacity:petOpacity}]} source={require('../resources/images/Evolutions/WingSilhouette.png')}/>
             </TouchableOpacity>
             {selected != null &&
             <Animated.View style={{opacity:backgroundOpacity, top:'70%', alignItems:'center'}}>
