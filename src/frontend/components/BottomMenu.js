@@ -83,7 +83,10 @@ function BottomMenu(props) {
 							}}
 							title={'Reflection'}
 						/>
-								props.navigation.navigate('EvolutionScreen');
+						<TitledIcon
+							onPress={() => {
+								props.setModalVisible(false);
+							props.navigation.navigate('EvolutionScreen');
 							}}
 							title={'Calender Entry'} />
 					</View>

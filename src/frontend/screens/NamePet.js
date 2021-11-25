@@ -28,7 +28,7 @@ function NameHabit(props) {
     const [name, setName] = useState(props.reason);
     return (
         <SafeAreaView style={styles(colors).headContainer}>
-            <MenuHeader text='Evolution' navigation={props.navigation} hideMenu={true} />
+            <MenuHeader text='Evolution' navigation={props.navigation} hideRight={true} />
             <View style={{alignItems:'center'}}>
                 <Image
                     style={{marginVertical:30}}
