@@ -11,12 +11,7 @@ function Popup(props) {
 	const { colors } = useTheme();
 	const style = styles(colors);
 	const hasButton = props.button;
-	let button;
-	const { signOut } = useContext(AuthContext);
-	
-
-	if(hasButton) {
-		button = (
+	let button = (
 		<View style={style.popupButtonContainer}>
 			<TouchableOpacity
 				activeOpacity={0.6}
@@ -25,7 +20,7 @@ function Popup(props) {
 					props.setModalVisible(false);
 					signOut();
 				}}
-				>
+			>
 				<Text style={style.popupButtonText}>Yes</Text>
 			</TouchableOpacity>
 			<TouchableOpacity
@@ -34,14 +29,11 @@ function Popup(props) {
 				onPress={() => {
 					props.setModalVisible(false);
 				}}
-				>
+			>
 				<Text style={style.popupButtonText}>No</Text>
 			</TouchableOpacity>
 		</View>);
-	} else {
-		button = "";
-	}
-
+	const { signOut } = useContext(AuthContext);
 	return (
 		<View>
 			<Modal
@@ -60,8 +52,8 @@ function Popup(props) {
 							source={props.image}
 						/>
 						<Text style={style.title}>{props.title}</Text>
-						<Text style={style.text}>{props.text}</Text>
-						{button}
+						<Text style={[style.text, {textAlign: 'center'}]}>{props.text}</Text>
+						{hasButton && button}
 					</View>
 				</View>
 			</Modal>
