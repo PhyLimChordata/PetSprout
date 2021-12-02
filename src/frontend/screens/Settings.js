@@ -12,6 +12,7 @@ import {
 import { useTheme } from '@react-navigation/native';
 import Colours from '../resources/themes/Colours';
 import MenuHeader from '../components/MenuHeader';
+import HomeButton from '../components/HomeButton';
 import TextBox from '../components/TextBox';
 
 import { AuthContext } from '../Context';
@@ -224,6 +225,7 @@ function SettingsPage(props) {
 					</View>
 				</View>
 			</View>
+			<HomeButton navigation={props.navigation} colors={colors}/>
 		</SafeAreaView>
 	);
 }

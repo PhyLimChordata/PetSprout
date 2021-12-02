@@ -52,7 +52,7 @@ const Stack = createStackNavigator();
 
 export default function App() {
 	// Global variables within the app
-	const [token, setToken] = useState(null);
+	const [token, setToken] = useState('a');
 	const [color, setColor] = useState('green');
 	const [mode, setMode] = useState('light');
 	const [refreshing, setRefreshing] = useState(false);

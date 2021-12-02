@@ -11,6 +11,7 @@ import {
 import MenuHeader from '../components/MenuHeader';
 import styles from '../styling/Feedback';
 import TextBox from '../components/TextBox';
+import HomeButton from '../components/HomeButton';
 //import Popup from '../components/Popup';
 
 import { useTheme } from '@react-navigation/native';
@@ -46,6 +47,7 @@ function Feedback(props) {
 					<Text style={style.feedbackButtonText}>Submit</Text>
 				</TouchableOpacity>
 			</View>
+			<HomeButton navigation={props.navigation} colors={colors}/>
 		</SafeAreaView>
 	);
 }

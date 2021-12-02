@@ -8,6 +8,7 @@ function achievementStyles(theme, width, height) {
 			display: 'flex',
 			alignItems: 'center',
 			flexDirection: 'column',
+			height: '100%',
 		},
 		achievementContainer: {
 			width: iconWidth,
