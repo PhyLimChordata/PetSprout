@@ -15,7 +15,9 @@ module.exports = async (req, res) => {
 		let habitShow = userHabitInfo.habitList.filter(function (habit) {
 			return habit.schedule.includes(day);
 		});
-
+		//check continuity
+		//when its tmr -> new habit - before user logs out send the time
+		// if it times out, user should log in again
 		let habit = { habitList: habitShow };
 
 		let info = {

@@ -133,6 +133,7 @@ function HabitsScreen(props) {
 											habitId={data._id}
 											userHabitId={userHabitId}
 											exp={experience}
+											remainingToLevel={100 - experience}
 										></Habits>
 										<View style={{ height: 15 }}></View>
 									</Animated.View>

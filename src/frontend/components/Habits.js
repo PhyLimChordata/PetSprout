@@ -20,7 +20,6 @@ function Habits(props) {
 
 	const completeHabit = () => {
 		setFrequency(frequency - 1);
-
 		fetch(
 			'http://localhost:5000/api/v1.0.0/habit/mark_TODO/' +
 				props.userHabitId +
@@ -33,7 +32,9 @@ function Habits(props) {
 					'authentication-token': getToken,
 				},
 				body: JSON.stringify({
-					expValue: 3,
+					expValue: +props.exp + 5,
+					date: new Date(),
+					remainingToLevel: props.remainingToLevel
 				}),
 			},
 		)

@@ -19,7 +19,7 @@ module.exports = async (req, res) => {
 		if (!errors.isEmpty())
 			return res.status(400).json({ error: errors.array() });
 
-		let { expValue, date } = req.body;
+		let { expValue, date, remainingToLevel } = req.body;
 
 		let user = await User.findById(req.user.id).select('-password');
 		if (!user) return res.status(404).json('User could not found');
@@ -34,7 +34,9 @@ module.exports = async (req, res) => {
 			return res.status(404).json("Habit could not find in user's habits");
 
 		habitFromDB.todo = habitFromDB.todo + 1;
+		console.log(userHabit.expValue);
 		userHabit.expValue = expValue;
+		console.log(expValue);
 
 		if (habitFromDB.todo === habitFromDB.times) {
 			habitFromDB.continuous = habitFromDB.continuous + 1;
@@ -57,31 +59,37 @@ module.exports = async (req, res) => {
 			}
 		}
 
-		let anaylzeId = habitFromDB.analyze;
-		let analyze = await Analyze.findById(anaylzeId);
-		if (!analyze) return res.status(404).json("User habit's analyze not found");
+		// let anaylzeId = habitFromDB.analyze;
+		// let analyze = await Analyze.findById(anaylzeId);
+		// if (!analyze) return res.status(404).json("User habit's analyze not found");
 
-		console.log(analyze);
-		// need to change to user time
-		// const date = new Date();
-		let analyze_data = analyze.freq.find(
-			(data) =>
-				data.date.getFullYear().toString() === date.getFullYear().toString() &&
-				data.date.getMonth().toString() === date.getMonth().toString() &&
-				data.date.getDate().toString() === date.getDate().toString(),
-		);
+		// // need to change to user time
+		// // const date = new Date();
 
-		if (!analyze_data) {
-			let newData = {
-				date: date,
-				frequency: 1,
-			};
-			analyze.freq.push(newData);
-		} else {
-			analyze_data.freq = analyze_data.freq + 1;
+		// let analyze_data = analyze.freq.find(
+		// 	(data) =>
+		// 		data.date.getFullYear().toString() === date.getFullYear().toString() &&
+		// 		data.date.getMonth().toString() === date.getMonth().toString() &&
+		// 		data.date.getDate().toString() === date.getDate().toString(),
+		// );
+		// if (!analyze_data) {
+		// 	let newData = {
+		// 		date: date,
+		// 		frequency: 1,
+		// 	};
+		// 	analyze.freq.push(newData);
+		// } else {
+		// 	analyze_data.freq = analyze_data.freq + 1;
+		// }
+
+		//Check evolutioon and replenish health
+		if (remainingToLevel <= 5) {
+			userHabit.heart = 3;
+			if (expValue / 100 == 5) {
+				console.log('evolve');
+			}
 		}
-
-		await analyze.save();
+		// await analyze.save();
 		await userHabit.save();
 
 		res.json(userHabit);
