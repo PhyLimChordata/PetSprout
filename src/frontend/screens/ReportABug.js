@@ -51,7 +51,7 @@ function ReportABug(props) {
 	}
 
 	return (
-		<SafeAreaView>
+		<SafeAreaView style={{height: "100%"}}>
 			<MenuHeader
 				text='Report a Bug'
 				navigation={props.navigation}

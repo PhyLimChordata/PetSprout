@@ -9,7 +9,7 @@ function HomeButton(props) {
 		<View style={menuPageStyles.bottom}>
 			<TouchableOpacity
 				style={menuPageStyles.homeButton}
-				onPress={() => props.navigation.goBack(null)}
+				onPress={() => props.navigation.navigate('HomeScreen')}
 			>
 				<View>
 					<Image

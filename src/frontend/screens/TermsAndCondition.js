@@ -18,7 +18,7 @@ function TermsAndCondition(props) {
 	const style = styles(colors);
 
 	return (
-		<SafeAreaView>
+		<SafeAreaView style={{height: "100%"}}>
 			<MenuHeader
 				text='Terms and Condition'
 				navigation={props.navigation}
@@ -55,6 +55,7 @@ function TermsAndCondition(props) {
 					</Text>
 				</ScrollView>
 			</View>
+			<HomeButton navigation={props.navigation} colors={colors}/>
 		</SafeAreaView>
 	);
 }

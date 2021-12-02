@@ -22,7 +22,7 @@ function Feedback(props) {
 	const [feedback, setFeedback] = useState('');
 
 	return (
-		<SafeAreaView>
+		<SafeAreaView style={{height: "100%"}}>
 			<MenuHeader
 				text='Feedback'
 				navigation={props.navigation}
@@ -47,7 +47,7 @@ function Feedback(props) {
 					<Text style={style.feedbackButtonText}>Submit</Text>
 				</TouchableOpacity>
 			</View>
-			<HomeButton navigation={props.navigation} colors={colors}/>
+			<HomeButton navigation={props.navigation} colors={colors} />
 		</SafeAreaView>
 	);
 }
