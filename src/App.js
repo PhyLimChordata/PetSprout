@@ -31,8 +31,8 @@ import HabitsScreen from './frontend/screens/Habits';
 import CreateHabitScreen from './frontend/screens/PutHabits/CreateHabit';
 import ComingSoonScreen from './frontend/screens/ComingSoon';
 import ModifyHabitScreen from './frontend/screens/PutHabits/ModifyHabit';
+import NamePetScreen from './frontend/screens/NamePet'
 import AllHabitsScreen from './frontend/screens/AllHabits';
-
 // Colour Themes
 import GreenLightTheme from './frontend/resources/themes/light/GreenTheme';
 import OrangeLightTheme from './frontend/resources/themes/light/OrangeTheme';
@@ -166,6 +166,11 @@ function NavContainer(props) {
 						name='EvolutionScreen'
 						component={EvolutionScreen}
 					/>
+					<Stack.Screen
+						name='NamePetScreen'
+						component={NamePetScreen}
+					/>
+
 				</Stack.Navigator>
 			) : (
 				<Stack.Navigator headerMode='none'>
