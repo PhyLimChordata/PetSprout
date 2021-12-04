@@ -1,27 +1,22 @@
 const router = require('express').Router();
 const authentication = require('../middleware/authentication');
 
-const getPet = require('../function/pets/getCurrentPet');
+const evolve = require('../function/pets/evolve');
 const getPets = require('../function/pets/getPets');
-const addHealth = require('../function/pets/addHealth');
-const checkEvolvability = require('../function/pets/checkEvolvability');
-const customizePet = require('../function/pets/customizePet');
-const evolvePet = require('../function/pets/evolvePet');
-const gainExperience = require('../function/pets/gainExperience');
-const loseHealth = require('../function/pets/loseHealth');
-const namePet = require('../function/pets/namePet');
+const health = require('../function/pets/health');
 const switchPets = require('../function/pets/switchPets');
+const updatePet = require('../function/pets/updatePet');
 
-router.get('/get_pet', authentication, getPet);
-router.get('/get_all_pets', authentication, getPets);
-router.get('/evolving?', authentication, checkEvolvability);
+router.get('/get_current', authentication, getPets.get_current);
+router.get('/get_all', authentication, getPets.get_all);
+router.get('/evolveCheck', authentication, evolve.evolveCheck);
 
 router.post('/switch_pet', authentication, switchPets);
-router.post('/add_health', authentication, addHealth);
-router.post('/lose_health', authentication, loseHealth);
-router.post('/gain_exp', authentication, gainExperience);
-router.post('/name_pet', authentication, namePet);
-router.post('/evolve', authentication, evolvePet);
-router.post('/customize', authentication, customizePet);
+router.post('/add_health', authentication, health.addHealth);
+router.post('/lose_health', authentication, health.loseHealth);
+router.post('/gain_exp', authentication, updatePet.gain_exp);
+router.post('/name_pet', authentication, updatePet.name);
+router.post('/evolve', authentication, evolve.evolve);
+router.post('/customize', authentication, updatePet.customize);
 
 module.exports = router;
