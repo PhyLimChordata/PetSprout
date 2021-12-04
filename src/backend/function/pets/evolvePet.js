@@ -18,6 +18,8 @@ module.exports = async (req, res) => {
         }
         currentPet.name = req.name;
         currentPet.image = req.image;
+        currentPet.hp = 100;
+        currentPet.readyToEvolve = false;
         await currentPet.save();
         
         res.json(currentPet);
