@@ -6,6 +6,7 @@ const Habit = require('../../schemas/habitSchema');
 const Achievements = require('../../schemas/achievementSchema');
 const Mailing = require('../../schemas/mailingValidationSchema');
 const Setting = require('../../schemas/settingSchema');
+const Pet = require('../../schemas/petsSchema');
 const bcryptjs = require('bcryptjs');
 
 const user_regist = async (req, res) => {
@@ -48,7 +49,14 @@ const user_regist = async (req, res) => {
 			user: newUser._id,
 		});
 
+		// create an egg 
 		await newUserHabit.save();
+
+		let newPet = new Pet({
+			user: newUser._id,
+			pets: []
+		})
+		await newPet.save();
 
 		// create setting
 		let newUserSetting = new Setting({

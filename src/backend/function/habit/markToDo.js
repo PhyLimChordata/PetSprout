@@ -1,5 +1,6 @@
 const Habit = require('../../schemas/habitSchema');
 const User = require('../../schemas/userSchema');
+const Pets = require('../../schemas/petsSchema');
 const Analyze = require('../../schemas/analyzeSchema');
 const { validationResult } = require('express-validator');
 
@@ -23,6 +24,8 @@ module.exports = async (req, res) => {
 
 		let user = await User.findById(req.user.id).select('-password');
 		if (!user) return res.status(404).json('User could not found');
+
+				// Pets.findById(user.id)
 
 		let userHabit = await Habit.findById(req.params.user_habit_id);
 		if (!userHabit) return res.status(404).json("User's habits could not find");
