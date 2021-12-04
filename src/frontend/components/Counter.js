@@ -17,9 +17,7 @@ function Counter(props) {
 			<View
 				style={{
 					flexDirection: 'row',
-					marginRight: 60,
 					paddingTop: 10,
-					backgroundColor: containerColor,
 				}}
 			>
 				<Text
@@ -37,20 +35,24 @@ function Counter(props) {
 		);
 	}
 	return (
-		<View style={{flexDirection: 'row',
-		borderRadius: 8,
-		backgroundColor: containerColor,
-		paddingRight: 20,
-		paddingTop: 10,}}>
+		<View
+			style={{
+				flexDirection: 'row',
+				borderRadius: 8,
+				backgroundColor: containerColor,
+				paddingRight: 20,
+				paddingTop: 10,
+			}}
+		>
 			<Text
 				style={{
-					flexDirection: 'row',
-					borderRadius: 8,
-					backgroundColor: containerColor,
-					paddingRight: 20,
-					paddingTop: 10,
-				}}
-			/>
+					fontSize: 20,
+					flex: 1,
+					fontWeight: 'bold',
+					color: textColor,
+				}}>
+					{props.quantity}
+					</Text>
 			{props.supplementalInfo}
 		</View>
 	);

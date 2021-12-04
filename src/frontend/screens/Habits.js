@@ -112,10 +112,14 @@ function HabitsScreen(props) {
 						{ useNativeDriver: true },
 					)}
 					scrollEventThrottle={16}
-					decelerationRate={'normal'}
+					// decelerationRate={'normal'}
 					refreshControl={
 						<RefreshControl refreshing={getRefreshing} onRefresh={onRefresh} />
 					}
+					scrollsToTop={true}
+					showsVerticalScrollIndicator={true}
+					snapToInterval={100}
+					decelerationRate="normal"
 				>
 					{habits.map((data, index) => {
 						let completed = data.times - data.todo > 0 ? false : true;
