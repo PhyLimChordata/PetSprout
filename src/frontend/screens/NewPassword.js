@@ -140,6 +140,7 @@ function NewPassword(props) {
 							});
 						});
 					} else {
+						setError('An internal error occurred');
 						displayError();
 					}
 				})
