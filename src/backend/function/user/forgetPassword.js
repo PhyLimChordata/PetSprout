@@ -34,7 +34,7 @@ const checkUserExist = async (req, res) => {
 		}
 
 		if (user.status === 0)
-			res.status(403).json("User email hasn't been activated");
+			return res.status(403).json({email: email});
 
 		res.status(200).json({ email: email });
 	} catch (error) {
