@@ -3,6 +3,7 @@ import { View, Text, TextInput, Image, TouchableOpacity } from 'react-native';
 
 import styles from '../styling/Authentication';
 import { useTheme } from '@react-navigation/native';
+import Colours from '../resources/themes/Colours';
 
 function SignupScreen(props) {
 	const [userName, setusername] = useState('');
@@ -62,15 +63,37 @@ function SignupScreen(props) {
 	});
 
 	const errorIndicator = {
-		backgroundColor: colors.Secondary,
+		backgroundColor: Colours.Red.NotSelected,
 		padding: 10,
-		borderWidth: 3,
-		borderColor: 'red',
-		borderStyle: 'solid',
 		fontSize: 15,
 		borderRadius: 5,
 		width: 300,
 	};
+
+	const [userNameTextStyle, setUserNameTextStyle] = useState({
+		fontSize: 20,
+		fontWeight: 'bold',
+		paddingBottom: 5,
+		color: colors.Quaternary,
+	});
+	const [emailTextStyle, setEmailTextStyle] = useState({
+		fontSize: 20,
+		fontWeight: 'bold',
+		paddingBottom: 5,
+		color: colors.Quaternary,
+	});
+	const [passwordTextStyle, setPasswordTextStyle] = useState({
+		fontSize: 20,
+		fontWeight: 'bold',
+		paddingBottom: 5,
+		color: colors.Quaternary,
+	});
+	const [reEnterPasswordTextStyle, setReEnterPasswordTextStyle] = useState({
+		fontSize: 20,
+		fontWeight: 'bold',
+		paddingBottom: 5,
+		color: colors.Quaternary,
+	});
 
 	const updatingUsernameInput = (text) => {
 		setusername(text);
@@ -84,6 +107,12 @@ function SignupScreen(props) {
 			borderRadius: 5,
 			marginBottom: 20,
 			width: 300,
+		});
+		setUserNameTextStyle({
+			fontSize: 20,
+			fontWeight: 'bold',
+			paddingBottom: 5,
+			color: colors.Quaternary,
 		});
 	};
 
@@ -100,6 +129,12 @@ function SignupScreen(props) {
 			marginBottom: 20,
 			width: 300,
 		});
+		setEmailTextStyle({
+			fontSize: 20,
+			fontWeight: 'bold',
+			paddingBottom: 5,
+			color: colors.Quaternary,
+		});
 	};
 
 	const updatingPasswordInput = (text) => {
@@ -113,6 +148,12 @@ function SignupScreen(props) {
 			borderRadius: 5,
 			marginBottom: 20,
 			width: 300,
+		});
+		setPasswordTextStyle({
+			fontSize: 20,
+			fontWeight: 'bold',
+			paddingBottom: 5,
+			color: colors.Quaternary,
 		});
 	};
 
@@ -128,7 +169,17 @@ function SignupScreen(props) {
 			marginBottom: 20,
 			width: 300,
 		});
+		setReEnterPasswordTextStyle({
+			fontSize: 20,
+			fontWeight: 'bold',
+			paddingBottom: 5,
+			color: colors.Quaternary,
+		});
 	};
+
+
+const regEmail =
+/^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
 
 	const attemptSignup = () => {
 		fetch('http://localhost:5000/api/v1.0.0/user/register', {
@@ -143,25 +194,35 @@ function SignupScreen(props) {
 			}),
 		})
 			.then((res) => {
+				console.log(res);
 				if (userName == '') {
 					setUserNameError('This is a required field');
 					setUsernameInputStyle(errorIndicator);
-				}
-				if (email == '') {
-					setEmailError('This is a required field');
-					setEmailInputStyle(errorIndicator);
-				}
-				if (password == '') {
-					setPasswordError('This is a required field');
-					setPasswordInputStyle(errorIndicator);
+					setUserNameTextStyle({
+						fontSize: 20,
+						fontWeight: 'bold',
+						paddingBottom: 5,
+						color: Colours.Red.Error,
+					});
 				}
 				if (reEnterPassword == '') {
 					setReEnterPasswordError('This is a required field');
 					setReEnterPasswordInputStyle(errorIndicator);
+					setReEnterPasswordTextStyle({
+						fontSize: 20,
+						fontWeight: 'bold',
+						paddingBottom: 5,
+						color: Colours.Red.Error,
+					});
 				} else if (password != '' && reEnterPassword != password) {
 					setReEnterPasswordError('Passwords do not match');
-					setPasswordInputStyle(errorIndicator);
 					setReEnterPasswordInputStyle(errorIndicator);
+					setReEnterPasswordTextStyle({
+						fontSize: 20,
+						fontWeight: 'bold',
+						paddingBottom: 5,
+						color: Colours.Red.Error,
+					});
 				}
 				if (res.status == 200) {
 					res.json().then((data) => {
@@ -169,10 +230,74 @@ function SignupScreen(props) {
 					});
 				} else if (res.status == 401) {
 					setUserNameError(res.statusText);
-					if (res.statusText == 'User email exists')
+					if (res.statusText == 'User email exists'){						
 						setEmailInputStyle(errorIndicator);
-					else if (res.statusText == 'User name exists')
+						setEmailTextStyle({
+							fontSize: 20,
+							fontWeight: 'bold',
+							paddingBottom: 5,
+							color: Colours.Red.Error,
+						});
+					}
+					else if (res.statusText == 'User name exists') {
 						setUsernameInputStyle(errorIndicator);
+						setUserNameTextStyle({
+							fontSize: 20,
+							fontWeight: 'bold',
+							paddingBottom: 5,
+							color: Colours.Red.Error,
+						});
+					}	
+				} else if (res.status == 400) {
+					if (password.length < 6) {
+						setPasswordError('Passwords must be 6-12 characters');
+						setPasswordInputStyle(errorIndicator);
+						setPasswordTextStyle({
+							fontSize: 20,
+							fontWeight: 'bold',
+							paddingBottom: 5,
+							color: Colours.Red.Error,
+						});
+					} else if (password.length > 12) {
+						setPasswordError('Passwords must be 6-12 characters');
+						setPasswordInputStyle(errorIndicator);
+						setPasswordTextStyle({
+							fontSize: 20,
+							fontWeight: 'bold',
+							paddingBottom: 5,
+							color: Colours.Red.Error,
+						});
+					}
+					if (!regEmail.test(email)) {
+						setEmailError('Please enter a valid email');
+					setEmailInputStyle(errorIndicator);
+					setEmailTextStyle({
+						fontSize: 20,
+						fontWeight: 'bold',
+						paddingBottom: 5,
+						color: Colours.Red.Error,
+					});
+					}
+				}
+				if (email == '') {
+					setEmailError('This is a required field');
+					setEmailInputStyle(errorIndicator);
+					setEmailTextStyle({
+						fontSize: 20,
+						fontWeight: 'bold',
+						paddingBottom: 5,
+						color: Colours.Red.Error,
+					});
+				}
+				if (password == '') {
+					setPasswordError('This is a required field');
+					setPasswordInputStyle(errorIndicator);
+					setPasswordTextStyle({
+						fontSize: 20,
+						fontWeight: 'bold',
+						paddingBottom: 5,
+						color: Colours.Red.Error,
+					});
 				}
 			})
 			.catch();
@@ -185,14 +310,14 @@ function SignupScreen(props) {
 				source={require('../resources/images/Logo.png')}
 			/>
 			<View style={styles(colors).inputContainer}>
-				<Text style={styles(colors).authenticationText}>Username</Text>
+				<Text style={userNameTextStyle}>Username</Text>
 				<TextInput
 					style={usernameInputStyle}
 					value={userName}
 					onChangeText={(text) => updatingUsernameInput(text)}
 				></TextInput>
 				<Text style={styles(colors).errorMessageRight}>{userNameError}</Text>
-				<Text style={styles(colors).authenticationText}>Email</Text>
+				<Text style={emailTextStyle}>Email</Text>
 				<TextInput
 					style={emailInputStyle}
 					value={email}
@@ -200,7 +325,7 @@ function SignupScreen(props) {
 				></TextInput>
 				<Text style={styles(colors).errorMessageRight}>{emailError}</Text>
 
-				<Text style={styles(colors).authenticationText}>Password</Text>
+				<Text style={passwordTextStyle}>Password</Text>
 				<TextInput
 					style={passwordInputStyle}
 					secureTextEntry={true}
@@ -209,7 +334,7 @@ function SignupScreen(props) {
 				></TextInput>
 				<Text style={styles(colors).errorMessageRight}>{passwordError}</Text>
 
-				<Text style={styles(colors).authenticationText}>Re-enter Password</Text>
+				<Text style={reEnterPasswordTextStyle}>Re-enter Password</Text>
 				<TextInput
 					style={reEnterPasswordInputStyle}
 					secureTextEntry={true}

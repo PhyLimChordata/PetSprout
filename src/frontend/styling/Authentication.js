@@ -105,13 +105,15 @@ const authenticationStyles = (theme) =>
 		},
 		errorMessage: {
 			textAlign: 'center',
-			color: 'red',
-			fontWeight: '500',
+			color: Colours.Red.Error,
+			fontSize: 14,
+			fontWeight: 'bold',
 		},
 		errorMessageRight: {
 			alignSelf: 'flex-end',
-			color: 'red',
-			fontWeight: '500',
+			color: Colours.Red.Error,
+			fontSize: 14,
+			fontWeight: 'bold',
 		},
 	});
 
