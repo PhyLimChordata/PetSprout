@@ -14,12 +14,6 @@ function MenuHeader(props) {
 	const [modalVisible, setModalVisible] = useState(false);
 	const [logoutVisible, setLogoutVisible] = useState(false);
 	var hp = props.hp != undefined ? props.hp : [];
-	if (props.hideRight && props.back) {
-		console.log('eh')
-	} else {
-		console.log('dsa')
-	}
-	console.log()
 	return (
 		<View style={styles(colors).header}>
 			<View style={styles(colors).menuTitle}>

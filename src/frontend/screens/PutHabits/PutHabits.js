@@ -64,6 +64,7 @@ function PutHabits(props) {
 
 	const { colors } = useTheme();
 	const createHabit = () => {
+		var times = alarms.length == 0 ? 1 : alarms.length;
 		fetch('http://localhost:5000/api/v1.0.0/habit/create_habit', {
 			method: 'POST',
 			headers: {
@@ -76,7 +77,7 @@ function PutHabits(props) {
 				reason: reason,
 				schedule: days,
 				date: new Date(),
-				times: alarms.length,
+				times: times,
 				alarm: alarms,
 			}),
 		})
@@ -244,15 +245,10 @@ function PutHabits(props) {
 				<View style={{ marginHorizontal: 30, marginTop: 10 }}>
 					<TextBox
 						onPress={() => {
-							console.log('???');
-							console.log(invalidParams.includes('title'));
 							if (invalidParams.includes('title')) {
 								let cloneArray = invalidParams.slice();
 								cloneArray.splice(cloneArray.indexOf('title'), 1);
 								setInvalidParams(cloneArray);
-								// console.log(invalidParams)
-								// invalidParams.splice(invalidParams.indexOf('title'), 1);
-								// console.log(invalidParams)
 							}
 						}}
 						header={'Title'}

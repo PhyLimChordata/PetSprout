@@ -45,6 +45,7 @@ function HabitsScreen(props) {
 
 	useEffect(() => {
 		if (getRefreshing) displayHabits();
+		console.log(habits);
 	}, [getRefreshing]);
 
 	const displayHabits = () => {
@@ -60,6 +61,14 @@ function HabitsScreen(props) {
 		})
 			.then((res) =>
 				res.json().then((data) => {
+					data.habitList.sort(function (a, b) {
+						var keyA = a.times - a.todo;
+						var keyB = b.times - b.todo;
+						if (keyA < keyB) return 1;
+						if (keyA > keyB) return -1;
+						return 0;
+					});
+
 					const expValue = parseInt(data.expValue);
 					setTimeout(() => {
 						setHabits(data.habitList);
@@ -103,43 +112,49 @@ function HabitsScreen(props) {
 						{ useNativeDriver: true },
 					)}
 					scrollEventThrottle={16}
-					decelerationRate={'normal'}
+					// decelerationRate={'normal'}
 					refreshControl={
 						<RefreshControl refreshing={getRefreshing} onRefresh={onRefresh} />
 					}
+					scrollsToTop={true}
+					showsVerticalScrollIndicator={true}
+					snapToInterval={100}
+					decelerationRate="normal"
 				>
 					{habits.map((data, index) => {
-						if (data.times - data.todo > 0) {
-							const scale = scrolling.interpolate({
-								inputRange: [-1, 0, 100 * index, 100 * (index + 1)],
-								outputRange: [1, 1, 1, 0],
-							});
+						let completed = data.times - data.todo > 0 ? false : true;
 
-							const opacity = scrolling.interpolate({
-								inputRange: [-1, 0, 100 * index, 100 * (index + 0.8)],
-								outputRange: [1, 1, 1, 0],
-							});
+						const scale = scrolling.interpolate({
+							inputRange: [-1, 0, 100 * index, 100 * (index + 1)],
+							outputRange: [1, 1, 1, 0],
+						});
 
-							return (
-								<View>
-									<Animated.View style={{ opacity, transform: [{ scale }] }}>
-										<Habits
-											enableRight={true}
-											navigation={props.navigation}
-											habitId={data._id}
-											name={data.title}
-											streak={1}
-											frequency={data.times - data.todo}
-											habitId={data._id}
-											userHabitId={userHabitId}
-											exp={experience}
-											remainingToLevel={100 - experience}
-										></Habits>
-										<View style={{ height: 15 }}></View>
-									</Animated.View>
-								</View>
-							);
-						}
+						const opacity = scrolling.interpolate({
+							inputRange: [-1, 0, 100 * index, 100 * (index + 0.8)],
+							outputRange: [1, 1, 1, 0],
+						});
+
+						return (
+							<View>
+								<Animated.View style={{ opacity, transform: [{ scale }] }}>
+									<Habits
+										completed={completed}
+										enableRight={true}
+										navigation={props.navigation}
+										habitId={data._id}
+										name={data.title}
+										streak={1}
+										frequency={data.times - data.todo}
+										habitId={data._id}
+										userHabitId={userHabitId}
+										exp={experience}
+										remainingToLevel={100 - experience}
+									></Habits>
+									<View style={{ height: 15 }}></View>
+								</Animated.View>
+							</View>
+						);
+						// 	}
 					})}
 				</Animated.ScrollView>
 			</SafeAreaView>

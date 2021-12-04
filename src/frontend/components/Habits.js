@@ -8,13 +8,14 @@ import ScrollViewElement from './ScrollViewElement';
 
 import { AuthContext } from '../Context';
 import { useTheme } from '@react-navigation/native';
+import Colours from '../resources/themes/Colours';
 
 function Habits(props) {
 	const [streak, setStreak] = useState(props.streak);
 	const [frequency, setFrequency] = useState(props.frequency);
 
-	const [completed, setCompleted] = useState(false);
-	const { getToken } = useContext(AuthContext);
+	const [completed, setCompleted] = useState(props.completed);
+	const { getToken, changeRefreshing } = useContext(AuthContext);
 
 	const { colors } = useTheme();
 
@@ -34,15 +35,16 @@ function Habits(props) {
 				body: JSON.stringify({
 					expValue: +props.exp + 5,
 					date: new Date(),
-					remainingToLevel: props.remainingToLevel
+					remainingToLevel: props.remainingToLevel,
 				}),
 			},
 		)
 			.then((res) =>
-				res.json().then((data) => {
+				res.json().then(() => {
 					if (frequency - 1 == 0) {
 						setCompleted(true);
 					}
+					changeRefreshing(true);
 				}),
 			)
 			.catch();
@@ -123,7 +125,57 @@ function Habits(props) {
 						</View>
 					}
 				/>
-			) : null}
+			) : (
+				<ScrollViewElement
+					text={props.name}
+					content={
+						<View style={styles(colors).completedHabit}>
+							<View style={styles(colors).leftContainer}>
+								<Text style={styles(colors).completedHabitTextTitle}>
+									{Capitalize(props.name)}
+								</Text>
+							</View>
+							<View style={styles(colors).completedContainer}>
+								<Ellipsis
+									completed={true}
+									onPress={() =>
+										props.navigation.navigate('ModifyHabitScreen', {
+											habitId: props.habitId,
+											userHabitId: props.userHabitId,
+										})
+									}
+								/>
+								<View style={styles(colors).completedHorizontalContainerBottom}>
+									<Counter
+										completed={true}
+										quantity={streak}
+										supplementalInfo={
+											<Image
+												source={require('../resources/images/Streak.png')}
+												resizeMode='contain'
+												style={{
+													height: 20,
+													width: 20,
+													tintColor: Colours.Grey.Text,
+													marginTop: 'auto',
+												}}
+											/>
+										}
+									/>
+									<Counter
+										completed={true}
+										quantity={frequency}
+										supplementalInfo={
+											<Text style={styles(colors).completedExpText}>x</Text>
+										}
+										last={true}
+									/>
+								</View>
+							</View>
+						</View>
+					}
+				/>
+			)}
 		</View>
 	);
 }
