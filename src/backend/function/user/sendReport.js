@@ -77,7 +77,7 @@ function sendEmail(message, email, type) {
 				'</td> </tr> </table>';
 			console.log(html);
 			var data = {
-				from: 'habipetshelp@gmail.com',
+				from: 'HabiPets',
 				to: 'habipetshelp@gmail.com',
 				subject: type,
 				html: html,

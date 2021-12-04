@@ -13,7 +13,6 @@ function TextBox(props) {
 		TextStyle = styles(colors).authenticationText,
 		multiline = false,
 	} = props;
-	const [text, setText] = useState(props.text);
 
 	return (
 		<View style={containerStyle}>
@@ -22,9 +21,7 @@ function TextBox(props) {
 				onTouchStart={props.onPress}
 				multiline={multiline}
 				style={boxStyle}
-				value={text}
-				onChangeText={(content) => setText(content)}
-				onEndEditing={() => props.setText(text)}
+				onChangeText={(content) => props.setText(content)}
 			></TextInput>
 		</View>
 	);

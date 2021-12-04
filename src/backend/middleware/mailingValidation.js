@@ -32,7 +32,7 @@ module.export = (mailingValidation) => {
 			let code = randomFns();
 			transport.sendMail(
 				{
-					from: 'habipetshelp@gmail.com',
+					from: 'HabiPets',
 					to: EMAIL,
 					subject: 'Validate your email',
 					html: `

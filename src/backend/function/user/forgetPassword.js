@@ -142,7 +142,7 @@ function sendUserEmail(cnd, code) {
 				'Click to allow resetting password and return back to app page </a>';
 			console.log(html);
 			var data = {
-				from: 'habipetshelp@gmail.com',
+				from: 'HabiPets',
 				to: cnd,
 				subject: 'Password Reset',
 				html: html,

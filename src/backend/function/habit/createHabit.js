@@ -24,9 +24,9 @@ module.exports = async (req, res) => {
 		) {
 			errors.push('schedule');
 		}
-		if (alarm.length === 0) errors.push('alarm');
-		if (times === 0) errors.push('times');
 		if (date === '') errors.push('date');
+
+		console.log(errors);
 
 		if (errors.length != 0) return res.status(403).json({ error: errors });
 
