@@ -18,7 +18,6 @@ function Counter(props) {
 				style={{
 					flexDirection: 'row',
 					paddingTop: 10,
-					backgroundColor: containerColor,
 				}}
 			>
 				<Text
