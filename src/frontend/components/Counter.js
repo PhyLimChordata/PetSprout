@@ -4,9 +4,14 @@ import { View, Text } from 'react-native';
 import styles from '../styling/Habits';
 
 import { useTheme } from '@react-navigation/native';
+import Colours from '../resources/themes/Colours';
 
 function Counter(props) {
 	const { colors } = useTheme();
+	const containerColor = props.completed
+		? Colours.Grey.ExpBarBackground
+		: colors.Secondary;
+	const textColor = props.completed ? Colours.Grey.Text : colors.Quaternary;
 	if (props.last) {
 		return (
 			<View
@@ -14,17 +19,38 @@ function Counter(props) {
 					flexDirection: 'row',
 					marginRight: 60,
 					paddingTop: 10,
-					backgroundColor: colors.Secondary,
+					backgroundColor: containerColor,
 				}}
 			>
-				<Text style={styles(colors).levelText}>{props.quantity}</Text>
+				<Text
+					style={{
+						fontSize: 20,
+						flex: 1,
+						fontWeight: 'bold',
+						color: textColor,
+					}}
+				>
+					{props.quantity}
+				</Text>
 				{props.supplementalInfo}
 			</View>
 		);
 	}
 	return (
-		<View style={styles(colors).horizontalContainerPaddingRight}>
-			<Text style={styles(colors).levelText}>{props.quantity}</Text>
+		<View style={{flexDirection: 'row',
+		borderRadius: 8,
+		backgroundColor: containerColor,
+		paddingRight: 20,
+		paddingTop: 10,}}>
+			<Text
+				style={{
+					flexDirection: 'row',
+					borderRadius: 8,
+					backgroundColor: containerColor,
+					paddingRight: 20,
+					paddingTop: 10,
+				}}
+			/>
 			{props.supplementalInfo}
 		</View>
 	);

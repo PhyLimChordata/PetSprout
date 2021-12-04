@@ -29,6 +29,7 @@ const Colours = {
 		ExpBarBackground: '#E7E7E7',
 		Button: '#C4C4C4',
 		TextInput: '#EF2723',
+		Text: '#C3C3C3',
 	},
 	Unique: {
 		Bronze: '#C6895E',

@@ -8,6 +8,33 @@ const habitsStyles = (theme) =>
 			borderRadius: 8,
 			backgroundColor: theme.Secondary,
 		},
+		completedHabit: {
+			flexDirection: 'row',
+			borderRadius: 8,
+			backgroundColor: Colours.Grey.ExpBarBackground,
+		},
+		completedHabitTextTitle: {
+			fontSize: 25,
+			fontWeight: 'bold',
+			marginBottom: 20,
+			color: Colours.Grey.Text,
+		},
+		completedContainer: {
+			backgroundColor: Colours.Grey.ExpBarBackground,
+			margin: 20,
+			alignItems: 'center',
+		},
+		completedExpText: {
+			color: Colours.Grey.Text,
+			fontSize: 20,
+		},
+		completedHorizontalContainerBottom: {
+			flexDirection: 'row',
+			position: 'absolute',
+			bottom: 0,
+			borderRadius: 8,
+			backgroundColor: Colours.Grey.ExpBarBackground,
+		},
 		horizontalContainerBottom: {
 			flexDirection: 'row',
 			position: 'absolute',
