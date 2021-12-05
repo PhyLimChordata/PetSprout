@@ -117,7 +117,6 @@ function HabitsScreen(props) {
 						<RefreshControl refreshing={getRefreshing} onRefresh={onRefresh} />
 					}
 					scrollsToTop={true}
-					showsVerticalScrollIndicator={true}
 					snapToInterval={100}
 					decelerationRate="normal"
 				>

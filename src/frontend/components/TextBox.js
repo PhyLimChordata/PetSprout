@@ -32,7 +32,7 @@ function TextBox(props) {
 				multiline={multiline}
 				style={boxStyle}
 				onChangeText={(content) => resetValidity(content)}
-			></TextInput>
+			>{props.text}</TextInput>
 		</View>
 	);
 }
