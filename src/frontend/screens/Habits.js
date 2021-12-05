@@ -18,8 +18,20 @@ import { useTheme } from '@react-navigation/native';
 import { AuthContext } from '../Context';
 
 function HabitsScreen(props) {
+	const heartSize = 70;
 	const [habits, setHabits] = useState([]);
-	const [hearts, setHearts] = useState([]);
+	const [heartValue, setHeartValue] = useState({
+		size: heartSize,
+		view: {
+			position: 'absolute',
+			height: heartSize,
+			width: heartSize,
+			marginTop: 0,
+			overflow: 'hidden',
+		},
+		image: { height: heartSize, width: heartSize, bottom: 0, zIndex: 1 },
+		value: 100,
+	});
 	const [userHabitId, setUserHabitId] = useState('');
 	const [experience, setExperience] = useState('');
 	const { colors } = useTheme();
@@ -75,12 +87,21 @@ function HabitsScreen(props) {
 						setUserHabitId(data._id);
 						setExperience((expValue % 100).toString());
 						setLevel(Math.floor(expValue / 100).toString());
+						let tempHeartValue = heartValue;
+						tempHeartValue.view.height = 76 * 0.7;
+						tempHeartValue.view.marginTop = 70 - tempHeartValue.view.height;
+						tempHeartValue.image.bottom = tempHeartValue.view.marginTop;
+						tempHeartValue.value = Math.ceil(
+							tempHeartValue.view.height * 1.42857,
+						);
+
+						setHeartValue(tempHeartValue);
 						//Displaying purposes TODO
-						const heartValue = [];
-						for (var i = 0; i < data.heart; i++) {
-							heartValue.push(i);
-						}
-						setHearts(heartValue);
+						// const heartValue = [];
+						// for (var i = 0; i < data.heart; i++) {
+						// 	heartValue.push(i);
+						// }
+						// setHearts(heartValue);
 						setDisplayed(true);
 						setRefreshing(false);
 						changeRefreshing(false);
@@ -92,7 +113,7 @@ function HabitsScreen(props) {
 
 	return (
 		<SafeAreaView style={styles(colors).headContainer}>
-			<MenuHeader text='' navigation={props.navigation} hp={hearts} />
+			<MenuHeader text='' navigation={props.navigation} hp={heartValue} />
 			<View style={styles(colors).verticalContainer}>
 				<Image
 					style={styles(colors).creature}
@@ -118,7 +139,7 @@ function HabitsScreen(props) {
 					}
 					scrollsToTop={true}
 					snapToInterval={100}
-					decelerationRate="normal"
+					decelerationRate='normal'
 				>
 					{habits.map((data, index) => {
 						let completed = data.times - data.todo > 0 ? false : true;
