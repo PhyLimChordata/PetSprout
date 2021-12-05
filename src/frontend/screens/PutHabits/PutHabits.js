@@ -90,24 +90,8 @@ function PutHabits(props) {
 						setInvalidParams(data.error);
 						setPopupText('The provided information cannot be saved');
 						popup.current?.togglePopup();
-
-						if ('title' in data.error) {
-							setTitleTextStyle({
-								fontSize: 20,
-				fontWeight: 'bold',
-				paddingBottom: 5,
-				color: Colours.Red.Error,
-							});
-						}
-						if ('schedule' in data.error) {
-							setScheduleTextStyle({
-								fontSize: 20,
-				fontWeight: 'bold',
-				paddingBottom: 5,
-				color: Colours.Red.Error,
-							});
-						}
-					
+						checkInvalidity('title', data.error, setTitleTextStyle);
+						checkInvalidity('schedule', data.error, setScheduleTextStyle);
 					}
 				});
 			})
@@ -131,7 +115,7 @@ function PutHabits(props) {
 					reason: reason,
 					schedule: days,
 					date: new Date(),
-					times: alarms.length,
+					times: alarms.length == 0 ? 1 : alarms.length,
 					alarm: alarms,
 				}),
 			},
@@ -145,22 +129,8 @@ function PutHabits(props) {
 						setInvalidParams(data.error);
 						setPopupText('The provided information cannot be saved');
 						popup.current?.togglePopup();
-						if ('title' in data.error) {
-							setTitleTextStyle({
-								fontSize: 20,
-				fontWeight: 'bold',
-				paddingBottom: 5,
-				color: Colours.Red.Error,
-							});
-						}
-						if ('schedule' in data.error) {
-							setScheduleTextStyle({
-								fontSize: 20,
-				fontWeight: 'bold',
-				paddingBottom: 5,
-				color: Colours.Red.Error,
-							});
-						}
+						checkInvalidity('title', data.error, setTitleTextStyle);
+						checkInvalidity('schedule', data.error, setScheduleTextStyle);
 					}
 				});
 			})
@@ -195,6 +165,16 @@ function PutHabits(props) {
 			.catch();
 	};
 
+	const checkInvalidity = (value, error, set) => {
+		if (error.includes(value)) {
+			set({
+				fontSize: 20,
+				fontWeight: 'bold',
+				paddingBottom: 5,
+				color: Colours.Red.Error,
+			});
+		}
+	};
 	const onPress = props.isCreate ? () => createHabit() : () => modifyHabit();
 
 	function flipDay(index) {
@@ -235,13 +215,13 @@ function PutHabits(props) {
 		fontSize: 20,
 		fontWeight: 'bold',
 		paddingBottom: 5,
-		color: colors.Quaternary
+		color: colors.Quaternary,
 	});
 
 	const [scheduleTextStyle, setScheduleTextStyle] = useState({
 		fontSize: 20,
 		fontWeight: 'bold',
-		color: colors.Quaternary
+		color: colors.Quaternary,
 	});
 
 	const textboxSmallStyle = {
@@ -254,7 +234,7 @@ function PutHabits(props) {
 		borderRadius: 5,
 		marginBottom: 20,
 
-		color: colors.Quinary
+		color: colors.Quinary,
 	};
 	const textboxBigStyle = {
 		backgroundColor: colors.Secondary,
@@ -264,8 +244,7 @@ function PutHabits(props) {
 		fontWeight: 'bold',
 		borderRadius: 5,
 		marginBottom: 20,
-		color: colors.Quinary
-
+		color: colors.Quinary,
 	};
 
 	const textboxSmallStyleInvalid = {
@@ -276,8 +255,7 @@ function PutHabits(props) {
 		fontWeight: 'bold',
 		borderRadius: 5,
 		marginBottom: 20,
-		color: Colours.Unique.Black
-
+		color: Colours.Unique.Black,
 	};
 	return (
 		<SafeAreaView style={styles(colors).headContainer}>
@@ -342,11 +320,7 @@ function PutHabits(props) {
 						setText={setReason}
 						text={reason}
 					/>
-					<Text
-						style={scheduleTextStyle}
-					>
-						Schedule
-					</Text>
+					<Text style={scheduleTextStyle}>Schedule</Text>
 					<View
 						style={{ flexDirection: 'row', justifyContent: 'space-between' }}
 					>
