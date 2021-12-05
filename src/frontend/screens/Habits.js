@@ -19,6 +19,8 @@ import { AuthContext } from '../Context';
 
 function HabitsScreen(props) {
 	const heartSize = 70;
+	//THIS CAN VARY BASED ON USER's PET
+	const maxHealth = 100;
 	const [habits, setHabits] = useState([]);
 	const [heartValue, setHeartValue] = useState({
 		size: heartSize,
@@ -109,11 +111,11 @@ function HabitsScreen(props) {
 			.then((res) =>
 				res.json().then((hpValue) => {
 					let tempHeartValue = heartValue;
-					tempHeartValue.view.height = hpValue * 0.7;
-					tempHeartValue.view.marginTop = 70 - tempHeartValue.view.height;
+					tempHeartValue.view.height = hpValue * (heartSize/maxHealth);
+					tempHeartValue.view.marginTop = heartSize - tempHeartValue.view.height;
 					tempHeartValue.image.bottom = tempHeartValue.view.marginTop;
 					tempHeartValue.value = Math.ceil(
-						tempHeartValue.view.height * 1.42857,
+						tempHeartValue.view.height * (maxHealth/heartSize),
 					);
 
 					setHeartValue(tempHeartValue);
