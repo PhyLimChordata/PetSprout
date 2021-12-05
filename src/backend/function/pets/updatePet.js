@@ -53,19 +53,11 @@ const gain_exp = async (req, res) => {
 
 		let usersPet = await Pets.findOne({ user: req.user.id });
 		let currentPet = usersPet.currentPet;
-
-		console.log('start');
-        console.log(req);
-		console.log(req.body.expValue);
 		currentPet.expValue = currentPet.expValue + req.body.expValue;
-		console.log(currentPet.expValue);
 
 		if (req.body.totalExp < currentPet.expValue) {
 			currentPet.level += 1;
 		}
-
-		console.log(req.body.totalExp);
-		console.log(req.body.levelToEvolveNext);
 		if (currentPet.level === req.body.levelToEvolveNext) {
 			currentPet.readyToEvolve = true;
 		}
