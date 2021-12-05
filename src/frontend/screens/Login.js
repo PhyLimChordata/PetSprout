@@ -6,6 +6,7 @@ import styles from '../styling/Authentication';
 
 import { AuthContext } from '../Context';
 import { useTheme } from '@react-navigation/native';
+import Colours from '../resources/themes/Colours';
 
 function Login(props) {
 	const [primaryInfo, setPrimaryInfo] = useState('');
@@ -24,6 +25,14 @@ function Login(props) {
 		marginBottom: 20,
 		width: 300,
 	});
+
+	const [textStyle, setTextStyle] = useState({
+		fontSize: 20,
+		fontWeight: 'bold',
+		paddingBottom: 5,
+		color: colors.Quaternary,
+	});
+
 	const { logIn } = useContext(AuthContext);
 
 	const updatingPrimaryInput = (text) => {
@@ -39,6 +48,12 @@ function Login(props) {
 			marginBottom: 20,
 			width: 300,
 		});
+		setTextStyle({
+			fontSize: 20,
+		fontWeight: 'bold',
+		paddingBottom: 5,
+		color: colors.Quaternary,
+		});
 	};
 
 	const updatingPasswordInput = (text) => {
@@ -52,6 +67,12 @@ function Login(props) {
 			borderRadius: 5,
 			marginBottom: 20,
 			width: 300,
+		});
+		setTextStyle({
+			fontSize: 20,
+		fontWeight: 'bold',
+		paddingBottom: 5,
+		color: colors.Quaternary,
 		});
 	};
 
@@ -84,15 +105,18 @@ function Login(props) {
 
 				if (res.status != 200) {
 					setInputStyle({
-						backgroundColor: colors.Secondary,
+						backgroundColor: Colours.Red.NotSelected,
 						padding: 10,
-						borderWidth: 3,
-						borderColor: 'red',
-						borderStyle: 'solid',
 						fontSize: 15,
 						borderRadius: 5,
 						marginBottom: 20,
 						width: 300,
+					});
+					setTextStyle({
+						fontSize: 20,
+		fontWeight: 'bold',
+		paddingBottom: 5,
+		color: Colours.Red.Error,
 					});
 				}
 			})
@@ -106,7 +130,7 @@ function Login(props) {
 				source={require('../resources/images/Logo.png')}
 			/>
 			<View style={styles(colors).inputContainer}>
-				<Text style={styles(colors).authenticationText}>Email or Username</Text>
+				<Text style={textStyle}>Email or Username</Text>
 				<TextInput
 					style={inputStyle}
 					value={primaryInfo}
@@ -115,7 +139,7 @@ function Login(props) {
 					autoCapitalize={'none'}
 				></TextInput>
 
-				<Text style={styles(colors).authenticationText}>Password</Text>
+				<Text style={textStyle}>Password</Text>
 				<TextInput
 					style={inputStyle}
 					secureTextEntry={true}

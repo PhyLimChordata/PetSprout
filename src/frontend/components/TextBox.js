@@ -10,18 +10,28 @@ function TextBox(props) {
 	const {
 		containerStyle,
 		boxStyle = styles(colors).authenticationInput,
-		TextStyle = styles(colors).authenticationText,
+		textStyle = styles(colors).authenticationText,
 		multiline = false,
 	} = props;
 
+	const resetValidity = (content) => {
+		props.setText(content)
+		if (!props.setTextStyle) {
+			props.setTextStyle(styles(colors).authenticationText);
+		}
+		if (!props.setTextStyle) {
+		    props.setBoxStyle(styles(colors).authenticationInput);
+		}
+	}
+
 	return (
 		<View style={containerStyle}>
-			<Text style={TextStyle}>{props.header}</Text>
+			<Text style={textStyle}>{props.header}</Text>
 			<TextInput
 				onTouchStart={props.onPress}
 				multiline={multiline}
 				style={boxStyle}
-				onChangeText={(content) => props.setText(content)}
+				onChangeText={(content) => resetValidity(content)}
 			></TextInput>
 		</View>
 	);

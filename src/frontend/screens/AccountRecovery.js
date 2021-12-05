@@ -1,10 +1,12 @@
 import React, { useState, useContext } from 'react';
 
-import { View, Text, TextInput, Image, TouchableOpacity } from 'react-native';
+import { View, Text, TextInput, Image, TouchableOpacity, ShadowPropTypesIOS } from 'react-native';
 
 import styles from '../styling/Authentication';
 
 import { useTheme } from '@react-navigation/native';
+
+import Colours from '../resources/themes/Colours'
 
 function PasswordScreen(props) {
 	const { colors } = useTheme();
@@ -36,6 +38,22 @@ function PasswordScreen(props) {
 		});
 	};
 
+	const activateAccount = (email) => {
+		fetch('http://localhost:5000/api/v1.0.0/user/send_activate_email', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				email: email
+			}),
+		})
+		.then((res) => {
+			props.navigation.push('VerifyEmailSignUp', { email: email });
+		})
+		.catch();
+	};
+	
 	const forgetPassword = () => {
 		fetch('http://localhost:5000/api/v1.0.0/user/check_user', {
 			method: 'POST',
@@ -58,17 +76,17 @@ function PasswordScreen(props) {
 					setError('Something wrong happened internally...');
 				} else if (res.status == 404) {
 					setError('User does not exist');
-				} else if (res.status == 403) {
-					setError('The user has not activated their account');
-				}
-
-				if (res.status != 200) {
+				} 
+				
+				if (res.status == 403) {
+					res.json().then((data) => {
+                      console.log(data.email);
+			          activateAccount(data.email);
+					});
+				} else if (res.status != 200) {
 					setInputStyle({
-						backgroundColor: colors.Secondary,
+						backgroundColor: Colours.Red.NotSelected,
 						padding: 10,
-						borderWidth: 3,
-						borderColor: 'red',
-						borderStyle: 'solid',
 						fontSize: 15,
 						borderRadius: 5,
 						width: 300,

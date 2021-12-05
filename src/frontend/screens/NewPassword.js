@@ -5,9 +5,12 @@ import styles from '../styling/Authentication';
 import { useTheme } from '@react-navigation/native';
 import { AuthContext } from '../Context';
 
+import Colours from '../resources/themes/Colours';
+
 function NewPassword(props) {
 	const [password, setPassword] = useState('');
 	const [reEnteredPassword, setReEnteredPassword] = useState('');
+
 	const { colors } = useTheme();
 
 	const normalInputStyle = {
@@ -21,7 +24,21 @@ function NewPassword(props) {
 		width: 300,
 	};
 
-	const [inputStyle, setInputStyle] = useState(normalInputStyle);
+	const [passwordInputStyle, setPasswordInputStyle] = useState(normalInputStyle);
+	const [reEnterPasswordInputStyle, setReEnterPasswordInputStyle] = useState(normalInputStyle);
+
+	const [passwordTextStyle, setPasswordTextStyle] = useState({
+		fontSize: 20,
+			fontWeight: 'bold',
+			paddingBottom: 5,
+			color: colors.Quaternary,
+	});
+	const [reEnterPasswordTextStyle, setReEnterPasswordTextStyle] = useState({
+		fontSize: 20,
+			fontWeight: 'bold',
+			paddingBottom: 5,
+			color: colors.Quaternary,
+	});
 
 	const [error, setError] = useState('');
 	const [spaceAfterError, setSpaceAfterError] = useState({});
@@ -30,39 +47,79 @@ function NewPassword(props) {
 		setPassword(text);
 		setError('');
 		setSpaceAfterError({});
-		setInputStyle(normalInputStyle);
+		setPasswordInputStyle(normalInputStyle);
+		setPasswordTextStyle({
+			fontSize: 20,
+			fontWeight: 'bold',
+			paddingBottom: 5,
+			color: colors.Quaternary,
+		});
 	};
 
 	const updatingReEnteredPassword = (text) => {
 		setReEnteredPassword(text);
 		setError('');
 		setSpaceAfterError({});
-		setInputStyle(normalInputStyle);
+		setReEnterPasswordInputStyle(normalInputStyle);
+		setReEnterPasswordTextStyle({
+			fontSize: 20,
+			fontWeight: 'bold',
+			paddingBottom: 5,
+			color: colors.Quaternary,
+		});
 	};
 
 	const { resetPassword } = useContext(AuthContext);
 
-	function displayError() {
+	function displayError(password, reenter) {
 		setSpaceAfterError({ height: 20 });
-		setInputStyle({
-			backgroundColor: colors.Secondary,
-			padding: 10,
-			borderWidth: 3,
-			borderColor: 'red',
-			borderStyle: 'solid',
-			fontSize: 15,
-			borderRadius: 5,
-			width: 300,
-		});
+
+		if (password) {
+			setPasswordTextStyle({
+				fontSize: 20,
+			fontWeight: 'bold',
+			paddingBottom: 5,
+			color: Colours.Red.Error,
+			});
+			setPasswordInputStyle({
+				backgroundColor: Colours.Red.NotSelected,
+				padding: 10,
+				fontSize: 15,
+				borderRadius: 5,
+				width: 300,
+			});
+		}
+
+		if (reenter) {
+			setReEnterPasswordTextStyle({
+				fontSize: 20,
+			fontWeight: 'bold',
+			paddingBottom: 5,
+			color: Colours.Red.Error,
+			});
+			setReEnterPasswordInputStyle({
+				backgroundColor: Colours.Red.NotSelected,
+				padding: 10,
+				fontSize: 15,
+				borderRadius: 5,
+				width: 300,
+			});
+		}
 	}
 
 	const attemptSetNewPassword = () => {
-		if (password == '' || reEnteredPassword == '') {
+		if (password.length < 6) {
+			setError('Passwords must be between 6-12 characters');
+			displayError(true, false);
+		} else if (password.length > 12) {
+			setError('Passwords must be between 6-12 characters');
+			displayError(true, false);
+		} else if (password == '' || reEnteredPassword == '') {
 			setError('Please enter all parameters');
-			displayError();
+			displayError(true, true);
 		} else if (password != reEnteredPassword) {
 			setError('Passwords do not match');
-			displayError();
+			displayError(true, true);
 		} else {
 			fetch('http://localhost:5000/api/v1.0.0/user/pending_password', {
 				method: 'POST',
@@ -83,6 +140,7 @@ function NewPassword(props) {
 							});
 						});
 					} else {
+						setError('An internal error occurred');
 						displayError();
 					}
 				})
@@ -101,18 +159,18 @@ function NewPassword(props) {
 			</View>
 
 			<View style={styles(colors).inputContainer}>
-				<Text style={styles(colors).authenticationText}>Password</Text>
+				<Text style={passwordTextStyle}>Password</Text>
 				<TextInput
-					style={inputStyle}
+					style={passwordInputStyle}
 					value={password}
 					secureTextEntry={true}
 					placeholder='*********'
 					onChangeText={(text) => updatingPassword(text)}
 				></TextInput>
 				<View style={spaceAfterError} />
-				<Text style={styles(colors).authenticationText}>ReEnter Password</Text>
+				<Text style={reEnterPasswordTextStyle}>ReEnter Password</Text>
 				<TextInput
-					style={inputStyle}
+					style={reEnterPasswordInputStyle}
 					value={reEnteredPassword}
 					secureTextEntry={true}
 					placeholder='*********'

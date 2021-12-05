@@ -12,9 +12,6 @@ const bcryptjs = require('bcryptjs');
 const user_regist = async (req, res) => {
 	try {
 		let { userName, email, password } = req.body;
-		console.log({ userName });
-		console.log({ email });
-		console.log({ password });
 
 		let errors = validationResult(req);
 		if (!errors.isEmpty())
