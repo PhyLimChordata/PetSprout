@@ -1,10 +1,9 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import {
     View,
     Text,
     TouchableOpacity,
-    ScrollView,
-    SafeAreaView, Image,
+    SafeAreaView, Image, requireNativeComponent,
 } from 'react-native';
 import MenuHeader from '../components/MenuHeader';
 
@@ -23,6 +22,11 @@ function Button(props) {
     </TouchableOpacity>)
 }
 
+const namePet = () => {
+    //Prompt an are you sure pop up - (independent of if they provide a name)
+    //update the pet using the fetch command passing in the pet's id by getting the user id (viewaccount route)
+    props.navigation.navigate('HomeScreen');
+}
 function NameHabit(props) {
     const { colors } = useTheme();
     const [name, setName] = useState(props.reason);
@@ -53,7 +57,7 @@ function NameHabit(props) {
                                                 text={name}></TextBox>
                 <View style={{flexDirection:'row'}}>
                     <Button text='SHARE' onPress={() => console.log("SHARE")}/>
-                    <Button text='CONTINUE' onPress={() => console.log("CONTINUE")}/>
+                    <Button text='CONTINUE' onPress={() => namePet()}/>
                 </View>
             </View>
 

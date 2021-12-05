@@ -90,6 +90,18 @@ function PutHabits(props) {
 						setInvalidParams(data.error);
 						setPopupText('The provided information cannot be saved');
 						popup.current?.togglePopup();
+						setTitleTextStyle({
+							fontSize: 20,
+			fontWeight: 'bold',
+			paddingBottom: 5,
+			color: Colours.Red.Error,
+						});
+						setScheduleTextStyle({
+							fontSize: 20,
+			fontWeight: 'bold',
+			paddingBottom: 5,
+			color: Colours.Red.Error,
+						});
 					}
 				});
 			})
@@ -197,6 +209,19 @@ function PutHabits(props) {
 		return localeSpecificTime.replace(/:\d+ /, ' ');
 	}
 
+	const [titleTextStyle, setTitleTextStyle] = useState({
+		fontSize: 20,
+		fontWeight: 'bold',
+		paddingBottom: 5,
+		color: colors.Quaternary
+	});
+
+	const [scheduleTextStyle, setScheduleTextStyle] = useState({
+		fontSize: 20,
+		fontWeight: 'bold',
+		color: colors.Quaternary
+	});
+
 	const textboxSmallStyle = {
 		backgroundColor: colors.Secondary,
 		padding: 10,
@@ -210,21 +235,16 @@ function PutHabits(props) {
 	const textboxBigStyle = {
 		backgroundColor: colors.Secondary,
 		padding: 10,
-		borderWidth: 0,
 		height: 100,
-		borderStyle: 'solid',
 		fontSize: 15,
 		borderRadius: 5,
 		marginBottom: 20,
 	};
 
 	const textboxSmallStyleInvalid = {
-		backgroundColor: colors.Secondary,
+		backgroundColor: Colours.Red.NotSelected,
 		padding: 10,
 		height: 50,
-		borderWidth: 3,
-		borderColor: 'red',
-		borderStyle: 'solid',
 		fontSize: 15,
 		borderRadius: 5,
 		marginBottom: 20,
@@ -250,8 +270,12 @@ function PutHabits(props) {
 								cloneArray.splice(cloneArray.indexOf('title'), 1);
 								setInvalidParams(cloneArray);
 							}
+							setTitleTextStyle(styles(colors).authenticationText);
+							setScheduleTextStyle(styles(colors).authenticationText);
 						}}
 						header={'Title'}
+						setTextStyle={setTitleTextStyle}
+						textStyle={titleTextStyle}
 						boxStyle={
 							invalidParams.includes('title')
 								? textboxSmallStyleInvalid
@@ -266,7 +290,7 @@ function PutHabits(props) {
 							style={{
 								marginTop: -10,
 								marginBottom: 5,
-								color: 'red',
+								color: Colours.Red.Error,
 								fontSize: 15,
 								fontWeight: 'bold',
 							}}
@@ -290,11 +314,7 @@ function PutHabits(props) {
 						text={reason}
 					/>
 					<Text
-						style={{
-							fontSize: 20,
-							fontWeight: 'bold',
-							color: colors.Quaternary,
-						}}
+						style={scheduleTextStyle}
 					>
 						Schedule
 					</Text>
@@ -313,7 +333,7 @@ function PutHabits(props) {
 						<Text
 							style={{
 								marginTop: 5,
-								color: 'red',
+								color: Colours.Red.Error,
 								fontSize: 15,
 								fontWeight: 'bold',
 							}}
@@ -353,7 +373,7 @@ function PutHabits(props) {
 							<Text
 								style={{
 									marginTop: 10,
-									color: 'red',
+									color: Colours.Red.Error,
 									fontSize: 15,
 									fontWeight: 'bold',
 								}}
