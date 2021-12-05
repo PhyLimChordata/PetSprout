@@ -101,4 +101,3 @@ Calvin Cheng\
 Cheryl Chen\
 YuanYuan Li\
 Katrina Best\
-Rachelle Willemsma
