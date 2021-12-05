@@ -43,9 +43,9 @@ function Habits(props) {
 				res.json().then(() => {
 					if (frequency - 1 == 0) {
 						setCompleted(true);
-						gainXP(200);
+						gainXP(300);
 					} else {
-						gainXP(225);
+						gainXP(50);
 					}
 					changeRefreshing(true);
 				}),
@@ -63,9 +63,9 @@ function Habits(props) {
 					'authentication-token': getToken,
 				},
 				body: JSON.stringify({
-					expValue: xp
-					// expToLevelNext: props.remainingToLevel,
-					// levelToEvolveNext: 
+					expValue: xp,
+					totalExp: props.totalExp,
+					levelToEvolveNext: props.levelToEvolveNext
 				}),
 			},
 		)
