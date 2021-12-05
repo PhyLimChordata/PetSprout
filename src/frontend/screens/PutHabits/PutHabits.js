@@ -90,18 +90,24 @@ function PutHabits(props) {
 						setInvalidParams(data.error);
 						setPopupText('The provided information cannot be saved');
 						popup.current?.togglePopup();
-						setTitleTextStyle({
-							fontSize: 20,
-			fontWeight: 'bold',
-			paddingBottom: 5,
-			color: Colours.Red.Error,
-						});
-						setScheduleTextStyle({
-							fontSize: 20,
-			fontWeight: 'bold',
-			paddingBottom: 5,
-			color: Colours.Red.Error,
-						});
+
+						if ('title' in data.error) {
+							setTitleTextStyle({
+								fontSize: 20,
+				fontWeight: 'bold',
+				paddingBottom: 5,
+				color: Colours.Red.Error,
+							});
+						}
+						if ('schedule' in data.error) {
+							setScheduleTextStyle({
+								fontSize: 20,
+				fontWeight: 'bold',
+				paddingBottom: 5,
+				color: Colours.Red.Error,
+							});
+						}
+					
 					}
 				});
 			})
@@ -139,18 +145,22 @@ function PutHabits(props) {
 						setInvalidParams(data.error);
 						setPopupText('The provided information cannot be saved');
 						popup.current?.togglePopup();
-						setTitleTextStyle({
-							fontSize: 20,
-			fontWeight: 'bold',
-			paddingBottom: 5,
-			color: Colours.Red.Error,
-						});
-						setScheduleTextStyle({
-							fontSize: 20,
-			fontWeight: 'bold',
-			paddingBottom: 5,
-			color: Colours.Red.Error,
-						});
+						if ('title' in data.error) {
+							setTitleTextStyle({
+								fontSize: 20,
+				fontWeight: 'bold',
+				paddingBottom: 5,
+				color: Colours.Red.Error,
+							});
+						}
+						if ('schedule' in data.error) {
+							setScheduleTextStyle({
+								fontSize: 20,
+				fontWeight: 'bold',
+				paddingBottom: 5,
+				color: Colours.Red.Error,
+							});
+						}
 					}
 				});
 			})
