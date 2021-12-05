@@ -12,9 +12,9 @@ const get_current = async (req, res) => {
         let user = await User.findById(req.user.id).select('-password');
         if (!user) return res.status(404).json('User could not found');
 
-        let currentPet = await Pets.findOne({user: req.user.id}).currentPet;
+        let usersPet = await Pets.findOne({user: req.user.id});
         
-        res.json(currentPet);
+        res.json(usersPet.currentPet);
     } catch (error) {
 		console.error(error);
 		res.status(500).json('Server error');

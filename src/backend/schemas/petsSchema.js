@@ -33,6 +33,10 @@ const PetsSchema = new Schema({
         readyToEvolve: {
             type: Boolean,
             default: false
+        },
+        readyToHatch: {
+            type: Boolean,
+            default: false
         }
     },
 	pets: [
@@ -61,6 +65,10 @@ const PetsSchema = new Schema({
                 type: String
             }],
             readyToEvolve: {
+                type: Boolean,
+                default: false
+            },
+            readyToHatch: {
                 type: Boolean,
                 default: false
             }

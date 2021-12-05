@@ -7,11 +7,12 @@ import { useTheme } from '@react-navigation/native';
 
 function ExperienceBar(props) {
 	const { colors } = useTheme();
-
+	var widthPercent = ((props.experience / props.xpLevelCap) * 100);
+	var width = widthPercent + "%";
 	var experience = {
 		// FOR MOBILE DEBUGGING TODO: Switch to props.width
 		// width: 20,
-		width: props.width,
+		width: width,
 		height: 15,
 		backgroundColor: colors.Tertiary,
 		borderRadius: 10,
@@ -22,7 +23,7 @@ function ExperienceBar(props) {
 			<View style={styles(colors).horizontalExperienceContainer}>
 				<Text style={styles(colors).levelText}>Level {props.level}</Text>
 				<View style={styles(colors).rightText}>
-					<Text style={styles(colors).expText}>{props.exp}/100</Text>
+					<Text style={styles(colors).expText}>{props.exp}/{props.xpLevelCap}</Text>
 				</View>
 			</View>
 			<View style={styles(colors).expBar}>

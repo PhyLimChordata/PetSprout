@@ -10,7 +10,6 @@ const updatePet = require('../function/pets/updatePet');
 router.get('/get_current', authentication, getPets.get_current);
 router.get('/get_all', authentication, getPets.get_all);
 router.get('/evolveCheck', authentication, evolve.evolveCheck);
-router.get('/get_health', authentication, health.getHealth);
 
 router.post('/switch_pet', authentication, switchPets);
 router.post('/add_health', authentication, health.addHealth);
