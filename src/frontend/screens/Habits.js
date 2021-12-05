@@ -81,9 +81,12 @@ function HabitsScreen(props) {
 	const [userHabitId, setUserHabitId] = useState('');
 	const [experience, setExperience] = useState('');
 	const [xpLevelCap, setXpLevelCap] = useState(0);
+	const [totalXPCap, setTotalXPCap] = useState(0);
 	const { colors } = useTheme();
 
 	const [level, setLevel] = useState('');
+	const [levelToEvolveNext, setLevelToEvolveNext] = useState(0);
+
 	const [displayed, setDisplayed] = useState(false);
 
 	const scrolling = React.useRef(new Animated.Value(0)).current;
@@ -129,8 +132,6 @@ function HabitsScreen(props) {
 						if (keyA > keyB) return -1;
 						return 0;
 					});
-
-					const expValue = parseInt(data.expValue);
 					setTimeout(() => {
 						setHabits(data.habitList);
 						setUserHabitId(data._id);
@@ -174,6 +175,8 @@ function HabitsScreen(props) {
 
 					const petsLevel = currentPet.level;
 					setLevel(currentPet.level);
+					setNextLevelToEvolve();
+					setTotalXPCap(levelMapping[petsLevel].totalXP);
 
 					//Cap for exp bar
 					setXpLevelCap(levelMapping[petsLevel].xpLevelCap);
@@ -185,10 +188,19 @@ function HabitsScreen(props) {
 						var previousTotalXPCap = levelMapping[previousLevel].totalXP;
 						setExperience(currentPet.expValue - previousTotalXPCap);
 					}
+					
 				}),
 			)
 			.catch();
 	};
+
+	const setNextLevelToEvolve = () => {
+		if (level == 40) {
+			setLevelToEvolveNext(-1);
+		} else {
+			setLevelToEvolveNext(level + 10 - (level % 10));
+		}
+	}
 
 	return (
 		<SafeAreaView style={styles(colors).headContainer}>
@@ -222,7 +234,6 @@ function HabitsScreen(props) {
 				>
 					{habits.map((data, index) => {
 						let completed = data.times - data.todo > 0 ? false : true;
-
 						const scale = scrolling.interpolate({
 							inputRange: [-1, 0, 100 * index, 100 * (index + 1)],
 							outputRange: [1, 1, 1, 0],
@@ -247,7 +258,8 @@ function HabitsScreen(props) {
 										habitId={data._id}
 										userHabitId={userHabitId}
 										exp={experience}
-										remainingToLevel={100 - experience}
+										totalExp={totalXPCap}
+										levelToEvolveNext={levelToEvolveNext}
 									></Habits>
 									<View style={{ height: 15 }}></View>
 								</Animated.View>

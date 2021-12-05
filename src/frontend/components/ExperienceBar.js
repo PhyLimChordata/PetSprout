@@ -7,7 +7,7 @@ import { useTheme } from '@react-navigation/native';
 
 function ExperienceBar(props) {
 	const { colors } = useTheme();
-	var widthPercent = ((props.experience / props.xpLevelCap) * 100);
+	var widthPercent = ((props.exp / props.xpLevelCap) * 100);
 	var width = widthPercent + "%";
 	var experience = {
 		// FOR MOBILE DEBUGGING TODO: Switch to props.width

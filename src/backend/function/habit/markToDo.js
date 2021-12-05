@@ -25,8 +25,6 @@ module.exports = async (req, res) => {
 		let user = await User.findById(req.user.id).select('-password');
 		if (!user) return res.status(404).json('User could not found');
 
-				// Pets.findById(user.id)
-
 		let userHabit = await Habit.findById(req.params.user_habit_id);
 		if (!userHabit) return res.status(404).json("User's habits could not find");
 
@@ -37,9 +35,7 @@ module.exports = async (req, res) => {
 			return res.status(404).json("Habit could not find in user's habits");
 
 		habitFromDB.todo = habitFromDB.todo + 1;
-		console.log(userHabit.expValue);
 		userHabit.expValue = expValue;
-		console.log(expValue);
 
 		if (habitFromDB.todo === habitFromDB.times) {
 			habitFromDB.continuous = habitFromDB.continuous + 1;
