@@ -14,6 +14,11 @@ function MenuHeader(props) {
 	const { colors } = useTheme();
 	const [modalVisible, setModalVisible] = useState(false);
 	const [logoutVisible, setLogoutVisible] = useState(false);
+
+	var heartSize = props.hp ? props.hp.size : 0;
+	var hpViewStyle = props.hp ? props.hp.view : {};
+	var hpImageStyle = props.hp ? props.hp.image : {};
+
 	return (
 		<View style={styles(colors).header}>
 			<View style={styles(colors).menuTitle}>
@@ -37,18 +42,18 @@ function MenuHeader(props) {
 			)}
 			{props.children}
 
-			<View style={{ height: 70, width: 70, textAlign: 'center', alignItems: 'center', textAlignVertical: 'center', paddingRight: 30, paddingTop: 10}}>
+			<View style={{ height: heartSize, width: heartSize, textAlign: 'center', alignItems: 'center', textAlignVertical: 'center', paddingRight: 30, paddingTop: 10}}>
 				<Text style={{position: 'absolute', top: '40%', color: Colours.Red.HeartValue, fontSize: 20, fontWeight: 'bold', zIndex: 2}}>
-						{props.hp.value}
+						{props.hp ? props.hp.value : ''}
 					</Text>
-				<Image style={{height: props.hp.size, width: props.hp.size, zIndex: 0}}
+				<Image style={{height: heartSize, width: heartSize, zIndex: 0}}
 				source={require('../resources/images/DeadHeart.png')}/>
 				<View
-					style={props.hp.view}
+					style={hpViewStyle}
 				>
 					
 					<Image
-						style={props.hp.image}
+						style={hpImageStyle}
 						source={require('../resources/images/Heart.png')}
 					/>
 				</View>
