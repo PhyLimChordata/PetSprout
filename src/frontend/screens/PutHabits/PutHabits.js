@@ -139,6 +139,18 @@ function PutHabits(props) {
 						setInvalidParams(data.error);
 						setPopupText('The provided information cannot be saved');
 						popup.current?.togglePopup();
+						setTitleTextStyle({
+							fontSize: 20,
+			fontWeight: 'bold',
+			paddingBottom: 5,
+			color: Colours.Red.Error,
+						});
+						setScheduleTextStyle({
+							fontSize: 20,
+			fontWeight: 'bold',
+			paddingBottom: 5,
+			color: Colours.Red.Error,
+						});
 					}
 				});
 			})
@@ -227,18 +239,23 @@ function PutHabits(props) {
 		padding: 10,
 		borderWidth: 0,
 		height: 50,
-		borderStyle: 'solid',
+		fontWeight: 'bold',
 		fontSize: 15,
 		borderRadius: 5,
 		marginBottom: 20,
+
+		color: colors.Quinary
 	};
 	const textboxBigStyle = {
 		backgroundColor: colors.Secondary,
 		padding: 10,
 		height: 100,
 		fontSize: 15,
+		fontWeight: 'bold',
 		borderRadius: 5,
 		marginBottom: 20,
+		color: colors.Quinary
+
 	};
 
 	const textboxSmallStyleInvalid = {
@@ -246,8 +263,11 @@ function PutHabits(props) {
 		padding: 10,
 		height: 50,
 		fontSize: 15,
+		fontWeight: 'bold',
 		borderRadius: 5,
 		marginBottom: 20,
+		color: Colours.Unique.Black
+
 	};
 	return (
 		<SafeAreaView style={styles(colors).headContainer}>
@@ -271,7 +291,6 @@ function PutHabits(props) {
 								setInvalidParams(cloneArray);
 							}
 							setTitleTextStyle(styles(colors).authenticationText);
-							setScheduleTextStyle(styles(colors).authenticationText);
 						}}
 						header={'Title'}
 						setTextStyle={setTitleTextStyle}
