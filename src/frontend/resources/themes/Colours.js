@@ -23,7 +23,7 @@ const Colours = {
 		NotSelected: '#FF8D8D',
 		Selected: '#E37272',
 		Error: '#E37272',
-		HeartValue: '#A72727'
+		HeartValue: '#541111',
 	},
 	Grey: {
 		Default: '#B7BEB0',

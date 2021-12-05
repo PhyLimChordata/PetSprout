@@ -49,10 +49,12 @@ function HabitsScreen(props) {
 		setRefreshing(true);
 		changeRefreshing(true);
 		displayHabits();
+		updateHp();
 	}, []);
 
 	useEffect(() => {
 		if (habits.length == 0 && !displayed) displayHabits();
+		updateHp();
 	});
 
 	useEffect(() => {
@@ -87,25 +89,34 @@ function HabitsScreen(props) {
 						setUserHabitId(data._id);
 						setExperience((expValue % 100).toString());
 						setLevel(Math.floor(expValue / 100).toString());
-						let tempHeartValue = heartValue;
-						tempHeartValue.view.height = 76 * 0.7;
-						tempHeartValue.view.marginTop = 70 - tempHeartValue.view.height;
-						tempHeartValue.image.bottom = tempHeartValue.view.marginTop;
-						tempHeartValue.value = Math.ceil(
-							tempHeartValue.view.height * 1.42857,
-						);
-
-						setHeartValue(tempHeartValue);
-						//Displaying purposes TODO
-						// const heartValue = [];
-						// for (var i = 0; i < data.heart; i++) {
-						// 	heartValue.push(i);
-						// }
-						// setHearts(heartValue);
 						setDisplayed(true);
 						setRefreshing(false);
 						changeRefreshing(false);
 					}, 1000);
+				}),
+			)
+			.catch();
+	};
+
+	const updateHp = () => {
+		fetch('http://localhost:5000/api/v1.0.0/pets/get_health', {
+			method: 'GET',
+			headers: {
+				'Content-Type': 'application/json',
+				'authentication-token': getToken,
+			},
+		})
+			.then((res) =>
+				res.json().then((hpValue) => {
+					let tempHeartValue = heartValue;
+					tempHeartValue.view.height = hpValue * 0.7;
+					tempHeartValue.view.marginTop = 70 - tempHeartValue.view.height;
+					tempHeartValue.image.bottom = tempHeartValue.view.marginTop;
+					tempHeartValue.value = Math.ceil(
+						tempHeartValue.view.height * 1.42857,
+					);
+
+					setHeartValue(tempHeartValue);
 				}),
 			)
 			.catch();

@@ -50,5 +50,25 @@ const loseHealth = async (req, res) => {
 	}
 }
 
+const getHealth = async (req, res) => {
+    try {
+        let errors = validationResult(req);
+        if (!errors.isEmpty())
+			return res.status(400).json({ error: errors.array() });
+
+        console.log(req.user.id);
+        let user = await User.findById(req.user.id).select('-password');
+        if (!user) return res.status(404).json('User could not found');
+
+        console.log(user.id);
+
+        let usersPet = await Pets.findOne({user: user.id});
+        res.json(usersPet.currentPet.hp);
+    } catch (error) {
+		console.error(error);
+		res.status(500).json('Server error');
+	}
+}
 exports.addHealth = addHealth;
 exports.loseHealth = loseHealth;
+exports.getHealth = getHealth;
