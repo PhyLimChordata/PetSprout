@@ -43,12 +43,39 @@ function Habits(props) {
 				res.json().then(() => {
 					if (frequency - 1 == 0) {
 						setCompleted(true);
+						gainXP(200);
+					} else {
+						gainXP(225);
 					}
 					changeRefreshing(true);
 				}),
 			)
 			.catch();
 	};
+
+	const gainXP = (xp) => {
+		fetch(
+			'http://localhost:5000/api/v1.0.0/pets/gain_exp',
+			{
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+					'authentication-token': getToken,
+				},
+				body: JSON.stringify({
+					expValue: xp
+					// expToLevelNext: props.remainingToLevel,
+					// levelToEvolveNext: 
+				}),
+			},
+		)
+			.then((res) =>
+				res.json().then(() => {
+					
+				}),
+			)
+			.catch();
+	}
 
 	const deleteHabit = () => {
 		fetch(
