@@ -32,15 +32,25 @@ const update_login_streaks = async(req, res) => {
         let year = user_lastlogin.lastlogin.getFullYear();
         let month = user_lastlogin.lastlogin.getMonth();
         let date = user_lastlogin.lastlogin.getDate();
+        //console.log("User last login year = " + year);
+        //console.log("User last login month = " + month);
+        //console.log("User last login date = " + date);
         // (ms / (1000 * 60 * 60)).toFixed(1)
         //console.log((new Date(2021, 10, 5) - new Date(year, month, date))/ (1000 * 60 * 60 * 24).toFixed(1));
 
         if(!user_achievements) return res.status(404).json('Achievements not found');
 
 		// Only update the database if the login is not on the same day
-		if((new Date(2021, 10, 5) - new Date(year, month, date))/ (1000 * 60 * 60 * 24).toFixed(1) >= 24) {
-			let new_streak = user_achievements.achievements.accountability.login_streak + 1;
+        let today = new Date();
+        today.setHours(0, 0, 0);
 
+        //console.log(today);
+        //console.log(new Date(year, month, date));
+        //console.log((today - new Date(year, month, date))/ (1000 * 60 * 60 * 24).toFixed(1))
+		if((today - new Date(year, month, date))/ (1000 * 60 * 60 * 24).toFixed(1) == 1) {
+			let new_streak = user_achievements.achievements.accountability.login_streak + 1;
+            //console.log("new streak = " + new_streak);
+            //console.log("login streak = " + user_achievements.achievements.accountability.login_streak);
 			user_achievements.achievements.accountability.login_streak = new_streak;
 
 			// Check if this is a new longest streak
@@ -49,7 +59,7 @@ const update_login_streaks = async(req, res) => {
 			}
 		} else {
 			// Player loses streak as they didn't login everyday
-			user_achievements.achievements.accountability.login_streak = 0;
+			user_achievements.achievements.accountability.login_streak = 1;
 		}
         
         await user_achievements.save();
