@@ -61,7 +61,7 @@ function CreateHabitScreen(props) {
 	const { colors } = useTheme();
 
 	const createHabit = () => {
-		fetch('http://localhost:5000/api/v1.0.0/habit/create_habit', {
+		fetch('http://192.168.0.25:5000/api/v1.0.0/habit/create_habit', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
@@ -134,6 +134,9 @@ function CreateHabitScreen(props) {
 	};
 	return (
 		<SafeAreaView style={styles(colors).headContainer}>
+			<View
+				style={{ marginTop: 20}}
+				/>
 			<MenuHeader
 				back={true}
 				text={'Create Habit'}

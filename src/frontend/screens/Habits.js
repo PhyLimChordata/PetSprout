@@ -1,6 +1,10 @@
 import React, { useState, useEffect, useContext } from 'react';
+
+import { StatusBar } from 'react-native';
+
 import { View, Image, Animated, SafeAreaView } from 'react-native';
 
+import AndroidSafeView from '../styling/AndroidSafeAreaView';
 import styles from '../styling/HabitsScreen';
 import Habits from '../components/Habits';
 import MenuHeader from '../components/MenuHeader';
@@ -31,7 +35,7 @@ function HabitsScreen(props) {
 	const displayHabits = () => {
 		setDisplayed(true);
 		const date = new Date().getDay();
-		fetch('http://localhost:5000/api/v1.0.0/habit/show_user_habit/' + date, {
+		fetch('http://192.168.0.25:5000/api/v1.0.0/habit/show_user_habit/' + date, {
 			method: 'GET',
 			headers: {
 				'Content-Type': 'application/json',
@@ -61,7 +65,7 @@ function HabitsScreen(props) {
 	};
 
 	return (
-		<SafeAreaView style={styles(colors).headContainer}>
+		<SafeAreaView style={[styles(colors).headContainer, { paddingTop: StatusBar.currentHeight }]}>
 			<MenuHeader text='' navigation={props.navigation} hp={hearts} />
 			<View style={styles(colors).verticalContainer}>
 				<Image

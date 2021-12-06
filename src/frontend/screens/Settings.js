@@ -23,7 +23,7 @@ function SettingsPage(props) {
 	console.log(getToken)
 	useEffect(() => {
 		const get = () => {
-			fetch('http://localhost:5000/api/v1.0.0/setting/getUserSetting', {
+			fetch('http://192.168.0.25:5000/api/v1.0.0/setting/getUserSetting', {
 				method: 'GET',
 				headers: {
 					'Content-Type': 'application/json',
@@ -90,7 +90,7 @@ function SettingsPage(props) {
 						console.log("Previous value for " + props.tag + " = " + props.enabled)
 						console.log("Received value for " + props.tag + " = " + val)
 						props.handle(val, 
-							fetch('http://localhost:5000/api/v1.0.0/setting/updateUserSetting', {
+							fetch('http://192.168.0.25:5000/api/v1.0.0/setting/updateUserSetting', {
 								method: 'PUT',
 								headers: {
 									'Content-Type': 'application/json',
