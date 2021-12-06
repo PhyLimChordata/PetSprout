@@ -61,7 +61,7 @@ function CreateHabitScreen(props) {
 	const { colors } = useTheme();
 
 	const createHabit = () => {
-		fetch('http://192.168.0.25:5000/api/v1.0.0/habit/create_habit', {
+		fetch('http://localhost:5000/api/v1.0.0/habit/create_habit', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',

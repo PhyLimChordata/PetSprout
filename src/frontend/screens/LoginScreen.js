@@ -56,7 +56,7 @@ function LoginScreen(props) {
 	};
 
 	const attemptLogin = () => {
-		fetch('http://192.168.0.25:5000/api/v1.0.0/user/login', {
+		fetch('http://localhost:5000/api/v1.0.0/user/login', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',

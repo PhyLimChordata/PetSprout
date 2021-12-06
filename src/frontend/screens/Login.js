@@ -57,7 +57,7 @@ function Login(props) {
 	};
 
 	const attemptLogin = () => {
-		fetch('http://192.168.0.25:5000/api/v1.0.0/user/login', {
+		fetch('http://localhost:5000/api/v1.0.0/user/login', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
@@ -75,7 +75,7 @@ function Login(props) {
 				} else if (res.status == 200) {
 					res.json().then((data) => {
 						logIn(data.token);
-						fetch('http://192.168.0.25:5000/api/v1.0.0/achievements/updateLoginStreaks', {
+						fetch('http://localhost:5000/api/v1.0.0/achievements/updateLoginStreaks', {
 							method: 'PUT',
 							headers: {
 								'Content-Type': 'application/json',

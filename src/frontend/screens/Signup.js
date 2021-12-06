@@ -138,7 +138,7 @@ function SignupScreen(props) {
 				password: password,
 			})
 		);
-		fetch('http://192.168.0.25:5000/api/v1.0.0/user/register', {
+		fetch('http://localhost:5000/api/v1.0.0/user/register', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',

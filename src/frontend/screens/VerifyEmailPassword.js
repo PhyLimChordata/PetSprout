@@ -11,7 +11,7 @@ function VerifyEmailPassword(props) {
 	const { colors } = useTheme();
 
 	const resend = () => {
-		fetch('http://192.168.0.25:5000/api/v1.0.0/user/pending_password', {
+		fetch('http://localhost:5000/api/v1.0.0/user/pending_password', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
