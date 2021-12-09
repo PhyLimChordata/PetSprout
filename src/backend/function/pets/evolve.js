@@ -39,8 +39,7 @@ const evolvePet = async (req, res) => {
         currentPet.image = req.image;
         currentPet.hp = 100;
         currentPet.readyToEvolve = false;
-        await currentPet.save();
-        
+        await usersPet.save();
         res.json(currentPet);
     } catch (error) {
 		console.error(error);

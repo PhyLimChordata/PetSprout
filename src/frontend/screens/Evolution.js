@@ -1,4 +1,4 @@
-import React, {useRef, useState, useEffect} from 'react';
+import React, {useRef, useState, useEffect, useContext} from 'react';
 import { Animated, SafeAreaView, TouchableOpacity, Text, Image, Dimensions, View, Easing } from 'react-native';
 import { EvolutionMapping } from '../resources/mappings/EvolutionMapping'
 import { EvolutionTreeMapping } from '../resources/mappings/EvolutionTreeMapping'
@@ -7,8 +7,10 @@ import styles from '../styling/ComingSoon';
 import MenuHeader from '../components/MenuHeader';
 
 import { useTheme } from '@react-navigation/native';
+import {AuthContext} from "../Context";
 
 function Evolution(props) {
+    const { getToken } = useContext(AuthContext);
 
     const {colors} = useTheme();
     let zoomValue = useRef(new Animated.Value(1)).current;
@@ -19,13 +21,22 @@ function Evolution(props) {
     let evolveOpacity = useRef(new Animated.Value(0)).current;
     let spinValue = useRef(new Animated.Value(0)).current;
 
-    const [evolutions, setEvolutions] = useState({});
     const [evolutionNames, setEvolutionNames] = useState([]);
     const [buttonDisabled, setButtonDisabled] = useState(false);
-
     useEffect(() => {
-        // replace with api call
-        setEvolutionNames(EvolutionTreeMapping["beta fish"])
+        fetch('http://localhost:5000/api/v1.0.0/pets/get_current', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'authentication-token': getToken,
+            },
+        }).then((res) =>
+            res.json().then((data) => {
+                console.log(data)
+                setEvolutionNames(EvolutionTreeMapping[data.name])
+            }),
+        )
+            .catch();
     }, []);
 
 
@@ -111,8 +122,18 @@ function Evolution(props) {
         ).start(() => setButtonDisabled(false))
         setButtonDisabled(true)
         setShowColor(true)
-        // add evolution api call
-
+        console.log(evolutionNames[selected])
+        fetch('http://localhost:5000/api/v1.0.0/pets/evolve', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'authentication-token': getToken,
+            },
+            body: {'name': evolutionNames[selected]},
+        }).then((res) =>
+            res.json().then((data) => {console.log(data)}),
+        )
+            .catch();
     }
 
     const spin = spinValue.interpolate({
@@ -195,8 +216,6 @@ function Evolution(props) {
                     }
 
                 </Animated.View>}
-                <View>
-                </View>
                 {showColor &&
                 <View style={{
                     position: "absolute",
