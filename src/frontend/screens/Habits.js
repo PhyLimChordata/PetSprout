@@ -3,9 +3,10 @@ import {
 	View,
 	Image,
 	Animated,
-	SafeAreaView,
 	RefreshControl,
 } from 'react-native';
+
+import SafeAreaView from '../styling/SafeAreaView'
 
 import styles from '../styling/HabitsScreen';
 import Habits from '../components/Habits';
