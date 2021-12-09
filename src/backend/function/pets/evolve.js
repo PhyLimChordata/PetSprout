@@ -31,7 +31,7 @@ const evolvePet = async (req, res) => {
         if (!user) return res.status(404).json('User could not found');
 
         let usersPet = await Pets.findOne({user: req.user.id});
-        const currentPet = usersPet.currentPet;
+        let currentPet = usersPet.currentPet;
         if (!currentPet.readyToEvolve) {
             return;
         }
