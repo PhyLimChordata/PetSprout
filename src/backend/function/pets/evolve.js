@@ -30,7 +30,8 @@ const evolvePet = async (req, res) => {
         let user = await User.findById(req.user.id).select('-password');
         if (!user) return res.status(404).json('User could not found');
 
-        let currentPet = await Pets.findOne({user: req.user.id}).currentPet;
+        let usersPet = await Pets.findOne({user: req.user.id});
+        const currentPet = usersPet.currentPet;
         if (!currentPet.readyToEvolve) {
             return;
         }

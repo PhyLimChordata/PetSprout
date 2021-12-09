@@ -60,13 +60,17 @@ function HabitsScreen(props) {
 	}, []);
 
 	useEffect(() => {
-		if (habits.length == 0 && !displayed) displayHabits();
-		updatePet();
+		if (habits.length == 0 && !displayed) {
+			displayHabits();
+			updatePet();
+		}
 	});
 
 	useEffect(() => {
-		if (getRefreshing) displayHabits();
-		console.log(habits);
+		if (getRefreshing) {
+			displayHabits();
+			updatePet();
+		}
 	}, [getRefreshing]);
 
 	const displayHabits = () => {
@@ -119,6 +123,7 @@ function HabitsScreen(props) {
 					tempHeartValue.value = Math.ceil(
 						tempHeartValue.view.height * (maxHealth / heartSize),
 					);
+					console.log('ok');
 
 					setHeartValue(tempHeartValue);
 
