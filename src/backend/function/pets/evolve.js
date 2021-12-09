@@ -35,8 +35,7 @@ const evolvePet = async (req, res) => {
         if (!currentPet.readyToEvolve) {
             return;
         }
-        currentPet.name = req.name;
-        currentPet.image = req.image;
+        currentPet.name = req.body.name;
         currentPet.hp = 100;
         currentPet.readyToEvolve = false;
         await usersPet.save();

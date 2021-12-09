@@ -129,7 +129,7 @@ function Evolution(props) {
                 'Content-Type': 'application/json',
                 'authentication-token': getToken,
             },
-            body: {'name': evolutionNames[selected]},
+            body: JSON.stringify({name: evolutionNames[selected]}),
         }).then((res) =>
             res.json().then((data) => {console.log(data)}),
         )
