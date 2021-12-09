@@ -171,13 +171,16 @@ const CarouselAcheivement = (props) => {
 
 		return (
 			<Animated.ScrollView
+				showsHorizontalScrollIndicator={false}
 				horizontal={true}
 				onScroll={Animated.event(
 					[{ nativeEvent: { contentOffset: { y: scrolling } } }],
 					{ useNativeDriver: true }
 				)}
-				decelerationRate={'normal'}
-				style={props.style.achievementPanel}>
+				decelerationRate={'fast'}
+				style={props.style.achievementPanel}
+				snapToInterval={props.style.achievementPanel}
+				snapToAlignment={'center'}>
 					{panels.map(item => (
 						<View style={props.style.achievementPanel}>
 							<AchievementPanel temp={item} style={props.style}/>
