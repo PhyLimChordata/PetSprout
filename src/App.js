@@ -10,7 +10,6 @@ import { NavigationContainer, useTheme } from '@react-navigation/native';
 
 //Screens
 import BottomMenu from './frontend/components/BottomMenu';
-
 import LoginScreen from './frontend/screens/Login';
 import SignupScreen from './frontend/screens/Signup';
 import VerifyEmailSignUpScreen from './frontend/screens/VerifyEmailSignUp';
@@ -33,6 +32,7 @@ import ComingSoonScreen from './frontend/screens/ComingSoon';
 import ModifyHabitScreen from './frontend/screens/PutHabits/ModifyHabit';
 import NamePetScreen from './frontend/screens/NamePet'
 import AllHabitsScreen from './frontend/screens/AllHabits';
+import PomodoroScreen from './frontend/screens/Pomodoro';
 // Colour Themes
 import GreenLightTheme from './frontend/resources/themes/light/GreenTheme';
 import OrangeLightTheme from './frontend/resources/themes/light/OrangeTheme';
@@ -170,7 +170,10 @@ function NavContainer(props) {
 						name='NamePetScreen'
 						component={NamePetScreen}
 					/>
-
+					<Stack.Screen
+						name='PomodoroScreen'
+						component={PomodoroScreen}
+					/>
 				</Stack.Navigator>
 			) : (
 				<Stack.Navigator headerMode='none'>
@@ -320,7 +323,7 @@ function Calendar(props) {
 }
 
 function Pomodoro(props) {
-	return <ComingSoonScreen title='Pomodoro' />;
+	return <PomodoroScreen title='Pomodoro'/>;
 }
 
 function Reflect(props) {
