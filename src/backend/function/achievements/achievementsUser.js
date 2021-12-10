@@ -53,7 +53,7 @@ const update_login_streaks = async(req, res) => {
 			}
 		} else if (daysApart > 1) {
 			// Player loses streak as they didn't login everyday
-			user_achievements.achievements.accountability.login_streak = 1;
+			user_achievements.achievements.accountability.login = 1;
 		}
 
 		await user_achievements.save();
