@@ -329,6 +329,7 @@ function PomodoroScreen(props) {
 				}}
 			>
 				{/* <TouchableOpacity
+				<TouchableOpacity
 					activeOpacity={0.6}
 					style={{
 						backgroundColor: colors.Tertiary,
@@ -366,6 +367,7 @@ function PomodoroScreen(props) {
 				>
 					Current Task
 				</TextInput>
+
 				<Text
 					style={{
 						fontSize: 60,
