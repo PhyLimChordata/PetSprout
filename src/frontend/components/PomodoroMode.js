@@ -8,10 +8,10 @@ function PomodoroMode(props) {
 	const { colors } = useTheme();
 
 	const switchModes = (mode) => {
-		if (!props.active) {
-			props.modeSelect(mode);
-			props.setTimer(props.duration[mode]);
-		}
+        if (!props.active) {
+            props.modeSelect(mode);
+			props.setTimer(props.duration[mode])
+        }
 	};
 
 	return props.modeSelected == props.mode ? (
@@ -21,7 +21,7 @@ function PomodoroMode(props) {
 				backgroundColor: colors.Quaternary,
 				borderRadius: 30,
 				flex: 1,
-				borderColor: colors.background,
+                borderColor: colors.background,
 				borderWidth: 3,
 				margin: 10,
 				textAlign: 'center',
