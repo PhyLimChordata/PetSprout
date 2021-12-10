@@ -2,15 +2,15 @@ import React from 'react';
 import { SafeAreaView, View, Platform } from 'react-native';
 
 function CustomSafeAreaView(props) {
-    if(Platform.OS === 'andriod') {
+    if(Platform.OS === 'android') {
         return (
-            <View style={{ paddingTop: 30}}>
+            <View style={[props.style, { paddingTop: 35}]}>
                 {props.children}
             </View>
         )
     } else {
         return (
-            <SafeAreaView>
+            <SafeAreaView style={props.style}>
                 {props.children}
             </SafeAreaView>
         )
