@@ -1,19 +1,23 @@
-import React, { useState } from 'react';
-import { View, SafeAreaView, Text, Image, Dimensions, ScrollView } from 'react-native';
+import React from 'react';
+import { View, SafeAreaView, Text, Image, ScrollView } from 'react-native';
 
 import MenuHeader from '../components/MenuHeader';
 import styles from '../styling/Collaborators';
+import HomeButton from '../components/HomeButton';
 
 import { useTheme } from '@react-navigation/native';
 
 function Collaborators(props) {
 	const { colors } = useTheme();
 	const style = styles(colors);
-	
+
 	return (
-		<SafeAreaView>
-			<MenuHeader text='Collaborators' navigation={props.navigation}></MenuHeader>
-			<View style={style.container}>
+		<SafeAreaView style={{ height: '100%' }}>
+			<MenuHeader
+				text='Collaborators'
+				navigation={props.navigation}
+			></MenuHeader>
+			<View style={style.headContainer}>
 				<Image
 					style={style.collabImg}
 					source={require('../resources/images/Collaborators.png')}
@@ -30,6 +34,7 @@ function Collaborators(props) {
 					<Text style={style.text}>Prof. Joordens</Text>
 				</ScrollView>
 			</View>
+			<HomeButton navigation={props.navigation} colors={colors} />
 		</SafeAreaView>
 	);
 }

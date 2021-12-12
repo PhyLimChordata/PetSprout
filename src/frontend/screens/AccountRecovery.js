@@ -1,10 +1,19 @@
 import React, { useState, useContext } from 'react';
 
-import { View, Text, TextInput, Image, TouchableOpacity } from 'react-native';
+import {
+	View,
+	Text,
+	TextInput,
+	Image,
+	TouchableOpacity,
+	ShadowPropTypesIOS,
+} from 'react-native';
 
 import styles from '../styling/Authentication';
 
 import { useTheme } from '@react-navigation/native';
+
+import Colours from '../resources/themes/Colours';
 
 function PasswordScreen(props) {
 	const { colors } = useTheme();
@@ -36,6 +45,22 @@ function PasswordScreen(props) {
 		});
 	};
 
+	const activateAccount = (email) => {
+		fetch('http://localhost:5000/api/v1.0.0/user/send_activate_email', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				email: email,
+			}),
+		})
+			.then((res) => {
+				props.navigation.push('VerifyEmailSignUp', { email: email });
+			})
+			.catch();
+	};
+
 	const forgetPassword = () => {
 		fetch('http://localhost:5000/api/v1.0.0/user/check_user', {
 			method: 'POST',
@@ -58,24 +83,24 @@ function PasswordScreen(props) {
 					setError('Something wrong happened internally...');
 				} else if (res.status == 404) {
 					setError('User does not exist');
-				} else if (res.status == 403) {
-					setError('The user has not activated their account');
 				}
 
-				if (res.status != 200) {
+				if (res.status == 403) {
+					res.json().then((data) => {
+						console.log(data.email);
+						activateAccount(data.email);
+					});
+				} else if (res.status != 200) {
 					setInputStyle({
-						backgroundColor: colors.Secondary,
+						backgroundColor: Colours.Red.NotSelected,
 						padding: 10,
-						borderWidth: 3,
-						borderColor: 'red',
-						borderStyle: 'solid',
 						fontSize: 15,
 						borderRadius: 5,
 						width: 300,
 					});
 				}
 			})
-			.catch((data) => console.log(data));
+			.catch();
 	};
 
 	return (
@@ -97,7 +122,8 @@ function PasswordScreen(props) {
 						style={inputStyle}
 						value={primaryInfo}
 						placeholder='Please enter an Email or Username'
-						onChangeText={(text) => updatingPrimaryInfo(text)}></TextInput>
+						onChangeText={(text) => updatingPrimaryInfo(text)}
+					></TextInput>
 					<Text style={styles(colors).errorMessageRight}>{error}</Text>
 				</View>
 			</View>
@@ -105,13 +131,15 @@ function PasswordScreen(props) {
 			<TouchableOpacity
 				activeOpacity={0.6}
 				style={styles(colors).authenticationButton}
-				onPress={() => forgetPassword()}>
+				onPress={() => forgetPassword()}
+			>
 				<Text style={styles(colors).authenticationButtonText}>Continue</Text>
 			</TouchableOpacity>
 			<TouchableOpacity
 				activeOpacity={0.6}
 				style={styles(colors).authenticationSpecialButton}
-				onPress={() => props.navigation.push('LoginScreen')}>
+				onPress={() => props.navigation.push('LoginScreen')}
+			>
 				<Text style={styles(colors).authenticationButtonText}>
 					Back to Login
 				</Text>

@@ -3,11 +3,11 @@ const blueTheme = {
 		background: '#505050',
 		opposite: '#ffffff',
 
-		Primary: '#EFFDFE',
-		Secondary: '#BAE0E2',
+		Primary: '#738E8F',
+		Secondary: '#8EBDBF',
 		Tertiary: '#95D1D4',
-		Quaternary: '#8EBDBF',
-		Quinary: '#738E8F',
+		Quaternary: '#BAE0E2',
+		Quinary: '#EFFDFE',
 	},
 };
 

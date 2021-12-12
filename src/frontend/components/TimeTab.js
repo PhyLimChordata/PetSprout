@@ -16,14 +16,16 @@ function TimeTab(props) {
 				alignItems: 'flex-end',
 				borderRadius: 10,
 				height: 60,
-			}}>
+			}}
+		>
 			<Text
 				style={{
 					fontSize: 50,
 					fontWeight: 'bold',
 					color: colors.background,
 					marginRight: -5,
-				}}>
+				}}
+			>
 				{' '}
 				{props.time.slice(0, time_index - 1)}{' '}
 			</Text>
@@ -33,7 +35,8 @@ function TimeTab(props) {
 					fontWeight: 'bold',
 					color: colors.background,
 					marginBottom: 9,
-				}}>
+				}}
+			>
 				{' '}
 				{props.time.slice(time_index - 1)}{' '}
 			</Text>

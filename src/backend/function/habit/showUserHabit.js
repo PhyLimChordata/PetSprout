@@ -12,13 +12,13 @@ module.exports = async (req, res) => {
 		if (!userHabitInfo)
 			return res.status(404).json("User's habits could not found");
 
-		let habitShow = userHabitInfo.habitList.filter(
-			function(habit) {
-				return habit.schedule.includes(day);
-			}
-		);
-		
-		let habit = {"habitList":habitShow};
+		let habitShow = userHabitInfo.habitList.filter(function (habit) {
+			return habit.schedule.includes(day);
+		});
+		//check continuity
+		//when its tmr -> new habit - before user logs out send the time
+		// if it times out, user should log in again
+		let habit = { habitList: habitShow };
 
 		let info = {
 			expValue: userHabitInfo.expValue,

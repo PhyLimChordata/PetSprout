@@ -27,13 +27,15 @@ function Day({ selected, letter, onPress }) {
 				borderWidth: 2,
 				borderColor: colors.Quaternary,
 			}}
-			activeOpacity={0.6}>
+			activeOpacity={0.6}
+		>
 			<Text
 				style={{
 					color: colors.Quinary,
 					fontSize: 20,
 					fontWeight: 'bold',
-				}}>
+				}}
+			>
 				{' '}
 				{letter}{' '}
 			</Text>
@@ -134,9 +136,7 @@ function CreateHabitScreen(props) {
 	};
 	return (
 		<SafeAreaView style={styles(colors).headContainer}>
-			<View
-				style={{ marginTop: 20}}
-				/>
+			<View style={{ marginTop: 20 }} />
 			<MenuHeader
 				back={true}
 				text={'Create Habit'}
@@ -172,11 +172,13 @@ function CreateHabitScreen(props) {
 							fontSize: 20,
 							fontWeight: 'bold',
 							color: colors.Quaternary,
-						}}>
+						}}
+					>
 						Schedule
 					</Text>
 					<View
-						style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+						style={{ flexDirection: 'row', justifyContent: 'space-between' }}
+					>
 						<Day letter={'S'} selected={days[0]} onPress={() => flipDay(0)} />
 						<Day letter={'M'} selected={days[1]} onPress={() => flipDay(1)} />
 						<Day letter={'T'} selected={days[2]} onPress={() => flipDay(2)} />
@@ -195,13 +197,15 @@ function CreateHabitScreen(props) {
 								justifyContent: 'center',
 								borderRadius: 20,
 							}}
-							onPress={() => setDatePickerVisibility(true)}>
+							onPress={() => setDatePickerVisibility(true)}
+						>
 							<Text
 								style={{
 									fontSize: 20,
 									fontWeight: 'bold',
 									color: colors.Quinary,
-								}}>
+								}}
+							>
 								Add An Alarm
 							</Text>
 						</TouchableOpacity>

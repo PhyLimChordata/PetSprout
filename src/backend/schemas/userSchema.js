@@ -31,10 +31,14 @@ const UserSchema = new Schema(
 		lastlogin: {
 			type: Date,
 		},
+		//TODO: Store a metadata like a version number, timestamp, IP etc
+		termsAndAgreements: {
+			type: Boolean,
+		},
 	},
 	{
 		timestamps: true,
-	}
+	},
 );
 
 const userSchema = mongoose.model('user', UserSchema);

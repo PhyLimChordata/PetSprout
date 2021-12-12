@@ -1,88 +1,94 @@
-const  Achievement = require('../../schemas/achievementSchema');
+const Achievement = require('../../schemas/achievementSchema');
 const User = require('../../schemas/userSchema');
 
 const get_user_achievements = async (req, res) => {
-    try {
-        let user_id = req.user.id;
+	try {
+		let user_id = req.user.id;
 
-        let user_achievements = await Achievement.findOne({ user: user_id });
+		let user_achievements = await Achievement.findOne({ user: user_id });
 
-        if(!user_achievements) {
-            // return res.status(404).json('Achievements not found for user');
-            // creating achievements
-            let newUserAchievements = new Achievements({
-                user: newUser._id
-            })
-            await newUserAchievements.save();
+		if (!user_achievements) {
+			// return res.status(404).json('Achievements not found for user');
+			// creating achievements
+			let newUserAchievements = new Achievements({
+				user: newUser._id,
+			});
+			await newUserAchievements.save();
 
-            let user_achievements = await Achievement.findOne({ user: user_id });
-        }
+			let user_achievements = await Achievement.findOne({ user: user_id });
+		}
 
-        res.status(200).json(user_achievements);
-    } catch(error) {
-        console.log(error)
-        return res.status(500).json('server error');
-    }
-}
+		res.status(200).json(user_achievements);
+	} catch (error) {
+		console.log(error);
+		return res.status(500).json('server error');
+	}
+};
 
-const update_login_streaks = async(req, res) => {
-    try {
-        let user_id = req.user.id;
-        let user_achievements = await Achievement.findOne({ user: user_id });
-        let user_lastlogin = await User.findById(user_id).select('lastlogin');
+const update_login_streaks = async (req, res) => {
+	try {
+		let user_id = req.user.id;
+		let user_achievements = await Achievement.findOne({ user: user_id });
+		let user_lastlogin = await User.findById(user_id).select('lastlogin');
 
-        if(!user_lastlogin) return res.status(404).json('Last login not found');
-        
-        let year = user_lastlogin.lastlogin.getFullYear();
-        let month = user_lastlogin.lastlogin.getMonth();
-        let date = user_lastlogin.lastlogin.getDate();
-        // (ms / (1000 * 60 * 60)).toFixed(1)
-        //console.log((new Date(2021, 10, 5) - new Date(year, month, date))/ (1000 * 60 * 60 * 24).toFixed(1));
+		if (!user_lastlogin) return res.status(404).json('Last login not found');
 
-        if(!user_achievements) return res.status(404).json('Achievements not found');
+		let year = user_lastlogin.lastlogin.getFullYear();
+		let month = user_lastlogin.lastlogin.getMonth();
+		let date = user_lastlogin.lastlogin.getDate();
+		// (ms / (1000 * 60 * 60)).toFixed(1)
+		//console.log((new Date(2021, 10, 5) - new Date(year, month, date))/ (1000 * 60 * 60 * 24).toFixed(1));
+
+		if (!user_achievements)
+			return res.status(404).json('Achievements not found');
 
 		// Only update the database if the login is not on the same day
-		if((new Date(2021, 10, 5) - new Date(year, month, date))/ (1000 * 60 * 60 * 24).toFixed(1) >= 24) {
-			let new_streak = user_achievements.achievements.accountability.login_streak + 1;
+		if (
+			(new Date(2021, 10, 5) - new Date(year, month, date)) /
+				(1000 * 60 * 60 * 24).toFixed(1) >=
+			24
+		) {
+			let new_streak =
+				user_achievements.achievements.accountability.login_streak + 1;
 
 			user_achievements.achievements.accountability.login_streak = new_streak;
 
 			// Check if this is a new longest streak
-			if(user_achievements.achievements.streaks.longest_streak < new_streak) {
+			if (user_achievements.achievements.streaks.longest_streak < new_streak) {
 				user_achievements.achievements.streaks.longest_streak = new_streak;
 			}
 		} else {
 			// Player loses streak as they didn't login everyday
 			user_achievements.achievements.accountability.login_streak = 0;
 		}
-        
-        await user_achievements.save();
 
-        res.status(200).json(user_achievements);
-    } catch (error) {
-        console.log(error)
-        return res.status(500).json('server error');
-    }
-}
+		await user_achievements.save();
 
-const update_user_achievements = async(req, res) => {
-    try {
-        let user_id = req.user.id;
-        let user_achievements = await Achievement.findOne({ user: user_id });
+		res.status(200).json(user_achievements);
+	} catch (error) {
+		console.log(error);
+		return res.status(500).json('server error');
+	}
+};
 
-        if(!user_achievements) return res.status(404).json('Achievements not found');
+const update_user_achievements = async (req, res) => {
+	try {
+		let user_id = req.user.id;
+		let user_achievements = await Achievement.findOne({ user: user_id });
 
-        for(field in req.body) {
-            console.log(field)
-        }
+		if (!user_achievements)
+			return res.status(404).json('Achievements not found');
 
-        res.status(200).json(user_achievements)
+		for (field in req.body) {
+			console.log(field);
+		}
 
-    } catch (error) {
-        console.log(error)
-        return res.status(500).json('server error');
-    }
-}
+		res.status(200).json(user_achievements);
+	} catch (error) {
+		console.log(error);
+		return res.status(500).json('server error');
+	}
+};
 
 exports.get_user_achievements = get_user_achievements;
 exports.update_user_achievements = update_user_achievements;

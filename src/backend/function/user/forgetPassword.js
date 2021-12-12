@@ -33,8 +33,7 @@ const checkUserExist = async (req, res) => {
 			if (!user) return res.status(404).json("User hasn't been registered in");
 		}
 
-		if (user.status === 0)
-			res.status(403).json("User email hasn't been activated");
+		if (user.status === 0) return res.status(403).json({ email: email });
 
 		res.status(200).json({ email: email });
 	} catch (error) {
@@ -129,7 +128,7 @@ function sendUserEmail(cnd, code) {
 						user: 'habipetshelp@gmail.com',
 						pass: 'mvpiybwihptcqlgr',
 					},
-				})
+				}),
 			);
 
 			var html =
@@ -142,7 +141,7 @@ function sendUserEmail(cnd, code) {
 				'Click to allow resetting password and return back to app page </a>';
 			console.log(html);
 			var data = {
-				from: 'habipetshelp@gmail.com',
+				from: 'HabiPets',
 				to: cnd,
 				subject: 'Password Reset',
 				html: html,

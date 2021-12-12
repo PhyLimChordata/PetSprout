@@ -16,7 +16,7 @@ const exampleSchema = new Schema(
 	},
 	{
 		timestamps: true,
-	}
+	},
 );
 
 const example = mongoose.model('example', exampleSchema);

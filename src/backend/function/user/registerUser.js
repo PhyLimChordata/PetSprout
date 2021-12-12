@@ -6,14 +6,12 @@ const Habit = require('../../schemas/habitSchema');
 const Achievements = require('../../schemas/achievementSchema');
 const Mailing = require('../../schemas/mailingValidationSchema');
 const Setting = require('../../schemas/settingSchema');
+const Pet = require('../../schemas/petsSchema');
 const bcryptjs = require('bcryptjs');
 
 const user_regist = async (req, res) => {
 	try {
 		let { userName, email, password } = req.body;
-		console.log({ userName });
-		console.log({ email });
-		console.log({ password });
 
 		let errors = validationResult(req);
 		if (!errors.isEmpty())
@@ -42,25 +40,6 @@ const user_regist = async (req, res) => {
 
 		//save to the database
 		await newUser.save();
-
-		// create user habit
-		let newUserHabit = new Habit({
-			user: newUser._id,
-		});
-
-		await newUserHabit.save();
-
-		// create setting
-		let newUserSetting = new Setting({
-			user: newUser._id,
-		});
-		await newUserSetting.save();
-
-		// creating achievements
-		let newUserAchievements = new Achievements({
-			user: newUser._id
-		})
-		await newUserAchievements.save()
 
 		const code = require('crypto').randomBytes(16).toString('hex');
 		sendUserEmail(email, code);
@@ -106,6 +85,32 @@ const user_activation = async (req, res) => {
 		if (!user) res.status(404).json("User doesn't exist");
 		user.status = 1;
 		await user.save();
+
+		//create user's pet
+		let newPet = new Pet({
+			user: user._id,
+			pets: [],
+		});
+		await newPet.save();
+
+		// create user habit
+		let newUserHabit = new Habit({
+			user: user._id,
+		});
+		await newUserHabit.save();
+
+		// create setting
+		let newUserSetting = new Setting({
+			user: user._id,
+		});
+		await newUserSetting.save();
+
+		// creating achievements
+		let newUserAchievements = new Achievements({
+			user: user._id,
+		});
+		await newUserAchievements.save();
+
 		await Mailing.deleteMany({ email });
 		res.status(200).json('Success');
 	} catch (error) {
@@ -159,7 +164,7 @@ function sendUserEmail(cnd, code) {
 						user: 'habipetshelp@gmail.com',
 						pass: 'mvpiybwihptcqlgr',
 					},
-				})
+				}),
 			);
 			var html =
 				'<a href="http://127.0.0.1:5000/api/v1.0.0/user/activation/' +
@@ -171,7 +176,7 @@ function sendUserEmail(cnd, code) {
 				'Click to allow resetting password and return back to app page </a>';
 			console.log(html);
 			var data = {
-				from: 'habipetshelp@gmail.com',
+				from: 'HabiPets',
 				to: cnd,
 				subject: 'Validation',
 				html: html,

@@ -23,18 +23,20 @@ const Colours = {
 		NotSelected: '#FF8D8D',
 		Selected: '#E37272',
 		Error: '#E37272',
+		HeartValue: '#541111',
 	},
 	Grey: {
 		Default: '#B7BEB0',
 		ExpBarBackground: '#E7E7E7',
 		Button: '#C4C4C4',
 		TextInput: '#EF2723',
+		Text: '#C3C3C3',
 	},
 	Unique: {
 		Bronze: '#C6895E',
 		Silver: '#A7BFCA',
 		Gold: '#FFC93E',
-		Black: '#000000'
+		Black: '#000000',
 	},
 };
 

@@ -12,7 +12,7 @@ module.export = (mailingValidation) => {
 				user: 'habipetshelp@gmail.com',
 				pass: 'mvpiybwihptcqlgr',
 			},
-		})
+		}),
 	);
 
 	const randomFns = () => {
@@ -32,7 +32,7 @@ module.export = (mailingValidation) => {
 			let code = randomFns();
 			transport.sendMail(
 				{
-					from: 'habipetshelp@gmail.com',
+					from: 'HabiPets',
 					to: EMAIL,
 					subject: 'Validate your email',
 					html: `
@@ -45,7 +45,7 @@ module.export = (mailingValidation) => {
 				function (error, data) {
 					assert(!error, 500, 'Fail to send validation email');
 					transport.close();
-				}
+				},
 			);
 			const email = EMAIL;
 			await Mailing.deleteMany({ email });
