@@ -7,12 +7,12 @@ const get_user_achievements = async (req, res) => {
 
         let user_achievements = await Achievement.findOne({ user: user_id });
 
-        if(!user_achievements) return res.status(404).json('Achievements not found for user');
-        /*if(!user_achievements){
+        //if(!user_achievements) return res.status(404).json('Achievements not found for user');
+        if(!user_achievements){
         let newUserAchievements = new Achievement({
 			user: user_id
 		})
-		await newUserAchievements.save()}*/
+		await newUserAchievements.save()}
 
         res.status(200).json(user_achievements);
     } catch(error) {

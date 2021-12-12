@@ -35,7 +35,7 @@ function AchievementScreen(props) {
 	let list = [];
 	useEffect(() => {
 		const get = () => {
-			fetch('http://192.168.0.25:5000/api/v1.0.0/achievements/getAchievements', {
+			fetch('http://localhost:5000/api/v1.0.0/achievements/getAchievements', {
 				method: 'GET',
 				headers: {
 					'Content-Type': 'application/json',
@@ -138,76 +138,6 @@ const AchievementPanel = (props) => {
 		</View>
 	);
 };
-
-const CarouselAcheivement = (props) => {
-	let list = props.list;
-	console.log(list);
-	if (list.length > 3) {
-		let panels = [];
-		let subpanel = [];
-		for (let i = 0; i < list.length; i++) {
-			if (subpanel.length > 3) {
-				panels.push(subpanel);
-				subpanel = [];
-			}
-			subpanel.push(list[i]);
-		}
-		console.log(panels);
-		/*
-		return (
-			<ScrollView
-				horizontal={true}
-				contentContainerStyle={{ width: 200 }}
-				showsHorizontalScrollIndicator={false}
-				scrollEventThrottle={200}
-				decelerationRate="fast"
-				pagingEnabled
-				>
-				{panels.map(item => (
-					<AchievementPanel temp={item} style={props.style}/>
-				))}
-			</ScrollView>
-		);*/
-		return (
-			<SafeAreaView>
-				<View style={props.style.achievementRow}>
-					{list.map((item) => (
-						<OneAchievement
-							key={item.name}
-							name={item.name}
-							level={item.level}
-							progress={item.progress}
-							srcPath={item.iconSrc}
-							styles={props.style}
-						/>
-					))}
-				</View>
-			</SafeAreaView>
-		);
-	} else {
-		return <AchievementPanel temp={list} style={props.style} />;
-	}
-};
-
-const AchievementPanel = (props) => {
-	let temp = props.temp;
-	console.log("Temp:");
-	console.log(temp);
-	return (
-		<View style={props.style.achievementRow}>
-			{temp.map((item, index) => (
-				<OneAchievement
-					key={item.name}
-					name={item.name}
-					level={item.level}
-					progress={item.progress}
-					srcPath={item.iconSrc}
-					styles={props.style}
-				/>
-			))}
-		</View>
-	)
-}
 
 const CarouselAcheivement = (props) => {
 	const scrolling = React.useRef(new Animated.Value(0)).current;
