@@ -1,12 +1,5 @@
 import React, { useEffect, useContext, useState } from 'react';
-import {
-	View,
-	Text,
-	Image,
-	Dimensions,
-	SafeAreaViewBase,
-	SafeAreaView,
-} from 'react-native';
+import { View, Text, Image, Dimensions, SafeAreaView, Animated } from 'react-native';
 import AchievementStyle from '../styling/Achievement';
 import { ProgressBar } from 'react-native-paper';
 import MenuHeader from '../components/MenuHeader';
@@ -17,58 +10,76 @@ import { useTheme } from '@react-navigation/native';
 
 import { AuthContext } from '../Context';
 
+// data from database
+
+/*
+
+{
+	category: category name,
+	achievements: [
+		{
+			name: achievement name,
+			level: bronze/silver/gold,
+			progress: some decimal,
+			iconSrc: require('../resources/assets/icon.png'),
+		}
+	]
+}
+
+*/
+
 function AchievementScreen(props) {
 	const { getToken } = useContext(AuthContext);
 	const [achievements, setAchievements] = useState([]);
+
 	let list = [];
 	useEffect(() => {
 		const get = () => {
-			fetch('http://localhost:5000/api/v1.0.0/achievements/getAchievements', {
+			fetch('http://192.168.0.25:5000/api/v1.0.0/achievements/getAchievements', {
 				method: 'GET',
 				headers: {
 					'Content-Type': 'application/json',
 					'authentication-token': getToken,
 				},
 			})
-				.then((res) => res.json())
-				.then((data) => {
-					console.log(data);
-					console.log(data.achievements);
-					for (let cat in Object.keys(data.achievements)) {
-						let sublist = [];
-
-						console.log('cat = ' + cat);
-						let cate = data.achievements[Object.keys(data.achievements)[cat]];
-						console.log('cate = ');
-						console.log(cate);
-						for (let ach in Object.keys(cate)) {
-							console.log(Object.keys(cate)[ach]);
-							console.log('ach = ' + ach);
-							let achieve = cate[Object.keys(cate)[ach]];
-							console.log('achieve = ');
-							console.log(achieve);
-							sublist.push({
-								name: Object.keys(cate)[ach],
-								level:
-									achieve >= 60 ? 'gold' : achieve >= 30 ? 'silver' : 'bronze',
-								progress: achieve >= 90 ? 1 : (achieve % 30) / 30,
-								iconSrc: require('../resources/assets/icon.png'),
-							});
-						}
-						list.push({
-							category: Object.keys(data.achievements)[cat],
-							progresses: sublist,
-						});
+			.then((res) => res.json())
+			.then((data) => {
+				console.log(data);
+				console.log(data.achievements)
+				for(let cat in Object.keys(data.achievements)) {
+					let sublist = []
+					
+					console.log("cat = " + cat);
+					let cate = data.achievements[Object.keys(data.achievements)[cat]];
+					console.log("cate = ");
+					console.log(cate);
+					for(let ach in Object.keys(cate)) {
+						console.log(Object.keys(cate)[ach]);
+						console.log("ach = " + ach);
+						let achieve = cate[Object.keys(cate)[ach]];
+						console.log("achieve = ");
+						console.log(achieve);
+						sublist.push({
+							name: Object.keys(cate)[ach],
+							level: (achieve >= 60 ? 'gold' : (achieve >= 30 ? 'silver' : 'bronze')),
+							progress: (achieve >= 90 ? 1 : (achieve % 30) / 30),
+							iconSrc: require('../resources/assets/icon.png'),
+						})
 					}
-				})
-				.then(() => {
-					console.log(list);
-					setAchievements(list);
-				})
-				.catch((e) => console.log(e));
-		};
+					list.push({
+						category: Object.keys(data.achievements)[cat],
+						progresses: sublist
+					});
+				}
+			})
+			.then(() => {
+				console.log(list)
+				setAchievements(list);
+			})
+			.catch(e => console.log(e));
+		}
 
-		if (achievements.length == 0) {
+		if(achievements.length == 0) {
 			get();
 		}
 	}, []);
@@ -177,6 +188,74 @@ const CarouselAcheivement = (props) => {
 		return <AchievementPanel temp={list} style={props.style} />;
 	}
 };
+
+const AchievementPanel = (props) => {
+	let temp = props.temp;
+	console.log("Temp:");
+	console.log(temp);
+	return (
+		<View style={props.style.achievementRow}>
+			{temp.map((item, index) => (
+				<OneAchievement
+					key={item.name}
+					name={item.name}
+					level={item.level}
+					progress={item.progress}
+					srcPath={item.iconSrc}
+					styles={props.style}
+				/>
+			))}
+		</View>
+	)
+}
+
+const CarouselAcheivement = (props) => {
+	const scrolling = React.useRef(new Animated.Value(0)).current;
+	let list = props.list;
+	console.log(list);
+	if(list.length > 3) {
+		let panels = [];
+		let subpanel = [];
+		for(let i = 0; i < list.length; i++) {
+			if(subpanel.length == 3) {
+				panels.push(subpanel);
+				subpanel = [];
+			}
+			subpanel.push(list[i]);
+		}
+		if(subpanel.length > 0) {
+			panels.push(subpanel);
+		}
+		console.log("Panel:");
+		console.log(panels)
+
+		return (
+			<Animated.ScrollView
+				showsHorizontalScrollIndicator={false}
+				horizontal={true}
+				onScroll={Animated.event(
+					[{ nativeEvent: { contentOffset: { y: scrolling } } }],
+					{ useNativeDriver: true }
+				)}
+				decelerationRate={'fast'}
+				style={props.style.achievementPanel}
+				snapToInterval={props.style.achievementPanel}
+				snapToAlignment={'center'}>
+					{panels.map(item => (
+						<View style={props.style.achievementPanel}>
+							<AchievementPanel temp={item} style={props.style}/>
+						</View>
+						
+					))
+					}
+			</Animated.ScrollView>
+		);
+	} else {
+		return (
+			<AchievementPanel temp={list} style={props.style}/>
+		);
+	}
+}
 
 const OneCategory = (props) => {
 	console.log(props.progresses);
