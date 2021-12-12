@@ -54,28 +54,21 @@ function Habits(props) {
 	};
 
 	const gainXP = (xp) => {
-		fetch(
-			'http://localhost:5000/api/v1.0.0/pets/gain_exp',
-			{
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-					'authentication-token': getToken,
-				},
-				body: JSON.stringify({
-					expValue: xp,
-					totalExp: props.totalExp,
-					levelToEvolveNext: props.levelToEvolveNext
-				}),
+		fetch('http://localhost:5000/api/v1.0.0/pets/gain_exp', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				'authentication-token': getToken,
 			},
-		)
-			.then((res) =>
-				res.json().then(() => {
-					
-				}),
-			)
+			body: JSON.stringify({
+				expValue: xp,
+				totalExp: props.totalExp,
+				levelToEvolveNext: props.levelToEvolveNext,
+			}),
+		})
+			.then((res) => res.json().then(() => {}))
 			.catch();
-	}
+	};
 
 	const deleteHabit = () => {
 		fetch(

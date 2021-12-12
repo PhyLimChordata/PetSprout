@@ -1,12 +1,15 @@
 import React, { useState, useEffect, useContext } from 'react';
+
 import {
 	View,
 	Image,
 	Animated,
 	SafeAreaView,
 	RefreshControl,
+	StatusBar,
 } from 'react-native';
 
+import AndroidSafeView from '../styling/AndroidSafeAreaView';
 import styles from '../styling/HabitsScreen';
 import Habits from '../components/Habits';
 import MenuHeader from '../components/MenuHeader';
@@ -18,7 +21,7 @@ import { useTheme } from '@react-navigation/native';
 import { AuthContext } from '../Context';
 
 const levelMapping = {
-	0: { xpLevelCap: 100, totalXP: 100},
+	0: { xpLevelCap: 100, totalXP: 100 },
 	1: { xpLevelCap: 400, totalXP: 500 },
 	2: { xpLevelCap: 725, totalXP: 1225 },
 	3: { xpLevelCap: 950, totalXP: 2175 },
@@ -181,14 +184,13 @@ function HabitsScreen(props) {
 					//Cap for exp bar
 					setXpLevelCap(levelMapping[petsLevel].xpLevelCap);
 
-					if (petsLevel == 0) {	
-						setExperience(currentPet.expValue);					
+					if (petsLevel == 0) {
+						setExperience(currentPet.expValue);
 					} else {
 						let previousLevel = petsLevel - 1;
 						var previousTotalXPCap = levelMapping[previousLevel].totalXP;
 						setExperience(currentPet.expValue - previousTotalXPCap);
 					}
-					
 				}),
 			)
 			.catch();
@@ -200,21 +202,22 @@ function HabitsScreen(props) {
 		} else {
 			setLevelToEvolveNext(level + 10 - (level % 10));
 		}
-	}
+	};
 
 	return (
-		<SafeAreaView style={styles(colors).headContainer}>
+		<SafeAreaView
+			style={[
+				styles(colors).headContainer,
+				{ paddingTop: StatusBar.currentHeight },
+			]}
+		>
 			<MenuHeader text='' navigation={props.navigation} hp={heartValue} />
 			<View style={styles(colors).verticalContainer}>
 				<Image
 					style={styles(colors).creature}
 					source={require('../resources/animations/Egg.gif')}
 				/>
-				<ExperienceBar
-					level={level}
-					exp={experience}
-					xpLevelCap={xpLevelCap}
-				/>
+				<ExperienceBar level={level} exp={experience} xpLevelCap={xpLevelCap} />
 			</View>
 			<SafeAreaView style={styles(colors).scrollViewContainer}>
 				<Animated.ScrollView

@@ -6,72 +6,76 @@ const PetsSchema = new Schema({
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'user',
 	},
-    currentPet: {
-        name: {
-            type: String,
-            default: 'Egg'
-        },
-        level: {
-            type: Number,
-            default: 0
-        },
-        hp: {
-            type: Number, 
-            default: 100
-        },
-        expValue: {
-            type: Number, 
-            default: 0
-        },
-        image: {
-            type: String, 
-            default: 'Egg'
-        },
-        cosmetics: [{
-            type: String
-        }],
-        readyToEvolve: {
-            type: Boolean,
-            default: false
-        },
-        readyToHatch: {
-            type: Boolean,
-            default: false
-        }
-    },
+	currentPet: {
+		name: {
+			type: String,
+			default: 'Egg',
+		},
+		level: {
+			type: Number,
+			default: 0,
+		},
+		hp: {
+			type: Number,
+			default: 100,
+		},
+		expValue: {
+			type: Number,
+			default: 0,
+		},
+		image: {
+			type: String,
+			default: 'Egg',
+		},
+		cosmetics: [
+			{
+				type: String,
+			},
+		],
+		readyToEvolve: {
+			type: Boolean,
+			default: false,
+		},
+		readyToHatch: {
+			type: Boolean,
+			default: false,
+		},
+	},
 	pets: [
 		{
-            name: {
-                type: String,
-                default: 'Egg'
-            },
-            level: {
-                type: Number,
-                default: 0
-            },
-            hp: {
-                type: Number, 
-                default: 100
-            },
-            expValue: {
-                type: Number, 
-                default: 0
-            },
-            image: {
-                type: String, 
-                default: 'Egg'
-            },
-            cosmetics: [{
-                type: String
-            }],
-            readyToEvolve: {
-                type: Boolean,
-                default: false
-            },
-            readyToHatch: {
-                type: Boolean,
-                default: false
-            }
+			name: {
+				type: String,
+				default: 'Egg',
+			},
+			level: {
+				type: Number,
+				default: 0,
+			},
+			hp: {
+				type: Number,
+				default: 100,
+			},
+			expValue: {
+				type: Number,
+				default: 0,
+			},
+			image: {
+				type: String,
+				default: 'Egg',
+			},
+			cosmetics: [
+				{
+					type: String,
+				},
+			],
+			readyToEvolve: {
+				type: Boolean,
+				default: false,
+			},
+			readyToHatch: {
+				type: Boolean,
+				default: false,
+			},
 		},
 	],
 });

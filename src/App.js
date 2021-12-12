@@ -17,7 +17,7 @@ import VerifyEmailSignUpScreen from './frontend/screens/VerifyEmailSignUp';
 import PasswordScreen from './frontend/screens/AccountRecovery';
 import NewPasswordScreen from './frontend/screens/NewPassword';
 import VerifyEmailPasswordScreen from './frontend/screens/VerifyEmailPassword';
-import EvolutionScreen from "./frontend/screens/Evolution"
+import EvolutionScreen from './frontend/screens/Evolution';
 import SettingsScreen from './frontend/screens/Settings';
 import ProfileEditScreen from './frontend/screens/Profile';
 import AchievementScreen from './frontend/screens/Achievement';
@@ -31,7 +31,7 @@ import HabitsScreen from './frontend/screens/Habits';
 import CreateHabitScreen from './frontend/screens/PutHabits/CreateHabit';
 import ComingSoonScreen from './frontend/screens/ComingSoon';
 import ModifyHabitScreen from './frontend/screens/PutHabits/ModifyHabit';
-import NamePetScreen from './frontend/screens/NamePet'
+import NamePetScreen from './frontend/screens/NamePet';
 import AllHabitsScreen from './frontend/screens/AllHabits';
 // Colour Themes
 import GreenLightTheme from './frontend/resources/themes/light/GreenTheme';
@@ -162,15 +162,8 @@ function NavContainer(props) {
 						name='TermsAndConditionScreen'
 						component={TermsAndConditionScreen}
 					/>
-					<Stack.Screen
-						name='EvolutionScreen'
-						component={EvolutionScreen}
-					/>
-					<Stack.Screen
-						name='NamePetScreen'
-						component={NamePetScreen}
-					/>
-
+					<Stack.Screen name='EvolutionScreen' component={EvolutionScreen} />
+					<Stack.Screen name='NamePetScreen' component={NamePetScreen} />
 				</Stack.Navigator>
 			) : (
 				<Stack.Navigator headerMode='none'>

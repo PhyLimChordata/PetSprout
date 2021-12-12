@@ -18,7 +18,7 @@ function About(props) {
 	const style = styles(colors);
 
 	return (
-		<SafeAreaView>
+		<SafeAreaView style={{ height: '100%' }}>
 			<MenuHeader text='About' navigation={props.navigation}></MenuHeader>
 			<View style={style.container}>
 				<Image
@@ -63,7 +63,7 @@ function About(props) {
 					<Text style={style.aboutButtonText}>Terms and Condition</Text>
 				</TouchableOpacity>
 			</View>
-			<HomeButton navigation={props.navigation} colors={colors}/>
+			<HomeButton navigation={props.navigation} colors={colors} />
 		</SafeAreaView>
 	);
 }

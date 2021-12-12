@@ -51,6 +51,9 @@ function achievementStyles(theme, width, height) {
 		achievementHeader: {
 			fontSize: 24,
 		},
+		achievementPanel: {
+			width: 3 * (iconWidth + (0.05 * width)),
+		}
 	});
 }
 

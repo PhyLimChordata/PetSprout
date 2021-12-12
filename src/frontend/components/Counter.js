@@ -50,9 +50,10 @@ function Counter(props) {
 					flex: 1,
 					fontWeight: 'bold',
 					color: textColor,
-				}}>
-					{props.quantity}
-					</Text>
+				}}
+			>
+				{props.quantity}
+			</Text>
 			{props.supplementalInfo}
 		</View>
 	);

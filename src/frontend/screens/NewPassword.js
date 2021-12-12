@@ -24,20 +24,22 @@ function NewPassword(props) {
 		width: 300,
 	};
 
-	const [passwordInputStyle, setPasswordInputStyle] = useState(normalInputStyle);
-	const [reEnterPasswordInputStyle, setReEnterPasswordInputStyle] = useState(normalInputStyle);
+	const [passwordInputStyle, setPasswordInputStyle] =
+		useState(normalInputStyle);
+	const [reEnterPasswordInputStyle, setReEnterPasswordInputStyle] =
+		useState(normalInputStyle);
 
 	const [passwordTextStyle, setPasswordTextStyle] = useState({
 		fontSize: 20,
-			fontWeight: 'bold',
-			paddingBottom: 5,
-			color: colors.Quaternary,
+		fontWeight: 'bold',
+		paddingBottom: 5,
+		color: colors.Quaternary,
 	});
 	const [reEnterPasswordTextStyle, setReEnterPasswordTextStyle] = useState({
 		fontSize: 20,
-			fontWeight: 'bold',
-			paddingBottom: 5,
-			color: colors.Quaternary,
+		fontWeight: 'bold',
+		paddingBottom: 5,
+		color: colors.Quaternary,
 	});
 
 	const [error, setError] = useState('');
@@ -77,9 +79,9 @@ function NewPassword(props) {
 		if (password) {
 			setPasswordTextStyle({
 				fontSize: 20,
-			fontWeight: 'bold',
-			paddingBottom: 5,
-			color: Colours.Red.Error,
+				fontWeight: 'bold',
+				paddingBottom: 5,
+				color: Colours.Red.Error,
 			});
 			setPasswordInputStyle({
 				backgroundColor: Colours.Red.NotSelected,
@@ -93,9 +95,9 @@ function NewPassword(props) {
 		if (reenter) {
 			setReEnterPasswordTextStyle({
 				fontSize: 20,
-			fontWeight: 'bold',
-			paddingBottom: 5,
-			color: Colours.Red.Error,
+				fontWeight: 'bold',
+				paddingBottom: 5,
+				color: Colours.Red.Error,
 			});
 			setReEnterPasswordInputStyle({
 				backgroundColor: Colours.Red.NotSelected,

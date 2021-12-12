@@ -72,8 +72,7 @@ function profileStyles(theme, width, height) {
 			width: 110,
 			height: 26,
 			alignItems: 'center',
-			justifyContent: 'center'
-
+			justifyContent: 'center',
 		},
 		submitButtonText: {
 			color: theme.background,
