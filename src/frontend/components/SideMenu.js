@@ -90,6 +90,8 @@ function SideMenu(props) {
 		getMode,
 		getToken,
 		changeLogo,
+		changePet,
+		changeComingSoon,
 	} = useContext(AuthContext);
 
 	const { colors } = useTheme();
@@ -132,6 +134,20 @@ function SideMenu(props) {
 		changeColorTheme(color);
 		setColor(color);
 		changeLogo(require('../resources/images/Logo/Logo' + color + '.png'));
+		changePet(findPet(color));
+		changeComingSoon(
+			require('../resources/images/Pets/ComingSoon/ComingSoon' +
+				color +
+				'.png'),
+		);
+		props.setModalVisible(false);
+	}
+
+	function findPet(color) {
+		//if the pet is happy, neutral, sad
+		//determine which pet
+		//create the path
+		return require('../resources/images/Pets/Egg/EggHappy' + color + '.gif');
 	}
 
 	return (

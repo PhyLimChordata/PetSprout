@@ -9,7 +9,7 @@ import { AuthContext } from '../Context';
 
 function ComingSoon(props) {
 	const { colors } = useTheme();
-	const { getLogo } = useContext(AuthContext);
+	const { getLogo, getComingSoon } = useContext(AuthContext);
 
 	return (
 		<SafeAreaView style={styles(colors).headContainer}>
@@ -21,7 +21,7 @@ function ComingSoon(props) {
 
 			<Image
 				style={styles(colors).creature}
-				source={require('../resources/images/ComingSoon.png')}
+				source={getComingSoon}
 			/>
 		</SafeAreaView>
 	);
