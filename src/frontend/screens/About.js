@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, { useContext } from 'react';
 import {
 	View,
 	SafeAreaView,
@@ -23,10 +23,7 @@ function About(props) {
 		<SafeAreaView style={{ height: '100%' }}>
 			<MenuHeader text='About' navigation={props.navigation}></MenuHeader>
 			<View style={style.container}>
-				<Image
-					style={style.aboutLogo}
-					source={getLogo}
-				/>
+				<Image style={style.aboutLogo} source={getLogo} />
 				<Text style={style.textTitle}>HabiPets</Text>
 				<Text style={style.textSubtitle}>Version 1.0.0</Text>
 

@@ -83,8 +83,14 @@ const Tab = ({ color, icon, onPress, title, isImage = false }) => (
 );
 
 function SideMenu(props) {
-	const { changeColorTheme, getColor, changeModeTheme, getMode, getToken, changeLogo } =
-		useContext(AuthContext);
+	const {
+		changeColorTheme,
+		getColor,
+		changeModeTheme,
+		getMode,
+		getToken,
+		changeLogo,
+	} = useContext(AuthContext);
 
 	const { colors } = useTheme();
 	const [color, setColor] = useState(getColor);

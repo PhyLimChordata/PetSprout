@@ -54,7 +54,9 @@ export default function App() {
 	// Global variables within the app
 	const [token, setToken] = useState(null);
 	const [color, setColor] = useState('Green');
-	const [logo, setLogo] = useState(require('./frontend/resources/images/Logo/LogoGreen.png'));
+	const [logo, setLogo] = useState(
+		require('./frontend/resources/images/Logo/LogoGreen.png'),
+	);
 	const [mode, setMode] = useState('light');
 	const [refreshing, setRefreshing] = useState(false);
 
@@ -91,7 +93,7 @@ export default function App() {
 		setColor,
 		mode,
 		setMode,
-		logo, 
+		logo,
 		setLogo,
 		refreshing,
 		setRefreshing,

@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, { useContext } from 'react';
 import { View, Text, Image, SafeAreaView } from 'react-native';
 
 import styles from '../styling/ComingSoon';
@@ -15,10 +15,7 @@ function ComingSoon(props) {
 		<SafeAreaView style={styles(colors).headContainer}>
 			<MenuHeader text={props.title} navigation={props.navigation} />
 			<View style={styles(colors).container}>
-				<Image
-					style={styles(colors).logo}
-					source={getLogo}
-				/>
+				<Image style={styles(colors).logo} source={getLogo} />
 				<Text style={styles(colors).comingSoonText}>Coming Soon...</Text>
 			</View>
 

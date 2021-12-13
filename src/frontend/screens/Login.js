@@ -145,10 +145,7 @@ function Login(props) {
 
 	return (
 		<View style={styles(colors).container}>
-			<Image
-				style={styles(colors).authenticationLogo}
-				source={getLogo}
-			/>
+			<Image style={styles(colors).authenticationLogo} source={getLogo} />
 			<View style={styles(colors).inputContainer}>
 				<Text style={textStyle}>Email or Username</Text>
 				<TextInput

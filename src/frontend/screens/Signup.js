@@ -20,7 +20,6 @@ function SignupScreen(props) {
 
 	const { getLogo } = useContext(AuthContext);
 
-
 	const { colors } = useTheme();
 
 	const [usernameInputStyle, setUsernameInputStyle] = useState({
@@ -308,10 +307,7 @@ function SignupScreen(props) {
 
 	return (
 		<View style={styles(colors).container}>
-			<Image
-				style={styles(colors).authenticationLogo}
-				source={getLogo}
-			/>
+			<Image style={styles(colors).authenticationLogo} source={getLogo} />
 			<View style={styles(colors).inputContainer}>
 				<Text style={userNameTextStyle}>Username</Text>
 				<TextInput

@@ -1,12 +1,6 @@
 import React, { useState, useContext } from 'react';
 
-import {
-	View,
-	Text,
-	TextInput,
-	Image,
-	TouchableOpacity,
-} from 'react-native';
+import { View, Text, TextInput, Image, TouchableOpacity } from 'react-native';
 
 import styles from '../styling/Authentication';
 
@@ -107,10 +101,7 @@ function PasswordScreen(props) {
 
 	return (
 		<View style={styles(colors).container}>
-			<Image
-				style={styles(colors).authenticationLogo}
-				source={getLogo}
-			/>
+			<Image style={styles(colors).authenticationLogo} source={getLogo} />
 			<View style={styles(colors).header}>
 				<Text style={styles(colors).textTitle}>Account Recovery</Text>
 				<Text style={styles(colors).explanationText}>

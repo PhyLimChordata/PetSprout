@@ -154,10 +154,7 @@ function NewPassword(props) {
 
 	return (
 		<View style={styles(colors).container}>
-			<Image
-				style={styles(colors).authenticationLogo}
-				source={getLogo}
-			/>
+			<Image style={styles(colors).authenticationLogo} source={getLogo} />
 			<View style={styles(colors).header}>
 				<Text style={styles(colors).textTitle}>Enter a new Password</Text>
 			</View>
