@@ -94,7 +94,7 @@ function HabitsScreen(props) {
 
 	const scrolling = React.useRef(new Animated.Value(0)).current;
 
-	const { getToken, getRefreshing, changeRefreshing } = useContext(AuthContext);
+	const { getToken, getRefreshing, changeRefreshing, getPet } = useContext(AuthContext);
 
 	const [refreshing, setRefreshing] = React.useState(false);
 
@@ -215,7 +215,7 @@ function HabitsScreen(props) {
 			<View style={styles(colors).verticalContainer}>
 				<Image
 					style={styles(colors).creature}
-					source={require('../resources/animations/Egg.gif')}
+					source={getPet}
 				/>
 				<ExperienceBar level={level} exp={experience} xpLevelCap={xpLevelCap} />
 			</View>

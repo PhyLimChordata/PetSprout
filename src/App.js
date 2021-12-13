@@ -57,6 +57,12 @@ export default function App() {
 	const [logo, setLogo] = useState(
 		require('./frontend/resources/images/Logo/LogoGreen.png'),
 	);
+	const [pet, setPet] = useState(
+		require('./frontend/resources/images/Pets/Egg/EggHappyGreen.gif')
+	);
+	const [comingSoon, setComingSoon] = useState(
+		require('./frontend/resources/images/Pets/ComingSoon/ComingSoonGreen.png')
+	)
 	const [mode, setMode] = useState('light');
 	const [refreshing, setRefreshing] = useState(false);
 
@@ -80,9 +86,17 @@ export default function App() {
 			changeLogo: (logo) => {
 				setLogo(logo);
 			},
+			changePet: (pet) => {
+				setPet(pet);
+			},
+			changeComingSoon: (comingSoon) => {
+				setComingSoon(comingSoon);
+			},
 			getToken: token,
 			getColor: color,
 			getLogo: logo,
+			getPet: pet,
+			getComingSoon: comingSoon,
 			getMode: mode,
 			getRefreshing: refreshing,
 		};
@@ -95,6 +109,8 @@ export default function App() {
 		setMode,
 		logo,
 		setLogo,
+		setPet,
+		setComingSoon,
 		refreshing,
 		setRefreshing,
 	]);
