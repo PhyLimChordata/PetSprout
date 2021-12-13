@@ -24,6 +24,8 @@ function NewPassword(props) {
 		width: 300,
 	};
 
+	const { getLogo } = useContext(AuthContext);
+
 	const [passwordInputStyle, setPasswordInputStyle] =
 		useState(normalInputStyle);
 	const [reEnterPasswordInputStyle, setReEnterPasswordInputStyle] =
@@ -154,7 +156,7 @@ function NewPassword(props) {
 		<View style={styles(colors).container}>
 			<Image
 				style={styles(colors).authenticationLogo}
-				source={require('../resources/images/Logo.png')}
+				source={getLogo}
 			/>
 			<View style={styles(colors).header}>
 				<Text style={styles(colors).textTitle}>Enter a new Password</Text>

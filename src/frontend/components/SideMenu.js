@@ -83,7 +83,7 @@ const Tab = ({ color, icon, onPress, title, isImage = false }) => (
 );
 
 function SideMenu(props) {
-	const { changeColorTheme, getColor, changeModeTheme, getMode, getToken } =
+	const { changeColorTheme, getColor, changeModeTheme, getMode, getToken, changeLogo } =
 		useContext(AuthContext);
 
 	const { colors } = useTheme();
@@ -125,6 +125,7 @@ function SideMenu(props) {
 	function colorChange(color) {
 		changeColorTheme(color);
 		setColor(color);
+		changeLogo(require('../resources/images/Logo/Logo' + color + '.png'));
 	}
 
 	return (
@@ -314,28 +315,28 @@ function SideMenu(props) {
 						>
 							<ThemeCircle
 								colorTheme={Colours.Green}
-								selected={color == 'green'}
-								onPress={() => colorChange('green')}
+								selected={color == 'Green'}
+								onPress={() => colorChange('Green')}
 							/>
 							<ThemeCircle
 								colorTheme={Colours.Yellow}
-								selected={color == 'orange'}
-								onPress={() => colorChange('orange')}
+								selected={color == 'Orange'}
+								onPress={() => colorChange('Orange')}
 							/>
 							<ThemeCircle
 								colorTheme={Colours.Blue}
-								selected={color == 'blue'}
-								onPress={() => colorChange('blue')}
+								selected={color == 'Blue'}
+								onPress={() => colorChange('Blue')}
 							/>
 							<ThemeCircle
 								colorTheme={Colours.Purple}
-								selected={color == 'purple'}
-								onPress={() => colorChange('purple')}
+								selected={color == 'Purple'}
+								onPress={() => colorChange('Purple')}
 							/>
 							<ThemeCircle
 								colorTheme={Colours.Red}
-								selected={color == 'red'}
-								onPress={() => colorChange('red')}
+								selected={color == 'Red'}
+								onPress={() => colorChange('Red')}
 							/>
 						</View>
 						<View style={{ alignItems: 'center' }}>

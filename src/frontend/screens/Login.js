@@ -141,11 +141,13 @@ function Login(props) {
 			.catch();
 	};
 
+	const { getLogo } = useContext(AuthContext);
+
 	return (
 		<View style={styles(colors).container}>
 			<Image
 				style={styles(colors).authenticationLogo}
-				source={require('../resources/images/Logo.png')}
+				source={getLogo}
 			/>
 			<View style={styles(colors).inputContainer}>
 				<Text style={textStyle}>Email or Username</Text>
