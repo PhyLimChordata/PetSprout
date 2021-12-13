@@ -1,19 +1,13 @@
 import React, { useState, useContext } from 'react';
 
-import {
-	View,
-	Text,
-	TextInput,
-	Image,
-	TouchableOpacity,
-	ShadowPropTypesIOS,
-} from 'react-native';
+import { View, Text, TextInput, Image, TouchableOpacity } from 'react-native';
 
 import styles from '../styling/Authentication';
 
 import { useTheme } from '@react-navigation/native';
 
 import Colours from '../resources/themes/Colours';
+import { AuthContext } from '../Context';
 
 function PasswordScreen(props) {
 	const { colors } = useTheme();
@@ -29,6 +23,8 @@ function PasswordScreen(props) {
 		width: 300,
 	});
 	const [error, setError] = useState('');
+
+	const { getLogo } = useContext(AuthContext);
 
 	const updatingPrimaryInfo = (text) => {
 		setPrimaryInfo(text);
@@ -105,10 +101,7 @@ function PasswordScreen(props) {
 
 	return (
 		<View style={styles(colors).container}>
-			<Image
-				style={styles(colors).authenticationLogo}
-				source={require('../resources/images/Logo.png')}
-			/>
+			<Image style={styles(colors).authenticationLogo} source={getLogo} />
 			<View style={styles(colors).header}>
 				<Text style={styles(colors).textTitle}>Account Recovery</Text>
 				<Text style={styles(colors).explanationText}>

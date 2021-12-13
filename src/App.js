@@ -53,7 +53,10 @@ const Stack = createStackNavigator();
 export default function App() {
 	// Global variables within the app
 	const [token, setToken] = useState(null);
-	const [color, setColor] = useState('green');
+	const [color, setColor] = useState('Green');
+	const [logo, setLogo] = useState(
+		require('./frontend/resources/images/Logo/LogoGreen.png'),
+	);
 	const [mode, setMode] = useState('light');
 	const [refreshing, setRefreshing] = useState(false);
 
@@ -74,8 +77,12 @@ export default function App() {
 			changeRefreshing: (refreshMode) => {
 				setRefreshing(refreshMode);
 			},
+			changeLogo: (logo) => {
+				setLogo(logo);
+			},
 			getToken: token,
 			getColor: color,
+			getLogo: logo,
 			getMode: mode,
 			getRefreshing: refreshing,
 		};
@@ -86,6 +93,8 @@ export default function App() {
 		setColor,
 		mode,
 		setMode,
+		logo,
+		setLogo,
 		refreshing,
 		setRefreshing,
 	]);
@@ -94,29 +103,29 @@ export default function App() {
 	return (
 		<AuthContext.Provider value={authContext}>
 			{mode == 'light' ? (
-				color == 'green' ? (
+				color == 'Green' ? (
 					<NavContainer token={token} theme={GreenLightTheme} />
-				) : color == 'orange' ? (
+				) : color == 'Orange' ? (
 					<NavContainer token={token} theme={OrangeLightTheme} />
-				) : color == 'blue' ? (
+				) : color == 'Blue' ? (
 					<NavContainer token={token} theme={BlueLightTheme} />
-				) : color == 'purple' ? (
+				) : color == 'Purple' ? (
 					<NavContainer token={token} theme={PurpleLightTheme} />
-				) : color == 'red' ? (
+				) : color == 'Red' ? (
 					<NavContainer token={token} theme={RedLightTheme} />
 				) : (
 					<NavContainer token={token} theme={GreenLightTheme} />
 				)
 			) : mode == 'dark' ? (
-				color == 'green' ? (
+				color == 'Green' ? (
 					<NavContainer token={token} theme={GreenDarkTheme} />
-				) : color == 'orange' ? (
+				) : color == 'Orange' ? (
 					<NavContainer token={token} theme={OrangeDarkTheme} />
-				) : color == 'blue' ? (
+				) : color == 'Blue' ? (
 					<NavContainer token={token} theme={BlueDarkTheme} />
-				) : color == 'purple' ? (
+				) : color == 'Purple' ? (
 					<NavContainer token={token} theme={PurpleDarkTheme} />
-				) : color == 'red' ? (
+				) : color == 'Red' ? (
 					<NavContainer token={token} theme={RedDarkTheme} />
 				) : (
 					<NavContainer token={token} theme={GreenDarkTheme} />

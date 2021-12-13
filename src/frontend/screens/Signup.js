@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { View, Text, TextInput, Image, TouchableOpacity } from 'react-native';
 
 import styles from '../styling/Authentication';
 import { useTheme } from '@react-navigation/native';
 import Colours from '../resources/themes/Colours';
+
+import { AuthContext } from '../Context';
 
 function SignupScreen(props) {
 	const [userName, setusername] = useState('');
@@ -15,6 +17,8 @@ function SignupScreen(props) {
 	const [emailError, setEmailError] = useState('');
 	const [passwordError, setPasswordError] = useState('');
 	const [reEnterPasswordError, setReEnterPasswordError] = useState('');
+
+	const { getLogo } = useContext(AuthContext);
 
 	const { colors } = useTheme();
 
@@ -303,10 +307,7 @@ function SignupScreen(props) {
 
 	return (
 		<View style={styles(colors).container}>
-			<Image
-				style={styles(colors).authenticationLogo}
-				source={require('../resources/images/Logo.png')}
-			/>
+			<Image style={styles(colors).authenticationLogo} source={getLogo} />
 			<View style={styles(colors).inputContainer}>
 				<Text style={userNameTextStyle}>Username</Text>
 				<TextInput
