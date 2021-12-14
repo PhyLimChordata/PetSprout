@@ -334,15 +334,15 @@ function HomeScreen(props) {
 
 // TODO: Replace the below with imported screens
 function Calendar(props) {
-	return <ComingSoonScreen title='Calendar' />;
+	return <ComingSoonScreen title='Calendar' navigation={props.navigation} />;
 }
 
 function Pomodoro(props) {
-	return <ComingSoonScreen title='Pomodoro' />;
+	return <ComingSoonScreen title='Pomodoro' navigation={props.navigation}/>;
 }
 
 function Reflect(props) {
-	return <ComingSoonScreen title='Reflect' />;
+	return <ComingSoonScreen title='Reflect' navigation={props.navigation}/>;
 }
 
 // The 'create' button in the bottom navigation bar
