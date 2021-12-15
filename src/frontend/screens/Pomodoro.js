@@ -24,7 +24,7 @@ import * as BackgroundFetch from 'expo-background-fetch';
 
 import * as TaskManager from 'expo-task-manager';
 
-import { DisplayPet } from '../components/DisplayPet';
+import { DisplayPet, gainXP, getHP } from '../components/DisplayPet';
 
 const BACKGROUND_FETCH_TASK = 'background-fetch';
 
@@ -42,10 +42,21 @@ function PomodoroScreen(props) {
 	const [breakEnabled, setBreak] = useState(false);
 	const [rounds, setRounds] = useState(0);
 
-	const [mode, setMode] = useState('Pomodoro');
+	const heartSize = 70;
+	const [heartValue, setHeartValue] = useState({
+		size: heartSize,
+		view: {
+			position: 'absolute',
+			height: heartSize,
+			width: heartSize,
+			marginTop: 0,
+			overflow: 'hidden',
+		},
+		image: { height: heartSize, width: heartSize, bottom: 0, zIndex: 1 },
+		value: 100,
+	});
 
-	const [xpLevelCap, setXpLevelCap] = useState(0);
-	const [totalXPCap, setTotalXPCap] = useState(0);
+	const [mode, setMode] = useState('Pomodoro');
 
 	const formatNumber = (number) => {
 		return ('0' + number.toString()).slice(-2);
@@ -74,6 +85,12 @@ function PomodoroScreen(props) {
 	};
 
 	useEffect(() => {
+		if (getRefreshing) {
+			setHeartValue(getHP);
+		}
+	}, [getRefreshing]);
+
+	useEffect(() => {
 		let interval = null;
 		if (isActive) {
 			if (mode != 'Pomodoro') {
@@ -99,43 +116,17 @@ function PomodoroScreen(props) {
 				setMode('Pomodoro');
 			} else {
 				if (rounds >= 3 && rounds % 3 == 0) {
-					gainXP(500);
-				} else {
-					gainXP(150);
+					gainXP(500, getToken);
+				} else if (rounds > 0) {
+					gainXP(150, getToken);
 				}
-				updatePet();
+				changeRefreshing(true);
 			}
 		}
 		return () => clearInterval(interval);
 	}, [isActive, remainingSecs]);
 
-	const heartSize = 70;
-	//THIS CAN VARY BASED ON USER's PET
-	const maxHealth = 100;
-	const [heartValue, setHeartValue] = useState({
-		size: heartSize,
-		view: {
-			position: 'absolute',
-			height: heartSize,
-			width: heartSize,
-			marginTop: 0,
-			overflow: 'hidden',
-		},
-		image: { height: heartSize, width: heartSize, bottom: 0, zIndex: 1 },
-		value: 100,
-	});
-
-	const [level, setLevel] = useState('');
-
 	const { getToken, getRefreshing, changeRefreshing } = useContext(AuthContext);
-
-	const [experience, setExperience] = useState('');
-
-	const [displayed, setDisplayed] = useState(false);
-
-	useEffect(() => {
-		if (!displayed) updatePet();
-	});
 
 	useEffect(() => {
 		checkStatusAsync();
@@ -160,83 +151,6 @@ function PomodoroScreen(props) {
 		}
 
 		checkStatusAsync();
-	};
-
-	const [levelToEvolveNext, setLevelToEvolveNext] = useState(0);
-
-	const gainXP = (xp) => {
-		fetch('http://localhost:5000/api/v1.0.0/pets/gain_exp', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-				'authentication-token': getToken,
-			},
-			body: JSON.stringify({
-				expValue: xp,
-				totalExp: totalXPCap,
-				levelToEvolveNext: levelToEvolveNext,
-			}),
-		})
-			.then((res) => res.json().then(() => {}))
-			.catch();
-	};
-
-	const updatePet = () => {
-		fetch('http://localhost:5000/api/v1.0.0/pets/get_current', {
-			method: 'GET',
-			headers: {
-				'Content-Type': 'application/json',
-				'authentication-token': getToken,
-			},
-		})
-			.then((res) =>
-				res.json().then((currentPet) => {
-					setDisplayed(true);
-					let tempHeartValue = heartValue;
-					tempHeartValue.view.height = currentPet.hp * (heartSize / maxHealth);
-					tempHeartValue.view.marginTop =
-						heartSize - tempHeartValue.view.height;
-					tempHeartValue.image.bottom = tempHeartValue.view.marginTop;
-					tempHeartValue.value = Math.ceil(
-						tempHeartValue.view.height * (maxHealth / heartSize),
-					);
-
-					setHeartValue(tempHeartValue);
-
-					if (currentPet.readyToEvolve) {
-						//set some visibility
-					}
-
-					if (currentPet.readyToHatch) {
-						//set some visibility
-					}
-
-					const petsLevel = currentPet.level;
-					setLevel(currentPet.level);
-					setNextLevelToEvolve();
-					setTotalXPCap(LevelMapping[petsLevel].totalXP);
-
-					//Cap for exp bar
-					setXpLevelCap(LevelMapping[petsLevel].xpLevelCap);
-
-					if (petsLevel == 0) {
-						setExperience(currentPet.expValue);
-					} else {
-						let previousLevel = petsLevel - 1;
-						var previousTotalXPCap = LevelMapping[previousLevel].totalXP;
-						setExperience(currentPet.expValue - previousTotalXPCap);
-					}
-				}),
-			)
-			.catch();
-	};
-
-	const setNextLevelToEvolve = () => {
-		if (level == 40) {
-			setLevelToEvolveNext(-1);
-		} else {
-			setLevelToEvolveNext(level + 10 - (level % 10));
-		}
 	};
 
 	const toggle = () => {

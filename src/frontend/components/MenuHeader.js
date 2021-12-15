@@ -50,14 +50,12 @@ function MenuHeader(props) {
 						textAlign: 'center',
 						alignItems: 'center',
 						textAlignVertical: 'center',
-						paddingRight: 30,
-						paddingTop: 10,
 					}}
 				>
 					<Text
 						style={{
 							position: 'absolute',
-							top: '40%',
+							top: '30%',
 							color: Colours.Red.HeartValue,
 							fontSize: 20,
 							fontWeight: 'bold',

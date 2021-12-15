@@ -8,13 +8,34 @@ import { LevelMapping } from '../resources/mappings/LevelMapping';
 
 var totalXP = 0;
 var lvlToEvolve = 0;
+const heartSize = 70;
+//THIS CAN VARY BASED ON USER's PET
+const maxHealth = 100;
+var hp = {
+	size: heartSize,
+	view: {
+		position: 'absolute',
+		height: heartSize,
+		width: heartSize,
+		marginTop: 0,
+		overflow: 'hidden',
+	},
+	image: { height: heartSize, width: heartSize, bottom: 0, zIndex: 1 },
+	value: 100,
+};
+const _ = require('lodash');
 
-function gainXP(xp) {
+export function getHP() {
+	return hp;
+}
+
+export function gainXP(xp, token) {
+	console.log('asd');
 	fetch('http://localhost:5000/api/v1.0.0/pets/gain_exp', {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',
-			'authentication-token': getToken,
+			'authentication-token': token,
 		},
 		body: JSON.stringify({
 			expValue: xp,
@@ -28,34 +49,33 @@ function gainXP(xp) {
 
 export function DisplayPet(props) {
 	const { colors } = useTheme();
-	const [totalXPCap, setTotalXPCap] = useState(0);
-	const [levelToEvolveNext, setLevelToEvolveNext] = useState(0);
+	const [totalXPCap, setTotalXPCap] = useState(_.cloneDeep(totalXP));
+	const [levelToEvolveNext, setLevelToEvolveNext] = useState(
+		_.cloneDeep(lvlToEvolve),
+	);
 
 	const [xpLevelCap, setXpLevelCap] = useState(0);
 	const [experience, setExperience] = useState('');
 	const [level, setLevel] = useState('');
+	const [displayed, setDisplayed] = useState(false);
 
-	const heartSize = 70;
-	//THIS CAN VARY BASED ON USER's PET
-	const maxHealth = 100;
-	const [heartValue, setHeartValue] = useState({
-		size: heartSize,
-		view: {
-			position: 'absolute',
-			height: heartSize,
-			width: heartSize,
-			marginTop: 0,
-			overflow: 'hidden',
-		},
-		image: { height: heartSize, width: heartSize, bottom: 0, zIndex: 1 },
-		value: 100,
-	});
+	const [heartValue, setHeartValue] = useState(_.cloneDeep(hp));
+
+	const [refreshing, setRefreshing] = React.useState(false);
 
 	useEffect(() => {
-		updatePet();
-	}, [xpLevelCap, totalXPCap, experience, level, heartValue]);
+		if (!displayed) {
+			updatePet();
+		}
+	});
 
-	const { getToken, getRefreshing, changeRefreshing } = useContext(AuthContext);
+	const { getToken, getRefreshing } = useContext(AuthContext);
+
+	useEffect(() => {
+		if (getRefreshing) {
+			updatePet();
+		}
+	}, [getRefreshing]);
 
 	const updatePet = () => {
 		fetch('http://localhost:5000/api/v1.0.0/pets/get_current', {
@@ -69,23 +89,24 @@ export function DisplayPet(props) {
 				res.json().then((currentPet) => {
 					setDisplayed(true);
 					//TODO: DEEP CLONE
-					let tempHeartValue = {
-						size: heartSize,
-						view: {
-							position: 'absolute',
-							height: heartSize,
-							width: heartSize,
-							marginTop: 0,
-							overflow: 'hidden',
-						},
-						image: {
-							height: heartSize,
-							width: heartSize,
-							bottom: 0,
-							zIndex: 1,
-						},
-						value: 100,
-					};
+					let tempHeartValue = _.cloneDeep(heartValue);
+					// let tempHeartValue = {
+					// 	size: heartSize,
+					// 	view: {
+					// 		position: 'absolute',
+					// 		height: heartSize,
+					// 		width: heartSize,
+					// 		marginTop: 0,
+					// 		overflow: 'hidden',
+					// 	},
+					// 	image: {
+					// 		height: heartSize,
+					// 		width: heartSize,
+					// 		bottom: 0,
+					// 		zIndex: 1,
+					// 	},
+					// 	value: 100,
+					// };
 					tempHeartValue.view.height = currentPet.hp * (heartSize / maxHealth);
 					tempHeartValue.view.marginTop =
 						heartSize - tempHeartValue.view.height;
@@ -93,6 +114,7 @@ export function DisplayPet(props) {
 					tempHeartValue.value = Math.ceil(
 						tempHeartValue.view.height * (maxHealth / heartSize),
 					);
+					hp = _.cloneDeep(tempHeartValue);
 
 					setHeartValue(tempHeartValue);
 
@@ -104,7 +126,7 @@ export function DisplayPet(props) {
 						//set some visibility
 					}
 
-					const petsLevel = currentPet.level;
+					const petsLevel = currentPet.level.toString();
 					setLevel(currentPet.level);
 					setNextLevelToEvolve();
 					setTotalXPCap(LevelMapping[petsLevel].totalXP);
@@ -116,6 +138,7 @@ export function DisplayPet(props) {
 						setExperience(currentPet.expValue);
 					} else {
 						let previousLevel = petsLevel - 1;
+
 						var previousTotalXPCap = LevelMapping[previousLevel].totalXP;
 						setExperience(currentPet.expValue - previousTotalXPCap);
 					}

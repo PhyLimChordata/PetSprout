@@ -22,12 +22,9 @@ import { AuthContext } from '../Context';
 import { LevelMapping } from '../resources/mappings/LevelMapping';
 
 import { DisplayPet } from '../components/DisplayPet';
-// import gainXP from '../components/DisplayPet';
 
 function HabitsScreen(props) {
 	const heartSize = 70;
-	//THIS CAN VARY BASED ON USER's PET
-	const maxHealth = 100;
 	const [habits, setHabits] = useState([]);
 	const [heartValue, setHeartValue] = useState({
 		size: heartSize,
@@ -69,14 +66,12 @@ function HabitsScreen(props) {
 	useEffect(() => {
 		if (habits.length == 0 && !displayed) {
 			displayHabits();
-			updatePet();
 		}
 	});
 
 	useEffect(() => {
 		if (getRefreshing) {
 			displayHabits();
-			updatePet();
 		}
 	}, [getRefreshing]);
 
@@ -112,69 +107,6 @@ function HabitsScreen(props) {
 			.catch();
 	};
 
-	const _ = require('lodash');
-
-	const updatePet = () => {
-		fetch('http://localhost:5000/api/v1.0.0/pets/get_current', {
-			method: 'GET',
-			headers: {
-				'Content-Type': 'application/json',
-				'authentication-token': getToken,
-			},
-		})
-			.then((res) =>
-				res.json().then((currentPet) => {
-					var tempHeartValue = _.cloneDeep(heartValue);
-					tempHeartValue.view['height'] =
-						currentPet.hp * (heartSize / maxHealth);
-					tempHeartValue.view.marginTop =
-						heartSize - tempHeartValue.view.height;
-					tempHeartValue.image.bottom = tempHeartValue.view.marginTop;
-
-					tempHeartValue.value = Math.ceil(
-						tempHeartValue.view.height * (maxHealth / heartSize),
-					);
-					console.log(tempHeartValue);
-					setHeartValue(tempHeartValue);
-					console.log(heartValue);
-					if (currentPet.readyToEvolve) {
-						//set some visibility
-					}
-
-					if (currentPet.readyToHatch) {
-						//set some visibility
-					}
-
-					const petsLevel = currentPet.level;
-					setLevel(currentPet.level);
-					setNextLevelToEvolve();
-					setTotalXPCap(LevelMapping[petsLevel].totalXP);
-
-					//Cap for exp bar
-					setXpLevelCap(LevelMapping[petsLevel].xpLevelCap);
-
-					if (petsLevel == 0) {
-						setExperience(currentPet.expValue);
-					} else {
-						let previousLevel = petsLevel - 1;
-						var previousTotalXPCap = LevelMapping[previousLevel].totalXP;
-						setExperience(currentPet.expValue - previousTotalXPCap);
-					}
-				}),
-			)
-			.catch((err) => {
-				console.log(err);
-			});
-	};
-
-	const setNextLevelToEvolve = () => {
-		if (level == 40) {
-			setLevelToEvolveNext(-1);
-		} else {
-			setLevelToEvolveNext(level + 10 - (level % 10));
-		}
-	};
-
 	return (
 		<SafeAreaView
 			style={[
@@ -183,10 +115,6 @@ function HabitsScreen(props) {
 			]}
 		>
 			<MenuHeader text='' navigation={props.navigation} hp={heartValue} />
-			{/* <View style={styles(colors).verticalContainer}>
-				<Image style={styles(colors).creature} source={getPet} />
-				<ExperienceBar level={level} exp={experience} xpLevelCap={xpLevelCap} />
-			</View> */}
 			<DisplayPet />
 			<SafeAreaView style={styles(colors).scrollViewContainer}>
 				<Animated.ScrollView
