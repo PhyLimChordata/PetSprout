@@ -12,6 +12,9 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 // import Toggle from 'react-native-toggle-element';
 import Colours from '../resources/themes/Colours';
 import { useTheme } from '@react-navigation/native';
+import { logo } from '../resources/images/Logo/Logo';
+import { comingsoon } from '../resources/images/Pets/ComingSoon/ComingSoon';
+import { egg } from '../resources/images/Pets/Egg/Egg';
 
 function ThemeCircle({ colorTheme, onPress, selected }) {
 	return (
@@ -135,7 +138,6 @@ function SideMenu(props) {
 		setColor(color);
 		props.setModalVisible(false);
 	}
-
 	return (
 		<Modal
 			swipeDirection='left'

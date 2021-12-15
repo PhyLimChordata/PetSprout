@@ -20,6 +20,7 @@ import { useTheme } from '@react-navigation/native';
 
 import { AuthContext } from '../Context';
 import { LevelMapping } from '../resources/mappings/LevelMapping';
+
 function HabitsScreen(props) {
 	const heartSize = 70;
 	//THIS CAN VARY BASED ON USER's PET
