@@ -1,6 +1,13 @@
 import React, { useState, useContext } from 'react';
 
-import { View, Text, TextInput, Image, TouchableOpacity } from 'react-native';
+import {
+	View,
+	Text,
+	TextInput,
+	Image,
+	TouchableOpacity,
+	ShadowPropTypesIOS,
+} from 'react-native';
 
 import styles from '../styling/Authentication';
 
