@@ -33,8 +33,7 @@ const checkUserExist = async (req, res) => {
 			if (!user) return res.status(404).json("User hasn't been registered in");
 		}
 
-		if (user.status === 0)
-			return res.status(403).json({email: email});
+		if (user.status === 0) return res.status(403).json({ email: email });
 
 		res.status(200).json({ email: email });
 	} catch (error) {

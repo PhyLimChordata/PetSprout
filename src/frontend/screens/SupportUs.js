@@ -17,7 +17,7 @@ function SupportUs(props) {
 	const { colors } = useTheme();
 	const style = styles(colors);
 	return (
-		<SafeAreaView style={{height: "100%"}}>
+		<SafeAreaView style={{ height: '100%' }}>
 			<MenuHeader text='Support Us' navigation={props.navigation}></MenuHeader>
 			<View style={style.container}>
 				<Image
@@ -40,7 +40,7 @@ function SupportUs(props) {
 					<Text style={style.supportUsButtonText}>Donate</Text>
 				</TouchableOpacity>
 			</View>
-			<HomeButton navigation={props.navigation} colors={colors}/>
+			<HomeButton navigation={props.navigation} colors={colors} />
 		</SafeAreaView>
 	);
 }

@@ -18,6 +18,7 @@ const addHealth = async (req, res) => {
 			currentPet.hp = 100;
 		}
 		setMood(currentPet);
+
 		await currentPet.save();
 
 		res.json(currentPet);
@@ -50,7 +51,6 @@ const loseHealth = async (req, res) => {
 		res.status(500).json('Server error');
 	}
 };
-
 const setMood = (pet) => {
 	if (pet.hp > 70) {
 		pet.mood = 'happy';

@@ -33,7 +33,6 @@ function ProfileEdit(props) {
 	const { getToken } = useContext(AuthContext);
 	const { colors } = useTheme();
 	//let styles= profileStyles(Dimensions.get('screen').width, Dimensions.get('screen').height, colors)
-
 	let styles = profileStyles(
 		colors,
 		Dimensions.get('screen').width,
@@ -121,7 +120,7 @@ function ProfileEdit(props) {
 
 	return (
 		<>
-			<SafeAreaView style={{height: "100%"}}>
+			<SafeAreaView style={{ height: '100%' }}>
 				<View>
 					<MenuHeader
 						text='Account  '
@@ -200,9 +199,7 @@ function ProfileEdit(props) {
 					</View>
 					<SubmitButton submit={onSubmit} />
 				</View>
-				<HomeButton navigation={props.navigation} colors={colors}/>
-
-				
+				<HomeButton navigation={props.navigation} colors={colors} />
 			</SafeAreaView>
 			<BottomPopup ref={popup} color={color} text={message} />
 		</>

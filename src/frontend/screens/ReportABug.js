@@ -51,7 +51,7 @@ function ReportABug(props) {
 	}
 
 	return (
-		<SafeAreaView style={{height: "100%"}}>
+		<SafeAreaView style={{ height: '100%' }}>
 			<MenuHeader
 				text='Report a Bug'
 				navigation={props.navigation}
@@ -82,8 +82,7 @@ function ReportABug(props) {
 				</TouchableOpacity>
 				{popup}
 			</View>
-            <HomeButton navigation={props.navigation} colors={colors}/>
-
+			<HomeButton navigation={props.navigation} colors={colors} />
 		</SafeAreaView>
 	);
 }

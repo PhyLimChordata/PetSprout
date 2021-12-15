@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Platform, StatusBar } from 'react-native';
 import Colours from '../resources/themes/Colours';
 
 const habitsStyles = (theme) =>

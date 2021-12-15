@@ -11,9 +11,7 @@ function Ellipsis(props) {
 	const containerColor = props.completed
 		? Colours.Grey.ExpBarBackground
 		: colors.Secondary;
-	const textColor = props.completed
-		? Colours.Grey.Text
-		: colors.Quaternary;
+	const textColor = props.completed ? Colours.Grey.Text : colors.Quaternary;
 	return (
 		<TouchableOpacity
 			style={{

@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { View, Text, TextInput, Image, TouchableOpacity } from 'react-native';
 
 import styles from '../styling/Authentication';
 import { useTheme } from '@react-navigation/native';
 import Colours from '../resources/themes/Colours';
+
+import { AuthContext } from '../Context';
 
 function SignupScreen(props) {
 	const [userName, setusername] = useState('');
@@ -15,6 +17,8 @@ function SignupScreen(props) {
 	const [emailError, setEmailError] = useState('');
 	const [passwordError, setPasswordError] = useState('');
 	const [reEnterPasswordError, setReEnterPasswordError] = useState('');
+
+	const { getLogo } = useContext(AuthContext);
 
 	const { colors } = useTheme();
 
@@ -177,9 +181,8 @@ function SignupScreen(props) {
 		});
 	};
 
-
-const regEmail =
-/^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
+	const regEmail =
+		/^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
 
 	const attemptSignup = () => {
 		fetch('http://localhost:5000/api/v1.0.0/user/register', {
@@ -230,7 +233,7 @@ const regEmail =
 					});
 				} else if (res.status == 401) {
 					setUserNameError(res.statusText);
-					if (res.statusText == 'User email exists'){						
+					if (res.statusText == 'User email exists') {
 						setEmailInputStyle(errorIndicator);
 						setEmailTextStyle({
 							fontSize: 20,
@@ -238,8 +241,7 @@ const regEmail =
 							paddingBottom: 5,
 							color: Colours.Red.Error,
 						});
-					}
-					else if (res.statusText == 'User name exists') {
+					} else if (res.statusText == 'User name exists') {
 						setUsernameInputStyle(errorIndicator);
 						setUserNameTextStyle({
 							fontSize: 20,
@@ -247,7 +249,7 @@ const regEmail =
 							paddingBottom: 5,
 							color: Colours.Red.Error,
 						});
-					}	
+					}
 				} else if (res.status == 400) {
 					if (password.length < 6) {
 						setPasswordError('Passwords must be 6-12 characters');
@@ -270,13 +272,13 @@ const regEmail =
 					}
 					if (!regEmail.test(email)) {
 						setEmailError('Please enter a valid email');
-					setEmailInputStyle(errorIndicator);
-					setEmailTextStyle({
-						fontSize: 20,
-						fontWeight: 'bold',
-						paddingBottom: 5,
-						color: Colours.Red.Error,
-					});
+						setEmailInputStyle(errorIndicator);
+						setEmailTextStyle({
+							fontSize: 20,
+							fontWeight: 'bold',
+							paddingBottom: 5,
+							color: Colours.Red.Error,
+						});
 					}
 				}
 				if (email == '') {
@@ -305,10 +307,7 @@ const regEmail =
 
 	return (
 		<View style={styles(colors).container}>
-			<Image
-				style={styles(colors).authenticationLogo}
-				source={require('../resources/images/Logo.png')}
-			/>
+			<Image style={styles(colors).authenticationLogo} source={getLogo} />
 			<View style={styles(colors).inputContainer}>
 				<Text style={userNameTextStyle}>Username</Text>
 				<TextInput

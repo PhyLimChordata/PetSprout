@@ -22,7 +22,7 @@ function Feedback(props) {
 	const [feedback, setFeedback] = useState('');
 
 	return (
-		<SafeAreaView style={{height: "100%"}}>
+		<SafeAreaView style={{ height: '100%' }}>
 			<MenuHeader
 				text='Feedback'
 				navigation={props.navigation}

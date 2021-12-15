@@ -12,6 +12,9 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 // import Toggle from 'react-native-toggle-element';
 import Colours from '../resources/themes/Colours';
 import { useTheme } from '@react-navigation/native';
+import { logo } from '../resources/images/Logo/Logo';
+import { comingsoon } from '../resources/images/Pets/ComingSoon/ComingSoon';
+import { egg } from '../resources/images/Pets/Egg/Egg';
 
 function ThemeCircle({ colorTheme, onPress, selected }) {
 	return (
@@ -83,8 +86,16 @@ const Tab = ({ color, icon, onPress, title, isImage = false }) => (
 );
 
 function SideMenu(props) {
-	const { changeColorTheme, getColor, changeModeTheme, getMode, getToken } =
-		useContext(AuthContext);
+	const {
+		changeColorTheme,
+		getColor,
+		changeModeTheme,
+		getMode,
+		getToken,
+		changeLogo,
+		changePet,
+		changeComingSoon,
+	} = useContext(AuthContext);
 
 	const { colors } = useTheme();
 	const [color, setColor] = useState(getColor);
@@ -125,6 +136,22 @@ function SideMenu(props) {
 	function colorChange(color) {
 		changeColorTheme(color);
 		setColor(color);
+		changeLogo(logo[color]);
+		//TODO: use findPet
+		console.log(egg);
+		console.log(egg[color]);
+		console.log(comingsoon);
+		console.log(comingsoon[color]);
+		changePet(egg[color]);
+		changeComingSoon(comingsoon[color]);
+		props.setModalVisible(false);
+	}
+
+	function findPet(color) {
+		//if the pet is happy, neutral, sad
+		//determine which pet
+		//create the path
+		// return require('../resources/images/Pets/Egg/EggHappy' + color + '.gif');
 	}
 
 	return (
@@ -314,28 +341,28 @@ function SideMenu(props) {
 						>
 							<ThemeCircle
 								colorTheme={Colours.Green}
-								selected={color == 'green'}
-								onPress={() => colorChange('green')}
+								selected={color == 'Green'}
+								onPress={() => colorChange('Green')}
 							/>
 							<ThemeCircle
 								colorTheme={Colours.Yellow}
-								selected={color == 'orange'}
-								onPress={() => colorChange('orange')}
+								selected={color == 'Orange'}
+								onPress={() => colorChange('Orange')}
 							/>
 							<ThemeCircle
 								colorTheme={Colours.Blue}
-								selected={color == 'blue'}
-								onPress={() => colorChange('blue')}
+								selected={color == 'Blue'}
+								onPress={() => colorChange('Blue')}
 							/>
 							<ThemeCircle
 								colorTheme={Colours.Purple}
-								selected={color == 'purple'}
-								onPress={() => colorChange('purple')}
+								selected={color == 'Purple'}
+								onPress={() => colorChange('Purple')}
 							/>
 							<ThemeCircle
 								colorTheme={Colours.Red}
-								selected={color == 'red'}
-								onPress={() => colorChange('red')}
+								selected={color == 'Red'}
+								onPress={() => colorChange('Red')}
 							/>
 						</View>
 						<View style={{ alignItems: 'center' }}>
