@@ -7,6 +7,7 @@ import {
 	RefreshControl,
 	TouchableOpacity,
 	TextInput,
+	Button,
 } from 'react-native';
 
 import MenuHeader from '../components/MenuHeader';
@@ -61,10 +62,19 @@ const levelMapping = {
 	40: { xpLevelCap: 4050, totalXP: 114625 },
 };
 
+import * as BackgroundFetch from 'expo-background-fetch';
+
+import * as TaskManager from 'expo-task-manager';
+
+const BACKGROUND_FETCH_TASK = 'background-fetch';
+
 function PomodoroScreen(props) {
+	const [isRegistered, setIsRegistered] = React.useState(false);
+	const [status, setStatus] = React.useState(null);
+
 	const { colors } = useTheme();
 
-	const duration = { Pomodoro: 2, 'Long Break': 2, 'Short Break': 2 };
+	const duration = { Pomodoro: 60, 'Long Break': 2, 'Short Break': 2 };
 
 	const [remainingSecs, setRemainingSecs] = useState(duration['Pomodoro']);
 	const [isActive, setActive] = useState(false);
@@ -167,6 +177,31 @@ function PomodoroScreen(props) {
 		if (!displayed) updatePet();
 	});
 
+	useEffect(() => {
+		checkStatusAsync();
+		console.log('Checking async');
+	}, []);
+
+	const checkStatusAsync = async () => {
+		const status = await BackgroundFetch.getStatusAsync();
+		const isRegistered = await TaskManager.isTaskRegisteredAsync(
+			BACKGROUND_FETCH_TASK,
+		);
+		setStatus(status);
+		setIsRegistered(isRegistered);
+	};
+
+	const toggleFetchTask = async () => {
+		console.log('its working');
+		if (isRegistered) {
+			await unregisterBackgroundFetchAsync();
+		} else {
+			await registerBackgroundFetchAsync();
+		}
+
+		checkStatusAsync();
+	};
+
 	const [levelToEvolveNext, setLevelToEvolveNext] = useState(0);
 
 	const gainXP = (xp) => {
@@ -255,6 +290,62 @@ function PomodoroScreen(props) {
 		setSecs(formatNumber(0));
 		setActive(false);
 	};
+
+	// 1. Define the task by providing a name and the function that should be executed
+	// Note: This needs to be called in the global scope (e.g outside of your React components)
+	TaskManager.defineTask(BACKGROUND_FETCH_TASK, async () => {
+		try {
+			const receivedNewData = Date.now();
+			console.log('tick');
+			setRemainingSecs((remainingSecs) => remainingSecs - 1);
+			setTimer(remainingSecs);
+			if (remainingSecs == 0) {
+				setRounds(rounds + 1);
+				//play sound and bring up pop up
+				if (rounds >= 2) {
+					setBreak(true);
+				}
+				setActive(false);
+				resetTimer(duration[mode]);
+			}
+			return receivedNewData
+				? BackgroundFetch.Result.NewData
+				: BackgroundFetch.Result.NoData;
+		} catch (error) {
+			console.log(error);
+			return BackgroundFetch.Result.Failed;
+		}
+	});
+
+	// 2. Register the task at some point in your app by providing the same name, and some configuration options for how the background fetch should behave
+	// Note: This does NOT need to be in the global scope and CAN be used in your React components!
+	async function registerBackgroundFetchAsync() {
+		console.log('its workingReg');
+
+		return BackgroundFetch.registerTaskAsync(BACKGROUND_FETCH_TASK, {
+			minimumInterval: 1 / 60, // TO INVESTIGATE: on docs this is seconds but when testing on android it is 1 minute
+			stopOnTerminate: false, // android only,
+			startOnBoot: true, // android only
+		});
+	}
+
+	// 3. (Optional) Unregister tasks by specifying the task name
+	// This will cancel any future background fetch calls that match the given name
+	// Note: This does NOT need to be in the global scope and CAN be used in your React components!
+	async function unregisterBackgroundFetchAsync() {
+		console.log('its workingUnreg');
+		if (mode != 'Pomodoro') {
+			setMode('Pomodoro');
+		} else {
+			if (rounds >= 3 && rounds % 3 == 0) {
+				gainXP(500);
+			} else {
+				gainXP(150);
+			}
+			updatePet();
+		}
+		return BackgroundFetch.unregisterTaskAsync(BACKGROUND_FETCH_TASK);
+	}
 	return (
 		<SafeAreaView style={{ flex: 1, backgroundColor: colors.white }}>
 			<MenuHeader
@@ -328,6 +419,28 @@ function PomodoroScreen(props) {
 					marginBottom: 50,
 				}}
 			>
+				<Text>
+					Background fetch status:{' '}
+					<Text>
+						{status && BackgroundFetch.BackgroundFetchStatus
+							? status && BackgroundFetch.BackgroundFetchStatus[status]
+							: ''}
+					</Text>
+				</Text>
+				<Text>
+					Background fetch task name:{' '}
+					<Text>
+						{isRegistered ? BACKGROUND_FETCH_TASK : 'Not registered yet!'}
+					</Text>
+				</Text>
+				<Button
+					title={
+						isRegistered
+							? 'Unregister BackgroundFetch task'
+							: 'Register BackgroundFetch task'
+					}
+					onPress={toggleFetchTask}
+				/>
 				{/* <TouchableOpacity
 					activeOpacity={0.6}
 					style={{
