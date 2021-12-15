@@ -58,11 +58,11 @@ export default function App() {
 		require('./frontend/resources/images/Logo/LogoGreen.png'),
 	);
 	const [pet, setPet] = useState(
-		require('./frontend/resources/images/Pets/Egg/EggHappyGreen.gif')
+		require('./frontend/resources/images/Pets/Egg/EggHappyGreen.gif'),
 	);
 	const [comingSoon, setComingSoon] = useState(
-		require('./frontend/resources/images/Pets/ComingSoon/ComingSoonGreen.png')
-	)
+		require('./frontend/resources/images/Pets/ComingSoon/ComingSoonGreen.png'),
+	);
 	const [mode, setMode] = useState('light');
 	const [refreshing, setRefreshing] = useState(false);
 
@@ -338,11 +338,11 @@ function Calendar(props) {
 }
 
 function Pomodoro(props) {
-	return <ComingSoonScreen title='Pomodoro' navigation={props.navigation}/>;
+	return <ComingSoonScreen title='Pomodoro' navigation={props.navigation} />;
 }
 
 function Reflect(props) {
-	return <ComingSoonScreen title='Reflect' navigation={props.navigation}/>;
+	return <ComingSoonScreen title='Reflect' navigation={props.navigation} />;
 }
 
 // The 'create' button in the bottom navigation bar
