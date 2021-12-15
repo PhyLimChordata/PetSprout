@@ -12,8 +12,11 @@ const name = async (req, res) => {
 		let user = await User.findById(req.user.id).select('-password');
 		if (!user) return res.status(404).json('User could not found');
 
-		let currentPet = await Pets.findOne({ user: req.user.id }).currentPet;
-		currentPet.name = req.name;
+		let usersPet = await Pets.findOne({ user: req.user.id });
+		if (req.name == '') {
+			req.name = req.user.userName + '\'s Pet';
+		}
+		usersPet.currentPet.name = req.name;
 		await currentPet.save();
 		res.json(currentPet);
 	} catch (error) {
