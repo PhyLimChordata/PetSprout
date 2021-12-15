@@ -20,7 +20,6 @@ import { useTheme } from '@react-navigation/native';
 
 import { AuthContext } from '../Context';
 import { LevelMapping } from '../resources/mappings/LevelMapping';
-
 function HabitsScreen(props) {
 	const heartSize = 70;
 	//THIS CAN VARY BASED ON USER's PET
@@ -109,6 +108,8 @@ function HabitsScreen(props) {
 			.catch();
 	};
 
+	const _ = require('lodash');
+
 	const updatePet = () => {
 		fetch('http://localhost:5000/api/v1.0.0/pets/get_current', {
 			method: 'GET',
@@ -119,23 +120,7 @@ function HabitsScreen(props) {
 		})
 			.then((res) =>
 				res.json().then((currentPet) => {
-					var tempHeartValue = {
-						size: heartSize,
-						view: {
-							position: 'absolute',
-							height: heartSize,
-							width: heartSize,
-							marginTop: 0,
-							overflow: 'hidden',
-						},
-						image: {
-							height: heartSize,
-							width: heartSize,
-							bottom: 0,
-							zIndex: 1,
-						},
-						value: 100,
-					};
+					var tempHeartValue = _.cloneDeep(heartValue);
 					tempHeartValue.view['height'] =
 						currentPet.hp * (heartSize / maxHealth);
 					tempHeartValue.view.marginTop =
