@@ -14,6 +14,7 @@ const Popup = (theme) =>
 			fontStyle: 'normal',
 			color: 'white',
 			marginBottom: 10,
+			textAlign:'center'
 		},
 		popupButton: {
 			padding: 10,

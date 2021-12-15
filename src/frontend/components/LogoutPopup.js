@@ -1,12 +1,14 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { useTheme } from '@react-navigation/native';
 
 import Popup from './Popup';
 import styles from '../styling/Logout';
+import {AuthContext} from "../Context";
 
 function LogoutConfirmation(props) {
 	const { colors } = useTheme();
 	const style = styles(colors);
+	const { signOut } = useContext(AuthContext);
 	return (
 		<Popup
 			modalVisible={props.logoutVisible}
@@ -15,7 +17,8 @@ function LogoutConfirmation(props) {
 			style={style.confirmation}
 			title='Are you sure you want to log out?'
 			text='You will be redirected to the login screen.'
-			button={true}
+			buttonType={'confirmation'}
+			successFunction={() => signOut}
 		></Popup>
 	);
 }

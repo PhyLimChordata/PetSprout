@@ -9,15 +9,14 @@ import styles from '../styling/Popup';
 function Popup(props) {
 	const { colors } = useTheme();
 	const style = styles(colors);
-	const hasButton = props.button;
-	let button = (
+	let confirmation_button = (
 		<View style={style.popupButtonContainer}>
 			<TouchableOpacity
 				activeOpacity={0.6}
 				style={style.popupButton}
 				onPress={() => {
 					props.setModalVisible(false);
-					signOut();
+					props.successFunction()
 				}}
 			>
 				<Text style={style.popupButtonText}>Yes</Text>
@@ -33,7 +32,21 @@ function Popup(props) {
 			</TouchableOpacity>
 		</View>
 	);
-	const { signOut } = useContext(AuthContext);
+	let continue_button = (
+		<View style={style.popupButtonContainer}>
+			<TouchableOpacity
+				activeOpacity={0.6}
+				style={style.popupButton}
+				onPress={() => {
+					props.setModalVisible(false);
+					props.successFunction()
+				}}
+			>
+				<Text style={style.popupButtonText}>Yes</Text>
+			</TouchableOpacity>
+		</View>
+	)
+
 	return (
 		<View>
 			<Modal
@@ -48,12 +61,17 @@ function Popup(props) {
 			>
 				<View style={style.container}>
 					<View style={props.style}>
-						<Image style={style.popupImage} source={props.image} />
-						<Text style={style.title}>{props.title}</Text>
-						<Text style={[style.text, { textAlign: 'center' }]}>
-							{props.text}
-						</Text>
-						{hasButton && button}
+						<View style={{flex:1, justifyContent: 'center', alignItems: 'center'}}>
+							<Image style={style.popupImage} source={props.image} />
+							<Text style={style.title}>{props.title}</Text>
+							<Text style={[style.text, { textAlign: 'center' }]}>
+								{props.text}
+							</Text>
+						</View>
+						<View>
+							{props.buttonType == 'confirmation' && confirmation_button}
+							{props.buttonType == 'continue' && continue_button}
+						</View>
 					</View>
 				</View>
 			</Modal>
