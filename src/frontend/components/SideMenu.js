@@ -136,24 +136,8 @@ function SideMenu(props) {
 	function colorChange(color) {
 		changeColorTheme(color);
 		setColor(color);
-		changeLogo(logo[color]);
-		//TODO: use findPet
-		console.log(egg);
-		console.log(egg[color]);
-		console.log(comingsoon);
-		console.log(comingsoon[color]);
-		changePet(egg[color]);
-		changeComingSoon(comingsoon[color]);
 		props.setModalVisible(false);
 	}
-
-	function findPet(color) {
-		//if the pet is happy, neutral, sad
-		//determine which pet
-		//create the path
-		// return require('../resources/images/Pets/Egg/EggHappy' + color + '.gif');
-	}
-
 	return (
 		<Modal
 			swipeDirection='left'
