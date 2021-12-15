@@ -1,12 +1,15 @@
 import React, { useState, useEffect, useContext } from 'react';
+
 import {
 	View,
 	Image,
 	Animated,
 	SafeAreaView,
 	RefreshControl,
+	StatusBar,
 } from 'react-native';
 
+import AndroidSafeView from '../styling/AndroidSafeAreaView';
 import styles from '../styling/HabitsScreen';
 import Habits from '../components/Habits';
 import MenuHeader from '../components/MenuHeader';
@@ -48,7 +51,7 @@ function HabitsScreen(props) {
 
 	const scrolling = React.useRef(new Animated.Value(0)).current;
 
-	const { getToken, getRefreshing, changeRefreshing } = useContext(AuthContext);
+	const { getToken, getRefreshing, changeRefreshing, getPet } = useContext(AuthContext);
 
 	const [refreshing, setRefreshing] = React.useState(false);
 
@@ -143,14 +146,13 @@ function HabitsScreen(props) {
 					//Cap for exp bar
 					setXpLevelCap(LevelMapping[petsLevel].xpLevelCap);
 
-					if (petsLevel == 0) {	
-						setExperience(currentPet.expValue);					
+					if (petsLevel == 0) {
+						setExperience(currentPet.expValue);
 					} else {
 						let previousLevel = petsLevel - 1;
 						var previousTotalXPCap = LevelMapping[previousLevel].totalXP;
 						setExperience(currentPet.expValue - previousTotalXPCap);
 					}
-					
 				}),
 			)
 			.catch();
@@ -162,21 +164,22 @@ function HabitsScreen(props) {
 		} else {
 			setLevelToEvolveNext(level + 10 - (level % 10));
 		}
-	}
+	};
 
 	return (
-		<SafeAreaView style={styles(colors).headContainer}>
+		<SafeAreaView
+			style={[
+				styles(colors).headContainer,
+				{ paddingTop: StatusBar.currentHeight },
+			]}
+		>
 			<MenuHeader text='' navigation={props.navigation} hp={heartValue} />
 			<View style={styles(colors).verticalContainer}>
 				<Image
 					style={styles(colors).creature}
-					source={require('../resources/animations/Egg.gif')}
+					source={getPet}
 				/>
-				<ExperienceBar
-					level={level}
-					exp={experience}
-					xpLevelCap={xpLevelCap}
-				/>
+				<ExperienceBar level={level} exp={experience} xpLevelCap={xpLevelCap} />
 			</View>
 			<SafeAreaView style={styles(colors).scrollViewContainer}>
 				<Animated.ScrollView

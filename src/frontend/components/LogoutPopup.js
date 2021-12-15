@@ -13,10 +13,10 @@ function LogoutConfirmation(props) {
 			setModalVisible={props.setLogoutVisible}
 			image={require('../resources/images/Logout.png')}
 			style={style.confirmation}
-			title="Are you sure you want to log out?"
-			text="You will be redirected to the login screen."
+			title='Are you sure you want to log out?'
+			text='You will be redirected to the login screen.'
 			button={true}
-        ></Popup>
+		></Popup>
 	);
 }
 

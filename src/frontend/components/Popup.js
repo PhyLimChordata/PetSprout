@@ -1,4 +1,3 @@
-
 import React, { useContext } from 'react';
 import { View, Text, Image, TouchableOpacity } from 'react-native';
 import Modal from 'react-native-modal';
@@ -32,7 +31,8 @@ function Popup(props) {
 			>
 				<Text style={style.popupButtonText}>No</Text>
 			</TouchableOpacity>
-		</View>);
+		</View>
+	);
 	const { signOut } = useContext(AuthContext);
 	return (
 		<View>
@@ -44,15 +44,15 @@ function Popup(props) {
 				}}
 				useNativeDriverForBackdrop
 				swipeDirection={['down']}
-				style={{ justifyContent: "center", alignItems: "center" }}>
+				style={{ justifyContent: 'center', alignItems: 'center' }}
+			>
 				<View style={style.container}>
 					<View style={props.style}>
-						<Image
-							style={style.popupImage}
-							source={props.image}
-						/>
+						<Image style={style.popupImage} source={props.image} />
 						<Text style={style.title}>{props.title}</Text>
-						<Text style={[style.text, {textAlign: 'center'}]}>{props.text}</Text>
+						<Text style={[style.text, { textAlign: 'center' }]}>
+							{props.text}
+						</Text>
 						{hasButton && button}
 					</View>
 				</View>

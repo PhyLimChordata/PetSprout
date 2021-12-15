@@ -15,14 +15,14 @@ function TextBox(props) {
 	} = props;
 
 	const resetValidity = (content) => {
-		props.setText(content)
+		props.setText(content);
 		if (!props.setTextStyle) {
 			props.setTextStyle(styles(colors).authenticationText);
 		}
 		if (!props.setTextStyle) {
-		    props.setBoxStyle(styles(colors).authenticationInput);
+			props.setBoxStyle(styles(colors).authenticationInput);
 		}
-	}
+	};
 
 	return (
 		<View style={containerStyle}>
@@ -32,7 +32,9 @@ function TextBox(props) {
 				multiline={multiline}
 				style={boxStyle}
 				onChangeText={(content) => resetValidity(content)}
-			>{props.text}</TextInput>
+			>
+				{props.text}
+			</TextInput>
 		</View>
 	);
 }

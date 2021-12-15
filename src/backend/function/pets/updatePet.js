@@ -57,7 +57,7 @@ const gain_exp = async (req, res) => {
 
 		if (req.body.totalExp < currentPet.expValue) {
 			currentPet.level += 1;
-      currentPet.hp = 100;
+			currentPet.hp = 100;
 		}
 		if (currentPet.level === req.body.levelToEvolveNext) {
 			currentPet.readyToEvolve = true;

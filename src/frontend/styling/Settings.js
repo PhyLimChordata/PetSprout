@@ -54,7 +54,7 @@ function settingStyles(theme, width, height) {
 			width: '100%',
 			color: theme.Quaternary,
 		},
-		switchStyling: {transform: [{ scaleX: .8 }, { scaleY: .8 }] },
+		switchStyling: { transform: [{ scaleX: 0.8 }, { scaleY: 0.8 }] },
 	});
 }
 

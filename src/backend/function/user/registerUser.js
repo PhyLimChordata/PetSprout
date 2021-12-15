@@ -89,8 +89,8 @@ const user_activation = async (req, res) => {
 		//create user's pet
 		let newPet = new Pet({
 			user: user._id,
-			pets: []
-		})
+			pets: [],
+		});
 		await newPet.save();
 
 		// create user habit

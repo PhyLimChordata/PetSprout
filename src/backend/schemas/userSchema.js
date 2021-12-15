@@ -33,8 +33,8 @@ const UserSchema = new Schema(
 		},
 		//TODO: Store a metadata like a version number, timestamp, IP etc
 		termsAndAgreements: {
-			type: Boolean
-		}
+			type: Boolean,
+		},
 	},
 	{
 		timestamps: true,
