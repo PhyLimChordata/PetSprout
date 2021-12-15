@@ -19,7 +19,7 @@ import ExperienceBar from '../components/ExperienceBar';
 import { useTheme } from '@react-navigation/native';
 
 import { AuthContext } from '../Context';
-import { LevelMapping } from '../resources/mappings/LevelMapping'
+import { LevelMapping } from '../resources/mappings/LevelMapping';
 
 function HabitsScreen(props) {
 	const heartSize = 70;
@@ -51,7 +51,8 @@ function HabitsScreen(props) {
 
 	const scrolling = React.useRef(new Animated.Value(0)).current;
 
-	const { getToken, getRefreshing, changeRefreshing, getPet } = useContext(AuthContext);
+	const { getToken, getRefreshing, changeRefreshing, getPet } =
+		useContext(AuthContext);
 
 	const [refreshing, setRefreshing] = React.useState(false);
 
@@ -175,10 +176,7 @@ function HabitsScreen(props) {
 		>
 			<MenuHeader text='' navigation={props.navigation} hp={heartValue} />
 			<View style={styles(colors).verticalContainer}>
-				<Image
-					style={styles(colors).creature}
-					source={getPet}
-				/>
+				<Image style={styles(colors).creature} source={getPet} />
 				<ExperienceBar level={level} exp={experience} xpLevelCap={xpLevelCap} />
 			</View>
 			<SafeAreaView style={styles(colors).scrollViewContainer}>

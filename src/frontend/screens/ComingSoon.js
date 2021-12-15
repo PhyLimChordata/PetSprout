@@ -19,10 +19,7 @@ function ComingSoon(props) {
 				<Text style={styles(colors).comingSoonText}>Coming Soon...</Text>
 			</View>
 
-			<Image
-				style={styles(colors).creature}
-				source={getComingSoon}
-			/>
+			<Image style={styles(colors).creature} source={getComingSoon} />
 		</SafeAreaView>
 	);
 }
