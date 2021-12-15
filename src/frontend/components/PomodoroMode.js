@@ -8,10 +8,10 @@ function PomodoroMode(props) {
 	const { colors } = useTheme();
 
 	const switchModes = (mode) => {
-        if (!props.active) {
-            props.modeSelect(mode);
-			props.setTimer(props.duration[mode])
-        }
+		if (!props.active) {
+			props.modeSelect(mode);
+			props.setTimer(props.duration[mode]);
+		}
 	};
 
 	return props.modeSelected == props.mode ? (
@@ -21,7 +21,7 @@ function PomodoroMode(props) {
 				backgroundColor: colors.Quaternary,
 				borderRadius: 30,
 				flex: 1,
-                borderColor: colors.background,
+				borderColor: colors.background,
 				borderWidth: 3,
 				margin: 10,
 				textAlign: 'center',
@@ -31,7 +31,8 @@ function PomodoroMode(props) {
 		>
 			<Text
 				style={{
-					fontSize: 12,
+					fontSize: 16,
+					textAlign: 'center',
 					fontWeight: 'bold',
 					paddingBottom: 5,
 					color: colors.background,
@@ -40,8 +41,8 @@ function PomodoroMode(props) {
 				{props.mode}
 			</Text>
 		</TouchableOpacity>
-	) : (!props.break && props.mode != 'Pomodoro' ? (
-        <TouchableOpacity
+	) : !props.break && props.mode != 'Pomodoro' ? (
+		<TouchableOpacity
 			activeOpacity={0.6}
 			style={{
 				backgroundColor: Colours.Grey.ExpBarBackground,
@@ -57,7 +58,8 @@ function PomodoroMode(props) {
 		>
 			<Text
 				style={{
-					fontSize: 12,
+					fontSize: 16,
+					textAlign: 'center',
 					fontWeight: 'bold',
 					paddingBottom: 5,
 					color: colors.background,
@@ -66,7 +68,7 @@ function PomodoroMode(props) {
 				{props.mode}
 			</Text>
 		</TouchableOpacity>
-    ) : (
+	) : (
 		<TouchableOpacity
 			activeOpacity={0.6}
 			style={{
@@ -84,7 +86,8 @@ function PomodoroMode(props) {
 		>
 			<Text
 				style={{
-					fontSize: 12,
+					fontSize: 16,
+					textAlign: 'center',
 					fontWeight: 'bold',
 					paddingBottom: 5,
 					color: colors.Quaternary,
@@ -93,7 +96,7 @@ function PomodoroMode(props) {
 				{props.mode}
 			</Text>
 		</TouchableOpacity>
-	));
+	);
 }
 
 export default PomodoroMode;

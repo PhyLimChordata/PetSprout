@@ -225,7 +225,7 @@ function SettingsPage(props) {
 					</View>
 				</View>
 			</View>
-			<HomeButton navigation={props.navigation} colors={colors}/>
+			<HomeButton navigation={props.navigation} colors={colors} />
 		</SafeAreaView>
 	);
 }

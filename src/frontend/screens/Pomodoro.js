@@ -6,6 +6,7 @@ import {
 	Text,
 	RefreshControl,
 	TouchableOpacity,
+	TextInput,
 } from 'react-native';
 
 import MenuHeader from '../components/MenuHeader';
@@ -69,7 +70,7 @@ function PomodoroScreen(props) {
 	const [isActive, setActive] = useState(false);
 
 	const [breakEnabled, setBreak] = useState(false);
-	const [rounds, setRounds] = useState(1);
+	const [rounds, setRounds] = useState(0);
 
 	const [mode, setMode] = useState('Pomodoro');
 
@@ -327,7 +328,7 @@ function PomodoroScreen(props) {
 					marginBottom: 50,
 				}}
 			>
-				<TouchableOpacity
+				{/* <TouchableOpacity
 					activeOpacity={0.6}
 					style={{
 						backgroundColor: colors.Tertiary,
@@ -349,8 +350,22 @@ function PomodoroScreen(props) {
 					>
 						Current Task
 					</Text>
-				</TouchableOpacity>
-
+				</TouchableOpacity> */}
+				<TextInput
+					style={{
+						backgroundColor: colors.Tertiary,
+						borderRadius: 30,
+						padding: 10,
+						paddingLeft: 40,
+						paddingRight: 40,
+						marginBottom: 20,
+						color: 'white',
+						fontSize: 20,
+						fontWeight: 'bold',
+					}}
+				>
+					Current Task
+				</TextInput>
 				<Text
 					style={{
 						fontSize: 60,

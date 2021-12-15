@@ -121,7 +121,7 @@ function ProfileEdit(props) {
 
 	return (
 		<>
-			<SafeAreaView style={{height: "100%"}}>
+			<SafeAreaView style={{ height: '100%' }}>
 				<View>
 					<MenuHeader
 						text='Account  '
@@ -200,9 +200,7 @@ function ProfileEdit(props) {
 					</View>
 					<SubmitButton submit={onSubmit} />
 				</View>
-				<HomeButton navigation={props.navigation} colors={colors}/>
-
-				
+				<HomeButton navigation={props.navigation} colors={colors} />
 			</SafeAreaView>
 			<BottomPopup ref={popup} color={color} text={message} />
 		</>

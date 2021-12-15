@@ -18,7 +18,7 @@ import { useTheme } from '@react-navigation/native';
 import { AuthContext } from '../Context';
 
 const levelMapping = {
-	0: { xpLevelCap: 100, totalXP: 100},
+	0: { xpLevelCap: 100, totalXP: 100 },
 	1: { xpLevelCap: 400, totalXP: 500 },
 	2: { xpLevelCap: 725, totalXP: 1225 },
 	3: { xpLevelCap: 950, totalXP: 2175 },
@@ -181,14 +181,13 @@ function HabitsScreen(props) {
 					//Cap for exp bar
 					setXpLevelCap(levelMapping[petsLevel].xpLevelCap);
 
-					if (petsLevel == 0) {	
-						setExperience(currentPet.expValue);					
+					if (petsLevel == 0) {
+						setExperience(currentPet.expValue);
 					} else {
 						let previousLevel = petsLevel - 1;
 						var previousTotalXPCap = levelMapping[previousLevel].totalXP;
 						setExperience(currentPet.expValue - previousTotalXPCap);
 					}
-					
 				}),
 			)
 			.catch();
@@ -200,7 +199,7 @@ function HabitsScreen(props) {
 		} else {
 			setLevelToEvolveNext(level + 10 - (level % 10));
 		}
-	}
+	};
 
 	return (
 		<SafeAreaView style={styles(colors).headContainer}>
@@ -210,11 +209,7 @@ function HabitsScreen(props) {
 					style={styles(colors).creature}
 					source={require('../resources/animations/Egg.gif')}
 				/>
-				<ExperienceBar
-					level={level}
-					exp={experience}
-					xpLevelCap={xpLevelCap}
-				/>
+				<ExperienceBar level={level} exp={experience} xpLevelCap={xpLevelCap} />
 			</View>
 			<SafeAreaView style={styles(colors).scrollViewContainer}>
 				<Animated.ScrollView

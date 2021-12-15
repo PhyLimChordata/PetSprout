@@ -50,9 +50,9 @@ function Login(props) {
 		});
 		setTextStyle({
 			fontSize: 20,
-		fontWeight: 'bold',
-		paddingBottom: 5,
-		color: colors.Quaternary,
+			fontWeight: 'bold',
+			paddingBottom: 5,
+			color: colors.Quaternary,
 		});
 	};
 
@@ -70,9 +70,9 @@ function Login(props) {
 		});
 		setTextStyle({
 			fontSize: 20,
-		fontWeight: 'bold',
-		paddingBottom: 5,
-		color: colors.Quaternary,
+			fontWeight: 'bold',
+			paddingBottom: 5,
+			color: colors.Quaternary,
 		});
 	};
 
@@ -114,9 +114,9 @@ function Login(props) {
 					});
 					setTextStyle({
 						fontSize: 20,
-		fontWeight: 'bold',
-		paddingBottom: 5,
-		color: Colours.Red.Error,
+						fontWeight: 'bold',
+						paddingBottom: 5,
+						color: Colours.Red.Error,
 					});
 				}
 			})
