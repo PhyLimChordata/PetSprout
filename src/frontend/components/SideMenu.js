@@ -12,6 +12,9 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 // import Toggle from 'react-native-toggle-element';
 import Colours from '../resources/themes/Colours';
 import { useTheme } from '@react-navigation/native';
+import { logo } from '../resources/images/Logo/Logo';
+import { comingsoon } from '../resources/images/Pets/ComingSoon/ComingSoon';
+import { egg } from '../resources/images/Pets/Egg/Egg';
 
 function ThemeCircle({ colorTheme, onPress, selected }) {
 	return (
@@ -133,13 +136,14 @@ function SideMenu(props) {
 	function colorChange(color) {
 		changeColorTheme(color);
 		setColor(color);
-		changeLogo(require('../resources/images/Logo/Logo' + color + '.png'));
-		changePet(findPet(color));
-		changeComingSoon(
-			require('../resources/images/Pets/ComingSoon/ComingSoon' +
-				color +
-				'.png'),
-		);
+		changeLogo(logo[color]);
+		//TODO: use findPet
+		console.log(egg);
+		console.log(egg[color]);
+		console.log(comingsoon);
+		console.log(comingsoon[color]);
+		changePet(egg[color]);
+		changeComingSoon(comingsoon[color]);
 		props.setModalVisible(false);
 	}
 
@@ -147,7 +151,7 @@ function SideMenu(props) {
 		//if the pet is happy, neutral, sad
 		//determine which pet
 		//create the path
-		return require('../resources/images/Pets/Egg/EggHappy' + color + '.gif');
+		// return require('../resources/images/Pets/Egg/EggHappy' + color + '.gif');
 	}
 
 	return (
