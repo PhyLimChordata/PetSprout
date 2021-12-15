@@ -19,7 +19,7 @@ import ExperienceBar from '../components/ExperienceBar';
 import { useTheme } from '@react-navigation/native';
 
 import { AuthContext } from '../Context';
-import { LevelMapping } from '../resources/mappings/LevelMapping'
+import { LevelMapping } from '../resources/mappings/LevelMapping';
 
 function HabitsScreen(props) {
 	const heartSize = 70;
@@ -51,7 +51,8 @@ function HabitsScreen(props) {
 
 	const scrolling = React.useRef(new Animated.Value(0)).current;
 
-	const { getToken, getRefreshing, changeRefreshing, getPet } = useContext(AuthContext);
+	const { getToken, getRefreshing, changeRefreshing, getPet } =
+		useContext(AuthContext);
 
 	const [refreshing, setRefreshing] = React.useState(false);
 
@@ -118,18 +119,35 @@ function HabitsScreen(props) {
 		})
 			.then((res) =>
 				res.json().then((currentPet) => {
-					let tempHeartValue = heartValue;
-					tempHeartValue.view.height = currentPet.hp * (heartSize / maxHealth);
+					var tempHeartValue = {
+						size: heartSize,
+						view: {
+							position: 'absolute',
+							height: heartSize,
+							width: heartSize,
+							marginTop: 0,
+							overflow: 'hidden',
+						},
+						image: {
+							height: heartSize,
+							width: heartSize,
+							bottom: 0,
+							zIndex: 1,
+						},
+						value: 100,
+					};
+					tempHeartValue.view['height'] =
+						currentPet.hp * (heartSize / maxHealth);
 					tempHeartValue.view.marginTop =
 						heartSize - tempHeartValue.view.height;
 					tempHeartValue.image.bottom = tempHeartValue.view.marginTop;
+
 					tempHeartValue.value = Math.ceil(
 						tempHeartValue.view.height * (maxHealth / heartSize),
 					);
-					console.log('ok');
-
+					console.log(tempHeartValue);
 					setHeartValue(tempHeartValue);
-
+					console.log(heartValue);
 					if (currentPet.readyToEvolve) {
 						//set some visibility
 					}
@@ -155,7 +173,9 @@ function HabitsScreen(props) {
 					}
 				}),
 			)
-			.catch();
+			.catch((err) => {
+				console.log(err);
+			});
 	};
 
 	const setNextLevelToEvolve = () => {
@@ -175,10 +195,7 @@ function HabitsScreen(props) {
 		>
 			<MenuHeader text='' navigation={props.navigation} hp={heartValue} />
 			<View style={styles(colors).verticalContainer}>
-				<Image
-					style={styles(colors).creature}
-					source={getPet}
-				/>
+				<Image style={styles(colors).creature} source={getPet} />
 				<ExperienceBar level={level} exp={experience} xpLevelCap={xpLevelCap} />
 			</View>
 			<SafeAreaView style={styles(colors).scrollViewContainer}>
