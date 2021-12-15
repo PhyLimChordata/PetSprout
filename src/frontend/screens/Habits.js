@@ -21,6 +21,9 @@ import { useTheme } from '@react-navigation/native';
 import { AuthContext } from '../Context';
 import { LevelMapping } from '../resources/mappings/LevelMapping';
 
+import { DisplayPet } from '../components/DisplayPet';
+// import gainXP from '../components/DisplayPet';
+
 function HabitsScreen(props) {
 	const heartSize = 70;
 	//THIS CAN VARY BASED ON USER's PET
@@ -180,10 +183,11 @@ function HabitsScreen(props) {
 			]}
 		>
 			<MenuHeader text='' navigation={props.navigation} hp={heartValue} />
-			<View style={styles(colors).verticalContainer}>
+			{/* <View style={styles(colors).verticalContainer}>
 				<Image style={styles(colors).creature} source={getPet} />
 				<ExperienceBar level={level} exp={experience} xpLevelCap={xpLevelCap} />
-			</View>
+			</View> */}
+			<DisplayPet />
 			<SafeAreaView style={styles(colors).scrollViewContainer}>
 				<Animated.ScrollView
 					showsVerticalScrollIndicator={false}
