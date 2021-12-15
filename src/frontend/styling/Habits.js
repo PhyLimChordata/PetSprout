@@ -38,7 +38,7 @@ const habitsStyles = (theme) =>
 		},
 		horizontalContainerBottom: {
 			flexDirection: 'row',
-			position: 'absolute',
+			paddingTop: 10,
 			bottom: 0,
 			right: 0,
 			borderRadius: 8,
