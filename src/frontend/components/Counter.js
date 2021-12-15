@@ -17,13 +17,12 @@ function Counter(props) {
 			<View
 				style={{
 					flexDirection: 'row',
-					paddingTop: 10,
+					paddingTop: 15,
 				}}
 			>
 				<Text
 					style={{
 						fontSize: 20,
-						flex: 1,
 						fontWeight: 'bold',
 						color: textColor,
 					}}
@@ -41,15 +40,14 @@ function Counter(props) {
 				borderRadius: 8,
 				backgroundColor: containerColor,
 				paddingRight: 20,
-				paddingTop: 10,
 			}}
 		>
 			<Text
 				style={{
 					fontSize: 20,
-					flex: 1,
 					fontWeight: 'bold',
 					color: textColor,
+					paddingTop: 20
 				}}
 			>
 				{props.quantity}

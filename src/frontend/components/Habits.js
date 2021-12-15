@@ -13,7 +13,6 @@ import Colours from '../resources/themes/Colours';
 function Habits(props) {
 	const [streak, setStreak] = useState(props.streak);
 	const [frequency, setFrequency] = useState(props.frequency);
-
 	const [completed, setCompleted] = useState(props.completed);
 	const { getToken, changeRefreshing } = useContext(AuthContext);
 
@@ -109,14 +108,18 @@ function Habits(props) {
 								</Text>
 							</View>
 							<View style={styles(colors).container}>
-								<Ellipsis
-									onPress={() =>
-										props.navigation.navigate('ModifyHabitScreen', {
-											habitId: props.habitId,
-											userHabitId: props.userHabitId,
-										})
-									}
-								/>
+								<View style={{ position: 'absolute', top: 0, right: 0 }}>
+									<Ellipsis
+										onPress={() =>
+											props.navigation.navigate('ModifyHabitScreen', {
+												habitId: props.habitId,
+												userHabitId: props.userHabitId,
+											})
+										}
+									/>
+								</View>
+								<View style={{ width: 100 }} />
+								<Ellipsis ghettofix={true} />
 								<View style={styles(colors).horizontalContainerBottom}>
 									<Counter
 										quantity={streak}
