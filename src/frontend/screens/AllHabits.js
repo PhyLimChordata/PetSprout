@@ -36,12 +36,6 @@ function AllHabitsScreen(props) {
 					const expValue = parseInt(data.expValue);
 					setHabits(data.habitList);
 					setUserHabitId(data._id);
-
-					//Displaying purposes
-					const heartValue = [];
-					for (var i = 0; i < data.heart; i++) {
-						heartValue.push(i);
-					}
 					setDisplayed(true);
 				}),
 			)

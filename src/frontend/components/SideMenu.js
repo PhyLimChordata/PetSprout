@@ -138,7 +138,6 @@ function SideMenu(props) {
 		setColor(color);
 		props.setModalVisible(false);
 	}
-
 	return (
 		<Modal
 			swipeDirection='left'

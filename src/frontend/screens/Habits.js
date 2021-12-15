@@ -109,6 +109,8 @@ function HabitsScreen(props) {
 			.catch();
 	};
 
+	const _ = require('lodash');
+
 	const updatePet = () => {
 		fetch('http://localhost:5000/api/v1.0.0/pets/get_current', {
 			method: 'GET',
@@ -119,18 +121,19 @@ function HabitsScreen(props) {
 		})
 			.then((res) =>
 				res.json().then((currentPet) => {
-					let tempHeartValue = heartValue;
-					tempHeartValue.view.height = currentPet.hp * (heartSize / maxHealth);
+					var tempHeartValue = _.cloneDeep(heartValue);
+					tempHeartValue.view['height'] =
+						currentPet.hp * (heartSize / maxHealth);
 					tempHeartValue.view.marginTop =
 						heartSize - tempHeartValue.view.height;
 					tempHeartValue.image.bottom = tempHeartValue.view.marginTop;
+
 					tempHeartValue.value = Math.ceil(
 						tempHeartValue.view.height * (maxHealth / heartSize),
 					);
-					console.log('ok');
-
+					console.log(tempHeartValue);
 					setHeartValue(tempHeartValue);
-
+					console.log(heartValue);
 					if (currentPet.readyToEvolve) {
 						//set some visibility
 					}
@@ -156,7 +159,9 @@ function HabitsScreen(props) {
 					}
 				}),
 			)
-			.catch();
+			.catch((err) => {
+				console.log(err);
+			});
 	};
 
 	const setNextLevelToEvolve = () => {
