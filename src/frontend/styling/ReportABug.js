@@ -55,7 +55,7 @@ const ReportABug = (theme) =>
 			justifyContent: 'center',
 			backgroundColor: Colours.Red.Error,
 			color: Colours.Red.Error,
-			height: 330,
+			height: 360,
 			width: 300,
 			borderRadius: 30,
 		},

@@ -17,6 +17,7 @@ import ScrollViewElement from '../../components/ScrollViewElement';
 import BottomPopup from '../../components/BottomPopup';
 
 import { useTheme } from '@react-navigation/native';
+import DeleteHabitPopup from "../../components/DeleteHabitPopup";
 
 function Day({ selected, letter, onPress }) {
 	const { colors } = useTheme();
@@ -61,6 +62,7 @@ function PutHabits(props) {
 	const { getToken, changeRefreshing } = useContext(AuthContext);
 	const [popupText, setPopupText] = useState('');
 	const [invalidParams, setInvalidParams] = useState([]);
+	const [deleteVisible, setDeleteVisible] = useState(false);
 
 	const { colors } = useTheme();
 	const createHabit = () => {
@@ -402,9 +404,9 @@ function PutHabits(props) {
 					</View>
 				</View>
 			</ScrollView>
-			{!props.isCreate && (
+			{!props.isCreate && (<>
 				<TouchableOpacity
-					onPress={() => deleteHabit()}
+					onPress={() => setDeleteVisible(true)}
 					style={{
 						backgroundColor: '#E37272',
 						alignItems: 'center',
@@ -424,6 +426,11 @@ function PutHabits(props) {
 						Delete Habit
 					</Text>
 				</TouchableOpacity>
+					<DeleteHabitPopup visible={deleteVisible} setVisible={setDeleteVisible} habitTitle={props.title}
+									  setBottomPopupText={setPopupText} bottomPopupRef={popup} navigation={props.navigation}
+									  goBack={true} userHabitId={props.userHabitId} habitId={props.habitId}
+					/>
+				</>
 			)}
 			<BottomPopup ref={popup} text={popupText} />
 			<DateTimePickerModal
@@ -436,6 +443,8 @@ function PutHabits(props) {
 				}}
 				onCancel={() => setDatePickerVisibility(false)}
 			/>
+
+
 		</SafeAreaView>
 	);
 }

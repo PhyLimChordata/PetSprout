@@ -26,6 +26,7 @@ function Popup(props) {
 				style={style.popupButton}
 				onPress={() => {
 					props.setModalVisible(false);
+					props.failureFunction()
 				}}
 			>
 				<Text style={style.popupButtonText}>No</Text>
@@ -68,7 +69,7 @@ function Popup(props) {
 								{props.text}
 							</Text>
 						</View>
-						<View>
+						<View style={{marginBottom:10}}>
 							{props.buttonType == 'confirmation' && confirmation_button}
 							{props.buttonType == 'continue' && continue_button}
 						</View>
