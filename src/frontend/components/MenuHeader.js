@@ -42,26 +42,32 @@ function MenuHeader(props) {
 			)}
 			{props.children}
 
-			{props.hp &&
-			<View style={{
-				height: heartSize,
-				width: heartSize,
-				textAlign: 'center',
-				alignItems: 'center',
-				textAlignVertical: 'center',
-			}}>
-				<Text style={{
-					position: 'absolute',
-					top: '30%',
-					color: Colours.Red.HeartValue,
-					fontSize: 20,
-					fontWeight: 'bold',
-					zIndex: 2
-				}}>
-					{props.hp ? props.hp.value : ''}
-				</Text>
-				<Image style={{height: heartSize, width: heartSize, zIndex: 0}}
-					   source={require('../resources/images/DeadHeart.png')}/>
+			{props.hp && (
+				<View
+					style={{
+						height: heartSize,
+						width: heartSize,
+						textAlign: 'center',
+						alignItems: 'center',
+						textAlignVertical: 'center',
+					}}
+				>
+					<Text
+						style={{
+							position: 'absolute',
+							top: '30%',
+							color: Colours.Red.HeartValue,
+							fontSize: 20,
+							fontWeight: 'bold',
+							zIndex: 2,
+						}}
+					>
+						{props.hp ? props.hp.value : ''}
+					</Text>
+					<Image
+						style={{ height: heartSize, width: heartSize, zIndex: 0 }}
+						source={require('../resources/images/DeadHeart.png')}
+					/>
 					<View style={hpViewStyle}>
 						<Image
 							style={hpImageStyle}
