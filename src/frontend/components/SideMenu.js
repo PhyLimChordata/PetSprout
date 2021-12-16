@@ -137,6 +137,11 @@ function SideMenu(props) {
 		changeColorTheme(color);
 		setColor(color);
 		props.setModalVisible(false);
+		console.log(color);
+		console.log(logo[color]);
+		changeLogo(logo[color]);
+		changePet(egg[color]);
+		changeComingSoon(comingsoon[color]);
 	}
 	return (
 		<Modal

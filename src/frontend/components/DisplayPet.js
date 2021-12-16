@@ -65,7 +65,7 @@ export function DisplayPet(props) {
 		}
 	});
 
-	const { getToken, getRefreshing } = useContext(AuthContext);
+	const { getToken, getRefreshing, getPet } = useContext(AuthContext);
 
 	useEffect(() => {
 		if (getRefreshing) {
@@ -110,11 +110,6 @@ export function DisplayPet(props) {
 					totalXP = LevelMapping[petsLevelStr].totalXP;
 					//Cap for exp bar
 					setXpLevelCap(LevelMapping[petsLevelStr].xpLevelCap);
-
-					// if (currentPet.expValue >= totalXP) {
-					// 	petsLevel = petsLevel + 1;
-					// 	setLevel(petsLevel);
-					// }
 					if (petsLevel == 0) {
 						setExperience(currentPet.expValue);
 					} else {
@@ -157,7 +152,7 @@ export function DisplayPet(props) {
 						resizeMode: 'contain',
 						marginBottom: 5,
 					}}
-					source={require('../resources/animations/Egg.gif')}
+					source={getPet}
 				/>
 				<ExperienceBar level={level} exp={experience} xpLevelCap={xpLevelCap} />
 			</View>
