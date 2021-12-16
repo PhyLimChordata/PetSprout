@@ -33,13 +33,16 @@ function AllHabitsScreen(props) {
 		})
 			.then((res) =>
 				res.json().then((data) => {
+					console.log(data);
 					const expValue = parseInt(data.expValue);
 					setHabits(data.habitList);
 					setUserHabitId(data._id);
 					setDisplayed(true);
 				}),
 			)
-			.catch();
+			.catch((err) => {
+				console.log(err);
+			});
 	};
 
 	return (

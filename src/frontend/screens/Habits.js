@@ -90,6 +90,7 @@ function HabitsScreen(props) {
 		})
 			.then((res) =>
 				res.json().then((data) => {
+					console.log(data.habitList);
 					data.habitList.sort(function (a, b) {
 						var keyA = a.times - a.todo;
 						var keyB = b.times - b.todo;
@@ -106,7 +107,9 @@ function HabitsScreen(props) {
 					}, 1000);
 				}),
 			)
-			.catch();
+			.catch((err) => {
+				console.log(err);
+			});
 	};
 
 	const _ = require('lodash');
