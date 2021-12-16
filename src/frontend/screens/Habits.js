@@ -2,50 +2,27 @@ import React, { useState, useEffect, useContext } from 'react';
 
 import {
 	View,
-	Image,
 	Animated,
 	SafeAreaView,
 	RefreshControl,
 	StatusBar,
 } from 'react-native';
 
-import AndroidSafeView from '../styling/AndroidSafeAreaView';
 import styles from '../styling/HabitsScreen';
 import Habits from '../components/Habits';
 import MenuHeader from '../components/MenuHeader';
 
-import ExperienceBar from '../components/ExperienceBar';
-
 import { useTheme } from '@react-navigation/native';
 
 import { AuthContext } from '../Context';
-import { LevelMapping } from '../resources/mappings/LevelMapping';
 
 import { DisplayPet } from '../components/DisplayPet';
 
 function HabitsScreen(props) {
-	const heartSize = 70;
 	const [habits, setHabits] = useState([]);
-	const [heartValue, setHeartValue] = useState({
-		size: heartSize,
-		view: {
-			position: 'absolute',
-			height: heartSize,
-			width: heartSize,
-			marginTop: 0,
-			overflow: 'hidden',
-		},
-		image: { height: heartSize, width: heartSize, bottom: 0, zIndex: 1 },
-		value: 100,
-	});
 	const [userHabitId, setUserHabitId] = useState('');
-	const [experience, setExperience] = useState('');
-	const [xpLevelCap, setXpLevelCap] = useState(0);
-	const [totalXPCap, setTotalXPCap] = useState(0);
-	const { colors } = useTheme();
 
-	const [level, setLevel] = useState('');
-	const [levelToEvolveNext, setLevelToEvolveNext] = useState(0);
+	const { colors } = useTheme();
 
 	const [displayed, setDisplayed] = useState(false);
 
@@ -60,7 +37,6 @@ function HabitsScreen(props) {
 		setRefreshing(true);
 		changeRefreshing(true);
 		displayHabits();
-		updatePet();
 	}, []);
 
 	useEffect(() => {
@@ -114,7 +90,7 @@ function HabitsScreen(props) {
 				{ paddingTop: StatusBar.currentHeight },
 			]}
 		>
-			<MenuHeader text='' navigation={props.navigation} hp={heartValue} />
+			<MenuHeader text='' navigation={props.navigation} displayHp={true} />
 			<DisplayPet />
 			<SafeAreaView style={styles(colors).scrollViewContainer}>
 				<Animated.ScrollView
@@ -157,9 +133,6 @@ function HabitsScreen(props) {
 										frequency={data.times - data.todo}
 										habitId={data._id}
 										userHabitId={userHabitId}
-										exp={experience}
-										totalExp={totalXPCap}
-										levelToEvolveNext={levelToEvolveNext}
 									></Habits>
 									<View style={{ height: 15 }}></View>
 								</Animated.View>

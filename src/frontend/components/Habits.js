@@ -33,9 +33,9 @@ function Habits(props) {
 					'authentication-token': getToken,
 				},
 				body: JSON.stringify({
-					expValue: +props.exp + 5,
+					expValue: 5,
 					date: new Date(),
-					remainingToLevel: props.remainingToLevel,
+					// remainingToLevel: props.remainingToLevel,
 				}),
 			},
 		)

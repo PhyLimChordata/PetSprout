@@ -42,20 +42,6 @@ function PomodoroScreen(props) {
 	const [breakEnabled, setBreak] = useState(false);
 	const [rounds, setRounds] = useState(0);
 
-	const heartSize = 70;
-	const [heartValue, setHeartValue] = useState({
-		size: heartSize,
-		view: {
-			position: 'absolute',
-			height: heartSize,
-			width: heartSize,
-			marginTop: 0,
-			overflow: 'hidden',
-		},
-		image: { height: heartSize, width: heartSize, bottom: 0, zIndex: 1 },
-		value: 100,
-	});
-
 	const [mode, setMode] = useState('Pomodoro');
 
 	const formatNumber = (number) => {
@@ -83,12 +69,6 @@ function PomodoroScreen(props) {
 		setMins(formatNumber(convertRemaining(time).mins));
 		setSecs(formatNumber(convertRemaining(time).secs));
 	};
-
-	useEffect(() => {
-		if (getRefreshing) {
-			setHeartValue(getHP);
-		}
-	}, [getRefreshing]);
 
 	useEffect(() => {
 		let interval = null;
@@ -225,7 +205,7 @@ function PomodoroScreen(props) {
 			<MenuHeader
 				text={props.title}
 				navigation={props.navigation}
-				hp={heartValue}
+				displayHp={true}
 			/>
 			<View
 				style={{
@@ -264,7 +244,6 @@ function PomodoroScreen(props) {
 				/>
 			</View>
 			<DisplayPet />
-
 			<View
 				style={{
 					display: 'flex',
@@ -274,6 +253,8 @@ function PomodoroScreen(props) {
 					marginBottom: 50,
 				}}
 			>
+				{/* Background timer
+			
 				<Text>
 					Background fetch status:{' '}
 					<Text>
@@ -295,7 +276,7 @@ function PomodoroScreen(props) {
 							: 'Register BackgroundFetch task'
 					}
 					onPress={toggleFetchTask}
-				/>
+				/> */}
 				{/* <TouchableOpacity
 					activeOpacity={0.6}
 					style={{

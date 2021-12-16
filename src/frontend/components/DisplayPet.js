@@ -29,9 +29,8 @@ export function getHP() {
 	return hp;
 }
 
-export function gainXP(xp, token) {
-	console.log('asd');
-	fetch('http://localhost:5000/api/v1.0.0/pets/gain_exp', {
+export async function gainXP(xp, token) {
+	await fetch('http://localhost:5000/api/v1.0.0/pets/gain_exp', {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',
@@ -58,9 +57,6 @@ export function DisplayPet(props) {
 	const [experience, setExperience] = useState('');
 	const [level, setLevel] = useState('');
 	const [displayed, setDisplayed] = useState(false);
-
-	const [heartValue, setHeartValue] = useState(_.cloneDeep(hp));
-
 	const [refreshing, setRefreshing] = React.useState(false);
 
 	useEffect(() => {
@@ -88,25 +84,7 @@ export function DisplayPet(props) {
 			.then((res) =>
 				res.json().then((currentPet) => {
 					setDisplayed(true);
-					//TODO: DEEP CLONE
-					let tempHeartValue = _.cloneDeep(heartValue);
-					// let tempHeartValue = {
-					// 	size: heartSize,
-					// 	view: {
-					// 		position: 'absolute',
-					// 		height: heartSize,
-					// 		width: heartSize,
-					// 		marginTop: 0,
-					// 		overflow: 'hidden',
-					// 	},
-					// 	image: {
-					// 		height: heartSize,
-					// 		width: heartSize,
-					// 		bottom: 0,
-					// 		zIndex: 1,
-					// 	},
-					// 	value: 100,
-					// };
+					let tempHeartValue = _.cloneDeep(hp);
 					tempHeartValue.view.height = currentPet.hp * (heartSize / maxHealth);
 					tempHeartValue.view.marginTop =
 						heartSize - tempHeartValue.view.height;
@@ -116,8 +94,6 @@ export function DisplayPet(props) {
 					);
 					hp = _.cloneDeep(tempHeartValue);
 
-					setHeartValue(tempHeartValue);
-
 					if (currentPet.readyToEvolve) {
 						//set some visibility
 					}
@@ -126,14 +102,19 @@ export function DisplayPet(props) {
 						//set some visibility
 					}
 
-					const petsLevel = currentPet.level.toString();
+					const petsLevel = currentPet.level;
+					const petsLevelStr = petsLevel.toString();
 					setLevel(currentPet.level);
 					setNextLevelToEvolve();
-					setTotalXPCap(LevelMapping[petsLevel].totalXP);
-					totalXP = LevelMapping[petsLevel].totalXP;
+					setTotalXPCap(LevelMapping[petsLevelStr].totalXP);
+					totalXP = LevelMapping[petsLevelStr].totalXP;
 					//Cap for exp bar
-					setXpLevelCap(LevelMapping[petsLevel].xpLevelCap);
+					setXpLevelCap(LevelMapping[petsLevelStr].xpLevelCap);
 
+					// if (currentPet.expValue >= totalXP) {
+					// 	petsLevel = petsLevel + 1;
+					// 	setLevel(petsLevel);
+					// }
 					if (petsLevel == 0) {
 						setExperience(currentPet.expValue);
 					} else {
