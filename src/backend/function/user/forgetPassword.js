@@ -132,13 +132,18 @@ function sendUserEmail(cnd, code) {
 			);
 
 			var html =
-				'<a href="http://127.0.0.1:5000/api/v1.0.0/user/reset_password/' +
+				"Hello, <br><br>Recently, your password has been resetted. If this wasn't you, please ignore this message and contact us regarding a possible account breach. <br><br>To reset your password, you will need to confirm it was done so by you by clicking the link below. If you have forgotten what the password had been resetted to, you may always attempt to reset your password again." +
+				'<br><br><a href="http://127.0.0.1:5000/api/v1.0.0/user/reset_password/' +
 				code +
 				'/' +
 				cnd +
 				'/' +
 				'">' +
-				'Click to allow resetting password and return back to app page </a>';
+				'Click to allow resetting password and return back to app page </a>' +
+				'<br><br>If problems proceed to continue, feel free to contact us and we can arrange another method of recovering your account.' +
+				'<br><br>We hope you have a fun time building your habits!' +
+				'<br><br>Thanks!';
+
 			console.log(html);
 			var data = {
 				from: 'HabiPets',
