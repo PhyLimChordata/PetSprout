@@ -2,7 +2,7 @@ import React, {useContext} from 'react';
 import { useTheme } from '@react-navigation/native';
 
 import Popup from './Popup';
-import styles from '../styling/logout';
+import styles from '../styling/Logout';
 
 function EvolutionPopup(props) {
     const { colors } = useTheme();

@@ -6,8 +6,7 @@ const Popup = (theme) =>
 			fontSize: 16,
 			fontStyle: 'normal',
 			color: 'white',
-			marginRight: 50,
-			marginLeft: 50,
+			marginHorizontal: 10,
 		},
 		title: {
 			fontSize: 25,
@@ -17,9 +16,8 @@ const Popup = (theme) =>
 			textAlign:'center'
 		},
 		popupButton: {
-			padding: 10,
-			paddingLeft: 50,
-			paddingRight: 50,
+			flex:1,
+			alignItems: 'center'
 		},
 		popupButtonText: {
 			fontSize: 20,
@@ -28,13 +26,13 @@ const Popup = (theme) =>
 		popupButtonContainer: {
 			alignItems: 'center',
 			textAlign: 'center',
-			justifyContent: 'center',
+			justifyContent: 'space-between',
 			flexDirection: 'row',
 		},
 		popupImage: {
-			height: 125,
-			width: 125,
-			marginTop: -20,
+			height: 100,
+			width: 100,
+			marginTop:-40,
 			resizeMode: 'contain',
 			alignContent: 'center',
 			justifyContent: 'center',

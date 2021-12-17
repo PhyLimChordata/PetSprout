@@ -421,8 +421,8 @@ function SideMenu(props) {
 				</SafeAreaView>
 			</View>
 			<LogoutConfirmation
-				logoutVisible={logoutVisible}
-				setLogoutVisible={setLogoutVisible}
+				visible={logoutVisible}
+				setVisible={setLogoutVisible}
 			></LogoutConfirmation>
 		</Modal>
 	);

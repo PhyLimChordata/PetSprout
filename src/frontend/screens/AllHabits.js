@@ -105,9 +105,10 @@ function AllHabitsScreen(props) {
 					})}
 				</Animated.ScrollView>
 			</View>
-			{selected!=null && 			<DeleteHabitPopup visible={deleteVisible} setVisible={setDeleteVisible} habitTitle={selected.habitTitle}
-															goBack={false} userHabitId={selected.userHabitId} habitId={selected.habitId}
-			/>}
+			{selected!=null &&
+			<DeleteHabitPopup visible={deleteVisible} setVisible={setDeleteVisible} habitTitle={selected.habitTitle}
+															goBack={false} userHabitId={selected.userHabitId} habitId={selected.habitId}/>
+			}
 
 		</SafeAreaView>
 	);

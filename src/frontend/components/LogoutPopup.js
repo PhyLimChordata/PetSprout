@@ -11,8 +11,8 @@ function LogoutConfirmation(props) {
 	const { signOut } = useContext(AuthContext);
 	return (
 		<Popup
-			modalVisible={props.logoutVisible}
-			setModalVisible={props.setLogoutVisible}
+			modalVisible={props.visible}
+			setModalVisible={props.setVisible}
 			image={require('../resources/images/Logout.png')}
 			style={style.confirmation}
 			title='Are you sure you want to log out?'
