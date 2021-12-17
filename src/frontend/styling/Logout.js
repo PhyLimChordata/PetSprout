@@ -11,7 +11,7 @@ const Logout = (theme) =>
 			height: 360,
 			width: 300,
 			borderRadius: 30,
-			padding: 20,
+			paddingVertical: 20,
 		},
 	});
 

@@ -98,7 +98,7 @@ function Habits(props) {
 			{!completed ? (
 				<ScrollViewElement
 					rightFunction={props.enableRight ? completeHabit : undefined}
-					leftFunction={props.enableLeft ? deleteHabit : undefined}
+					leftFunction={props.enableLeft ? () => props.deleteHabit({habitId: props.habitId, userHabitId: props.userHabitId, habitTitle: props.name}) : undefined}
 					text={props.name}
 					content={
 						<View style={styles(colors).horizontalContainer}>

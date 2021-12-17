@@ -32,7 +32,6 @@ function ReportABug(props) {
 				title='Thank you for Reporting a Bug!'
 				text='An email has been sent and
               we will look into it promptly'
-				button={false}
 			></Popup>
 		);
 	} else {
@@ -45,7 +44,6 @@ function ReportABug(props) {
 				title='Something went wrong...'
 				text='An email could not be sent. 
               Please attempt another time.'
-				button={false}
 			></Popup>
 		);
 	}
