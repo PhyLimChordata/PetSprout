@@ -17,7 +17,7 @@ import ScrollViewElement from '../../components/ScrollViewElement';
 import BottomPopup from '../../components/BottomPopup';
 
 import { useTheme } from '@react-navigation/native';
-import DeleteHabitPopup from "../../components/DeleteHabitPopup";
+import DeleteHabitPopup from '../../components/DeleteHabitPopup';
 
 function Day({ selected, letter, onPress }) {
 	const { colors } = useTheme();
@@ -404,31 +404,39 @@ function PutHabits(props) {
 					</View>
 				</View>
 			</ScrollView>
-			{!props.isCreate && (<>
-				<TouchableOpacity
-					onPress={() => setDeleteVisible(true)}
-					style={{
-						backgroundColor: '#E37272',
-						alignItems: 'center',
-						justifyContent: 'center',
-						height: 40,
-						marginHorizontal: 30,
-						borderRadius: 10,
-					}}
-				>
-					<Text
+			{!props.isCreate && (
+				<>
+					<TouchableOpacity
+						onPress={() => setDeleteVisible(true)}
 						style={{
-							fontSize: 20,
-							fontWeight: 'bold',
-							color: colors.background,
+							backgroundColor: '#E37272',
+							alignItems: 'center',
+							justifyContent: 'center',
+							height: 40,
+							marginHorizontal: 30,
+							borderRadius: 10,
 						}}
 					>
-						Delete Habit
-					</Text>
-				</TouchableOpacity>
-					<DeleteHabitPopup visible={deleteVisible} setVisible={setDeleteVisible} habitTitle={props.title}
-									  setBottomPopupText={setPopupText} bottomPopupRef={popup} navigation={props.navigation}
-									  goBack={true} userHabitId={props.userHabitId} habitId={props.habitId}
+						<Text
+							style={{
+								fontSize: 20,
+								fontWeight: 'bold',
+								color: colors.background,
+							}}
+						>
+							Delete Habit
+						</Text>
+					</TouchableOpacity>
+					<DeleteHabitPopup
+						visible={deleteVisible}
+						setVisible={setDeleteVisible}
+						habitTitle={props.title}
+						setBottomPopupText={setPopupText}
+						bottomPopupRef={popup}
+						navigation={props.navigation}
+						goBack={true}
+						userHabitId={props.userHabitId}
+						habitId={props.habitId}
 					/>
 				</>
 			)}
@@ -443,8 +451,6 @@ function PutHabits(props) {
 				}}
 				onCancel={() => setDatePickerVisibility(false)}
 			/>
-
-
 		</SafeAreaView>
 	);
 }

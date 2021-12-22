@@ -15,8 +15,8 @@ import { useTheme } from '@react-navigation/native';
 import { logo } from '../resources/images/Logo/Logo';
 import { comingsoon } from '../resources/images/Pets/ComingSoon/ComingSoon';
 import { egg } from '../resources/images/Pets/Egg/Egg';
-import LogoutConfirmation from "./LogoutPopup";
-import { EvolutionMapping } from "../resources/mappings/EvolutionMapping"
+import LogoutConfirmation from './LogoutPopup';
+import { EvolutionMapping } from '../resources/mappings/EvolutionMapping';
 function ThemeCircle({ colorTheme, onPress, selected }) {
 	return (
 		<View>
@@ -224,7 +224,7 @@ function SideMenu(props) {
 									</Text>
 								</View>
 							</View>
-							<TouchableOpacity
+							{/* <TouchableOpacity
 								style={{ height: 40, justifyContent: 'center' }}
 								onPress={() => {
 									props.setModalVisible(false);
@@ -236,7 +236,7 @@ function SideMenu(props) {
 									color={colors.Quaternary}
 									size={40}
 								/>
-							</TouchableOpacity>
+							</TouchableOpacity> */}
 						</View>
 						<TouchableOpacity
 							style={{ marginHorizontal: '6%', marginBottom: '6%' }}
@@ -270,7 +270,7 @@ function SideMenu(props) {
 								marginBottom: '12%',
 							}}
 						>
-							<Tab
+							{/* <Tab
 								color={colors.Quaternary}
 								icon={'star'}
 								title={'Achievements'}
@@ -278,7 +278,7 @@ function SideMenu(props) {
 									props.setModalVisible(false);
 									props.navigation.navigate('AchievementScreen');
 								}}
-							/>
+							/> */}
 							<Tab
 								color={colors.Quaternary}
 								icon={'account-circle'}
@@ -288,7 +288,7 @@ function SideMenu(props) {
 									props.navigation.navigate('ProfileScreen');
 								}}
 							/>
-							<Tab
+							{/* <Tab
 								color={colors.Quaternary}
 								icon={'bullhorn'}
 								title={'Feedback'}
@@ -305,7 +305,7 @@ function SideMenu(props) {
 									props.setModalVisible(false);
 									props.navigation.navigate('ReportABugScreen');
 								}}
-							/>
+							/> */}
 							<Tab
 								color={colors.Quaternary}
 								icon={'account-group'}

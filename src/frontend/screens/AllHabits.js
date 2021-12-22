@@ -8,7 +8,7 @@ import MenuHeader from '../components/MenuHeader';
 import { useTheme } from '@react-navigation/native';
 
 import { AuthContext } from '../Context';
-import DeleteHabitPopup from "../components/DeleteHabitPopup";
+import DeleteHabitPopup from '../components/DeleteHabitPopup';
 
 function AllHabitsScreen(props) {
 	const [habits, setHabits] = useState([]);
@@ -22,11 +22,10 @@ function AllHabitsScreen(props) {
 	const { getToken } = useContext(AuthContext);
 
 	const deleteHabit = (habit) => {
-
-		setSelected(habit)
-		setDeleteVisible(true)
-		console.log(habit)
-		console.log('eh')
+		setSelected(habit);
+		setDeleteVisible(true);
+		console.log(habit);
+		console.log('eh');
 	};
 	useEffect(() => {
 		if (habits.length == 0 && !displayed) displayHabits();
@@ -99,11 +98,16 @@ function AllHabitsScreen(props) {
 					})}
 				</Animated.ScrollView>
 			</View>
-			{selected!=null &&
-			<DeleteHabitPopup visible={deleteVisible} setVisible={setDeleteVisible} habitTitle={selected.habitTitle}
-															goBack={false} userHabitId={selected.userHabitId} habitId={selected.habitId}/>
-			}
-
+			{selected != null && (
+				<DeleteHabitPopup
+					visible={deleteVisible}
+					setVisible={setDeleteVisible}
+					habitTitle={selected.habitTitle}
+					goBack={false}
+					userHabitId={selected.userHabitId}
+					habitId={selected.habitId}
+				/>
+			)}
 		</SafeAreaView>
 	);
 }
