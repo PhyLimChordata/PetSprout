@@ -3,6 +3,7 @@ const User = require('../../schemas/userSchema');
 
 module.exports = async (req, res) => {
 	try {
+		let { date } = req.body;
 		let user = await User.findById(req.user.id).select('-password');
 		if (!user) return res.status(404).json('User could not found');
 
@@ -12,7 +13,7 @@ module.exports = async (req, res) => {
 		if (!userHabitInfo)
 			return res.status(404).json("User's habits could not found");
 
-		const today = new Date().setHours(0, 0, 0);
+		const today = new Date(date).setHours(0, 0, 0);
 		console.log(user);
 		const user_last_login = user.lastlogin;
 		user_last_login.setHours(0, 0, 0);
@@ -31,10 +32,10 @@ module.exports = async (req, res) => {
 					let interval = 0;
 					let index = today.getDay();
 					while(!habit.schedule.includes(index.toString())) {
-						if(index+1 >= 7) {
-							index++;
-						} else {
+						if(index+1 > 7) {
 							index = 0;
+						} else {
+							index++;
 						}
 						interval++;
 					}
@@ -42,6 +43,7 @@ module.exports = async (req, res) => {
 					habit.nextSignInDate = new Date(newSignDate);
 				}
 			}
+			await userHabitInfo.save();
 		}
 
 		// Filtering out habits to be shown
