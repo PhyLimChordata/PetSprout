@@ -2,50 +2,27 @@ import React, { useState, useEffect, useContext } from 'react';
 
 import {
 	View,
-	Image,
 	Animated,
 	SafeAreaView,
 	RefreshControl,
 	StatusBar,
 } from 'react-native';
 
-import AndroidSafeView from '../styling/AndroidSafeAreaView';
 import styles from '../styling/HabitsScreen';
 import Habits from '../components/Habits';
 import MenuHeader from '../components/MenuHeader';
 
-import ExperienceBar from '../components/ExperienceBar';
-
 import { useTheme } from '@react-navigation/native';
 
 import { AuthContext } from '../Context';
-import { LevelMapping } from '../resources/mappings/LevelMapping';
+
+import { DisplayPet } from '../components/DisplayPet';
 
 function HabitsScreen(props) {
-	const heartSize = 70;
-	//THIS CAN VARY BASED ON USER's PET
-	const maxHealth = 100;
 	const [habits, setHabits] = useState([]);
-	const [heartValue, setHeartValue] = useState({
-		size: heartSize,
-		view: {
-			position: 'absolute',
-			height: heartSize,
-			width: heartSize,
-			marginTop: 0,
-			overflow: 'hidden',
-		},
-		image: { height: heartSize, width: heartSize, bottom: 0, zIndex: 1 },
-		value: 100,
-	});
 	const [userHabitId, setUserHabitId] = useState('');
-	const [experience, setExperience] = useState('');
-	const [xpLevelCap, setXpLevelCap] = useState(0);
-	const [totalXPCap, setTotalXPCap] = useState(0);
-	const { colors } = useTheme();
 
-	const [level, setLevel] = useState('');
-	const [levelToEvolveNext, setLevelToEvolveNext] = useState(0);
+	const { colors } = useTheme();
 
 	const [displayed, setDisplayed] = useState(false);
 
@@ -60,20 +37,17 @@ function HabitsScreen(props) {
 		setRefreshing(true);
 		changeRefreshing(true);
 		displayHabits();
-		updatePet();
 	}, []);
 
 	useEffect(() => {
 		if (habits.length == 0 && !displayed) {
 			displayHabits();
-			updatePet();
 		}
 	});
 
 	useEffect(() => {
 		if (getRefreshing) {
 			displayHabits();
-			updatePet();
 		}
 	}, [getRefreshing]);
 
@@ -109,69 +83,6 @@ function HabitsScreen(props) {
 			.catch();
 	};
 
-	const _ = require('lodash');
-
-	const updatePet = () => {
-		fetch('http://localhost:5000/api/v1.0.0/pets/get_current', {
-			method: 'GET',
-			headers: {
-				'Content-Type': 'application/json',
-				'authentication-token': getToken,
-			},
-		})
-			.then((res) =>
-				res.json().then((currentPet) => {
-					var tempHeartValue = _.cloneDeep(heartValue);
-					tempHeartValue.view['height'] =
-						currentPet.hp * (heartSize / maxHealth);
-					tempHeartValue.view.marginTop =
-						heartSize - tempHeartValue.view.height;
-					tempHeartValue.image.bottom = tempHeartValue.view.marginTop;
-
-					tempHeartValue.value = Math.ceil(
-						tempHeartValue.view.height * (maxHealth / heartSize),
-					);
-					console.log(tempHeartValue);
-					setHeartValue(tempHeartValue);
-					console.log(heartValue);
-					if (currentPet.readyToEvolve) {
-						//set some visibility
-					}
-
-					if (currentPet.readyToHatch) {
-						//set some visibility
-					}
-
-					const petsLevel = currentPet.level;
-					setLevel(currentPet.level);
-					setNextLevelToEvolve();
-					setTotalXPCap(LevelMapping[petsLevel].totalXP);
-
-					//Cap for exp bar
-					setXpLevelCap(LevelMapping[petsLevel].xpLevelCap);
-
-					if (petsLevel == 0) {
-						setExperience(currentPet.expValue);
-					} else {
-						let previousLevel = petsLevel - 1;
-						var previousTotalXPCap = LevelMapping[previousLevel].totalXP;
-						setExperience(currentPet.expValue - previousTotalXPCap);
-					}
-				}),
-			)
-			.catch((err) => {
-				console.log(err);
-			});
-	};
-
-	const setNextLevelToEvolve = () => {
-		if (level == 40) {
-			setLevelToEvolveNext(-1);
-		} else {
-			setLevelToEvolveNext(level + 10 - (level % 10));
-		}
-	};
-
 	return (
 		<SafeAreaView
 			style={[
@@ -179,11 +90,8 @@ function HabitsScreen(props) {
 				{ paddingTop: StatusBar.currentHeight },
 			]}
 		>
-			<MenuHeader text='' navigation={props.navigation} hp={heartValue} />
-			<View style={styles(colors).verticalContainer}>
-				<Image style={styles(colors).creature} source={getPet} />
-				<ExperienceBar level={level} exp={experience} xpLevelCap={xpLevelCap} />
-			</View>
+			<MenuHeader text='' navigation={props.navigation} displayHp={true} />
+			<DisplayPet />
 			<SafeAreaView style={styles(colors).scrollViewContainer}>
 				<Animated.ScrollView
 					showsVerticalScrollIndicator={false}
@@ -225,9 +133,6 @@ function HabitsScreen(props) {
 										frequency={data.times - data.todo}
 										habitId={data._id}
 										userHabitId={userHabitId}
-										exp={experience}
-										totalExp={totalXPCap}
-										levelToEvolveNext={levelToEvolveNext}
 									></Habits>
 									<View style={{ height: 15 }}></View>
 								</Animated.View>
