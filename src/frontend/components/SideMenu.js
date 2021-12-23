@@ -15,7 +15,8 @@ import { useTheme } from '@react-navigation/native';
 import { logo } from '../resources/images/Logo/Logo';
 import { comingsoon } from '../resources/images/Pets/ComingSoon/ComingSoon';
 import { egg } from '../resources/images/Pets/Egg/Egg';
-
+import LogoutConfirmation from "./LogoutPopup";
+import { EvolutionMapping } from "../resources/mappings/EvolutionMapping"
 function ThemeCircle({ colorTheme, onPress, selected }) {
 	return (
 		<View>
@@ -100,6 +101,8 @@ function SideMenu(props) {
 	const { colors } = useTheme();
 	const [color, setColor] = useState(getColor);
 	const [userName, setUserName] = useState('');
+	const [pet, setPet] = useState(null);
+	const [logoutVisible, setLogoutVisible] = useState(false);
 
 	let defaultMode = true;
 	if (getMode == 'dark') {
@@ -127,6 +130,23 @@ function SideMenu(props) {
 			})
 			.catch((err) => console.log(err));
 	}, []);
+
+	useEffect(() => {
+		fetch('http://localhost:5000/api/v1.0.0/pets/get_current', {
+			method: 'GET',
+			headers: {
+				'Content-Type': 'application/json',
+				'authentication-token': getToken,
+			},
+		})
+			.then((res) =>
+				res.json().then((data) => {
+					setPet(EvolutionMapping[data.name]);
+				}),
+			)
+			.catch();
+	}, []);
+
 	{
 		/* TODO: Change this to a global variable */
 	}
@@ -180,14 +200,14 @@ function SideMenu(props) {
 								style={{ flexDirection: 'row', alignItems: 'center', flex: 1 }}
 							>
 								<TouchableOpacity style={{ justifyContent: 'center' }}>
-									<View
+									<Image
 										style={{
-											backgroundColor: colors.Quaternary,
 											width: 50,
 											height: 50,
 											borderRadius: 25,
 										}}
-									></View>
+										source={pet}
+									></Image>
 								</TouchableOpacity>
 								<View
 									style={{
@@ -400,13 +420,17 @@ function SideMenu(props) {
 								icon={'logout'}
 								title={'Log Out'}
 								onPress={() => {
-									props.setLogoutVisible(true);
+									setLogoutVisible(true);
 								}}
 							/>
 						</View>
 					</View>
 				</SafeAreaView>
 			</View>
+			<LogoutConfirmation
+				visible={logoutVisible}
+				setVisible={setLogoutVisible}
+			></LogoutConfirmation>
 		</Modal>
 	);
 }
