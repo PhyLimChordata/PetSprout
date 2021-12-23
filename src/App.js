@@ -273,13 +273,13 @@ function HomeScreen(props) {
 				/>
 				<Tab.Screen
 					name={'TabMiddle'}
-					component={ComingSoonScreen}
-					listeners={{
-						tabPress: (e) => {
-							setModalVisible(true);
-							e.preventDefault();
-						},
-					}}
+					component={CreateHabitScreen}
+					// listeners={{
+					// 	tabPress: (e) => {
+					// 		setModalVisible(true);
+					// 		e.preventDefault();
+					// 	},
+					// }}
 					options={{
 						tabBarLabel: () => {
 							return null;
@@ -323,11 +323,11 @@ function HomeScreen(props) {
 					}}
 				/>
 			</Tab.Navigator>
-			<BottomMenu
+			{/* <BottomMenu
 				navigation={props.navigation}
 				modalVisible={modalVisible}
 				setModalVisible={setModalVisible}
-			/>
+			/> */}
 		</>
 	);
 }
