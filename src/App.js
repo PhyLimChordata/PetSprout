@@ -10,7 +10,6 @@ import { NavigationContainer, useTheme } from '@react-navigation/native';
 
 //Screens
 import BottomMenu from './frontend/components/BottomMenu';
-
 import LoginScreen from './frontend/screens/Login';
 import SignupScreen from './frontend/screens/Signup';
 import VerifyEmailSignUpScreen from './frontend/screens/VerifyEmailSignUp';
@@ -33,6 +32,7 @@ import ComingSoonScreen from './frontend/screens/ComingSoon';
 import ModifyHabitScreen from './frontend/screens/PutHabits/ModifyHabit';
 import NamePetScreen from './frontend/screens/NamePet';
 import AllHabitsScreen from './frontend/screens/AllHabits';
+import PomodoroScreen from './frontend/screens/Pomodoro';
 // Colour Themes
 import GreenLightTheme from './frontend/resources/themes/light/GreenTheme';
 import OrangeLightTheme from './frontend/resources/themes/light/OrangeTheme';
@@ -187,8 +187,18 @@ function NavContainer(props) {
 						name='TermsAndConditionScreen'
 						component={TermsAndConditionScreen}
 					/>
-					<Stack.Screen name='EvolutionScreen' component={EvolutionScreen} />
-					<Stack.Screen name='NamePetScreen' component={NamePetScreen} />
+					<Stack.Screen
+						name='EvolutionScreen'
+						component={EvolutionScreen}
+					/>
+					<Stack.Screen
+						name='NamePetScreen'
+						component={NamePetScreen}
+					/>
+					<Stack.Screen
+						name='PomodoroScreen'
+						component={PomodoroScreen}
+					/>
 				</Stack.Navigator>
 			) : (
 				<Stack.Navigator headerMode='none'>
@@ -273,13 +283,13 @@ function HomeScreen(props) {
 				/>
 				<Tab.Screen
 					name={'TabMiddle'}
-					component={ComingSoonScreen}
-					listeners={{
-						tabPress: (e) => {
-							setModalVisible(true);
-							e.preventDefault();
-						},
-					}}
+					component={CreateHabitScreen}
+					// listeners={{
+					// 	tabPress: (e) => {
+					// 		setModalVisible(true);
+					// 		e.preventDefault();
+					// 	},
+					// }}
 					options={{
 						tabBarLabel: () => {
 							return null;
@@ -323,11 +333,11 @@ function HomeScreen(props) {
 					}}
 				/>
 			</Tab.Navigator>
-			<BottomMenu
+			{/* <BottomMenu
 				navigation={props.navigation}
 				modalVisible={modalVisible}
 				setModalVisible={setModalVisible}
-			/>
+			/> */}
 		</>
 	);
 }
@@ -338,7 +348,7 @@ function Calendar(props) {
 }
 
 function Pomodoro(props) {
-	return <ComingSoonScreen title='Pomodoro' navigation={props.navigation} />;
+	return <PomodoroScreen title='Pomodoro'/>;
 }
 
 function Reflect(props) {
