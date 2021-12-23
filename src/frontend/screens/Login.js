@@ -96,8 +96,9 @@ function Login(props) {
 				} else if (res.status == 200) {
 					res.json().then((data) => {
 						logIn(data.token);
+						const date = new Date().toISOString();
 						fetch(
-							'http://localhost:5000/api/v1.0.0/achievements/updateLoginStreaks',
+							'http://localhost:5000/api/v1.0.0/achievements/updateLoginStreaks/' + date,
 							{
 								method: 'PUT',
 								headers: {
