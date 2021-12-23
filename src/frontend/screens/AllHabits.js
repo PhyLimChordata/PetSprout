@@ -8,6 +8,7 @@ import MenuHeader from '../components/MenuHeader';
 import { useTheme } from '@react-navigation/native';
 
 import { AuthContext } from '../Context';
+import DeleteHabitPopup from '../components/DeleteHabitPopup';
 
 function AllHabitsScreen(props) {
 	const [habits, setHabits] = useState([]);
@@ -15,9 +16,17 @@ function AllHabitsScreen(props) {
 	const { colors } = useTheme();
 	const [displayed, setDisplayed] = useState(false);
 	const scrolling = React.useRef(new Animated.Value(0)).current;
+	const [selected, setSelected] = useState(null);
+	const [deleteVisible, setDeleteVisible] = useState(false);
 
 	const { getToken } = useContext(AuthContext);
 
+	const deleteHabit = (habit) => {
+		setSelected(habit);
+		setDeleteVisible(true);
+		console.log(habit);
+		console.log('eh');
+	};
 	useEffect(() => {
 		if (habits.length == 0 && !displayed) displayHabits();
 	});
@@ -33,13 +42,16 @@ function AllHabitsScreen(props) {
 		})
 			.then((res) =>
 				res.json().then((data) => {
+					console.log(data);
 					const expValue = parseInt(data.expValue);
 					setHabits(data.habitList);
 					setUserHabitId(data._id);
 					setDisplayed(true);
 				}),
 			)
-			.catch();
+			.catch((err) => {
+				console.log(err);
+			});
 	};
 
 	return (
@@ -79,6 +91,7 @@ function AllHabitsScreen(props) {
 											frequency={data.times - data.todo}
 											habitId={data._id}
 											userHabitId={userHabitId}
+											deleteHabit={(selected) => deleteHabit(selected)}
 										></Habits>
 										<View style={{ height: 15 }}></View>
 									</Animated.View>
@@ -88,6 +101,16 @@ function AllHabitsScreen(props) {
 					})}
 				</Animated.ScrollView>
 			</View>
+			{selected != null && (
+				<DeleteHabitPopup
+					visible={deleteVisible}
+					setVisible={setDeleteVisible}
+					habitTitle={selected.habitTitle}
+					goBack={false}
+					userHabitId={selected.userHabitId}
+					habitId={selected.habitId}
+				/>
+			)}
 		</SafeAreaView>
 	);
 }

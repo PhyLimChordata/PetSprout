@@ -9,6 +9,7 @@ import ScrollViewElement from './ScrollViewElement';
 import { AuthContext } from '../Context';
 import { useTheme } from '@react-navigation/native';
 import Colours from '../resources/themes/Colours';
+import { gainXP } from '../components/DisplayPet';
 
 function Habits(props) {
 	const [streak, setStreak] = useState(props.streak);
@@ -32,40 +33,25 @@ function Habits(props) {
 					'authentication-token': getToken,
 				},
 				body: JSON.stringify({
-					expValue: +props.exp + 5,
+					expValue: 5,
 					date: new Date(),
-					remainingToLevel: props.remainingToLevel,
+					// remainingToLevel: props.remainingToLevel,
 				}),
 			},
 		)
 			.then((res) =>
 				res.json().then(() => {
+					console.log('completehabit was called');
+
 					if (frequency - 1 == 0) {
 						setCompleted(true);
-						gainXP(300);
+						gainXP(300, getToken);
 					} else {
-						gainXP(50);
+						gainXP(50, getToken);
 					}
 					changeRefreshing(true);
 				}),
 			)
-			.catch();
-	};
-
-	const gainXP = (xp) => {
-		fetch('http://localhost:5000/api/v1.0.0/pets/gain_exp', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-				'authentication-token': getToken,
-			},
-			body: JSON.stringify({
-				expValue: xp,
-				totalExp: props.totalExp,
-				levelToEvolveNext: props.levelToEvolveNext,
-			}),
-		})
-			.then((res) => res.json().then(() => {}))
 			.catch();
 	};
 
@@ -98,7 +84,16 @@ function Habits(props) {
 			{!completed ? (
 				<ScrollViewElement
 					rightFunction={props.enableRight ? completeHabit : undefined}
-					leftFunction={props.enableLeft ? deleteHabit : undefined}
+					leftFunction={
+						props.enableLeft
+							? () =>
+									props.deleteHabit({
+										habitId: props.habitId,
+										userHabitId: props.userHabitId,
+										habitTitle: props.name,
+									})
+							: undefined
+					}
 					text={props.name}
 					content={
 						<View style={styles(colors).horizontalContainer}>
