@@ -143,7 +143,7 @@ const user_activation = async (req, res) => {
 		for (data in daily_data) {
 			let newAnalyze = new Analyze({});
 			await newAnalyze.save();
-			let desc = daily_data.data;
+			let desc = daily_data[data];
 			let newHabit = {
 				analyze: newAnalyze._id,
 				title: data,
@@ -157,6 +157,7 @@ const user_activation = async (req, res) => {
 
 			newUserHabit.habitList.push(newHabit);
 		}
+		console.log(newUserHabit);
 
 		let weeklySchedule = ['5'];
 		if (weeklySchedule.includes(current_day.toString())) {
@@ -176,7 +177,7 @@ const user_activation = async (req, res) => {
 		for (data in weekly_data) {
 			let newAnalyze = new Analyze({});
 			await newAnalyze.save();
-			let desc = weekly_data.data;
+			let desc = weekly_data[data];
 			let newHabit = {
 				analyze: newAnalyze._id,
 				title: data,
