@@ -118,7 +118,7 @@ function HabitsScreen(props) {
 	const displayHabits = () => {
 		setDisplayed(true);
 		setRefreshing(true);
-		const date = new Date().getDay();
+		const date = new Date().toISOString();
 		fetch('http://localhost:5000/api/v1.0.0/habit/show_user_habit/' + date, {
 			method: 'GET',
 			headers: {
