@@ -1,31 +1,41 @@
 {
-	"expo": {
-		"name": "root",
-		"slug": "root",
-		"version": "1.0.0",
-		"orientation": "portrait",
-		"icon": "./frontend/resources/assets/icon.png",
-		"splash": {
-			"image": "./frontend/resources/assets/splash.png",
-			"resizeMode": "contain",
-			"backgroundColor": "#ffffff"
-		},
-		"updates": {
-			"fallbackToCacheTimeout": 0
-		},
-		"assetBundlePatterns": ["**/*"],
-		"ios": {
-			"supportsTablet": true
-		},
-		"android": {
-			"package": "PetSprout",
-			"adaptiveIcon": {
-				"foregroundImage": "./frontend/resources/assets/adaptive-icon.png",
-				"backgroundColor": "#FFFFFF"
-			}
-		},
-		"web": {
-			"favicon": "./frontend/resources/assets/favicon.png"
-		}
-	}
+  "expo": {
+    "name": "root",
+    "slug": "root",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./frontend/resources/assets/icon.png",
+    "splash": {
+      "image": "./frontend/resources/assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./frontend/resources/assets/adaptive-icon.png",
+        "backgroundColor": "#FFFFFF"
+      },
+      "package": "com.phylimchordata.root"
+    },
+    "web": {
+      "favicon": "./frontend/resources/assets/favicon.png"
+    }
+  },
+  "android": {
+    "package": "petsprout",
+	"versionCode": 1
+  },
+  "ios": {
+    "bundleIdentifier": "petsprout",
+	"buildNumber": "1.0.0"
+  }
 }
