@@ -18,6 +18,7 @@
 			"supportsTablet": true
 		},
 		"android": {
+			"package": "PetSprout",
 			"adaptiveIcon": {
 				"foregroundImage": "./frontend/resources/assets/adaptive-icon.png",
 				"backgroundColor": "#FFFFFF"
