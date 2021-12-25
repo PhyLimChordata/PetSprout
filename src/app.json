@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "root",
-    "slug": "root",
+    "name": "PetSprout",
+    "slug": "petsprout",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./frontend/resources/assets/icon.png",
