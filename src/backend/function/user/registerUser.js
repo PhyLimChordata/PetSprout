@@ -173,7 +173,7 @@ function sendUserEmail(cnd, code) {
 				cnd +
 				'/' +
 				'">' +
-				'Click to allow resetting password and return back to app page </a>';
+				'Click to verifiy the email and return back to app page </a>';
 			console.log(html);
 			var data = {
 				from: 'HabiPets',

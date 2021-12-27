@@ -53,6 +53,10 @@ const HabitSchema = new Schema(
 					type: Number,
 					default: 0,
 				},
+				missing: {
+					type: Number,
+					default: 0,
+				},
 				nextSignInDate: {
 					type: Date,
 				},

@@ -29,6 +29,7 @@ module.exports = async (req, res) => {
 				// user loses streak
 				if(signDate - today < 0) {
 					habit.continuous = 0;
+					habit.missing++;
 					// reset next sign in date
 					let interval = 0;
 					let index = today.getDay();

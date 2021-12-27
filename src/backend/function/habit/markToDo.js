@@ -39,6 +39,7 @@ module.exports = async (req, res) => {
 
 		if (habitFromDB.todo === habitFromDB.times) {
 			habitFromDB.continuous = habitFromDB.continuous + 1;
+			habitFromDB.missing = 0;
 			let current = new Date(date);
 			let current_date = current.getDate();
 			let current_day = current.getDay();
