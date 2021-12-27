@@ -58,7 +58,7 @@ const update_login_streaks = async(req, res) => {
 
 		await user_achievements.save();
 
-		res.status(200).json(user_achievements);
+		res.status(200).json(user_achievements.achievements.accountability.login_streak);
 	} catch (error) {
 		console.log(error);
 		return res.status(500).json('server error');
