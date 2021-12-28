@@ -17,22 +17,19 @@
       "**/*"
     ],
     "ios": {
-      "bundleIdentifier": "com.phylimchordata.PetSprout"
+      "bundleIdentifier": "com.phylimchordata.PetSprout",
+      "buildNumber": "1.0.1"
+    },
+    "android": {
+      "package": "petsprout",
+      "versionCode": 1,
+      "adaptiveIcon": {
+        "foregroundImage": "./frontend/resources/images/Logo/LogoGreen.png",
+        "backgroundColor": "#FFFFFF"
+      }
     },
     "web": {
       "favicon": "./frontend/resources/assets/favicon.png"
     }
   },
-  "android": {
-    "package": "petsprout",
-	"versionCode": 1,
-    "adaptiveIcon": {
-      "foregroundImage": "./frontend/resources/images/Logo/LogoGreen.png",
-      "backgroundColor": "#FFFFFF"
-    }
-  },
-  "ios": {
-    "bundleIdentifier": "petsprout",
-	"buildNumber": "1.0.1"
-  }
 }
