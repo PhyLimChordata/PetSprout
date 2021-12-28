@@ -136,7 +136,6 @@ function Habits(props) {
 										supplementalInfo={
 											<Text style={styles(colors).expText}>x</Text>
 										}
-										last={true}
 									/>
 								</View>
 							</View>
@@ -175,7 +174,6 @@ function Habits(props) {
 													height: 20,
 													width: 20,
 													tintColor: Colours.Grey.Text,
-													marginTop: 'auto',
 												}}
 											/>
 										}
@@ -186,7 +184,6 @@ function Habits(props) {
 										supplementalInfo={
 											<Text style={styles(colors).completedExpText}>x</Text>
 										}
-										last={true}
 									/>
 								</View>
 							</View>

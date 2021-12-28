@@ -30,9 +30,6 @@ const habitsStyles = (theme) =>
 		},
 		completedHorizontalContainerBottom: {
 			flexDirection: 'row',
-			position: 'absolute',
-			bottom: 0,
-			right: 0,
 			borderRadius: 8,
 			backgroundColor: Colours.Grey.ExpBarBackground,
 		},

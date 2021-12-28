@@ -6,6 +6,8 @@ import {
 	SafeAreaView,
 	RefreshControl,
 	StatusBar,
+	Text,
+	TouchableOpacity
 } from 'react-native';
 
 import styles from '../styling/HabitsScreen';
@@ -95,7 +97,16 @@ function HabitsScreen(props) {
 		>
 			<MenuHeader text='' navigation={props.navigation} displayHp={true} />
 			<DisplayPet />
-			<SafeAreaView style={styles(colors).scrollViewContainer}>
+			<View style={styles(colors).scrollViewContainer}>
+				<TouchableOpacity style={{alignSelf: 'flex-end'}}onPress={() => props.navigation.navigate('AllHabitsScreen')}>
+				<Text style={{
+					fontSize: 16,
+					fontWeight: 'bold',
+					color: colors.Quaternary
+				}}>
+					View All Habits
+				</Text>
+				</TouchableOpacity>
 				<Animated.ScrollView
 					showsVerticalScrollIndicator={false}
 					onScroll={Animated.event(
@@ -144,7 +155,7 @@ function HabitsScreen(props) {
 						// 	}
 					})}
 				</Animated.ScrollView>
-			</SafeAreaView>
+			</View>
 		</SafeAreaView>
 	);
 }

@@ -12,34 +12,13 @@ function Counter(props) {
 		? Colours.Grey.ExpBarBackground
 		: colors.Secondary;
 	const textColor = props.completed ? Colours.Grey.Text : colors.Quaternary;
-	if (props.last) {
-		return (
-			<View
-				style={{
-					flexDirection: 'row',
-					paddingTop: 15,
-				}}
-			>
-				<Text
-					style={{
-						fontSize: 20,
-						fontWeight: 'bold',
-						color: textColor,
-					}}
-				>
-					{props.quantity}
-				</Text>
-				{props.supplementalInfo}
-			</View>
-		);
-	}
 	return (
 		<View
 			style={{
 				flexDirection: 'row',
-				borderRadius: 8,
 				backgroundColor: containerColor,
 				paddingRight: 20,
+				alignItems:'flex-end'
 			}}
 		>
 			<Text
