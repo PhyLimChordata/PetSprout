@@ -25,6 +25,7 @@ import * as BackgroundFetch from 'expo-background-fetch';
 import * as TaskManager from 'expo-task-manager';
 
 import { DisplayPet, gainXP, getHP } from '../components/DisplayPet';
+import { Title } from 'react-native-paper';
 
 const BACKGROUND_FETCH_TASK = 'background-fetch';
 
@@ -300,21 +301,33 @@ function PomodoroScreen(props) {
 						Current Task
 					</Text>
 				</TouchableOpacity> */}
-				<TextInput
-					style={{
-						backgroundColor: colors.Tertiary,
-						borderRadius: 30,
-						padding: 10,
-						paddingLeft: 40,
-						paddingRight: 40,
-						marginBottom: 20,
-						color: 'white',
-						fontSize: 20,
-						fontWeight: 'bold',
-					}}
-				>
-					Current Task
-				</TextInput>
+				<TouchableOpacity
+						activeOpacity={0.6}
+						style={{
+							backgroundColor: colors.Background,
+							borderRadius: 30,
+							borderColor: colors.Quaternary,
+							padding: 10,
+							borderWidth: 3,
+							paddingLeft: 40,
+							paddingRight: 40,
+							marginBottom: 20,
+						}}
+						onPress={() => {
+							props.navigation.navigate('PomodoroTasksScreen');
+						}}
+					>
+						<Text
+							style={{
+								fontSize: 20,
+								fontWeight: 'bold',
+								color: colors.Quaternary,
+							}}
+						>
+							Current Task
+						</Text>
+					</TouchableOpacity>
+
 				<Text
 					style={{
 						fontSize: 60,
@@ -374,6 +387,38 @@ function PomodoroScreen(props) {
 				)}
 			</View>
 		</SafeAreaView>
+	);
+}
+
+function TitledIcon({ icon, onPress, title }) {
+	const { colors } = useTheme();
+	return (
+		<View style={{ width: 75 }}>
+			<TouchableOpacity
+				style={{ justifyContent: 'center', alignItems: 'center' }}
+				onPress={onPress}
+			>
+				<View
+					style={{
+						backgroundColor: colors.background,
+						width: 36,
+						height: 36,
+						borderRadius: 18,
+					}}
+				></View>
+			</TouchableOpacity>
+			<Text
+				style={{
+					fontSize: 12,
+					fontWeight: 'bold',
+					color: colors.background,
+					textAlign: 'center',
+				}}
+			>
+				{' '}
+				{title}{' '}
+			</Text>
+		</View>
 	);
 }
 
