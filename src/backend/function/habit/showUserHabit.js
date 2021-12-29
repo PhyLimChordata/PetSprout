@@ -24,7 +24,8 @@ module.exports = async (req, res) => {
 				// reset all counts to 0
 				habit.todo = 0; 
 				// check continuity
-				let signDate = habit.nextSignInDate.setHours(0, 0, 0);
+				let signDate = new Date(habit.nextSignInDate);
+				signDate.setHours(0, 0, 0);
 				// if the next sign in date for habit is before today, then user missed (since not reset),
 				// user loses streak
 				if(signDate - today < 0) {
