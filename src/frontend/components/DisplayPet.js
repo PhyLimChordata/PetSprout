@@ -59,7 +59,7 @@ export function DisplayPet(props) {
 	const [level, setLevel] = useState('');
 	const [displayed, setDisplayed] = useState(false);
 	const [refreshing, setRefreshing] = React.useState(false);
-	const [evolutionVisible, setEvolutionVisible] = useState(false);
+	const [evolutionVisible, setEvolutionVisible] = useState(true);
 	const [isEgg, setIsEgg] = useState(true);
 
 	useEffect(() => {

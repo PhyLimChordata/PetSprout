@@ -114,7 +114,7 @@ function Habits(props) {
 									/>
 								</View>
 								<View style={{ width: 100 }} />
-								<Ellipsis ghettofix={true} />
+								<Ellipsis ghettofix={false} />
 								<View style={styles(colors).horizontalContainerBottom}>
 									<Counter
 										quantity={streak}
