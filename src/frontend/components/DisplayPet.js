@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { View, Image } from 'react-native';
+import {View, Image, SafeAreaView} from 'react-native';
 import ExperienceBar from '../components/ExperienceBar';
 
 import { useTheme } from '@react-navigation/native';
 import { AuthContext } from '../Context';
 import { LevelMapping } from '../resources/mappings/LevelMapping';
+import EvolutionPopup from "./EvolutionPopup";
 
 var totalXP = 0;
 var lvlToEvolve = 0;
@@ -58,6 +59,8 @@ export function DisplayPet(props) {
 	const [level, setLevel] = useState('');
 	const [displayed, setDisplayed] = useState(false);
 	const [refreshing, setRefreshing] = React.useState(false);
+	const [evolutionVisible, setEvolutionVisible] = useState(false);
+	const [isEgg, setIsEgg] = useState(true);
 
 	useEffect(() => {
 		if (!displayed) {
@@ -93,13 +96,11 @@ export function DisplayPet(props) {
 						tempHeartValue.view.height * (maxHealth / heartSize),
 					);
 					hp = _.cloneDeep(tempHeartValue);
+					console.log(currentPet)
 
 					if (currentPet.readyToEvolve) {
-						//set some visibility
-					}
-
-					if (currentPet.readyToHatch) {
-						//set some visibility
+						setIsEgg(currentPet.image == 'egg')
+						setEvolutionVisible(true)
 					}
 
 					const petsLevel = currentPet.level;
@@ -134,28 +135,36 @@ export function DisplayPet(props) {
 	};
 
 	return (
-		<View style={{ flex: 10 }}>
-			<View
-				style={{
-					height: '100%',
-					width: '100%',
-					backgroundColor: colors.white,
-					alignItems: 'center',
-					justifyContent: 'center',
-					marginBottom: 10,
-				}}
-			>
-				<Image
+		<>
+			<View style={{ flex: 10 }}>
+				<View
 					style={{
-						width: '50%',
-						height: '50%',
-						resizeMode: 'contain',
-						marginBottom: 5,
+						height: '100%',
+						width: '100%',
+						backgroundColor: colors.white,
+						alignItems: 'center',
+						justifyContent: 'center',
+						marginBottom: 10,
 					}}
-					source={getPet}
-				/>
-				<ExperienceBar level={level} exp={experience} xpLevelCap={xpLevelCap} />
+				>
+					<Image
+						style={{
+							width: '50%',
+							height: '50%',
+							resizeMode: 'contain',
+							marginBottom: 5,
+						}}
+						source={getPet}
+					/>
+					<ExperienceBar level={level} exp={experience} xpLevelCap={xpLevelCap} />
+				</View>
 			</View>
-		</View>
+			<EvolutionPopup
+				visible={evolutionVisible}
+				setVisible={setEvolutionVisible}
+				isEgg={isEgg}
+				navigation={props.navigation}
+			/>
+		</>
 	);
 }

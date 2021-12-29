@@ -19,6 +19,8 @@ import { useTheme } from '@react-navigation/native';
 import { AuthContext } from '../Context';
 
 import { DisplayPet } from '../components/DisplayPet';
+import DeleteHabitPopup from "../components/DeleteHabitPopup";
+import EvolutionPopup from "../components/EvolutionPopup";
 
 function HabitsScreen(props) {
 	const [habits, setHabits] = useState([]);
@@ -96,9 +98,9 @@ function HabitsScreen(props) {
 			]}
 		>
 			<MenuHeader text='' navigation={props.navigation} displayHp={true} />
-			<DisplayPet />
+			<DisplayPet navigation={props.navigation}/>
 			<View style={styles(colors).scrollViewContainer}>
-				<TouchableOpacity style={{alignSelf: 'flex-end'}}onPress={() => props.navigation.navigate('AllHabitsScreen')}>
+				<TouchableOpacity style={{alignSelf: 'flex-end'}} onPress={() => props.navigation.navigate('AllHabitsScreen')}>
 				<Text style={{
 					fontSize: 16,
 					fontWeight: 'bold',
