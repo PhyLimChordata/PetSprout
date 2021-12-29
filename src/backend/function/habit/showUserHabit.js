@@ -15,13 +15,15 @@ module.exports = async (req, res) => {
 		let today = new Date(date);
 		today.setHours(0, 0, 0);
 		let day = today.getDay();
-		console.log(user);
-		const user_last_login = user.lastlogin;
+		let user_last_login = user.lastlogin;
 		user_last_login.setHours(0, 0, 0);
-		if(userHabitInfo.updatedAt.setHours(0, 0, 0) - today < 0) {
+		let lastUpdate = userHabitInfo.updatedAt;
+		lastUpdate.setHours(0, 0, 0);
+		if(lastUpdate - today < 0) {
 			// user logged in new day
-			for(let habit in userHabitInfo.habitList) {
+			for(let index in userHabitInfo.habitList) {
 				// reset all counts to 0
+				let habit = userHabitInfo.habitList[index];
 				habit.todo = 0; 
 				// check continuity
 				let signDate = new Date(habit.nextSignInDate);
@@ -45,6 +47,7 @@ module.exports = async (req, res) => {
 					let newSignDate = today.setDate(today.getDate() + interval);
 					habit.nextSignInDate = new Date(newSignDate);
 				}
+				userHabitInfo.habitList[index] = habit;
 			}
 			await userHabitInfo.save();
 		}

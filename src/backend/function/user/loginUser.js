@@ -70,7 +70,7 @@ module.exports = async (req, res) => {
 					var nextDate = next.getDate();
 					if (next < current && nextDate !== currentDate) {
 						habit.continuous = 0;
-						habit.missing++;
+						// habit.missing++;
 					}
 				}
 			}
