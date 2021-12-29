@@ -43,20 +43,18 @@ module.exports = async (req, res) => {
 			let current = new Date(date);
 			let current_date = current.getDate();
 			let current_day = current.getDay();
-			let nextSignInDate = null;
-			if (newSchedule.includes(current_day.toString())) {
-				nextSignInDate = current;
-			} else {
-				let index = current_day;
-				let interval = 0;
-				while (!newSchedule.includes(index.toString())) {
-					if (index === 6) index = 0;
-					else index++;
-					interval++;
-				}
-				nextSignInDate = current.setDate(current_date + interval);
-				nextSignInDate = new Date(nextSignInDate);
+			// Check the next day onwards for the next sign date
+			let index = current_day + 1 > 6 ? 0 : current_day + 1;
+			let interval = 1; // can't be today again if the habit has already been finished
+			while (!habitFromDB.schedule.includes(index.toString())) {
+				if (index === 6) index = 0;
+				else index++;
+
+				interval++;
 			}
+			current.setDate(current_date + interval);
+			newSignInDate = new Date(current);
+			habitFromDB.nextSignInDate = newSignInDate;
 		}
 
 		// let anaylzeId = habitFromDB.analyze;
