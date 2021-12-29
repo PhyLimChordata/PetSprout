@@ -36,7 +36,7 @@ const HabitSchema = new Schema(
 					type: [String],
 				},
 				times: {
-					type: String,
+					type: Number,
 				},
 				alarm: {
 					type: [Date],
