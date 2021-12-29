@@ -54,6 +54,7 @@ module.exports = async (req, res) => {
 
 		// Filtering out habits to be shown
 		let habitShow = userHabitInfo.habitList.filter(function (habit) {
+			/*
 			// only show if incompleted: todo is less than times
 			if(habit.times > habit.todo) {
 				// only show if previous satisfies and scheduled to today
@@ -61,6 +62,8 @@ module.exports = async (req, res) => {
 			} else {
 				return false;
 			}
+			*/
+			return habit.schedule.includes(day);
 		});
 		//check continuity
 		//when its tmr -> new habit - before user logs out send the time
