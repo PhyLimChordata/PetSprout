@@ -1,5 +1,5 @@
 export const EvolutionTreeMapping = {
-	egg: ['toeny', 'finny', 'wingin'],
+	blob: ['toeny', 'finny', 'wingin'],
 	toeny: ['meerkat', 'turtle', 'tapir'],
 	turtle: ['tortoise', 'armadillo', 'pangolin'],
 	meerkat: ['bear', 'red panda', 'kangaroo'],

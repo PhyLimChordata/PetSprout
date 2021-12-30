@@ -14,11 +14,11 @@ function EvolutionPopup(props) {
             setModalVisible={props.setVisible}
             image={props.isEgg ? require('../resources/images/EggEvolution.png'): require('../resources/images/PetEvolution.png')}
             style={style.confirmation}
-            title='Are you sure you want to delete this habit?'
-            text={'Deleting "' + props.habitTitle + '"'}
+            title={'Something is\nHappening!'}
+            text={props.isEgg ? "Your pet is hatching!" : "Your pet is evolving"}
             buttonType={'continue'}
-            successFunction={() => props.navigation.navigate('EvolutionScreen')}
-        ></Popup>
+            successFunction={props.isEgg ? () => props.navigation.navigate('NamePetScreen') : () => props.navigation.navigate('EvolutionScreen')}
+        />
     );
 }
 
