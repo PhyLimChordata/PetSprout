@@ -86,7 +86,7 @@ function Login(props) {
 			body: JSON.stringify({
 				primaryInfo: primaryInfo,
 				password: password,
-				date: new Date(),
+				date: new Date().toString(),
 			}),
 		})
 			.then((res) => {
@@ -96,7 +96,7 @@ function Login(props) {
 				} else if (res.status == 200) {
 					res.json().then((data) => {
 						logIn(data.token);
-						const date = new Date().toISOString();
+						const date = new Date().toString();
 						fetch(
 							'http://localhost:5000/api/v1.0.0/achievements/updateLoginStreaks/' + date,
 							{

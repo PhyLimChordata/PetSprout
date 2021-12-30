@@ -36,11 +36,11 @@ module.exports = async (req, res) => {
 
 		habitFromDB.todo = habitFromDB.todo + 1;
 		userHabit.expValue = expValue;
-
 		if (habitFromDB.todo === habitFromDB.times) {
 			habitFromDB.continuous = habitFromDB.continuous + 1;
 			habitFromDB.missing = 0;
 			let current = new Date(date);
+			current.setHours(0, 0, 0, 0);
 			let current_date = current.getDate();
 			let current_day = current.getDay();
 			// Check the next day onwards for the next sign date
@@ -56,30 +56,6 @@ module.exports = async (req, res) => {
 			newSignInDate = new Date(current);
 			habitFromDB.nextSignInDate = newSignInDate;
 		}
-
-		// let anaylzeId = habitFromDB.analyze;
-		// let analyze = await Analyze.findById(anaylzeId);
-		// if (!analyze) return res.status(404).json("User habit's analyze not found");
-
-		// // need to change to user time
-		// // const date = new Date();
-
-		// let analyze_data = analyze.freq.find(
-		// 	(data) =>
-		// 		data.date.getFullYear().toString() === date.getFullYear().toString() &&
-		// 		data.date.getMonth().toString() === date.getMonth().toString() &&
-		// 		data.date.getDate().toString() === date.getDate().toString(),
-		// );
-		// if (!analyze_data) {
-		// 	let newData = {
-		// 		date: date,
-		// 		frequency: 1,
-		// 	};
-		// 	analyze.freq.push(newData);
-		// } else {
-		// 	analyze_data.freq = analyze_data.freq + 1;
-		// }
-
 		//Check evolutioon and replenish health
 		if (remainingToLevel <= 5) {
 			userHabit.heart = 3;

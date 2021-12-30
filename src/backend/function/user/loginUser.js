@@ -47,12 +47,11 @@ module.exports = async (req, res) => {
 			let lastLoginMonth = user.lastlogin.getMonth();
 			let lastLoginDate = user.lastlogin.getDate();
 
-			// var current = new Date();
-			var current = new Date(date);
+			let current = new Date(date);
 			let userHabit = await Habit.findOne({ user: user._id });
-			var currentYear = current.getFullYear();
-			var currentMonth = current.getMonth();
-			var currentDate = current.getDate();
+			let currentYear = current.getFullYear();
+			let currentMonth = current.getMonth();
+			let currentDate = current.getDate();
 			if (
 				lastLoginDate !== currentDate ||
 				lastLoginMonth !== currentMonth ||
@@ -70,7 +69,20 @@ module.exports = async (req, res) => {
 					var nextDate = next.getDate();
 					if (next < current && nextDate !== currentDate) {
 						habit.continuous = 0;
-						// habit.missing++;
+						habit.missing++;
+						let interval = 0;
+						let index = current.getDay();
+						while(!habit.schedule.includes(index.toString())) {
+							if(index+1 > 7) {
+								index = 0;
+							} else {
+								index++;
+							}
+							interval++;
+						}
+						let today = current;
+						today.setDate(today.getDate() + interval);
+						habit.nextSignInDate = new Date(today);
 					}
 				}
 			}

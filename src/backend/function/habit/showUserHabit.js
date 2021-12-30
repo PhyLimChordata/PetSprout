@@ -13,13 +13,12 @@ module.exports = async (req, res) => {
 			return res.status(404).json("User's habits could not found");
 
 		let today = new Date(date);
-		today.setHours(0, 0, 0);
+		today.setHours(0, 0, 0, 0);
 		let day = today.getDay();
 		let user_last_login = user.lastlogin;
-		user_last_login.setHours(0, 0, 0);
-		let lastUpdate = userHabitInfo.updatedAt;
-		lastUpdate.setHours(0, 0, 0);
-		if(lastUpdate - today < 0) {
+		user_last_login.setHours(0, 0, 0, 0);
+		/*
+		if(user_last_login - today < 0) {
 			// user logged in new day
 			for(let index in userHabitInfo.habitList) {
 				// reset all counts to 0
@@ -27,12 +26,13 @@ module.exports = async (req, res) => {
 				habit.todo = 0; 
 				// check continuity
 				let signDate = new Date(habit.nextSignInDate);
-				signDate.setHours(0, 0, 0);
+				signDate.setHours(0, 0, 0, 0);
 				// if the next sign in date for habit is before today, then user missed (since not reset),
 				// user loses streak
+				console.log("sign date = " + signDate + " today = " + today);
 				if(signDate - today < 0) {
 					habit.continuous = 0;
-					habit.missing++;
+					// habit.missing++;
 					// reset next sign in date
 					let interval = 0;
 					let index = today.getDay();
@@ -50,19 +50,10 @@ module.exports = async (req, res) => {
 				userHabitInfo.habitList[index] = habit;
 			}
 			await userHabitInfo.save();
-		}
+		}*/
 
 		// Filtering out habits to be shown
 		let habitShow = userHabitInfo.habitList.filter(function (habit) {
-			/*
-			// only show if incompleted: todo is less than times
-			if(habit.times > habit.todo) {
-				// only show if previous satisfies and scheduled to today
-				return habit.schedule.includes(day);
-			} else {
-				return false;
-			}
-			*/
 			return habit.schedule.includes(day);
 		});
 		//check continuity
@@ -72,7 +63,7 @@ module.exports = async (req, res) => {
 
 
 		let habit = { habitList: habitShow };
-
+		
 		let info = {
 			expValue: userHabitInfo.expValue,
 			heart: userHabitInfo.heart,
