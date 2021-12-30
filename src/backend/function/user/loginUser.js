@@ -26,6 +26,10 @@ module.exports = async (req, res) => {
 			res.status(400).json('Email or user name should be provided');
 		}
 
+		if (typeof date == 'undefined') {
+			return res.status(400).json('Date should be provided.');
+		}
+
 		let user = null;
 		if (email === '') {
 			user = await User.findOne({ userName });
@@ -41,7 +45,6 @@ module.exports = async (req, res) => {
 
 		let matching = await bcryptjs.compare(password, user.password);
 		if (!matching) return res.status(401).json('Wrong password');
-
 		if (user.lastlogin !== null) {
 			let lastLoginYear = user.lastlogin.getFullYear();
 			let lastLoginMonth = user.lastlogin.getMonth();
@@ -50,33 +53,35 @@ module.exports = async (req, res) => {
 			// var current = new Date();
 			var current = new Date(date);
 			let userHabit = await Habit.findOne({ user: user._id });
-			var currentYear = current.getFullYear();
-			var currentMonth = current.getMonth();
-			var currentDate = current.getDate();
-			if (
-				lastLoginDate !== currentDate ||
-				lastLoginMonth !== currentMonth ||
-				lastLoginYear !== currentYear
-			) {
+			if(userHabit) {
+				var currentYear = current.getFullYear();
+				var currentMonth = current.getMonth();
+				var currentDate = current.getDate();
+				if (
+					lastLoginDate !== currentDate ||
+					lastLoginMonth !== currentMonth ||
+					lastLoginYear !== currentYear
+				) {
+					if (userHabit.habitList !== null) {
+						for (const habit of userHabit.habitList) {
+							habit.todo = 0;
+						}
+					}
+				}
 				if (userHabit.habitList !== null) {
 					for (const habit of userHabit.habitList) {
-						habit.todo = 0;
+						let next = new Date(habit.nextSignInDate);
+						var nextDate = next.getDate();
+						if (next < current && nextDate !== currentDate) {
+							habit.continuous = 0;
+						}
 					}
 				}
+				userHabit.save();
 			}
-			if (userHabit.habitList !== null) {
-				for (const habit of userHabit.habitList) {
-					let next = new Date(habit.nextSignInDate);
-					var nextDate = next.getDate();
-					if (next < current && nextDate !== currentDate) {
-						habit.continuous = 0;
-					}
-				}
-			}
-			userHabit.save();
+			
 		}
-
-		user.lastlogin = date;
+		user.lastlogin = current;
 		await user.save();
 
 		const payload = {

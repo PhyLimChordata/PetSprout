@@ -86,7 +86,7 @@ function Login(props) {
 			body: JSON.stringify({
 				primaryInfo: primaryInfo,
 				password: password,
-				date: new Date(),
+				date: new Date().toString(),
 			}),
 		})
 			.then((res) => {
