@@ -33,6 +33,7 @@ import ModifyHabitScreen from './frontend/screens/PutHabits/ModifyHabit';
 import NamePetScreen from './frontend/screens/NamePet';
 import AllHabitsScreen from './frontend/screens/AllHabits';
 import PomodoroScreen from './frontend/screens/Pomodoro';
+import PomodoroTasksScreen from './frontend/screens/PomodoroTasks';
 // Colour Themes
 import GreenLightTheme from './frontend/resources/themes/light/GreenTheme';
 import OrangeLightTheme from './frontend/resources/themes/light/OrangeTheme';
@@ -183,6 +184,9 @@ function NavContainer(props) {
 					<Stack.Screen name='FeedbackScreen' component={FeedbackScreen} />
 					<Stack.Screen name='ReportABugScreen' component={ReportABugScreen} />
 					<Stack.Screen name='AllHabitsScreen' component={AllHabitsScreen} />
+
+					<Stack.Screen name='PomodoroTasksScreen' component={PomodoroTasksScreen} />
+
 					<Stack.Screen
 						name='TermsAndConditionScreen'
 						component={TermsAndConditionScreen}
@@ -348,7 +352,7 @@ function Calendar(props) {
 }
 
 function Pomodoro(props) {
-	return <PomodoroScreen title='Pomodoro'/>;
+	return <PomodoroScreen title='Pomodoro' navigation={props.navigation}/>;
 }
 
 function Reflect(props) {

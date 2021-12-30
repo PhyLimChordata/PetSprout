@@ -300,21 +300,33 @@ function PomodoroScreen(props) {
 						Current Task
 					</Text>
 				</TouchableOpacity> */}
-				<TextInput
-					style={{
-						backgroundColor: colors.Tertiary,
-						borderRadius: 30,
-						padding: 10,
-						paddingLeft: 40,
-						paddingRight: 40,
-						marginBottom: 20,
-						color: 'white',
-						fontSize: 20,
-						fontWeight: 'bold',
-					}}
-				>
-					Current Task
-				</TextInput>
+				<TouchableOpacity
+						activeOpacity={0.6}
+						style={{
+							backgroundColor: colors.Background,
+							borderRadius: 30,
+							borderColor: colors.Quaternary,
+							padding: 10,
+							borderWidth: 3,
+							paddingLeft: 40,
+							paddingRight: 40,
+							marginBottom: 20,
+						}}
+						onPress={() => {
+							props.navigation.navigate('PomodoroTasksScreen');
+						}}
+					>
+						<Text
+							style={{
+								fontSize: 20,
+								fontWeight: 'bold',
+								color: colors.Quaternary,
+							}}
+						>
+							Current Task
+						</Text>
+					</TouchableOpacity>
+
 				<Text
 					style={{
 						fontSize: 60,
