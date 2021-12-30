@@ -25,7 +25,6 @@ import * as BackgroundFetch from 'expo-background-fetch';
 import * as TaskManager from 'expo-task-manager';
 
 import { DisplayPet, gainXP, getHP } from '../components/DisplayPet';
-import { Title } from 'react-native-paper';
 
 const BACKGROUND_FETCH_TASK = 'background-fetch';
 
@@ -387,38 +386,6 @@ function PomodoroScreen(props) {
 				)}
 			</View>
 		</SafeAreaView>
-	);
-}
-
-function TitledIcon({ icon, onPress, title }) {
-	const { colors } = useTheme();
-	return (
-		<View style={{ width: 75 }}>
-			<TouchableOpacity
-				style={{ justifyContent: 'center', alignItems: 'center' }}
-				onPress={onPress}
-			>
-				<View
-					style={{
-						backgroundColor: colors.background,
-						width: 36,
-						height: 36,
-						borderRadius: 18,
-					}}
-				></View>
-			</TouchableOpacity>
-			<Text
-				style={{
-					fontSize: 12,
-					fontWeight: 'bold',
-					color: colors.background,
-					textAlign: 'center',
-				}}
-			>
-				{' '}
-				{title}{' '}
-			</Text>
-		</View>
 	);
 }
 
