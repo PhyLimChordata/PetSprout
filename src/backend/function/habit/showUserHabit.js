@@ -17,50 +17,11 @@ module.exports = async (req, res) => {
 		let day = today.getDay();
 		let user_last_login = user.lastlogin;
 		user_last_login.setHours(0, 0, 0, 0);
-		/*
-		if(user_last_login - today < 0) {
-			// user logged in new day
-			for(let index in userHabitInfo.habitList) {
-				// reset all counts to 0
-				let habit = userHabitInfo.habitList[index];
-				habit.todo = 0; 
-				// check continuity
-				let signDate = new Date(habit.nextSignInDate);
-				signDate.setHours(0, 0, 0, 0);
-				// if the next sign in date for habit is before today, then user missed (since not reset),
-				// user loses streak
-				console.log("sign date = " + signDate + " today = " + today);
-				if(signDate - today < 0) {
-					habit.continuous = 0;
-					// habit.missing++;
-					// reset next sign in date
-					let interval = 0;
-					let index = today.getDay();
-					while(!habit.schedule.includes(index.toString())) {
-						if(index+1 > 7) {
-							index = 0;
-						} else {
-							index++;
-						}
-						interval++;
-					}
-					let newSignDate = today.setDate(today.getDate() + interval);
-					habit.nextSignInDate = new Date(newSignDate);
-				}
-				userHabitInfo.habitList[index] = habit;
-			}
-			await userHabitInfo.save();
-		}*/
 
 		// Filtering out habits to be shown
 		let habitShow = userHabitInfo.habitList.filter(function (habit) {
 			return habit.schedule.includes(day);
 		});
-		//check continuity
-		//when its tmr -> new habit - before user logs out send the time
-		// if it times out, user should log in again
-
-
 
 		let habit = { habitList: habitShow };
 		
