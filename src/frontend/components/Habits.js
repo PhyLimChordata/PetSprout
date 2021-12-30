@@ -81,80 +81,30 @@ function Habits(props) {
 
 	return (
 		<View>
-			{!completed ? (
-				<ScrollViewElement
-					rightFunction={props.enableRight ? completeHabit : undefined}
-					leftFunction={
-						props.enableLeft
-							? () =>
-									props.deleteHabit({
-										habitId: props.habitId,
-										userHabitId: props.userHabitId,
-										habitTitle: props.name,
-									})
-							: undefined
-					}
-					text={props.name}
-					content={
-						<View style={styles(colors).horizontalContainer}>
-							<View style={styles(colors).leftContainer}>
-								<Text style={styles(colors).textTitle}>
-									{Capitalize(props.name)}
-								</Text>
-							</View>
-							<View style={styles(colors).container}>
-								<View style={{ position: 'absolute', top: 0, right: 0 }}>
-									<Ellipsis
-										onPress={() =>
-											props.navigation.navigate('ModifyHabitScreen', {
-												habitId: props.habitId,
-												userHabitId: props.userHabitId,
-											})
-										}
-									/>
-								</View>
-								<View style={{ width: 100 }} />
-								<Ellipsis ghettofix={false} />
-								<View style={styles(colors).horizontalContainerBottom}>
-									<Counter
-										quantity={streak}
-										supplementalInfo={
-											<Image
-												source={require('../resources/images/Streak.png')}
-												resizeMode='contain'
-												style={{
-													height: 20,
-													width: 20,
-													tintColor: colors.Quaternary,
-													marginTop: 'auto',
-												}}
-											/>
-										}
-									/>
-									<Counter
-										quantity={frequency}
-										supplementalInfo={
-											<Text style={styles(colors).expText}>x</Text>
-										}
-									/>
-								</View>
-							</View>
+			<ScrollViewElement
+				rightFunction={props.enableRight && !completed ? completeHabit : undefined}
+				leftFunction={
+					props.enableLeft && !completed
+						? () =>
+								props.deleteHabit({
+									habitId: props.habitId,
+									userHabitId: props.userHabitId,
+									habitTitle: props.name,
+								})
+						: undefined
+				}
+				text={props.name}
+				content={
+					<View style={!completed ? styles(colors).horizontalContainer : styles(colors).completedHabit}>
+						<View style={styles(colors).leftContainer}>
+							<Text style={!completed ? styles(colors).textTitle : styles(colors).completedHabitTextTitle}>
+								{Capitalize(props.name)}
+							</Text>
 						</View>
-					}
-				/>
-			) : (
-				<ScrollViewElement
-					text={props.name}
-					content={
-						<View style={styles(colors).completedHabit}>
-							<View style={styles(colors).leftContainer}>
-								<Text style={styles(colors).completedHabitTextTitle}>
-									{Capitalize(props.name)}
-								</Text>
-							</View>
-							<View style={styles(colors).completedContainer}>
+						<View style={!completed ?  styles(colors).container : styles(colors).completedContainer}>
+							<View style={{alignItems:'flex-end'}}>
 								<Ellipsis
-									completed={true}
+									completed = {completed}
 									onPress={() =>
 										props.navigation.navigate('ModifyHabitScreen', {
 											habitId: props.habitId,
@@ -162,35 +112,36 @@ function Habits(props) {
 										})
 									}
 								/>
-								<View style={styles(colors).completedHorizontalContainerBottom}>
-									<Counter
-										completed={true}
-										quantity={streak}
-										supplementalInfo={
-											<Image
-												source={require('../resources/images/Streak.png')}
-												resizeMode='contain'
-												style={{
-													height: 20,
-													width: 20,
-													tintColor: Colours.Grey.Text,
-												}}
-											/>
-										}
-									/>
-									<Counter
-										completed={true}
-										quantity={frequency}
-										supplementalInfo={
-											<Text style={styles(colors).completedExpText}>x</Text>
-										}
-									/>
-								</View>
+							</View>
+							<View style={!completed ? styles(colors).horizontalContainerBottom : styles(colors).completedHorizontalContainerBottom}>
+								<Counter
+									completed={completed}
+									quantity={streak}
+									supplementalInfo={
+										<Image
+											source={require('../resources/images/Streak.png')}
+											resizeMode='contain'
+											style={{
+												height: 20,
+												width: 20,
+												tintColor: !completed ? colors.Quaternary : Colours.Grey.Text,
+												marginTop: 'auto',
+											}}
+										/>
+									}
+								/>
+								<Counter
+									completed={completed}
+									quantity={frequency}
+									supplementalInfo={
+										<Text style={!completed ? styles(colors).expText : styles(colors).completedExpText}>x</Text>
+									}
+								/>
 							</View>
 						</View>
-					}
-				/>
-			)}
+					</View>
+				}
+			/>
 		</View>
 	);
 }

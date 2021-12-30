@@ -22,7 +22,6 @@ const habitsStyles = (theme) =>
 		completedContainer: {
 			backgroundColor: Colours.Grey.ExpBarBackground,
 			margin: 20,
-			alignItems: 'center',
 		},
 		completedExpText: {
 			color: Colours.Grey.Text,
@@ -50,13 +49,13 @@ const habitsStyles = (theme) =>
 		},
 		leftContainer: {
 			flex: 2,
-			padding: 20,
-			paddingBottom: 30,
+			paddingLeft: 20,
+			paddingTop: 20,
+			paddingBottom: 20,
 		},
 		container: {
 			backgroundColor: theme.Secondary,
 			margin: 20,
-			alignItems: 'center',
 		},
 		experienceContainer: {
 			width: '60%',
