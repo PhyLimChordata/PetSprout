@@ -45,7 +45,7 @@ module.exports = async (req, res) => {
 
 		let matching = await bcryptjs.compare(password, user.password);
 		if (!matching) return res.status(401).json('Wrong password');
-		if (user.lastlogin !== null) {
+		if (user.lastlogin !== null && typeof user.lastlogin !== 'undefined') {
 			let lastLoginYear = user.lastlogin.getFullYear();
 			let lastLoginMonth = user.lastlogin.getMonth();
 			let lastLoginDate = user.lastlogin.getDate();
