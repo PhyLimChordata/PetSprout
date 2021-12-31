@@ -270,7 +270,7 @@ function SideMenu(props) {
 						<View
 							style={{
 								marginLeft: '6%',
-								height: '50%',
+								height: '40%',
 								justifyContent: 'space-between',
 								marginBottom: '12%',
 							}}
@@ -411,7 +411,6 @@ function SideMenu(props) {
 						<View
 							style={{
 								justifyContent: 'flex-end',
-								flex: 1,
 								marginHorizontal: '6%',
 							}}
 						>
