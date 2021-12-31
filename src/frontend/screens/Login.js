@@ -170,7 +170,7 @@ function Login(props) {
 						onPress={() => props.navigation.push('PasswordScreen')}
 					>
 						<Text style={styles(colors).forgotPassword}>
-							Need help logging in?
+							Need help Logging in?
 						</Text>
 
 						<Text style={styles(colors).errorMessage}>{error}</Text>
@@ -184,15 +184,15 @@ function Login(props) {
 			>
 				<Text style={styles(colors).authenticationButtonText}>Login</Text>
 			</TouchableOpacity>
-			<Text style={styles(colors).subText}>
-				New User?
+			<View style={{ flexDirection: 'row' }}>
+				<Text style={styles(colors).subText}>New User?</Text>
 				<TouchableOpacity
 					activeOpacity={0.6}
 					onPress={() => props.navigation.push('SignupScreen')}
 				>
 					<Text style={styles(colors).signupText}> Sign up</Text>
 				</TouchableOpacity>
-			</Text>
+			</View>
 		</View>
 	);
 }
