@@ -45,15 +45,15 @@ module.exports = async (req, res) => {
 
 		let matching = await bcryptjs.compare(password, user.password);
 		if (!matching) return res.status(401).json('Wrong password');
+		var current = new Date(date);
 		if (user.lastlogin !== null) {
 			let lastLoginYear = user.lastlogin.getFullYear();
 			let lastLoginMonth = user.lastlogin.getMonth();
 			let lastLoginDate = user.lastlogin.getDate();
 
 			// var current = new Date();
-			var current = new Date(date);
 			let userHabit = await Habit.findOne({ user: user._id });
-			if(userHabit) {
+			if (userHabit) {
 				var currentYear = current.getFullYear();
 				var currentMonth = current.getMonth();
 				var currentDate = current.getDate();
@@ -79,7 +79,6 @@ module.exports = async (req, res) => {
 				}
 				userHabit.save();
 			}
-			
 		}
 		user.lastlogin = current;
 		await user.save();
