@@ -14,7 +14,7 @@ const name = async (req, res) => {
 
 		let usersPet = await Pets.findOne({ user: req.user.id });
 		if (req.name == '') {
-			req.name = req.user.userName + '\'s Pet';
+			req.name = req.user.userName + "'s Pet";
 		}
 		usersPet.currentPet.name = req.name;
 		await currentPet.save();

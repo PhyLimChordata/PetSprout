@@ -185,24 +185,18 @@ function NavContainer(props) {
 					<Stack.Screen name='ReportABugScreen' component={ReportABugScreen} />
 					<Stack.Screen name='AllHabitsScreen' component={AllHabitsScreen} />
 
-					<Stack.Screen name='PomodoroTasksScreen' component={PomodoroTasksScreen} />
+					<Stack.Screen
+						name='PomodoroTasksScreen'
+						component={PomodoroTasksScreen}
+					/>
 
 					<Stack.Screen
 						name='TermsAndConditionScreen'
 						component={TermsAndConditionScreen}
 					/>
-					<Stack.Screen
-						name='EvolutionScreen'
-						component={EvolutionScreen}
-					/>
-					<Stack.Screen
-						name='NamePetScreen'
-						component={NamePetScreen}
-					/>
-					<Stack.Screen
-						name='PomodoroScreen'
-						component={PomodoroScreen}
-					/>
+					<Stack.Screen name='EvolutionScreen' component={EvolutionScreen} />
+					<Stack.Screen name='NamePetScreen' component={NamePetScreen} />
+					<Stack.Screen name='PomodoroScreen' component={PomodoroScreen} />
 				</Stack.Navigator>
 			) : (
 				<Stack.Navigator headerMode='none'>
@@ -352,7 +346,7 @@ function Calendar(props) {
 }
 
 function Pomodoro(props) {
-	return <PomodoroScreen title='Pomodoro' navigation={props.navigation}/>;
+	return <PomodoroScreen title='Pomodoro' navigation={props.navigation} />;
 }
 
 function Reflect(props) {

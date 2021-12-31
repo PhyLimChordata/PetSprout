@@ -82,7 +82,9 @@ function Habits(props) {
 	return (
 		<View>
 			<ScrollViewElement
-				rightFunction={props.enableRight && !completed ? completeHabit : undefined}
+				rightFunction={
+					props.enableRight && !completed ? completeHabit : undefined
+				}
 				leftFunction={
 					props.enableLeft && !completed
 						? () =>
@@ -95,16 +97,34 @@ function Habits(props) {
 				}
 				text={props.name}
 				content={
-					<View style={!completed ? styles(colors).horizontalContainer : styles(colors).completedHabit}>
+					<View
+						style={
+							!completed
+								? styles(colors).horizontalContainer
+								: styles(colors).completedHabit
+						}
+					>
 						<View style={styles(colors).leftContainer}>
-							<Text style={!completed ? styles(colors).textTitle : styles(colors).completedHabitTextTitle}>
+							<Text
+								style={
+									!completed
+										? styles(colors).textTitle
+										: styles(colors).completedHabitTextTitle
+								}
+							>
 								{Capitalize(props.name)}
 							</Text>
 						</View>
-						<View style={!completed ?  styles(colors).container : styles(colors).completedContainer}>
-							<View style={{alignItems:'flex-end'}}>
+						<View
+							style={
+								!completed
+									? styles(colors).container
+									: styles(colors).completedContainer
+							}
+						>
+							<View style={{ alignItems: 'flex-end' }}>
 								<Ellipsis
-									completed = {completed}
+									completed={completed}
 									onPress={() =>
 										props.navigation.navigate('ModifyHabitScreen', {
 											habitId: props.habitId,
@@ -113,7 +133,13 @@ function Habits(props) {
 									}
 								/>
 							</View>
-							<View style={!completed ? styles(colors).horizontalContainerBottom : styles(colors).completedHorizontalContainerBottom}>
+							<View
+								style={
+									!completed
+										? styles(colors).horizontalContainerBottom
+										: styles(colors).completedHorizontalContainerBottom
+								}
+							>
 								<Counter
 									completed={completed}
 									quantity={streak}
@@ -124,7 +150,9 @@ function Habits(props) {
 											style={{
 												height: 20,
 												width: 20,
-												tintColor: !completed ? colors.Quaternary : Colours.Grey.Text,
+												tintColor: !completed
+													? colors.Quaternary
+													: Colours.Grey.Text,
 												marginTop: 'auto',
 											}}
 										/>
@@ -134,7 +162,15 @@ function Habits(props) {
 									completed={completed}
 									quantity={frequency}
 									supplementalInfo={
-										<Text style={!completed ? styles(colors).expText : styles(colors).completedExpText}>x</Text>
+										<Text
+											style={
+												!completed
+													? styles(colors).expText
+													: styles(colors).completedExpText
+											}
+										>
+											x
+										</Text>
 									}
 								/>
 							</View>

@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useContext } from 'react';
-import {View, Image, SafeAreaView} from 'react-native';
+import { View, Image, SafeAreaView } from 'react-native';
 import ExperienceBar from '../components/ExperienceBar';
 
 import { useTheme } from '@react-navigation/native';
 import { AuthContext } from '../Context';
 import { LevelMapping } from '../resources/mappings/LevelMapping';
-import EvolutionPopup from "./EvolutionPopup";
+import EvolutionPopup from './EvolutionPopup';
 
 var totalXP = 0;
 var lvlToEvolve = 0;
@@ -96,11 +96,11 @@ export function DisplayPet(props) {
 						tempHeartValue.view.height * (maxHealth / heartSize),
 					);
 					hp = _.cloneDeep(tempHeartValue);
-					console.log(currentPet)
+					console.log(currentPet);
 
 					if (currentPet.readyToEvolve) {
-						setIsEgg(currentPet.image == 'egg')
-						setEvolutionVisible(true)
+						setIsEgg(currentPet.image == 'egg');
+						setEvolutionVisible(true);
 					}
 
 					const petsLevel = currentPet.level;
@@ -156,7 +156,11 @@ export function DisplayPet(props) {
 						}}
 						source={getPet}
 					/>
-					<ExperienceBar level={level} exp={experience} xpLevelCap={xpLevelCap} />
+					<ExperienceBar
+						level={level}
+						exp={experience}
+						xpLevelCap={xpLevelCap}
+					/>
 				</View>
 			</View>
 			<EvolutionPopup
