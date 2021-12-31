@@ -23,7 +23,7 @@ function Login(props) {
 		fontSize: 15,
 		borderRadius: 5,
 		marginBottom: 20,
-		width: 300,
+		width: '100%',
 	});
 
 	const [textStyle, setTextStyle] = useState({
@@ -47,7 +47,7 @@ function Login(props) {
 			fontSize: 15,
 			borderRadius: 5,
 			marginBottom: 20,
-			width: 300,
+			width: '100%',
 		});
 		setTextStyle({
 			fontSize: 20,
@@ -67,7 +67,7 @@ function Login(props) {
 			borderStyle: 'solid',
 			borderRadius: 5,
 			marginBottom: 20,
-			width: 300,
+			width: '100%',
 		});
 		setTextStyle({
 			fontSize: 20,
@@ -128,7 +128,7 @@ function Login(props) {
 						fontSize: 15,
 						borderRadius: 5,
 						marginBottom: 20,
-						width: 300,
+						width: '100%',
 					});
 					setTextStyle({
 						fontSize: 20,
@@ -166,15 +166,17 @@ function Login(props) {
 				></TextInput>
 				<View style={styles(colors).forgotView}>
 					<TouchableOpacity
+						style={{
+							width: '100%',
+						}}
 						activeOpacity={0.6}
 						onPress={() => props.navigation.push('PasswordScreen')}
 					>
 						<Text style={styles(colors).forgotPassword}>
 							Need help Logging in?
 						</Text>
-
-						<Text style={styles(colors).errorMessage}>{error}</Text>
 					</TouchableOpacity>
+					<Text style={styles(colors).errorMessage}>{error}</Text>
 				</View>
 			</View>
 			<TouchableOpacity
