@@ -37,7 +37,7 @@ function SignupScreen(props) {
 		fontSize: 15,
 		borderRadius: 5,
 		marginBottom: 20,
-		width: '90%'
+		width: '90%',
 	});
 
 	const [emailInputStyle, setEmailInputStyle] = useState({
@@ -48,7 +48,7 @@ function SignupScreen(props) {
 		fontSize: 15,
 		borderRadius: 5,
 		marginBottom: 20,
-		width: '90%'
+		width: '90%',
 	});
 
 	const [passwordInputStyle, setPasswordInputStyle] = useState({
@@ -59,7 +59,7 @@ function SignupScreen(props) {
 		fontSize: 15,
 		borderRadius: 5,
 		marginBottom: 20,
-		width: '90%'
+		width: '90%',
 	});
 
 	const [reEnterPasswordInputStyle, setReEnterPasswordInputStyle] = useState({
@@ -70,7 +70,7 @@ function SignupScreen(props) {
 		fontSize: 15,
 		borderRadius: 5,
 		marginBottom: 20,
-		width: '90%'
+		width: '90%',
 	});
 
 	const errorIndicator = {
@@ -117,7 +117,7 @@ function SignupScreen(props) {
 			fontSize: 15,
 			borderRadius: 5,
 			marginBottom: 20,
-			width: '90%'
+			width: '90%',
 		});
 		setUserNameTextStyle({
 			fontSize: 20,
@@ -138,7 +138,7 @@ function SignupScreen(props) {
 			fontSize: 15,
 			borderRadius: 5,
 			marginBottom: 20,
-			width: '90%'
+			width: '90%',
 		});
 		setEmailTextStyle({
 			fontSize: 20,
@@ -158,7 +158,7 @@ function SignupScreen(props) {
 			borderStyle: 'solid',
 			borderRadius: 5,
 			marginBottom: 20,
-			width: '90%'
+			width: '90%',
 		});
 		setPasswordTextStyle({
 			fontSize: 20,
@@ -178,7 +178,7 @@ function SignupScreen(props) {
 			borderStyle: 'solid',
 			borderRadius: 5,
 			marginBottom: 20,
-			width: '90%'
+			width: '90%',
 		});
 		setReEnterPasswordTextStyle({
 			fontSize: 20,
@@ -315,7 +315,7 @@ function SignupScreen(props) {
 	return (
 		<View style={styles(colors).container}>
 			<Image style={styles(colors).authenticationLogo} source={getLogo} />
-			<ScrollView persistentScrollbar={true} style={{width: 300, margin: 20}}>
+			<ScrollView persistentScrollbar={true} style={{ width: 300, margin: 20 }}>
 				<View style={styles(colors).inputContainer}>
 					<Text style={userNameTextStyle}>Username</Text>
 					<TextInput
