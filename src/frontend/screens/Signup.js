@@ -1,5 +1,12 @@
 import React, { useState, useContext } from 'react';
-import { View, Text, TextInput, Image, TouchableOpacity } from 'react-native';
+import {
+	View,
+	Text,
+	TextInput,
+	Image,
+	TouchableOpacity,
+	ScrollView,
+} from 'react-native';
 
 import styles from '../styling/Authentication';
 import { useTheme } from '@react-navigation/native';
@@ -30,7 +37,7 @@ function SignupScreen(props) {
 		fontSize: 15,
 		borderRadius: 5,
 		marginBottom: 20,
-		width: 300,
+		width: '90%'
 	});
 
 	const [emailInputStyle, setEmailInputStyle] = useState({
@@ -41,7 +48,7 @@ function SignupScreen(props) {
 		fontSize: 15,
 		borderRadius: 5,
 		marginBottom: 20,
-		width: 300,
+		width: '90%'
 	});
 
 	const [passwordInputStyle, setPasswordInputStyle] = useState({
@@ -52,7 +59,7 @@ function SignupScreen(props) {
 		fontSize: 15,
 		borderRadius: 5,
 		marginBottom: 20,
-		width: 300,
+		width: '90%'
 	});
 
 	const [reEnterPasswordInputStyle, setReEnterPasswordInputStyle] = useState({
@@ -63,7 +70,7 @@ function SignupScreen(props) {
 		fontSize: 15,
 		borderRadius: 5,
 		marginBottom: 20,
-		width: 300,
+		width: '90%'
 	});
 
 	const errorIndicator = {
@@ -110,7 +117,7 @@ function SignupScreen(props) {
 			fontSize: 15,
 			borderRadius: 5,
 			marginBottom: 20,
-			width: 300,
+			width: '90%'
 		});
 		setUserNameTextStyle({
 			fontSize: 20,
@@ -131,7 +138,7 @@ function SignupScreen(props) {
 			fontSize: 15,
 			borderRadius: 5,
 			marginBottom: 20,
-			width: 300,
+			width: '90%'
 		});
 		setEmailTextStyle({
 			fontSize: 20,
@@ -151,7 +158,7 @@ function SignupScreen(props) {
 			borderStyle: 'solid',
 			borderRadius: 5,
 			marginBottom: 20,
-			width: 300,
+			width: '90%'
 		});
 		setPasswordTextStyle({
 			fontSize: 20,
@@ -171,7 +178,7 @@ function SignupScreen(props) {
 			borderStyle: 'solid',
 			borderRadius: 5,
 			marginBottom: 20,
-			width: 300,
+			width: '90%'
 		});
 		setReEnterPasswordTextStyle({
 			fontSize: 20,
@@ -308,43 +315,45 @@ function SignupScreen(props) {
 	return (
 		<View style={styles(colors).container}>
 			<Image style={styles(colors).authenticationLogo} source={getLogo} />
-			<View style={styles(colors).inputContainer}>
-				<Text style={userNameTextStyle}>Username</Text>
-				<TextInput
-					style={usernameInputStyle}
-					value={userName}
-					onChangeText={(text) => updatingUsernameInput(text)}
-				></TextInput>
-				<Text style={styles(colors).errorMessageRight}>{userNameError}</Text>
-				<Text style={emailTextStyle}>Email</Text>
-				<TextInput
-					style={emailInputStyle}
-					value={email}
-					onChangeText={(text) => updatingEmailInput(text)}
-				></TextInput>
-				<Text style={styles(colors).errorMessageRight}>{emailError}</Text>
+			<ScrollView persistentScrollbar={true} style={{width: 300, margin: 20}}>
+				<View style={styles(colors).inputContainer}>
+					<Text style={userNameTextStyle}>Username</Text>
+					<TextInput
+						style={usernameInputStyle}
+						value={userName}
+						onChangeText={(text) => updatingUsernameInput(text)}
+					></TextInput>
+					<Text style={styles(colors).errorMessageRight}>{userNameError}</Text>
+					<Text style={emailTextStyle}>Email</Text>
+					<TextInput
+						style={emailInputStyle}
+						value={email}
+						onChangeText={(text) => updatingEmailInput(text)}
+					></TextInput>
+					<Text style={styles(colors).errorMessageRight}>{emailError}</Text>
 
-				<Text style={passwordTextStyle}>Password</Text>
-				<TextInput
-					style={passwordInputStyle}
-					secureTextEntry={true}
-					value={password}
-					onChangeText={(text) => updatingPasswordInput(text)}
-				></TextInput>
-				<Text style={styles(colors).errorMessageRight}>{passwordError}</Text>
+					<Text style={passwordTextStyle}>Password</Text>
+					<TextInput
+						style={passwordInputStyle}
+						secureTextEntry={true}
+						value={password}
+						onChangeText={(text) => updatingPasswordInput(text)}
+					></TextInput>
+					<Text style={styles(colors).errorMessageRight}>{passwordError}</Text>
 
-				<Text style={reEnterPasswordTextStyle}>Re-enter Password</Text>
-				<TextInput
-					style={reEnterPasswordInputStyle}
-					secureTextEntry={true}
-					value={reEnterPassword}
-					onChangeText={(text) => updatingReEnterPasswordInput(text)}
-				></TextInput>
-				<Text style={styles(colors).errorMessageRight}>
-					{reEnterPasswordError}
-				</Text>
-			</View>
-			<View style={{ height: 10 }} />
+					<Text style={reEnterPasswordTextStyle}>Re-enter Password</Text>
+					<TextInput
+						style={reEnterPasswordInputStyle}
+						secureTextEntry={true}
+						value={reEnterPassword}
+						onChangeText={(text) => updatingReEnterPasswordInput(text)}
+					></TextInput>
+					<Text style={styles(colors).errorMessageRight}>
+						{reEnterPasswordError}
+					</Text>
+				</View>
+			</ScrollView>
+
 			<TouchableOpacity
 				activeOpacity={0.6}
 				style={styles(colors).authenticationButton}
@@ -352,15 +361,15 @@ function SignupScreen(props) {
 			>
 				<Text style={styles(colors).authenticationButtonText}>Sign Up</Text>
 			</TouchableOpacity>
-			<Text style={styles(colors).subText}>
-				Already have an account?
+			<View style={{ flexDirection: 'row' }}>
+				<Text style={styles(colors).subText}>Already have an account?</Text>
 				<TouchableOpacity
 					activeOpacity={0.6}
 					onPress={() => props.navigation.push('LoginScreen')}
 				>
 					<Text style={styles(colors).signupText}> Log in</Text>
 				</TouchableOpacity>
-			</Text>
+			</View>
 		</View>
 	);
 }
