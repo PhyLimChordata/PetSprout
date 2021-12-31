@@ -58,7 +58,7 @@ const ReportABug = (theme) =>
 			height: 360,
 			width: 300,
 			borderRadius: 30,
-			padding:20,
+			padding: 20,
 		},
 		container: {
 			alignItems: 'center',

@@ -301,31 +301,31 @@ function PomodoroScreen(props) {
 					</Text>
 				</TouchableOpacity> */}
 				<TouchableOpacity
-						activeOpacity={0.6}
+					activeOpacity={0.6}
+					style={{
+						backgroundColor: colors.Background,
+						borderRadius: 30,
+						borderColor: colors.Quaternary,
+						padding: 10,
+						borderWidth: 3,
+						paddingLeft: 40,
+						paddingRight: 40,
+						marginBottom: 20,
+					}}
+					onPress={() => {
+						props.navigation.navigate('PomodoroTasksScreen');
+					}}
+				>
+					<Text
 						style={{
-							backgroundColor: colors.Background,
-							borderRadius: 30,
-							borderColor: colors.Quaternary,
-							padding: 10,
-							borderWidth: 3,
-							paddingLeft: 40,
-							paddingRight: 40,
-							marginBottom: 20,
-						}}
-						onPress={() => {
-							props.navigation.navigate('PomodoroTasksScreen');
+							fontSize: 20,
+							fontWeight: 'bold',
+							color: colors.Quaternary,
 						}}
 					>
-						<Text
-							style={{
-								fontSize: 20,
-								fontWeight: 'bold',
-								color: colors.Quaternary,
-							}}
-						>
-							Current Task
-						</Text>
-					</TouchableOpacity>
+						Current Task
+					</Text>
+				</TouchableOpacity>
 
 				<Text
 					style={{

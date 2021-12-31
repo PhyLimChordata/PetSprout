@@ -13,11 +13,11 @@ const Popup = (theme) =>
 			fontStyle: 'normal',
 			color: 'white',
 			marginBottom: 10,
-			textAlign:'center'
+			textAlign: 'center',
 		},
 		popupButton: {
-			flex:1,
-			alignItems: 'center'
+			flex: 1,
+			alignItems: 'center',
 		},
 		popupButtonText: {
 			fontSize: 20,
@@ -32,7 +32,7 @@ const Popup = (theme) =>
 		popupImage: {
 			height: 100,
 			width: 100,
-			marginTop:-40,
+			marginTop: -40,
 			resizeMode: 'contain',
 			alignContent: 'center',
 			justifyContent: 'center',

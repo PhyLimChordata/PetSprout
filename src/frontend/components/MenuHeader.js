@@ -34,7 +34,7 @@ function MenuHeader(props) {
 				/>
 			)}
 			{props.children}
-			{props.displayHp ? <Heart/> : <></>}
+			{props.displayHp ? <Heart /> : <></>}
 			<View style={{ alignContent: 'flex-end', height: 25 }}>
 				{props.right}
 			</View>

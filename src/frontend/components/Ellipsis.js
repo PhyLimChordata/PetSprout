@@ -9,18 +9,23 @@ import Colours from '../resources/themes/Colours';
 function Ellipsis(props) {
 	const printTest = () => {
 		console.log('to have the settings displayed in the top right');
-	}
+	};
 	const { colors } = useTheme();
 	const containerColor = props.completed
 		? Colours.Grey.ExpBarBackground
 		: colors.Secondary;
-	const textColor = props.completed ? Colours.Grey.Text : (props.ghettofix ? colors.Secondary : colors.Quaternary);
-	const onPress = props.onPress ? props.onPress : printTest
+	const textColor = props.completed
+		? Colours.Grey.Text
+		: props.ghettofix
+		? colors.Secondary
+		: colors.Quaternary;
+	const onPress = props.onPress ? props.onPress : printTest;
 	return (
 		<TouchableOpacity
 			style={{
 				flexDirection: 'row',
-				top: 0, left: 0,
+				top: 0,
+				left: 0,
 				borderRadius: 8,
 				backgroundColor: containerColor,
 			}}

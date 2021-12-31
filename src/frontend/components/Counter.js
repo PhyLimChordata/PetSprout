@@ -18,7 +18,7 @@ function Counter(props) {
 				flexDirection: 'row',
 				backgroundColor: containerColor,
 				paddingRight: 20,
-				alignItems:'flex-end'
+				alignItems: 'flex-end',
 			}}
 		>
 			<Text
@@ -26,7 +26,7 @@ function Counter(props) {
 					fontSize: 20,
 					fontWeight: 'bold',
 					color: textColor,
-					paddingTop: 20
+					paddingTop: 20,
 				}}
 			>
 				{props.quantity}
