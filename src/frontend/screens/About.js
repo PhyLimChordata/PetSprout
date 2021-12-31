@@ -24,7 +24,7 @@ function About(props) {
 			<MenuHeader text='About' navigation={props.navigation}></MenuHeader>
 			<View style={style.container}>
 				<Image style={style.aboutLogo} source={getLogo} />
-				<Text style={style.textTitle}>HabiPets</Text>
+				<Text style={style.textTitle}>PetSprout</Text>
 				<Text style={style.textSubtitle}>Version 1.0.0</Text>
 
 				<Text style={style.text}>

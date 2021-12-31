@@ -262,14 +262,14 @@ function sendUserEmail(cnd, code) {
 				}),
 			);
 			var html =
-				'Welcome to HabiPets! <br><br>You have recently signed up a new account and the next step is to activate it! If this doesn’t apply to you or you are unaware of HabiPets as a whole, please ignore this message.' +
+				'Welcome to PetSprout! <br><br>You have recently signed up a new account and the next step is to activate it! If this doesn’t apply to you or you are unaware of PetSprout as a whole, please ignore this message.' +
 				'<br><br>Your adventure with your new pet will start once you click the button below! After doing so, you may log into your account with your credentials and be provided with a set of habits dedicated to building you into a student that thrives.' +
-				'<br><br>So, what are you waiting for?<br><a href="http://127.0.0.1:5000/api/v1.0.0/user/activation/' +
+				'<br><br>So, what are you waiting for?<br><a href="http://18.191.105.86:5000/api/v1.0.0/user/activation/' +
 				code +
 				'/' +
 				cnd +
 				'/' +
-				'">' +
+				'">Click this link to verify your account!</a>' +
 				'<br><br>We hope you have a fun time building your habits!' +
 				'<br><br>Thanks!';
 

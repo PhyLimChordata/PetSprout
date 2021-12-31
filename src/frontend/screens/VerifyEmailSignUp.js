@@ -39,8 +39,8 @@ function VerifyEmailSignUp(props) {
 				<Text style={styles(colors).textTitle}>Verify your Email</Text>
 				<Text style={styles(colors).explanationText}>
 					{' '}
-					To start using HabiPets, we need to verify your email. An email with a
-					verification link has been sent which will activate your account.{' '}
+					To start using PetSprout, we need to verify your email. An email with
+					a verification link has been sent which will activate your account.{' '}
 				</Text>
 			</View>
 			<TouchableOpacity
