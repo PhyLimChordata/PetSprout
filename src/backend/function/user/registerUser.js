@@ -256,7 +256,7 @@ function sendUserEmail(cnd, code) {
 					port: 465,
 					secure: true,
 					auth: {
-						user: 'habipetshelp@gmail.com',
+						user: 'petsprouthelp@gmail.com',
 						pass: 'mvpiybwihptcqlgr',
 					},
 				}),
@@ -275,7 +275,7 @@ function sendUserEmail(cnd, code) {
 
 			console.log(html);
 			var data = {
-				from: 'HabiPets',
+				from: 'PetSprout',
 				to: cnd,
 				subject: 'Validation',
 				html: html,
