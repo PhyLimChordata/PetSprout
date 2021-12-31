@@ -77,7 +77,7 @@ module.exports = async (req, res) => {
 			alarm,
 			nextSignInDate,
 		};
-
+		
 		userHabit.habitList.push(newHabit);
 		await userHabit.save();
 		res.json(newHabit);

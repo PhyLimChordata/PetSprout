@@ -23,16 +23,29 @@ module.exports = async (req, res) => {
 			return habit.schedule.includes(day);
 		});
 
+		let miss = userHabitInfo.habitList.filter(function (habit) {
+			return habit.missing > 0 && habit.schedule.includes(day);
+		});
+
+		let mastered = userHabitInfo.habitList.filter(function (habit) {
+			return habit.continuous == 66;
+		})
+
 		let habit = { habitList: habitShow };
+		let missing_habits = { missing_habits: miss};
+		let mastered_habits = { mastered_habits: mastered};
 		
 		let info = {
 			expValue: userHabitInfo.expValue,
 			heart: userHabitInfo.heart,
-			_id: userHabitInfo._id,
+			_id: userHabitInfo._id, 
 			user: userHabitInfo.user,
 		};
 
-		let return_object = extend({}, info, habit);
+		let return_object_1 = extend({}, info, habit);
+		let return_object_2 = extend({}, return_object_1, missing_habits);
+		let return_object = extend({}, return_object_2, mastered_habits);
+
 		res.json(return_object);
 	} catch (error) {
 		console.error(error);
