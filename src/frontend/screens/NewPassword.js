@@ -24,6 +24,8 @@ function NewPassword(props) {
 		width: 300,
 	};
 
+	const { getLogo } = useContext(AuthContext);
+
 	const [passwordInputStyle, setPasswordInputStyle] =
 		useState(normalInputStyle);
 	const [reEnterPasswordInputStyle, setReEnterPasswordInputStyle] =
@@ -123,7 +125,7 @@ function NewPassword(props) {
 			setError('Passwords do not match');
 			displayError(true, true);
 		} else {
-			fetch('http://localhost:5000/api/v1.0.0/user/pending_password', {
+			fetch('http://3.15.57.200:5000/api/v1.0.0/user/pending_password', {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
@@ -152,10 +154,7 @@ function NewPassword(props) {
 
 	return (
 		<View style={styles(colors).container}>
-			<Image
-				style={styles(colors).authenticationLogo}
-				source={require('../resources/images/Logo.png')}
-			/>
+			<Image style={styles(colors).authenticationLogo} source={getLogo} />
 			<View style={styles(colors).header}>
 				<Text style={styles(colors).textTitle}>Enter a new Password</Text>
 			</View>

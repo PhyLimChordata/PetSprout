@@ -9,6 +9,8 @@ const Setting = require('../../schemas/settingSchema');
 const Pet = require('../../schemas/petsSchema');
 const bcryptjs = require('bcryptjs');
 
+const Analyze = require('../../schemas/analyzeSchema');
+
 const user_regist = async (req, res) => {
 	try {
 		let { userName, email, password } = req.body;
@@ -99,6 +101,99 @@ const user_activation = async (req, res) => {
 		});
 		await newUserHabit.save();
 
+		let dailySchedule = [];
+		let i = 0;
+		for (i = 0; i < 7; i++) {
+			dailySchedule.push(i.toString());
+		}
+		let current = new Date();
+		let current_date = current.getDate();
+		let current_day = current.getDay();
+		let nextSignInDate = null;
+		if (dailySchedule.includes(current_day.toString())) {
+			nextSignInDate = current;
+		} else {
+			let index = current_day;
+			let interval = 0;
+			while (!dailySchedule.includes(index.toString())) {
+				if (index === 6) index = 0;
+				else index++;
+				interval++;
+			}
+			nextSignInDate = current.setDate(current_date + interval);
+			nextSignInDate = new Date(nextSignInDate);
+		}
+		let weekly_data = {
+			'Assigned Readings': 'Make notes and review your PSYA02 readings',
+			'Watch Lectures':
+				'Attend, watch and keep up to date with PSYA02 lectures',
+			'Make Schedule':
+				'Assess, plan and prioritize your time for the following week',
+		};
+		let daily_data = {
+			'1 Hour Work':
+				'Engage in dedicated focused work with very few short breaks permitted. Recommended to use Pomodoro',
+			'Check Announcements':
+				'Keep up to date with Quercus, Course Announcements, Course Websites etc for any important academic events',
+			'Check Agenda': 'This can also be a Calendar, Todo list or Notion',
+			'Check Email':
+				'Check your email for any important notices with your courses',
+		};
+
+		for (data in daily_data) {
+			let newAnalyze = new Analyze({});
+			await newAnalyze.save();
+			let desc = daily_data[data];
+			let newHabit = {
+				analyze: newAnalyze._id,
+				title: data,
+				description: desc,
+				reason: '',
+				schedule: dailySchedule,
+				times: 1,
+				alarm: [],
+				nextSignInDate,
+			};
+
+			newUserHabit.habitList.push(newHabit);
+		}
+		console.log(newUserHabit);
+
+		let weeklySchedule = ['5'];
+		if (weeklySchedule.includes(current_day.toString())) {
+			nextSignInDate = current;
+		} else {
+			let index = current_day;
+			let interval = 0;
+			while (!dailySchedule.includes(index.toString())) {
+				if (index === 6) index = 0;
+				else index++;
+				interval++;
+			}
+			nextSignInDate = current.setDate(current_date + interval);
+			nextSignInDate = new Date(nextSignInDate);
+		}
+
+		for (data in weekly_data) {
+			let newAnalyze = new Analyze({});
+			await newAnalyze.save();
+			let desc = weekly_data[data];
+			let newHabit = {
+				analyze: newAnalyze._id,
+				title: data,
+				description: desc,
+				reason: '',
+				schedule: weeklySchedule,
+				times: 1,
+				alarm: [],
+				nextSignInDate,
+			};
+
+			newUserHabit.habitList.push(newHabit);
+		}
+
+		await newUserHabit.save();
+
 		// create setting
 		let newUserSetting = new Setting({
 			user: user._id,
@@ -161,22 +256,25 @@ function sendUserEmail(cnd, code) {
 					port: 465,
 					secure: true,
 					auth: {
-						user: 'habipetshelp@gmail.com',
-						pass: 'mvpiybwihptcqlgr',
+						user: 'petsprouthelp@gmail.com',
+						pass: 'bbnfjimyikmcpsns',
 					},
 				}),
 			);
 			var html =
-				'<a href="http://127.0.0.1:5000/api/v1.0.0/user/activation/' +
+				'Welcome to PetSprout! <br><br>You have recently signed up a new account and the next step is to activate it! If this doesn’t apply to you or you are unaware of PetSprout as a whole, please ignore this message.' +
+				'<br><br>Your adventure with your new pet will start once you click the button below! After doing so, you may log into your account with your credentials and be provided with a set of habits dedicated to building you into a student that thrives.' +
+				'<br><br>So, what are you waiting for?<br><a href="http://3.15.57.200:5000/api/v1.0.0/user/activation/' +
 				code +
 				'/' +
 				cnd +
 				'/' +
-				'">' +
-				'Click to verifiy the email and return back to app page </a>';
+				'">Click this link to verify your account!</a>' +
+				'<br><br>We hope you have a fun time building your habits!' +
+				'<br><br>Thanks!';
 			console.log(html);
 			var data = {
-				from: 'HabiPets',
+				from: 'PetSprout',
 				to: cnd,
 				subject: 'Validation',
 				html: html,

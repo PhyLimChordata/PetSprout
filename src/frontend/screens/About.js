@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import {
 	View,
 	SafeAreaView,
@@ -6,26 +6,25 @@ import {
 	Text,
 	TouchableOpacity,
 } from 'react-native';
-
+import androidSafeAreaView from '../styling/AndroidSafeAreaView';
 import MenuHeader from '../components/MenuHeader';
 import HomeButton from '../components/HomeButton';
 import styles from '../styling/About';
 
 import { useTheme } from '@react-navigation/native';
+import { AuthContext } from '../Context';
 
 function About(props) {
 	const { colors } = useTheme();
 	const style = styles(colors);
+	const { getLogo } = useContext(AuthContext);
 
 	return (
-		<SafeAreaView style={{ height: '100%' }}>
+		<SafeAreaView style={androidSafeAreaView().AndroidSafeArea}>
 			<MenuHeader text='About' navigation={props.navigation}></MenuHeader>
 			<View style={style.container}>
-				<Image
-					style={style.aboutLogo}
-					source={require('../resources/images/Logo.png')}
-				/>
-				<Text style={style.textTitle}>HabiPets</Text>
+				<Image style={style.aboutLogo} source={getLogo} />
+				<Text style={style.textTitle}>PetSprout</Text>
 				<Text style={style.textSubtitle}>Version 1.0.0</Text>
 
 				<Text style={style.text}>

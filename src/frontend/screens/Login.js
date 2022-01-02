@@ -23,7 +23,7 @@ function Login(props) {
 		fontSize: 15,
 		borderRadius: 5,
 		marginBottom: 20,
-		width: 300,
+		width: '100%',
 	});
 
 	const [textStyle, setTextStyle] = useState({
@@ -47,7 +47,7 @@ function Login(props) {
 			fontSize: 15,
 			borderRadius: 5,
 			marginBottom: 20,
-			width: 300,
+			width: '100%',
 		});
 		setTextStyle({
 			fontSize: 20,
@@ -67,7 +67,7 @@ function Login(props) {
 			borderStyle: 'solid',
 			borderRadius: 5,
 			marginBottom: 20,
-			width: 300,
+			width: '100%',
 		});
 		setTextStyle({
 			fontSize: 20,
@@ -78,7 +78,7 @@ function Login(props) {
 	};
 
 	const attemptLogin = () => {
-		fetch('http://localhost:5000/api/v1.0.0/user/login', {
+		fetch('http://3.15.57.200:5000/api/v1.0.0/user/login', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
@@ -98,7 +98,7 @@ function Login(props) {
 						logIn(data.token);
 						const date = new Date().toString();
 						fetch(
-							'http://localhost:5000/api/v1.0.0/achievements/updateLoginStreaks/' + date,
+							'http://3.15.57.200:5000/api/v1.0.0/achievements/updateLoginStreaks' + date,
 							{
 								method: 'PUT',
 								headers: {
@@ -129,7 +129,7 @@ function Login(props) {
 						fontSize: 15,
 						borderRadius: 5,
 						marginBottom: 20,
-						width: 300,
+						width: '100%',
 					});
 					setTextStyle({
 						fontSize: 20,
@@ -142,12 +142,11 @@ function Login(props) {
 			.catch();
 	};
 
+	const { getLogo } = useContext(AuthContext);
+
 	return (
 		<View style={styles(colors).container}>
-			<Image
-				style={styles(colors).authenticationLogo}
-				source={require('../resources/images/Logo.png')}
-			/>
+			<Image style={styles(colors).authenticationLogo} source={getLogo} />
 			<View style={styles(colors).inputContainer}>
 				<Text style={textStyle}>Email or Username</Text>
 				<TextInput
@@ -168,15 +167,17 @@ function Login(props) {
 				></TextInput>
 				<View style={styles(colors).forgotView}>
 					<TouchableOpacity
+						style={{
+							width: '100%',
+						}}
 						activeOpacity={0.6}
 						onPress={() => props.navigation.push('PasswordScreen')}
 					>
 						<Text style={styles(colors).forgotPassword}>
-							Need help logging in?
+							Need help Logging in?
 						</Text>
-
-						<Text style={styles(colors).errorMessage}>{error}</Text>
 					</TouchableOpacity>
+					<Text style={styles(colors).errorMessage}>{error}</Text>
 				</View>
 			</View>
 			<TouchableOpacity
@@ -186,15 +187,15 @@ function Login(props) {
 			>
 				<Text style={styles(colors).authenticationButtonText}>Login</Text>
 			</TouchableOpacity>
-			<Text style={styles(colors).subText}>
-				New User?
+			<View style={{ flexDirection: 'row' }}>
+				<Text style={styles(colors).subText}>New User?</Text>
 				<TouchableOpacity
 					activeOpacity={0.6}
 					onPress={() => props.navigation.push('SignupScreen')}
 				>
 					<Text style={styles(colors).signupText}> Sign up</Text>
 				</TouchableOpacity>
-			</Text>
+			</View>
 		</View>
 	);
 }

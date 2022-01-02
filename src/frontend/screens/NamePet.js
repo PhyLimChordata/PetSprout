@@ -41,7 +41,7 @@ function Button(props) {
 const namePet = () => {
 	//Prompt an are you sure pop up - (independent of if they provide a name)
 	//update the pet using the fetch command passing in the pet's id by getting the user id (viewaccount route)
-	props.navigation.navigate('HomeScreen');
+	props.navigation.navigate('Evolution');
 };
 function NameHabit(props) {
 	const { colors } = useTheme();

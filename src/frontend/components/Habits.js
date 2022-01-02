@@ -9,11 +9,11 @@ import ScrollViewElement from './ScrollViewElement';
 import { AuthContext } from '../Context';
 import { useTheme } from '@react-navigation/native';
 import Colours from '../resources/themes/Colours';
+import { gainXP } from '../components/DisplayPet';
 
 function Habits(props) {
 	const [streak, setStreak] = useState(props.streak);
 	const [frequency, setFrequency] = useState(props.frequency);
-
 	const [completed, setCompleted] = useState(props.completed);
 	const { getToken, changeRefreshing } = useContext(AuthContext);
 
@@ -22,7 +22,7 @@ function Habits(props) {
 	const completeHabit = () => {
 		setFrequency(frequency - 1);
 		fetch(
-			'http://localhost:5000/api/v1.0.0/habit/mark_TODO/' +
+			'http://3.15.57.200:5000/api/v1.0.0/habit/mark_TODO/' +
 				props.userHabitId +
 				'/' +
 				props.habitId,
@@ -33,19 +33,21 @@ function Habits(props) {
 					'authentication-token': getToken,
 				},
 				body: JSON.stringify({
-					expValue: +props.exp + 5,
+					expValue: 5,
 					date: new Date(),
-					remainingToLevel: props.remainingToLevel,
+					// remainingToLevel: props.remainingToLevel,
 				}),
 			},
 		)
 			.then((res) =>
 				res.json().then(() => {
+					console.log('completehabit was called');
+
 					if (frequency - 1 == 0) {
 						setCompleted(true);
-						gainXP(300);
+						gainXP(300, getToken);
 					} else {
-						gainXP(50);
+						gainXP(50, getToken);
 					}
 					changeRefreshing(true);
 				}),
@@ -53,26 +55,9 @@ function Habits(props) {
 			.catch();
 	};
 
-	const gainXP = (xp) => {
-		fetch('http://localhost:5000/api/v1.0.0/pets/gain_exp', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-				'authentication-token': getToken,
-			},
-			body: JSON.stringify({
-				expValue: xp,
-				totalExp: props.totalExp,
-				levelToEvolveNext: props.levelToEvolveNext,
-			}),
-		})
-			.then((res) => res.json().then(() => {}))
-			.catch();
-	};
-
 	const deleteHabit = () => {
 		fetch(
-			'http://localhost:5000/api/v1.0.0/habit/delete_habit/' +
+			'http://3.15.57.200:5000/api/v1.0.0/habit/delete_habit/' +
 				props.userHabitId +
 				'/' +
 				props.habitId,
@@ -96,20 +81,50 @@ function Habits(props) {
 
 	return (
 		<View>
-			{!completed ? (
-				<ScrollViewElement
-					rightFunction={props.enableRight ? completeHabit : undefined}
-					leftFunction={props.enableLeft ? deleteHabit : undefined}
-					text={props.name}
-					content={
-						<View style={styles(colors).horizontalContainer}>
-							<View style={styles(colors).leftContainer}>
-								<Text style={styles(colors).textTitle}>
-									{Capitalize(props.name)}
-								</Text>
-							</View>
-							<View style={styles(colors).container}>
+			<ScrollViewElement
+				rightFunction={
+					props.enableRight && !completed ? completeHabit : undefined
+				}
+				leftFunction={
+					props.enableLeft && !completed
+						? () =>
+								props.deleteHabit({
+									habitId: props.habitId,
+									userHabitId: props.userHabitId,
+									habitTitle: props.name,
+								})
+						: undefined
+				}
+				text={props.name}
+				content={
+					<View
+						style={
+							!completed
+								? styles(colors).horizontalContainer
+								: styles(colors).completedHabit
+						}
+					>
+						<View style={styles(colors).leftContainer}>
+							<Text
+								style={
+									!completed
+										? styles(colors).textTitle
+										: styles(colors).completedHabitTextTitle
+								}
+							>
+								{Capitalize(props.name)}
+							</Text>
+						</View>
+						<View
+							style={
+								!completed
+									? styles(colors).container
+									: styles(colors).completedContainer
+							}
+						>
+							<View style={{ alignItems: 'flex-end' }}>
 								<Ellipsis
+									completed={completed}
 									onPress={() =>
 										props.navigation.navigate('ModifyHabitScreen', {
 											habitId: props.habitId,
@@ -117,85 +132,52 @@ function Habits(props) {
 										})
 									}
 								/>
-								<View style={styles(colors).horizontalContainerBottom}>
-									<Counter
-										quantity={streak}
-										supplementalInfo={
-											<Image
-												source={require('../resources/images/Streak.png')}
-												resizeMode='contain'
-												style={{
-													height: 20,
-													width: 20,
-													tintColor: colors.Quaternary,
-													marginTop: 'auto',
-												}}
-											/>
-										}
-									/>
-									<Counter
-										quantity={frequency}
-										supplementalInfo={
-											<Text style={styles(colors).expText}>x</Text>
-										}
-										last={true}
-									/>
-								</View>
 							</View>
-						</View>
-					}
-				/>
-			) : (
-				<ScrollViewElement
-					text={props.name}
-					content={
-						<View style={styles(colors).completedHabit}>
-							<View style={styles(colors).leftContainer}>
-								<Text style={styles(colors).completedHabitTextTitle}>
-									{Capitalize(props.name)}
-								</Text>
-							</View>
-							<View style={styles(colors).completedContainer}>
-								<Ellipsis
-									completed={true}
-									onPress={() =>
-										props.navigation.navigate('ModifyHabitScreen', {
-											habitId: props.habitId,
-											userHabitId: props.userHabitId,
-										})
+							<View
+								style={
+									!completed
+										? styles(colors).horizontalContainerBottom
+										: styles(colors).completedHorizontalContainerBottom
+								}
+							>
+								<Counter
+									completed={completed}
+									quantity={streak}
+									supplementalInfo={
+										<Image
+											source={require('../resources/images/Streak.png')}
+											resizeMode='contain'
+											style={{
+												height: 20,
+												width: 20,
+												tintColor: !completed
+													? colors.Quaternary
+													: Colours.Grey.Text,
+												marginTop: 'auto',
+											}}
+										/>
 									}
 								/>
-								<View style={styles(colors).completedHorizontalContainerBottom}>
-									<Counter
-										completed={true}
-										quantity={streak}
-										supplementalInfo={
-											<Image
-												source={require('../resources/images/Streak.png')}
-												resizeMode='contain'
-												style={{
-													height: 20,
-													width: 20,
-													tintColor: Colours.Grey.Text,
-													marginTop: 'auto',
-												}}
-											/>
-										}
-									/>
-									<Counter
-										completed={true}
-										quantity={frequency}
-										supplementalInfo={
-											<Text style={styles(colors).completedExpText}>x</Text>
-										}
-										last={true}
-									/>
-								</View>
+								<Counter
+									completed={completed}
+									quantity={frequency}
+									supplementalInfo={
+										<Text
+											style={
+												!completed
+													? styles(colors).expText
+													: styles(colors).completedExpText
+											}
+										>
+											x
+										</Text>
+									}
+								/>
 							</View>
 						</View>
-					}
-				/>
-			)}
+					</View>
+				}
+			/>
 		</View>
 	);
 }

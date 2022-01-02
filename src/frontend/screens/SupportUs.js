@@ -6,7 +6,7 @@ import {
 	Text,
 	TouchableOpacity,
 } from 'react-native';
-
+import androidSafeAreaView from '../styling/AndroidSafeAreaView';
 import MenuHeader from '../components/MenuHeader';
 import styles from '../styling/SupportUs';
 import HomeButton from '../components/HomeButton';
@@ -17,7 +17,7 @@ function SupportUs(props) {
 	const { colors } = useTheme();
 	const style = styles(colors);
 	return (
-		<SafeAreaView style={{ height: '100%' }}>
+		<SafeAreaView style={androidSafeAreaView().AndroidSafeArea}>
 			<MenuHeader text='Support Us' navigation={props.navigation}></MenuHeader>
 			<View style={style.container}>
 				<Image

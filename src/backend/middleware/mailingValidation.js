@@ -9,8 +9,8 @@ module.export = (mailingValidation) => {
 			port: 465,
 			secure: true,
 			auth: {
-				user: 'habipetshelp@gmail.com',
-				pass: 'mvpiybwihptcqlgr',
+				user: 'petsprouthelp@gmail.com',
+				pass: 'bbnfjimyikmcpsns',
 			},
 		}),
 	);
@@ -32,7 +32,7 @@ module.export = (mailingValidation) => {
 			let code = randomFns();
 			transport.sendMail(
 				{
-					from: 'HabiPets',
+					from: 'PetSprout',
 					to: EMAIL,
 					subject: 'Validate your email',
 					html: `

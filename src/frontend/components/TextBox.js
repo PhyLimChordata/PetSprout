@@ -16,10 +16,10 @@ function TextBox(props) {
 
 	const resetValidity = (content) => {
 		props.setText(content);
-		if (!props.setTextStyle) {
+		if (props.setTextStyle) {
 			props.setTextStyle(styles(colors).authenticationText);
 		}
-		if (!props.setTextStyle) {
+		if (props.setBoxStyle) {
 			props.setBoxStyle(styles(colors).authenticationInput);
 		}
 	};

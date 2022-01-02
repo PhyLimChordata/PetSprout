@@ -9,10 +9,14 @@ import {
 } from 'react-native';
 import Modal from 'react-native-modal';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-// import Toggle from 'react-native-toggle-element';
+import Toggle from 'react-native-toggle-element';
 import Colours from '../resources/themes/Colours';
 import { useTheme } from '@react-navigation/native';
-
+import { logo } from '../resources/images/Logo/Logo';
+import { comingsoon } from '../resources/images/Pets/ComingSoon/ComingSoon';
+import { egg } from '../resources/images/Pets/Egg/Egg';
+import LogoutConfirmation from './LogoutPopup';
+import { EvolutionMapping } from '../resources/mappings/EvolutionMapping';
 function ThemeCircle({ colorTheme, onPress, selected }) {
 	return (
 		<View>
@@ -83,12 +87,22 @@ const Tab = ({ color, icon, onPress, title, isImage = false }) => (
 );
 
 function SideMenu(props) {
-	const { changeColorTheme, getColor, changeModeTheme, getMode, getToken } =
-		useContext(AuthContext);
+	const {
+		changeColorTheme,
+		getColor,
+		changeModeTheme,
+		getMode,
+		getToken,
+		changeLogo,
+		changePet,
+		changeComingSoon,
+	} = useContext(AuthContext);
 
 	const { colors } = useTheme();
 	const [color, setColor] = useState(getColor);
 	const [userName, setUserName] = useState('');
+	const [pet, setPet] = useState(null);
+	const [logoutVisible, setLogoutVisible] = useState(false);
 
 	let defaultMode = true;
 	if (getMode == 'dark') {
@@ -103,7 +117,7 @@ function SideMenu(props) {
 	}, [props.modalVisible]);
 
 	useEffect(() => {
-		fetch('http://localhost:5000/api/v1.0.0/user/viewAccount', {
+		fetch('http://3.15.57.200:5000/api/v1.0.0/user/viewAccount', {
 			method: 'GET',
 			headers: {
 				'Content-Type': 'application/json',
@@ -116,6 +130,23 @@ function SideMenu(props) {
 			})
 			.catch((err) => console.log(err));
 	}, []);
+
+	useEffect(() => {
+		fetch('http://3.15.57.200:5000/api/v1.0.0/pets/get_current', {
+			method: 'GET',
+			headers: {
+				'Content-Type': 'application/json',
+				'authentication-token': getToken,
+			},
+		})
+			.then((res) =>
+				res.json().then((data) => {
+					setPet(EvolutionMapping[data.name]);
+				}),
+			)
+			.catch();
+	}, []);
+
 	{
 		/* TODO: Change this to a global variable */
 	}
@@ -125,8 +156,13 @@ function SideMenu(props) {
 	function colorChange(color) {
 		changeColorTheme(color);
 		setColor(color);
+		props.setModalVisible(false);
+		console.log(color);
+		console.log(logo[color]);
+		changeLogo(logo[color]);
+		changePet(egg[color]);
+		changeComingSoon(comingsoon[color]);
 	}
-
 	return (
 		<Modal
 			swipeDirection='left'
@@ -151,7 +187,7 @@ function SideMenu(props) {
 				}}
 			>
 				<SafeAreaView>
-					<View style={{ marginHorizontal: '6%', height: '100%' }}>
+					<View style={{ marginHorizontal: '6%', height: '90%' }}>
 						<View
 							style={{
 								flexDirection: 'row',
@@ -164,14 +200,14 @@ function SideMenu(props) {
 								style={{ flexDirection: 'row', alignItems: 'center', flex: 1 }}
 							>
 								<TouchableOpacity style={{ justifyContent: 'center' }}>
-									<View
+									<Image
 										style={{
-											backgroundColor: colors.Quaternary,
 											width: 50,
 											height: 50,
 											borderRadius: 25,
 										}}
-									></View>
+										source={pet}
+									></Image>
 								</TouchableOpacity>
 								<View
 									style={{
@@ -193,7 +229,7 @@ function SideMenu(props) {
 									</Text>
 								</View>
 							</View>
-							<TouchableOpacity
+							{/* <TouchableOpacity
 								style={{ height: 40, justifyContent: 'center' }}
 								onPress={() => {
 									props.setModalVisible(false);
@@ -205,7 +241,7 @@ function SideMenu(props) {
 									color={colors.Quaternary}
 									size={40}
 								/>
-							</TouchableOpacity>
+							</TouchableOpacity> */}
 						</View>
 						<TouchableOpacity
 							style={{ marginHorizontal: '6%', marginBottom: '6%' }}
@@ -234,12 +270,12 @@ function SideMenu(props) {
 						<View
 							style={{
 								marginLeft: '6%',
-								height: '50%',
+								height: '40%',
 								justifyContent: 'space-between',
-								marginBottom: '12%',
+								marginBottom: '15%',
 							}}
 						>
-							<Tab
+							{/* <Tab
 								color={colors.Quaternary}
 								icon={'star'}
 								title={'Achievements'}
@@ -247,7 +283,7 @@ function SideMenu(props) {
 									props.setModalVisible(false);
 									props.navigation.navigate('AchievementScreen');
 								}}
-							/>
+							/> */}
 							<Tab
 								color={colors.Quaternary}
 								icon={'account-circle'}
@@ -257,7 +293,7 @@ function SideMenu(props) {
 									props.navigation.navigate('ProfileScreen');
 								}}
 							/>
-							<Tab
+							{/* <Tab
 								color={colors.Quaternary}
 								icon={'bullhorn'}
 								title={'Feedback'}
@@ -274,7 +310,7 @@ function SideMenu(props) {
 									props.setModalVisible(false);
 									props.navigation.navigate('ReportABugScreen');
 								}}
-							/>
+							/> */}
 							<Tab
 								color={colors.Quaternary}
 								icon={'account-group'}
@@ -314,32 +350,32 @@ function SideMenu(props) {
 						>
 							<ThemeCircle
 								colorTheme={Colours.Green}
-								selected={color == 'green'}
-								onPress={() => colorChange('green')}
+								selected={color == 'Green'}
+								onPress={() => colorChange('Green')}
 							/>
 							<ThemeCircle
 								colorTheme={Colours.Yellow}
-								selected={color == 'orange'}
-								onPress={() => colorChange('orange')}
+								selected={color == 'Orange'}
+								onPress={() => colorChange('Orange')}
 							/>
 							<ThemeCircle
 								colorTheme={Colours.Blue}
-								selected={color == 'blue'}
-								onPress={() => colorChange('blue')}
+								selected={color == 'Blue'}
+								onPress={() => colorChange('Blue')}
 							/>
 							<ThemeCircle
 								colorTheme={Colours.Purple}
-								selected={color == 'purple'}
-								onPress={() => colorChange('purple')}
+								selected={color == 'Purple'}
+								onPress={() => colorChange('Purple')}
 							/>
 							<ThemeCircle
 								colorTheme={Colours.Red}
-								selected={color == 'red'}
-								onPress={() => colorChange('red')}
+								selected={color == 'Red'}
+								onPress={() => colorChange('Red')}
 							/>
 						</View>
-						<View style={{ alignItems: 'center' }}>
-							{/* <Toggle
+						<View style={{ alignItems: 'center', marginBottom: '5%' }}>
+							<Toggle
 								value={toggleValue}
 								onPress={(newState) => {
 									newState ? changeModeTheme('dark') : changeModeTheme('light');
@@ -370,12 +406,11 @@ function SideMenu(props) {
 										size={30}
 									/>
 								}
-							/> */}
+							/>
 						</View>
 						<View
 							style={{
 								justifyContent: 'flex-end',
-								flex: 1,
 								marginHorizontal: '6%',
 							}}
 						>
@@ -384,13 +419,17 @@ function SideMenu(props) {
 								icon={'logout'}
 								title={'Log Out'}
 								onPress={() => {
-									props.setLogoutVisible(true);
+									setLogoutVisible(true);
 								}}
 							/>
 						</View>
 					</View>
 				</SafeAreaView>
 			</View>
+			<LogoutConfirmation
+				visible={logoutVisible}
+				setVisible={setLogoutVisible}
+			></LogoutConfirmation>
 		</Modal>
 	);
 }
