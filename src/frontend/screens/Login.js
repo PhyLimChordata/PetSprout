@@ -78,7 +78,7 @@ function Login(props) {
 	};
 
 	const attemptLogin = () => {
-		fetch('http://3.15.57.200:5000/api/v1.0.0/user/login', {
+		fetch('http://3.15.57.200/api/v1.0.0/user/login', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
