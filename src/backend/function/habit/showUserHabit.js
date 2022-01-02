@@ -23,6 +23,10 @@ module.exports = async (req, res) => {
 			return habit.schedule.includes(day);
 		});
 
+		// Sort habit by frequency (number of times that they still need to
+		// copmplete the habit by)
+		habitShow.sort((a, b) => (b.times - b.todo) - (a.times - a.todo));
+
 		let miss = userHabitInfo.habitList.filter(function (habit) {
 			return habit.missing > 0 && habit.schedule.includes(day);
 		});
