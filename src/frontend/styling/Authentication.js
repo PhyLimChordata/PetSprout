@@ -34,7 +34,7 @@ const authenticationStyles = (theme) =>
 		},
 		inputContainer: {
 			alignItems: 'flex-start',
-			width: '100%'
+			width: '100%',
 		},
 		header: {
 			alignItems: 'center',

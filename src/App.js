@@ -284,7 +284,7 @@ function HomeScreen(props) {
 					component={CreateHabitScreen}
 					listeners={{
 						tabPress: (e) => {
-							props.navigation.navigate('CreateHabitScreen')
+							props.navigation.navigate('CreateHabitScreen');
 							e.preventDefault();
 						},
 					}}
