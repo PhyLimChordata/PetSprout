@@ -62,7 +62,7 @@ function sendEmail(message, email, type) {
 					secure: true,
 					auth: {
 						user: 'petsprouthelp@gmail.com',
-						pass: 'Q$m?67&Ldf7KiR3!S45o',
+						pass: 'bbnfjimyikmcpsns',
 					},
 				}),
 			);
