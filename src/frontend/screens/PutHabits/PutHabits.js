@@ -263,7 +263,8 @@ function PutHabits(props) {
 	return (
 		<SafeAreaView
 			style={[
-				styles(colors).headContainer, androidSafeAreaView().AndroidSafeArea
+				styles(colors).headContainer,
+				androidSafeAreaView().AndroidSafeArea,
 			]}
 		>
 			<MenuHeader
@@ -420,7 +421,7 @@ function PutHabits(props) {
 							height: 40,
 							marginHorizontal: 30,
 							borderRadius: 10,
-							marginBottom: 30
+							marginBottom: 30,
 						}}
 					>
 						<Text

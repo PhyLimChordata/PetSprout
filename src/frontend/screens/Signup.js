@@ -315,9 +315,8 @@ function SignupScreen(props) {
 
 	return (
 		<SafeAreaView
-			style={[
-				styles(colors).container, androidSafeAreaView().AndroidSafeArea
-			]}>
+			style={[styles(colors).container, androidSafeAreaView().AndroidSafeArea]}
+		>
 			<Image style={styles(colors).authenticationLogo} source={getLogo} />
 			<ScrollView persistentScrollbar={true} style={{ width: 300, margin: 20 }}>
 				<View style={styles(colors).inputContainer}>

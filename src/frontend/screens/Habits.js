@@ -88,7 +88,8 @@ function HabitsScreen(props) {
 	return (
 		<SafeAreaView
 			style={[
-				styles(colors).headContainer, androidSafeAreaView().AndroidSafeArea
+				styles(colors).headContainer,
+				androidSafeAreaView().AndroidSafeArea,
 			]}
 		>
 			<MenuHeader text='' navigation={props.navigation} displayHp={true} />

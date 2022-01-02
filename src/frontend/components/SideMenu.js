@@ -374,7 +374,7 @@ function SideMenu(props) {
 								onPress={() => colorChange('Red')}
 							/>
 						</View>
-						<View style={{ alignItems: 'center',marginBottom: '5%' }}>
+						<View style={{ alignItems: 'center', marginBottom: '5%' }}>
 							<Toggle
 								value={toggleValue}
 								onPress={(newState) => {
