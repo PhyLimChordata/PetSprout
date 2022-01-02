@@ -69,13 +69,6 @@ function HabitsScreen(props) {
 			.then((res) =>
 				res.json().then((data) => {
 					console.log(data.habitList);
-					// data.habitList.sort(function (a, b) {
-					// 	var keyA = a.times - a.todo;
-					// 	var keyB = b.times - b.todo;
-					// 	if (keyA < keyB) return 1;
-					// 	if (keyA > keyB) return -1;
-					// 	return 0;
-					// });
 					setTimeout(() => {
 						setHabits(data.habitList);
 						setUserHabitId(data._id);
