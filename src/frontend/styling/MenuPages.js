@@ -19,10 +19,8 @@ const MenuPagesStyles = (theme) =>
 			bottom: 2,
 		},
 		bottom: {
-			position: 'absolute',
-			bottom: 40,
+			marginBottom:50,
 			width: '100%',
-			display: 'flex',
 			justifyContent: 'center',
 			alignItems: 'center',
 		},

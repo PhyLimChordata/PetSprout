@@ -106,6 +106,7 @@ function Habits(props) {
 					>
 						<View style={styles(colors).leftContainer}>
 							<Text
+								numberOfLines={2}
 								style={
 									!completed
 										? styles(colors).textTitle
