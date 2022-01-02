@@ -4,10 +4,11 @@ import {
 	Text,
 	TextInput,
 	Image,
+	SafeAreaView,
 	TouchableOpacity,
 	ScrollView,
 } from 'react-native';
-
+import androidSafeAreaView from '../styling/AndroidSafeAreaView';
 import styles from '../styling/Authentication';
 import { useTheme } from '@react-navigation/native';
 import Colours from '../resources/themes/Colours';
@@ -313,7 +314,10 @@ function SignupScreen(props) {
 	};
 
 	return (
-		<View style={styles(colors).container}>
+		<SafeAreaView
+			style={[
+				styles(colors).container, androidSafeAreaView().AndroidSafeArea
+			]}>
 			<Image style={styles(colors).authenticationLogo} source={getLogo} />
 			<ScrollView persistentScrollbar={true} style={{ width: 300, margin: 20 }}>
 				<View style={styles(colors).inputContainer}>
@@ -370,7 +374,7 @@ function SignupScreen(props) {
 					<Text style={styles(colors).signupText}> Log in</Text>
 				</TouchableOpacity>
 			</View>
-		</View>
+		</SafeAreaView>
 	);
 }
 

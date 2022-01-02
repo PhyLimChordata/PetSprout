@@ -187,7 +187,7 @@ function SideMenu(props) {
 				}}
 			>
 				<SafeAreaView>
-					<View style={{ marginHorizontal: '6%', height: '100%' }}>
+					<View style={{ marginHorizontal: '6%', height: '90%' }}>
 						<View
 							style={{
 								flexDirection: 'row',
@@ -272,7 +272,7 @@ function SideMenu(props) {
 								marginLeft: '6%',
 								height: '40%',
 								justifyContent: 'space-between',
-								marginBottom: '12%',
+								marginBottom: '15%',
 							}}
 						>
 							{/* <Tab
@@ -374,7 +374,7 @@ function SideMenu(props) {
 								onPress={() => colorChange('Red')}
 							/>
 						</View>
-						<View style={{ alignItems: 'center' }}>
+						<View style={{ alignItems: 'center',marginBottom: '5%' }}>
 							<Toggle
 								value={toggleValue}
 								onPress={(newState) => {

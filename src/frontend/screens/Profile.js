@@ -9,6 +9,7 @@ import {
 	Image,
 	ImageBackground,
 } from 'react-native';
+import androidSafeAreaView from '../styling/AndroidSafeAreaView';
 import profileStyles from '../styling/Profile';
 import MenuHeader from '../components/MenuHeader';
 import { AuthContext } from '../Context';
@@ -120,7 +121,7 @@ function ProfileEdit(props) {
 
 	return (
 		<>
-			<SafeAreaView style={{ height: '100%' }}>
+			<SafeAreaView style={androidSafeAreaView().AndroidSafeArea}>
 				<View>
 					<MenuHeader
 						text='Account  '

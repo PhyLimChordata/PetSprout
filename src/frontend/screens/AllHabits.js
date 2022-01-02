@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { View, Image, Animated, SafeAreaView } from 'react-native';
-
+import androidSafeAreaView from '../styling/AndroidSafeAreaView';
 import styles from '../styling/HabitsScreen';
 import Habits from '../components/Habits';
 import MenuHeader from '../components/MenuHeader';
@@ -55,7 +55,12 @@ function AllHabitsScreen(props) {
 	};
 
 	return (
-		<SafeAreaView style={styles(colors).headContainer}>
+		<SafeAreaView
+			style={[
+				styles(colors).headContainer,
+				androidSafeAreaView().AndroidSafeArea,
+			]}
+		>
 			<MenuHeader back={true} text='All Habits' navigation={props.navigation} />
 			<View
 				style={{ flex: 20, marginLeft: 60, marginRight: 60, marginTop: 40 }}

@@ -10,6 +10,7 @@ import {
 	Button,
 } from 'react-native';
 
+import androidSafeAreaView from '../styling/AndroidSafeAreaView';
 import MenuHeader from '../components/MenuHeader';
 
 import ExperienceBar from '../components/ExperienceBar';
@@ -201,7 +202,7 @@ function PomodoroScreen(props) {
 		return BackgroundFetch.unregisterTaskAsync(BACKGROUND_FETCH_TASK);
 	}
 	return (
-		<SafeAreaView style={{ flex: 1, backgroundColor: colors.white }}>
+		<SafeAreaView style={androidSafeAreaView().AndroidSafeArea}>
 			<MenuHeader
 				text={props.title}
 				navigation={props.navigation}

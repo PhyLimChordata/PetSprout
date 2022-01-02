@@ -7,6 +7,7 @@ import {
 	SafeAreaView,
 	Animated,
 } from 'react-native';
+import androidSafeAreaView from '../styling/AndroidSafeAreaView';
 import AchievementStyle from '../styling/Achievement';
 import { ProgressBar } from 'react-native-paper';
 import MenuHeader from '../components/MenuHeader';
@@ -108,7 +109,7 @@ function AchievementScreen(props) {
 	} else {
 		return (
 			<>
-				<SafeAreaView style={{ height: '100%' }}>
+				<SafeAreaView style={androidSafeAreaView().AndroidSafeArea}>
 					<MenuHeader text='Achievement' navigation={props.navigation} />
 
 					<View style={styles.headContainer}>

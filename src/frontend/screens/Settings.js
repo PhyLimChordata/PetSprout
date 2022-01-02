@@ -9,6 +9,7 @@ import {
 	Image,
 	ImageBackground,
 } from 'react-native';
+import androidSafeAreaView from '../styling/AndroidSafeAreaView';
 import { useTheme } from '@react-navigation/native';
 import Colours from '../resources/themes/Colours';
 import MenuHeader from '../components/MenuHeader';
@@ -134,7 +135,7 @@ function SettingsPage(props) {
 	};
 
 	return (
-		<SafeAreaView>
+		<SafeAreaView style={androidSafeAreaView().AndroidSafeArea}>
 			<MenuHeader
 				back={true}
 				text={'Settings'}
