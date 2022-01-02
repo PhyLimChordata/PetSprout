@@ -7,6 +7,7 @@ import {
 	ScrollView,
 	SafeAreaView,
 } from 'react-native';
+import androidSafeAreaView from '../../styling/AndroidSafeAreaView';
 import MenuHeader from '../../components/MenuHeader';
 import styles from '../../styling/Header';
 import TextBox from '../../components/TextBox';
@@ -260,7 +261,12 @@ function PutHabits(props) {
 		color: Colours.Unique.Black,
 	};
 	return (
-		<SafeAreaView style={styles(colors).headContainer}>
+		<SafeAreaView
+			style={[
+				styles(colors).headContainer,
+				androidSafeAreaView().AndroidSafeArea,
+			]}
+		>
 			<MenuHeader
 				back={true}
 				text={props.header}
@@ -415,6 +421,7 @@ function PutHabits(props) {
 							height: 40,
 							marginHorizontal: 30,
 							borderRadius: 10,
+							marginBottom: 30,
 						}}
 					>
 						<Text

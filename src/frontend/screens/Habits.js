@@ -10,6 +10,8 @@ import {
 	TouchableOpacity,
 } from 'react-native';
 
+import androidSafeAreaView from '../styling/AndroidSafeAreaView';
+
 import styles from '../styling/HabitsScreen';
 import Habits from '../components/Habits';
 import MenuHeader from '../components/MenuHeader';
@@ -87,7 +89,7 @@ function HabitsScreen(props) {
 		<SafeAreaView
 			style={[
 				styles(colors).headContainer,
-				{ paddingTop: StatusBar.currentHeight },
+				androidSafeAreaView().AndroidSafeArea,
 			]}
 		>
 			<MenuHeader text='' navigation={props.navigation} displayHp={true} />

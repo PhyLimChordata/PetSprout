@@ -6,7 +6,7 @@ import {
 	TouchableOpacity,
 	Image,
 } from 'react-native';
-
+import androidSafeAreaView from '../styling/AndroidSafeAreaView';
 import MenuHeader from '../components/MenuHeader';
 import styles from '../styling/ReportABug';
 import TextBox from '../components/TextBox';
@@ -49,7 +49,7 @@ function ReportABug(props) {
 	}
 
 	return (
-		<SafeAreaView style={{ height: '100%' }}>
+		<SafeAreaView style={androidSafeAreaView().AndroidSafeArea}>
 			<MenuHeader
 				text='Report a Bug'
 				navigation={props.navigation}

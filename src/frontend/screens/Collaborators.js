@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, SafeAreaView, Text, Image, ScrollView } from 'react-native';
-
+import androidSafeAreaView from '../styling/AndroidSafeAreaView';
 import MenuHeader from '../components/MenuHeader';
 import styles from '../styling/Collaborators';
 import HomeButton from '../components/HomeButton';
@@ -12,7 +12,7 @@ function Collaborators(props) {
 	const style = styles(colors);
 
 	return (
-		<SafeAreaView style={{ height: '100%' }}>
+		<SafeAreaView style={androidSafeAreaView().AndroidSafeArea}>
 			<MenuHeader
 				text='Collaborators'
 				navigation={props.navigation}
