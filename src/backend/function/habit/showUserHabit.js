@@ -31,6 +31,18 @@ module.exports = async (req, res) => {
 			return habit.missing > 0 && habit.schedule.includes(day);
 		});
 
+		miss.sort((a,b) => {
+			if(b.missing === a.missing && b.missing === 1) {
+				return 0
+			} else if (a.missing === 1) {
+				return -1
+			} else if (b.missing === 1) {
+				return 1;
+			} else {
+				return b.missing - a.missing
+			}
+		});
+
 		let mastered = userHabitInfo.habitList.filter(function (habit) {
 			return habit.continuous == 66;
 		})
