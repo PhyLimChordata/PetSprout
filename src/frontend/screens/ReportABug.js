@@ -6,7 +6,7 @@ import {
 	TouchableOpacity,
 	Image,
 } from 'react-native';
-
+import androidSafeAreaView from '../styling/AndroidSafeAreaView';
 import MenuHeader from '../components/MenuHeader';
 import styles from '../styling/ReportABug';
 import TextBox from '../components/TextBox';
@@ -32,7 +32,6 @@ function ReportABug(props) {
 				title='Thank you for Reporting a Bug!'
 				text='An email has been sent and
               we will look into it promptly'
-				button={false}
 			></Popup>
 		);
 	} else {
@@ -45,13 +44,12 @@ function ReportABug(props) {
 				title='Something went wrong...'
 				text='An email could not be sent. 
               Please attempt another time.'
-				button={false}
 			></Popup>
 		);
 	}
 
 	return (
-		<SafeAreaView style={{ height: '100%' }}>
+		<SafeAreaView style={androidSafeAreaView().AndroidSafeArea}>
 			<MenuHeader
 				text='Report a Bug'
 				navigation={props.navigation}

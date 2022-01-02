@@ -7,6 +7,7 @@ import {
 	ScrollView,
 	SafeAreaView,
 } from 'react-native';
+import androidSafeAreaView from '../../styling/AndroidSafeAreaView';
 import MenuHeader from '../../components/MenuHeader';
 import styles from '../../styling/Header';
 import TextBox from '../../components/TextBox';
@@ -17,6 +18,7 @@ import ScrollViewElement from '../../components/ScrollViewElement';
 import BottomPopup from '../../components/BottomPopup';
 
 import { useTheme } from '@react-navigation/native';
+import DeleteHabitPopup from '../../components/DeleteHabitPopup';
 
 function Day({ selected, letter, onPress }) {
 	const { colors } = useTheme();
@@ -61,11 +63,12 @@ function PutHabits(props) {
 	const { getToken, changeRefreshing } = useContext(AuthContext);
 	const [popupText, setPopupText] = useState('');
 	const [invalidParams, setInvalidParams] = useState([]);
+	const [deleteVisible, setDeleteVisible] = useState(false);
 
 	const { colors } = useTheme();
 	const createHabit = () => {
 		var times = alarms.length == 0 ? 1 : alarms.length;
-		fetch('http://localhost:5000/api/v1.0.0/habit/create_habit', {
+		fetch('http://3.15.57.200:5000/api/v1.0.0/habit/create_habit', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
@@ -99,7 +102,7 @@ function PutHabits(props) {
 	};
 	const modifyHabit = () => {
 		fetch(
-			'http://localhost:5000/api/v1.0.0/habit/change_habit/' +
+			'http://3.15.57.200:5000/api/v1.0.0/habit/change_habit/' +
 				props.userHabitId +
 				'/' +
 				props.habitId,
@@ -139,7 +142,7 @@ function PutHabits(props) {
 
 	const deleteHabit = () => {
 		fetch(
-			'http://localhost:5000/api/v1.0.0/habit/delete_habit/' +
+			'http://3.15.57.200:5000/api/v1.0.0/habit/delete_habit/' +
 				props.userHabitId +
 				'/' +
 				props.habitId,
@@ -258,7 +261,12 @@ function PutHabits(props) {
 		color: Colours.Unique.Black,
 	};
 	return (
-		<SafeAreaView style={styles(colors).headContainer}>
+		<SafeAreaView
+			style={[
+				styles(colors).headContainer,
+				androidSafeAreaView().AndroidSafeArea,
+			]}
+		>
 			<MenuHeader
 				back={true}
 				text={props.header}
@@ -403,27 +411,41 @@ function PutHabits(props) {
 				</View>
 			</ScrollView>
 			{!props.isCreate && (
-				<TouchableOpacity
-					onPress={() => deleteHabit()}
-					style={{
-						backgroundColor: '#E37272',
-						alignItems: 'center',
-						justifyContent: 'center',
-						height: 40,
-						marginHorizontal: 30,
-						borderRadius: 10,
-					}}
-				>
-					<Text
+				<>
+					<TouchableOpacity
+						onPress={() => setDeleteVisible(true)}
 						style={{
-							fontSize: 20,
-							fontWeight: 'bold',
-							color: colors.background,
+							backgroundColor: '#E37272',
+							alignItems: 'center',
+							justifyContent: 'center',
+							height: 40,
+							marginHorizontal: 30,
+							borderRadius: 10,
+							marginBottom: 30,
 						}}
 					>
-						Delete Habit
-					</Text>
-				</TouchableOpacity>
+						<Text
+							style={{
+								fontSize: 20,
+								fontWeight: 'bold',
+								color: colors.background,
+							}}
+						>
+							Delete Habit
+						</Text>
+					</TouchableOpacity>
+					<DeleteHabitPopup
+						visible={deleteVisible}
+						setVisible={setDeleteVisible}
+						habitTitle={props.title}
+						setBottomPopupText={setPopupText}
+						bottomPopupRef={popup}
+						navigation={props.navigation}
+						goBack={true}
+						userHabitId={props.userHabitId}
+						habitId={props.habitId}
+					/>
+				</>
 			)}
 			<BottomPopup ref={popup} text={popupText} />
 			<DateTimePickerModal

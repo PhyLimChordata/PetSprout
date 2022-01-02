@@ -26,6 +26,10 @@ module.exports = async (req, res) => {
 			res.status(400).json('Email or user name should be provided');
 		}
 
+		if (typeof date == 'undefined') {
+			return res.status(400).json('Date should be provided.');
+		}
+
 		let user = null;
 		if (email === '') {
 			user = await User.findOne({ userName });
@@ -41,12 +45,11 @@ module.exports = async (req, res) => {
 
 		let matching = await bcryptjs.compare(password, user.password);
 		if (!matching) return res.status(401).json('Wrong password');
-
+		var current = new Date(date);
 		if (user.lastlogin !== null) {
 			let lastLoginYear = user.lastlogin.getFullYear();
 			let lastLoginMonth = user.lastlogin.getMonth();
 			let lastLoginDate = user.lastlogin.getDate();
-
 			let current = new Date(date);
 			let userHabit = await Habit.findOne({ user: user._id });
 			let currentYear = current.getFullYear();
@@ -85,11 +88,10 @@ module.exports = async (req, res) => {
 						habit.nextSignInDate = new Date(today);
 					}
 				}
+				userHabit.save();
 			}
-			userHabit.save();
 		}
-
-		user.lastlogin = date;
+		user.lastlogin = current;
 		await user.save();
 
 		const payload = {

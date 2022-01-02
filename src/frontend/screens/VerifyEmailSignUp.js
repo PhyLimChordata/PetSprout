@@ -10,7 +10,7 @@ function VerifyEmailSignUp(props) {
 	const { colors } = useTheme();
 
 	const resend = () => {
-		fetch('http://localhost:5000/api/v1.0.0/user/send_activate_email', {
+		fetch('http://3.15.57.200:5000/api/v1.0.0/user/send_activate_email', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
@@ -39,8 +39,8 @@ function VerifyEmailSignUp(props) {
 				<Text style={styles(colors).textTitle}>Verify your Email</Text>
 				<Text style={styles(colors).explanationText}>
 					{' '}
-					To start using HabiPets, we need to verify your email. An email with a
-					verification link has been sent which will activate your account.{' '}
+					To start using PetSprout, we need to verify your email. An email with
+					a verification link has been sent which will activate your account.{' '}
 				</Text>
 			</View>
 			<TouchableOpacity

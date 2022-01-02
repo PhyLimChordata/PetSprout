@@ -1,4 +1,4 @@
-# HabiPets
+# PetSprout
 
 ## Overview
 
@@ -100,4 +100,4 @@ Manola Yvonet\
 Calvin Cheng\
 Cheryl Chen\
 YuanYuan Li\
-Katrina Best\
+Katrina Best

@@ -5,6 +5,7 @@ const authenticationStyles = (theme) =>
 	StyleSheet.create({
 		container: {
 			flex: 1,
+			margin: 40,
 			backgroundColor: theme.white,
 			alignItems: 'center',
 			justifyContent: 'center',
@@ -33,15 +34,16 @@ const authenticationStyles = (theme) =>
 		},
 		inputContainer: {
 			alignItems: 'flex-start',
+			width: '100%',
 		},
 		header: {
 			alignItems: 'center',
 			marginBottom: 20,
 		},
 		authenticationLogo: {
-			height: 200,
-			width: 200,
-			marginBottom: 50,
+			height: 150,
+			width: 150,
+			marginBottom: 20,
 		},
 		authenticationInput: {
 			backgroundColor: theme.Secondary,

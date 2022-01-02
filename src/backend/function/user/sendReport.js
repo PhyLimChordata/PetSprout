@@ -61,8 +61,8 @@ function sendEmail(message, email, type) {
 					port: 465,
 					secure: true,
 					auth: {
-						user: 'habipetshelp@gmail.com',
-						pass: 'mvpiybwihptcqlgr',
+						user: 'petsprouthelp@gmail.com',
+						pass: 'bbnfjimyikmcpsns',
 					},
 				}),
 			);
@@ -77,8 +77,8 @@ function sendEmail(message, email, type) {
 				'</td> </tr> </table>';
 			console.log(html);
 			var data = {
-				from: 'HabiPets',
-				to: 'habipetshelp@gmail.com',
+				from: 'PetSprout',
+				to: 'petsprouthelp@gmail.com',
 				subject: type,
 				html: html,
 			};

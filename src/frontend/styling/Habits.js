@@ -22,7 +22,6 @@ const habitsStyles = (theme) =>
 		completedContainer: {
 			backgroundColor: Colours.Grey.ExpBarBackground,
 			margin: 20,
-			alignItems: 'center',
 		},
 		completedExpText: {
 			color: Colours.Grey.Text,
@@ -30,15 +29,12 @@ const habitsStyles = (theme) =>
 		},
 		completedHorizontalContainerBottom: {
 			flexDirection: 'row',
-			position: 'absolute',
-			bottom: 0,
-			right: 0,
 			borderRadius: 8,
 			backgroundColor: Colours.Grey.ExpBarBackground,
 		},
 		horizontalContainerBottom: {
 			flexDirection: 'row',
-			position: 'absolute',
+			paddingTop: 10,
 			bottom: 0,
 			right: 0,
 			borderRadius: 8,
@@ -53,13 +49,13 @@ const habitsStyles = (theme) =>
 		},
 		leftContainer: {
 			flex: 2,
-			padding: 20,
-			paddingBottom: 30,
+			paddingLeft: 20,
+			paddingTop: 20,
+			paddingBottom: 20,
 		},
 		container: {
 			backgroundColor: theme.Secondary,
 			margin: 20,
-			alignItems: 'center',
 		},
 		experienceContainer: {
 			width: '60%',
