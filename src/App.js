@@ -34,6 +34,7 @@ import NamePetScreen from './frontend/screens/NamePet';
 import AllHabitsScreen from './frontend/screens/AllHabits';
 import PomodoroScreen from './frontend/screens/Pomodoro';
 import PomodoroTasksScreen from './frontend/screens/PomodoroTasks';
+
 // Colour Themes
 import GreenLightTheme from './frontend/resources/themes/light/GreenTheme';
 import OrangeLightTheme from './frontend/resources/themes/light/OrangeTheme';
@@ -47,6 +48,7 @@ import PurpleDarkTheme from './frontend/resources/themes/dark/PurpleTheme';
 import RedDarkTheme from './frontend/resources/themes/dark/RedTheme';
 
 import { AuthContext } from './frontend/Context';
+import CreateTaskScreen from './frontend/screens/CreateTask';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -188,6 +190,10 @@ function NavContainer(props) {
 					<Stack.Screen
 						name='PomodoroTasksScreen'
 						component={PomodoroTasksScreen}
+					/>
+					<Stack.Screen
+						name='CreateTaskScreen'
+						component={CreateTaskScreen}
 					/>
 
 					<Stack.Screen
@@ -348,7 +354,9 @@ function Calendar(props) {
 function Pomodoro(props) {
 	return <PomodoroScreen title='Pomodoro' navigation={props.navigation} />;
 }
-
+function PomodoroTasks(props) {
+    return <CreateHabitScreen title='Tasks' navigation={props.navigation} />;
+}
 function Reflect(props) {
 	return <ComingSoonScreen title='Reflect' navigation={props.navigation} />;
 }
