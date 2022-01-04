@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import Modal from 'react-native-modal';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-// import Toggle from 'react-native-toggle-element';
+import Toggle from 'react-native-toggle-element';
 import Colours from '../resources/themes/Colours';
 import { useTheme } from '@react-navigation/native';
 import { logo } from '../resources/images/Logo/Logo';
@@ -117,7 +117,7 @@ function SideMenu(props) {
 	}, [props.modalVisible]);
 
 	useEffect(() => {
-		fetch('http://localhost:5000/api/v1.0.0/user/viewAccount', {
+		fetch('http://3.15.57.200:5000/api/v1.0.0/user/viewAccount', {
 			method: 'GET',
 			headers: {
 				'Content-Type': 'application/json',
@@ -132,7 +132,7 @@ function SideMenu(props) {
 	}, []);
 
 	useEffect(() => {
-		fetch('http://localhost:5000/api/v1.0.0/pets/get_current', {
+		fetch('http://3.15.57.200:5000/api/v1.0.0/pets/get_current', {
 			method: 'GET',
 			headers: {
 				'Content-Type': 'application/json',
@@ -187,7 +187,7 @@ function SideMenu(props) {
 				}}
 			>
 				<SafeAreaView>
-					<View style={{ marginHorizontal: '6%', height: '100%' }}>
+					<View style={{ marginHorizontal: '6%', height: '90%' }}>
 						<View
 							style={{
 								flexDirection: 'row',
@@ -272,7 +272,7 @@ function SideMenu(props) {
 								marginLeft: '6%',
 								height: '40%',
 								justifyContent: 'space-between',
-								marginBottom: '12%',
+								marginBottom: '15%',
 							}}
 						>
 							{/* <Tab
@@ -374,8 +374,8 @@ function SideMenu(props) {
 								onPress={() => colorChange('Red')}
 							/>
 						</View>
-						<View style={{ alignItems: 'center' }}>
-							{/* <Toggle
+						<View style={{ alignItems: 'center', marginBottom: '5%' }}>
+							<Toggle
 								value={toggleValue}
 								onPress={(newState) => {
 									newState ? changeModeTheme('dark') : changeModeTheme('light');
@@ -406,7 +406,7 @@ function SideMenu(props) {
 										size={30}
 									/>
 								}
-							/> */}
+							/>
 						</View>
 						<View
 							style={{

@@ -4,10 +4,11 @@ import {
 	Text,
 	TextInput,
 	Image,
+	SafeAreaView,
 	TouchableOpacity,
 	ScrollView,
 } from 'react-native';
-
+import androidSafeAreaView from '../styling/AndroidSafeAreaView';
 import styles from '../styling/Authentication';
 import { useTheme } from '@react-navigation/native';
 import Colours from '../resources/themes/Colours';
@@ -192,7 +193,7 @@ function SignupScreen(props) {
 		/^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
 
 	const attemptSignup = () => {
-		fetch('http://localhost:5000/api/v1.0.0/user/register', {
+		fetch('http://3.15.57.200:5000/api/v1.0.0/user/register', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
@@ -313,7 +314,9 @@ function SignupScreen(props) {
 	};
 
 	return (
-		<View style={styles(colors).container}>
+		<SafeAreaView
+			style={[styles(colors).container, androidSafeAreaView().AndroidSafeArea]}
+		>
 			<Image style={styles(colors).authenticationLogo} source={getLogo} />
 			<ScrollView persistentScrollbar={true} style={{ width: 300, margin: 20 }}>
 				<View style={styles(colors).inputContainer}>
@@ -370,7 +373,7 @@ function SignupScreen(props) {
 					<Text style={styles(colors).signupText}> Log in</Text>
 				</TouchableOpacity>
 			</View>
-		</View>
+		</SafeAreaView>
 	);
 }
 

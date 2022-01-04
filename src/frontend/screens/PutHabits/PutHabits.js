@@ -7,6 +7,7 @@ import {
 	ScrollView,
 	SafeAreaView,
 } from 'react-native';
+import androidSafeAreaView from '../../styling/AndroidSafeAreaView';
 import MenuHeader from '../../components/MenuHeader';
 import styles from '../../styling/Header';
 import TextBox from '../../components/TextBox';
@@ -67,7 +68,7 @@ function PutHabits(props) {
 	const { colors } = useTheme();
 	const createHabit = () => {
 		var times = alarms.length == 0 ? 1 : alarms.length;
-		fetch('http://localhost:5000/api/v1.0.0/habit/create_habit', {
+		fetch('http://3.15.57.200:5000/api/v1.0.0/habit/create_habit', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
@@ -101,7 +102,7 @@ function PutHabits(props) {
 	};
 	const modifyHabit = () => {
 		fetch(
-			'http://localhost:5000/api/v1.0.0/habit/change_habit/' +
+			'http://3.15.57.200:5000/api/v1.0.0/habit/change_habit/' +
 				props.userHabitId +
 				'/' +
 				props.habitId,
@@ -141,7 +142,7 @@ function PutHabits(props) {
 
 	const deleteHabit = () => {
 		fetch(
-			'http://localhost:5000/api/v1.0.0/habit/delete_habit/' +
+			'http://3.15.57.200:5000/api/v1.0.0/habit/delete_habit/' +
 				props.userHabitId +
 				'/' +
 				props.habitId,
@@ -260,7 +261,12 @@ function PutHabits(props) {
 		color: Colours.Unique.Black,
 	};
 	return (
-		<SafeAreaView style={styles(colors).headContainer}>
+		<SafeAreaView
+			style={[
+				styles(colors).headContainer,
+				androidSafeAreaView().AndroidSafeArea,
+			]}
+		>
 			<MenuHeader
 				back={true}
 				text={props.header}
@@ -415,6 +421,7 @@ function PutHabits(props) {
 							height: 40,
 							marginHorizontal: 30,
 							borderRadius: 10,
+							marginBottom: 30,
 						}}
 					>
 						<Text

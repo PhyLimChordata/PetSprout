@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { View, Image, Animated, SafeAreaView } from 'react-native';
-
+import androidSafeAreaView from '../styling/AndroidSafeAreaView';
 import styles from '../styling/HabitsScreen';
 import Habits from '../components/Habits';
 import MenuHeader from '../components/MenuHeader';
@@ -33,7 +33,7 @@ function AllHabitsScreen(props) {
 
 	const displayHabits = () => {
 		setDisplayed(true);
-		fetch('http://localhost:5000/api/v1.0.0/habit/show_all_user_habit/', {
+		fetch('http://3.15.57.200:5000/api/v1.0.0/habit/show_all_user_habit/', {
 			method: 'GET',
 			headers: {
 				'Content-Type': 'application/json',
@@ -55,7 +55,12 @@ function AllHabitsScreen(props) {
 	};
 
 	return (
-		<SafeAreaView style={styles(colors).headContainer}>
+		<SafeAreaView
+			style={[
+				styles(colors).headContainer,
+				androidSafeAreaView().AndroidSafeArea,
+			]}
+		>
 			<MenuHeader back={true} text='All Habits' navigation={props.navigation} />
 			<View
 				style={{ flex: 20, marginLeft: 60, marginRight: 60, marginTop: 40 }}

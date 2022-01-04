@@ -10,6 +10,8 @@ import {
 	TouchableOpacity,
 } from 'react-native';
 
+import androidSafeAreaView from '../styling/AndroidSafeAreaView';
+
 import styles from '../styling/HabitsScreen';
 import Habits from '../components/Habits';
 import MenuHeader from '../components/MenuHeader';
@@ -59,7 +61,7 @@ function HabitsScreen(props) {
 		setDisplayed(true);
 		setRefreshing(true);
 		const date = new Date().getDay();
-		fetch('http://localhost:5000/api/v1.0.0/habit/show_user_habit/' + date, {
+		fetch('http://3.15.57.200:5000/api/v1.0.0/habit/show_user_habit/' + date, {
 			method: 'GET',
 			headers: {
 				'Content-Type': 'application/json',
@@ -69,13 +71,6 @@ function HabitsScreen(props) {
 			.then((res) =>
 				res.json().then((data) => {
 					console.log(data.habitList);
-					// data.habitList.sort(function (a, b) {
-					// 	var keyA = a.times - a.todo;
-					// 	var keyB = b.times - b.todo;
-					// 	if (keyA < keyB) return 1;
-					// 	if (keyA > keyB) return -1;
-					// 	return 0;
-					// });
 					setTimeout(() => {
 						setHabits(data.habitList);
 						setUserHabitId(data._id);
@@ -94,7 +89,7 @@ function HabitsScreen(props) {
 		<SafeAreaView
 			style={[
 				styles(colors).headContainer,
-				{ paddingTop: StatusBar.currentHeight },
+				androidSafeAreaView().AndroidSafeArea,
 			]}
 		>
 			<MenuHeader text='' navigation={props.navigation} displayHp={true} />
