@@ -4,9 +4,9 @@ const authentication = require('../middleware/authentication');
 const achievementsUser = require('../function/achievements/achievementsUser.js');
 
 router.get(
-	// #swagger.description = 'DESCRIPTION: Today is going to be a good day.'
-	// #swagger.summary = 'SUMMARY: Today is going to be a bad day.'
-	// #swagger.tags = ['Tag1', 'Tag2']
+	// #swagger.description = 'DESCRIPTION: Filler Description here.'
+	// #swagger.summary = 'SUMMARY: Filler Summary Here.'
+	// #swagger.tags = ['TagA', 'TagB']
 	'/getAchievements',
 	authentication,
 	achievementsUser.get_user_achievements,

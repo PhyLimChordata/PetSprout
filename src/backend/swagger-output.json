@@ -14,11 +14,11 @@
     "/getAchievements": {
       "get": {
         "tags": [
-          "Tag1",
-          "Tag2"
+          "TagA",
+          "TagB"
         ],
-        "summary": "SUMMARY: Today is going to be a bad day.",
-        "description": "DESCRIPTION: Today is going to be a good day.",
+        "summary": "SUMMARY: Filler Summary Here.",
+        "description": "DESCRIPTION: Filler Description here.",
         "parameters": [
           {
             "name": "authentication-token",

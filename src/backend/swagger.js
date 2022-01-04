@@ -1,9 +1,6 @@
 // CommonJS
 const swaggerAutogen = require('swagger-autogen')();
 
-// // ES
-// import swaggerAutogen from 'swagger-autogen';
-
 const doc = {
   info: {
     version: '1.0.0',
@@ -25,14 +22,7 @@ const endpointsFiles = ['./routes/achievementRoute.js',
    'endpointsFiles' only the root file where the route starts,
    such as index.js, app.js, routes.js, ... */
 
-// swaggerAutogen(outputFile, endpointsFiles, doc);
-
 // CommonJS
 swaggerAutogen(outputFile, endpointsFiles, doc).then(() => {
-  require('../App.js'); // Your project's root file
+  require('./server.js'); // Your project's root file
 });
-
-// // ES
-// swaggerAutogen()(outputFile, endpointsFiles, doc).then(async () => {
-//   await import('../App.js'); // Your project's root file
-// });
