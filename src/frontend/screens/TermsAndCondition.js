@@ -10,7 +10,7 @@ import {
 
 import MenuHeader from '../components/MenuHeader';
 import styles from '../styling/TermsAndCondition';
-
+import HomeButton from '../components/HomeButton';
 import { useTheme } from '@react-navigation/native';
 
 function TermsAndCondition(props) {
