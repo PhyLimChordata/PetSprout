@@ -256,8 +256,9 @@ function sendUserEmail(cnd, code) {
 					port: 465,
 					secure: true,
 					auth: {
-						user: 'petsprouthelp@gmail.com',
-						pass: 'mvpiybwihptcqlgr',
+						user: 'PetSproutHelp@gmail.com',
+						// pass: 'mvpiybwihptcqlgr',
+						pass: 'Q$m?67&Ldf7KiR3!S45o',
 					},
 				}),
 			);
