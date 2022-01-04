@@ -34,6 +34,7 @@ app.use('/api/v1.0.0/habit', require('./routes/habitRoute'));
 app.use('/api/v1.0.0/setting', require('./routes/settingRoute'));
 app.use('/api/v1.0.0/achievements', require('./routes/achievementRoute'));
 app.use('/api/v1.0.0/pets', require('./routes/petsRoute'));
+app.use('/api/v1.0.0/pomodoro', require('./routes/pomodoroRoute'));
 
 //3.15.57.200:5000/api/v1.0.0/user
 
