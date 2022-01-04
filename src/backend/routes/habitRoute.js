@@ -13,25 +13,60 @@ const {
 	markTodoValidator,
 } = require('../middleware/express-validator/expressValidator');
 
-router.post('/create_habit', authentication, createHabit);
+router.post(
+	// #swagger.description = 'DESCRIPTION: Filler Description here.'
+	// #swagger.summary = 'SUMMARY: Filler Summary Here.'
+	// #swagger.tags = ['Habit']
+	'/create_habit',
+	authentication,
+	createHabit
+);
 router.put(
+	// #swagger.description = 'DESCRIPTION: Filler Description here.'
+	// #swagger.summary = 'SUMMARY: Filler Summary Here.'
+	// #swagger.tags = ['Habit']
 	'/mark_TODO/:user_habit_id/:habit_id',
 	authentication,
 	markTodoValidator,
 	markTODO,
 );
 router.put(
+	// #swagger.description = 'DESCRIPTION: Filler Description here.'
+	// #swagger.summary = 'SUMMARY: Filler Summary Here.'
+	// #swagger.tags = ['Habit']
 	'/change_habit/:user_habit_id/:habit_id',
 	authentication,
 	updateHabit,
 );
 router.delete(
+	// #swagger.description = 'DESCRIPTION: Filler Description here.'
+	// #swagger.summary = 'SUMMARY: Filler Summary Here.'
+	// #swagger.tags = ['Habit']
 	'/delete_habit/:user_habit_id/:habit_id',
 	authentication,
 	deleteHabit,
 );
-router.get('/show_user_habit/:day', authentication, showUserHabit);
-router.get('/show_all_user_habit', authentication, showAllUserHabit);
-router.get('/show_habit/:user_habit_id/:habit_id', authentication, showHabit);
+router.get(
+	// #swagger.description = 'DESCRIPTION: Filler Description here.'
+	// #swagger.summary = 'SUMMARY: Filler Summary Here.'
+	// #swagger.tags = ['Habit']
+	'/show_user_habit/:day',
+	authentication,
+	showUserHabit
+);
+router.get(
+	// #swagger.description = 'DESCRIPTION: Filler Description here.'
+	// #swagger.summary = 'SUMMARY: Filler Summary Here.'
+	// #swagger.tags = ['Habit']
+	'/show_all_user_habit',
+	authentication,
+	showAllUserHabit);
+router.get(
+	// #swagger.description = 'DESCRIPTION: Filler Description here.'
+	// #swagger.summary = 'SUMMARY: Filler Summary Here.'
+	// #swagger.tags = ['Habit']
+	'/show_habit/:user_habit_id/:habit_id',
+	authentication,
+	showHabit);
 
 module.exports = router;

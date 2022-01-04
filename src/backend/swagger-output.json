@@ -14,8 +14,7 @@
     "/getAchievements": {
       "get": {
         "tags": [
-          "TagA",
-          "TagB"
+          "Achievements"
         ],
         "summary": "SUMMARY: Filler Summary Here.",
         "description": "DESCRIPTION: Filler Description here.",
@@ -38,7 +37,11 @@
     },
     "/updateAchievements": {
       "put": {
-        "description": "",
+        "tags": [
+          "Achievements"
+        ],
+        "summary": "SUMMARY: Filler Summary Here.",
+        "description": "DESCRIPTION: Filler Description here.",
         "parameters": [
           {
             "name": "authentication-token",
@@ -61,7 +64,11 @@
     },
     "/updateLoginStreaks": {
       "put": {
-        "description": "",
+        "tags": [
+          "Achievements"
+        ],
+        "summary": "SUMMARY: Filler Summary Here.",
+        "description": "DESCRIPTION: Filler Description here.",
         "parameters": [
           {
             "name": "authentication-token",
@@ -84,7 +91,11 @@
     },
     "/create_habit": {
       "post": {
-        "description": "",
+        "tags": [
+          "Habit"
+        ],
+        "summary": "SUMMARY: Filler Summary Here.",
+        "description": "DESCRIPTION: Filler Description here.",
         "parameters": [
           {
             "name": "authentication-token",
@@ -140,7 +151,11 @@
     },
     "/mark_TODO/{user_habit_id}/{habit_id}": {
       "put": {
-        "description": "",
+        "tags": [
+          "Habit"
+        ],
+        "summary": "SUMMARY: Filler Summary Here.",
+        "description": "DESCRIPTION: Filler Description here.",
         "parameters": [
           {
             "name": "user_habit_id",
@@ -196,7 +211,11 @@
     },
     "/change_habit/{user_habit_id}/{habit_id}": {
       "put": {
-        "description": "",
+        "tags": [
+          "Habit"
+        ],
+        "summary": "SUMMARY: Filler Summary Here.",
+        "description": "DESCRIPTION: Filler Description here.",
         "parameters": [
           {
             "name": "user_habit_id",
@@ -264,7 +283,11 @@
     },
     "/delete_habit/{user_habit_id}/{habit_id}": {
       "delete": {
-        "description": "",
+        "tags": [
+          "Habit"
+        ],
+        "summary": "SUMMARY: Filler Summary Here.",
+        "description": "DESCRIPTION: Filler Description here.",
         "parameters": [
           {
             "name": "user_habit_id",
@@ -299,7 +322,11 @@
     },
     "/show_user_habit/{day}": {
       "get": {
-        "description": "",
+        "tags": [
+          "Habit"
+        ],
+        "summary": "SUMMARY: Filler Summary Here.",
+        "description": "DESCRIPTION: Filler Description here.",
         "parameters": [
           {
             "name": "day",
@@ -328,7 +355,11 @@
     },
     "/show_all_user_habit": {
       "get": {
-        "description": "",
+        "tags": [
+          "Habit"
+        ],
+        "summary": "SUMMARY: Filler Summary Here.",
+        "description": "DESCRIPTION: Filler Description here.",
         "parameters": [
           {
             "name": "authentication-token",
@@ -351,7 +382,11 @@
     },
     "/show_habit/{user_habit_id}/{habit_id}": {
       "get": {
-        "description": "",
+        "tags": [
+          "Habit"
+        ],
+        "summary": "SUMMARY: Filler Summary Here.",
+        "description": "DESCRIPTION: Filler Description here.",
         "parameters": [
           {
             "name": "user_habit_id",
@@ -386,7 +421,11 @@
     },
     "/get_current": {
       "get": {
-        "description": "",
+        "tags": [
+          "Pets"
+        ],
+        "summary": "SUMMARY: Filler Summary Here.",
+        "description": "DESCRIPTION: Filler Description here.",
         "parameters": [
           {
             "name": "authentication-token",
@@ -412,7 +451,11 @@
     },
     "/get_all": {
       "get": {
-        "description": "",
+        "tags": [
+          "Pets"
+        ],
+        "summary": "SUMMARY: Filler Summary Here.",
+        "description": "DESCRIPTION: Filler Description here.",
         "parameters": [
           {
             "name": "authentication-token",
@@ -438,7 +481,11 @@
     },
     "/evolveCheck": {
       "get": {
-        "description": "",
+        "tags": [
+          "Pets"
+        ],
+        "summary": "SUMMARY: Filler Summary Here.",
+        "description": "DESCRIPTION: Filler Description here.",
         "parameters": [
           {
             "name": "authentication-token",
@@ -464,7 +511,11 @@
     },
     "/switch_pet": {
       "post": {
-        "description": "",
+        "tags": [
+          "Pets"
+        ],
+        "summary": "SUMMARY: Filler Summary Here.",
+        "description": "DESCRIPTION: Filler Description here.",
         "parameters": [
           {
             "name": "authentication-token",
@@ -490,7 +541,11 @@
     },
     "/add_health": {
       "post": {
-        "description": "",
+        "tags": [
+          "Pets"
+        ],
+        "summary": "SUMMARY: Filler Summary Here.",
+        "description": "DESCRIPTION: Filler Description here.",
         "parameters": [
           {
             "name": "authentication-token",
@@ -516,7 +571,11 @@
     },
     "/lose_health": {
       "post": {
-        "description": "",
+        "tags": [
+          "Pets"
+        ],
+        "summary": "SUMMARY: Filler Summary Here.",
+        "description": "DESCRIPTION: Filler Description here.",
         "parameters": [
           {
             "name": "authentication-token",
@@ -542,7 +601,11 @@
     },
     "/gain_exp": {
       "post": {
-        "description": "",
+        "tags": [
+          "Pets"
+        ],
+        "summary": "SUMMARY: Filler Summary Here.",
+        "description": "DESCRIPTION: Filler Description here.",
         "parameters": [
           {
             "name": "authentication-token",
@@ -586,7 +649,11 @@
     },
     "/name_pet": {
       "post": {
-        "description": "",
+        "tags": [
+          "Pets"
+        ],
+        "summary": "SUMMARY: Filler Summary Here.",
+        "description": "DESCRIPTION: Filler Description here.",
         "parameters": [
           {
             "name": "authentication-token",
@@ -612,7 +679,11 @@
     },
     "/evolve": {
       "post": {
-        "description": "",
+        "tags": [
+          "Pets"
+        ],
+        "summary": "SUMMARY: Filler Summary Here.",
+        "description": "DESCRIPTION: Filler Description here.",
         "parameters": [
           {
             "name": "authentication-token",
@@ -625,7 +696,11 @@
     },
     "/customize": {
       "post": {
-        "description": "",
+        "tags": [
+          "Pets"
+        ],
+        "summary": "SUMMARY: Filler Summary Here.",
+        "description": "DESCRIPTION: Filler Description here.",
         "parameters": [
           {
             "name": "authentication-token",
@@ -651,7 +726,11 @@
     },
     "/getUserSetting": {
       "get": {
-        "description": "",
+        "tags": [
+          "Settings"
+        ],
+        "summary": "SUMMARY: Filler Summary Here.",
+        "description": "DESCRIPTION: Filler Description here.",
         "parameters": [
           {
             "name": "authentication-token",
@@ -674,7 +753,11 @@
     },
     "/updateUserSetting": {
       "put": {
-        "description": "",
+        "tags": [
+          "Settings"
+        ],
+        "summary": "SUMMARY: Filler Summary Here.",
+        "description": "DESCRIPTION: Filler Description here.",
         "parameters": [
           {
             "name": "authentication-token",
@@ -721,7 +804,11 @@
     },
     "/register": {
       "post": {
-        "description": "",
+        "tags": [
+          "User"
+        ],
+        "summary": "SUMMARY: Filler Summary Here.",
+        "description": "DESCRIPTION: Filler Description here.",
         "parameters": [
           {
             "name": "body",
@@ -760,7 +847,11 @@
     },
     "/activation/{code}/{email}": {
       "get": {
-        "description": "",
+        "tags": [
+          "User"
+        ],
+        "summary": "SUMMARY: Filler Summary Here.",
+        "description": "DESCRIPTION: Filler Description here.",
         "parameters": [
           {
             "name": "code",
@@ -790,7 +881,11 @@
     },
     "/send_activate_email": {
       "post": {
-        "description": "",
+        "tags": [
+          "User"
+        ],
+        "summary": "SUMMARY: Filler Summary Here.",
+        "description": "DESCRIPTION: Filler Description here.",
         "parameters": [
           {
             "name": "body",
@@ -823,7 +918,11 @@
     },
     "/login": {
       "post": {
-        "description": "",
+        "tags": [
+          "User"
+        ],
+        "summary": "SUMMARY: Filler Summary Here.",
+        "description": "DESCRIPTION: Filler Description here.",
         "parameters": [
           {
             "name": "body",
@@ -865,7 +964,11 @@
     },
     "/sendBugReport": {
       "post": {
-        "description": "",
+        "tags": [
+          "User"
+        ],
+        "summary": "SUMMARY: Filler Summary Here.",
+        "description": "DESCRIPTION: Filler Description here.",
         "parameters": [
           {
             "name": "authentication-token",
@@ -903,7 +1006,11 @@
     },
     "/sendFeedbackReport": {
       "post": {
-        "description": "",
+        "tags": [
+          "User"
+        ],
+        "summary": "SUMMARY: Filler Summary Here.",
+        "description": "DESCRIPTION: Filler Description here.",
         "parameters": [
           {
             "name": "authentication-token",
@@ -941,7 +1048,11 @@
     },
     "/viewAccount": {
       "get": {
-        "description": "",
+        "tags": [
+          "User"
+        ],
+        "summary": "SUMMARY: Filler Summary Here.",
+        "description": "DESCRIPTION: Filler Description here.",
         "parameters": [
           {
             "name": "authentication-token",
@@ -964,7 +1075,11 @@
     },
     "/modifyAccount": {
       "put": {
-        "description": "",
+        "tags": [
+          "User"
+        ],
+        "summary": "SUMMARY: Filler Summary Here.",
+        "description": "DESCRIPTION: Filler Description here.",
         "parameters": [
           {
             "name": "authentication-token",
@@ -999,7 +1114,11 @@
     },
     "/pending_password": {
       "post": {
-        "description": "",
+        "tags": [
+          "User"
+        ],
+        "summary": "SUMMARY: Filler Summary Here.",
+        "description": "DESCRIPTION: Filler Description here.",
         "parameters": [
           {
             "name": "body",
@@ -1032,7 +1151,11 @@
     },
     "/reset_password/{code}/{email}": {
       "get": {
-        "description": "",
+        "tags": [
+          "User"
+        ],
+        "summary": "SUMMARY: Filler Summary Here.",
+        "description": "DESCRIPTION: Filler Description here.",
         "produces": [],
         "parameters": [
           {
@@ -1063,7 +1186,11 @@
     },
     "/check_user": {
       "post": {
-        "description": "",
+        "tags": [
+          "User"
+        ],
+        "summary": "SUMMARY: Filler Summary Here.",
+        "description": "DESCRIPTION: Filler Description here.",
         "parameters": [],
         "responses": {}
       }
