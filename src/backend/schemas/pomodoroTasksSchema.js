@@ -8,6 +8,9 @@ const PomodoroTasksSchema = new Schema(
             ref: 'user'
         },
         selectedTask: {
+            id : {
+                type: mongoose.Schema.Types.ObjectId
+            },
             title: {
                 type: String,
             }

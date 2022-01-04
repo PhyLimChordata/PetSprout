@@ -1,7 +1,7 @@
 const PomodoroTasks = require('../../schemas/pomodoroTasksSchema');
 const User = require('../../schemas/userSchema');
 
-const delete_pomodoro_task = async (req, res) => {
+const select_pomodoro_task = async (req, res) => {
     try {
         let taskId = req.params.task_id;
 
@@ -11,19 +11,22 @@ const delete_pomodoro_task = async (req, res) => {
         let pomodoroTasks = await PomodoroTasks.findOne({ user: req.user.id });
         if(!pomodoroTasks) return res.status(404).json("User has no pomodoro tasks.");
 
-        let selectedTask = pomodoroTasks.pomodoroTasks.findIndex(task => task.id === taskId)
-        if(selectedTask == -1) {
+        let selectedTask = pomodoroTasks.pomodoroTasks.find(task => task.id === taskId)
+        if(typeof selectedTask === 'undefined') {
             return res.status(404).json('Task does not exist in user task list');
         } else {
-            if(pomodoroTasks.selectedTask.id == taskId) pomodoroTasks.selectedTask = null;
-            pomodoroTasks.pomodoroTasks.splice(selectedTask, 1);
+            selected = {
+                title : selectedTask.title,
+                id : selectedTask.id
+            }
+            pomodoroTasks.selectedTask = selected;
+            await pomodoroTasks.save();
         }
-        await pomodoroTasks.save();
-        return res.status(200).json("Deleted");
+        return res.status(200).json(selected);
     } catch (error) {
         console.log(error);
         return res.status(500).send(error)
     }
 };
 
-exports.delete_pomodoro_task = delete_pomodoro_task;
+exports.select_pomodoro_task = select_pomodoro_task;
