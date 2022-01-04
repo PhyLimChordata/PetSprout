@@ -6,7 +6,7 @@ const doc = {
     title: 'PetSprout Documentation',
     description: 'Documentation for the PetSprout endpoints.',
   },
-  host: '3.15.57.200:5000',
+  host: 'localhost:5000',
   schemes: ['http'],
 };
 
