@@ -5,7 +5,7 @@
     "title": "PetSprout Documentation",
     "description": "Documentation for the PetSprout endpoints."
   },
-  "host": "3.15.57.200:5000",
+  "host": "localhost:5000",
   "basePath": "/",
   "schemes": [
     "http"
@@ -13,7 +13,12 @@
   "paths": {
     "/getAchievements": {
       "get": {
-        "description": "",
+        "tags": [
+          "Tag1",
+          "Tag2"
+        ],
+        "summary": "SUMMARY: Today is going to be a bad day.",
+        "description": "DESCRIPTION: Today is going to be a good day.",
         "parameters": [
           {
             "name": "authentication-token",
