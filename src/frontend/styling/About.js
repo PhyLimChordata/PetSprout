@@ -8,6 +8,7 @@ const About = (theme) =>
 			justifyContent: 'center',
 		},
 		textTitle: {
+			marginTop: 10,
 			fontSize: 31,
 			fontWeight: 'bold',
 			color: theme.Quaternary,
@@ -15,7 +16,7 @@ const About = (theme) =>
 		textSubtitle: {
 			fontSize: 20,
 			color: theme.Quaternary,
-			marginBottom: 30,
+			marginBottom: 20,
 		},
 		text: {
 			fontSize: 16,
