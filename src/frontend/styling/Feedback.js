@@ -46,6 +46,16 @@ const Feedback = (theme) =>
 			flexDirection: 'column',
 			marginTop: 50,
 		},
+		feedbackInput: {
+			backgroundColor: theme.Secondary,
+			padding: 10,
+			borderWidth: 0,
+			borderStyle: 'solid',
+			fontSize: 15,
+			borderRadius: 5,
+			marginBottom: 20,
+			width: 300,
+		},
 	});
 
 export default Feedback;

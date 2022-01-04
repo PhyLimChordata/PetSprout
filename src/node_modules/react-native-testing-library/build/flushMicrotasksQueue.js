@@ -1,0 +1,1 @@
+Object.defineProperty(exports,"__esModule",{value:true});exports.default=flushMicrotasksQueue;function flushMicrotasksQueue(){return new Promise(function(resolve){return setImmediate(resolve);});}
