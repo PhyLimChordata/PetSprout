@@ -22,7 +22,7 @@ function Habits(props) {
 	const completeHabit = () => {
 		setFrequency(frequency - 1);
 		fetch(
-			'http://localhost:5000:5000/api/v1.0.0/habit/mark_TODO/' +
+			'http://localhost:5000/api/v1.0.0/habit/mark_TODO/' +
 				props.userHabitId +
 				'/' +
 				props.habitId,
@@ -57,7 +57,7 @@ function Habits(props) {
 
 	const deleteHabit = () => {
 		fetch(
-			'http://localhost:5000:5000/api/v1.0.0/habit/delete_habit/' +
+			'http://localhost:5000/api/v1.0.0/habit/delete_habit/' +
 				props.userHabitId +
 				'/' +
 				props.habitId,

@@ -22,18 +22,22 @@ const get_user_achievements = async (req, res) => {
         // check maturity and pet count
         let user_pets = await UserPets.findOne({ user : user_id });
         if(user_pets) {
+            console.log("USER PETS -----------------------------------------------------------")
+            console.log(user_pets)
             for(let pet in user_pets.pets) {
+                console.log(pet.expValue)
                 if(pet.expValue > user_achievements.achievements.habipet.maturity)
                     user_achievements.achievements.habipet.maturity = pet.expValue
             }
             user_achievements.achievements.habipet.pet_count = user_pets.pets.length;
+        } else {
+            console.log("User has no pets");
         }
 
         // check habit count nad mastery conut
         let user_habits = await UserHabits.findOne({ user : user_id });
         if(user_habits) {
             const habitlist = user_habits.habitlist;
-
             let habit_count = 0;
             let mastery_count = 0;
             for(let habit in habitlist) {
@@ -46,6 +50,8 @@ const get_user_achievements = async (req, res) => {
 
             if(user_achievements.achievements.streaks.mastery < mastery_count)
                 user_achievements.achievements.streaks.mastery = mastery_count;
+        } else {
+            console.log("User has no habits")
         }
 
         // check pet health streak

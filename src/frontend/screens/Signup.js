@@ -193,7 +193,7 @@ function SignupScreen(props) {
 		/^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
 
 	const attemptSignup = () => {
-		fetch('http://localhost:5000:5000/api/v1.0.0/user/register', {
+		fetch('http://localhost:5000/api/v1.0.0/user/register', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',

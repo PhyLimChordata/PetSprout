@@ -48,7 +48,7 @@ function ProfileEdit(props) {
 
 	useEffect(() => {
 		const get = () => {
-			fetch('http://localhost:5000:5000/api/v1.0.0/user/viewAccount', {
+			fetch('http://localhost:5000/api/v1.0.0/user/viewAccount', {
 				method: 'GET',
 				headers: {
 					'Content-Type': 'application/json',
@@ -73,7 +73,7 @@ function ProfileEdit(props) {
 			//setError("Username cannot be empty.")
 			//popup.current?.togglePopup();
 		} else {
-			fetch('http://localhost:5000:5000/api/v1.0.0/user/modifyAccount', {
+			fetch('http://localhost:5000/api/v1.0.0/user/modifyAccount', {
 				method: 'PUT',
 				headers: {
 					'Content-Type': 'application/json',

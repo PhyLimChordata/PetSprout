@@ -98,7 +98,7 @@ function Login(props) {
 						logIn(data.token);
 						const date = new Date().toString();
 						fetch(
-							'http://localhost:5000:5000/api/v1.0.0/achievements/updateLoginStreaks' + date,
+							'http://localhost:5000/api/v1.0.0/achievements/updateLoginStreaks' + date,
 							{
 								method: 'PUT',
 								headers: {
