@@ -78,7 +78,7 @@ function Login(props) {
 	};
 
 	const attemptLogin = () => {
-		fetch('http://3.15.57.200/api/v1.0.0/user/login', {
+		fetch('http://localhost:5000/api/v1.0.0/user/login', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
@@ -98,7 +98,7 @@ function Login(props) {
 						logIn(data.token);
 						const date = new Date().toString();
 						fetch(
-							'http://3.15.57.200:5000/api/v1.0.0/achievements/updateLoginStreaks' + date,
+							'http://localhost:5000:5000/api/v1.0.0/achievements/updateLoginStreaks' + date,
 							{
 								method: 'PUT',
 								headers: {

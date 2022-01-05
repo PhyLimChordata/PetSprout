@@ -49,7 +49,7 @@ function PasswordScreen(props) {
 	};
 
 	const activateAccount = (email) => {
-		fetch('http://3.15.57.200:5000/api/v1.0.0/user/send_activate_email', {
+		fetch('http://localhost:5000:5000/api/v1.0.0/user/send_activate_email', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
@@ -65,7 +65,7 @@ function PasswordScreen(props) {
 	};
 
 	const forgetPassword = () => {
-		fetch('http://3.15.57.200:5000/api/v1.0.0/user/check_user', {
+		fetch('http://localhost:5000:5000/api/v1.0.0/user/check_user', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
