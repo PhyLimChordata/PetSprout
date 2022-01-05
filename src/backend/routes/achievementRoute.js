@@ -2,11 +2,12 @@ const router = require('express').Router();
 const authentication = require('../middleware/authentication');
 
 const achievementsUser = require('../function/achievements/achievementsUser.js');
+const getAchievements = require('../function/achievements/getUserAchievements')
 
 router.get(
 	'/getAchievements',
 	authentication,
-	achievementsUser.get_user_achievements,
+	getAchievements.get_user_achievements,
 );
 
 router.put(

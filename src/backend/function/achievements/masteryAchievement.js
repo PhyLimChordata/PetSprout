@@ -25,3 +25,5 @@ const update_mastery_count = async(req, res) => {
 		return res.status(500).json('server error');
 	}
 };
+
+exports.update_mastery_count = update_mastery_count;

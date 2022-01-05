@@ -12,6 +12,7 @@ const update_habit_count = async(req, res) => {
             if(habit.continuous >= 3) habit_count++;
         }
 
+        let user_id = req.user.id;
         let user_achievements = await Achievement.findOne({ user: user_id });
         if(!user_achievements) return res.status(404).json('User achievements not found');
         if(user_achievements.achievements.streaks.habit_count < habit_count) user_achievements.achievements.streaks.habit_count = habit_count;

@@ -7,6 +7,14 @@ const AchievementSchema = new Schema(
 			type: mongoose.Schema.Types.ObjectId,
 			ref: 'user',
 		},
+        login_streak: {
+            type: Number,
+            default: 0
+        },
+        pet_health_streak: {
+            type: Number,
+            default: 0
+        },
 		achievements: 
             {
                 streaks: {

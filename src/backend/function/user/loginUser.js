@@ -1,5 +1,7 @@
 const Habit = require('../../schemas/habitSchema');
 const User = require('../../schemas/userSchema');
+const Achievement = require('../../schemas/achievementSchema');
+const Pet = require('../../schemas/petsSchema');
 
 const { validationResult } = require('express-validator');
 const bcryptjs = require('bcryptjs');
@@ -63,6 +65,22 @@ module.exports = async (req, res) => {
 				if (userHabit.habitList !== null) {
 					for (const habit of userHabit.habitList) {
 						habit.todo = 0;
+					}
+				}
+				let userAchievements = await Achievement.findOne({ user : user._id });
+				let userPets = await Pet.findOne({ user : user._id });
+				if(!userAchievements || !userPets) {
+					//console.log("No achievement or pets");
+				} else {
+					if(userPets.pets.length > 0) {
+						let hasStreak = 1;
+						for(let pet in userPets.pets) {
+							if(pet.hp < pet.maxhp/2) {
+								userAchievements.pet_health_streak = 0;
+								hasStreak = 0;
+							};
+						}
+						if(hasStreak) userAchievements.pet_health_streak++;
 					}
 				}
 			}

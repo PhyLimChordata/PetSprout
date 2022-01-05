@@ -7,12 +7,14 @@ module.exports = async (req, res) => {
 		if (!user) return res.status(404).json('User could not found');
 
 		let date = req.params.day;
-
+		console.log("User id = " + req.user.id);
 		let userHabitInfo = await Habit.findOne({ user: req.user.id });
+		console.log(userHabitInfo)
 		if (!userHabitInfo)
-			return res.status(404).json("User's habits could not found");
+			return res.status(404).json("HABITS: User's habits could not found");
 
 		let today = new Date(date);
+		console.log(today)
 		today.setHours(0, 0, 0, 0);
 		let day = today.getDay();
 		let user_last_login = user.lastlogin;
@@ -62,7 +64,9 @@ module.exports = async (req, res) => {
 		let return_object_2 = extend({}, return_object_1, missing_habits);
 		let return_object = extend({}, return_object_2, mastered_habits);
 
-		res.json(return_object);
+		console.log("habits return:")
+		console.log(return_object);
+		return res.status(200).json(return_object);
 	} catch (error) {
 		console.error(error);
 		res.status(500).json('Server error');
