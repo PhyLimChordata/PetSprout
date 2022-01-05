@@ -58,6 +58,7 @@ function HabitsScreen(props) {
 	}, [getRefreshing]);
 
 	const displayHabits = () => {
+		console.log('huhhhhh')
 		setDisplayed(true);
 		setRefreshing(true);
 		const date = new Date().toString();
@@ -70,7 +71,8 @@ function HabitsScreen(props) {
 		})
 			.then((res) =>
 				res.json().then((data) => {
-					console.log(data.habitList);
+					console.log('saddasasdasddas')
+					console.log(data);
 					setTimeout(() => {
 						setHabits(data.habitList);
 						setUserHabitId(data._id);
@@ -82,6 +84,7 @@ function HabitsScreen(props) {
 			)
 			.catch((err) => {
 				console.log(err);
+				console.log('saddasasdasddas')
 			});
 	};
 
