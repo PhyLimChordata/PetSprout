@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "389855352696",
+    "project_id": "petsprout-c4cb3",
+    "storage_bucket": "petsprout-c4cb3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:389855352696:android:37b6d03df0f60721b29a8d",
+        "android_client_info": {
+          "package_name": "com.phylimchordata.PetSprout"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "389855352696-glr14744dj5kkgi1te4id111pnvvs8vf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCYAZToHN9xXFuGUsIICW9_TeyLuSZwnIE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "389855352696-glr14744dj5kkgi1te4id111pnvvs8vf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
