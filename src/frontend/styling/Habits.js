@@ -16,7 +16,6 @@ const habitsStyles = (theme) =>
 		completedHabitTextTitle: {
 			fontSize: 25,
 			fontWeight: 'bold',
-			marginBottom: 20,
 			color: Colours.Grey.Text,
 		},
 		completedContainer: {
@@ -71,7 +70,6 @@ const habitsStyles = (theme) =>
 		textTitle: {
 			fontSize: 25,
 			fontWeight: 'bold',
-			marginBottom: 20,
 			color: theme.Quinary,
 		},
 		levelText: {
