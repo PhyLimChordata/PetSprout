@@ -274,15 +274,15 @@ function SideMenu(props) {
 								marginLeft: '6%',
 							}}
 						>
-							{/*<Tab*/}
-							{/*	color={colors.Quaternary}*/}
-							{/*	icon={'star'}*/}
-							{/*	title={'Achievements'}*/}
-							{/*	onPress={() => {*/}
-							{/*		props.setModalVisible(false);*/}
-							{/*		props.navigation.navigate('AchievementScreen');*/}
-							{/*	}}*/}
-							{/*/>*/}
+							<Tab
+								color={colors.Quaternary}
+								icon={'star'}
+								title={'Achievements'}
+								onPress={() => {
+									props.setModalVisible(false);
+									props.navigation.navigate('AchievementScreen');
+								}}
+							/>
 							<Tab
 								color={colors.Quaternary}
 								icon={'account-circle'}
