@@ -17,8 +17,9 @@ const name = async (req, res) => {
 			req.name = req.user.userName + "'s Pet";
 		}
 		usersPet.currentPet.name = req.name;
-		await currentPet.save();
-		res.json(currentPet);
+		usersPet.currentPet.image = 'blob';
+		await usersPet.save();
+		res.json(usersPet.currentPet);
 	} catch (error) {
 		console.error(error);
 		res.status(500).json('Server error');
