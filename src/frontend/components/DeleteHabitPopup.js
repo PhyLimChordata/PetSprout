@@ -9,10 +9,11 @@ function DeleteHabitPopup(props) {
 	const { colors } = useTheme();
 	const style = styles(colors);
 	const { getToken, changeRefreshing } = useContext(AuthContext);
+	// const url = process.env.BASE_URL;
 
 	const deleteHabit = () => {
 		fetch(
-			'http://localhost:5000/api/v1.0.0/habit/delete_habit/' +
+				url + '/api/v1.0.0/habit/delete_habit/' +
 				props.userHabitId +
 				'/' +
 				props.habitId,

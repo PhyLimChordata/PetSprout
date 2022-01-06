@@ -8,6 +8,8 @@ import { AuthContext } from '../Context';
 import { useTheme } from '@react-navigation/native';
 import Colours from '../resources/themes/Colours';
 
+const url = process.env.BASE_URL;
+
 function Login(props) {
 	const [primaryInfo, setPrimaryInfo] = useState('');
 	const [password, setPassword] = useState('');
@@ -78,7 +80,7 @@ function Login(props) {
 	};
 
 	const attemptLogin = () => {
-		fetch('http://localhost:5000/api/v1.0.0/user/login', {
+		fetch(url + '/api/v1.0.0/user/login', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
@@ -98,7 +100,7 @@ function Login(props) {
 						logIn(data.token);
 						const date = new Date().toString();
 						fetch(
-							'http://localhost:5000/api/v1.0.0/achievements/updateLoginStreaks' + date,
+							url + '/api/v1.0.0/achievements/updateLoginStreaks' + date,
 							{
 								method: 'PUT',
 								headers: {

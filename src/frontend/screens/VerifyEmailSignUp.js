@@ -6,11 +6,13 @@ import styles from '../styling/Authentication';
 
 import { useTheme } from '@react-navigation/native';
 
+const url = process.env.BASE_URL;
+
 function VerifyEmailSignUp(props) {
 	const { colors } = useTheme();
 
 	const resend = () => {
-		fetch('http://localhost:5000/api/v1.0.0/user/send_activate_email', {
+		fetch(url + '/api/v1.0.0/user/send_activate_email', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',

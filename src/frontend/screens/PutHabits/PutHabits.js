@@ -20,6 +20,8 @@ import BottomPopup from '../../components/BottomPopup';
 import { useTheme } from '@react-navigation/native';
 import DeleteHabitPopup from '../../components/DeleteHabitPopup';
 
+const url = process.env.BASE_URL;
+
 function Day({ selected, letter, onPress }) {
 	const { colors } = useTheme();
 	return (
@@ -68,7 +70,7 @@ function PutHabits(props) {
 	const { colors } = useTheme();
 	const createHabit = () => {
 		var times = alarms.length == 0 ? 1 : alarms.length;
-		fetch('http://localhost:5000/api/v1.0.0/habit/create_habit', {
+		fetch(url + '/api/v1.0.0/habit/create_habit', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
@@ -102,7 +104,7 @@ function PutHabits(props) {
 	};
 	const modifyHabit = () => {
 		fetch(
-			'http://localhost:5000/api/v1.0.0/habit/change_habit/' +
+			url + '/api/v1.0.0/habit/change_habit/' +
 				props.userHabitId +
 				'/' +
 				props.habitId,
@@ -142,7 +144,7 @@ function PutHabits(props) {
 
 	const deleteHabit = () => {
 		fetch(
-			'http://localhost:5000/api/v1.0.0/habit/delete_habit/' +
+			url + '/api/v1.0.0/habit/delete_habit/' +
 				props.userHabitId +
 				'/' +
 				props.habitId,

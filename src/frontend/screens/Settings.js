@@ -18,6 +18,7 @@ import TextBox from '../components/TextBox';
 
 import { AuthContext } from '../Context';
 
+const url = process.env.BASE_URL;
 
 // setting data from database
 
@@ -32,7 +33,7 @@ function SettingsPage(props) {
 	const { getToken } = useContext(AuthContext);
 	useEffect(() => {
 		const get = () => {
-			fetch('http://localhost:5000/api/v1.0.0/setting/getUserSetting', {
+			fetch(url + '/api/v1.0.0/setting/getUserSetting', {
 				method: 'GET',
 				headers: {
 					'Content-Type': 'application/json',
@@ -108,7 +109,7 @@ function SettingsPage(props) {
 						props.handle(
 							val,
 							fetch(
-								'http://localhost:5000/api/v1.0.0/setting/updateUserSetting',
+								url + '/api/v1.0.0/setting/updateUserSetting',
 								{
 									method: 'PUT',
 									headers: {

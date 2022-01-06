@@ -10,6 +10,8 @@ import { useTheme } from '@react-navigation/native';
 import { AuthContext } from '../Context';
 import DeleteHabitPopup from '../components/DeleteHabitPopup';
 
+const url = process.env.BASE_URL;
+
 function AllHabitsScreen(props) {
 	const [habits, setHabits] = useState([]);
 	const [userHabitId, setUserHabitId] = useState('');
@@ -33,7 +35,7 @@ function AllHabitsScreen(props) {
 
 	const displayHabits = () => {
 		setDisplayed(true);
-		fetch('http://localhost:5000/api/v1.0.0/habit/show_all_user_habit/', {
+		fetch(url + '/api/v1.0.0/habit/show_all_user_habit/', {
 			method: 'GET',
 			headers: {
 				'Content-Type': 'application/json',

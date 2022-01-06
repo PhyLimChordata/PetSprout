@@ -13,6 +13,9 @@ import { useTheme } from '@react-navigation/native';
 import styles from '../styling/HabitsScreen';
 import TextBox from '../components/TextBox';
 import {AuthContext} from "../Context";
+
+const url = process.env.BASE_URL;
+
 function Button(props) {
 	const { colors } = useTheme();
 	return (
@@ -43,7 +46,7 @@ function NameHabit(props) {
 	const { getToken } = useContext(AuthContext);
 	const namePet = (name) => {
 		console.log(name)
-		fetch('http://localhost:5000/api/v1.0.0/pets/name_pet', {
+		fetch(url + '/api/v1.0.0/pets/name_pet', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',

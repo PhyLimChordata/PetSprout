@@ -7,6 +7,8 @@ import { AuthContext } from '../Context';
 
 import Colours from '../resources/themes/Colours';
 
+const url = process.env.BASE_URL;
+
 function NewPassword(props) {
 	const [password, setPassword] = useState('');
 	const [reEnteredPassword, setReEnteredPassword] = useState('');
@@ -125,7 +127,7 @@ function NewPassword(props) {
 			setError('Passwords do not match');
 			displayError(true, true);
 		} else {
-			fetch('http://localhost:5000/api/v1.0.0/user/pending_password', {
+			fetch(url + '/api/v1.0.0/user/pending_password', {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',

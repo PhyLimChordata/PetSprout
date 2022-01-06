@@ -18,6 +18,8 @@ import { useTheme } from '@react-navigation/native';
 
 import { AuthContext } from '../Context';
 
+const url = process.env.BASE_URL;
+
 // data from database
 
 /*
@@ -43,7 +45,7 @@ function AchievementScreen(props) {
 	let list = [];
 	useEffect(() => {
 		const get = () => {
-			fetch('http://localhost:5000/api/v1.0.0/achievements/getAchievements', {
+			fetch(url + '/api/v1.0.0/achievements/getAchievements', {
 				method: 'GET',
 				headers: {
 					'Content-Type': 'application/json',

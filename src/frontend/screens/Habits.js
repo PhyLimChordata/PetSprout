@@ -24,6 +24,8 @@ import { DisplayPet } from '../components/DisplayPet';
 import DeleteHabitPopup from '../components/DeleteHabitPopup';
 import EvolutionPopup from '../components/EvolutionPopup';
 
+const url = process.env.BASE_URL;
+
 function HabitsScreen(props) {
 	const [habits, setHabits] = useState([]);
 	const [userHabitId, setUserHabitId] = useState('');
@@ -62,7 +64,7 @@ function HabitsScreen(props) {
 		setDisplayed(true);
 		setRefreshing(true);
 		const date = new Date().toISOString();
-		fetch('http://localhost:5000/api/v1.0.0/habit/show_user_habit/' + date, {
+		fetch(url + '/api/v1.0.0/habit/show_user_habit/' + date, {
 			method: 'GET',
 			headers: {
 				'Content-Type': 'application/json',

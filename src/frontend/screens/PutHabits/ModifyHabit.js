@@ -2,6 +2,8 @@ import React, { useState, useContext, useEffect } from 'react';
 import PutHabits from './PutHabits';
 import { AuthContext } from '../../Context';
 
+const url = process.env.BASE_URL;
+
 function ModifyHabitScreen(props) {
 	const [data, setData] = useState({});
 	const [isLoading, setLoading] = useState(true);
@@ -12,7 +14,7 @@ function ModifyHabitScreen(props) {
 
 	const getHabit = () => {
 		fetch(
-			'http://localhost:5000/api/v1.0.0/habit/show_habit/' +
+			url + '/api/v1.0.0/habit/show_habit/' +
 				props.route.params.userHabitId +
 				'/' +
 				props.route.params.habitId,

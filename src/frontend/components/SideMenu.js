@@ -17,6 +17,9 @@ import { comingsoon } from '../resources/images/Pets/ComingSoon/ComingSoon';
 import { egg } from '../resources/images/Pets/Egg/Egg';
 import LogoutConfirmation from './LogoutPopup';
 import { EvolutionMapping } from '../resources/mappings/EvolutionMapping';
+
+const url = process.env.BASE_URL;
+
 function ThemeCircle({ colorTheme, onPress, selected }) {
 	const {height, width} = Dimensions.get('window');
 
@@ -119,7 +122,7 @@ function SideMenu(props) {
 	}, [props.modalVisible]);
 
 	useEffect(() => {
-		fetch('http://localhost:5000/api/v1.0.0/user/viewAccount', {
+		fetch(url + '/api/v1.0.0/user/viewAccount', {
 			method: 'GET',
 			headers: {
 				'Content-Type': 'application/json',
@@ -134,7 +137,7 @@ function SideMenu(props) {
 	}, []);
 
 	useEffect(() => {
-		fetch('http://localhost:5000/api/v1.0.0/pets/get_current', {
+		fetch(url + '/api/v1.0.0/pets/get_current', {
 			method: 'GET',
 			headers: {
 				'Content-Type': 'application/json',

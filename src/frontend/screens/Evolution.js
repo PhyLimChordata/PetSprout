@@ -18,6 +18,8 @@ import MenuHeader from '../components/MenuHeader';
 import { useTheme } from '@react-navigation/native';
 import { AuthContext } from '../Context';
 
+const url = process.env.BASE_URL;
+
 function Evolution(props) {
 	const { getToken } = useContext(AuthContext);
 
@@ -33,7 +35,7 @@ function Evolution(props) {
 	const [evolutionNames, setEvolutionNames] = useState([]);
 	const [buttonDisabled, setButtonDisabled] = useState(false);
 	useEffect(() => {
-		fetch('http://localhost:5000/api/v1.0.0/pets/get_current', {
+		fetch(url + '/api/v1.0.0/pets/get_current', {
 			method: 'GET',
 			headers: {
 				'Content-Type': 'application/json',
@@ -129,7 +131,7 @@ function Evolution(props) {
 		setButtonDisabled(true);
 		setShowColor(true);
 		console.log(evolutionNames[selected]);
-		fetch('http://localhost:5000/api/v1.0.0/pets/evolve', {
+		fetch(url + '/api/v1.0.0/pets/evolve', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',

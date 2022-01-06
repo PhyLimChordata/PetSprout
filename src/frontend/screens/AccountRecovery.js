@@ -16,6 +16,8 @@ import { useTheme } from '@react-navigation/native';
 import Colours from '../resources/themes/Colours';
 import { AuthContext } from '../Context';
 
+const url = process.env.BASE_URL;
+
 function PasswordScreen(props) {
 	const { colors } = useTheme();
 	const [primaryInfo, setPrimaryInfo] = useState('');
@@ -49,7 +51,7 @@ function PasswordScreen(props) {
 	};
 
 	const activateAccount = (email) => {
-		fetch('http://localhost:5000/api/v1.0.0/user/send_activate_email', {
+		fetch(url + '/api/v1.0.0/user/send_activate_email', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
@@ -65,7 +67,7 @@ function PasswordScreen(props) {
 	};
 
 	const forgetPassword = () => {
-		fetch('http://localhost:5000/api/v1.0.0/user/check_user', {
+		fetch(url + '/api/v1.0.0/user/check_user', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',

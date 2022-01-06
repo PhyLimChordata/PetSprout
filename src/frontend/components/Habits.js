@@ -11,6 +11,8 @@ import { useTheme } from '@react-navigation/native';
 import Colours from '../resources/themes/Colours';
 import { gainXP } from '../components/DisplayPet';
 
+const url = process.env.BASE_URL;
+
 function Habits(props) {
 	const [streak, setStreak] = useState(props.streak);
 	const [frequency, setFrequency] = useState(props.frequency);
@@ -18,11 +20,11 @@ function Habits(props) {
 	const { getToken, changeRefreshing } = useContext(AuthContext);
 
 	const { colors } = useTheme();
-
+	
 	const completeHabit = () => {
 		setFrequency(frequency - 1);
 		fetch(
-			'http://localhost:5000/api/v1.0.0/habit/mark_TODO/' +
+			url + '/api/v1.0.0/habit/mark_TODO/' +
 				props.userHabitId +
 				'/' +
 				props.habitId,
@@ -57,7 +59,7 @@ function Habits(props) {
 
 	const deleteHabit = () => {
 		fetch(
-			'http://localhost:5000/api/v1.0.0/habit/delete_habit/' +
+			url + '/api/v1.0.0/habit/delete_habit/' +
 				props.userHabitId +
 				'/' +
 				props.habitId,
