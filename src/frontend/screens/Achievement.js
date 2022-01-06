@@ -102,31 +102,25 @@ function AchievementScreen(props) {
 		Dimensions.get('screen').width,
 		Dimensions.get('screen').height,
 	);
+	return (
+		fontsLoaded &&
+		<SafeAreaView style={androidSafeAreaView().AndroidSafeArea}>
+				<MenuHeader text='Achievement' navigation={props.navigation} />
 
-	if (!fontsLoaded) {
-		return <View></View>;
-	} else {
-		return (
-			<>
-				<SafeAreaView style={androidSafeAreaView().AndroidSafeArea}>
-					<MenuHeader text='Achievement' navigation={props.navigation} />
+				<View style={styles.headContainer}>
+					{achievements.map((item) => (
+						<OneCategory
+							key={item.category}
+							category={item.category}
+							progresses={item.progresses}
+							styles={styles}
+						/>
+					))}
 
-					<View style={styles.headContainer}>
-						{achievements.map((item) => (
-							<OneCategory
-								key={item.category}
-								category={item.category}
-								progresses={item.progresses}
-								styles={styles}
-							/>
-						))}
-
-						<HomeButton navigation={props.navigation} colors={colors} />
-					</View>
-				</SafeAreaView>
-			</>
+					<HomeButton navigation={props.navigation} colors={colors} />
+				</View>
+			</SafeAreaView>
 		);
-	}
 }
 
 const AchievementPanel = (props) => {
