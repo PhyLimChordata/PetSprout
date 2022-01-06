@@ -115,6 +115,19 @@ function SideMenu(props) {
 		if (props.modalVisible) {
 			setColor(getColor);
 			setToggleValue(getMode == 'dark');
+			fetch('http://localhost:5000/api/v1.0.0/pets/get_current', {
+				method: 'GET',
+				headers: {
+					'Content-Type': 'application/json',
+					'authentication-token': getToken,
+				},
+			})
+				.then((res) =>
+					res.json().then((data) => {
+						setPet(EvolutionMapping[data.image]);
+					}),
+				)
+				.catch();
 		}
 	}, [props.modalVisible]);
 
@@ -131,22 +144,6 @@ function SideMenu(props) {
 				setUserName(data.userName);
 			})
 			.catch((err) => console.log(err));
-	}, []);
-
-	useEffect(() => {
-		fetch('http://localhost:5000/api/v1.0.0/pets/get_current', {
-			method: 'GET',
-			headers: {
-				'Content-Type': 'application/json',
-				'authentication-token': getToken,
-			},
-		})
-			.then((res) =>
-				res.json().then((data) => {
-					setPet(EvolutionMapping[data.name]);
-				}),
-			)
-			.catch();
 	}, []);
 
 	{
