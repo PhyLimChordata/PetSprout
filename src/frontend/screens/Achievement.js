@@ -5,7 +5,7 @@ import {
 	Image,
 	Dimensions,
 	SafeAreaView,
-	Animated,
+	ScrollView,
 } from 'react-native';
 import androidSafeAreaView from '../styling/AndroidSafeAreaView';
 import AchievementStyle from '../styling/Achievement';
@@ -54,13 +54,12 @@ function AchievementScreen(props) {
 			})
 				.then((res) => res.json())
 				.then((data) => {
-					console.log(data);
-					console.log(data.achievements);
-					for (let cat in Object.keys(data.achievements)) {
+					console.log(data);;
+					for (let cat in Object.keys(data)) {
 						let sublist = [];
 
 						console.log('cat = ' + cat);
-						let cate = data.achievements[Object.keys(data.achievements)[cat]];
+						let cate = data[Object.keys(data)[cat]];
 						console.log('cate = ');
 						console.log(cate);
 						for (let ach in Object.keys(cate)) {
@@ -78,7 +77,7 @@ function AchievementScreen(props) {
 							});
 						}
 						list.push({
-							category: Object.keys(data.achievements)[cat],
+							category: Object.keys(data)[cat],
 							progresses: sublist,
 						});
 					}
@@ -151,7 +150,6 @@ const AchievementPanel = (props) => {
 };
 
 const CarouselAcheivement = (props) => {
-	const scrolling = React.useRef(new Animated.Value(0)).current;
 	let list = props.list;
 	console.log(list);
 	if (list.length > 3) {
@@ -171,16 +169,12 @@ const CarouselAcheivement = (props) => {
 		console.log(panels);
 
 		return (
-			<Animated.ScrollView
+			<ScrollView
 				showsHorizontalScrollIndicator={false}
 				horizontal={true}
-				onScroll={Animated.event(
-					[{ nativeEvent: { contentOffset: { y: scrolling } } }],
-					{ useNativeDriver: true },
-				)}
 				decelerationRate={'fast'}
 				style={props.style.achievementPanel}
-				snapToInterval={props.style.achievementPanel}
+				snapToInterval={3*((0.1415 * Dimensions.get('screen').width) + 0.05 * Dimensions.get('screen').width)}
 				snapToAlignment={'center'}
 			>
 				{panels.map((item) => (
@@ -188,7 +182,7 @@ const CarouselAcheivement = (props) => {
 						<AchievementPanel temp={item} style={props.style} />
 					</View>
 				))}
-			</Animated.ScrollView>
+			</ScrollView>
 		);
 	} else {
 		return <AchievementPanel temp={list} style={props.style} />;
