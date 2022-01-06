@@ -215,7 +215,7 @@ const OneAchievement = (props) => {
 			: props.styles.achievementBronze;
 	return (
 		<View style={props.styles.achievementContainer}>
-			<Text>{props.name}</Text>
+			{/*<Text numberOfLines={1}>{props.name}</Text>*/}
 			<Image
 				style={[props.styles.achievementIcon, sty]}
 				source={props.srcPath}
