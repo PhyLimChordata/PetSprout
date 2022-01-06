@@ -17,7 +17,7 @@
 		"android": {
 			"softwareKeyboardLayoutMode": "pan",
 			"package": "com.phylimchordata.PetSprout",
-			"versionCode": "1.0.0",
+			"versionCode": 1,
 			"adaptiveIcon": {
 				"foregroundImage": "./frontend/resources/images/Logo/LogoGreenNonTransparent.png",
 				"backgroundColor": "#FFFFFF"
