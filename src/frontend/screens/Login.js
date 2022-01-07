@@ -87,20 +87,24 @@ function Login(props) {
 				const { status } = await Notifications.requestPermissionsAsync();
 				finalStatus = status;
 			}
+			console.log("Push Notifications: " + finalStatus)
 			if (finalStatus !== 'granted') {
 				alert('Failed to get push token for push notification!');
 				return;
 			}
-			return await Notifications.getExpoPushTokenAsync({
+			const token = (await Notifications.getExpoPushTokenAsync({
 				experienceId: '@petsprouthelp@gmail.com/petsprout',
-			});
+			})).data;
+			console.log(token);
+			return token
 		} else {
 			alert('Must use physical device for Push Notifications');
 		}
 	};
 
 	const attemptLogin = () => {
-		fetch('http://3.15.57.200:5000/api/v1.0.0/user/login', {
+		registerForPushNotificationsAsync().then((pushToken) => {
+			fetch('http://3.15.57.200:5000/api/v1.0.0/user/login', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
@@ -109,7 +113,7 @@ function Login(props) {
 				primaryInfo: primaryInfo,
 				password: password,
 				date: new Date().toString(),
-				expoPushToken: registerForPushNotificationsAsync(),
+				expoPushToken: pushToken
 			}),
 		})
 			.then((res) => {
@@ -162,6 +166,7 @@ function Login(props) {
 				}
 			})
 			.catch();
+		})
 	};
 
 	const { getLogo } = useContext(AuthContext);
