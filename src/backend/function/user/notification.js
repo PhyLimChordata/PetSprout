@@ -39,7 +39,7 @@ module.exports = async(tokenList) => {
         // Send the chunks to the Expo push notification service. There are
         // different strategies you could use. A simple one is to send one chunk at a
         // time, which nicely spreads the load out over time:
-        console.log("Ticket Chunks:")
+        console.log("Push Ticket Chunks:")
         for (let chunk of chunks) {
           try {
             let ticketChunk = await expo.sendPushNotificationsAsync(chunk);
