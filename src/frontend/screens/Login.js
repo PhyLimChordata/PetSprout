@@ -7,6 +7,8 @@ import styles from '../styling/Authentication';
 import { AuthContext } from '../Context';
 import { useTheme } from '@react-navigation/native';
 import Colours from '../resources/themes/Colours';
+import Constants from 'expo-constants';
+import * as Notifications from 'expo-notifications';
 
 function Login(props) {
 	const [primaryInfo, setPrimaryInfo] = useState('');
@@ -77,6 +79,26 @@ function Login(props) {
 		});
 	};
 
+	const registerForPushNotificationsAsync = async () => {
+		if (Constants.isDevice) {
+			const { status: existingStatus } = await Notifications.getPermissionsAsync();
+			let finalStatus = existingStatus;
+			if (existingStatus !== 'granted') {
+				const { status } = await Notifications.requestPermissionsAsync();
+				finalStatus = status;
+			}
+			if (finalStatus !== 'granted') {
+				alert('Failed to get push token for push notification!');
+				return;
+			}
+			return await Notifications.getExpoPushTokenAsync({
+				experienceId: '@petsprouthelp@gmail.com/petsprout',
+			});
+		} else {
+			alert('Must use physical device for Push Notifications');
+		}
+	};
+
 	const attemptLogin = () => {
 		fetch('http://3.15.57.200/api/v1.0.0/user/login', {
 			method: 'POST',
@@ -87,6 +109,7 @@ function Login(props) {
 				primaryInfo: primaryInfo,
 				password: password,
 				date: new Date().toString(),
+				token: registerForPushNotificationsAsync(),
 			}),
 		})
 			.then((res) => {

@@ -5,7 +5,7 @@ import {
 	Text,
 	TouchableOpacity,
 	SafeAreaView,
-	Image,
+	Image, Dimensions,
 } from 'react-native';
 import Modal from 'react-native-modal';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -18,6 +18,8 @@ import { egg } from '../resources/images/Pets/Egg/Egg';
 import LogoutConfirmation from './LogoutPopup';
 import { EvolutionMapping } from '../resources/mappings/EvolutionMapping';
 function ThemeCircle({ colorTheme, onPress, selected }) {
+	const {height, width} = Dimensions.get('window');
+
 	return (
 		<View>
 			<TouchableOpacity
@@ -25,9 +27,9 @@ function ThemeCircle({ colorTheme, onPress, selected }) {
 					alignItems: 'center',
 					justifyContent: 'center',
 					flexDirection: 'row',
-					height: 44,
-					width: 44,
-					borderRadius: 22,
+					height: height * 0.045,
+					width: height * 0.045,
+					borderRadius: (height * 0.045) / 2,
 					backgroundColor: selected
 						? colorTheme.Selected
 						: colorTheme.NotSelected,
@@ -39,9 +41,9 @@ function ThemeCircle({ colorTheme, onPress, selected }) {
 						style={{
 							alignItems: 'center',
 							flexDirection: 'row',
-							height: 30,
-							width: 30,
-							borderRadius: 15,
+							height: height * 0.03,
+							width: height * 0.03,
+							borderRadius: (height * 0.03) / 2,
 							backgroundColor: colorTheme.NotSelected,
 						}}
 					/>
@@ -55,7 +57,7 @@ function ThemeCircle({ colorTheme, onPress, selected }) {
 
 const Tab = ({ color, icon, onPress, title, isImage = false }) => (
 	<TouchableOpacity
-		style={{ alignItems: 'center', flexDirection: 'row', width: '100%' }}
+		style={{ alignItems: 'center', flexDirection: 'row', width: '100%', marginBottom:Dimensions.get('window').height * 0.01 }}
 		onPress={onPress}
 	>
 		{isImage ? (
@@ -187,7 +189,7 @@ function SideMenu(props) {
 				}}
 			>
 				<SafeAreaView>
-					<View style={{ marginHorizontal: '6%', height: '90%' }}>
+					<View style={{ marginHorizontal: '6%', height: '100%' }}>
 						<View
 							style={{
 								flexDirection: 'row',
@@ -217,7 +219,7 @@ function SideMenu(props) {
 									}}
 								>
 									<Text
-										numberOfLines={1}
+										numberOfLines={2}
 										style={{
 											fontSize: 20,
 											fontWeight: 'bold',
@@ -229,22 +231,22 @@ function SideMenu(props) {
 									</Text>
 								</View>
 							</View>
-							{/* <TouchableOpacity
-								style={{ height: 40, justifyContent: 'center' }}
-								onPress={() => {
-									props.setModalVisible(false);
-									props.navigation.navigate('SettingsScreen');
-								}}
-							>
-								<MaterialCommunityIcons
-									name='cog'
-									color={colors.Quaternary}
-									size={40}
-								/>
-							</TouchableOpacity> */}
+							{/* <TouchableOpacity*/}
+							{/*	style={{ height: 40, justifyContent: 'center' }}*/}
+							{/*	onPress={() => {*/}
+							{/*		props.setModalVisible(false);*/}
+							{/*		props.navigation.navigate('SettingsScreen');*/}
+							{/*	}}*/}
+							{/*>*/}
+							{/*	<MaterialCommunityIcons*/}
+							{/*		name='cog'*/}
+							{/*		color={colors.Quaternary}*/}
+							{/*		size={40}*/}
+							{/*	/>*/}
+							{/*</TouchableOpacity>*/}
 						</View>
 						<TouchableOpacity
-							style={{ marginHorizontal: '6%', marginBottom: '6%' }}
+							style={{ marginHorizontal: '6%', marginBottom: '2%' }}
 						>
 							<Text
 								style={{
@@ -270,20 +272,17 @@ function SideMenu(props) {
 						<View
 							style={{
 								marginLeft: '6%',
-								height: '40%',
-								justifyContent: 'space-between',
-								marginBottom: '15%',
 							}}
 						>
-							{/* <Tab
-								color={colors.Quaternary}
-								icon={'star'}
-								title={'Achievements'}
-								onPress={() => {
-									props.setModalVisible(false);
-									props.navigation.navigate('AchievementScreen');
-								}}
-							/> */}
+							{/*<Tab*/}
+							{/*	color={colors.Quaternary}*/}
+							{/*	icon={'star'}*/}
+							{/*	title={'Achievements'}*/}
+							{/*	onPress={() => {*/}
+							{/*		props.setModalVisible(false);*/}
+							{/*		props.navigation.navigate('AchievementScreen');*/}
+							{/*	}}*/}
+							{/*/>*/}
 							<Tab
 								color={colors.Quaternary}
 								icon={'account-circle'}
@@ -293,24 +292,24 @@ function SideMenu(props) {
 									props.navigation.navigate('ProfileScreen');
 								}}
 							/>
-							{/* <Tab
-								color={colors.Quaternary}
-								icon={'bullhorn'}
-								title={'Feedback'}
-								onPress={() => {
-									props.setModalVisible(false);
-									props.navigation.navigate('FeedbackScreen');
-								}}
-							/>
-							<Tab
-								color={colors.Quaternary}
-								icon={'bug'}
-								title={'Report a Bug'}
-								onPress={() => {
-									props.setModalVisible(false);
-									props.navigation.navigate('ReportABugScreen');
-								}}
-							/> */}
+							{/*<Tab*/}
+							{/*	color={colors.Quaternary}*/}
+							{/*	icon={'bullhorn'}*/}
+							{/*	title={'Feedback'}*/}
+							{/*	onPress={() => {*/}
+							{/*		props.setModalVisible(false);*/}
+							{/*		props.navigation.navigate('FeedbackScreen');*/}
+							{/*	}}*/}
+							{/*/>*/}
+							{/*<Tab*/}
+							{/*	color={colors.Quaternary}*/}
+							{/*	icon={'bug'}*/}
+							{/*	title={'Report a Bug'}*/}
+							{/*	onPress={() => {*/}
+							{/*		props.setModalVisible(false);*/}
+							{/*		props.navigation.navigate('ReportABugScreen');*/}
+							{/*	}}*/}
+							{/*/>*/}
 							<Tab
 								color={colors.Quaternary}
 								icon={'account-group'}
@@ -342,78 +341,78 @@ function SideMenu(props) {
 						</View>
 						<View
 							style={{
-								flexDirection: 'row',
-								justifyContent: 'space-between',
-								marginHorizontal: '6%',
-								marginBottom: '6%',
-							}}
-						>
-							<ThemeCircle
-								colorTheme={Colours.Green}
-								selected={color == 'Green'}
-								onPress={() => colorChange('Green')}
-							/>
-							<ThemeCircle
-								colorTheme={Colours.Yellow}
-								selected={color == 'Orange'}
-								onPress={() => colorChange('Orange')}
-							/>
-							<ThemeCircle
-								colorTheme={Colours.Blue}
-								selected={color == 'Blue'}
-								onPress={() => colorChange('Blue')}
-							/>
-							<ThemeCircle
-								colorTheme={Colours.Purple}
-								selected={color == 'Purple'}
-								onPress={() => colorChange('Purple')}
-							/>
-							<ThemeCircle
-								colorTheme={Colours.Red}
-								selected={color == 'Red'}
-								onPress={() => colorChange('Red')}
-							/>
-						</View>
-						<View style={{ alignItems: 'center', marginBottom: '5%' }}>
-							<Toggle
-								value={toggleValue}
-								onPress={(newState) => {
-									newState ? changeModeTheme('dark') : changeModeTheme('light');
-									setToggleValue(newState);
-								}}
-								thumbButton={{
-									activeBackgroundColor: '#ffffff',
-									inActiveBackgroundColor: '#272727',
-								}}
-								trackBar={{
-									width: 100,
-									height: 50,
-									radius: 25,
-									activeBackgroundColor: '#272727',
-									inActiveBackgroundColor: '#808080',
-								}}
-								leftComponent={
-									<MaterialCommunityIcons
-										name={'weather-sunny'}
-										color={'#ffffff'}
-										size={30}
-									/>
-								}
-								rightComponent={
-									<MaterialCommunityIcons
-										name={'moon-waning-crescent'}
-										color={'#272727'}
-										size={30}
-									/>
-								}
-							/>
-						</View>
-						<View
-							style={{
 								justifyContent: 'flex-end',
 								marginHorizontal: '6%',
+								flex:1
 							}}
 						>
+							<View
+								style={{
+									flexDirection: 'row',
+									justifyContent: 'space-between',
+									marginBottom: '6%',
+								}}
+							>
+								<ThemeCircle
+									colorTheme={Colours.Green}
+									selected={color == 'Green'}
+									onPress={() => colorChange('Green')}
+								/>
+								<ThemeCircle
+									colorTheme={Colours.Yellow}
+									selected={color == 'Orange'}
+									onPress={() => colorChange('Orange')}
+								/>
+								<ThemeCircle
+									colorTheme={Colours.Blue}
+									selected={color == 'Blue'}
+									onPress={() => colorChange('Blue')}
+								/>
+								<ThemeCircle
+									colorTheme={Colours.Purple}
+									selected={color == 'Purple'}
+									onPress={() => colorChange('Purple')}
+								/>
+								<ThemeCircle
+									colorTheme={Colours.Red}
+									selected={color == 'Red'}
+									onPress={() => colorChange('Red')}
+								/>
+							</View>
+							<View style={{ alignItems: 'center', marginBottom:10 }}>
+								<Toggle
+									value={toggleValue}
+									onPress={(newState) => {
+										newState ? changeModeTheme('dark') : changeModeTheme('light');
+										setToggleValue(newState);
+									}}
+									thumbButton={{
+										activeBackgroundColor: '#ffffff',
+										inActiveBackgroundColor: '#272727',
+									}}
+									trackBar={{
+										width: 100,
+										height: 50,
+										radius: 25,
+										activeBackgroundColor: '#272727',
+										inActiveBackgroundColor: '#808080',
+									}}
+									leftComponent={
+										<MaterialCommunityIcons
+											name={'weather-sunny'}
+											color={'#ffffff'}
+											size={30}
+										/>
+									}
+									rightComponent={
+										<MaterialCommunityIcons
+											name={'moon-waning-crescent'}
+											color={'#272727'}
+											size={30}
+										/>
+									}
+								/>
+							</View>
 							<Tab
 								color={colors.Quaternary}
 								icon={'logout'}
