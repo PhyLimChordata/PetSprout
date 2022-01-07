@@ -11,7 +11,7 @@ module.exports = async (req, res) => {
 		if (!errors.isEmpty())
 			return res.status(400).json({ errors: errors.array() });
 
-		let { primaryInfo, password, date } = req.body;
+		let { primaryInfo, password, date, expoPushToken} = req.body;
 
 		let email = '';
 		let userName = '';
@@ -81,6 +81,23 @@ module.exports = async (req, res) => {
 			}
 		}
 		user.lastlogin = current;
+
+		///// DO NULL CHECK
+
+		/* Check if ExpoPushToken has already been saved. */
+		const checkToken = user.tokens.filter(
+            (token) => token.expoPushToken.toString() === expoPushToken.toString(),
+        );
+
+		/* Save ExpoPushToken if it isn't associated with the account. */
+        if(checkToken.length === 0){
+            let token = {
+                expoPushToken: expoPushToken
+            };
+            user.tokens.push(token);
+        }
+
+
 		await user.save();
 
 		const payload = {
