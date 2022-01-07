@@ -92,9 +92,7 @@ function Login(props) {
 				alert('Failed to get push token for push notification!');
 				return;
 			}
-			const token = (await Notifications.getExpoPushTokenAsync({
-				experienceId: '@petsprouthelp@gmail.com/petsprout',
-			})).data;
+			const token = (await Notifications.getExpoPushTokenAsync()).data;
 			console.log(token);
 			return token
 		} else {
