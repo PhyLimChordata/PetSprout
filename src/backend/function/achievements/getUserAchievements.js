@@ -1,3 +1,4 @@
+
 const Achievement = require('../../schemas/achievementSchema');
 const UserHabits = require('../../schemas/habitSchema');
 const UserPets = require('../../schemas/petsSchema');
@@ -22,12 +23,14 @@ const get_user_achievements = async (req, res) => {
         // check maturity and pet count
         let user_pets = await UserPets.findOne({ user : user_id });
         if(user_pets) {
-            console.log("USER PETS -----------------------------------------------------------")
-            console.log(user_pets)
+            if(user_pets.currentPet){
+                if(user_achievements.achievements.habipet.maturity < user_pets.currentPet.level)
+                    user_achievements.achievements.habipet.maturity = user_pets.currentPet.level
+            }
             for(let pet in user_pets.pets) {
                 console.log(pet.expValue)
-                if(pet.expValue > user_achievements.achievements.habipet.maturity)
-                    user_achievements.achievements.habipet.maturity = pet.expValue
+                if(pet.level > user_achievements.achievements.habipet.maturity)
+                    user_achievements.achievements.habipet.maturity = pet.level
             }
             user_achievements.achievements.habipet.pet_count = user_pets.pets.length;
         } else {
