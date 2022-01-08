@@ -58,7 +58,7 @@ const get_user_achievements = async (req, res) => {
                 user_achievements.achievements.streaks.mastery = mastery_count;
 
             if(user_achievements.achievements.streaks.commitment < max_cont)
-            user_achievements.achievements.streaks.commitment = max_cont;
+                user_achievements.achievements.streaks.commitment = max_cont;
         } else {
             console.log("User has no habits")
         }
