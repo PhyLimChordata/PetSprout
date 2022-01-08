@@ -1,5 +1,6 @@
 const Pets = require('../../schemas/petsSchema');
 const User = require('../../schemas/userSchema');
+const Achievements = require('../../schemas/achievementSchema');
 
 const { validationResult } = require('express-validator');
 
@@ -33,6 +34,16 @@ const evolvePet = async (req, res) => {
 		if (!currentPet.readyToEvolve) {
 			return;
 		}
+
+		// update caretaker count everytime a pet evovles/hatches
+		let userAchievements = await Achievements.findOne({ user: req.user.id });
+		if(userAchievements) {
+			userAchievements.achievements.habipet.caretaker++;
+			await userAchievements.save()
+		} else {
+			console.log("No achievements found.");
+		}
+
 		currentPet.image = req.body.name;
 		currentPet.hp = 100;
 		currentPet.readyToEvolve = false;
