@@ -68,12 +68,18 @@ module.exports = async (req, res) => {
 			nextSignInDate = new Date(nextSignInDate);
 		}
 
+		// Generate Alarm List (to preserve ids)
+		let alarm_list = []
+		for (const a of alarm) {
+			alarm_list.push({date: a})
+		}
+
 		habitFromDB.title = title;
 		habitFromDB.description = description;
 		habitFromDB.reason = reason;
 		habitFromDB.schedule = newSchedule;
 		habitFromDB.times = times;
-		habitFromDB.alarm = alarm;
+		habitFromDB.alarm = alarm_list;
 		habitFromDB.nextSignInDate = nextSignInDate;
 
 		await userHabit.save();

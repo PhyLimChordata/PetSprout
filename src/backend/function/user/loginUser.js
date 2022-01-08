@@ -4,7 +4,6 @@ const User = require('../../schemas/userSchema');
 const { validationResult } = require('express-validator');
 const bcryptjs = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const notification = require('./notification');
 
 module.exports = async (req, res) => {
 	try {
@@ -93,8 +92,6 @@ module.exports = async (req, res) => {
 			const checkToken = user.tokens.filter(
 				(token) => token.expoPushToken.toString() === expoPushToken.toString(),
 			);
-	
-			notification(user.tokens)
 	
 			/* Save ExpoPushToken if it isn't associated with the account. */
 			if(checkToken.length === 0){

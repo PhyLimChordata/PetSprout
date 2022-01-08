@@ -1,6 +1,14 @@
 const { Expo } = require('expo-server-sdk')
-
-module.exports = async(tokenList) => {
+/**
+ *
+ * @param {string[]} tokenList (list of a user's ExpoPushTokens)
+ * @param {string} body (body of the notification message)
+ * @param {json} data (additional data)
+ * @returns
+ *
+ * Create a particular habit and return back the newly created habit.
+ */
+module.exports = async(tokenList, body, data) => {
     // Create a new Expo SDK client
     // optionally providing an access token if you have enabled push security
     let expo = new Expo();
@@ -23,8 +31,8 @@ module.exports = async(tokenList) => {
         messages.push({
             to: pushToken,
             sound: 'default',
-            body: 'This is a test notification. Everything is fine.',
-            data: { withSome: 'data' },
+            body: body,
+            data: data,
         })
     }
 

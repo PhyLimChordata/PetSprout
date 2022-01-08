@@ -1,7 +1,8 @@
 const Habit = require('../../schemas/habitSchema');
 const User = require('../../schemas/userSchema');
 const Analyze = require('../../schemas/analyzeSchema');
-
+const notification = require('../user/notification');
+const alarmLib = require('./alarm');
 const { validationResult } = require('express-validator');
 
 /**
@@ -67,6 +68,12 @@ module.exports = async (req, res) => {
 			nextSignInDate = new Date(nextSignInDate);
 		}
 
+		// Generate Alarm List
+		let alarm_list = []
+		for (const a of alarm) {
+			alarm_list.push({date: a})
+		}
+
 		let newHabit = {
 			analyze: newAnalyze._id,
 			title,
@@ -74,10 +81,17 @@ module.exports = async (req, res) => {
 			reason,
 			schedule: newSchedule,
 			times,
-			alarm,
+			alarm: alarm_list,
 			nextSignInDate,
 		};
 
+		// // Schedule alarms for the user.
+		// // notification(user.tokens, "createHabit.", {})
+		// for (const a in alarm) {
+		// 	console.log(a)
+		// 	alarmLib.add(a, )
+		// }
+		console.log("ASDASDASD")
 		userHabit.habitList.push(newHabit);
 		await userHabit.save();
 		res.json(newHabit);
