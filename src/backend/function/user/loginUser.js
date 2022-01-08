@@ -116,7 +116,7 @@ module.exports = async (req, res) => {
 				for (const habit of userHabit.habitList) {
 					let next = new Date(habit.nextSignInDate);
 					var nextDate = next.getDate();
-					if (next < current && nextDate !== currentDate) {
+					if (next < current && nextDate !== current.getDate()) {
 						habit.continuous = 0;
 						habit.missing++;
 						let interval = 0;
