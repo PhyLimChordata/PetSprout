@@ -43,9 +43,11 @@ const get_user_achievements = async (req, res) => {
             const habitlist = user_habits.habitlist;
             let habit_count = 0;
             let mastery_count = 0;
+            let max_cont = -1;
             for(let habit in habitlist) {
                 if(habit.continuous >= 3) habit_count++;
                 if(habit.continuous >= 66) mastery_count++;
+                if(habit.continuous > max_count) max_cont = habit.continuous;
             }
 
             if(user_achievements.achievements.streaks.habit_count < habit_count)
@@ -53,6 +55,9 @@ const get_user_achievements = async (req, res) => {
 
             if(user_achievements.achievements.streaks.mastery < mastery_count)
                 user_achievements.achievements.streaks.mastery = mastery_count;
+
+            if(user_achievements.achievements.streaks.commitment < max_cont)
+            user_achievements.achievements.streaks.commitment = max_cont;
         } else {
             console.log("User has no habits")
         }
