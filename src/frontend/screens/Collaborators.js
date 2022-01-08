@@ -32,9 +32,15 @@ function Collaborators(props) {
 					<Text style={style.text}>Manola Yvonet</Text>
 					<Text style={style.text}>Andy PhyLim</Text>
 					<Text style={style.text}>Calvin Cheng</Text>
+					<Text style={style.text}>Robert Nichita</Text>
 					<Text style={style.text}>Katrina Best</Text>
 					<Text style={style.text}>Cheryl Chen</Text>
-					<Text style={style.text}>Tuan Zi Li</Text>
+					<Text style={style.text}>Yuanyuan Li</Text>
+					<Text style={style.text}>Darren Liu</Text>
+					<Text style={style.text}>Deen Haque</Text>
+					<Text style={style.text}>Joevin Chen</Text>
+					<Text style={style.text}>Justin Yu</Text>
+					<Text style={style.text}>Ryan Sue</Text>
 					<Text style={style.text}>Rachelle Willemsma</Text>
 					<Text style={style.text}>Prof. Joordens</Text>
 				</ScrollView>
