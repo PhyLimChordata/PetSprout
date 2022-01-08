@@ -1,8 +1,6 @@
 import { StyleSheet, Platform, StatusBar } from 'react-native';
 
 const androidSafeAreaView = () => {
-	console.log('Android safe view');
-	console.log(StatusBar.currentHeight);
 	return StyleSheet.create({
 		AndroidSafeArea: {
 			flex: 1,
