@@ -40,14 +40,15 @@ const get_user_achievements = async (req, res) => {
         // check habit count nad mastery conut
         let user_habits = await UserHabits.findOne({ user : user_id });
         if(user_habits) {
-            const habitlist = user_habits.habitlist;
+            const habitList = user_habits.habitList;
             let habit_count = 0;
             let mastery_count = 0;
             let max_cont = -1;
-            for(let habit in habitlist) {
+            for(let index in habitList) {
+                let habit = habitList[index];
                 if(habit.continuous >= 3) habit_count++;
                 if(habit.continuous >= 66) mastery_count++;
-                if(habit.continuous > max_count) max_cont = habit.continuous;
+                if(habit.continuous > max_cont) max_cont = habit.continuous;
             }
 
             if(user_achievements.achievements.streaks.habit_count < habit_count)
