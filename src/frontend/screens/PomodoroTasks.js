@@ -1,13 +1,12 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { View, Text, StyleSheet, SafeAreaView, Animated, scrolling, TouchableOpacity, Touchable } from 'react-native';
+import { View, Text, StyleSheet, SafeAreaView, Animated, scrolling, TouchableOpacity, Touchable, KeyboardAvoidingView, Platform } from 'react-native';
 
-import Task from '../components/PomodoroTasks';
+import PomodoroTasks from '../components/PomodoroTasks';
 import MenuHeader from '../components/MenuHeader';
 import CreateTask from '../components/CreateTaskButton';
 import SortTask from '../components/SortTask';
 import styles from '../styling/Header';
 import { useTheme } from '@react-navigation/native';
-
 
 function PomodoroTasksScreen(props) {
     const scrolling = React.useRef(new Animated.Value(0)).current;
@@ -21,7 +20,7 @@ function PomodoroTasksScreen(props) {
     }
 
     return(
-        <SafeAreaView style={styles(colors).headContainer}>
+        <KeyboardAvoidingView behavior={Platform.OS==="ios" ? "padding" : "padding"} style={styles(colors).headContainer}>
             <View style={{ marginTop: 20 }} />
             <MenuHeader
                 back={true}
@@ -40,7 +39,7 @@ function PomodoroTasksScreen(props) {
                     <View style={PomodoroTasksStyles.tasksWrapper}>
                         <View style={PomodoroTasksStyles.items}>
                             {tasks.map((items) => {
-                                return <Task text={items} 
+                                return <PomodoroTasks text={items} 
                                 />
                             })}
                         </View>
@@ -59,7 +58,7 @@ function PomodoroTasksScreen(props) {
                     <SortTask/>
                 </TouchableOpacity>
             </View>
-        </SafeAreaView>
+        </KeyboardAvoidingView>
     );
 }
 

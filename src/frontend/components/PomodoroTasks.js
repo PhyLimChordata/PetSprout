@@ -1,15 +1,29 @@
-import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity, TouchableHighlightComponent, Image} from 'react-native';
+import React,{useState} from "react";
+import { View, Text, StyleSheet, TouchableOpacity, TouchableHighlightComponent, Image, TextInput} from 'react-native';
 import Colours from "../resources/themes/Colours";
 
-const Task = (props) =>{
+function PomodoroTasks(props){
+    //const [task, setTask] = useState('Placeholder');
+    const [edit, setEdit] = useState(false);
+    if(edit) {
+        return(
+            <View style={styles.item}>
+                <View style={styles.itemLeft}>
+                    <TouchableOpacity onPress={()=>{setEdit(!edit)}} style={styles.square}>
+                        <Image source ={require('../resources/images/Checkmark2.png')}/>
+                    </TouchableOpacity>
+                    <TextInput style={styles.itemText} editable={edit}>{props.text}</TextInput>
+                </View>
+            </View>
+        )
+    }
     return(
         <View style={styles.item}>
             <View style={styles.itemLeft}>
-                <TouchableOpacity>
-                    <Image source ={require('../resources/images/PencilEdit.png')} style={styles.square}/>
+                <TouchableOpacity onPress={()=>{setEdit(!edit)}} style={styles.square}>
+                    <Image source ={require('../resources/images/PencilEdit.png')}/>
                 </TouchableOpacity>
-                <Text style={styles.itemText}>{props.text}</Text>
+                <TextInput style={styles.itemText} editable={edit}>{props.text}</TextInput>
             </View>
         </View>
     )
@@ -44,16 +58,15 @@ const styles = StyleSheet.create({
     itemText:{
         position: 'absolute',
         width: 259,
-        height: 125,
-        top: -49,
+        height: 185,
+        top: -140,
         left: -50,
         fontSize: 18,
         fontWeight: 'bold',
-
         color: '#6E8F6D',
         fontStyle: 'normal',
         lineHeight: 21,
         maxWidth: '80%',
     },
 });
-export default Task;
+export default PomodoroTasks;
