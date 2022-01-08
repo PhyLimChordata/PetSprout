@@ -47,12 +47,11 @@ module.exports = async (req, res) => {
 
 		let matching = await bcryptjs.compare(password, user.password);
 		if (!matching) return res.status(401).json('Wrong password');
-		var current = new Date(date);
+		let current = new Date(date);
 		if (user.lastlogin !== null) {
 			let lastLoginYear = user.lastlogin.getFullYear();
 			let lastLoginMonth = user.lastlogin.getMonth();
 			let lastLoginDate = user.lastlogin.getDate();
-			let current = new Date(date);
 			current.setHours(0, 0, 0, 0);
 			let lastLogin = new Date(lastLoginYear, lastLoginMonth, lastLoginDate);
 			let userHabit = await Habit.findOne({ user: user._id });
@@ -138,7 +137,7 @@ module.exports = async (req, res) => {
 				userHabit.save();
 			}
 		}
-		
+
 		user.lastlogin = current;
 		await user.save();
 
