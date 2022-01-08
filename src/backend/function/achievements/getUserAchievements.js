@@ -67,6 +67,23 @@ const get_user_achievements = async (req, res) => {
         console.log(error)
         return res.status(500).json('server error');
     }
+};
+
+// return the user's current login streaks as an integer
+const get_current_login_streaks = async(req, res) => {
+    try {
+        let user_id = req.user.id;
+
+        let user_achievements = await Achievement.findOne({ user: user_id }, { _id: 0, login_streak: 1 });
+        console.log(user_achievements);
+
+        return res.status(200).json(user_achievements.login_streak);
+        
+    } catch(error) {
+        console.log(error)
+        return res.status(500).json('server error');
+    }
 }
 
 exports.get_user_achievements = get_user_achievements;
+exports.get_current_login_streaks = get_current_login_streaks;

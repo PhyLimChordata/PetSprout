@@ -10,16 +10,16 @@ router.get(
 	getAchievements.get_user_achievements,
 );
 
+router.get(
+	'/getAchievements/currentLoginStreaks',
+	authentication,
+	getAchievements.get_current_login_streaks,
+)
+
 router.put(
 	'/updateAchievements',
 	authentication,
 	achievementsUser.update_user_achievements,
-);
-
-router.put(
-	'/updateLoginStreaks/:date',
-	authentication,
-	achievementsUser.update_login_streaks,
 );
 
 module.exports = router;
