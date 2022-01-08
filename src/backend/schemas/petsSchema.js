@@ -29,7 +29,7 @@ const PetsSchema = new Schema({
 		},
 		image: {
 			type: String,
-			default: 'Egg',
+			default: 'egg',
 		},
 		cosmetics: [
 			{
@@ -69,7 +69,7 @@ const PetsSchema = new Schema({
 			},
 			image: {
 				type: String,
-				default: 'Egg',
+				default: 'egg',
 			},
 			cosmetics: [
 				{
