@@ -42,7 +42,7 @@ const AchievementSchema = new Schema(
                     },
                     pet_count :{
                         type: Number,
-                        default: 0
+                        default: 1
                     },
                 },
                 accountability: {

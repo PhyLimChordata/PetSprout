@@ -32,7 +32,8 @@ const get_user_achievements = async (req, res) => {
                 if(pet.level > user_achievements.achievements.habipet.maturity)
                     user_achievements.achievements.habipet.maturity = pet.level
             }
-            user_achievements.achievements.habipet.pet_count = user_pets.pets.length;
+            // User has at least 1 pet (Default pet + more pets in the future)
+            user_achievements.achievements.habipet.pet_count = user_pets.pets.length + 1;
         } else {
             console.log("User has no pets");
         }
