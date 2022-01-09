@@ -15,8 +15,8 @@ const TermsAndCondition = (theme) =>
 			marginTop: 10,
 		},
 		termsImg: {
-			height: 200,
-			width: 200,
+			height: 100,
+			width: 100,
 			marginBottom: 25,
 			marginTop: 10,
 			resizeMode: 'contain',
@@ -25,7 +25,7 @@ const TermsAndCondition = (theme) =>
 		},
 		container: {
 			flexDirection: 'column',
-			paddingTop: StatusBar.currentHeight,
+			//paddingTop: StatusBar.currentHeight,
 			alignItems: 'flex-start',
 			textAlign: 'left',
 		},
@@ -40,7 +40,7 @@ const TermsAndCondition = (theme) =>
 			alignItems: 'center',
 			textAlign: 'center',
 			flexDirection: 'column',
-			height: 600,
+			height: 500,
 		},
 	});
 

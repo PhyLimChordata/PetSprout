@@ -34,6 +34,9 @@ import NamePetScreen from './frontend/screens/NamePet';
 import AllHabitsScreen from './frontend/screens/AllHabits';
 import PomodoroScreen from './frontend/screens/Pomodoro';
 import PomodoroTasksScreen from './frontend/screens/PomodoroTasks';
+import PrivacyPolicyScreen from './frontend/screens/PrivacyPolicy';
+import AcceptTermsAndConditionScreen from './frontend/screens/AcceptTermsAndCondition';
+import AcceptPrivacyPolicyScreen from './frontend/screens/AcceptPrivacyPolicy';
 // Colour Themes
 import GreenLightTheme from './frontend/resources/themes/light/GreenTheme';
 import OrangeLightTheme from './frontend/resources/themes/light/OrangeTheme';
@@ -160,6 +163,14 @@ function NavContainer(props) {
 		<NavigationContainer theme={props.theme}>
 			{props.token ? (
 				<Stack.Navigator headerMode='none'>
+					<Stack.Screen
+						name='AcceptTermsAndConditionScreen'
+						component={AcceptTermsAndConditionScreen}
+					/>
+					<Stack.Screen
+						name='AcceptPrivacyPolicyScreen'
+						component={AcceptPrivacyPolicyScreen}
+					/>
 					<Stack.Screen name='HomeScreen' component={HomeScreen} />
 					<Stack.Screen
 						name='AchievementScreen'
@@ -189,10 +200,15 @@ function NavContainer(props) {
 						name='PomodoroTasksScreen'
 						component={PomodoroTasksScreen}
 					/>
-
+					
 					<Stack.Screen
 						name='TermsAndConditionScreen'
 						component={TermsAndConditionScreen}
+					/>
+					
+					<Stack.Screen
+						name='PrivacyPolicyScreen'
+						component={PrivacyPolicyScreen}
 					/>
 					<Stack.Screen name='EvolutionScreen' component={EvolutionScreen} />
 					<Stack.Screen name='NamePetScreen' component={NamePetScreen} />
