@@ -34,6 +34,7 @@ const TermsAndCondition = (theme) =>
 			marginHorizontal: 50,
 			borderColor: theme.Quaternary,
 			borderWidth: 3,
+			marginBottom: 20
 		},
 		headContainer: {
 			display: 'flex',
