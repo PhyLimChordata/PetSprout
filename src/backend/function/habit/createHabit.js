@@ -1,7 +1,6 @@
 const Habit = require('../../schemas/habitSchema');
 const User = require('../../schemas/userSchema');
 const Analyze = require('../../schemas/analyzeSchema');
-const notification = require('../user/notification');
 const alarmLib = require('./alarm');
 const { validationResult } = require('express-validator');
 
@@ -26,8 +25,6 @@ module.exports = async (req, res) => {
 			errors.push('schedule');
 		}
 		if (date === '') errors.push('date');
-
-		console.log(errors);
 
 		if (errors.length != 0) return res.status(403).json({ error: errors });
 
@@ -68,10 +65,10 @@ module.exports = async (req, res) => {
 			nextSignInDate = new Date(nextSignInDate);
 		}
 
-		// Generate Alarm List
-		let alarm_list = []
+		// Generate Alarm List (this is so MongoDB will assign an ID)
+		let alarmList = []
 		for (const a of alarm) {
-			alarm_list.push({date: a})
+			alarmList.push({date: a})
 		}
 
 		let newHabit = {
@@ -81,19 +78,35 @@ module.exports = async (req, res) => {
 			reason,
 			schedule: newSchedule,
 			times,
-			alarm: alarm_list,
+			alarm: alarmList,
 			nextSignInDate,
 		};
-
-		// // Schedule alarms for the user.
-		// // notification(user.tokens, "createHabit.", {})
-		// for (const a in alarm) {
-		// 	console.log(a)
-		// 	alarmLib.add(a, )
-		// }
-		console.log("ASDASDASD")
+		
 		userHabit.habitList.push(newHabit);
 		await userHabit.save();
+
+		
+		// Grab the list of alarms now it has ids associated.
+		let updatedUserHabit = await Habit.findOne({ user: req.user.id });
+		if (!updatedUserHabit)
+			return res
+				.status(404)
+				.json({ error: ["User's habit information not found"] });
+		var updatedHabit = updatedUserHabit.habitList.find(
+			(habit) => habit.analyze.toString() === newAnalyze.id.toString(),
+		);
+		updatedAlarmList = updatedHabit.alarm
+
+		// Grab the users ExpoPushTokens
+		let userTokens = await User.findById(req.user.id).select('-password');
+		tokens = userTokens.tokens
+
+		// Schedule alarms for the user.
+		for (const a in updatedAlarmList) {
+			elem = updatedAlarmList[a];
+			alarmLib.add(elem.date, newSchedule, elem._id, tokens)
+		}
+		
 		res.json(newHabit);
 	} catch (error) {
 		console.error(error);
