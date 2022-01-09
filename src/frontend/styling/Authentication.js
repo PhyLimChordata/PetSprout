@@ -5,7 +5,7 @@ const authenticationStyles = (theme) =>
 	StyleSheet.create({
 		container: {
 			flex: 1,
-			margin: 40, //TO BE REPLACED BY ANDROID SAFE VIEW
+			margin: 40,
 			backgroundColor: theme.white,
 			alignItems: 'center',
 			justifyContent: 'center',
@@ -34,7 +34,7 @@ const authenticationStyles = (theme) =>
 		},
 		inputContainer: {
 			alignItems: 'flex-start',
-			width: '100%'
+			width: '100%',
 		},
 		header: {
 			alignItems: 'center',

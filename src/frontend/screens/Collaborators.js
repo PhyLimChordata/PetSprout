@@ -1,6 +1,6 @@
 import React from 'react';
-import { View, SafeAreaView, Text, Image, ScrollView } from 'react-native';
-
+import {View, SafeAreaView, Text, Image, ScrollView, Dimensions} from 'react-native';
+import androidSafeAreaView from '../styling/AndroidSafeAreaView';
 import MenuHeader from '../components/MenuHeader';
 import styles from '../styling/Collaborators';
 import HomeButton from '../components/HomeButton';
@@ -10,19 +10,24 @@ import { useTheme } from '@react-navigation/native';
 function Collaborators(props) {
 	const { colors } = useTheme();
 	const style = styles(colors);
+	const {height, width} = Dimensions.get('window');
 
 	return (
-		<SafeAreaView style={{ height: '100%' }}>
+		<SafeAreaView style={androidSafeAreaView().AndroidSafeArea}>
 			<MenuHeader
 				text='Collaborators'
 				navigation={props.navigation}
 			></MenuHeader>
 			<View style={style.headContainer}>
 				<Image
-					style={style.collabImg}
-					source={require('../resources/images/Collaborators.png')}
+					style={{
+						marginTop: 20,
+						height: height * 0.22,
+						width: height * 0.22,
+						resizeMode: 'contain',
+					}}					source={require('../resources/images/Collaborators.png')}
 				/>
-				<ScrollView contentContainerStyle={style.container}>
+				<ScrollView style= {{flex:1, marginBottom:20}}contentContainerStyle={style.container}>
 					<Text style={style.textTitle}>A Special Thanks To</Text>
 					<Text style={style.text}>Manola Yvonet</Text>
 					<Text style={style.text}>Andy PhyLim</Text>
@@ -33,8 +38,8 @@ function Collaborators(props) {
 					<Text style={style.text}>Rachelle Willemsma</Text>
 					<Text style={style.text}>Prof. Joordens</Text>
 				</ScrollView>
+				<HomeButton navigation={props.navigation} colors={colors} />
 			</View>
-			<HomeButton navigation={props.navigation} colors={colors} />
 		</SafeAreaView>
 	);
 }

@@ -7,6 +7,7 @@ import {
 	SafeAreaView,
 	Animated,
 } from 'react-native';
+import androidSafeAreaView from '../styling/AndroidSafeAreaView';
 import AchievementStyle from '../styling/Achievement';
 import { ProgressBar } from 'react-native-paper';
 import MenuHeader from '../components/MenuHeader';
@@ -42,7 +43,7 @@ function AchievementScreen(props) {
 	let list = [];
 	useEffect(() => {
 		const get = () => {
-			fetch('http://localhost:5000/api/v1.0.0/achievements/getAchievements', {
+			fetch('http://3.15.57.200:5000/api/v1.0.0/achievements/getAchievements', {
 				method: 'GET',
 				headers: {
 					'Content-Type': 'application/json',
@@ -108,7 +109,7 @@ function AchievementScreen(props) {
 	} else {
 		return (
 			<>
-				<SafeAreaView style={{ height: '100%' }}>
+				<SafeAreaView style={androidSafeAreaView().AndroidSafeArea}>
 					<MenuHeader text='Achievement' navigation={props.navigation} />
 
 					<View style={styles.headContainer}>
