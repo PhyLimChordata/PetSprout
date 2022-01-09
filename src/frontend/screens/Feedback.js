@@ -25,7 +25,7 @@ function Feedback(props) {
 	const { getToken } = useContext(AuthContext);
 
 	const attemptSendFeedback = () => {
-		console.log(feedback);
+		//console.log(feedback);
 		fetch('http://3.15.57.200:5000/api/v1.0.0/user/sendFeedbackReport', {
 			method: 'POST',
 			headers: {

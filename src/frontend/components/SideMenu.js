@@ -301,15 +301,15 @@ function SideMenu(props) {
 									props.navigation.navigate('FeedbackScreen');
 								}}
 							/>
-							{/*<Tab*/}
-							{/*	color={colors.Quaternary}*/}
-							{/*	icon={'bug'}*/}
-							{/*	title={'Report a Bug'}*/}
-							{/*	onPress={() => {*/}
-							{/*		props.setModalVisible(false);*/}
-							{/*		props.navigation.navigate('ReportABugScreen');*/}
-							{/*	}}*/}
-							{/*/>*/}
+							<Tab
+								color={colors.Quaternary}
+								icon={'bug'}
+								title={'Report a Bug'}
+								onPress={() => {
+									props.setModalVisible(false);
+									props.navigation.navigate('ReportABugScreen');
+								}}
+							/>
 							<Tab
 								color={colors.Quaternary}
 								icon={'account-group'}
