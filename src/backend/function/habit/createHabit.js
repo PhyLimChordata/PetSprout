@@ -85,27 +85,7 @@ module.exports = async (req, res) => {
 		userHabit.habitList.push(newHabit);
 		await userHabit.save();
 
-		
-		// Grab the list of alarms now it has ids associated.
-		let updatedUserHabit = await Habit.findOne({ user: req.user.id });
-		if (!updatedUserHabit)
-			return res
-				.status(404)
-				.json({ error: ["User's habit information not found"] });
-		var updatedHabit = updatedUserHabit.habitList.find(
-			(habit) => habit.analyze.toString() === newAnalyze.id.toString(),
-		);
-		updatedAlarmList = updatedHabit.alarm
-
-		// Grab the users ExpoPushTokens
-		let userTokens = await User.findById(req.user.id).select('-password');
-		tokens = userTokens.tokens
-
-		// Schedule alarms for the user.
-		for (const a in updatedAlarmList) {
-			elem = updatedAlarmList[a];
-			alarmLib.add(elem.date, newSchedule, elem._id, tokens)
-		}
+		alarmLib.schedule(req.user.id, newAnalyze._id)
 		
 		res.json(newHabit);
 	} catch (error) {
