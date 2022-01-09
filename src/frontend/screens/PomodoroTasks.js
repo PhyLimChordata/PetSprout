@@ -3,8 +3,6 @@ import { View, Text, StyleSheet, SafeAreaView, Animated, scrolling, TouchableOpa
 
 import PomodoroTasks from '../components/PomodoroTasks';
 import MenuHeader from '../components/MenuHeader';
-import CreateTask from '../components/CreateTaskButton';
-import SortTask from '../components/SortTask';
 import styles from '../styling/Header';
 import { useTheme } from '@react-navigation/native';
 
@@ -17,6 +15,22 @@ function PomodoroTasksScreen(props) {
     const createTask=(props)=>{
         setTasks([...tasks, '']);
         setTitle(...title,'');
+    }
+
+    const CreateTaskButton = () => {
+        return (
+            <View style={PomodoroTasksStyles.create}>
+                <Text style={PomodoroTasksStyles.plus}>+</Text>
+            </View>
+        )
+    }
+
+    const SortTaskButton = () =>{
+        return (
+            <View style={PomodoroTasksStyles.create}>
+                <Text style={PomodoroTasksStyles.plus}>S</Text>
+            </View>
+        )
     }
 
     return(
@@ -52,10 +66,10 @@ function PomodoroTasksScreen(props) {
                         createTask();
                     }}
                 >
-                    <CreateTask/>
+                    <CreateTaskButton/>
                 </TouchableOpacity>
                 <TouchableOpacity style={PomodoroTasksStyles.SortTask}>
-                    <SortTask/>
+                    <SortTaskButton/>
                 </TouchableOpacity>
             </View>
         </KeyboardAvoidingView>
@@ -91,6 +105,20 @@ const PomodoroTasksStyles = StyleSheet.create({
         position: 'relative',                                                                                             
         top: 10,
         alignSelf: 'flex-end',    
+    },
+    create:{
+        backgroundColor: '#9CC69B',
+        width: 75,
+        height: 75,
+        borderRadius: 50,
+        borderWidth: 3,
+        borderColor: '#6E8F6D',
+    },
+    plus:{
+        color: '#FFFFFF',
+        marginTop: 1,
+        marginLeft: 20,
+        fontSize: 48,
     },
 });
 

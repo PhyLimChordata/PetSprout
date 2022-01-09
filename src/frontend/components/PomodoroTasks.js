@@ -1,12 +1,12 @@
 import React,{useState} from "react";
-import { View, Text, StyleSheet, TouchableOpacity, TouchableHighlightComponent, Image, TextInput} from 'react-native';
-import Colours from "../resources/themes/Colours";
+import { View, Text, StyleSheet, TouchableOpacity, Image, TextInput} from 'react-native';
+
 
 function PomodoroTasks(props){
-    //const [task, setTask] = useState('Placeholder');
     const [edit, setEdit] = useState(false);
-    if(edit) {
-        return(
+    
+    return(
+        edit ? 
             <View style={styles.item}>
                 <View style={styles.itemLeft}>
                     <TouchableOpacity onPress={()=>{setEdit(!edit)}} style={styles.square}>
@@ -15,17 +15,15 @@ function PomodoroTasks(props){
                     <TextInput style={styles.itemText} editable={edit}>{props.text}</TextInput>
                 </View>
             </View>
-        )
-    }
-    return(
-        <View style={styles.item}>
-            <View style={styles.itemLeft}>
-                <TouchableOpacity onPress={()=>{setEdit(!edit)}} style={styles.square}>
-                    <Image source ={require('../resources/images/PencilEdit.png')}/>
-                </TouchableOpacity>
-                <TextInput style={styles.itemText} editable={edit}>{props.text}</TextInput>
+        : 
+            <View style={styles.item}>
+                <View style={styles.itemLeft}>
+                    <TouchableOpacity onPress={()=>{setEdit(!edit)}} style={styles.square}>
+                        <Image source ={require('../resources/images/PencilEdit.png')}/>
+                    </TouchableOpacity>
+                    <TextInput style={styles.itemText} editable={edit}>{props.text}</TextInput>
+                </View>
             </View>
-        </View>
     )
 }
 

@@ -48,7 +48,6 @@ import PurpleDarkTheme from './frontend/resources/themes/dark/PurpleTheme';
 import RedDarkTheme from './frontend/resources/themes/dark/RedTheme';
 
 import { AuthContext } from './frontend/Context';
-import CreateTaskScreen from './frontend/screens/CreateTask';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -190,10 +189,6 @@ function NavContainer(props) {
 					<Stack.Screen
 						name='PomodoroTasksScreen'
 						component={PomodoroTasksScreen}
-					/>
-					<Stack.Screen
-						name='CreateTaskScreen'
-						component={CreateTaskScreen}
 					/>
 
 					<Stack.Screen
