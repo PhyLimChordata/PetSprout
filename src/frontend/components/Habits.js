@@ -48,7 +48,7 @@ function Habits(props) {
 						gainXP(300, getToken);
 					} else {
 						gainXP(50, getToken);
-					}7
+					}
 					changeRefreshing(true);
 				}),
 			)
