@@ -35,6 +35,14 @@ const UserSchema = new Schema(
 		termsAndAgreements: {
 			type: Boolean,
 		},
+		tokens: [
+			{
+				expoPushToken: {
+					type: String,
+					unique: false
+				}
+			}
+		]
 	},
 	{
 		timestamps: true,

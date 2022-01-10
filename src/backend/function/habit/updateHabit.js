@@ -1,5 +1,6 @@
 const Habit = require('../../schemas/habitSchema');
 const User = require('../../schemas/userSchema');
+const alarmLib = require('./alarm');
 
 const { validationResult } = require('express-validator');
 
@@ -28,6 +29,9 @@ module.exports = async (req, res) => {
 			return res
 				.status(404)
 				.json({ error: "Habit could not find in user's habits" });
+
+		// Remove scheduled alarms.
+		alarmLib.unschedule(req.user.id, habitFromDB.analyze);
 
 		let { title, description, reason, schedule, times, alarm, date } = req.body;
 
@@ -68,15 +72,25 @@ module.exports = async (req, res) => {
 			nextSignInDate = new Date(nextSignInDate);
 		}
 
+		// Generate Alarm List (to preserve ids)
+		let alarm_list = []
+		for (const a of alarm) {
+			alarm_list.push({date: a})
+		}
+
 		habitFromDB.title = title;
 		habitFromDB.description = description;
 		habitFromDB.reason = reason;
 		habitFromDB.schedule = newSchedule;
 		habitFromDB.times = times;
-		habitFromDB.alarm = alarm;
+		habitFromDB.alarm = alarm_list;
 		habitFromDB.nextSignInDate = nextSignInDate;
 
 		await userHabit.save();
+
+		// Re-scheduled alarms.
+		alarmLib.schedule(req.user.id, habitFromDB.analyze);
+
 		res.json(habitFromDB);
 	} catch (error) {
 		console.error(error);

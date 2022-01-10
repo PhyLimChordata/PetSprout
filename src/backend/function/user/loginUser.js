@@ -11,7 +11,7 @@ module.exports = async (req, res) => {
 		if (!errors.isEmpty())
 			return res.status(400).json({ errors: errors.array() });
 
-		let { primaryInfo, password, date } = req.body;
+		let { primaryInfo, password, date, expoPushToken} = req.body;
 
 		let email = '';
 		let userName = '';
@@ -81,6 +81,27 @@ module.exports = async (req, res) => {
 			}
 		}
 		user.lastlogin = current;
+
+
+		/* Check if ExpoPushToken has already been saved. */
+		if (expoPushToken === undefined) {
+			console.log("expoPushToken was not received when logging in. " +
+						"If you were using the client and this console message occurs, " + 
+						"that is concerning.")
+		} else {
+			const checkToken = user.tokens.filter(
+				(token) => token.expoPushToken.toString() === expoPushToken.toString(),
+			);
+	
+			/* Save ExpoPushToken if it isn't associated with the account. */
+			if(checkToken.length === 0){
+				let token = {
+					expoPushToken: expoPushToken
+				};
+				user.tokens.push(token);
+			}
+		}
+
 		await user.save();
 
 		const payload = {

@@ -38,9 +38,13 @@ const HabitSchema = new Schema(
 				times: {
 					type: String,
 				},
-				alarm: {
-					type: [Date],
-				},
+				alarm: [
+						{
+							date: {
+								type: Date
+							},
+						}
+				],
 				date: {
 					type: Date,
 					default: Date.now(),

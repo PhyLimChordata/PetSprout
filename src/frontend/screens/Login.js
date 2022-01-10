@@ -7,6 +7,8 @@ import styles from '../styling/Authentication';
 import { AuthContext } from '../Context';
 import { useTheme } from '@react-navigation/native';
 import Colours from '../resources/themes/Colours';
+import Constants from 'expo-constants';
+import * as Notifications from 'expo-notifications';
 
 function Login(props) {
 	const [primaryInfo, setPrimaryInfo] = useState('');
@@ -77,8 +79,30 @@ function Login(props) {
 		});
 	};
 
+	const registerForPushNotificationsAsync = async () => {
+		if (Constants.isDevice) {
+			const { status: existingStatus } = await Notifications.getPermissionsAsync();
+			let finalStatus = existingStatus;
+			if (existingStatus !== 'granted') {
+				const { status } = await Notifications.requestPermissionsAsync();
+				finalStatus = status;
+			}
+			console.log("Push Notifications: " + finalStatus)
+			if (finalStatus !== 'granted') {
+				alert('Failed to get push token for push notification!');
+				return;
+			}
+			const token = (await Notifications.getExpoPushTokenAsync()).data;
+			console.log(token);
+			return token
+		} else {
+			alert('Must use physical device for Push Notifications');
+		}
+	};
+
 	const attemptLogin = () => {
-		fetch('http://3.15.57.200/api/v1.0.0/user/login', {
+		registerForPushNotificationsAsync().then((pushToken) => {
+			fetch('http://3.15.57.200:5000/api/v1.0.0/user/login', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
@@ -87,6 +111,7 @@ function Login(props) {
 				primaryInfo: primaryInfo,
 				password: password,
 				date: new Date().toString(),
+				expoPushToken: pushToken
 			}),
 		})
 			.then((res) => {
@@ -139,6 +164,7 @@ function Login(props) {
 				}
 			})
 			.catch();
+		})
 	};
 
 	const { getLogo } = useContext(AuthContext);
