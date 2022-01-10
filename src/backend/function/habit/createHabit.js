@@ -65,7 +65,8 @@ module.exports = async (req, res) => {
 			nextSignInDate = new Date(nextSignInDate);
 		}
 
-		// Generate Alarm List (this is so MongoDB will assign an ID)
+		// Wrap each alarm in the list of alarms in an object. This will force MongoDB
+		// to assign each alarm a unique ObjectId in the database.
 		let alarmList = []
 		for (const a of alarm) {
 			alarmList.push({date: a})

@@ -6,7 +6,7 @@ const { Expo } = require('expo-server-sdk')
  * @param {json} data (additional data)
  * @returns
  *
- * Create a particular habit and return back the newly created habit.
+ * Given input parameters, send a push notification to the target device.
  */
 module.exports = async(tokenList, body, data) => {
     // Create a new Expo SDK client

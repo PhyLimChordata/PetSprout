@@ -2,9 +2,6 @@ const cron = require('node-cron');
 const notification = require('../user/notification');
 const Habit = require('../../schemas/habitSchema');
 const User = require('../../schemas/userSchema');
-/*
- * Create a particular habit and return back the newly created habit.
- */
 
 var jobs = {};
 
@@ -15,17 +12,22 @@ var jobs = {};
  * @param {*} analyzeId 
  * @returns 
  */
-const schedule = async (userId, analyzeId) => {
+const scheduleHabitAlarms = async (userId, analyzeId) => {
     // Grab the list of alarms now it has ids associated.
-    let updatedUserHabit = await Habit.findOne({ user: userId });
-    if (!updatedUserHabit)
+    let user = await Habit.findOne({ user: userId });
+    if (!user)
+        return res
+            .status(404)
+            .json({ error: ["User's information not found"] });
+    var userHabit = user.habitList.find(
+        (habit) => habit.analyze.toString() === analyzeId.toString(),
+    );
+    
+    if (!userHabit)
         return res
             .status(404)
             .json({ error: ["User's habit information not found"] });
-    var updatedHabit = updatedUserHabit.habitList.find(
-        (habit) => habit.analyze.toString() === analyzeId.toString(),
-    );
-    updatedAlarmList = updatedHabit.alarm
+    updatedAlarmList = userHabit.alarm
 
     // Grab the users ExpoPushTokens
     let userTokens = await User.findById(userId).select('-password');
@@ -34,7 +36,7 @@ const schedule = async (userId, analyzeId) => {
     // Schedule alarms for the user.
     for (const a in updatedAlarmList) {
         elem = updatedAlarmList[a];
-        add(elem.date, updatedHabit.schedule, elem._id, tokens)
+        add(elem.date, userHabit.schedule, elem._id, tokens)
     }
 }
 
@@ -45,18 +47,23 @@ const schedule = async (userId, analyzeId) => {
  * @param {*} analyzeId 
  * @returns 
  */
- const unschedule = async (userId, analyzeId) => {
+ const unscheduleHabitAlarms = async (userId, analyzeId) => {
      console.log(`Unscheduling for ${userId}`)
     // Grab the list of alarms now it has ids associated.
-    let updatedUserHabit = await Habit.findOne({ user: userId });
-    if (!updatedUserHabit)
+    let user = await Habit.findOne({ user: userId });
+    if (!user)
         return res
             .status(404)
             .json({ error: ["User's habit information not found"] });
-    var updatedHabit = updatedUserHabit.habitList.find(
+    var userHabit = user.habitList.find(
         (habit) => habit.analyze.toString() === analyzeId.toString(),
     );
-    updatedAlarmList = updatedHabit.alarm
+
+    if (!userHabit)
+        return res
+            .status(404)
+            .json({ error: ["User's habit information not found"] });
+    updatedAlarmList = userHabit.alarm
 
     // Unschedule alarms for the user.
     for (const a in updatedAlarmList) {
@@ -67,7 +74,7 @@ const schedule = async (userId, analyzeId) => {
 }
 
 // Adds a new alarm, and returns an id
-const add = (alarm, schedule, id, tokens) => {
+const schedule = (alarm, schedule, id, tokens) => {
     var sch = ""
     for (const weekday in schedule) {
         sch += weekday + ","
@@ -77,23 +84,25 @@ const add = (alarm, schedule, id, tokens) => {
     hours = alarm.getHours();
 
     // Formatted hours/minutes
-    var ampm = hours >= 12 ? 'pm' : 'am';
+    var isPm = hours >= 12 ? 'pm' : 'am';
     hrs = hours % 12;
     hrs = hrs ? hrs : 12; // ensures that 00:00 => 12:00
     min = minutes < 10 ? '0' + minutes : minutes;
-
-    console.log(`Alarm for ${hrs}:${min}${ampm}, days: ${sch}, CREATED: ${id}`);
+    console.log(`Alarm for ${hrs}:${min}${isPm}, days: ${sch}, CREATED: ${id}`);
 
     // Create the scheduled task.
     var task = cron.schedule(minutes + ' ' + hours + ' * * *', () => {
-        
-        console.log(`Alarm for ${hrs}:${min}${ampm}, days: ${sch}, SENT: ${id}`);
-
-        notification(tokens, `PetSprout Alarm for ${hrs}:${min}${ampm}. Configured for these days: ${sch}`);
+        console.log(`Alarm for ${hrs}:${min}${isPm}, days: ${sch}, SENT: ${id}`);
+        notification(tokens, `PetSprout Alarm for ${hrs}:${min}${isPm}. Configured for these days: ${sch}`);
     }, {
         scheduled: true
         // timezone: ""
     });
+
+    if (!task)
+        return res
+            .status(500)
+            .json({ error: ["Server Error: Failed to create cron job."]});
 
     // Add the task to the collections of total jobs.
     jobs[id] = task;
@@ -107,5 +116,5 @@ const remove = async (id) => {
     (jobs[id]).stop();
 }
 
-exports.schedule = schedule;
-exports.unschedule = unschedule;
+exports.scheduleHabitAlarms = scheduleHabitAlarms;
+exports.unscheduleHabitAlarms = unscheduleHabitAlarms;
