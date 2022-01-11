@@ -27,6 +27,14 @@ connection.once('open', () => {
 	console.log('MongoDB database connection established successfully');
 });
 
+// Notification Toggled
+if(process.env.NOTIFICATIONTOGGLE === 'true') {
+	console.log(`Serverside Notifications are enabled. Toggle is located in .env file.`)
+} else {
+	console.log(`Serverside Notifications are DISABLED. Toggle is located in .env file.`)
+}
+
+
 //Adds routes for express to use
 //Example route: http://3.15.57.200:5000/example/get
 app.use('/api/v1.0.0/user', require('./routes/userRoute'));

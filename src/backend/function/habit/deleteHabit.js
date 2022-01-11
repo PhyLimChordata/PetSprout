@@ -25,8 +25,11 @@ module.exports = async (req, res) => {
 
 		let analyzeId = deleteHabitList[0].analyze;
 
-		// Stop any alarms from running.
-		alarmLib.unschedule(req.user.id, analyzeId);
+		
+		if(process.env.NOTIFICATIONTOGGLE === 'true') {
+			// Stop any alarms from running.
+			alarmLib.unscheduleHabitAlarms(req.user.id, analyzeId);
+		}
 
 		await Analyze.findByIdAndDelete(analyzeId);
 

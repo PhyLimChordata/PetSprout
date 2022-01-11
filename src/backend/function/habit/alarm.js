@@ -36,7 +36,7 @@ const scheduleHabitAlarms = async (userId, analyzeId) => {
     // Schedule alarms for the user.
     for (const a in updatedAlarmList) {
         elem = updatedAlarmList[a];
-        add(elem.date, userHabit.schedule, elem._id, tokens)
+        schedule(elem.date, userHabit.schedule, elem._id, tokens)
     }
 }
 
@@ -67,14 +67,15 @@ const scheduleHabitAlarms = async (userId, analyzeId) => {
 
     // Unschedule alarms for the user.
     for (const a in updatedAlarmList) {
-        elem = updatedAlarmList[a];XPathEvaluator
-        console.log(`Alarm Removed ${elem._id}`)
+        elem = updatedAlarmList[a];
         remove(elem._id);
     }
 }
 
 // Adds a new alarm, and returns an id
 const schedule = (alarm, schedule, id, tokens) => {
+    
+    // Formatted hours/minutes/weekdays
     var sch = ""
     for (const weekday in schedule) {
         sch += weekday + ","
@@ -82,38 +83,47 @@ const schedule = (alarm, schedule, id, tokens) => {
     sch = sch.slice(0, -1);
     minutes = alarm.getMinutes();
     hours = alarm.getHours();
-
-    // Formatted hours/minutes
     var isPm = hours >= 12 ? 'pm' : 'am';
     hrs = hours % 12;
     hrs = hrs ? hrs : 12; // ensures that 00:00 => 12:00
     min = minutes < 10 ? '0' + minutes : minutes;
-    console.log(`Alarm for ${hrs}:${min}${isPm}, days: ${sch}, CREATED: ${id}`);
-
+    
+    // Add the task to the collections of total jobs. All of these variables
+    // are required to be saved since when the cron job executes
+    var job_entry = {};
+    job_entry['id'] = id;
+    job_entry['hrs'] = hrs;
+    job_entry['min'] = min;
+    job_entry['sch'] = sch;
+    job_entry['isPm'] =isPm;
+    job_entry['tokens'] = tokens;
+    jobs[id] = job_entry;
+    
     // Create the scheduled task.
+    console.log(`CREATED Alarm for ${hrs}:${min}${isPm}, days: ${sch}, id: ${id}`);
     var task = cron.schedule(minutes + ' ' + hours + ' * * *', () => {
-        console.log(`Alarm for ${hrs}:${min}${isPm}, days: ${sch}, SENT: ${id}`);
-        notification(tokens, `PetSprout Alarm for ${hrs}:${min}${isPm}. Configured for these days: ${sch}`);
+        console.log(`SENT Alarm for ${jobs[id]['hrs']}:${jobs[id]['min']}${jobs[id]['isPm']}, days: ${jobs[id]['sch']}, id: ${id}`);
+        notification(jobs[id]['tokens'], `PetSprout Alarm for ${jobs[id]['hrs']}:${jobs[id]['min']}${jobs[id]['isPm']}. Configured for these days: ${jobs[id]['sch']}`);
     }, {
         scheduled: true
         // timezone: ""
     });
-
     if (!task)
         return res
             .status(500)
             .json({ error: ["Server Error: Failed to create cron job."]});
 
     // Add the task to the collections of total jobs.
-    jobs[id] = task;
-
+    job_entry['task'] = task;
     task.start();
 }
 
 // Stops a current cron job, given an id
 const remove = async (id) => {
     console.log(jobs[id]);
-    (jobs[id]).stop();
+    console.log(`REMOVED Alarm for ${jobs[id]['hrs']}:${jobs[id]['min']}${jobs[id]['isPm']}, days: ${jobs[id]['sch']}, id: ${jobs[id]['id']}`);
+    (jobs[id]['task']).stop();
+    delete jobs[id];
 }
 
 exports.scheduleHabitAlarms = scheduleHabitAlarms;
