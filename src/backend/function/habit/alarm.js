@@ -78,7 +78,7 @@ const schedule = (alarm, schedule, id, tokens) => {
     // Formatted hours/minutes/weekdays
     var sch = ""
     for (const weekday in schedule) {
-        sch += weekday + ","
+        sch += schedule[weekday] + ","
     }
     sch = sch.slice(0, -1);
     minutes = alarm.getMinutes();
@@ -101,17 +101,22 @@ const schedule = (alarm, schedule, id, tokens) => {
     
     // Create the scheduled task.
     console.log(`CREATED Alarm for ${hrs}:${min}${isPm}, days: ${sch}, id: ${id}`);
-    var task = cron.schedule(minutes + ' ' + hours + ' * * *', () => {
-        console.log(`SENT Alarm for ${jobs[id]['hrs']}:${jobs[id]['min']}${jobs[id]['isPm']}, days: ${jobs[id]['sch']}, id: ${id}`);
-        notification(jobs[id]['tokens'], `PetSprout Alarm for ${jobs[id]['hrs']}:${jobs[id]['min']}${jobs[id]['isPm']}. Configured for these days: ${jobs[id]['sch']}`);
-    }, {
-        scheduled: true
-        // timezone: ""
-    });
-    if (!task)
-        return res
-            .status(500)
-            .json({ error: ["Server Error: Failed to create cron job."]});
+    try {
+        var task = cron.schedule(`${minutes} ${hours} * * ${sch}`, () => {
+            console.log(`SENT Alarm for ${jobs[id]['hrs']}:${jobs[id]['min']}${jobs[id]['isPm']}, days: ${jobs[id]['sch']}, id: ${id}`);
+            notification(jobs[id]['tokens'], `PetSprout Alarm for ${jobs[id]['hrs']}:${jobs[id]['min']}${jobs[id]['isPm']}. Configured for these days: ${jobs[id]['sch']}`);
+        }, {
+            scheduled: true
+            // timezone: ""
+        });
+        if (!task)
+            return res
+                .status(500)
+                .json({ error: ["Server Error: Failed to create cron job."]});
+    } catch (error) {
+		console.log(error);
+		return res.status(500).json('server error');
+	}
 
     // Add the task to the collections of total jobs.
     job_entry['task'] = task;
@@ -122,7 +127,12 @@ const schedule = (alarm, schedule, id, tokens) => {
 const remove = async (id) => {
     console.log(jobs[id]);
     console.log(`REMOVED Alarm for ${jobs[id]['hrs']}:${jobs[id]['min']}${jobs[id]['isPm']}, days: ${jobs[id]['sch']}, id: ${jobs[id]['id']}`);
-    (jobs[id]['task']).stop();
+    try {    
+        (jobs[id]['task']).stop();
+    } catch (error) {
+        console.log(error);
+		return res.status(500).json('server error');
+    }
     delete jobs[id];
 }
 
