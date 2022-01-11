@@ -47,7 +47,7 @@ function PomodoroScreen(props) {
 
 	const [mode, setMode] = useState('Pomodoro');
 
-	const [finishedPopup, setFinished] = useState(false);
+	const [finished, setFinished] = useState(false);
 
 	const formatNumber = (number) => {
 		return ('0' + number.toString()).slice(-2);
@@ -396,7 +396,7 @@ function PomodoroScreen(props) {
 				)}
 			</View>
 			<PomodoroFinishPopup 
-				visible = {finishedPopup}
+				visible = {finished}
 				setVisible = {setFinished}
 			/>
 		</SafeAreaView>
