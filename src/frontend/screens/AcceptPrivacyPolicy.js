@@ -11,9 +11,11 @@ import {
 } from 'react-native';
 
 import androidSafeAreaView from '../styling/AndroidSafeAreaView';
-import styles from '../styling/AcceptTermsAndCondition';
+import styles from '../styling/TermsAndCondition';
 import { useTheme } from '@react-navigation/native';
 import { Checkbox } from 'react-native-paper';
+import MenuHeader from '../components/MenuHeader';
+import HomeButton from '../components/HomeButton';
 
 function AcceptPrivacyPolicy(props) {
 	const { colors } = useTheme();
@@ -21,6 +23,7 @@ function AcceptPrivacyPolicy(props) {
 	const [status, setState] = useState('unchecked')
 	const [disabled, setEnable] = useState(true)
 	const [greyed, setStyle] = useState(0.6)
+	const [show, setShow] = useState(props.route.params.isAcceptScreen)
 
 	const checkSwitch = () => {
 		if (status == 'unchecked')
@@ -50,16 +53,33 @@ function AcceptPrivacyPolicy(props) {
 		setEnable(!disabled)
 	}
 
+	const getStyle = () => {
+		if (show == true) {
+			return style.headContainerAccept
+		}
+		else {
+			return style.headContainer
+		}
+	}
+
 	return (
 		<SafeAreaView style={androidSafeAreaView().AndroidSafeArea}>
-			<View style={style.headContainer}>
+			{!show &&
+			<MenuHeader
+				text='Privacy Policy'
+				navigation={props.navigation}
+			></MenuHeader>
+			}
+			<View style={getStyle()}>
 				<Image
 					style={style.termsImg}
 					source={require('../resources/images/TermsAndCondition.png')}
 				/>
+				{show &&
 				<Text style={style.textTop}>
 					Privacy Policy
 				</Text>
+				}
 				<ScrollView
 					style={style.scrollView}
 					contentContainerStyle={style.container}
@@ -149,33 +169,42 @@ function AcceptPrivacyPolicy(props) {
                         We reserve the right to share personal information with the following additional parties: online organizers using our tools and resellers of our products and services from whose site the sale originated (even though the sale originates at site of the reseller, registration and collection of personal information occurs at this site).
 					</Text>
 				</ScrollView>
-				<View style = {style.checkboxContainer}>
-					<Checkbox
-						status = {status}
-						onPress = {checkSwitch}
-						uncheckedColor = {style.textTop.color}
-						color = {style.textTop.color}
-					/>
-					<Text style = {style.text}>
-					I have read, understood and agreed to the Privacy Policy that applies with the use of PetSprout.
-					</Text>
+				{show &&
+				<View style = {style.center}>
+					<View style = {style.checkboxContainer}>
+						<Checkbox
+							status = {status}
+							onPress = {checkSwitch}
+							uncheckedColor = {style.textTop.color}
+							color = {style.textTop.color}
+						/>
+						<Text style = {style.text}>
+							I have read, understood and agreed to the Privacy Policy that applies with the use of PetSprout.
+						</Text>
+					</View>
+					<View opacity = {greyed}>
+					<TouchableOpacity
+						disabled = {disabled}
+						activeOpacity={0.6}
+						style={style.aboutButton}
+						onPress={() => {
+							if (status == 'checked')
+							{
+							props.navigation.navigate('HomeScreen');
+							}
+						}}
+					>
+						<Text style={style.aboutButtonText}>Accept</Text>
+					</TouchableOpacity>
+					</View>
 				</View>
-				<View opacity = {greyed}>
-				<TouchableOpacity
-					disabled = {disabled}
-					activeOpacity={0.6}
-					style={style.aboutButton}
-					onPress={() => {
-						if (status == 'checked')
-						{
-						props.navigation.navigate('HomeScreen');
-						}
-					}}
-				>
-					<Text style={style.aboutButtonText}>Accept</Text>
-				</TouchableOpacity>
-				</View>
+				}
 			</View>
+			{!show &&
+			<View style = {style.spacer}>
+			<HomeButton navigation={props.navigation} colors={colors}/>
+			</View>
+			}
 		</SafeAreaView>
 	);
 }

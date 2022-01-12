@@ -25,7 +25,6 @@ import CollaboratorsScreen from './frontend/screens/Collaborators';
 import SupportUsScreen from './frontend/screens/SupportUs';
 import ReportABugScreen from './frontend/screens/ReportABug';
 import FeedbackScreen from './frontend/screens/Feedback';
-import TermsAndConditionScreen from './frontend/screens/TermsAndCondition';
 import HabitsScreen from './frontend/screens/Habits';
 import CreateHabitScreen from './frontend/screens/PutHabits/CreateHabit';
 import ComingSoonScreen from './frontend/screens/ComingSoon';
@@ -34,7 +33,6 @@ import NamePetScreen from './frontend/screens/NamePet';
 import AllHabitsScreen from './frontend/screens/AllHabits';
 import PomodoroScreen from './frontend/screens/Pomodoro';
 import PomodoroTasksScreen from './frontend/screens/PomodoroTasks';
-import PrivacyPolicyScreen from './frontend/screens/PrivacyPolicy';
 import AcceptTermsAndConditionScreen from './frontend/screens/AcceptTermsAndCondition';
 import AcceptPrivacyPolicyScreen from './frontend/screens/AcceptPrivacyPolicy';
 // Colour Themes
@@ -166,10 +164,12 @@ function NavContainer(props) {
 					<Stack.Screen
 						name='AcceptTermsAndConditionScreen'
 						component={AcceptTermsAndConditionScreen}
+						initialParams={{isAcceptScreen: true}}
 					/>
 					<Stack.Screen
 						name='AcceptPrivacyPolicyScreen'
 						component={AcceptPrivacyPolicyScreen}
+						initialParams={{isAcceptScreen: true}}
 					/>
 					<Stack.Screen name='HomeScreen' component={HomeScreen} />
 					<Stack.Screen
@@ -203,12 +203,14 @@ function NavContainer(props) {
 					
 					<Stack.Screen
 						name='TermsAndConditionScreen'
-						component={TermsAndConditionScreen}
+						component={AcceptTermsAndConditionScreen}
+						initialParams={{isAcceptScreen: false}}
 					/>
 					
 					<Stack.Screen
 						name='PrivacyPolicyScreen'
-						component={PrivacyPolicyScreen}
+						component={AcceptPrivacyPolicyScreen}
+						initialParams={{isAcceptScreen: false}}
 					/>
 					<Stack.Screen name='EvolutionScreen' component={EvolutionScreen} />
 					<Stack.Screen name='NamePetScreen' component={NamePetScreen} />
