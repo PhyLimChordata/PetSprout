@@ -121,7 +121,7 @@ function SideMenu(props) {
 	}, [props.modalVisible]);
 
 	useEffect(() => {
-		fetch('http://192.168.0.24:5000/api/v1.0.0/user/viewAccount', {
+		fetch('http://3.15.57.200:5000/api/v1.0.0/user/viewAccount', {
 			method: 'GET',
 			headers: {
 				'Content-Type': 'application/json',
@@ -136,7 +136,7 @@ function SideMenu(props) {
 	}, []);
 
 	useEffect(() => {
-		fetch('http://192.168.0.24:5000/api/v1.0.0/pets/get_current', {
+		fetch('http://3.15.57.200:5000/api/v1.0.0/pets/get_current', {
 			method: 'GET',
 			headers: {
 				'Content-Type': 'application/json',
@@ -145,7 +145,6 @@ function SideMenu(props) {
 		})
 			.then((res) =>
 				res.json().then((data) => {
-					console.log("===================== " + data.image + " ========================")
 					changePet(getImage(data.image, 'Happy', getColor));
 					setPet(getImage(data.image, 'Happy', getColor));
 				}),

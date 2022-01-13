@@ -33,7 +33,7 @@ export function getHP() {
 }
 
 export async function gainXP(xp, token) {
-	await fetch('http://192.168.0.24:5000/api/v1.0.0/pets/gain_exp', {
+	await fetch('http://3.15.57.200:5000/api/v1.0.0/pets/gain_exp', {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',
@@ -79,7 +79,7 @@ export function DisplayPet(props) {
 	}, [getRefreshing]);
 
 	const updatePet = () => {
-		fetch('http://192.168.0.24:5000/api/v1.0.0/pets/get_current', {
+		fetch('http://3.15.57.200:5000/api/v1.0.0/pets/get_current', {
 			method: 'GET',
 			headers: {
 				'Content-Type': 'application/json',

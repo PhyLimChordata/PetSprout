@@ -12,7 +12,7 @@ function ModifyHabitScreen(props) {
 
 	const getHabit = () => {
 		fetch(
-			'http://192.168.0.24:5000/api/v1.0.0/habit/show_habit/' +
+			'http://3.15.57.200:5000/api/v1.0.0/habit/show_habit/' +
 				props.route.params.userHabitId +
 				'/' +
 				props.route.params.habitId,
