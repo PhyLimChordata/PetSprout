@@ -282,12 +282,12 @@ function HomeScreen(props) {
 				<Tab.Screen
 					name={'TabMiddle'}
 					component={CreateHabitScreen}
-					// listeners={{
-					// 	tabPress: (e) => {
-					// 		setModalVisible(true);
-					// 		e.preventDefault();
-					// 	},
-					// }}
+					listeners={{
+						tabPress: (e) => {
+							props.navigation.navigate('CreateHabitScreen');
+							e.preventDefault();
+						},
+					}}
 					options={{
 						tabBarLabel: () => {
 							return null;

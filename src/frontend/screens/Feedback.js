@@ -7,7 +7,7 @@ import {
 	ScrollView,
 	Image,
 } from 'react-native';
-
+import androidSafeAreaView from '../styling/AndroidSafeAreaView';
 import MenuHeader from '../components/MenuHeader';
 import styles from '../styling/Feedback';
 import TextBox from '../components/TextBox';
@@ -22,7 +22,7 @@ function Feedback(props) {
 	const [feedback, setFeedback] = useState('');
 
 	return (
-		<SafeAreaView style={{ height: '100%' }}>
+		<SafeAreaView style={androidSafeAreaView().AndroidSafeArea}>
 			<MenuHeader
 				text='Feedback'
 				navigation={props.navigation}

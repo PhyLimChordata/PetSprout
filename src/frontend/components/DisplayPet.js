@@ -31,7 +31,7 @@ export function getHP() {
 }
 
 export async function gainXP(xp, token) {
-	await fetch('http://localhost:5000/api/v1.0.0/pets/gain_exp', {
+	await fetch('http://3.15.57.200:5000/api/v1.0.0/pets/gain_exp', {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',
@@ -77,7 +77,7 @@ export function DisplayPet(props) {
 	}, [getRefreshing]);
 
 	const updatePet = () => {
-		fetch('http://localhost:5000/api/v1.0.0/pets/get_current', {
+		fetch('http://3.15.57.200:5000/api/v1.0.0/pets/get_current', {
 			method: 'GET',
 			headers: {
 				'Content-Type': 'application/json',
@@ -129,8 +129,8 @@ export function DisplayPet(props) {
 			setLevelToEvolveNext(-1);
 			lvlToEvolve = -1;
 		} else {
-			setLevelToEvolveNext(level + 10 - (level % 10));
-			lvlToEvolve = level + 10 - (level % 10);
+			setLevelToEvolveNext(level + 1 - (level % 1));
+			lvlToEvolve = level + 1 - (level % 1);
 		}
 	};
 

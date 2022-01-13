@@ -10,7 +10,7 @@ module.export = (mailingValidation) => {
 			secure: true,
 			auth: {
 				user: 'petsprouthelp@gmail.com',
-				pass: 'mvpiybwihptcqlgr',
+				pass: 'bbnfjimyikmcpsns',
 			},
 		}),
 	);

@@ -9,6 +9,7 @@ import {
 	Image,
 	ImageBackground,
 } from 'react-native';
+import androidSafeAreaView from '../styling/AndroidSafeAreaView';
 import profileStyles from '../styling/Profile';
 import MenuHeader from '../components/MenuHeader';
 import { AuthContext } from '../Context';
@@ -47,7 +48,7 @@ function ProfileEdit(props) {
 
 	useEffect(() => {
 		const get = () => {
-			fetch('http://localhost:5000/api/v1.0.0/user/viewAccount', {
+			fetch('http://3.15.57.200:5000/api/v1.0.0/user/viewAccount', {
 				method: 'GET',
 				headers: {
 					'Content-Type': 'application/json',
@@ -72,7 +73,7 @@ function ProfileEdit(props) {
 			//setError("Username cannot be empty.")
 			//popup.current?.togglePopup();
 		} else {
-			fetch('http://localhost:5000/api/v1.0.0/user/modifyAccount', {
+			fetch('http://3.15.57.200:5000/api/v1.0.0/user/modifyAccount', {
 				method: 'PUT',
 				headers: {
 					'Content-Type': 'application/json',
@@ -120,7 +121,7 @@ function ProfileEdit(props) {
 
 	return (
 		<>
-			<SafeAreaView style={{ height: '100%' }}>
+			<SafeAreaView style={androidSafeAreaView().AndroidSafeArea}>
 				<View>
 					<MenuHeader
 						text='Account  '
