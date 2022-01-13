@@ -9,7 +9,6 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer, useTheme } from '@react-navigation/native';
 
 //Screens
-import BottomMenu from './frontend/components/BottomMenu';
 import LoginScreen from './frontend/screens/Login';
 import SignupScreen from './frontend/screens/Signup';
 import VerifyEmailSignUpScreen from './frontend/screens/VerifyEmailSignUp';
