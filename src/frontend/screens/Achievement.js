@@ -43,7 +43,7 @@ function AchievementScreen(props) {
 	let list = [];
 	useEffect(() => {
 		const get = () => {
-			fetch('http://3.15.57.200:5000/api/v1.0.0/achievements/getAchievements', {
+			fetch('http://192.168.0.24:5000/api/v1.0.0/achievements/getAchievements', {
 				method: 'GET',
 				headers: {
 					'Content-Type': 'application/json',

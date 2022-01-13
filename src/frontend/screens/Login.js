@@ -102,7 +102,7 @@ function Login(props) {
 
 	const attemptLogin = () => {
 		registerForPushNotificationsAsync().then((pushToken) => {
-			fetch('http://3.15.57.200:5000/api/v1.0.0/user/login', {
+			fetch('http://192.168.0.24:5000/api/v1.0.0/user/login', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
@@ -122,7 +122,7 @@ function Login(props) {
 					res.json().then((data) => {
 						logIn(data.token);
 						fetch(
-							'http://3.15.57.200:5000/api/v1.0.0/achievements/updateLoginStreaks',
+							'http://192.168.0.24:5000/api/v1.0.0/achievements/updateLoginStreaks',
 							{
 								method: 'PUT',
 								headers: {

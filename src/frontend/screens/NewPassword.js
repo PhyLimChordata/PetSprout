@@ -125,7 +125,7 @@ function NewPassword(props) {
 			setError('Passwords do not match');
 			displayError(true, true);
 		} else {
-			fetch('http://3.15.57.200:5000/api/v1.0.0/user/pending_password', {
+			fetch('http://192.168.0.24:5000/api/v1.0.0/user/pending_password', {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
