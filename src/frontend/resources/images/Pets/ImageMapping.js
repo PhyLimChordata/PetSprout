@@ -1,5 +1,3 @@
-import { color } from 'react-native-reanimated'
-
 export const ImageMapping = {
 	anglerfish: require('./anglerfish/anglerfish'),
 	anteater: require('./anteater/anteater'),
