@@ -1,4 +1,4 @@
-export const legs = {
+export const toeny = {
 	Blue: require('./legsHappyBlue.gif'),
 	Green: require('./legsHappyGreen.gif'),
 	Orange: require('./legsHappyOrange.gif'),

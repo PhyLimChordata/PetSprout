@@ -1,4 +1,4 @@
-export const fin = {
+export const finny = {
 	Blue: require('./finHappyBlue.gif'),
 	Green: require('./finHappyGreen.gif'),
 	Orange: require('./finHappyOrange.gif'),

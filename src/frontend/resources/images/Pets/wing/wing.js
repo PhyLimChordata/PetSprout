@@ -1,4 +1,4 @@
-export const wing = {
+export const wingin = {
 	Blue: require('./wingHappyBlue.gif'),
 	Green: require('./wingHappyGreen.gif'),
 	Orange: require('./wingHappyOrange.gif'),

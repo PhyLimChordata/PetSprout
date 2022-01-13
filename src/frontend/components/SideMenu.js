@@ -17,6 +17,7 @@ import { comingsoon } from '../resources/images/Pets/ComingSoon/ComingSoon';
 import { egg } from '../resources/images/Pets/Egg/Egg';
 import LogoutConfirmation from './LogoutPopup';
 import { EvolutionMapping } from '../resources/mappings/EvolutionMapping';
+import { ImageMapping } from '../resources/images/Pets/ImageMapping';
 function ThemeCircle({ colorTheme, onPress, selected }) {
 	const {height, width} = Dimensions.get('window');
 
@@ -98,6 +99,7 @@ function SideMenu(props) {
 		changeLogo,
 		changePet,
 		changeComingSoon,
+		getPet
 	} = useContext(AuthContext);
 
 	const { colors } = useTheme();
@@ -143,7 +145,8 @@ function SideMenu(props) {
 		})
 			.then((res) =>
 				res.json().then((data) => {
-					setPet(EvolutionMapping[data.name]);
+					changePet(ImageMapping[data.image.toLowerCase()][data.image.toLowerCase()][getColor]);
+					setPet(ImageMapping[data.image.toLowerCase()][data.image.toLowerCase()][getColor]);
 				}),
 			)
 			.catch();
@@ -162,7 +165,7 @@ function SideMenu(props) {
 		console.log(color);
 		console.log(logo[color]);
 		changeLogo(logo[color]);
-		changePet(egg[color]);
+		changePet(ImageMapping[data.image.toLowerCase()][data.image.toLowerCase()][color]);
 		changeComingSoon(comingsoon[color]);
 	}
 	return (
@@ -208,7 +211,7 @@ function SideMenu(props) {
 											height: 50,
 											borderRadius: 25,
 										}}
-										source={pet}
+										source={getPet}
 									></Image>
 								</TouchableOpacity>
 								<View
