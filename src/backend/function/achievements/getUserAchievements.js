@@ -8,11 +8,11 @@ const get_user_achievements = async (req, res) => {
         let user_id = req.user.id;
 
         let user_achievements = await Achievement.findOne({ user: user_id });
-        console.log(user_achievements);
+        console.log("Retrieved achievements for user with id: " + user_id);
 
         //if(!user_achievements) return res.status(404).json('Achievements not found for user');
         if(!user_achievements){
-            console.log("User has no achievements, creating achievements");
+            console.log(`User id ${user_id} has no achievements, creating achievements`);
             let newUserAchievements = new Achievement({
                 user: user_id
             })
@@ -35,7 +35,7 @@ const get_user_achievements = async (req, res) => {
             // User has at least 1 pet (Default pet + more pets in the future)
             user_achievements.achievements.habipet.pet_count = user_pets.pets.length + 1;
         } else {
-            console.log("User has no pets");
+            console.log(`User id ${user_id} has no pets`);
         }
 
         // check habit count nad mastery conut
@@ -47,8 +47,10 @@ const get_user_achievements = async (req, res) => {
             let max_cont = -1;
             for(let index in habitList) {
                 let habit = habitList[index];
-                if(habit.continuous >= 3) habit_count++;
-                if(habit.continuous >= 66) mastery_count++;
+                var streak = 3; 
+                var mastered_habit_day = 66;
+                if(habit.continuous >= streak) habit_count++;
+                if(habit.continuous >= mastered_habit_day) mastery_count++;
                 if(habit.continuous > max_cont) max_cont = habit.continuous;
             }
 
@@ -61,7 +63,7 @@ const get_user_achievements = async (req, res) => {
             if(user_achievements.achievements.streaks.commitment < max_cont)
                 user_achievements.achievements.streaks.commitment = max_cont;
         } else {
-            console.log("User has no habits")
+            console.log(`User id ${user_id} has no habits`)
         }
 
         // check pet health streak
@@ -71,7 +73,7 @@ const get_user_achievements = async (req, res) => {
         await user_achievements.save();
         res.status(200).json(user_achievements.achievements);
     } catch(error) {
-        console.log(error)
+        console.error(error)
         return res.status(500).json('server error');
     }
 };
@@ -87,7 +89,7 @@ const get_current_login_streaks = async(req, res) => {
         return res.status(200).json(user_achievements.login_streak);
         
     } catch(error) {
-        console.log(error)
+        console.error(error)
         return res.status(500).json('server error');
     }
 }
