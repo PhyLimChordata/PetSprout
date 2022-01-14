@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import {
 	View,
 	Text,
@@ -12,6 +12,7 @@ import MenuHeader from '../components/MenuHeader';
 import { useTheme } from '@react-navigation/native';
 import styles from '../styling/HabitsScreen';
 import TextBox from '../components/TextBox';
+import {AuthContext} from "../Context";
 function Button(props) {
 	const { colors } = useTheme();
 	return (
@@ -38,12 +39,26 @@ function Button(props) {
 	);
 }
 
-const namePet = () => {
-	//Prompt an are you sure pop up - (independent of if they provide a name)
-	//update the pet using the fetch command passing in the pet's id by getting the user id (viewaccount route)
-	props.navigation.navigate('Evolution');
-};
 function NameHabit(props) {
+	const { getToken } = useContext(AuthContext);
+	const namePet = (name) => {
+		console.log(name)
+		fetch('http://3.15.57.200:5000/api/v1.0.0/pets/name_pet', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				'authentication-token': getToken,
+			},
+			body: JSON.stringify({ name: name }),
+		}).then((res) =>
+			res.json().then((data) => {
+				props.navigation.navigate('EvolutionScreen');
+			}),
+		)
+			.catch(() => console.log('error'));
+		//Prompt an are you sure pop up - (independent of if they provide a name)
+		//update the pet using the fetch command passing in the pet's id by getting the user id (viewaccount route)
+	};
 	const { colors } = useTheme();
 	const [name, setName] = useState(props.reason);
 	return (
@@ -83,7 +98,7 @@ function NameHabit(props) {
 				<TextBox setText={setName} text={name}></TextBox>
 				<View style={{ flexDirection: 'row' }}>
 					<Button text='SHARE' onPress={() => console.log('SHARE')} />
-					<Button text='CONTINUE' onPress={() => namePet()} />
+					<Button text='CONTINUE' onPress={() => namePet(name)} />
 				</View>
 			</View>
 		</SafeAreaView>

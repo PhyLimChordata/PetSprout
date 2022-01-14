@@ -11,12 +11,10 @@ function HomeButton(props) {
 				style={menuPageStyles.homeButton}
 				onPress={() => props.navigation.navigate('HomeScreen')}
 			>
-				<View>
-					<Image
+				<Image
 						source={require('../resources/images/Home.png')}
 						style={menuPageStyles.homeIcon}
-					></Image>
-				</View>
+				/>
 			</TouchableOpacity>
 		</View>
 	);

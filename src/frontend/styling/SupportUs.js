@@ -1,4 +1,5 @@
-import { StyleSheet } from 'react-native';
+import {Dimensions, StyleSheet} from 'react-native';
+const {height, width} = Dimensions.get('window');
 
 const SupportUs = (theme) =>
 	StyleSheet.create({
@@ -28,12 +29,13 @@ const SupportUs = (theme) =>
 		},
 		supportUsLogo: {
 			marginTop: 20,
-			height: 200,
+			height: height * 0.2,
 			width: 200,
 			resizeMode: 'contain',
 			// tintColor: theme.Quaternary,
 			// TODO
 		},
+
 		supportUsButton: {
 			backgroundColor: theme.Tertiary,
 			borderRadius: 10,
