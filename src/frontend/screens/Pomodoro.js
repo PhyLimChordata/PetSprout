@@ -11,6 +11,8 @@ import {
 } from 'react-native';
 
 import PomodoroFinishPopup from '../components/PomodoroFinishPopup';
+import PomodoroStartPopup from '../components/PomodoroStartPopup';
+import PomodoroCancelPopup from '../components/PomodoroCancelPopup';
 
 import androidSafeAreaView from '../styling/AndroidSafeAreaView';
 import MenuHeader from '../components/MenuHeader';
@@ -28,6 +30,7 @@ import * as BackgroundFetch from 'expo-background-fetch';
 import * as TaskManager from 'expo-task-manager';
 
 import { DisplayPet, gainXP, getHP } from '../components/DisplayPet';
+
 
 const BACKGROUND_FETCH_TASK = 'background-fetch';
 
@@ -48,6 +51,8 @@ function PomodoroScreen(props) {
 	const [mode, setMode] = useState('Pomodoro');
 
 	const [finished, setFinished] = useState(false);
+	const [start, setStart] = useState(false);
+	const [cancel, setCancel] = useState(false);
 
 	const formatNumber = (number) => {
 		return ('0' + number.toString()).slice(-2);
@@ -77,6 +82,14 @@ function PomodoroScreen(props) {
 
 	const showFinish = () => {
 		setFinished(true)
+	}
+
+	const showStartPopup = () => {
+		setStart(true)
+	}
+
+	const showCancel = () => {
+		setCancel(true)
 	}
 
 	useEffect(() => {
@@ -358,7 +371,7 @@ function PomodoroScreen(props) {
 							paddingRight: 40,
 							marginBottom: 20,
 						}}
-						onPress={() => stopSession()}
+						onPress={() => showCancel()}
 					>
 						<Text
 							style={{
@@ -381,7 +394,7 @@ function PomodoroScreen(props) {
 							paddingRight: 40,
 							marginBottom: 20,
 						}}
-						onPress={() => toggle()}
+						onPress={() => showStartPopup()}
 					>
 						<Text
 							style={{
@@ -398,6 +411,16 @@ function PomodoroScreen(props) {
 			<PomodoroFinishPopup 
 				visible = {finished}
 				setVisible = {setFinished}
+			/>
+			<PomodoroStartPopup
+				visible = {start}
+				setVisible = {setStart}
+				startFunction = {toggle}
+			/>
+			<PomodoroCancelPopup
+				visible = {cancel}
+				setVisible = {setCancel}
+				cancelFunction = {stopSession}
 			/>
 		</SafeAreaView>
 	);
