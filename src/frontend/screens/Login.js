@@ -96,23 +96,6 @@ function Login(props) {
 				} else if (res.status == 200) {
 					res.json().then((data) => {
 						logIn(data.token);
-						const date = new Date().toString();
-						fetch(
-							'http://3.15.57.200:5000/api/v1.0.0/achievements/updateLoginStreaks' + date,
-							{
-								method: 'PUT',
-								headers: {
-									'Content-Type': 'application/json',
-									'authentication-token': data.token,
-								},
-							},
-						).then((ret) => {
-							if (ret.status == 404) {
-								console.log('Achievement not found');
-							} else if (res.status == 200) {
-								console.log('Success streak update!');
-							}
-						});
 					});
 				} else if (res.status == 404 || res.status == 401) {
 					setError('The provided information is incorrect');
