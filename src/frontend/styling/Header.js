@@ -10,6 +10,7 @@ const headerStyles = (theme) =>
 			flexDirection: 'row',
 			paddingLeft: 20,
 			paddingRight: 20,
+			marginTop:15,
 		},
 		middleComponent: {
 			flex: 8,

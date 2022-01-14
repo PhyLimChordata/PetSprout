@@ -9,7 +9,6 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer, useTheme } from '@react-navigation/native';
 
 //Screens
-import BottomMenu from './frontend/components/BottomMenu';
 import LoginScreen from './frontend/screens/Login';
 import SignupScreen from './frontend/screens/Signup';
 import VerifyEmailSignUpScreen from './frontend/screens/VerifyEmailSignUp';
@@ -35,6 +34,7 @@ import PomodoroScreen from './frontend/screens/Pomodoro';
 import PomodoroTasksScreen from './frontend/screens/PomodoroTasks';
 import AcceptTermsAndConditionScreen from './frontend/screens/AcceptTermsAndCondition';
 import AcceptPrivacyPolicyScreen from './frontend/screens/AcceptPrivacyPolicy';
+
 // Colour Themes
 import GreenLightTheme from './frontend/resources/themes/light/GreenTheme';
 import OrangeLightTheme from './frontend/resources/themes/light/OrangeTheme';
@@ -372,7 +372,9 @@ function Calendar(props) {
 function Pomodoro(props) {
 	return <PomodoroScreen title='Pomodoro' navigation={props.navigation} />;
 }
-
+function PomodoroTasks(props) {
+    return <CreateHabitScreen title='Tasks' navigation={props.navigation} />;
+}
 function Reflect(props) {
 	return <ComingSoonScreen title='Reflect' navigation={props.navigation} />;
 }
