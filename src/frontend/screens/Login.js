@@ -78,7 +78,10 @@ function Login(props) {
 	};
 
 	const attemptLogin = () => {
-		fetch('http://localhost:5000/api/v1.0.0/user/login', {
+		console.log(getNotificationsToggle)
+		if (!getNotificationsToggle) {
+			console.log(`Clientside Notifications (${getNotificationsToggle}) are DISABLED. Toggle is located in App.js.`)
+			fetch('http://3.15.57.200:5000/api/v1.0.0/user/login', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
