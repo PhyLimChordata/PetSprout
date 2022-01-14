@@ -69,6 +69,15 @@ function About(props) {
 					>
 						<Text style={style.aboutButtonText}>Terms and Condition</Text>
 					</TouchableOpacity>
+					<TouchableOpacity
+						activeOpacity={0.6}
+						style={style.aboutButton}
+						onPress={() => {
+							props.navigation.navigate('PrivacyPolicyScreen');
+						}}
+					>
+						<Text style={style.aboutButtonText}>Privacy Policy</Text>
+					</TouchableOpacity>
 				</ScrollView>
 			<HomeButton navigation={props.navigation} colors={colors} />
 		</SafeAreaView>
