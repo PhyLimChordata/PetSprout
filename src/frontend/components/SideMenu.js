@@ -173,6 +173,7 @@ function SideMenu(props) {
 		props.setModalVisible(false);
 		console.log(color);
 		console.log(logo[color]);
+
 		changeLogo(logo[color]);
 		changePet(ImageMapping[data.image.toLowerCase()][data.image.toLowerCase()]['Happy'][color]);
 		changeComingSoon(comingsoon[color]);
