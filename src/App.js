@@ -54,6 +54,9 @@ const Stack = createStackNavigator();
 
 export default function App() {
 	// Global variables within the app
+	
+	// TOGGLE TO FALSE TO TURN OFF NOTIFICATIONS
+	const [notificationsToggle, setNotificationsToggle] = useState("true");
 	const [token, setToken] = useState(null);
 	const [color, setColor] = useState('Green');
 	const [logo, setLogo] = useState(
@@ -94,6 +97,7 @@ export default function App() {
 			changeComingSoon: (comingSoon) => {
 				setComingSoon(comingSoon);
 			},
+			getNotificationsToggle: notificationsToggle,
 			getToken: token,
 			getColor: color,
 			getLogo: logo,
@@ -103,6 +107,8 @@ export default function App() {
 			getRefreshing: refreshing,
 		};
 	}, [
+		notificationsToggle,
+		setNotificationsToggle,
 		token,
 		setToken,
 		color,
