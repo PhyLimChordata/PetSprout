@@ -23,7 +23,7 @@ function PomodoroCancelPopup(props) {
 				'Failing to complete the full duration of a pomodoro session will lead to your pet’s health going down by x points'
 			}
 			buttonType={'confirmation'}
-			successFunction={() => cancelPomodoro()}
+			successFunction={props.cancelFunction}
 		></Popup>
 	);
 }
