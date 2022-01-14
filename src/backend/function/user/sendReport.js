@@ -39,7 +39,7 @@ const sendFeedbackReport = async (req, res) => {
 		if (!user) return res.status(404).json('User not found');
 
 		let email = user.email;
-		sendEmail(message, email, 'Bug Report');
+		sendEmail(message, email, 'Feedback Report');
 
 		res.status(200).json('Success');
 	} catch (error) {

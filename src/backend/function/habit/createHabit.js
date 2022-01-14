@@ -1,7 +1,7 @@
 const Habit = require('../../schemas/habitSchema');
 const User = require('../../schemas/userSchema');
 const Analyze = require('../../schemas/analyzeSchema');
-
+const alarmLib = require('./alarm');
 const { validationResult } = require('express-validator');
 
 /**
@@ -25,8 +25,6 @@ module.exports = async (req, res) => {
 			errors.push('schedule');
 		}
 		if (date === '') errors.push('date');
-
-		console.log(errors);
 
 		if (errors.length != 0) return res.status(403).json({ error: errors });
 
@@ -67,6 +65,13 @@ module.exports = async (req, res) => {
 			nextSignInDate = new Date(nextSignInDate);
 		}
 
+		// Wrap each alarm in the list of alarms in an object. This will force MongoDB
+		// to assign each alarm a unique ObjectId in the database.
+		let alarmList = []
+		for (const a of alarm) {
+			alarmList.push({date: a})
+		}
+
 		let newHabit = {
 			analyze: newAnalyze._id,
 			title,
@@ -74,12 +79,17 @@ module.exports = async (req, res) => {
 			reason,
 			schedule: newSchedule,
 			times,
-			alarm,
+			alarm: alarmList,
 			nextSignInDate,
 		};
-
+		
 		userHabit.habitList.push(newHabit);
 		await userHabit.save();
+		
+		if(process.env.NOTIFICATIONTOGGLE === 'true') {		
+			alarmLib.scheduleHabitAlarms(req.user.id, newAnalyze._id)
+		}
+		
 		res.json(newHabit);
 	} catch (error) {
 		console.error(error);

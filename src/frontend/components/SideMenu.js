@@ -17,6 +17,7 @@ import { comingsoon } from '../resources/images/Pets/ComingSoon/ComingSoon';
 import { egg } from '../resources/images/Pets/Egg/Egg';
 import LogoutConfirmation from './LogoutPopup';
 import { EvolutionMapping } from '../resources/mappings/EvolutionMapping';
+import { ImageMapping, getImage } from '../resources/images/Pets/ImageMapping';
 function ThemeCircle({ colorTheme, onPress, selected }) {
 	const {height, width} = Dimensions.get('window');
 
@@ -98,6 +99,7 @@ function SideMenu(props) {
 		changeLogo,
 		changePet,
 		changeComingSoon,
+		getPet
 	} = useContext(AuthContext);
 
 	const { colors } = useTheme();
@@ -119,7 +121,7 @@ function SideMenu(props) {
 	}, [props.modalVisible]);
 
 	useEffect(() => {
-		fetch('http://3.15.57.200:5000/api/v1.0.0/user/viewAccount', {
+		fetch('http://localhost:5000/api/v1.0.0/user/viewAccount', {
 			method: 'GET',
 			headers: {
 				'Content-Type': 'application/json',
@@ -134,7 +136,7 @@ function SideMenu(props) {
 	}, []);
 
 	useEffect(() => {
-		fetch('http://3.15.57.200:5000/api/v1.0.0/pets/get_current', {
+		fetch('http://localhost:5000/api/v1.0.0/pets/get_current', {
 			method: 'GET',
 			headers: {
 				'Content-Type': 'application/json',
@@ -143,7 +145,8 @@ function SideMenu(props) {
 		})
 			.then((res) =>
 				res.json().then((data) => {
-					setPet(EvolutionMapping[data.name]);
+					changePet(getImage(data.image, 'Happy', getColor));
+					setPet(getImage(data.image, 'Happy', getColor));
 				}),
 			)
 			.catch();
@@ -162,7 +165,7 @@ function SideMenu(props) {
 		console.log(color);
 		console.log(logo[color]);
 		changeLogo(logo[color]);
-		changePet(egg[color]);
+		changePet(ImageMapping[data.image.toLowerCase()][data.image.toLowerCase()]['Happy'][color]);
 		changeComingSoon(comingsoon[color]);
 	}
 	return (
@@ -208,7 +211,7 @@ function SideMenu(props) {
 											height: 50,
 											borderRadius: 25,
 										}}
-										source={pet}
+										source={getPet}
 									></Image>
 								</TouchableOpacity>
 								<View
@@ -292,24 +295,24 @@ function SideMenu(props) {
 									props.navigation.navigate('ProfileScreen');
 								}}
 							/>
-							{/*<Tab*/}
-							{/*	color={colors.Quaternary}*/}
-							{/*	icon={'bullhorn'}*/}
-							{/*	title={'Feedback'}*/}
-							{/*	onPress={() => {*/}
-							{/*		props.setModalVisible(false);*/}
-							{/*		props.navigation.navigate('FeedbackScreen');*/}
-							{/*	}}*/}
-							{/*/>*/}
-							{/*<Tab*/}
-							{/*	color={colors.Quaternary}*/}
-							{/*	icon={'bug'}*/}
-							{/*	title={'Report a Bug'}*/}
-							{/*	onPress={() => {*/}
-							{/*		props.setModalVisible(false);*/}
-							{/*		props.navigation.navigate('ReportABugScreen');*/}
-							{/*	}}*/}
-							{/*/>*/}
+							<Tab
+								color={colors.Quaternary}
+								icon={'bullhorn'}
+								title={'Feedback'}
+								onPress={() => {
+									props.setModalVisible(false);
+									props.navigation.navigate('FeedbackScreen');
+								}}
+							/>
+							<Tab
+								color={colors.Quaternary}
+								icon={'bug'}
+								title={'Report a Bug'}
+								onPress={() => {
+									props.setModalVisible(false);
+									props.navigation.navigate('ReportABugScreen');
+								}}
+							/>
 							<Tab
 								color={colors.Quaternary}
 								icon={'account-group'}
@@ -380,6 +383,7 @@ function SideMenu(props) {
 								/>
 							</View>
 							<View style={{ alignItems: 'center', marginBottom:10 }}>
+								
 								<Toggle
 									value={toggleValue}
 									onPress={(newState) => {

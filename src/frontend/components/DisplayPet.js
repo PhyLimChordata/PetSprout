@@ -5,7 +5,9 @@ import ExperienceBar from '../components/ExperienceBar';
 import { useTheme } from '@react-navigation/native';
 import { AuthContext } from '../Context';
 import { LevelMapping } from '../resources/mappings/LevelMapping';
+import { ImageMapping } from '../resources/images/Pets/ImageMapping';
 import EvolutionPopup from './EvolutionPopup';
+import { get } from 'lodash';
 
 var totalXP = 0;
 var lvlToEvolve = 0;
@@ -31,7 +33,7 @@ export function getHP() {
 }
 
 export async function gainXP(xp, token) {
-	await fetch('http://3.15.57.200:5000/api/v1.0.0/pets/gain_exp', {
+	await fetch('http://localhost:5000/api/v1.0.0/pets/gain_exp', {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',
@@ -68,7 +70,7 @@ export function DisplayPet(props) {
 		}
 	});
 
-	const { getToken, getRefreshing, getPet } = useContext(AuthContext);
+	const { getToken, getRefreshing, getPet, getColor } = useContext(AuthContext);
 
 	useEffect(() => {
 		if (getRefreshing) {
@@ -77,7 +79,7 @@ export function DisplayPet(props) {
 	}, [getRefreshing]);
 
 	const updatePet = () => {
-		fetch('http://3.15.57.200:5000/api/v1.0.0/pets/get_current', {
+		fetch('http://localhost:5000/api/v1.0.0/pets/get_current', {
 			method: 'GET',
 			headers: {
 				'Content-Type': 'application/json',

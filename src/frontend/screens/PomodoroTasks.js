@@ -20,10 +20,35 @@ function PomodoroTasksScreen(props) {
 		if (tasks.length == 0 && !displayed) displayTasks();
 	});
 
+<<<<<<< HEAD
     const displayTasks= () => {
         setTasks([...tasks, 'Mock Task']);
         setTitle(...title,'');
     }
+=======
+	const displayHabits = () => {
+		setDisplayed(true);
+		fetch('http://localhost:5000/api/v1.0.0/habit/show_all_user_habit/', {
+			method: 'GET',
+			headers: {
+				'Content-Type': 'application/json',
+				'authentication-token': getToken,
+			},
+		})
+			.then((res) =>
+				res.json().then((data) => {
+					console.log(data);
+					const expValue = parseInt(data.expValue);
+					setHabits(data.habitList);
+					setUserHabitId(data._id);
+					setDisplayed(true);
+				}),
+			)
+			.catch((err) => {
+				console.log(err);
+			});
+	};
+>>>>>>> development
 
     const createTask=(props)=>{
         setTasks([...tasks, '']);
