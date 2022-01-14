@@ -295,24 +295,24 @@ function SideMenu(props) {
 									props.navigation.navigate('ProfileScreen');
 								}}
 							/>
-							{/*<Tab*/}
-							{/*	color={colors.Quaternary}*/}
-							{/*	icon={'bullhorn'}*/}
-							{/*	title={'Feedback'}*/}
-							{/*	onPress={() => {*/}
-							{/*		props.setModalVisible(false);*/}
-							{/*		props.navigation.navigate('FeedbackScreen');*/}
-							{/*	}}*/}
-							{/*/>*/}
-							{/*<Tab*/}
-							{/*	color={colors.Quaternary}*/}
-							{/*	icon={'bug'}*/}
-							{/*	title={'Report a Bug'}*/}
-							{/*	onPress={() => {*/}
-							{/*		props.setModalVisible(false);*/}
-							{/*		props.navigation.navigate('ReportABugScreen');*/}
-							{/*	}}*/}
-							{/*/>*/}
+							<Tab
+								color={colors.Quaternary}
+								icon={'bullhorn'}
+								title={'Feedback'}
+								onPress={() => {
+									props.setModalVisible(false);
+									props.navigation.navigate('FeedbackScreen');
+								}}
+							/>
+							<Tab
+								color={colors.Quaternary}
+								icon={'bug'}
+								title={'Report a Bug'}
+								onPress={() => {
+									props.setModalVisible(false);
+									props.navigation.navigate('ReportABugScreen');
+								}}
+							/>
 							<Tab
 								color={colors.Quaternary}
 								icon={'account-group'}
@@ -383,6 +383,7 @@ function SideMenu(props) {
 								/>
 							</View>
 							<View style={{ alignItems: 'center', marginBottom:10 }}>
+								
 								<Toggle
 									value={toggleValue}
 									onPress={(newState) => {

@@ -10,6 +10,8 @@ import {
 	Button,
 } from 'react-native';
 
+import PomodoroFinishPopup from '../components/PomodoroFinishPopup';
+
 import androidSafeAreaView from '../styling/AndroidSafeAreaView';
 import MenuHeader from '../components/MenuHeader';
 
@@ -45,6 +47,8 @@ function PomodoroScreen(props) {
 
 	const [mode, setMode] = useState('Pomodoro');
 
+	const [finished, setFinished] = useState(false);
+
 	const formatNumber = (number) => {
 		return ('0' + number.toString()).slice(-2);
 	};
@@ -71,6 +75,10 @@ function PomodoroScreen(props) {
 		setSecs(formatNumber(convertRemaining(time).secs));
 	};
 
+	const showFinish = () => {
+		setFinished(true)
+	}
+
 	useEffect(() => {
 		let interval = null;
 		if (isActive) {
@@ -84,6 +92,7 @@ function PomodoroScreen(props) {
 				if (remainingSecs == 0) {
 					setRounds(rounds + 1);
 					//play sound and bring up pop up
+					showFinish()
 					if (rounds >= 2) {
 						setBreak(true);
 					}
@@ -386,6 +395,10 @@ function PomodoroScreen(props) {
 					</TouchableOpacity>
 				)}
 			</View>
+			<PomodoroFinishPopup 
+				visible = {finished}
+				setVisible = {setFinished}
+			/>
 		</SafeAreaView>
 	);
 }

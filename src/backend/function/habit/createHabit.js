@@ -85,8 +85,10 @@ module.exports = async (req, res) => {
 		
 		userHabit.habitList.push(newHabit);
 		await userHabit.save();
-
-		alarmLib.schedule(req.user.id, newAnalyze._id)
+		
+		if(process.env.NOTIFICATIONTOGGLE === 'true') {		
+			alarmLib.scheduleHabitAlarms(req.user.id, newAnalyze._id)
+		}
 		
 		res.json(newHabit);
 	} catch (error) {

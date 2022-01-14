@@ -30,8 +30,10 @@ module.exports = async (req, res) => {
 				.status(404)
 				.json({ error: "Habit could not find in user's habits" });
 
-		// Remove scheduled alarms.
-		alarmLib.unschedule(req.user.id, habitFromDB.analyze);
+				if(process.env.NOTIFICATIONTOGGLE === 'true') {
+			// Remove scheduled alarms.
+			alarmLib.unscheduleHabitAlarms(req.user.id, habitFromDB.analyze);
+		}
 
 		let { title, description, reason, schedule, times, alarm, date } = req.body;
 
@@ -88,8 +90,10 @@ module.exports = async (req, res) => {
 
 		await userHabit.save();
 
-		// Re-scheduled alarms.
-		alarmLib.schedule(req.user.id, habitFromDB.analyze);
+		if(process.env.NOTIFICATIONTOGGLE === 'true') {
+			// Re-scheduled alarms.
+			alarmLib.scheduleHabitAlarms(req.user.id, habitFromDB.analyze);
+		}
 
 		res.json(habitFromDB);
 	} catch (error) {
