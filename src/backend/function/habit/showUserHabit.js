@@ -1,18 +1,19 @@
 const Habit = require('../../schemas/habitSchema');
 const User = require('../../schemas/userSchema');
 
+const masteryDays = 66
 module.exports = async (req, res) => {
 	try {
 		let user = await User.findById(req.user.id).select('-password');
 		if (!user) return res.status(404).json('User could not found');
 
 		let date = req.params.day;
-
 		let userHabitInfo = await Habit.findOne({ user: req.user.id });
 		if (!userHabitInfo)
-			return res.status(404).json("User's habits could not found");
+			return res.status(404).json("HABITS: User's habits could not found");
 
 		let today = new Date(date);
+		console.log(today)
 		today.setHours(0, 0, 0, 0);
 		let day = today.getDay();
 		let user_last_login = user.lastlogin;
@@ -31,6 +32,8 @@ module.exports = async (req, res) => {
 			return habit.missing > 0 && habit.schedule.includes(day);
 		});
 
+		// Sort missed habits in a way that if it is missed for once it will
+		// show up first in the list, otherwise order in descending order.
 		miss.sort((a,b) => {
 			if(b.missing === a.missing && b.missing === 1) {
 				return 0
@@ -44,7 +47,7 @@ module.exports = async (req, res) => {
 		});
 
 		let mastered = userHabitInfo.habitList.filter(function (habit) {
-			return habit.continuous == 66;
+			return habit.continuous == masteryDays;
 		})
 
 		let habit = { habitList: habitShow };
@@ -62,7 +65,7 @@ module.exports = async (req, res) => {
 		let return_object_2 = extend({}, return_object_1, missing_habits);
 		let return_object = extend({}, return_object_2, mastered_habits);
 
-		res.json(return_object);
+		return res.status(200).json(return_object);
 	} catch (error) {
 		console.error(error);
 		res.status(500).json('Server error');

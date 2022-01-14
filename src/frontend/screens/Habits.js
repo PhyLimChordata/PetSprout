@@ -21,8 +21,6 @@ import { useTheme } from '@react-navigation/native';
 import { AuthContext } from '../Context';
 
 import { DisplayPet } from '../components/DisplayPet';
-import DeleteHabitPopup from '../components/DeleteHabitPopup';
-import EvolutionPopup from '../components/EvolutionPopup';
 
 function HabitsScreen(props) {
 	const [habits, setHabits] = useState([]);
@@ -47,17 +45,20 @@ function HabitsScreen(props) {
 
 	useEffect(() => {
 		if (habits.length == 0 && !displayed) {
+			console.log('ooop')
 			displayHabits();
 		}
 	});
 
 	useEffect(() => {
 		if (getRefreshing) {
+			console.log('rees')
 			displayHabits();
 		}
 	}, [getRefreshing]);
 
 	const displayHabits = () => {
+		console.log('huhhhhh')
 		setDisplayed(true);
 		setRefreshing(true);
 		const date = new Date().toString();
@@ -70,7 +71,7 @@ function HabitsScreen(props) {
 		})
 			.then((res) =>
 				res.json().then((data) => {
-					console.log(data.habitList);
+					console.log('saddasasdasddas')
 					setTimeout(() => {
 						setHabits(data.habitList);
 						setUserHabitId(data._id);
@@ -82,6 +83,7 @@ function HabitsScreen(props) {
 			)
 			.catch((err) => {
 				console.log(err);
+				console.log('saddasasdasddas')
 			});
 	};
 

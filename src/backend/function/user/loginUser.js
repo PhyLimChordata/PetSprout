@@ -1,5 +1,7 @@
 const Habit = require('../../schemas/habitSchema');
 const User = require('../../schemas/userSchema');
+const Achievement = require('../../schemas/achievementSchema');
+const Pet = require('../../schemas/petsSchema');
 
 const { validationResult } = require('express-validator');
 const bcryptjs = require('bcryptjs');
@@ -45,32 +47,76 @@ module.exports = async (req, res) => {
 
 		let matching = await bcryptjs.compare(password, user.password);
 		if (!matching) return res.status(401).json('Wrong password');
-		var current = new Date(date);
+		let current = new Date(date);
 		if (user.lastlogin !== null) {
 			let lastLoginYear = user.lastlogin.getFullYear();
 			let lastLoginMonth = user.lastlogin.getMonth();
 			let lastLoginDate = user.lastlogin.getDate();
-			let current = new Date(date);
+			current.setHours(0, 0, 0, 0);
+			let lastLogin = new Date(lastLoginYear, lastLoginMonth, lastLoginDate);
 			let userHabit = await Habit.findOne({ user: user._id });
-			let currentYear = current.getFullYear();
-			let currentMonth = current.getMonth();
-			let currentDate = current.getDate();
-			if (
-				lastLoginDate !== currentDate ||
-				lastLoginMonth !== currentMonth ||
-				lastLoginYear !== currentYear
-			) {
+			const daysApart = ((current - lastLogin)/ (1000 * 60 * 60 * 24)).toFixed(1);
+			console.log(daysApart);
+			// Update habits todo and streaks for new day
+			if (daysApart > 0) {
 				if (userHabit.habitList !== null) {
+					// for each habit, reset to to do (0, 1 being done)
 					for (const habit of userHabit.habitList) {
 						habit.todo = 0;
 					}
 				}
+				// Find user's achievement and pets
+				let userAchievements = await Achievement.findOne({ user : user._id });
+				let userPets = await Pet.findOne({ user : user._id });
+				// Ensure both are found
+				if(!userAchievements || !userPets) {
+					//console.log("No achievement or pets");
+				} else {
+					// update login streaks
+					if(daysApart == 1) {
+						let new_streak = userAchievements.login_streak + 1;
+						userAchievements.login_streak = new_streak;
+			
+						// Check if this is a new longest streak
+						if (userAchievements.achievements.accountability.login < new_streak) {
+							userAchievements.achievements.accountability.login = new_streak;
+						}
+					} else if (daysApart > 1) {
+						// Player loses streak as they didn't login everyday
+						userAchievements.login_streak = 1;
+					}
+
+					// Check pet health to update the consecutive days that user's pet have at least
+					// 50% of max health
+					if(userPets.currentPet) {
+						if(userPets.currentPet.hp < userPets.currentPet.maxhp / 2) {
+							userAchievements.pet_health_streak = 0;
+						} else {
+							userAchievements.pet_health_streak++;
+						}
+					} 
+					/*
+					***For more than one pet, only current pet at this version.***
+					if(userPets.pets.length > 0) {
+						let hasStreak = 1;
+						for(let pet in userPets.pets) {
+							if(pet.hp < pet.maxhp/2) {
+								userAchievements.pet_health_streak = 0;
+								hasStreak = 0;
+							};
+						}
+						if(hasStreak) userAchievements.pet_health_streak++;
+					}
+					*/
+				}
+				await userAchievements.save();
 			}
+			
 			if (userHabit.habitList !== null) {
 				for (const habit of userHabit.habitList) {
 					let next = new Date(habit.nextSignInDate);
 					var nextDate = next.getDate();
-					if (next < current && nextDate !== currentDate) {
+					if (next < current && nextDate !== current.getDate()) {
 						habit.continuous = 0;
 						habit.missing++;
 						let interval = 0;
@@ -91,6 +137,7 @@ module.exports = async (req, res) => {
 				userHabit.save();
 			}
 		}
+
 		user.lastlogin = current;
 
 		if(process.env.NOTIFICATIONTOGGLE === 'true') {

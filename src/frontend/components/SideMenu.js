@@ -117,6 +117,19 @@ function SideMenu(props) {
 		if (props.modalVisible) {
 			setColor(getColor);
 			setToggleValue(getMode == 'dark');
+			fetch('http://localhost:5000/api/v1.0.0/pets/get_current', {
+				method: 'GET',
+				headers: {
+					'Content-Type': 'application/json',
+					'authentication-token': getToken,
+				},
+			})
+				.then((res) =>
+					res.json().then((data) => {
+						setPet(EvolutionMapping[data.image]);
+					}),
+				)
+				.catch();
 		}
 	}, [props.modalVisible]);
 
@@ -151,10 +164,6 @@ function SideMenu(props) {
 			)
 			.catch();
 	}, []);
-
-	{
-		/* TODO: Change this to a global variable */
-	}
 
 	const [toggleValue, setToggleValue] = useState(!defaultMode);
 
@@ -241,7 +250,7 @@ function SideMenu(props) {
 							{/*		props.navigation.navigate('SettingsScreen');*/}
 							{/*	}}*/}
 							{/*>*/}
-							{/*	<MaterialCommunityIcons*/}
+							{/*	<MaterialCommxunityIcons*/}
 							{/*		name='cog'*/}
 							{/*		color={colors.Quaternary}*/}
 							{/*		size={40}*/}
@@ -277,15 +286,15 @@ function SideMenu(props) {
 								marginLeft: '6%',
 							}}
 						>
-							{/*<Tab*/}
-							{/*	color={colors.Quaternary}*/}
-							{/*	icon={'star'}*/}
-							{/*	title={'Achievements'}*/}
-							{/*	onPress={() => {*/}
-							{/*		props.setModalVisible(false);*/}
-							{/*		props.navigation.navigate('AchievementScreen');*/}
-							{/*	}}*/}
-							{/*/>*/}
+							<Tab
+								color={colors.Quaternary}
+								icon={'star'}
+								title={'Achievements'}
+								onPress={() => {
+									props.setModalVisible(false);
+									props.navigation.navigate('AchievementScreen');
+								}}
+							/>
 							<Tab
 								color={colors.Quaternary}
 								icon={'account-circle'}
@@ -383,7 +392,6 @@ function SideMenu(props) {
 								/>
 							</View>
 							<View style={{ alignItems: 'center', marginBottom:10 }}>
-								
 								<Toggle
 									value={toggleValue}
 									onPress={(newState) => {

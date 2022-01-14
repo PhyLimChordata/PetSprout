@@ -325,7 +325,7 @@ function Evolution(props) {
 							<Button
 								text='CONTINUE'
 								disabled={buttonDisabled}
-								onPress={() => props.navigation.goBack(null)}
+								onPress={() => props.navigation.navigate('Habit')}
 							></Button>
 						)}
 					</Animated.View>

@@ -15,6 +15,10 @@ const PetsSchema = new Schema({
 			type: Number,
 			default: 0,
 		},
+		maxhp: {
+			type: Number,
+			default: 100,
+		},
 		hp: {
 			type: Number,
 			default: 100,
@@ -25,7 +29,7 @@ const PetsSchema = new Schema({
 		},
 		image: {
 			type: String,
-			default: 'Egg',
+			default: 'egg',
 		},
 		cosmetics: [
 			{
@@ -51,6 +55,10 @@ const PetsSchema = new Schema({
 				type: Number,
 				default: 0,
 			},
+			maxhp: {
+				type: Number,
+				default: 100,
+			},
 			hp: {
 				type: Number,
 				default: 100,
@@ -61,7 +69,7 @@ const PetsSchema = new Schema({
 			},
 			image: {
 				type: String,
-				default: 'Egg',
+				default: 'egg',
 			},
 			cosmetics: [
 				{

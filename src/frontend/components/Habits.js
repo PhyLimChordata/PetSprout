@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, {useState, useContext, useEffect} from 'react';
 import { View, Image, Text } from 'react-native';
 
 import styles from '../styling/Habits';
@@ -15,9 +15,17 @@ function Habits(props) {
 	const [streak, setStreak] = useState(props.streak);
 	const [frequency, setFrequency] = useState(props.frequency);
 	const [completed, setCompleted] = useState(props.completed);
-	const { getToken, changeRefreshing } = useContext(AuthContext);
+	const { getToken, changeRefreshing, getRefreshing } = useContext(AuthContext);
 
 	const { colors } = useTheme();
+
+	useEffect(() => {
+		if (!getRefreshing) {
+			setCompleted(props.completed)
+			setFrequency(props.frequency)
+			setStreak(props.streak)
+		}
+	}, [getRefreshing]);
 
 	const completeHabit = () => {
 		setFrequency(frequency - 1);
@@ -42,7 +50,6 @@ function Habits(props) {
 			.then((res) =>
 				res.json().then(() => {
 					console.log('completehabit was called');
-
 					if (frequency - 1 == 0) {
 						setCompleted(true);
 						gainXP(300, getToken);
