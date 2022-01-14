@@ -41,7 +41,7 @@ const evolvePet = async (req, res) => {
 			userAchievements.achievements.habipet.caretaker++;
 			await userAchievements.save()
 		} else {
-			console.log("No achievements found.");
+			console.log("No achievements found for user with id " + req.user.id);
 		}
 
 		currentPet.image = req.body.name;

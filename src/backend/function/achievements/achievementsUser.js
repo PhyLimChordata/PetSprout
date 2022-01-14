@@ -8,7 +8,7 @@ const update_login_streaks = async(req, res) => {
         let user_achievements = await Achievement.findOne({ user: user_id });
         let user_lastlogin = await User.findById(user_id).select('lastlogin');
 
-        if(!user_lastlogin) return res.status(404).json('Last login not found');
+        if(!user_lastlogin) return res.status(404).json('Last login not found for user ' + user_id);
         
         let year = user_lastlogin.lastlogin.getFullYear();
         let month = user_lastlogin.lastlogin.getMonth();
