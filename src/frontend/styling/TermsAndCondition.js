@@ -16,7 +16,7 @@ const TermsAndCondition = (theme) =>
 		},
 		textTop: {
 			fontSize: 31,
-			color: theme.Tertiary,
+			color: theme.Quaternary,
 			fontWeight: 'bold',
 			marginBottom: 10,
 			marginTop: 10,
@@ -38,7 +38,7 @@ const TermsAndCondition = (theme) =>
 		},
 		checkboxContainer: {
 			flexDirection: 'row',
-			alignItems: 'flex-start',
+			alignItems: 'center',
 			width: 275,
 			fontSize: 15,
 			fontStyle: 'normal',

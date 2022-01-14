@@ -172,12 +172,21 @@ function AcceptPrivacyPolicy(props) {
 				{show &&
 				<View style = {style.center}>
 					<View style = {style.checkboxContainer}>
+						<View
+							style={{
+								borderColor: colors.Quaternary,
+								borderWidth: 2,
+								borderRadius:5,
+								marginLeft:-10,
+								marginRight:10
+							}}>
 						<Checkbox
 							status = {status}
 							onPress = {checkSwitch}
 							uncheckedColor = {style.textTop.color}
 							color = {style.textTop.color}
 						/>
+						</View>
 						<Text style = {style.text}>
 							I have read, understood and agreed to the Privacy Policy that applies with the use of PetSprout.
 						</Text>
