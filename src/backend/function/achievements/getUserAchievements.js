@@ -84,7 +84,7 @@ const get_current_login_streaks = async(req, res) => {
         let user_id = req.user.id;
 
         let user_achievements = await Achievement.findOne({ user: user_id }, { _id: 0, login_streak: 1 });
-        console.log(user_achievements);
+        console.log(`get user_achievements for user with id ${user_id}`);
 
         return res.status(200).json(user_achievements.login_streak);
         
