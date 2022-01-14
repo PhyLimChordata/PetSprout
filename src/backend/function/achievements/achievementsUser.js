@@ -23,7 +23,7 @@ const update_login_streaks = async(req, res) => {
 		lastLogin.setHours(0, 0, 0);
 
 		const daysApart = ((today - lastLogin)/ (1000 * 60 * 60 * 24)).toFixed(1);
-		console.log(daysApart);
+		console.log("Days since last login of user id " + user_id + ": " + daysApart);
 		if(daysApart == 1) {
 			let new_streak = user_achievements.login_streak + 1;
 			user_achievements.login_streak = new_streak;
