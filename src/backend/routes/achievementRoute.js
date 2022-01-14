@@ -16,7 +16,7 @@ router.put(
 );
 
 router.put(
-	'/updateLoginStreaks',
+	'/updateLoginStreaks/:date',
 	authentication,
 	achievementsUser.update_login_streaks,
 );

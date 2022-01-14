@@ -272,7 +272,6 @@ function sendUserEmail(cnd, code) {
 				'">Click this link to verify your account!</a>' +
 				'<br><br>We hope you have a fun time building your habits!' +
 				'<br><br>Thanks!';
-
 			console.log(html);
 			var data = {
 				from: 'PetSprout',

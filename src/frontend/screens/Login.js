@@ -121,7 +121,7 @@ function Login(props) {
 				} else if (res.status == 200) {
 					res.json().then((data) => {
 						logIn(data.token);
-            
+
 					});
 				} else if (res.status == 404 || res.status == 401) {
 					setError('The provided information is incorrect');

@@ -36,7 +36,7 @@ const HabitSchema = new Schema(
 					type: [String],
 				},
 				times: {
-					type: String,
+					type: Number,
 				},
 				alarm: [
 						{
@@ -54,6 +54,10 @@ const HabitSchema = new Schema(
 					default: 0,
 				},
 				continuous: {
+					type: Number,
+					default: 0,
+				},
+				missing: {
 					type: Number,
 					default: 0,
 				},

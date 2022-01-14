@@ -36,51 +36,26 @@ module.exports = async (req, res) => {
 
 		habitFromDB.todo = habitFromDB.todo + 1;
 		userHabit.expValue = expValue;
-
 		if (habitFromDB.todo === habitFromDB.times) {
 			habitFromDB.continuous = habitFromDB.continuous + 1;
+			habitFromDB.missing = 0;
 			let current = new Date(date);
+			current.setHours(0, 0, 0, 0);
 			let current_date = current.getDate();
 			let current_day = current.getDay();
-			let nextSignInDate = null;
-			if (newSchedule.includes(current_day.toString())) {
-				nextSignInDate = current;
-			} else {
-				let index = current_day;
-				let interval = 0;
-				while (!newSchedule.includes(index.toString())) {
-					if (index === 6) index = 0;
-					else index++;
-					interval++;
-				}
-				nextSignInDate = current.setDate(current_date + interval);
-				nextSignInDate = new Date(nextSignInDate);
+			// Check the next day onwards for the next sign date
+			let index = current_day + 1 > 6 ? 0 : current_day + 1;
+			let interval = 1; // can't be today again if the habit has already been finished
+			while (!habitFromDB.schedule.includes(index.toString())) {
+				if (index === 6) index = 0;
+				else index++;
+
+				interval++;
 			}
+			current.setDate(current_date + interval);
+			newSignInDate = new Date(current);
+			habitFromDB.nextSignInDate = newSignInDate;
 		}
-
-		// let anaylzeId = habitFromDB.analyze;
-		// let analyze = await Analyze.findById(anaylzeId);
-		// if (!analyze) return res.status(404).json("User habit's analyze not found");
-
-		// // need to change to user time
-		// // const date = new Date();
-
-		// let analyze_data = analyze.freq.find(
-		// 	(data) =>
-		// 		data.date.getFullYear().toString() === date.getFullYear().toString() &&
-		// 		data.date.getMonth().toString() === date.getMonth().toString() &&
-		// 		data.date.getDate().toString() === date.getDate().toString(),
-		// );
-		// if (!analyze_data) {
-		// 	let newData = {
-		// 		date: date,
-		// 		frequency: 1,
-		// 	};
-		// 	analyze.freq.push(newData);
-		// } else {
-		// 	analyze_data.freq = analyze_data.freq + 1;
-		// }
-
 		//Check evolutioon and replenish health
 		if (remainingToLevel <= 5) {
 			userHabit.heart = 3;
