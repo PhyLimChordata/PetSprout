@@ -23,7 +23,7 @@ function PomodoroStartPopup(props) {
 				'You’re about to start a Pomodoro session!\n\nYou can’t stop once you start'
 			}
 			buttonType={'confirmation'}
-			successFunction={() => startPomodoro()}
+			successFunction={props.startFunction}
 			successText={'Continue'}
 			failureText={'Cancel'}
 		></Popup>

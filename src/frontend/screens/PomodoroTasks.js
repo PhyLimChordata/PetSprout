@@ -1,118 +1,95 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { View, Image, Animated, SafeAreaView } from 'react-native';
+import { View, Text, StyleSheet, SafeAreaView, Animated, scrolling, TouchableOpacity, Touchable, KeyboardAvoidingView, Platform } from 'react-native';
 
-import styles from '../styling/HabitsScreen';
-import Habits from '../components/Habits';
+import PomodoroTasks from '../components/PomodoroTasks';
 import MenuHeader from '../components/MenuHeader';
-
+import styles from '../styling/Header';
 import { useTheme } from '@react-navigation/native';
-
-import { AuthContext } from '../Context';
-import DeleteHabitPopup from '../components/DeleteHabitPopup';
+import PomodoroTasksStyles from'../styling/PomodoroTasks';
 
 function PomodoroTasksScreen(props) {
-	const [habits, setHabits] = useState([]);
-	const [userHabitId, setUserHabitId] = useState('');
-	const { colors } = useTheme();
-	const [displayed, setDisplayed] = useState(false);
-	const scrolling = React.useRef(new Animated.Value(0)).current;
-	const [selected, setSelected] = useState(null);
-	const [deleteVisible, setDeleteVisible] = useState(false);
+    const scrolling = React.useRef(new Animated.Value(0)).current;
+    const { colors } = useTheme();
 
-	const { getToken } = useContext(AuthContext);
+    const [tasks, setTasks] = useState([])
+    const [title, setTitle] = useState('');
 
-	const deleteHabit = (habit) => {
-		setSelected(habit);
-		setDeleteVisible(true);
-		console.log(habit);
-		console.log('eh');
-	};
-	useEffect(() => {
-		if (habits.length == 0 && !displayed) displayHabits();
+    const [displayed, setDisplayed] = useState(false);
+
+    useEffect(() => {
+		if (tasks.length == 0 && !displayed) displayTasks();
 	});
 
-	const displayHabits = () => {
-		setDisplayed(true);
-		fetch('http://localhost:5000/api/v1.0.0/habit/show_all_user_habit/', {
-			method: 'GET',
-			headers: {
-				'Content-Type': 'application/json',
-				'authentication-token': getToken,
-			},
-		})
-			.then((res) =>
-				res.json().then((data) => {
-					console.log(data);
-					const expValue = parseInt(data.expValue);
-					setHabits(data.habitList);
-					setUserHabitId(data._id);
-					setDisplayed(true);
-				}),
-			)
-			.catch((err) => {
-				console.log(err);
-			});
-	};
+    const displayTasks= () => {
+        setTasks([...tasks, 'Mock Task']);
+        setTitle(...title,'');
+    }
 
-	return (
-		<SafeAreaView style={styles(colors).headContainer}>
-			<MenuHeader back={true} text='All Habits' navigation={props.navigation} />
-			<View
-				style={{ flex: 20, marginLeft: 60, marginRight: 60, marginTop: 40 }}
-			>
-				<Animated.ScrollView
-					showsVerticalScrollIndicator={false}
-					onScroll={Animated.event(
-						[{ nativeEvent: { contentOffset: { y: scrolling } } }],
-						{ useNativeDriver: true },
-					)}
-					decelerationRate={'normal'}
-				>
-					{habits.map((data, index) => {
-						if (data.times - data.todo > 0) {
-							const scale = scrolling.interpolate({
-								inputRange: [-1, 0, 100 * index, 100 * (index + 1)],
-								outputRange: [1, 1, 1, 0],
-							});
+    const createTask=(props)=>{
+        setTasks([...tasks, '']);
+        setTitle(...title,'');
+    }
 
-							const opacity = scrolling.interpolate({
-								inputRange: [-1, 0, 100 * index, 100 * (index + 0.8)],
-								outputRange: [1, 1, 1, 0],
-							});
+    const CreateTaskButton = () => {
+        return (
+            <View style={PomodoroTasksStyles.create}>
+                <Text style={PomodoroTasksStyles.plus}>+</Text>
+            </View>
+        )
+    }
 
-							return (
-								<View>
-									<Animated.View style={{ opacity, transform: [{ scale }] }}>
-										<Habits
-											enableLeft={true}
-											navigation={props.navigation}
-											name={data.title}
-											streak={1}
-											frequency={data.times - data.todo}
-											habitId={data._id}
-											userHabitId={userHabitId}
-											deleteHabit={(selected) => deleteHabit(selected)}
-										></Habits>
-										<View style={{ height: 15 }}></View>
-									</Animated.View>
-								</View>
-							);
-						}
-					})}
-				</Animated.ScrollView>
-			</View>
-			{selected != null && (
-				<DeleteHabitPopup
-					visible={deleteVisible}
-					setVisible={setDeleteVisible}
-					habitTitle={selected.habitTitle}
-					goBack={false}
-					userHabitId={selected.userHabitId}
-					habitId={selected.habitId}
-				/>
-			)}
-		</SafeAreaView>
-	);
+    const SortTaskButton = () =>{
+        return (
+            <View style={PomodoroTasksStyles.create}>
+                <Text style={PomodoroTasksStyles.plus}>S</Text>
+            </View>
+        )
+    }
+
+    return(
+        <SafeAreaView style={{ flex: 1, backgroundColor: colors.white }}>
+			<MenuHeader
+                back={true}
+                text={'PomodoroTasks'}
+                navigation={props.navigation}
+			/>
+            <KeyboardAvoidingView behavior={Platform.OS==="ios" ? "padding" : "padding"} style={styles(colors).headContainer}>
+                <View style={{ marginTop: 20 }} />
+                <Animated.ScrollView
+                        showsVerticalScrollIndicator={false}
+                        onScroll={Animated.event(
+                            [{ nativeEvent: { contentOffset: { y: scrolling } } }],
+                            { useNativeDriver: true },
+                        )}
+                        decelerationRate={'normal'}
+                >
+                    <View style={PomodoroTasksStyles.container}>
+                        <View style={PomodoroTasksStyles.tasksWrapper}>
+                            <View style={PomodoroTasksStyles.items}>
+                                {tasks.map((items) => {
+                                    return <PomodoroTasks text={items} 
+                                    />
+                                })}
+                            </View>
+                        </View>
+                    </View>
+                </Animated.ScrollView>
+                <View style={PomodoroTasksStyles.buttons}>
+                    <TouchableOpacity style={PomodoroTasksStyles.createTask}
+                        onPress={() => {
+                            createTask();
+                        }}
+                    >
+                        <CreateTaskButton/>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={PomodoroTasksStyles.SortTask}>
+                        <SortTaskButton/>
+                    </TouchableOpacity>
+                </View>
+            </KeyboardAvoidingView>
+        </SafeAreaView>
+    );
 }
+
 
 export default PomodoroTasksScreen;

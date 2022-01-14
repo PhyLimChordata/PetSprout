@@ -1,6 +1,7 @@
 const Habit = require('../../schemas/habitSchema');
 const User = require('../../schemas/userSchema');
 const Analyze = require('../../schemas/analyzeSchema');
+const alarmLib = require('./alarm');
 
 /**
  *
@@ -23,6 +24,12 @@ module.exports = async (req, res) => {
 		);
 
 		let analyzeId = deleteHabitList[0].analyze;
+
+		
+		if(process.env.NOTIFICATIONTOGGLE === 'true') {
+			// Stop any alarms from running.
+			alarmLib.unscheduleHabitAlarms(req.user.id, analyzeId);
+		}
 
 		await Analyze.findByIdAndDelete(analyzeId);
 

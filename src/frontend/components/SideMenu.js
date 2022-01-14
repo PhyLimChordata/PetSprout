@@ -17,6 +17,7 @@ import { comingsoon } from '../resources/images/Pets/ComingSoon/ComingSoon';
 import { egg } from '../resources/images/Pets/Egg/Egg';
 import LogoutConfirmation from './LogoutPopup';
 import { EvolutionMapping } from '../resources/mappings/EvolutionMapping';
+import { ImageMapping, getImage } from '../resources/images/Pets/ImageMapping';
 function ThemeCircle({ colorTheme, onPress, selected }) {
 	const {height, width} = Dimensions.get('window');
 
@@ -98,6 +99,7 @@ function SideMenu(props) {
 		changeLogo,
 		changePet,
 		changeComingSoon,
+		getPet
 	} = useContext(AuthContext);
 
 	const { colors } = useTheme();
@@ -146,9 +148,22 @@ function SideMenu(props) {
 			.catch((err) => console.log(err));
 	}, []);
 
-	{
-		/* TODO: Change this to a global variable */
-	}
+	useEffect(() => {
+		fetch('http://localhost:5000/api/v1.0.0/pets/get_current', {
+			method: 'GET',
+			headers: {
+				'Content-Type': 'application/json',
+				'authentication-token': getToken,
+			},
+		})
+			.then((res) =>
+				res.json().then((data) => {
+					changePet(getImage(data.image, 'Happy', getColor));
+					setPet(getImage(data.image, 'Happy', getColor));
+				}),
+			)
+			.catch();
+	}, []);
 
 	const [toggleValue, setToggleValue] = useState(!defaultMode);
 
@@ -159,7 +174,7 @@ function SideMenu(props) {
 		console.log(color);
 		console.log(logo[color]);
 		changeLogo(logo[color]);
-		changePet(egg[color]);
+		changePet(ImageMapping[data.image.toLowerCase()][data.image.toLowerCase()]['Happy'][color]);
 		changeComingSoon(comingsoon[color]);
 	}
 	return (
@@ -205,7 +220,7 @@ function SideMenu(props) {
 											height: 50,
 											borderRadius: 25,
 										}}
-										source={pet}
+										source={getPet}
 									></Image>
 								</TouchableOpacity>
 								<View
@@ -235,7 +250,7 @@ function SideMenu(props) {
 							{/*		props.navigation.navigate('SettingsScreen');*/}
 							{/*	}}*/}
 							{/*>*/}
-							{/*	<MaterialCommunityIcons*/}
+							{/*	<MaterialCommxunityIcons*/}
 							{/*		name='cog'*/}
 							{/*		color={colors.Quaternary}*/}
 							{/*		size={40}*/}
@@ -289,24 +304,24 @@ function SideMenu(props) {
 									props.navigation.navigate('ProfileScreen');
 								}}
 							/>
-							{/*<Tab*/}
-							{/*	color={colors.Quaternary}*/}
-							{/*	icon={'bullhorn'}*/}
-							{/*	title={'Feedback'}*/}
-							{/*	onPress={() => {*/}
-							{/*		props.setModalVisible(false);*/}
-							{/*		props.navigation.navigate('FeedbackScreen');*/}
-							{/*	}}*/}
-							{/*/>*/}
-							{/*<Tab*/}
-							{/*	color={colors.Quaternary}*/}
-							{/*	icon={'bug'}*/}
-							{/*	title={'Report a Bug'}*/}
-							{/*	onPress={() => {*/}
-							{/*		props.setModalVisible(false);*/}
-							{/*		props.navigation.navigate('ReportABugScreen');*/}
-							{/*	}}*/}
-							{/*/>*/}
+							<Tab
+								color={colors.Quaternary}
+								icon={'bullhorn'}
+								title={'Feedback'}
+								onPress={() => {
+									props.setModalVisible(false);
+									props.navigation.navigate('FeedbackScreen');
+								}}
+							/>
+							<Tab
+								color={colors.Quaternary}
+								icon={'bug'}
+								title={'Report a Bug'}
+								onPress={() => {
+									props.setModalVisible(false);
+									props.navigation.navigate('ReportABugScreen');
+								}}
+							/>
 							<Tab
 								color={colors.Quaternary}
 								icon={'account-group'}

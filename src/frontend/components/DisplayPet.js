@@ -5,7 +5,9 @@ import ExperienceBar from '../components/ExperienceBar';
 import { useTheme } from '@react-navigation/native';
 import { AuthContext } from '../Context';
 import { LevelMapping } from '../resources/mappings/LevelMapping';
+import { ImageMapping } from '../resources/images/Pets/ImageMapping';
 import EvolutionPopup from './EvolutionPopup';
+import { get } from 'lodash';
 
 var totalXP = 0;
 var lvlToEvolve = 0;
@@ -68,7 +70,7 @@ export function DisplayPet(props) {
 		}
 	});
 
-	const { getToken, getRefreshing, getPet } = useContext(AuthContext);
+	const { getToken, getRefreshing, getPet, getColor } = useContext(AuthContext);
 
 	useEffect(() => {
 		if (getRefreshing) {
@@ -129,8 +131,8 @@ export function DisplayPet(props) {
 			setLevelToEvolveNext(-1);
 			lvlToEvolve = -1;
 		} else {
-			setLevelToEvolveNext(level + 10 - (level % 10));
-			lvlToEvolve = level + 10 - (level % 10);
+			setLevelToEvolveNext(level + 1 - (level % 1));
+			lvlToEvolve = level + 1 - (level % 1);
 		}
 	};
 

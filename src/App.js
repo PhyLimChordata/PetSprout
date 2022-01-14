@@ -9,7 +9,6 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer, useTheme } from '@react-navigation/native';
 
 //Screens
-import BottomMenu from './frontend/components/BottomMenu';
 import LoginScreen from './frontend/screens/Login';
 import SignupScreen from './frontend/screens/Signup';
 import VerifyEmailSignUpScreen from './frontend/screens/VerifyEmailSignUp';
@@ -25,7 +24,6 @@ import CollaboratorsScreen from './frontend/screens/Collaborators';
 import SupportUsScreen from './frontend/screens/SupportUs';
 import ReportABugScreen from './frontend/screens/ReportABug';
 import FeedbackScreen from './frontend/screens/Feedback';
-import TermsAndConditionScreen from './frontend/screens/TermsAndCondition';
 import HabitsScreen from './frontend/screens/Habits';
 import CreateHabitScreen from './frontend/screens/PutHabits/CreateHabit';
 import ComingSoonScreen from './frontend/screens/ComingSoon';
@@ -34,6 +32,9 @@ import NamePetScreen from './frontend/screens/NamePet';
 import AllHabitsScreen from './frontend/screens/AllHabits';
 import PomodoroScreen from './frontend/screens/Pomodoro';
 import PomodoroTasksScreen from './frontend/screens/PomodoroTasks';
+import AcceptTermsAndConditionScreen from './frontend/screens/AcceptTermsAndCondition';
+import AcceptPrivacyPolicyScreen from './frontend/screens/AcceptPrivacyPolicy';
+
 // Colour Themes
 import GreenLightTheme from './frontend/resources/themes/light/GreenTheme';
 import OrangeLightTheme from './frontend/resources/themes/light/OrangeTheme';
@@ -53,6 +54,9 @@ const Stack = createStackNavigator();
 
 export default function App() {
 	// Global variables within the app
+	
+	// TOGGLE TO FALSE TO TURN OFF NOTIFICATIONS
+	const [notificationsToggle, setNotificationsToggle] = useState("true");
 	const [token, setToken] = useState(null);
 	const [color, setColor] = useState('Green');
 	const [logo, setLogo] = useState(
@@ -93,6 +97,7 @@ export default function App() {
 			changeComingSoon: (comingSoon) => {
 				setComingSoon(comingSoon);
 			},
+			getNotificationsToggle: notificationsToggle,
 			getToken: token,
 			getColor: color,
 			getLogo: logo,
@@ -102,6 +107,8 @@ export default function App() {
 			getRefreshing: refreshing,
 		};
 	}, [
+		notificationsToggle,
+		setNotificationsToggle,
 		token,
 		setToken,
 		color,
@@ -160,6 +167,16 @@ function NavContainer(props) {
 		<NavigationContainer theme={props.theme}>
 			{props.token ? (
 				<Stack.Navigator headerMode='none'>
+					<Stack.Screen
+						name='AcceptTermsAndConditionScreen'
+						component={AcceptTermsAndConditionScreen}
+						initialParams={{isAcceptScreen: true}}
+					/>
+					<Stack.Screen
+						name='AcceptPrivacyPolicyScreen'
+						component={AcceptPrivacyPolicyScreen}
+						initialParams={{isAcceptScreen: true}}
+					/>
 					<Stack.Screen name='HomeScreen' component={HomeScreen} />
 					<Stack.Screen
 						name='AchievementScreen'
@@ -189,10 +206,17 @@ function NavContainer(props) {
 						name='PomodoroTasksScreen'
 						component={PomodoroTasksScreen}
 					/>
-
+					
 					<Stack.Screen
 						name='TermsAndConditionScreen'
-						component={TermsAndConditionScreen}
+						component={AcceptTermsAndConditionScreen}
+						initialParams={{isAcceptScreen: false}}
+					/>
+					
+					<Stack.Screen
+						name='PrivacyPolicyScreen'
+						component={AcceptPrivacyPolicyScreen}
+						initialParams={{isAcceptScreen: false}}
 					/>
 					<Stack.Screen name='EvolutionScreen' component={EvolutionScreen} />
 					<Stack.Screen name='NamePetScreen' component={NamePetScreen} />
@@ -348,7 +372,9 @@ function Calendar(props) {
 function Pomodoro(props) {
 	return <PomodoroScreen title='Pomodoro' navigation={props.navigation} />;
 }
-
+function PomodoroTasks(props) {
+    return <CreateHabitScreen title='Tasks' navigation={props.navigation} />;
+}
 function Reflect(props) {
 	return <ComingSoonScreen title='Reflect' navigation={props.navigation} />;
 }
