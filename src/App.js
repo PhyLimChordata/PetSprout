@@ -32,12 +32,9 @@ import NamePetScreen from './frontend/screens/NamePet';
 import AllHabitsScreen from './frontend/screens/AllHabits';
 import PomodoroScreen from './frontend/screens/Pomodoro';
 import PomodoroTasksScreen from './frontend/screens/PomodoroTasks';
-<<<<<<< HEAD
-
-=======
 import AcceptTermsAndConditionScreen from './frontend/screens/AcceptTermsAndCondition';
 import AcceptPrivacyPolicyScreen from './frontend/screens/AcceptPrivacyPolicy';
->>>>>>> development
+
 // Colour Themes
 import GreenLightTheme from './frontend/resources/themes/light/GreenTheme';
 import OrangeLightTheme from './frontend/resources/themes/light/OrangeTheme';

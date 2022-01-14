@@ -103,7 +103,7 @@ function Login(props) {
 		console.log(getNotificationsToggle)
 		if (!getNotificationsToggle) {
 			console.log(`Clientside Notifications (${getNotificationsToggle}) are DISABLED. Toggle is located in App.js.`)
-			fetch('http://3.15.57.200:5000/api/v1.0.0/user/login', {
+			fetch('http://localhost:5000/api/v1.0.0/user/login', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
@@ -152,7 +152,7 @@ function Login(props) {
 		} else {
 			console.log(`Clientside Notifications  (${getNotificationsToggle}) are enabled. Toggle is located in App.js.`)
 			registerForPushNotificationsAsync().then((pushToken) => {
-				fetch('http://3.15.57.200:5000/api/v1.0.0/user/login', {
+				fetch('http://localhost:5000/api/v1.0.0/user/login', {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
@@ -172,7 +172,7 @@ function Login(props) {
 						res.json().then((data) => {
 							logIn(data.token);
 							fetch(
-								'http://3.15.57.200:5000/api/v1.0.0/achievements/updateLoginStreaks',
+								'http://localhost:5000/api/v1.0.0/achievements/updateLoginStreaks',
 								{
 									method: 'PUT',
 									headers: {
