@@ -17,7 +17,7 @@
 		"android": {
 			"googleServicesFile": "./google-services.json",
 			"softwareKeyboardLayoutMode": "pan",
-			"package": "com.phylimchordata.PetSprout",
+			"package": "com.phylimchordata.root",
 			"versionCode": 2,
 			"adaptiveIcon": {
 				"foregroundImage": "./frontend/resources/images/Logo/LogoGreenNonTransparent.png",
