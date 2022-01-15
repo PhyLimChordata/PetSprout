@@ -40,36 +40,25 @@ If it's not being recognized then add the nodeJS folder path to the environment 
 
     npm install
 
-### 3. Test that everything related to backend is working by typing the following in 'src/backend':
-
-    nodemon server
-
-If successful, the server would open and the database can be accessed.
-
-In terminal, you should see:
-
-    Server is running on port: 5000
-    MongoDB database connection established successfully"
-
-### 4. Test that everything related to frontend is working by typing the following in 'src':
+### 3. Test that everything related to frontend is working by typing the following in 'src':
 
     npm start
 
 If configured correctly, the code would redirect you to expo's developer tools where you have the option to run emulators, run on the web browser or on your personal device.
 
-### 5. If you intend on testing on a web browser...
+### 4. If you intend on testing on a web browser...
 
     "Run in web browser"
 
 Clicking on the button with the label above will redirect you to a 3.15.57.200 where you should be able to see react components.
 
-### 6. If you intend on using your personal device...
+### 5. If you intend on using your personal device...
 
     "Download the mobile app: Expo Go"
 
 Once installed, scan the QR code and the program should be displayed onto your personal device.
 
-### 7. If you intend on using an Android emulator...
+### 6. If you intend on using an Android emulator...
 
     "Install Android Studio -> Launch a Virtual Device -> Enter "a" in terminal (after entering npm start) OR Click "Run on Android Device/Emulator"
 
@@ -83,7 +72,7 @@ You should be prompted with options for virtual devices.\
 Launch an emulator by clicking the green play button.\
 Enter "a" in terminal (after entering npm start) OR Click "Run on Android Device/Emulator
 
-### 8. If you intend on using an IOS emulator...
+### 7. If you intend on using an IOS emulator...
 
     "Install XCode -> Launch a Virtual Device -> Run on IOS Simulator"
 
@@ -101,3 +90,8 @@ Calvin Cheng\
 Cheryl Chen\
 YuanYuan Li\
 Katrina Best
+Robert Nichita\
+Darren Liu \ 
+Joevin Chen\
+Justin Yu\
+Daniel Chen\ 
