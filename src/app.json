@@ -4,9 +4,9 @@
 		"slug": "petsprout",
 		"version": "1.0.0",
 		"orientation": "portrait",
-		"icon": "./frontend/resources/images/Logo/LogoGreenNonTransparent.jpeg",
+		"icon": "./frontend/resources/images/Logo/LogoGreenNonTransparent.png",
 		"splash": {
-			"image": "./frontend/resources/images/Logo/LogoGreenNonTransparent.jpeg",
+			"image": "./frontend/resources/images/Logo/LogoGreenNonTransparent.png",
 			"resizeMode": "contain",
 			"backgroundColor": "#bde4a8"
 		},
@@ -20,7 +20,7 @@
 			"package": "com.phylimchordata.PetSprout",
 			"versionCode": 2,
 			"adaptiveIcon": {
-				"foregroundImage": "./frontend/resources/images/Logo/LogoGreenNonTransparent.jpeg",
+				"foregroundImage": "./frontend/resources/images/Logo/LogoGreenNonTransparent.png",
 				"backgroundColor": "#FFFFFF"
 			}
 		},
@@ -29,7 +29,7 @@
 			"buildNumber": "2.0.0"
 		},
 		"web": {
-			"favicon": "./frontend/resources/images/Logo/LogoGreenNonTransparent.jpeg"
+			"favicon": "./frontend/resources/images/Logo/LogoGreenNonTransparent.png"
 		},
 		"plugins": [
 			[
