@@ -90,6 +90,7 @@ export default function App() {
 				setLogo(logo);
 			},
 			changePet: (pet) => {
+				console.log(pet)
 				setPet(pet);
 			},
 			changeComingSoon: (comingSoon) => {
@@ -115,6 +116,7 @@ export default function App() {
 		setMode,
 		logo,
 		setLogo,
+		pet,
 		setPet,
 		setComingSoon,
 		refreshing,
