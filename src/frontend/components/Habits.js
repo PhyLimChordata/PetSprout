@@ -1,4 +1,4 @@
-import React, {useState, useContext, useEffect} from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { View, Image, Text } from 'react-native';
 
 import styles from '../styling/Habits';
@@ -21,9 +21,9 @@ function Habits(props) {
 
 	useEffect(() => {
 		if (!getRefreshing) {
-			setCompleted(props.completed)
-			setFrequency(props.frequency)
-			setStreak(props.streak)
+			setCompleted(props.completed);
+			setFrequency(props.frequency);
+			setStreak(props.streak);
 		}
 	}, [getRefreshing]);
 
