@@ -33,7 +33,7 @@ function ReportABug(props) {
 				'authentication-token': getToken,
 			},
 			body: JSON.stringify({
-				message: bug
+				message: bug,
 			}),
 		})
 			.then((res) => {
@@ -42,7 +42,7 @@ function ReportABug(props) {
 				}
 				if (res.status == 200) {
 					res.json().then((data) => {
-						console.log("Success!");
+						console.log('Success!');
 					});
 				} else if (res.status == 404) {
 					setError('User not found');
@@ -62,7 +62,7 @@ function ReportABug(props) {
 	// 			image={require('../resources/images/EmailPopup.png')}
 	// 			title='Thank you for Reporting a Bug!'
 	// 			text='An email has been sent and
-    //           we will look into it promptly'
+	//           we will look into it promptly'
 	// 		></Popup>
 	// 	);
 	// } else {
@@ -73,8 +73,8 @@ function ReportABug(props) {
 	// 			style={style.bugError}
 	// 			image={require('../resources/images/EmailPopup.png')}
 	// 			title='Something went wrong...'
-	// 			text='An email could not be sent. 
-    //           Please attempt another time.'
+	// 			text='An email could not be sent.
+	//           Please attempt another time.'
 	// 		></Popup>
 	// 	);
 	// }
@@ -106,8 +106,8 @@ function ReportABug(props) {
 					activeOpacity={0.6}
 					style={style.reportABugButton}
 					onPress={() => {
-						setModalVisible(true)
-						attemptSendBug()
+						setModalVisible(true);
+						attemptSendBug();
 					}}
 				>
 					<Text style={style.reportABugButtonText}>Submit</Text>

@@ -18,7 +18,6 @@ import TextBox from '../components/TextBox';
 
 import { AuthContext } from '../Context';
 
-
 // setting data from database
 
 function SettingsPage(props) {
@@ -204,7 +203,7 @@ function SettingsPage(props) {
 						handle={setVibration}
 						styles={styles}
 					/>
-					
+
 					<Text style={[styles.textTitle, styles.text]}>App version</Text>
 					<View style={styles.textDisplayMargin}>
 						<Text style={[styles.textNormal, styles.textDisplay]}>1.0.0</Text>
