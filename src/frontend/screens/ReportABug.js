@@ -92,7 +92,7 @@ function ReportABug(props) {
 				}
 			/>
 
-			<View style={style.container}>
+			<View style={{flex:1, alignItems: 'center', marginTop:20}}>
 				<TextBox
 					header={'Message'}
 					boxStyle={style.textbox}

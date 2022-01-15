@@ -62,9 +62,7 @@ export default function App() {
 	const [logo, setLogo] = useState(
 		require('./frontend/resources/images/Logo/LogoGreen.png'),
 	);
-	const [pet, setPet] = useState(
-		require('./frontend/resources/images/Pets/Egg/EggHappyGreen.gif'),
-	);
+	const [pet, setPet] = useState("egg");
 	const [comingSoon, setComingSoon] = useState(
 		require('./frontend/resources/images/Pets/ComingSoon/ComingSoonGreen.png'),
 	);
