@@ -164,8 +164,8 @@ function SideMenu(props) {
 		})
 			.then((res) =>
 				res.json().then((data) => {
+					console.log("Current pet from side menu is " + data.image)
 					changePet(data.image);
-					setPet(getImage(data.image, 'Happy', getColor));
 				}),
 			)
 			.catch();
