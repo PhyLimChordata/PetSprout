@@ -5,7 +5,7 @@ import ExperienceBar from '../components/ExperienceBar';
 import { useTheme } from '@react-navigation/native';
 import { AuthContext } from '../Context';
 import { LevelMapping } from '../resources/mappings/LevelMapping';
-import { ImageMapping } from '../resources/images/Pets/ImageMapping';
+import { getImage } from '../resources/images/Pets/ImageMapping';
 import EvolutionPopup from './EvolutionPopup';
 import { get } from 'lodash';
 
@@ -156,7 +156,7 @@ export function DisplayPet(props) {
 							resizeMode: 'contain',
 							marginBottom: 5,
 						}}
-						source={getPet}
+						source={getImage(getPet, 'Happy', getColor)}
 					/>
 					<ExperienceBar
 						level={level}
