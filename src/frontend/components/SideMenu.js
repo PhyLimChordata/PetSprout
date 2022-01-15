@@ -15,9 +15,7 @@ import Colours from '../resources/themes/Colours';
 import { useTheme } from '@react-navigation/native';
 import { logo } from '../resources/images/Logo/Logo';
 import { comingsoon } from '../resources/images/Pets/ComingSoon/ComingSoon';
-import { egg } from '../resources/images/Pets/Egg/Egg';
 import LogoutConfirmation from './LogoutPopup';
-import { EvolutionMapping } from '../resources/mappings/EvolutionMapping';
 import { getImage } from '../resources/images/Pets/ImageMapping';
 function ThemeCircle({ colorTheme, onPress, selected }) {
 	const { height, width } = Dimensions.get('window');
@@ -111,33 +109,12 @@ function SideMenu(props) {
 	const { colors } = useTheme();
 	const [color, setColor] = useState(getColor);
 	const [userName, setUserName] = useState('');
-	const [pet, setPet] = useState(null);
 	const [logoutVisible, setLogoutVisible] = useState(false);
 
 	let defaultMode = true;
 	if (getMode == 'dark') {
 		defaultMode = false;
 	}
-
-	useEffect(() => {
-		if (props.modalVisible) {
-			setColor(getColor);
-			setToggleValue(getMode == 'dark');
-			fetch('http://localhost:5000/api/v1.0.0/pets/get_current', {
-				method: 'GET',
-				headers: {
-					'Content-Type': 'application/json',
-					'authentication-token': getToken,
-				},
-			})
-				.then((res) =>
-					res.json().then((data) => {
-						setPet(EvolutionMapping[data.image]);
-					}),
-				)
-				.catch();
-		}
-	}, [props.modalVisible]);
 
 	useEffect(() => {
 		fetch('http://localhost:5000/api/v1.0.0/user/viewAccount', {
