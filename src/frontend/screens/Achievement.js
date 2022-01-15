@@ -52,7 +52,7 @@ function AchievementScreen(props) {
 			})
 				.then((res) => res.json())
 				.then((data) => {
-					console.log(data);;
+					console.log(data);
 					for (let cat in Object.keys(data)) {
 						let sublist = [];
 
@@ -103,8 +103,8 @@ function AchievementScreen(props) {
 		Dimensions.get('screen').height,
 	);
 	return (
-		fontsLoaded &&
-		<SafeAreaView style={androidSafeAreaView().AndroidSafeArea}>
+		fontsLoaded && (
+			<SafeAreaView style={androidSafeAreaView().AndroidSafeArea}>
 				<MenuHeader text='Achievement' navigation={props.navigation} />
 
 				<View style={styles.headContainer}>
@@ -120,7 +120,8 @@ function AchievementScreen(props) {
 					<HomeButton navigation={props.navigation} colors={colors} />
 				</View>
 			</SafeAreaView>
-		);
+		)
+	);
 }
 
 const AchievementPanel = (props) => {
@@ -166,7 +167,11 @@ const CarouselAcheivement = (props) => {
 				horizontal={true}
 				decelerationRate={'fast'}
 				style={props.style.achievementPanel}
-				snapToInterval={3*((0.1415 * Dimensions.get('screen').width) + 0.05 * Dimensions.get('screen').width)}
+				snapToInterval={
+					3 *
+					(0.1415 * Dimensions.get('screen').width +
+						0.05 * Dimensions.get('screen').width)
+				}
 				snapToAlignment={'center'}
 			>
 				{panels.map((item) => (

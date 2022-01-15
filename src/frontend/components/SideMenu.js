@@ -5,7 +5,8 @@ import {
 	Text,
 	TouchableOpacity,
 	SafeAreaView,
-	Image, Dimensions,
+	Image,
+	Dimensions,
 } from 'react-native';
 import Modal from 'react-native-modal';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -19,7 +20,7 @@ import LogoutConfirmation from './LogoutPopup';
 import { EvolutionMapping } from '../resources/mappings/EvolutionMapping';
 import { ImageMapping, getImage } from '../resources/images/Pets/ImageMapping';
 function ThemeCircle({ colorTheme, onPress, selected }) {
-	const {height, width} = Dimensions.get('window');
+	const { height, width } = Dimensions.get('window');
 
 	return (
 		<View>
@@ -58,7 +59,12 @@ function ThemeCircle({ colorTheme, onPress, selected }) {
 
 const Tab = ({ color, icon, onPress, title, isImage = false }) => (
 	<TouchableOpacity
-		style={{ alignItems: 'center', flexDirection: 'row', width: '100%', marginBottom:Dimensions.get('window').height * 0.01 }}
+		style={{
+			alignItems: 'center',
+			flexDirection: 'row',
+			width: '100%',
+			marginBottom: Dimensions.get('window').height * 0.01,
+		}}
 		onPress={onPress}
 	>
 		{isImage ? (
@@ -99,7 +105,7 @@ function SideMenu(props) {
 		changeLogo,
 		changePet,
 		changeComingSoon,
-		getPet
+		getPet,
 	} = useContext(AuthContext);
 
 	const { colors } = useTheme();
@@ -174,7 +180,11 @@ function SideMenu(props) {
 		console.log(color);
 		console.log(logo[color]);
 		changeLogo(logo[color]);
-		changePet(ImageMapping[data.image.toLowerCase()][data.image.toLowerCase()]['Happy'][color]);
+		changePet(
+			ImageMapping[data.image.toLowerCase()][data.image.toLowerCase()]['Happy'][
+				color
+			],
+		);
 		changeComingSoon(comingsoon[color]);
 	}
 	return (
@@ -355,7 +365,7 @@ function SideMenu(props) {
 							style={{
 								justifyContent: 'flex-end',
 								marginHorizontal: '6%',
-								flex:1
+								flex: 1,
 							}}
 						>
 							<View
@@ -391,11 +401,13 @@ function SideMenu(props) {
 									onPress={() => colorChange('Red')}
 								/>
 							</View>
-							<View style={{ alignItems: 'center', marginBottom:10 }}>
+							<View style={{ alignItems: 'center', marginBottom: 10 }}>
 								<Toggle
 									value={toggleValue}
 									onPress={(newState) => {
-										newState ? changeModeTheme('dark') : changeModeTheme('light');
+										newState
+											? changeModeTheme('dark')
+											: changeModeTheme('light');
 										setToggleValue(newState);
 									}}
 									thumbButton={{

@@ -33,7 +33,7 @@ function Feedback(props) {
 				'authentication-token': getToken,
 			},
 			body: JSON.stringify({
-				message: feedback
+				message: feedback,
 			}),
 		})
 			.then((res) => {
@@ -42,7 +42,7 @@ function Feedback(props) {
 				}
 				if (res.status == 200) {
 					res.json().then((data) => {
-						console.log("Success!");
+						console.log('Success!');
 						//sendFeedback(data.token);
 					});
 				} else if (res.status == 404) {
@@ -76,10 +76,13 @@ function Feedback(props) {
 				<Text style={style.text}>
 					Send us your feedback! We would love to hear it!
 				</Text>
-				<TouchableOpacity 
-				activeOpacity={0.6} 
-				style={style.feedbackButton}
-				onPress={() => {attemptSendFeedback()}}>
+				<TouchableOpacity
+					activeOpacity={0.6}
+					style={style.feedbackButton}
+					onPress={() => {
+						attemptSendFeedback();
+					}}
+				>
 					<Text style={style.feedbackButtonText}>Submit</Text>
 				</TouchableOpacity>
 			</View>
