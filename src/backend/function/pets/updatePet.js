@@ -13,10 +13,10 @@ const name = async (req, res) => {
 		if (!user) return res.status(404).json('User could not found');
 
 		let usersPet = await Pets.findOne({ user: req.user.id });
-		if (req.name == '') {
-			req.name = req.user.userName + "'s Pet";
+		if (req.body.name == '') {
+			req.body.name= req.user.userName + "'s Pet";
 		}
-		usersPet.currentPet.name = req.name;
+		usersPet.currentPet.name = req.body.name;
 		usersPet.currentPet.image = 'blob';
 		await usersPet.save();
 		res.json(usersPet.currentPet);
