@@ -19,7 +19,7 @@ function AllHabitsScreen(props) {
 	const [selected, setSelected] = useState(null);
 	const [deleteVisible, setDeleteVisible] = useState(false);
 
-	const { getToken } = useContext(AuthContext);
+	const { getToken, getRefreshing } = useContext(AuthContext);
 
 	const deleteHabit = (habit) => {
 		setSelected(habit);
@@ -31,6 +31,11 @@ function AllHabitsScreen(props) {
 		if (habits.length == 0 && !displayed) displayHabits();
 	});
 
+	useEffect(() => {
+		if (getRefreshing) {
+			displayHabits();
+		}
+	}, [getRefreshing])
 	const displayHabits = () => {
 		setDisplayed(true);
 		fetch('http://localhost:5000/api/v1.0.0/habit/show_all_user_habit/', {
@@ -42,7 +47,8 @@ function AllHabitsScreen(props) {
 		})
 			.then((res) =>
 				res.json().then((data) => {
-					console.log(data);
+					// console.log(data);
+					console.log(data.habitList.length)
 					const expValue = parseInt(data.expValue);
 					setHabits(data.habitList);
 					setUserHabitId(data._id);
@@ -74,7 +80,6 @@ function AllHabitsScreen(props) {
 					decelerationRate={'normal'}
 				>
 					{habits.map((data, index) => {
-						if (data.times - data.todo > 0) {
 							const scale = scrolling.interpolate({
 								inputRange: [-1, 0, 100 * index, 100 * (index + 1)],
 								outputRange: [1, 1, 1, 0],
@@ -102,7 +107,6 @@ function AllHabitsScreen(props) {
 									</Animated.View>
 								</View>
 							);
-						}
 					})}
 				</Animated.ScrollView>
 			</View>
