@@ -107,7 +107,7 @@ function AchievementScreen(props) {
 		<SafeAreaView style={androidSafeAreaView().AndroidSafeArea}>
 				<MenuHeader text='Achievement' navigation={props.navigation} />
 
-				<View style={styles.headContainer}>
+				<View style={{flex:1, alignItems: 'center'}}>
 					{achievements.map((item) => (
 						<OneCategory
 							key={item.category}
@@ -116,10 +116,9 @@ function AchievementScreen(props) {
 							styles={styles}
 						/>
 					))}
-
-					<HomeButton navigation={props.navigation} colors={colors} />
 				</View>
-			</SafeAreaView>
+			<HomeButton navigation={props.navigation} colors={colors} />
+		</SafeAreaView>
 		);
 }
 
