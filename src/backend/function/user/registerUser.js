@@ -141,11 +141,8 @@ const user_activation = async (req, res) => {
 		};
 
 		for (data in daily_data) {
-			let newAnalyze = new Analyze({});
-			await newAnalyze.save();
 			let desc = daily_data[data];
 			let newHabit = {
-				analyze: newAnalyze._id,
 				title: data,
 				description: desc,
 				reason: '',
@@ -175,11 +172,8 @@ const user_activation = async (req, res) => {
 		}
 
 		for (data in weekly_data) {
-			let newAnalyze = new Analyze({});
-			await newAnalyze.save();
 			let desc = weekly_data[data];
 			let newHabit = {
-				analyze: newAnalyze._id,
 				title: data,
 				description: desc,
 				reason: '',
@@ -188,7 +182,6 @@ const user_activation = async (req, res) => {
 				alarm: [],
 				nextSignInDate,
 			};
-
 			newUserHabit.habitList.push(newHabit);
 		}
 
@@ -206,7 +199,7 @@ const user_activation = async (req, res) => {
 		});
 		await newUserAchievements.save();
 
-		await Mailing.deleteMany({ email });
+		// await Mailing.deleteMany({ email });
 		res.status(200).json('Success');
 	} catch (error) {
 		console.error(error);
@@ -261,6 +254,7 @@ function sendUserEmail(cnd, code) {
 					},
 				}),
 			);
+
 			var html =
 				'Welcome to PetSprout! <br><br>You have recently signed up a new account and the next step is to activate it! If this doesn’t apply to you or you are unaware of PetSprout as a whole, please ignore this message.' +
 				'<br><br>Your adventure with your new pet will start once you click the button below! After doing so, you may log into your account with your credentials and be provided with a set of habits dedicated to building you into a student that thrives.' +

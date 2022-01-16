@@ -17,10 +17,10 @@ const HabitSchema = new Schema(
 		},
 		habitList: [
 			{
-				analyze: {
-					type: mongoose.Schema.Types.ObjectId,
-					ref: 'analyze',
-				},
+				// analyze: {
+				// 	type: mongoose.Schema.Types.ObjectId,
+				// 	ref: 'analyze',
+				// },
 				title: {
 					type: String,
 				},

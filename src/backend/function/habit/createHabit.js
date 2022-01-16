@@ -30,9 +30,6 @@ module.exports = async (req, res) => {
 
 		if (errors.length != 0) return res.status(403).json({ error: errors });
 
-		let newAnalyze = new Analyze({});
-		await newAnalyze.save();
-
 		let user = await User.findById(req.user.id).select('-password');
 		if (!user) return res.status(404).json({ error: ['User not found'] });
 
@@ -68,7 +65,6 @@ module.exports = async (req, res) => {
 		}
 
 		let newHabit = {
-			analyze: newAnalyze._id,
 			title,
 			description,
 			reason,
