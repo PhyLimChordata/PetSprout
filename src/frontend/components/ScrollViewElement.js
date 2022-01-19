@@ -17,8 +17,8 @@ function ScrollViewElement(props) {
 			extrapolate: 'clamp',
 		});
 		let left = () => {
-			swipeableRef.current.close();
 			props.leftFunction();
+			swipeableRef.current.close();
 			// if (props.leftClose && swipeableRef.current != null)
 			// 	swipeableRef.current.close();
 		};
