@@ -17,12 +17,13 @@
 		"android": {
 			"googleServicesFile": "./google-services.json",
 			"softwareKeyboardLayoutMode": "pan",
-			"package": "com.phylimchordata.root",
+			"package": "com.phylimchordata.petsprout",
 			"versionCode": 2,
 			"adaptiveIcon": {
 				"foregroundImage": "./frontend/resources/images/Logo/LogoGreenNonTransparent.png",
 				"backgroundColor": "#FFFFFF"
-			}
+			},
+			"permissions": []
 		},
 		"ios": {
 			"bundleIdentifier": "com.phylimchordata.PetSprout",
