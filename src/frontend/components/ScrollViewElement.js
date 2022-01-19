@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { View, Animated, TouchableOpacity, Image } from 'react-native';
 import Swipeable from 'react-native-gesture-handler/Swipeable';
 
@@ -9,6 +9,7 @@ import { useTheme } from '@react-navigation/native';
 
 function ScrollViewElement(props) {
 	const swipeableRef = useRef(props.swipe);
+	const [disabled, setDisabled] = useState(false);
 	const leftSwipe = (progress, dragX) => {
 		const scale = dragX.interpolate({
 			inputRange: [0, 100],
@@ -16,11 +17,12 @@ function ScrollViewElement(props) {
 			extrapolate: 'clamp',
 		});
 		let left = () => {
-			props.leftFunction();
-			swipeableRef.current.close();
-			// if (props.leftClose && swipeableRef.current != null)
-			// 	swipeableRef.current.close();
+				swipeableRef.current.close();
+				props.leftFunction();
+				// if (props.leftClose && swipeableRef.current != null)
+				// 	swipeableRef.current.close();
 		};
+
 		return (
 			<View
 				style={{
@@ -46,12 +48,16 @@ function ScrollViewElement(props) {
 			outputRange: [1, 0],
 			extrapolate: 'clamp',
 		});
+		
 		let right = () => {
+			setDisabled(true);
 			props.rightFunction();
 			swipeableRef.current.close();
+			setTimeout(() => {setDisabled(false)}, 3000)
 			// if (props.rightClose && swipeableRef.current != null)
 			// 	swipeableRef.current.close()
 		};
+		
 		return (
 			<View
 				style={{
@@ -65,7 +71,7 @@ function ScrollViewElement(props) {
 				}}
 			>
 				<Animated.View style={{ transform: [{ scale }] }}>
-					<Checkmark onPress={right} />
+					<Checkmark onPress={right} disabled = {disabled}/>
 				</Animated.View>
 			</View>
 		);
@@ -113,7 +119,7 @@ function ScrollViewElement(props) {
 function Checkmark(props) {
 	const { colors } = useTheme();
 	return (
-		<TouchableOpacity activeOpacity={0.6} onPress={props.onPress}>
+		<TouchableOpacity activeOpacity={0.6} onPress={props.onPress} disabled = {props.disabled}>
 			<Image
 				style={styles(colors).swipeIcon}
 				source={require('../resources/images/Checkmark.png')}
