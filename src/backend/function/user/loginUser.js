@@ -7,6 +7,8 @@ const { validationResult } = require('express-validator');
 const bcryptjs = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
+const HabitDAO = require('../habit/habitsDAO')
+
 module.exports = async (req, res) => {
 	try {
 		let errors = validationResult(req);
@@ -111,30 +113,49 @@ module.exports = async (req, res) => {
 				}
 				await userAchievements.save();
 			}
-			
-			if (userHabit.habitList !== null) {
-				for (const habit of userHabit.habitList) {
-					let next = new Date(habit.nextSignInDate);
-					var nextDate = next.getDate();
-					if (next < current && nextDate !== current.getDate()) {
-						habit.continuous = 0;
-						habit.missing++;
-						let interval = 0;
-						let index = current.getDay();
-						while(!habit.schedule.includes(index.toString())) {
-							if(index+1 > 7) {
-								index = 0;
-							} else {
-								index++;
+
+			let habits = await HabitDAO.getHabits(user._id)
+			if(habits.msg === "success") {
+				let now = new Date(date);
+				now.setHours(0,0,0,0);
+				for(const habit of habits.result.habitList) {
+					// Get the habit's initial todo date
+					let todoTime = new Date(habit.nextSignInDate);
+					todoTime.setHours(0,0,0,0);
+					// If todo date is BEFORE today
+					if(todoTime < now) {
+						console.log(`Habit ${habit._id} has missed to-dos`)
+						let newMissingValue = 0;
+						let nextTodoTime = todoTime;
+						// Keep looking for the next todo date until it is today or after
+						while(nextTodoTime < now) {
+							console.log(`nextTodoTime = ${new Date(nextTodoTime)} and now = ${now}`)
+							// Next to-do date has to be at least the next day or onwards
+							let interval = 1;
+							let nextTodoDay = now.getDay() + 1 > 6 ? 0 : now.getDay() + 1;
+							// While the current checked day of week is not in the schedule, check the next day
+							while(!habit.schedule.includes(nextTodoDay)) {
+								nextTodoDay++;
+								if(nextTodoDay > 6) nextTodoDay = 0;
+								interval++;
 							}
-							interval++;
+							// Habit missed for one interval, add by the number of times it should be done
+							newMissingValue += habit.times;
+							// Update the nextTodoTime with the interval
+							nextTodoTime = new Date(nextTodoTime.setDate(nextTodoTime.getDate() + interval));
+							console.log(`new nextTodoTIme = ${nextTodoTime}`)
 						}
-						let today = current;
-						today.setDate(today.getDate() + interval);
-						habit.nextSignInDate = new Date(today);
+						// Automatically updates continuous to 0 too for data consistency.
+						let updateMissingSuccess = await HabitDAO.updateHabitMissing(user._id, habit._id, habit.missing + newMissingValue)
+						if(updateMissingSuccess.msg !== "success") {
+							console.log(updateMissingSuccess.msg)
+						}
+						let updateNextSignInDateSuccess = await HabitDAO.updateNextSignInDate(user._id, habit._id, nextTodoTime)
+						if(updateNextSignInDateSuccess.msg !== 'success') {
+							console.log(updateNextSignInDateSuccess.msg)
+						}
 					}
 				}
-				userHabit.save();
 			}
 		}
 
