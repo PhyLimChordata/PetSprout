@@ -118,33 +118,33 @@ async function updateNextSignInDate(user_id, habit_id, newSignInDate) {
         }
     }
     try {
-            let userHabit = await getHabits(user_id);
-            if(userHabit.msg == "success") {
-                let habits = userHabit.result.habitList
-                for(let habit of habits) {
-                    if(habit._id.equals(habit_id)) {
-                        habit.nextSignInDate = newSignInDate;
-                        userHabit.result.save();
-                        return { "msg": "success" }
-                    }
-                }
-                var error_msg = `Error updating 'nextSignInDate' for habit ${habit_id} for user id ${user_id} : habit ${habit_id} not found`
-                logError(error_msg)
-                return {
-                    msg: error_msg
-                }
-            } else {
-                logError(userHabit.msg)
-                return {
-                    msg: userHabit.msg
+        let userHabit = await getHabits(user_id);
+        if(userHabit.msg == "success") {
+            let habits = userHabit.result.habitList
+            for(let habit of habits) {
+                if(habit._id.equals(habit_id)) {
+                    habit.nextSignInDate = newSignInDate;
+                    userHabit.result.save();
+                    return { "msg": "success" }
                 }
             }
-    } catch(error) {
-            let error_msg = `Server error updating 'nextSignInDate' for habit ${habit_id} for user id ${user_id} : ${error}`
+            var error_msg = `Error updating 'nextSignInDate' for habit ${habit_id} for user id ${user_id} : habit ${habit_id} not found`
             logError(error_msg)
             return {
                 msg: error_msg
-            };
+            }
+        } else {
+            logError(userHabit.msg)
+            return {
+                msg: userHabit.msg
+            }
+        }
+    } catch(error) {
+        let error_msg = `Server error updating 'nextSignInDate' for habit ${habit_id} for user id ${user_id} : ${error}`
+        logError(error_msg)
+        return {
+            msg: error_msg
+        };
     }
 }
 
