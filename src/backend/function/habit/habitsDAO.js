@@ -10,7 +10,8 @@ const logError = (error_msg) => { console.log("    > " + error_msg)}
  *     result: {},
  *     msg: ""
  *  }
- * if error exists, error returned as string and habits returns null.
+ * if error exists, error returned as string and result returns null.
+ * o/w error as "success", result as { result: {...} }
  */
 async function getHabits(user_id) {
     try {
@@ -38,6 +39,14 @@ async function getHabits(user_id) {
     }
 }
 
+/*
+ *  Given user_id, habit_id, newMissingValue, updates the habit's missed times
+ *  Return: JSON
+ *  {
+ *     msg: ""
+ *  }
+ * if error exists, error returned as string, otherwise "success"
+ */
 async function updateHabitMissing(user_id, habit_id, newMissingValue) {
     console.log(`Updating 'missing' for habit ${habit_id} for user id ${user_id} to ${newMissingValue}:`)
     // Input sanitization
@@ -89,6 +98,14 @@ async function updateHabitMissing(user_id, habit_id, newMissingValue) {
     }
 }
 
+/*
+ *  Given user_id, habit_id, newSignInDate, updates the habit's nextSignInDate
+ *  Return: JSON
+ *  {
+ *     msg: ""
+ *  }
+ * if error exists, error returned as string, otherwise "success"
+ */
 async function updateNextSignInDate(user_id, habit_id, newSignInDate) {
     console.log(`Updating 'nextSignInDate' for habit ${habit_id} for user id ${user_id} to ${newSignInDate}:`)
     let date = ""
