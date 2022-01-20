@@ -50,11 +50,10 @@ function ScrollViewElement(props) {
 		});
 		
 		let right = () => {
-			setDisabled(true);
+			
 			props.rightFunction();
 			swipeableRef.current.close();
-			//props.disableFunction();
-			setTimeout(() => {setDisabled(false)}, 4000)
+			
 			// if (props.rightClose && swipeableRef.current != null)
 			// 	swipeableRef.current.close()
 		};
@@ -72,7 +71,7 @@ function ScrollViewElement(props) {
 				}}
 			>
 				<Animated.View style={{ transform: [{ scale }] }}>
-					<Checkmark onPress={right} disabled = {disabled}/>
+					<Checkmark onPress={right} disabled = {props.disabled}/>
 				</Animated.View>
 			</View>
 		);

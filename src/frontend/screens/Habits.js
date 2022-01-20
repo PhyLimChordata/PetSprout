@@ -36,6 +36,9 @@ function HabitsScreen(props) {
 		useContext(AuthContext);
 
 	const [refreshing, setRefreshing] = React.useState(false);
+	const [disabled, setDisabled] = useState(false);
+
+
 
 	const onRefresh = React.useCallback(() => {
 		setRefreshing(true);
@@ -57,12 +60,19 @@ function HabitsScreen(props) {
 		}
 	}, [getRefreshing]);
 
+	const stopSpam = () => {
+		setDisabled(true);
+		setTimeout(() => {
+			setDisabled(false)
+		}, 4000)
+	}
+
 	const displayHabits = () => {
 		console.log('huhhhhh');
 		setDisplayed(true);
 		setRefreshing(true);
 		const date = new Date().toString();
-		fetch('http://localhost:5000/api/v1.0.0/habit/show_user_habit/' + date, {
+		fetch('http://192.168.0.58:5000/api/v1.0.0/habit/show_user_habit/' + date, {
 			method: 'GET',
 			headers: {
 				'Content-Type': 'application/json',
@@ -151,6 +161,8 @@ function HabitsScreen(props) {
 										frequency={data.times - data.todo}
 										habitId={data._id}
 										userHabitId={userHabitId}
+										disabled = {disabled}
+										pauseFunction = {stopSpam}
 									></Habits>
 									<View style={{ height: 15 }}></View>
 								</Animated.View>
