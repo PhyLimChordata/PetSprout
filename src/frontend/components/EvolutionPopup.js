@@ -10,6 +10,7 @@ function EvolutionPopup(props) {
 
 	return (
 		<Popup
+			disableOnBackdropPress={true}
 			modalVisible={props.visible}
 			setModalVisible={props.setVisible}
 			image={

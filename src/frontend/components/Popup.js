@@ -66,7 +66,11 @@ function Popup(props) {
 		<View>
 			<Modal
 				isVisible={props.modalVisible}
-				onBackdropPress={() => props.setModalVisible(false)}
+				onBackdropPress={() => {
+					if (!props.disableOnBackdropPress) {
+						props.setModalVisible(false)
+					}
+				}}
 				onSwipeComplete={(e) => {
 					props.setModalVisible(false);
 				}}
