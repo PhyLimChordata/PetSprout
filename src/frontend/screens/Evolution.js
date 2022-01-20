@@ -19,7 +19,7 @@ import { useTheme } from '@react-navigation/native';
 import { AuthContext } from '../Context';
 
 function Evolution(props) {
-	const { getToken } = useContext(AuthContext);
+	const { getToken, changePet } = useContext(AuthContext);
 
 	const { colors } = useTheme();
 	let zoomValue = useRef(new Animated.Value(1)).current;
@@ -139,7 +139,7 @@ function Evolution(props) {
 		})
 			.then((res) =>
 				res.json().then((data) => {
-					console.log(data);
+					changePet(data.image)
 				}),
 			)
 			.catch();

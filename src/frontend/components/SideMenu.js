@@ -19,6 +19,7 @@ import { egg } from '../resources/images/Pets/Egg/Egg';
 import LogoutConfirmation from './LogoutPopup';
 import { EvolutionMapping } from '../resources/mappings/EvolutionMapping';
 import { getImage } from '../resources/images/Pets/ImageMapping';
+import FaintingPopup from "./FaintingPopup";
 function ThemeCircle({ colorTheme, onPress, selected }) {
 	const { height, width } = Dimensions.get('window');
 
