@@ -53,7 +53,8 @@ function ScrollViewElement(props) {
 			setDisabled(true);
 			props.rightFunction();
 			swipeableRef.current.close();
-			setTimeout(() => {setDisabled(false)}, 3000)
+			//props.disableFunction();
+			setTimeout(() => {setDisabled(false)}, 4000)
 			// if (props.rightClose && swipeableRef.current != null)
 			// 	swipeableRef.current.close()
 		};
