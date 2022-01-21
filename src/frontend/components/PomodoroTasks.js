@@ -7,23 +7,27 @@ function PomodoroTasks(props){
     
     return(
         edit ? 
-            <View style={PomodoroTasksStyles.item}>
-                <View style={PomodoroTasksStyles.itemLeft}>
-                    <TouchableOpacity onPress={()=>{setEdit(!edit)}} style={PomodoroTasksStyles.square}>
-                        <Image source ={require('../resources/images/Checkmark2.png')}/>
-                    </TouchableOpacity>
-                    <TextInput style={PomodoroTasksStyles.itemText} editable={edit}>{props.text}</TextInput>
+            <SafeAreaView style={androidSafeAreaView().AndroidSafeArea}>
+                <View style={PomodoroTasksStyles.item}>
+                    <View style={PomodoroTasksStyles.itemLeft}>
+                        <TouchableOpacity onPress={()=>{setEdit(!edit)}} style={PomodoroTasksStyles.square}>
+                            <Image source ={require('../resources/images/Checkmark2.png')}/>
+                        </TouchableOpacity>
+                        <TextInput style={PomodoroTasksStyles.itemText} editable={edit}>{props.text}</TextInput>
+                    </View>
                 </View>
-            </View>
+            </SafeAreaView>
         : 
-            <View style={PomodoroTasksStyles.item}>
-                <View style={PomodoroTasksStyles.itemLeft}>
-                    <TouchableOpacity onPress={()=>{setEdit(!edit)}} style={PomodoroTasksStyles.square}>
-                        <Image source ={require('../resources/images/PencilEdit.png')}/>
-                    </TouchableOpacity>
-                    <TextInput style={PomodoroTasksStyles.itemText} editable={edit}>{props.text}</TextInput>
+            <SafeAreaView style={androidSafeAreaView().AndroidSafeArea}>
+                <View style={PomodoroTasksStyles.item}>
+                    <View style={PomodoroTasksStyles.itemLeft}>
+                        <TouchableOpacity onPress={()=>{setEdit(!edit)}} style={PomodoroTasksStyles.square}>
+                            <Image source ={require('../resources/images/PencilEdit.png')}/>
+                        </TouchableOpacity>
+                        <TextInput style={PomodoroTasksStyles.itemText} editable={edit}>{props.text}</TextInput>
+                    </View>
                 </View>
-            </View>
+            </SafeAreaView>
     )
 }
 
