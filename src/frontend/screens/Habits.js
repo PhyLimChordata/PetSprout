@@ -75,7 +75,7 @@ function HabitsScreen(props) {
 		setDisplayed(true);
 		setRefreshing(true);
 		const date = new Date().toString();
-		fetch('http://192.168.0.58:5000/api/v1.0.0/habit/show_user_habit/' + date, {
+		fetch('http://localhost:5000/api/v1.0.0/habit/show_user_habit/' + date, {
 			method: 'GET',
 			headers: {
 				'Content-Type': 'application/json',
