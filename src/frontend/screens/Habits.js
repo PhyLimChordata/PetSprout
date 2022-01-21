@@ -60,11 +60,14 @@ function HabitsScreen(props) {
 		}
 	}, [getRefreshing]);
 
-	const stopSpam = () => {
+	const disableCheck = () => {
 		setDisabled(true);
-		setTimeout(() => {
-			setDisabled(false)
-		}, 4000)
+		//console.log('disabled');
+	}
+
+	const enableCheck = () => {
+		setDisabled(false);
+		//console.log('enabled');
 	}
 
 	const displayHabits = () => {
@@ -72,7 +75,7 @@ function HabitsScreen(props) {
 		setDisplayed(true);
 		setRefreshing(true);
 		const date = new Date().toString();
-		fetch('http://localhost:5000/api/v1.0.0/habit/show_user_habit/' + date, {
+		fetch('http://192.168.0.58:5000/api/v1.0.0/habit/show_user_habit/' + date, {
 			method: 'GET',
 			headers: {
 				'Content-Type': 'application/json',
@@ -152,17 +155,20 @@ function HabitsScreen(props) {
 							<View>
 								<Animated.View style={{ opacity, transform: [{ scale }] }}>
 									<Habits
-										completed={completed}
+										//completed={completed}
+										completed = {false}
 										enableRight={true}
 										navigation={props.navigation}
 										habitId={data._id}
 										name={data.title}
 										streak={1}
-										frequency={data.times - data.todo}
+										//frequency={data.times - data.todo}
+										frequency={1000}
 										habitId={data._id}
 										userHabitId={userHabitId}
 										disabled = {disabled}
-										pauseFunction = {stopSpam}
+										pauseFunction = {disableCheck}
+										startFunction = {enableCheck}
 									></Habits>
 									<View style={{ height: 15 }}></View>
 								</Animated.View>

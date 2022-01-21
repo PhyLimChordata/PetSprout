@@ -16,7 +16,7 @@ function Habits(props) {
 	const [frequency, setFrequency] = useState(props.frequency);
 	const [completed, setCompleted] = useState(props.completed);
 	const { getToken, changeRefreshing, getRefreshing } = useContext(AuthContext);
-
+	
 	const { colors } = useTheme();
 	
 	useEffect(() => {
@@ -24,19 +24,20 @@ function Habits(props) {
 			setCompleted(props.completed);
 			setFrequency(props.frequency);
 			setStreak(props.streak);
+			props.startFunction();
 		}
 	}
 	, [getRefreshing]);
 	
 	const disableCompletionTemp = () => {
-		completeHabit();
 		props.pauseFunction();
+		completeHabit();
 	};
 	
 	const completeHabit = () => {
 		setFrequency(frequency - 1);
 		fetch(
-			'http://localhost:5000/api/v1.0.0/habit/mark_TODO/' +
+			'http://192.168.0.58:5000/api/v1.0.0/habit/mark_TODO/' +
 				props.userHabitId +
 				'/' +
 				props.habitId,
@@ -57,12 +58,13 @@ function Habits(props) {
 				res.json().then(() => {
 					console.log('completehabit was called');
 					if (frequency - 1 == 0) {
-						setCompleted(true);
+						setCompleted(false);
 						gainXP(300, getToken);
 					} else {
 						gainXP(50, getToken);
 					}
 					changeRefreshing(true);
+					//console.log('refreshed');
 				}),
 			)
 			.catch();
@@ -70,7 +72,7 @@ function Habits(props) {
 
 	const deleteHabit = () => {
 		fetch(
-			'http://localhost:5000/api/v1.0.0/habit/delete_habit/' +
+			'http://192.168.0.58:5000/api/v1.0.0/habit/delete_habit/' +
 				props.userHabitId +
 				'/' +
 				props.habitId,
