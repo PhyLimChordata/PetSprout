@@ -9,7 +9,6 @@ import { useTheme } from '@react-navigation/native';
 
 function ScrollViewElement(props) {
 	const swipeableRef = useRef(props.swipe);
-	const [disabled, setDisabled] = useState(false);
 	const leftSwipe = (progress, dragX) => {
 		const scale = dragX.interpolate({
 			inputRange: [0, 100],
