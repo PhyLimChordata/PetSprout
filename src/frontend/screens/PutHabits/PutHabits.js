@@ -1,4 +1,5 @@
 import React, { useState, useContext } from 'react';
+import { Appearance } from 'react-native';
 import Colours from '../../resources/themes/Colours';
 import {
 	View,
@@ -197,7 +198,7 @@ function PutHabits(props) {
 	}
 	function addAlarm(time) {
 		time.setSeconds(0, 0);
-
+		console.log(Appearance.getColorScheme())
 		for (let alarm of alarms) {
 			alarm = new Date(alarm);
 			if (getTime(alarm) == getTime(time)) {
@@ -463,6 +464,7 @@ function PutHabits(props) {
 					addAlarm(time);
 					setDatePickerVisibility(false);
 				}}
+				isDarkModeEnabled={Appearance.getColorScheme() === 'dark'}
 				onCancel={() => setDatePickerVisibility(false)}
 			/>
 		</SafeAreaView>
