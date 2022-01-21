@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import { View, Animated, TouchableOpacity, Image } from 'react-native';
 import Swipeable from 'react-native-gesture-handler/Swipeable';
 
