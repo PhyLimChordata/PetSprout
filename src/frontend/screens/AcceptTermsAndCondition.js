@@ -7,6 +7,7 @@ import {
 	ScrollView,
 	TouchableOpacity,
 	StatusBar,
+	Platform,
 } from 'react-native';
 
 import androidSafeAreaView from '../styling/AndroidSafeAreaView';
@@ -46,6 +47,12 @@ function AcceptTermsAndCondition(props) {
 	const enableButton = () => {
 		setEnable(!disabled);
 	};
+
+	const checkStyle = () => {
+		if (Platform.OS == 'ios') {
+			return style.appleCheck;
+		}
+	}
 
 	const getStyle = () => {
 		if (show == true) {
@@ -278,13 +285,7 @@ function AcceptTermsAndCondition(props) {
 					<View style={style.center}>
 						<View style={style.checkboxContainer}>
 							<View
-								style={{
-									borderColor: colors.Quaternary,
-									borderWidth: 2,
-									borderRadius: 5,
-									marginLeft: -10,
-									marginRight: 10,
-								}}
+								style={checkStyle()}
 							>
 								<Checkbox
 									status={status}
