@@ -58,7 +58,7 @@ function Habits(props) {
 				res.json().then(() => {
 					console.log('completehabit was called');
 					if (frequency - 1 == 0) {
-						setCompleted(false);
+						setCompleted(true);
 						gainXP(300, getToken);
 					} else {
 						gainXP(50, getToken);

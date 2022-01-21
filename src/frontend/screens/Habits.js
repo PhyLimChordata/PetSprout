@@ -155,15 +155,13 @@ function HabitsScreen(props) {
 							<View>
 								<Animated.View style={{ opacity, transform: [{ scale }] }}>
 									<Habits
-										//completed={completed}
-										completed = {false}
+										completed={completed}
 										enableRight={true}
 										navigation={props.navigation}
 										habitId={data._id}
 										name={data.title}
 										streak={1}
-										//frequency={data.times - data.todo}
-										frequency={1000}
+										frequency={data.times - data.todo}
 										habitId={data._id}
 										userHabitId={userHabitId}
 										disabled = {disabled}
