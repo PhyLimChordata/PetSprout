@@ -67,7 +67,9 @@ function PutHabits(props) {
 
 	const { colors } = useTheme();
 	const createHabit = () => {
-		var times = alarms.length == 0 ? 1 : alarms.length;
+		let times = alarms.length == 0 ? 1 : alarms.length;
+		let local_alarms = alarms.map((time) => {return time.toString()})
+
 		fetch('http://localhost:5000/api/v1.0.0/habit/create_habit', {
 			method: 'POST',
 			headers: {
@@ -81,7 +83,7 @@ function PutHabits(props) {
 				schedule: days,
 				date: new Date(),
 				times: times,
-				alarm: alarms,
+				alarm: local_alarms,
 			}),
 		})
 			.then((res) => {
@@ -101,6 +103,7 @@ function PutHabits(props) {
 			.catch();
 	};
 	const modifyHabit = () => {
+		let local_alarms = alarms.map((time) => {return time.toString()})
 		fetch(
 			'http://localhost:5000/api/v1.0.0/habit/change_habit/' +
 				props.userHabitId +
@@ -119,7 +122,7 @@ function PutHabits(props) {
 					schedule: days,
 					date: new Date(),
 					times: alarms.length == 0 ? 1 : alarms.length,
-					alarm: alarms,
+					alarm: local_alarms,
 				}),
 			},
 		)
@@ -194,7 +197,7 @@ function PutHabits(props) {
 	}
 	function addAlarm(time) {
 		time.setSeconds(0, 0);
-		time.setUTCFullYear(2020,8,29);
+
 		for (let alarm of alarms) {
 			alarm = new Date(alarm);
 			if (getTime(alarm) == getTime(time)) {
@@ -203,6 +206,7 @@ function PutHabits(props) {
 				return;
 			}
 		}
+
 		setAlarms([...alarms, time].sort());
 	}
 
@@ -262,7 +266,7 @@ function PutHabits(props) {
 		color: Colours.Unique.Black,
 	};
 	var today = new Date();
-	// today.setHours(0,0,0,0);
+	today.setHours(0,0,0,0);
 	return (
 		<SafeAreaView
 			style={[
