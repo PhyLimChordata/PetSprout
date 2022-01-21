@@ -39,14 +39,14 @@ if (process.env.NOTIFICATIONTOGGLE === 'true') {
 }
 
 //Adds routes for express to use
-//Example route: http://3.15.57.200:5000/example/get
+//Example route: http://localhost:5000/example/get
 app.use('/api/v1.0.0/user', require('./routes/userRoute'));
 app.use('/api/v1.0.0/habit', require('./routes/habitRoute'));
 app.use('/api/v1.0.0/setting', require('./routes/settingRoute'));
 app.use('/api/v1.0.0/achievements', require('./routes/achievementRoute'));
 app.use('/api/v1.0.0/pets', require('./routes/petsRoute'));
 
-//3.15.57.200:5000/api/v1.0.0/user
+//localhost:5000/api/v1.0.0/user
 
 app.listen(port, () => {
 	console.log(`Server is running on port: ${port}`);

@@ -31,7 +31,7 @@ function SettingsPage(props) {
 	const { getToken } = useContext(AuthContext);
 	useEffect(() => {
 		const get = () => {
-			fetch('http://3.15.57.200:5000/api/v1.0.0/setting/getUserSetting', {
+			fetch('http://localhost:5000/api/v1.0.0/setting/getUserSetting', {
 				method: 'GET',
 				headers: {
 					'Content-Type': 'application/json',
@@ -107,7 +107,7 @@ function SettingsPage(props) {
 						props.handle(
 							val,
 							fetch(
-								'http://3.15.57.200:5000/api/v1.0.0/setting/updateUserSetting',
+								'http://localhost:5000/api/v1.0.0/setting/updateUserSetting',
 								{
 									method: 'PUT',
 									headers: {
