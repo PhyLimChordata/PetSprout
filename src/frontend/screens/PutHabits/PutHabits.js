@@ -194,6 +194,7 @@ function PutHabits(props) {
 	}
 	function addAlarm(time) {
 		time.setSeconds(0, 0);
+		time.setUTCFullYear(2020,8,29);
 		for (let alarm of alarms) {
 			alarm = new Date(alarm);
 			if (getTime(alarm) == getTime(time)) {
@@ -260,6 +261,8 @@ function PutHabits(props) {
 		marginBottom: 20,
 		color: Colours.Unique.Black,
 	};
+	var today = new Date();
+	// today.setHours(0,0,0,0);
 	return (
 		<SafeAreaView
 			style={[
@@ -451,7 +454,7 @@ function PutHabits(props) {
 			<DateTimePickerModal
 				isVisible={isDatePickerVisible}
 				mode='time'
-				date={new Date('Aug 29 2020 23:00:00 EST')}
+				date={today}
 				onConfirm={(time) => {
 					addAlarm(time);
 					setDatePickerVisibility(false);
