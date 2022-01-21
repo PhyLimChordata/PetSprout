@@ -3,6 +3,7 @@
 		"name": "PetSprout",
 		"slug": "petsprout",
 		"version": "1.0.0",
+		"userInterfaceStyle": "automatic",
 		"orientation": "portrait",
 		"icon": "./frontend/resources/images/Logo/LogoGreenNonTransparent.png",
 		"splash": {
