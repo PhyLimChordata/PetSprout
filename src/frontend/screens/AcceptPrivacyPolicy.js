@@ -7,6 +7,7 @@ import {
 	ScrollView,
 	TouchableOpacity,
 	StatusBar,
+	Platform,
 	
 } from 'react-native';
 
@@ -24,6 +25,12 @@ function AcceptPrivacyPolicy(props) {
 	const [disabled, setEnable] = useState(true)
 	const [greyed, setStyle] = useState(0.6)
 	const [show, setShow] = useState(props.route.params.isAcceptScreen)
+
+	const checkStyle = () => {
+		if (Platform.OS == 'ios') {
+			return style.appleCheckbox;
+		}
+	}
 
 	const checkSwitch = () => {
 		if (status == 'unchecked')
@@ -172,39 +179,43 @@ function AcceptPrivacyPolicy(props) {
 				{show &&
 				<View style = {style.center}>
 					<View style = {style.checkboxContainer}>
+						<View
+							style={checkStyle()}>
 						<Checkbox
 							status = {status}
 							onPress = {checkSwitch}
 							uncheckedColor = {style.textTop.color}
 							color = {style.textTop.color}
 						/>
-						<Text style = {style.text}>
-							I have read, understood and agreed to the Privacy Policy that applies with the use of PetSprout.
-						</Text>
-					</View>
-					<View opacity = {greyed}>
-					<TouchableOpacity
-						disabled = {disabled}
-						activeOpacity={0.6}
-						style={style.aboutButton}
-						onPress={() => {
-							if (status == 'checked')
-							{
-							props.navigation.navigate('HomeScreen');
-							}
-						}}
-					>
-						<Text style={style.aboutButtonText}>Accept</Text>
-					</TouchableOpacity>
+						</View>
+							<Text style = {style.text}>
+								I have read, understood and agreed to the Privacy Policy that applies with the use of PetSprout.
+							</Text>
+						</View>
+						<View opacity = {greyed}>
+						<TouchableOpacity
+							disabled = {disabled}
+							activeOpacity={0.6}
+							style={style.aboutButton}
+							onPress={() => {
+								if (status == 'checked')
+								{
+								props.navigation.navigate('HomeScreen');
+								}
+							}}
+						>
+							<Text style={style.aboutButtonText}>Accept</Text>
+						</TouchableOpacity>
 					</View>
 				</View>
-				}
-			</View>
+			} 	
+				</View>
 			{!show &&
 			<View style = {style.spacer}>
 			<HomeButton navigation={props.navigation} colors={colors}/>
 			</View>
 			}
+			
 		</SafeAreaView>
 	);
 }

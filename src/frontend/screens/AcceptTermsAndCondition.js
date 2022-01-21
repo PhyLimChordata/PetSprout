@@ -7,6 +7,7 @@ import {
 	ScrollView,
 	TouchableOpacity,
 	StatusBar,
+	Platform
 	
 } from 'react-native';
 
@@ -53,6 +54,12 @@ function AcceptTermsAndCondition(props) {
 
 	const enableButton = () => {
 		setEnable(!disabled)
+	}
+
+	const checkStyle = () => {
+		if (Platform.OS == 'ios') {
+			return style.appleCheckbox;
+		}
 	}
 
 	const getStyle = () => {
@@ -216,37 +223,41 @@ function AcceptTermsAndCondition(props) {
 						Upon clicking ACCEPT, using our Services, downloading or posting content associated to PetSprout, you acknowledge that you have fully read, understood and agreed to be legally bound by these Terms. These Terms supersede and replace all prior oral and written understandings or agreements with respect to the same.
 					</Text>
 				</ScrollView>
-				{show &&
-				<View style = {style.center}>
-					<View style = {style.checkboxContainer}>
-						<Checkbox
-							status = {status}
-							onPress = {checkSwitch}
-							uncheckedColor = {style.textTop.color}
-							color = {style.textTop.color}
-						/>
-						<Text style = {style.text}>
-							I have read, understood and agreed to the Terms and Conditions that apply with the use of PetSprout.
-						</Text>
+				{show && 
+					<View style={style.center}>
+						<View style={style.checkboxContainer}>
+							<View
+								style={checkStyle()}
+							>
+								<Checkbox
+									status={status}
+									onPress={checkSwitch}
+									uncheckedColor={style.textTop.color}
+									color={style.textTop.color}
+								/>
+							</View>
+							<Text style={style.text}>
+								I have read, understood and agreed to the Terms and Conditions
+								that apply with the use of PetSprout.
+							</Text>
+						</View>
+						<View opacity={greyed}>
+							<TouchableOpacity
+								disabled={disabled}
+								activeOpacity={0.6}
+								style={style.aboutButton}
+								onPress={() => {
+									if (status == 'checked') {
+										props.navigation.navigate('AcceptPrivacyPolicyScreen');
+									}
+								}}
+							>
+								<Text style={style.aboutButtonText}>Accept</Text>
+							</TouchableOpacity>
+						</View>
 					</View>
-					<View opacity = {greyed}>
-					<TouchableOpacity
-						disabled = {disabled}
-						activeOpacity={0.6}
-						style={style.aboutButton}
-						onPress={() => {
-							if (status == 'checked')
-							{
-							props.navigation.navigate('AcceptPrivacyPolicyScreen');
-							}
-						}}
-					>
-						<Text style={style.aboutButtonText}>Accept</Text>
-					</TouchableOpacity>
-					</View>
-				</View>
 				}
-			</View>
+					</View>
 			{!show &&
 			<View style = {style.spacer}>
 			<HomeButton navigation={props.navigation} colors={colors}/>
