@@ -127,13 +127,14 @@ export function DisplayPet(props) {
 	};
 
 	const setNextLevelToEvolve = () => {
-		if (level == 40) {
+		if (level == 30) {
 			setLevelToEvolveNext(-1);
 			lvlToEvolve = -1;
 		} else {
-			setLevelToEvolveNext(level + 1 - (level % 1));
-			lvlToEvolve = level + 1 - (level % 1);
+			setLevelToEvolveNext(level + 10 - (level % 10));
+			lvlToEvolve = level + 10 - (level % 10);
 		}
+		console.log(lvlToEvolve)
 	};
 
 	return (
