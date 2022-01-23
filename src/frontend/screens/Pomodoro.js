@@ -40,13 +40,13 @@ function PomodoroScreen(props) {
 
 	const { colors } = useTheme();
 
-	const duration = { Pomodoro: 60, 'Long Break': 2, 'Short Break': 2 };
+	const duration = { Pomodoro: 1500, 'Long Break': 600, 'Short Break': 300 };
 
 	const [remainingSecs, setRemainingSecs] = useState(duration['Pomodoro']);
 	const [isActive, setActive] = useState(false);
 
 	const [breakEnabled, setBreak] = useState(false);
-	const [rounds, setRounds] = useState(0);
+	const [rounds, setRounds] = useState(1);
 
 	const [mode, setMode] = useState('Pomodoro');
 
@@ -106,11 +106,11 @@ function PomodoroScreen(props) {
 					setRounds(rounds + 1);
 					//play sound and bring up pop up
 					showFinish()
-					if (rounds >= 2) {
+					if (rounds >= 1) {
 						setBreak(true);
 					}
 					setActive(false);
-					resetTimer(duration[mode]);
+					resetTimer(duration['Pomodoro']);
 				}
 			}, 1000);
 		} else if (!isActive && remainingSecs !== 0) {
@@ -162,8 +162,8 @@ function PomodoroScreen(props) {
 
 	const stopSession = () => {
 		//bring up pop up
-		setRemainingSecs(900);
-		setMins(formatNumber(15));
+		setRemainingSecs(resetTimer);
+		setMins(formatNumber(25));
 		setSecs(formatNumber(0));
 		setActive(false);
 	};
@@ -179,11 +179,11 @@ function PomodoroScreen(props) {
 			if (remainingSecs == 0) {
 				setRounds(rounds + 1);
 				//play sound and bring up pop up
-				if (rounds >= 2) {
+				if (rounds >= 1) {
 					setBreak(true);
 				}
 				setActive(false);
-				resetTimer(duration[mode]);
+				resetTimer(duration['Pomodoro']);
 			}
 			return receivedNewData
 				? BackgroundFetch.Result.NewData
