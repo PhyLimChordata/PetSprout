@@ -48,11 +48,7 @@ function AcceptTermsAndCondition(props) {
 		setEnable(!disabled);
 	};
 
-	const checkStyle = () => {
-		if (Platform.OS == 'ios') {
-			return style.appleCheck;
-		}
-	}
+	const checkboxStyle = (Platform.OS == 'ios' && style.appleCheck);
 
 	const getStyle = () => {
 		if (show == true) {
@@ -285,7 +281,7 @@ function AcceptTermsAndCondition(props) {
 					<View style={style.center}>
 						<View style={style.checkboxContainer}>
 							<View
-								style={checkStyle()}
+								style={checkboxStyle}
 							>
 								<Checkbox
 									status={status}
