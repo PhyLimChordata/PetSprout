@@ -60,14 +60,9 @@ function HabitsScreen(props) {
 		}
 	}, [getRefreshing]);
 
-	const disableCheck = () => {
-		setDisabled(true);
+	const disableCheck = (val) => {
+		setDisabled(val);
 		//console.log('disabled');
-	}
-
-	const enableCheck = () => {
-		setDisabled(false);
-		//console.log('enabled');
 	}
 
 	const displayHabits = () => {
@@ -165,8 +160,8 @@ function HabitsScreen(props) {
 										habitId={data._id}
 										userHabitId={userHabitId}
 										disabled = {disabled}
-										pauseFunction = {disableCheck}
-										startFunction = {enableCheck}
+										pauseFunction = {() => {disableCheck(true)}}
+										startFunction = {() => {disableCheck(false)}}
 									></Habits>
 									<View style={{ height: 15 }}></View>
 								</Animated.View>
