@@ -20,7 +20,7 @@ const acceptTerms = async (req, res) => {
         res.status(200).json("Terms and Conditions accepted.");
     
     } catch (error) {
-        console.log(error);
+        console.log(`Server Error for /acceptTerms for user ${userId}.\n ${error}`);
         res.status(500).json("Server Error when handling /acceptTerms");
     }
 }
@@ -46,7 +46,7 @@ const didAcceptTerms = async (req, res) => {
         }
     
     } catch (error) {
-        console.log(error);
+        console.log(`Server Error for /didAcceptTerms for user ${userId}.\n ${error}`);
         res.status(500).json("Server Error when handling /didAcceptPolicy");
     }
 }

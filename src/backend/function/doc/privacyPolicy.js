@@ -20,7 +20,7 @@ const acceptPolicy = async (req, res) => {
         res.status(200).json("Privacy Policy accepted.")
     
     } catch (error) {
-        console.log(error);
+        console.log(`Server Error for /acceptPolicy for user ${userId}.\n ${error}`);
         res.status(500).json("Server Error when handling /acceptPolicy");
     }
 }
@@ -46,7 +46,7 @@ const didAcceptPolicy = async (req, res) => {
         }
     
     } catch (error) {
-        console.log(error);
+        console.log(`Server Error for /didAcceptPolicy for user ${userId}.\n ${error}`);
         res.status(500).json("Server Error when handling /didAcceptPolicy");
     }
 }
