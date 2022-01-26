@@ -144,7 +144,7 @@ module.exports = async (req, res) => {
 							newMissingValue += habit.times;
 
 							/* Health Loss based on missed streaks. */
-							health.missedStreaksHealthLoss(habit.times)
+							health.missedStreaksHealthLoss(user._id, habit.times)
 
 							// Update the nextTodoTime with the interval
 							nextTodoTime = new Date(nextTodoTime.setDate(nextTodoTime.getDate() + interval));

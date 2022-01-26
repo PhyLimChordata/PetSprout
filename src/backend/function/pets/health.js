@@ -6,37 +6,41 @@ const missedHabitPunishment = -10; // Health lost per time habit is missed.
 
 
 const addHealth = async (req, res) => {
-	res = modifyHealth(req.user.id, req.body.hp, res);
+	ret = modifyHealth(req.user.id, req.body.hp, res);
+	res.status(ret.status).json(ret.message);
 	return res;
 }
 
 const loseHealth = async (req, res) => {
-	res = modifyHealth(req.user.id, -req.body.hp, res);
+	ret = modifyHealth(req.user.id, -req.body.hp, res);
+	res.status(ret.status).json(ret.message);
 	return res;
 };
 
-const missedStreaksHealthLoss = async (numHabitsMissed) => {
+const missedStreaksHealthLoss = async (id, numHabitsMissed) => {
 	try {
 		console.log(`Health Lossed: ${missedHabitPunishment * numHabitsMissed}`)
-		return modifyHealth(missedHabitPunishment * numHabitsMissed);
+		return modifyHealth(id, missedHabitPunishment * numHabitsMissed);
 	} catch (error) {
 		console.error(error);
-		return res.status(500).json('Server error');
+		return error;
 	}
 }
 
 /*
 	Change health value by 'healthChange'.
 */
-const modifyHealth = async (id, healthChange, res) => {
+const modifyHealth = async (id, healthChange) => {
 	try {
 		// Find user
 		let user = await User.findById(id).select('-password');
-		if (!user) return res.status(404).json('User could not found');
+		if (!user) return {"status": 404,
+						   "message": "User could not be found."}
 
 		// Find associated pet
 		let petQuery = await Pets.findOne({ user: id })
-		if (!petQuery) return res.status(404).json('Pet could not found');
+		if (!petQuery) return {"status": 404,
+						       "message": "Pet could not found."}
 		currentPet = petQuery.currentPet;
 		currentPet.hp = currentPet.hp + healthChange;
 		
@@ -50,11 +54,14 @@ const modifyHealth = async (id, healthChange, res) => {
 		
 		// Update pet health
 		await petQuery.save();
-		return res.json(currentPet);
+		return {"status": 200,
+				"message": `Updated pet health by ${healthChange}`,
+				"currentPet": currentPet}
 
 	} catch (error) {
 		console.error(error);
-		return res.status(500).json('Server error');
+		return {"status": 500,
+				"message": "Server Error"}
 	}
 }
 
