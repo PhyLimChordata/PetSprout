@@ -10,10 +10,25 @@ router.post(
 	privacyPolicy.acceptPolicy
 );
 
+router.get(
+	'/didAcceptPolicy',
+	authentication,
+	privacyPolicy.didAcceptPolicy
+);
+
 router.post(
 	'/acceptTerms',
 	authentication,
 	termsAndConditions.acceptTerms
 );
+
+router.get(
+	'/didAcceptTerms',
+	authentication,
+	termsAndConditions.didAcceptTerms
+);
+
+
+
 
 module.exports = router;
