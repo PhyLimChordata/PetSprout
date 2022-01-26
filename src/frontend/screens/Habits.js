@@ -5,7 +5,6 @@ import {
 	Animated,
 	SafeAreaView,
 	RefreshControl,
-	StatusBar,
 	Text,
 	TouchableOpacity,
 } from 'react-native';
@@ -21,9 +20,12 @@ import { useTheme } from '@react-navigation/native';
 import { AuthContext } from '../Context';
 
 import { DisplayPet } from '../components/DisplayPet';
+import MissedHabitBanner from "../components/MissedHabitBanner";
 
 function HabitsScreen(props) {
 	const [habits, setHabits] = useState([]);
+	const [missedHabits, setMissedHabits] = useState([]);
+
 	const [userHabitId, setUserHabitId] = useState('');
 
 	const { colors } = useTheme();
@@ -72,8 +74,10 @@ function HabitsScreen(props) {
 			.then((res) =>
 				res.json().then((data) => {
 					console.log('saddasasdasddas');
+					console.log(data)
 					setTimeout(() => {
 						setHabits(data.habitList);
+						setMissedHabits(data.missing_habits)
 						setUserHabitId(data._id);
 						setDisplayed(true);
 						setRefreshing(false);
@@ -96,6 +100,7 @@ function HabitsScreen(props) {
 		>
 			<MenuHeader text='' navigation={props.navigation} displayHp={true} />
 			<DisplayPet navigation={props.navigation} />
+			{missedHabits.length > 0 && <MissedHabitBanner/>}
 			<View style={styles(colors).scrollViewContainer}>
 				<TouchableOpacity
 					style={{ alignSelf: 'flex-end' }}
