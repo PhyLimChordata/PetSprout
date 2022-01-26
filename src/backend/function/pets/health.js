@@ -2,52 +2,62 @@ const Pets = require('../../schemas/petsSchema');
 const User = require('../../schemas/userSchema');
 
 const { validationResult } = require('express-validator');
+const missedHabitPunishment = -10; // Health lost per time habit is missed.
+
 
 const addHealth = async (req, res) => {
-	try {
-		let errors = validationResult(req);
-		if (!errors.isEmpty())
-			return res.status(400).json({ error: errors.array() });
-
-		let user = await User.findById(req.user.id).select('-password');
-		if (!user) return res.status(404).json('User could not found');
-
-		let currentPet = await Pets.findOne({ user: req.user.id }).currentPet;
-		currentPet.hp = currentPet.hp + req.hp;
-		if (currentPet.hp > 100) {
-			currentPet.hp = 100;
-		}
-		await currentPet.save();
-
-		res.json(currentPet);
-	} catch (error) {
-		console.error(error);
-		res.status(500).json('Server error');
-	}
-};
+	res = modifyHealth(req.user.id, req.body.hp, res);
+	return res;
+}
 
 const loseHealth = async (req, res) => {
-	try {
-		let errors = validationResult(req);
-		if (!errors.isEmpty())
-			return res.status(400).json({ error: errors.array() });
+	res = modifyHealth(req.user.id, -req.body.hp, res);
+	return res;
+};
 
-		let user = await User.findById(req.user.id).select('-password');
+const missedStreaksHealthLoss = async (numHabitsMissed) => {
+	try {
+		console.log(`Health Lossed: ${missedHabitPunishment * numHabitsMissed}`)
+		return modifyHealth(missedHabitPunishment * numHabitsMissed);
+	} catch (error) {
+		console.error(error);
+		return res.status(500).json('Server error');
+	}
+}
+
+/*
+	Change health value by 'healthChange'.
+*/
+const modifyHealth = async (id, healthChange, res) => {
+	try {
+		// Find user
+		let user = await User.findById(id).select('-password');
 		if (!user) return res.status(404).json('User could not found');
 
-		let currentPet = await Pets.findOne({ user: req.user.id }).currentPet;
-		currentPet.hp = currentPet.hp - req.hp;
+		// Find associated pet
+		let petQuery = await Pets.findOne({ user: id })
+		if (!petQuery) return res.status(404).json('Pet could not found');
+		currentPet = petQuery.currentPet;
+		currentPet.hp = currentPet.hp + healthChange;
+		
+		// Ensure 0 <= health <= 100
 		if (currentPet.hp < 0) {
 			currentPet.hp = 0;
 		}
-		await currentPet.save();
+		if (currentPet.hp > 100) {
+			currentPet.hp = 100;
+		}
+		
+		// Update pet health
+		await petQuery.save();
+		return res.json(currentPet);
 
-		res.json(currentPet);
 	} catch (error) {
 		console.error(error);
-		res.status(500).json('Server error');
+		return res.status(500).json('Server error');
 	}
-};
+}
 
 exports.addHealth = addHealth;
 exports.loseHealth = loseHealth;
+exports.missedStreaksHealthLoss = missedStreaksHealthLoss;

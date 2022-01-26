@@ -8,6 +8,7 @@ const bcryptjs = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 const HabitDAO = require('../habit/habitsDAO')
+const health = require('../pets/health')
 
 module.exports = async (req, res) => {
 	try {
@@ -141,6 +142,10 @@ module.exports = async (req, res) => {
 							}
 							// Habit missed for one interval, add by the number of times it should be done
 							newMissingValue += habit.times;
+
+							/* Health Loss based on missed streaks. */
+							health.missedStreaksHealthLoss(habit.times)
+
 							// Update the nextTodoTime with the interval
 							nextTodoTime = new Date(nextTodoTime.setDate(nextTodoTime.getDate() + interval));
 							console.log(`new nextTodoTIme = ${nextTodoTime}`)
