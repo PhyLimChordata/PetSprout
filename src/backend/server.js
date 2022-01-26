@@ -45,6 +45,7 @@ app.use('/api/v1.0.0/habit', require('./routes/habitRoute'));
 app.use('/api/v1.0.0/setting', require('./routes/settingRoute'));
 app.use('/api/v1.0.0/achievements', require('./routes/achievementRoute'));
 app.use('/api/v1.0.0/pets', require('./routes/petsRoute'));
+app.use('/api/v1.0.0/doc', require('./routes/documentRoute'));
 
 //localhost:5000/api/v1.0.0/user
 
