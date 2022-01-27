@@ -6,6 +6,7 @@ import MenuHeader from '../components/MenuHeader';
 import styles from '../styling/Header';
 import { useTheme } from '@react-navigation/native';
 import PomodoroTasksStyles from'../styling/PomodoroTasks';
+import androidSafeAreaView from '../styling/AndroidSafeAreaView';
 
 function PomodoroTasksScreen(props) {
     const scrolling = React.useRef(new Animated.Value(0)).current;
@@ -47,12 +48,15 @@ function PomodoroTasksScreen(props) {
     }
 
     return(
-        <SafeAreaView style={{ flex: 1, backgroundColor: colors.white }}>
-			<MenuHeader
+        <SafeAreaView style={[
+            PomodoroTasksStyles.safeArea,
+            androidSafeAreaView().AndroidSafeArea,
+        ]}>
+            <MenuHeader
                 back={true}
                 text={'PomodoroTasks'}
                 navigation={props.navigation}
-			/>
+            />
             <KeyboardAvoidingView behavior={Platform.OS==="ios" ? "padding" : "padding"} style={styles(colors).headContainer}>
                 <View style={{ marginTop: 20 }} />
                 <Animated.ScrollView
