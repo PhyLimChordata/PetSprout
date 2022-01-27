@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useRef } from 'react';
 import {
 	View,
 	Image,
@@ -8,6 +8,7 @@ import {
 	TouchableOpacity,
 	TextInput,
 	Button,
+	AppState,
 } from 'react-native';
 
 import PomodoroFinishPopup from '../components/PomodoroFinishPopup';
@@ -29,7 +30,8 @@ import * as BackgroundFetch from 'expo-background-fetch';
 
 import * as TaskManager from 'expo-task-manager';
 
-import { DisplayPet, gainXP, getHP } from '../components/DisplayPet';
+import { DisplayPet, gainXP, getHP, loseHP } from '../components/DisplayPet';
+import App from '../../App';
 
 
 const BACKGROUND_FETCH_TASK = 'background-fetch';
@@ -53,6 +55,10 @@ function PomodoroScreen(props) {
 	const [finished, setFinished] = useState(false);
 	const [start, setStart] = useState(false);
 	const [cancel, setCancel] = useState(false);
+
+	//CHANGES
+	const appState = useRef(AppState.currentState);
+	const [appStateVisible, setAppStateVisible] = useState(appState.current);
 
 	const formatNumber = (number) => {
 		return ('0' + number.toString()).slice(-2);
@@ -135,6 +141,50 @@ function PomodoroScreen(props) {
 		checkStatusAsync();
 		console.log('Checking async');
 	}, []);
+	
+	//CHANGES
+	useEffect(() => {
+		AppState.addEventListener('change', _handleAppStateChange);
+		return () => {
+		  AppState.remove('change', _handleAppStateChange);
+		};
+	}, []);
+	
+	
+	//CHANGES
+	const _handleAppStateChange = (nextAppState) => {
+		// console.log('handleappstatework')
+		// //Make seconds go down 
+		// setRemainingSecs((remainingSecs) => remainingSecs - 1);
+		// setTimer(remainingSecs);
+		// if (remainingSecs == 0) {
+		// 	setRounds(rounds + 1);
+		// 	//play sound and bring up pop up
+		// 	if (rounds >= 1) {
+		// 		setBreak(true);
+		// 	}
+		// 	setActive(false);
+		// 	resetTimer(duration['Pomodoro']);
+		// }
+		// while(appState.current.match(/inactive|background/) &&
+		// isActive === true) {
+		// 	console.log('App has come to the foreground!');  
+		// 	setRemainingSecs((remainingSecs) => remainingSecs - 1);
+		// 	setTimer(remainingSecs);
+		// 	if (remainingSecs == 0) {
+		// 		setRounds(rounds + 1);
+		// 		//play sound and bring up pop up
+		// 		if (rounds >= 1) {
+		// 			setBreak(true);
+		// 		}
+		// 		setActive(false);
+		// 		resetTimer(duration['Pomodoro']);
+		// 	}
+		// }
+		appState.current = nextAppState;
+		setAppStateVisible(appState.current);
+		console.log('AppState', appState.current);
+	};
 
 	const checkStatusAsync = async () => {
 		const status = await BackgroundFetch.getStatusAsync();
@@ -161,6 +211,8 @@ function PomodoroScreen(props) {
 	};
 
 	const stopSession = () => {
+		//Lose 2 HP
+		loseHP();
 		//bring up pop up
 		setRemainingSecs(resetTimer);
 		setMins(formatNumber(25));
