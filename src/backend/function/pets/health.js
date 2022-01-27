@@ -8,18 +8,16 @@ const missedHabitPunishment = -10; // Health lost per time habit is missed.
 const addHealth = async (req, res) => {
 	ret = modifyHealth(req.user.id, req.body.hp, res);
 	res.status(ret.status).json(ret.message);
-	return res;
 }
 
 const loseHealth = async (req, res) => {
 	ret = modifyHealth(req.user.id, -req.body.hp, res);
 	res.status(ret.status).json(ret.message);
-	return res;
 };
 
-const missedStreaksHealthLoss = async (id, numHabitsMissed) => {
+const missedStreaksHealthLoss = async (id, numHabitsMissed, ) => {
 	try {
-		console.log(`Health Lossed: ${missedHabitPunishment * numHabitsMissed}`)
+		console.log(`Health Lost as a result: ${missedHabitPunishment * numHabitsMissed}`)
 		return modifyHealth(id, missedHabitPunishment * numHabitsMissed);
 	} catch (error) {
 		console.error(error);

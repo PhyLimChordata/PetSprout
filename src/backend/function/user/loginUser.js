@@ -143,13 +143,11 @@ module.exports = async (req, res) => {
 							// Habit missed for one interval, add by the number of times it should be done
 							newMissingValue += habit.times;
 
-							/* Health Loss based on missed streaks. */
-							health.missedStreaksHealthLoss(user._id, habit.times)
-
 							// Update the nextTodoTime with the interval
 							nextTodoTime = new Date(nextTodoTime.setDate(nextTodoTime.getDate() + interval));
 							console.log(`new nextTodoTIme = ${nextTodoTime}`)
 						}
+
 						// Automatically updates continuous to 0 too for data consistency.
 						let updateMissingSuccess = await HabitDAO.updateHabitMissing(user._id, habit._id, habit.missing + newMissingValue)
 						if(updateMissingSuccess.msg !== "success") {
@@ -159,6 +157,10 @@ module.exports = async (req, res) => {
 						if(updateNextSignInDateSuccess.msg !== 'success') {
 							console.log(updateNextSignInDateSuccess.msg)
 						}
+
+						/* Health Loss based on missed streaks. */
+						console.log(`User ${user._id} missed the habit '${habit.title}' ${newMissingValue} times since last login.`)
+						health.missedStreaksHealthLoss(user._id, newMissingValue)
 					}
 				}
 			}
