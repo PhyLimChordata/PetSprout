@@ -1,8 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { Appearance } from 'react-native';
 import Colours from '../../resources/themes/Colours';
-import 'intl';
-import 'intl/locale-data/jsonp/en';
 import {
 	View,
 	Text,
@@ -19,7 +17,7 @@ import TimeTab from '../../components/TimeTab';
 import { AuthContext } from '../../Context';
 import ScrollViewElement from '../../components/ScrollViewElement';
 import BottomPopup from '../../components/BottomPopup';
-
+import * as Localization from 'expo-localization';
 import { useTheme } from '@react-navigation/native';
 import DeleteHabitPopup from '../../components/DeleteHabitPopup';
 
@@ -71,7 +69,7 @@ function PutHabits(props) {
 	const { colors } = useTheme();
 	const createHabit = () => {
 		let times = alarms.length == 0 ? 1 : alarms.length;
-		console.log(Intl.DateTimeFormat().resolvedOptions().timeZone)
+		console.log(Localization.timezone)
 		fetch('http://localhost:5000/api/v1.0.0/habit/create_habit', {
 			method: 'POST',
 			headers: {
@@ -86,7 +84,7 @@ function PutHabits(props) {
 				date: new Date(),
 				times: times,
 				alarm: alarms,
-				timezone: Intl.DateTimeFormat().resolvedOptions().timeZone
+				timezone: Localization.timezone
 			}),
 		})
 			.then((res) => {
@@ -125,7 +123,7 @@ function PutHabits(props) {
 					date: new Date(),
 					times: alarms.length == 0 ? 1 : alarms.length,
 					alarm: alarms,
-					timezone: Intl.DateTimeFormat().resolvedOptions().timeZone
+					timezone: Localization.timezone
 				}),
 			},
 		)
