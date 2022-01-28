@@ -8,10 +8,11 @@ import {
 	StatusBar,
 	Text,
 	TouchableOpacity,
+	Image,
 } from 'react-native';
 
 import androidSafeAreaView from '../styling/AndroidSafeAreaView';
-
+import Colours from '../resources/themes/Colours';
 import styles from '../styling/HabitsScreen';
 import Habits from '../components/Habits';
 import MenuHeader from '../components/MenuHeader';
@@ -24,6 +25,7 @@ import { DisplayPet } from '../components/DisplayPet';
 
 function HabitsScreen(props) {
 	const [habits, setHabits] = useState([]);
+	const [missed_twice, setMissedTwice] = useState(false);
 	const [userHabitId, setUserHabitId] = useState('');
 
 	const { colors } = useTheme();
@@ -65,12 +67,22 @@ function HabitsScreen(props) {
 		//console.log('disabled');
 	}
 
+	const checkMissedTwice = (missed_twice) => {
+		for (var habit in missed_twice) {
+			if (habit) {
+				setMissedTwice(true);
+				return;
+			}
+		}
+		setMissedTwice(false);
+	}
+
 	const displayHabits = () => {
 		console.log('huhhhhh');
 		setDisplayed(true);
 		setRefreshing(true);
 		const date = new Date().toString();
-		fetch('http://localhost:5000/api/v1.0.0/habit/show_user_habit/' + date, {
+		fetch('http://192.168.2.78:5000/api/v1.0.0/habit/show_user_habit/' + date, {
 			method: 'GET',
 			headers: {
 				'Content-Type': 'application/json',
@@ -79,9 +91,11 @@ function HabitsScreen(props) {
 		})
 			.then((res) =>
 				res.json().then((data) => {
-					console.log('saddasasdasddas');
+					console.log('inside success');
 					setTimeout(() => {
 						setHabits(data.habitList);
+						checkMissedTwice(data.missed_twice);
+						console.log("Missed twice: " + missed_twice);
 						setUserHabitId(data._id);
 						setDisplayed(true);
 						setRefreshing(false);
@@ -104,6 +118,28 @@ function HabitsScreen(props) {
 		>
 			<MenuHeader text='' navigation={props.navigation} displayHp={true} />
 			<DisplayPet navigation={props.navigation} />
+			{ missed_twice && <View style = {{height: 55, backgroundColor: Colours.Red.NotSelected, marginBottom: 0, marginTop: -20}}>
+                <View style = {{flexDirection: 'row', flex: 1, alignItems: 'center'}}>
+                    <Image style = {{
+                        height: 34,
+                        width: 50,
+                        marginBottom: 0,
+                        marginTop: 0,
+                        resizeMode: 'contain',
+                    }} source = {require('../resources/images/2Exclamation.png')}>
+                    </Image>
+                    <View>
+                        <Text style={{fontSize: 16,fontWeight: 'bold',color: '#FFFFFF'}}>
+                            Looks like you missed some habits!
+                        </Text>
+                        <Text style={{fontSize: 16, color: '#FFFFFF'}}
+                        >
+                            Try not to miss a habit 3x in a row
+                        </Text>
+                    </View>
+                </View>
+            </View>
+			}
 			<View style={styles(colors).scrollViewContainer}>
 				<TouchableOpacity
 					style={{ alignSelf: 'flex-end' }}

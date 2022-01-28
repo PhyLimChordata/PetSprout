@@ -31,6 +31,10 @@ module.exports = async (req, res) => {
 		let miss = userHabitInfo.habitList.filter(function (habit) {
 			return habit.missing > 0 && habit.schedule.includes(day);
 		});
+		// checks if any habit has been missed twice or more (display notification)
+		let twice = userHabitInfo.habitList.filter(function (habit) {
+			return habit.missing > 1;
+		});
 
 		// Sort missed habits in a way that if it is missed for once it will
 		// show up first in the list, otherwise order in descending order.
@@ -53,7 +57,8 @@ module.exports = async (req, res) => {
 		let habit = { habitList: habitShow };
 		let missing_habits = { missing_habits: miss};
 		let mastered_habits = { mastered_habits: mastered};
-		
+		let missed_twice = { missed_twice: twice};
+
 		let info = {
 			expValue: userHabitInfo.expValue,
 			heart: userHabitInfo.heart,
@@ -63,7 +68,8 @@ module.exports = async (req, res) => {
 
 		let return_object_1 = extend({}, info, habit);
 		let return_object_2 = extend({}, return_object_1, missing_habits);
-		let return_object = extend({}, return_object_2, mastered_habits);
+		let return_object_3 = extend({}, return_object_2, missed_twice);
+		let return_object = extend({}, return_object_3, mastered_habits);
 
 		return res.status(200).json(return_object);
 	} catch (error) {
