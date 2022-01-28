@@ -1,6 +1,8 @@
 import React, { useState, useContext } from 'react';
 import { Appearance } from 'react-native';
 import Colours from '../../resources/themes/Colours';
+import 'intl';
+import 'intl/locale-data/jsonp/en';
 import {
 	View,
 	Text,

@@ -24,6 +24,7 @@
     "expo-status-bar": "~1.0.4",
     "express": "^4.17.1",
     "firebase": "^9.6.1",
+    "intl": "^1.2.5",
     "lodash.clonedeep": "^4.5.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
