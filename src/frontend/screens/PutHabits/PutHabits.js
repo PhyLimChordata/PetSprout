@@ -69,8 +69,7 @@ function PutHabits(props) {
 	const { colors } = useTheme();
 	const createHabit = () => {
 		let times = alarms.length == 0 ? 1 : alarms.length;
-		let local_alarms = alarms.map((time) => {return time.toString()})
-
+		console.log(Intl.DateTimeFormat().resolvedOptions().timeZone)
 		fetch('http://localhost:5000/api/v1.0.0/habit/create_habit', {
 			method: 'POST',
 			headers: {
@@ -84,7 +83,8 @@ function PutHabits(props) {
 				schedule: days,
 				date: new Date(),
 				times: times,
-				alarm: local_alarms,
+				alarm: alarms,
+				timezone: Intl.DateTimeFormat().resolvedOptions().timeZone
 			}),
 		})
 			.then((res) => {
@@ -104,7 +104,6 @@ function PutHabits(props) {
 			.catch();
 	};
 	const modifyHabit = () => {
-		let local_alarms = alarms.map((time) => {return time.toString()})
 		fetch(
 			'http://localhost:5000/api/v1.0.0/habit/change_habit/' +
 				props.userHabitId +
@@ -123,7 +122,8 @@ function PutHabits(props) {
 					schedule: days,
 					date: new Date(),
 					times: alarms.length == 0 ? 1 : alarms.length,
-					alarm: local_alarms,
+					alarm: alarms,
+					timezone: Intl.DateTimeFormat().resolvedOptions().timeZone
 				}),
 			},
 		)
