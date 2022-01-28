@@ -48,7 +48,6 @@ async function getHabits(user_id) {
  * if error exists, error returned as string, otherwise "success"
  */
 async function updateHabitMissing(user_id, habit_id, newMissingValue) {
-    console.log(`Updating 'missing' for habit ${habit_id} for user id ${user_id} to ${newMissingValue}:`)
     // Input sanitization
     if(typeof newMissingValue !== "number") {
         var error_msg = `Error updating 'missing' for habit ${habit_id} for user id ${user_id} : newMissingValue is not a number.`
@@ -107,7 +106,6 @@ async function updateHabitMissing(user_id, habit_id, newMissingValue) {
  * if error exists, error returned as string, otherwise "success"
  */
 async function updateNextSignInDate(user_id, habit_id, newSignInDate) {
-    console.log(`Updating 'nextSignInDate' for habit ${habit_id} for user id ${user_id} to ${newSignInDate}:`)
     try {
         var date = new Date(newSignInDate);
     } catch (error) {

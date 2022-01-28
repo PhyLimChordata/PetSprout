@@ -115,8 +115,7 @@ module.exports = async (req, res) => {
 				await userAchievements.save();
 			}
 
-			console.log(`Checking if habits missed for : ${user._id} :`)
-			let habits = await HabitDAO.getHabits(user._id)
+			let habits = await HabitDAO.getHabits(user._id);
 			if(habits.msg === "success") {
 				let now = new Date(date);
 				now.setHours(0,0,0,0);
@@ -126,12 +125,10 @@ module.exports = async (req, res) => {
 					todoTime.setHours(0,0,0,0);
 					// If todo date is BEFORE today
 					if(todoTime < now) {
-						console.log(`Habit ${habit._id} has missed to-dos`)
 						let newMissingValue = 0;
 						let nextTodoTime = todoTime;
 						// Keep looking for the next todo date until it is today or after
 						while(nextTodoTime < now) {
-							console.log(`nextTodoTime = ${new Date(nextTodoTime)} and now = ${now}`)
 							// Next to-do date has to be at least the next day or onwards
 							let interval = 1;
 							let nextTodoDay = now.getDay() + 1 > 6 ? 0 : now.getDay() + 1;
@@ -144,12 +141,8 @@ module.exports = async (req, res) => {
 							// Habit missed for one interval, add by the number of times it should be done
 							newMissingValue++;
 
-							/* Health Loss based on missed streaks. */
-							health.missedStreaksHealthLoss(user._id, habit.times)
-
 							// Update the nextTodoTime with the interval
 							nextTodoTime = new Date(nextTodoTime.setDate(nextTodoTime.getDate() + interval));
-							console.log(`new nextTodoTIme = ${nextTodoTime}`)
 						}
 						// Automatically updates continuous to 0 too for data consistency.
 						let updateMissingSuccess = await HabitDAO.updateHabitMissing(user._id, habit._id, habit.missing + newMissingValue)
@@ -160,6 +153,10 @@ module.exports = async (req, res) => {
 						if(updateNextSignInDateSuccess.msg !== 'success') {
 							console.log(updateNextSignInDateSuccess.msg)
 						}
+
+						/* Health Loss based on missed streaks. */
+						// console.log(`User ${user._id} missed the habit '${habit.title}' ${newMissingValue} times since last login.`)
+						health.missedStreaksHealthLoss(user._id, newMissingValue)
 					}
 				}
 			} else {

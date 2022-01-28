@@ -17,7 +17,6 @@ const loseHealth = async (req, res) => {
 
 const missedStreaksHealthLoss = async (id, numHabitsMissed, ) => {
 	try {
-		console.log(`Health Lost as a result: ${missedHabitPunishment * numHabitsMissed}`)
 		return modifyHealth(id, missedHabitPunishment * numHabitsMissed);
 	} catch (error) {
 		console.error(error);
