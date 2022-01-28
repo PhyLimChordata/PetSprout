@@ -36,6 +36,7 @@ const scheduleHabitAlarms = async (userId, analyzeId) => {
     // Schedule alarms for the user.
     for (const a in updatedAlarmList) {
         elem = updatedAlarmList[a];
+        console.log(`Date String Received in alarm.js: ${elem.date}`)
         schedule(elem.date, userHabit.schedule, elem._id, tokens)
     }
 }

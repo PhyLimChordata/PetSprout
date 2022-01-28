@@ -14,7 +14,7 @@ const { validationResult } = require('express-validator');
  */
 module.exports = async (req, res) => {
 	try {
-		let { title, description, reason, schedule, times, alarm, date } = req.body;
+		let { title, description, reason, schedule, times, alarm, date, timezone } = req.body;
 
 		let errors = [];
 		if (title === '') errors.push('title');
@@ -69,7 +69,14 @@ module.exports = async (req, res) => {
 		// to assign each alarm a unique ObjectId in the database.
 		let alarmList = []
 		for (const a of alarm) {
-			alarmList.push({date: a})
+			foo = new Date(a);
+			
+			console.log(`CreateHabit a: ${a}`)
+			console.log(`CreateHabit foo: ${foo}`)
+			console.log(`CreateHabit typeof: ${typeof foo}`)
+			console.log(`CreateHabit getTimezoneoffset: ${foo.getTimezoneOffset()}`)
+			alarmList.push({date: a,
+							timezone: timezone})
 		}
 
 		let newHabit = {
