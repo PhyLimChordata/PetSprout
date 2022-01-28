@@ -85,7 +85,7 @@ const PomodoroTasksStyles = StyleSheet.create({
         },
         safeArea:{
             flex: 1, 
-            backgroundColor: colors.white,
+            backgroundColor: '#FFFFFF',
         },
     });
 
