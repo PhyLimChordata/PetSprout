@@ -69,7 +69,6 @@ function PutHabits(props) {
 	const { colors } = useTheme();
 	const createHabit = () => {
 		let times = alarms.length == 0 ? 1 : alarms.length;
-		console.log(Localization.timezone)
 		fetch('http://localhost:5000/api/v1.0.0/habit/create_habit', {
 			method: 'POST',
 			headers: {

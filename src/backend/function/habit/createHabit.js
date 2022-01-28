@@ -70,11 +70,6 @@ module.exports = async (req, res) => {
 		let alarmList = []
 		for (const a of alarm) {
 			foo = new Date(a);
-			
-			console.log(`CreateHabit a: ${a}`)
-			console.log(`CreateHabit foo: ${foo}`)
-			console.log(`CreateHabit typeof: ${typeof foo}`)
-			console.log(`CreateHabit getTimezoneoffset: ${foo.getTimezoneOffset()}`)
 			alarmList.push({date: a,
 							timezone: timezone})
 		}
