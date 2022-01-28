@@ -36,6 +36,9 @@ function HabitsScreen(props) {
 		useContext(AuthContext);
 
 	const [refreshing, setRefreshing] = React.useState(false);
+	const [disabled, setDisabled] = useState(false);
+
+
 
 	const onRefresh = React.useCallback(() => {
 		setRefreshing(true);
@@ -56,6 +59,11 @@ function HabitsScreen(props) {
 			displayHabits();
 		}
 	}, [getRefreshing]);
+
+	const disableCheck = (val) => {
+		setDisabled(val);
+		//console.log('disabled');
+	}
 
 	const displayHabits = () => {
 		console.log('huhhhhh');
@@ -151,6 +159,9 @@ function HabitsScreen(props) {
 										frequency={data.times - data.todo}
 										habitId={data._id}
 										userHabitId={userHabitId}
+										disabled = {disabled}
+										pauseFunction = {() => {disableCheck(true)}}
+										startFunction = {() => {disableCheck(false)}}
 									></Habits>
 									<View style={{ height: 15 }}></View>
 								</Animated.View>

@@ -21,6 +21,7 @@ function ScrollViewElement(props) {
 			// if (props.leftClose && swipeableRef.current != null)
 			// 	swipeableRef.current.close();
 		};
+
 		return (
 			<View
 				style={{
@@ -46,12 +47,16 @@ function ScrollViewElement(props) {
 			outputRange: [1, 0],
 			extrapolate: 'clamp',
 		});
+		
 		let right = () => {
+			
 			props.rightFunction();
 			swipeableRef.current.close();
+			
 			// if (props.rightClose && swipeableRef.current != null)
 			// 	swipeableRef.current.close()
 		};
+		
 		return (
 			<View
 				style={{
@@ -65,7 +70,7 @@ function ScrollViewElement(props) {
 				}}
 			>
 				<Animated.View style={{ transform: [{ scale }] }}>
-					<Checkmark onPress={right} />
+					<Checkmark onPress={right} disabled = {props.disabled}/>
 				</Animated.View>
 			</View>
 		);
@@ -113,7 +118,7 @@ function ScrollViewElement(props) {
 function Checkmark(props) {
 	const { colors } = useTheme();
 	return (
-		<TouchableOpacity activeOpacity={0.6} onPress={props.onPress}>
+		<TouchableOpacity activeOpacity={0.6} onPress={props.onPress} disabled = {props.disabled}>
 			<Image
 				style={styles(colors).swipeIcon}
 				source={require('../resources/images/Checkmark.png')}
