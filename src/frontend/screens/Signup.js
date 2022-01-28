@@ -75,7 +75,7 @@ function SignupScreen(props) {
 		padding: 10,
 		fontSize: 15,
 		borderRadius: 5,
-		width: 300,
+		width: '90%',
 	};
 
 	const [userNameTextStyle, setUserNameTextStyle] = useState({
