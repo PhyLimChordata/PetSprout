@@ -64,7 +64,7 @@ function HabitsScreen(props) {
 		setDisplayed(true);
 		setRefreshing(true);
 		const date = new Date().toString();
-		fetch('http://localhost:5000/api/v1.0.0/habit/show_user_habit/' + date, {
+		fetch('http://192.168.0.58:5000/api/v1.0.0/habit/show_user_habit/' + date, {
 			method: 'GET',
 			headers: {
 				'Content-Type': 'application/json',
@@ -100,7 +100,7 @@ function HabitsScreen(props) {
 		>
 			<MenuHeader text='' navigation={props.navigation} displayHp={true} />
 			<DisplayPet navigation={props.navigation} />
-			{missedHabits.length > 0 && <MissedHabitBanner/>}
+			{missedHabits.length > 0 && <MissedHabitBanner onPress = {() => {props.navigation.navigate('AllHabitsScreen')}}/>}
 			<View style={styles(colors).scrollViewContainer}>
 				<TouchableOpacity
 					style={{ alignSelf: 'flex-end' }}
