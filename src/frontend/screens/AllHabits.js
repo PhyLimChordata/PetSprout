@@ -81,12 +81,12 @@ function AllHabitsScreen(props) {
 				>
 					{habits.map((data, index) => {
 							const scale = scrolling.interpolate({
-								inputRange: [-1, 0, 100 * index, 100 * (index + 1)],
+								inputRange: [-1, 0, 115 * index, 115 * (index + 1)],
 								outputRange: [1, 1, 1, 0],
 							});
 
 							const opacity = scrolling.interpolate({
-								inputRange: [-1, 0, 100 * index, 100 * (index + 0.8)],
+								inputRange: [-1, 0, 115 * index, 115 * (index + 0.8)],
 								outputRange: [1, 1, 1, 0],
 							});
 
