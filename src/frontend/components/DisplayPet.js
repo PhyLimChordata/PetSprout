@@ -144,7 +144,7 @@ export function DisplayPet(props) {
 					style={{
 						height: '100%',
 						width: '100%',
-						backgroundColor: colors.white,
+						backgroundColor: "#FFFFFF",
 						alignItems: 'center',
 						justifyContent: 'center',
 						marginBottom: 10,

@@ -1,5 +1,5 @@
 const cron = require('node-cron');
-const notification = require('../user/notification');
+const notification = require('./notification');
 const Habit = require('../../schemas/habitSchema');
 const User = require('../../schemas/userSchema');
 

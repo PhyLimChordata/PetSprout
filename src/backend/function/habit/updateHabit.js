@@ -1,6 +1,6 @@
 const Habit = require('../../schemas/habitSchema');
 const User = require('../../schemas/userSchema');
-const alarmLib = require('./alarm');
+const alarmLib = require('../common/alarm');
 
 const { validationResult } = require('express-validator');
 
