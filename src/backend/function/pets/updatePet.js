@@ -64,7 +64,7 @@ const gain_exp = async (req, res) => {
 			currentPet.hp = 100;
 		}
 		if (currentPet.level === req.body.levelToEvolveNext) {
-			currentPet.readyToEvolve = true
+			currentPet.readyToEvolve = true;
 		}
 
 		usersPet.currentPet = currentPet;

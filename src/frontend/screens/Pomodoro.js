@@ -9,7 +9,7 @@ import {
 	TextInput,
 	Button,
 	AppState,
-	moment,
+	//moment,
 } from 'react-native';
 
 import PomodoroFinishPopup from '../components/PomodoroFinishPopup';
@@ -33,10 +33,7 @@ import * as TaskManager from 'expo-task-manager';
 
 import { DisplayPet, gainXP, getHP, loseHP } from '../components/DisplayPet';
 import App from '../../App';
-
-//CHANGES
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { differenceInSeconds } from "date-fns";
+import { setHours } from 'date-fns';
 
 const BACKGROUND_FETCH_TASK = 'background-fetch';
 
@@ -63,7 +60,13 @@ function PomodoroScreen(props) {
 	//CHANGES
 	const appState = useRef(AppState.currentState);
 	const [appStateVisible, setAppStateVisible] = useState(appState.current);
-	const [elapsed, setElapsed] = useState(0);
+	const [startHour, setStartHour] = useState(0);
+	const [startMin, setStartMin] = useState(0);
+	const [startSeconds, setStartSeconds] = useState(0);
+	const [date, setDate] = useState();
+	// const [endHour, setEndHour] = useState(0);
+	// const [endMin, setEndMin] = useState(0);
+	// const [endSeconds, setEndSeconds] = useState(0);
 
 	const formatNumber = (number) => {
 		return ('0' + number.toString()).slice(-2);
@@ -149,57 +152,66 @@ function PomodoroScreen(props) {
 
 	//CHANGES
 	useEffect(() => {
-		AppState.addEventListener('change', handleAppStateChange);
+		AppState.addEventListener('change', caller);
 		return () => {
-		  AppState.remove('change', handleAppStateChange);
+		  AppState.removeEventListener('change', caller);
 		};
 	}, []);
 
-	const handleAppStateChange = async (nextAppState) => {
-		if (appState.current.match(/inactive|background/) &&
-		  nextAppState === "active") {
-		  // We just became active again: recalculate elapsed time based 
-		  // on what we stored in AsyncStorage when we started.
-		  const elapsed = await getElapsedTime();
-		  // Update the elapsed seconds state
-		  setElapsed(elapsed);
-		  setRemainingSecs((remainingSecs) => remainingSecs - 1);
-		  setTimer(remainingSecs);
+	//Method that calls offFocus or onFocus depending on the situation
+	const caller = () => {
+		if(appState.current.match(/inactive|background/) && isActive == true) {
+			offFocus();
+		}else if(appState.current.match(/active/)) {
+			onFocus();
 		}
-		appState.current = nextAppState;
-	  };
+	}
 
-	//CHANGES
-	const getElapsedTime = async () => {
-		try {
-		  const startTime = await AsyncStorage.getItem("@start_time");
-		  const now = new Date();
-		  return differenceInSeconds(now, Date.parse(startTime));
-		} catch (err) {
-		  // TODO: handle errors from setItem properly
-		  console.warn(err);
+	//Method that sets isActive to false, and records current time
+	const offFocus = () => {
+		//Records time user left app for later
+		let date = new Date();
+		setDate(date);
+		setStartHour(date.getHours());
+    	setStartMin(date.getMinutes());
+    	setStartSeconds(date.getSeconds());
+		//Turns timer off
+		setActive(false);
+   	};
+
+	//Method that records current time, checks time elapsed, checks if time = 0
+	const onFocus = () => {
+		//Records time user put focus back on app
+		let date2 = new Date();
+		let hours = date2.getHours();
+    	let minutes = date2.getMinutes();
+    	let seconds = date2.getSeconds();
+		//Calculate time elapsed between times
+		var diff = (date2 -date)/1000;
+		// let elapsedHours = hours - startHour;
+		// let elapsedMinutes = minutes - startMin;
+		// let elapsedSeconds = seconds  - startSeconds;
+		// elapsedHours = 0;
+		// elapsedMinutes = 0;
+		// elapsedSeconds = 0;
+		// elapsedSeconds = (elapsedHours * 360) + (elapsedMinutes * 60) + (seconds - startSeconds);
+		//Check if time has reached zero
+		if(setRemainingSecs((remainingSecs) => remainingSecs - diff) <= 0) {
+			//If reached zero, 
+			setRounds(rounds + 1);
+			//resetTimer(duration['Pomodoro']);
+			if (rounds >= 1) {
+				setBreak(true);
+			}
 		}
-	};
-
-	//CHANGES
-	const _handleAppStateChange = (nextAppState) => {
-		//Make seconds go down 
-		// setRemainingSecs((remainingSecs) => remainingSecs - 1);
-		// setTimer(remainingSecs);
-		// if (remainingSecs == 0) {
-		// 	setRounds(rounds + 1);
-		// 	//play sound and bring up pop up
-		// 	if (rounds >= 1) {
-		// 		setBreak(true);
-		// 	}
-		// 	setActive(false);
-		// 	resetTimer(duration['Pomodoro']);
-		// }
-		appState.current = nextAppState;
-		setAppStateVisible(appState.current);
-		console.log('AppState', appState.current);
-	};
-
+		else {
+			//If not reached zero
+			setRemainingSecs((remainingSecs) => remainingSecs - diff);
+			setTimer(remainingSecs);
+			setActive(true);
+		}
+	}
+	
 	const checkStatusAsync = async () => {
 		const status = await BackgroundFetch.getStatusAsync();
 		const isRegistered = await TaskManager.isTaskRegisteredAsync(
@@ -223,21 +235,21 @@ function PomodoroScreen(props) {
 	const toggle = () => {
 		setActive(!isActive);
 		//CHANGES
-		if(isActive) {
-			recordStartTime();
-		}
+		// if(isActive) {
+		// 	recordStartTime();
+		// }
 	};
 
 	//CHANGES
-	const recordStartTime = async () => {
-		try {
-		  const now = new Date();
-		  await AsyncStorage.setItem("@start_time", now.toISOString());
-		} catch (err) {
-		  // TODO: handle errors from setItem properly
-		  console.warn(err);
-		}
-	  };
+	// const recordStartTime = async () => {
+	// 	try {
+	// 	  const now = new Date();
+	// 	  await AsyncStorage.setItem("@start_time", now.toISOString());
+	// 	} catch (err) {
+	// 	  // TODO: handle errors from setItem properly
+	// 	  console.warn(err);
+	// 	}
+	//   };
 
 	const stopSession = () => {
 		//Lose 2 HP
