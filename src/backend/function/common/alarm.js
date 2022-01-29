@@ -7,6 +7,21 @@ const Pets = require('../../schemas/petsSchema');
 var jobs = {};
 
 /**
+ * Reschedules all alarms on server startup.
+ */
+const startupAlarms = async () => {
+    for await (const u of User.find()) {
+        console.log(`[Alarm Startup] Scheduling Alarms for ${u._id}`)
+        for await (const h of Habit.findOne({user: u._id })) {
+            for (const habit of h.habitList) {
+                console.log(`[Alarm Startup] Habit Alarms Scheduled: ${habit.title}`)
+                scheduleHabitAlarms(u._id, habit.analyze);
+            }
+        }
+      }
+}
+
+/**
  * Given a userId and analyzeId (used to identify which habit), schedule all of the 
  * alarms.
  * @param {*} userId 
@@ -180,3 +195,4 @@ const alarmLog = (id, method) => {
 }
 exports.scheduleHabitAlarms = scheduleHabitAlarms;
 exports.unscheduleHabitAlarms = unscheduleHabitAlarms;
+exports.startup = startupAlarms;
