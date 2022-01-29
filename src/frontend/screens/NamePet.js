@@ -40,7 +40,7 @@ function Button(props) {
 }
 
 function NameHabit(props) {
-	const { getToken } = useContext(AuthContext);
+	const { getToken, changePet } = useContext(AuthContext);
 	const namePet = (name) => {
 		console.log(name);
 		fetch('http://localhost:5000/api/v1.0.0/pets/name_pet', {
@@ -53,7 +53,9 @@ function NameHabit(props) {
 		})
 			.then((res) =>
 				res.json().then((data) => {
-					props.navigation.navigate('EvolutionScreen');
+					changePet(data.image)
+					props.navigation.navigate('Habit');
+					console.log(data.image)
 				}),
 			)
 			.catch(() => console.log('error'));
