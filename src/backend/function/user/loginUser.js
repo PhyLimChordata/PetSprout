@@ -76,14 +76,13 @@ module.exports = async (req, res) => {
 					if(daysApart == 1) {
 						let new_streak = userAchievements.login_streak + 1;
 						userAchievements.login_streak = new_streak;
-			
-						// Check if this is a new longest streak
-						if (userAchievements.achievements.accountability.login < new_streak) {
-							userAchievements.achievements.accountability.login = new_streak;
-						}
 					} else if (daysApart > 1) {
 						// Player loses streak as they didn't login everyday
 						userAchievements.login_streak = 1;
+					}
+					// Check if this is a new longest streak
+					if (userAchievements.achievements.accountability.login < new_streak) {
+						userAchievements.achievements.accountability.login = new_streak;
 					}
 
 					// Check pet health to update the consecutive days that user's pet have at least
