@@ -18,16 +18,17 @@
 		"android": {
 			"googleServicesFile": "./google-services.json",
 			"softwareKeyboardLayoutMode": "pan",
-			"package": "com.phylimchordata.PetSprout",
-			"versionCode": 1,
+			"package": "com.phylimchordata.petsprout",
+			"versionCode": 2,
 			"adaptiveIcon": {
 				"foregroundImage": "./frontend/resources/images/Logo/LogoGreenNonTransparent.png",
 				"backgroundColor": "#FFFFFF"
-			}
+			},
+			"permissions": []
 		},
 		"ios": {
 			"bundleIdentifier": "com.phylimchordata.PetSprout",
-			"buildNumber": "1.1.0"
+			"buildNumber": "2.0.0"
 		},
 		"web": {
 			"favicon": "./frontend/resources/images/Logo/LogoGreenNonTransparent.png"
@@ -36,7 +37,7 @@
 			[
 			  "expo-notifications",
 			  {
-				"icon": "./frontend/resources/images/Icon.png",
+				"icon": "./frontend/resources/images/Icon.jpeg",
 				"color": "#ffffff"
 			  }
 			]
