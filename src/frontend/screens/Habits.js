@@ -28,18 +28,17 @@ function HabitsScreen(props) {
 
 	const [userHabitId, setUserHabitId] = useState('');
 
-	const { colors } = useTheme();
+	const {colors} = useTheme();
 
 	const [displayed, setDisplayed] = useState(false);
 
 	const scrolling = React.useRef(new Animated.Value(0)).current;
 
-	const { getToken, getRefreshing, changeRefreshing, getPet } =
+	const {getToken, getRefreshing, changeRefreshing, getPet} =
 		useContext(AuthContext);
 
 	const [refreshing, setRefreshing] = React.useState(false);
 	const [disabled, setDisabled] = useState(false);
-
 
 
 	const onRefresh = React.useCallback(() => {
@@ -111,7 +110,7 @@ function HabitsScreen(props) {
 			{missedHabits.length > 0 && <MissedHabitBanner/>}
 			<View style={styles(colors).scrollViewContainer}>
 				<TouchableOpacity
-					style={{ alignSelf: 'flex-end' }}
+					style={{alignSelf: 'flex-end'}}
 					onPress={() => props.navigation.navigate('AllHabitsScreen')}
 				>
 					<Text
@@ -127,13 +126,13 @@ function HabitsScreen(props) {
 				<Animated.ScrollView
 					showsVerticalScrollIndicator={false}
 					onScroll={Animated.event(
-						[{ nativeEvent: { contentOffset: { y: scrolling } } }],
-						{ useNativeDriver: true },
+						[{nativeEvent: {contentOffset: {y: scrolling}}}],
+						{useNativeDriver: true},
 					)}
 					scrollEventThrottle={16}
 					// decelerationRate={'normal'}
 					refreshControl={
-						<RefreshControl refreshing={getRefreshing} onRefresh={onRefresh} />
+						<RefreshControl refreshing={getRefreshing} onRefresh={onRefresh}/>
 					}
 					scrollsToTop={true}
 					snapToInterval={100}
@@ -153,7 +152,7 @@ function HabitsScreen(props) {
 
 						return (
 							<View>
-								<Animated.View style={{ opacity, transform: [{ scale }] }}>
+								<Animated.View style={{opacity, transform: [{scale}]}}>
 									<Habits
 										completed={completed}
 										enableRight={true}
@@ -164,11 +163,15 @@ function HabitsScreen(props) {
 										frequency={data.times - data.todo}
 										habitId={data._id}
 										userHabitId={userHabitId}
-										disabled = {disabled}
-										pauseFunction = {() => {disableCheck(true)}}
-										startFunction = {() => {disableCheck(false)}}
+										disabled={disabled}
+										pauseFunction={() => {
+											disableCheck(true)
+										}}
+										startFunction={() => {
+											disableCheck(false)
+										}}
 									></Habits>
-									<View style={{ height: 15 }}></View>
+									<View style={{height: 15}}></View>
 								</Animated.View>
 							</View>
 						);
