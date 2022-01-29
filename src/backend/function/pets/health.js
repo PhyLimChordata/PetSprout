@@ -3,6 +3,31 @@ const User = require('../../schemas/userSchema');
 
 const { validationResult } = require('express-validator');
 
+const revivePet = async (req, res) => {
+	currentPet = undefined;
+	try {
+		currentPet = await Pets.findOne({ user: req.user.id }).currentPet;
+		if (isDead(currentPet)) {
+			currentPet.hp = restoreHp(currentPet.hp, currentPet.maxhp / 2);
+		}
+	} catch (error) {
+		console.error(error);
+		return res.status(500).json(`error in revive ${JSON.stringify(error)}`);
+	}
+};
+
+const isDead = async (pet) => {
+	return pet.hp <= 0;
+};
+
+const restoreHp = async (prevAmount, restoreAmount) => {
+	let currentAmount = prevAmount + restoreAmount;
+	if (currentAmount > 100) {
+		currentAmount = 100;
+	}
+	return currentAmount;
+};
+
 const addHealth = async (req, res) => {
 	try {
 		let errors = validationResult(req);
@@ -13,10 +38,7 @@ const addHealth = async (req, res) => {
 		if (!user) return res.status(404).json('User could not found');
 
 		let currentPet = await Pets.findOne({ user: req.user.id }).currentPet;
-		currentPet.hp = currentPet.hp + req.hp;
-		if (currentPet.hp > 100) {
-			currentPet.hp = 100;
-		}
+		currentPet.hp = restoreHp(currentPet.hp, req.hp);
 		await currentPet.save();
 
 		res.json(currentPet);

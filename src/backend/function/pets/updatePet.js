@@ -2,6 +2,8 @@ const Pets = require('../../schemas/petsSchema');
 const User = require('../../schemas/userSchema');
 
 const { validationResult } = require('express-validator');
+const { LevelMapping, evolveLevels } = require('./const');
+const { intervalGet } = require('../common/util');
 
 const name = async (req, res) => {
 	try {
@@ -14,7 +16,7 @@ const name = async (req, res) => {
 
 		let usersPet = await Pets.findOne({ user: req.user.id });
 		if (req.body.name == '') {
-			req.body.name= req.user.userName + "'s Pet";
+			req.body.name = req.user.userName + "'s Pet";
 		}
 		usersPet.currentPet.name = req.body.name;
 		usersPet.currentPet.image = 'blob';
@@ -59,11 +61,20 @@ const gain_exp = async (req, res) => {
 		let currentPet = usersPet.currentPet;
 		currentPet.expValue = currentPet.expValue + req.body.expValue;
 
-		if (req.body.totalExp <= currentPet.expValue) {
-			currentPet.level += 1;
-			currentPet.hp = 100;
+		let { exp, level } = change_exp(currentPet.expValue, req.body.ExpValue);
+		currentPet.expValue = exp;
+		currentPet.level = level;
+
+		//add this for pet entries which currently exist
+		if (!currentPet.next_evolution_lvl) {
+			currentPet.next_evolution_lvl = intervalGet(
+				currentPet.level,
+				'level',
+				evolveLevels,
+			);
 		}
-		if (currentPet.level === req.body.levelToEvolveNext) {
+
+		if (currentPet.level >= currentPet.next_evolution_lvl) {
 			currentPet.readyToEvolve = true;
 		}
 
@@ -75,6 +86,12 @@ const gain_exp = async (req, res) => {
 		console.error(error);
 		res.status(500).json('Server error');
 	}
+};
+
+const change_exp = (prevAmount, changeAmount) => {
+	currentAmount = prevAmount + changeAmount;
+	currentLevel = intervalGet(currentAmount, 'totalExp', LevelMapping);
+	return { exp: currentAmount, level: currentLevel };
 };
 
 exports.name = name;
