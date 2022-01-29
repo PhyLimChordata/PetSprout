@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import {
 	View,
 	SafeAreaView,
@@ -16,6 +16,7 @@ import { Checkbox } from 'react-native-paper';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 import MenuHeader from '../components/MenuHeader';
 import HomeButton from '../components/HomeButton';
+import { AuthContext } from '../Context';
 
 function AcceptTermsAndCondition(props) {
 	const { colors } = useTheme();
@@ -23,7 +24,10 @@ function AcceptTermsAndCondition(props) {
 	const [status, setState] = useState('unchecked');
 	const [disabled, setEnable] = useState(true);
 	const [greyed, setStyle] = useState(0.6);
+
 	const [show, setShow] = useState(props.route.params.isAcceptScreen);
+
+	const { getToken, setTCAccepted, getPrivacyAccepted } = useContext(AuthContext);
 
 	const checkSwitch = () => {
 		if (status == 'unchecked') {
@@ -305,7 +309,23 @@ function AcceptTermsAndCondition(props) {
 								style={style.aboutButton}
 								onPress={() => {
 									if (status == 'checked') {
-										props.navigation.navigate('AcceptPrivacyPolicyScreen');
+										fetch('http://localhost:5000/api/v1.0.0/doc/acceptTerms',{
+											method: 'POST',
+											headers: {
+												'Content-Type': 'application/json',
+												'authentication-token': getToken,
+											}
+										})
+										.then((res) => {
+											setTCAccepted(true)
+										})
+										.then(() => {
+											if(getPrivacyAccepted) {
+												props.navigation.navigate('Habit')
+											} else {
+												props.navigation.navigate('AcceptPrivacyPolicyScreen');
+											}
+										})
 									}
 								}}
 							>

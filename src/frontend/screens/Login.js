@@ -9,6 +9,8 @@ import { useTheme } from '@react-navigation/native';
 import Colours from '../resources/themes/Colours';
 import Constants from 'expo-constants';
 import * as Notifications from 'expo-notifications';
+import HabitsScreen from './Habits';
+import Habits from '../components/Habits';
 
 function Login(props) {
 	const [primaryInfo, setPrimaryInfo] = useState('');
@@ -35,7 +37,8 @@ function Login(props) {
 		color: colors.Quaternary,
 	});
 
-	const { getNotificationsToggle, logIn } = useContext(AuthContext);
+	const { getNotificationsToggle, logIn, setTCAccepted, setPrivacyAccepted } 
+		= useContext(AuthContext);
 
 	const updatingPrimaryInput = (text) => {
 		setPrimaryInfo(text);
@@ -101,124 +104,89 @@ function Login(props) {
 	};
 
 	const attemptLogin = () => {
-		console.log(getNotificationsToggle);
-		if (!getNotificationsToggle) {
+		console.log(`Logging in with notifications: ${getNotificationsToggle}`);
+		let login_body = {
+			primaryInfo: primaryInfo,
+			password: password,
+			date: new Date().toString(),
+		}
+		if (getNotificationsToggle) {
+			console.log(
+				`Clientside Notifications  (${getNotificationsToggle}) are enabled. Toggle is located in App.js.`,
+			);
+			registerForPushNotificationsAsync().then((pushToken) => {
+				login_body['expoPushToken'] = pushToken
+				runLogin();
+			});
+		} else {
 			console.log(
 				`Clientside Notifications (${getNotificationsToggle}) are DISABLED. Toggle is located in App.js.`,
 			);
+			runLogin();
+		}
+
+		const runLogin = () => {
 			fetch('http://localhost:5000/api/v1.0.0/user/login', {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
 				},
-				body: JSON.stringify({
-					primaryInfo: primaryInfo,
-					password: password,
-					date: new Date().toString(),
-				}),
+				body: JSON.stringify(login_body),
 			})
-				.then((res) => {
-					let token = -1;
-					if (primaryInfo == '' || password == '') {
-						setError('Please enter all parameters');
-					} else if (res.status == 200) {
-						res.json().then((data) => {
-							logIn(data.token);
-						});
-					} else if (res.status == 404 || res.status == 401) {
-						setError('The provided information is incorrect');
-					} else if (res.status == 400) {
-						setError('User has not been verified');
-					} else if (res.status == 500) {
-						setError('Something wrong happened internally...');
-					}
-
-					if (res.status != 200) {
-						setInputStyle({
-							backgroundColor: Colours.Red.NotSelected,
-							padding: 10,
-							fontSize: 15,
-							borderRadius: 5,
-							marginBottom: 20,
-							width: '100%',
-						});
-						setTextStyle({
-							fontSize: 20,
-							fontWeight: 'bold',
-							paddingBottom: 5,
-							color: Colours.Red.Error,
-						});
-					}
-				})
-				.catch();
-		} else {
-			console.log(
-				`Clientside Notifications  (${getNotificationsToggle}) are enabled. Toggle is located in App.js.`,
-			);
-			registerForPushNotificationsAsync().then((pushToken) => {
-				fetch('http://localhost:5000/api/v1.0.0/user/login', {
-					method: 'POST',
-					headers: {
-						'Content-Type': 'application/json',
-					},
-					body: JSON.stringify({
-						primaryInfo: primaryInfo,
-						password: password,
-						date: new Date().toString(),
-						expoPushToken: pushToken,
-					}),
-				})
-					.then((res) => {
-						let token = -1;
-						if (primaryInfo == '' || password == '') {
-							setError('Please enter all parameters');
-						} else if (res.status == 200) {
-							res.json().then((data) => {
-								logIn(data.token);
-								fetch(
-									'http://localhost:5000/api/v1.0.0/achievements/updateLoginStreaks',
-									{
-										method: 'PUT',
-										headers: {
-											'Content-Type': 'application/json',
-											'authentication-token': data.token,
-										},
-									},
-								).then((ret) => {
-									if (ret.status == 404) {
-										console.log('Achievement not found');
-									} else if (res.status == 200) {
-										console.log('Success streak update!');
-									}
-								});
+			.then((res) => {
+				let token = -1;
+				if (primaryInfo == '' || password == '') {
+					setError('Please enter all parameters');
+				} else if (res.status == 200) {
+					res.json().then((data) => {
+						fetch('http://localhost:5000/api/v1.0.0/doc/didAcceptPolicy', {
+							method: 'GET',
+							headers: {
+								'Content-Type': 'application/json',
+								'authentication-token': data.token,
+							}
+						})
+						.then((privRes) => {
+							fetch('http://localhost:5000/api/v1.0.0/doc/didAcceptTerms', {
+								method: 'GET',
+								headers: {
+									'Content-Type': 'application/json',
+									'authentication-token': data.token,
+								}
+							})
+							.then((termsRes) => {
+								privRes.json().then((privData) => {console.log(`Privacy for ${privData.accepted}`); setPrivacyAccepted(privData.accepted)})
+								termsRes.json().then((termsData) =>{console.log(`Terms for ${termsData.accepted}`); setTCAccepted(termsData.accepted)})
 							});
-						} else if (res.status == 404 || res.status == 401) {
-							setError('The provided information is incorrect');
-						} else if (res.status == 400) {
-							setError('User has not been verified');
-						} else if (res.status == 500) {
-							setError('Something wrong happened internally...');
-						}
-
-						if (res.status != 200) {
-							setInputStyle({
-								backgroundColor: Colours.Red.NotSelected,
-								padding: 10,
-								fontSize: 15,
-								borderRadius: 5,
-								marginBottom: 20,
-								width: '100%',
-							});
-							setTextStyle({
-								fontSize: 20,
-								fontWeight: 'bold',
-								paddingBottom: 5,
-								color: Colours.Red.Error,
-							});
-						}
-					})
-					.catch();
-			});
+						})
+						.then(() => {console.log("Setting token"); logIn(data.token)});
+					});
+				} else if (res.status == 404 || res.status == 401) {
+					setError('The provided information is incorrect');
+				} else if (res.status == 400) {
+					setError('User has not been verified');
+				} else if (res.status == 500) {
+					setError('Something wrong happened internally...');
+				}
+	
+				if (res.status != 200) {
+					setInputStyle({
+						backgroundColor: Colours.Red.NotSelected,
+						padding: 10,
+						fontSize: 15,
+						borderRadius: 5,
+						marginBottom: 20,
+						width: '100%',
+					});
+					setTextStyle({
+						fontSize: 20,
+						fontWeight: 'bold',
+						paddingBottom: 5,
+						color: Colours.Red.Error,
+					});
+				}
+			})
+			.catch(() => setError('Something wrong happened internally... :('));
 		}
 	};
 
