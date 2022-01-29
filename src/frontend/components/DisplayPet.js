@@ -142,7 +142,7 @@ export function DisplayPet(props) {
 				<View
 					style={{
 						width: '100%',
-						backgroundColor: colors.white,
+						backgroundColor: "#FFFFFF",
 						alignItems: 'center',
 						justifyContent: 'center',
 						marginBottom: 0,

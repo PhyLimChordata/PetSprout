@@ -43,6 +43,9 @@ const HabitSchema = new Schema(
 							date: {
 								type: Date
 							},
+							timezone: {
+								type: String
+							}
 						}
 				],
 				date: {

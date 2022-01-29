@@ -20,6 +20,7 @@ const name = async (req, res) => {
 		}
 		usersPet.currentPet.name = req.body.name;
 		usersPet.currentPet.image = 'blob';
+		usersPet.currentPet.readyToEvolve = false;
 		await usersPet.save();
 		res.json(usersPet.currentPet);
 	} catch (error) {
