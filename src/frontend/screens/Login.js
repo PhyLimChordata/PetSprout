@@ -155,8 +155,8 @@ function Login(props) {
 								}
 							})
 							.then((termsRes) => {
-								privRes.json().then((privData) => {console.log(`Privacy for ${privData.accepted}`); setPrivacyAccepted(privData.accepted)})
-								termsRes.json().then((termsData) =>{console.log(`Terms for ${termsData.accepted}`); setTCAccepted(termsData.accepted)})
+								privRes.json().then((privData) => setPrivacyAccepted(privData.accepted))
+								termsRes.json().then((termsData) => setTCAccepted(termsData.accepted))
 							});
 						})
 						.then(() => {console.log("Setting token"); logIn(data.token)});
