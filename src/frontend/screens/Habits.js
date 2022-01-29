@@ -160,7 +160,7 @@ function HabitsScreen(props) {
 										navigation={props.navigation}
 										habitId={data._id}
 										name={data.title}
-										streak={1}
+										streak={data.continuous}
 										frequency={data.times - data.todo}
 										habitId={data._id}
 										userHabitId={userHabitId}
