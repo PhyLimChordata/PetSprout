@@ -139,21 +139,18 @@ export function DisplayPet(props) {
 
 	return (
 		<>
-			<View style={{ flex: 10 }}>
 				<View
 					style={{
-						height: '100%',
 						width: '100%',
 						backgroundColor: colors.white,
 						alignItems: 'center',
 						justifyContent: 'center',
-						marginBottom: 10,
+						marginBottom: 0,
 					}}
 				>
 					<Image
 						style={{
-							width: '50%',
-							height: '50%',
+							height: 150,
 							resizeMode: 'contain',
 							marginBottom: 5,
 						}}
@@ -165,7 +162,6 @@ export function DisplayPet(props) {
 						xpLevelCap={xpLevelCap}
 					/>
 				</View>
-			</View>
 			<EvolutionPopup
 				visible={evolutionVisible}
 				setVisible={setEvolutionVisible}
