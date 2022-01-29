@@ -9,7 +9,6 @@ import {
 	TextInput,
 	Button,
 	AppState,
-	//moment,
 } from 'react-native';
 
 import PomodoroFinishPopup from '../components/PomodoroFinishPopup';
