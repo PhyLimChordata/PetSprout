@@ -24,12 +24,17 @@ function Habits(props) {
 			setCompleted(props.completed);
 			setFrequency(props.frequency);
 			setStreak(props.streak);
-			props.startFunction();
+			if (props.startFunction) {
+				props.startFunction();
+			}
 		}
 	}
 	, [getRefreshing]);
 	
 	const disableCompletionTemp = () => {
+		if (props.pauseFunction()) {
+			props.pauseFunction();
+		}
 		props.pauseFunction();
 		completeHabit();
 	};
