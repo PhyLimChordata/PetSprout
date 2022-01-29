@@ -7,8 +7,8 @@
  * }
  *
  * intervalGet(5, 'a', map)
- * > 2
- * since 5 is greater than 4 and less than 6
+ * > 3
+ * since 5 less than 6 and greater than all prior values (2,4)
  * PREREQUISITE: the props in the map are in ascending order
  **/
 export let intervalGet = (key, prop, map) => {
