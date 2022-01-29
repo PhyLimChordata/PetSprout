@@ -1,5 +1,6 @@
 const Pets = require('../../schemas/petsSchema');
 const User = require('../../schemas/userSchema');
+const updatePet = require('./updatePet');
 
 const { validationResult } = require('express-validator');
 
@@ -9,6 +10,12 @@ const revivePet = async (req, res) => {
 		currentPet = await Pets.findOne({ user: req.user.id }).currentPet;
 		if (isDead(currentPet)) {
 			currentPet.hp = restoreHp(currentPet.hp, currentPet.maxhp / 2);
+			let { exp, level } = updatePet.changeExp(
+				currentPet.expValue,
+				-(currentPet.expValue / 2),
+			);
+			currentPet.expValue = exp;
+			currentPet.level = level;
 		}
 	} catch (error) {
 		console.error(error);
@@ -73,3 +80,4 @@ const loseHealth = async (req, res) => {
 
 exports.addHealth = addHealth;
 exports.loseHealth = loseHealth;
+exports.revivePet = revivePet;

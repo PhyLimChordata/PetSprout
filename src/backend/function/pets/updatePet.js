@@ -61,7 +61,7 @@ const gain_exp = async (req, res) => {
 		let currentPet = usersPet.currentPet;
 		currentPet.expValue = currentPet.expValue + req.body.expValue;
 
-		let { exp, level } = change_exp(currentPet.expValue, req.body.ExpValue);
+		let { exp, level } = changeExp(currentPet.expValue, req.body.ExpValue);
 		currentPet.expValue = exp;
 		currentPet.level = level;
 
@@ -88,7 +88,7 @@ const gain_exp = async (req, res) => {
 	}
 };
 
-const change_exp = (prevAmount, changeAmount) => {
+const changeExp = (prevAmount, changeAmount) => {
 	currentAmount = prevAmount + changeAmount;
 	currentLevel = intervalGet(currentAmount, 'totalExp', LevelMapping);
 	return { exp: currentAmount, level: currentLevel };
