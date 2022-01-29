@@ -16,6 +16,7 @@ const revivePet = async (req, res) => {
 			);
 			currentPet.expValue = exp;
 			currentPet.level = level;
+			await currentPet.save();
 		}
 	} catch (error) {
 		console.error(error);
