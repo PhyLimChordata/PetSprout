@@ -31,8 +31,6 @@ import * as BackgroundFetch from 'expo-background-fetch';
 import * as TaskManager from 'expo-task-manager';
 
 import { DisplayPet, gainXP, getHP, loseHP } from '../components/DisplayPet';
-import App from '../../App';
-import { setHours } from 'date-fns';
 
 const BACKGROUND_FETCH_TASK = 'background-fetch';
 
@@ -147,9 +145,9 @@ function PomodoroScreen(props) {
         const subscription = AppState.addEventListener("change", nextAppState => {
 			console.log('activeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee')
 			console.log(isActive)
-            if(appState.current.match(/inactive|background/) && nextAppState === 'active') {
+            if(appState.current.match(/inactive|background/) && nextAppState === 'active' && iniDateRef.current) {
                 onFocus();
-            }else if(appState.current === 'active' && nextAppState.match(/inactive|background/)) {
+            }else if(appState.current === 'active' && nextAppState.match(/inactive|background/) && activeRef.current) {
                 offFocus();
             }
             appState.current = nextAppState;
@@ -169,6 +167,13 @@ function PomodoroScreen(props) {
     }, [initialDate])
 
 	const iniDateRef = useRef(initialDate);
+
+	useEffect(() => {
+		activeRef.current = isActive;
+        console.log(activeRef.current)
+	}, [isActive])
+
+	const activeRef = useRef(isActive);
 
 	//Method that sets isActive to false, and records current time
 	const offFocus = () => {
@@ -195,6 +200,7 @@ function PomodoroScreen(props) {
 		console.log('diff aaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
 		console.log(remainingSecs)
 		console.log(remainingSecs - diff)
+	 	setInitialDate(null);
 		//Check if time has reached zero
 		if((remainingSecs - diff) <= 0) {
 			//If reached zero, 
