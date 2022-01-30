@@ -69,6 +69,10 @@ const get_user_achievements = async (req, res) => {
         // check pet health streak
         if(user_achievements.pet_health_streak > user_achievements.achievements.accountability.health)
             user_achievements.achievements.accountability.health = user_achievements.pet_health_streak;
+        
+        // check user login streaks
+        if(user_achievements.login_streak > user_achievements.achievements.accountability.login)
+            user_achievements.achievements.accountability.login = user_achievements.login_streak;
 
         await user_achievements.save();
         res.status(200).json(user_achievements.achievements);

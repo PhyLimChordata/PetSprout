@@ -1,7 +1,7 @@
 const Habit = require('../../schemas/habitSchema');
 const User = require('../../schemas/userSchema');
 const Analyze = require('../../schemas/analyzeSchema');
-const alarmLib = require('./alarm');
+const alarmLib = require('../common/alarm');
 
 /**
  *

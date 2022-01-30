@@ -83,6 +83,9 @@ const PomodoroTasksStyles = StyleSheet.create({
             lineHeight: 21,
             maxWidth: '80%',
         },
+        safeArea:{
+            flex: 1, 
+        },
     });
 
 export default PomodoroTasksStyles;

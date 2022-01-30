@@ -91,6 +91,13 @@ const TermsAndCondition = (theme) =>
 			alignItems: 'center',
 			textAlign: 'center',
 			flexDirection: 'column',
+		},
+		appleCheck: {
+			borderColor: theme.Quaternary,
+			borderWidth: 2,
+			borderRadius: 5,
+			marginLeft: -10,
+			marginRight: 10,
 		}
 
 	});

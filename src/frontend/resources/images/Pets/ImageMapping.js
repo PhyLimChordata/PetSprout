@@ -3,6 +3,7 @@ export const ImageMapping = {
 	anteater: require('./anteater/anteater'),
 	armadillo: require('./armadillo/armadillo'),
 	bat: require('./bat/bat'),
+	blob: require('./blob/blob'),
 	bear: require('./bear/bear'),
 	betafish: require('./betafish/betafish'),
 	biblicalangel: require('./biblicalangel/biblicalangel'),

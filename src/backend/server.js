@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
+const alarm = require('./function/common/alarm');
 
 // configures env vars in .env files
 require('dotenv').config();
@@ -32,6 +33,10 @@ if (process.env.NOTIFICATIONTOGGLE === 'true') {
 	console.log(
 		`Serverside Notifications are enabled. Toggle is located in .env file.`,
 	);
+
+	/* Reschedule alarms that were lost. */
+	alarm.startup();
+
 } else {
 	console.log(
 		`Serverside Notifications are DISABLED. Toggle is located in .env file.`,
@@ -45,6 +50,7 @@ app.use('/api/v1.0.0/habit', require('./routes/habitRoute'));
 app.use('/api/v1.0.0/setting', require('./routes/settingRoute'));
 app.use('/api/v1.0.0/achievements', require('./routes/achievementRoute'));
 app.use('/api/v1.0.0/pets', require('./routes/petsRoute'));
+app.use('/api/v1.0.0/doc', require('./routes/documentRoute'));
 
 //localhost:5000/api/v1.0.0/user
 
