@@ -138,13 +138,10 @@ function PomodoroScreen(props) {
 
 	useEffect(() => {
 		checkStatusAsync();
-		console.log('Checking async');
 	}, []);
 
 	useEffect(() => {
         const subscription = AppState.addEventListener("change", nextAppState => {
-			console.log('activeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee')
-			console.log(isActive)
             if(appState.current.match(/inactive|background/) && nextAppState === 'active' && iniDateRef.current) {
                 onFocus();
             }else if(appState.current === 'active' && nextAppState.match(/inactive|background/) && activeRef.current) {
@@ -152,7 +149,6 @@ function PomodoroScreen(props) {
             }
             appState.current = nextAppState;
             setAppStateVisible(appState.current);
-            console.log("AppState", appState.current);
         });
 
         return () => {
@@ -162,44 +158,31 @@ function PomodoroScreen(props) {
 
 	useEffect(() => {
         iniDateRef.current = initialDate;
-        console.log(iniDateRef.current)
-		console.log('reference aaaaaaaaaaaaaaaaaaaaaaaaa')
     }, [initialDate])
 
 	const iniDateRef = useRef(initialDate);
 
 	useEffect(() => {
 		activeRef.current = isActive;
-        console.log(activeRef.current)
 	}, [isActive])
 
 	const activeRef = useRef(isActive);
 
 	//Method that sets isActive to false, and records current time
 	const offFocus = () => {
-		console.log("offfocus works");
 		//Records time user left app for later
 		let date = new Date();
 		setInitialDate(date);
-		console.log(iniDateRef.current);
 		//Turns timer off
 		setActive(false);
    	};
 
 	//Method that records current time, checks time elapsed, checks if time = 0
 	const onFocus = () => {
-		console.log("its working");
 		//Records time user put focus back on app
 		let date2 = new Date();
-		console.log(date2);
-		console.log(iniDateRef.current);
-		console.log('onfocus aaaaaaaaaaaaaaaaaaaaaaaa')
 		//Calculate time elapsed between times
 		var diff = Math.floor((date2.getTime() - iniDateRef.current.getTime())/1000);
-		console.log(diff);
-		console.log('diff aaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
-		console.log(remainingSecs)
-		console.log(remainingSecs - diff)
 	 	setInitialDate(null);
 		//Check if time has reached zero
 		if((remainingSecs - diff) <= 0) {
@@ -214,7 +197,6 @@ function PomodoroScreen(props) {
 			//If not reached zero
 			setRemainingSecs((remainingSecs) => remainingSecs - diff);
 			setTimer(remainingSecs);
-			console.log(remainingSecs)
 			setActive(true);
 		}
 	}
@@ -229,7 +211,6 @@ function PomodoroScreen(props) {
 	};
 
 	const toggleFetchTask = async () => {
-		console.log('its working');
 		if (isRegistered) {
 			await unregisterBackgroundFetchAsync();
 		} else {
@@ -258,7 +239,6 @@ function PomodoroScreen(props) {
 	TaskManager.defineTask(BACKGROUND_FETCH_TASK, async () => {
 		try {
 			const receivedNewData = Date.now();
-			console.log('tick');
 			setRemainingSecs((remainingSecs) => remainingSecs - 1);
 			setTimer(remainingSecs);
 			if (remainingSecs == 0) {
@@ -274,7 +254,6 @@ function PomodoroScreen(props) {
 				? BackgroundFetch.Result.NewData
 				: BackgroundFetch.Result.NoData;
 		} catch (error) {
-			console.log(error);
 			return BackgroundFetch.Result.Failed;
 		}
 	});
@@ -282,7 +261,6 @@ function PomodoroScreen(props) {
 	// 2. Register the task at some point in your app by providing the same name, and some configuration options for how the background fetch should behave
 	// Note: This does NOT need to be in the global scope and CAN be used in your React components!
 	async function registerBackgroundFetchAsync() {
-		console.log('its workingReg');
 
 		return BackgroundFetch.registerTaskAsync(BACKGROUND_FETCH_TASK, {
 			minimumInterval: 1 / 60, // TO INVESTIGATE: on docs this is seconds but when testing on android it is 1 minute
@@ -295,7 +273,6 @@ function PomodoroScreen(props) {
 	// This will cancel any future background fetch calls that match the given name
 	// Note: This does NOT need to be in the global scope and CAN be used in your React components!
 	async function unregisterBackgroundFetchAsync() {
-		console.log('its workingUnreg');
 		if (mode != 'Pomodoro') {
 			setMode('Pomodoro');
 		} else {
