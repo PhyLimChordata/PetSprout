@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useRef } from 'react';
 import {
 	View,
 	Image,
@@ -8,6 +8,7 @@ import {
 	TouchableOpacity,
 	TextInput,
 	Button,
+	AppState,
 } from 'react-native';
 
 import PomodoroFinishPopup from '../components/PomodoroFinishPopup';
@@ -29,8 +30,7 @@ import * as BackgroundFetch from 'expo-background-fetch';
 
 import * as TaskManager from 'expo-task-manager';
 
-import { DisplayPet, gainXP, getHP } from '../components/DisplayPet';
-
+import { DisplayPet, gainXP, getHP, loseHP } from '../components/DisplayPet';
 
 const BACKGROUND_FETCH_TASK = 'background-fetch';
 
@@ -53,6 +53,11 @@ function PomodoroScreen(props) {
 	const [finished, setFinished] = useState(false);
 	const [start, setStart] = useState(false);
 	const [cancel, setCancel] = useState(false);
+
+	//CHANGES
+	const appState = useRef(AppState.currentState);
+	const [appStateVisible, setAppStateVisible] = useState(appState.current);
+	const [initialDate, setInitialDate] = useState(null);
 
 	const formatNumber = (number) => {
 		return ('0' + number.toString()).slice(-2);
@@ -133,9 +138,69 @@ function PomodoroScreen(props) {
 
 	useEffect(() => {
 		checkStatusAsync();
-		console.log('Checking async');
 	}, []);
 
+	useEffect(() => {
+        const subscription = AppState.addEventListener("change", nextAppState => {
+            if(appState.current.match(/inactive|background/) && nextAppState === 'active' && iniDateRef.current) {
+                onFocus();
+            }else if(appState.current === 'active' && nextAppState.match(/inactive|background/) && activeRef.current) {
+                offFocus();
+            }
+            appState.current = nextAppState;
+            setAppStateVisible(appState.current);
+        });
+
+        return () => {
+          subscription.remove();
+        };
+    }, []);
+
+	useEffect(() => {
+        iniDateRef.current = initialDate;
+    }, [initialDate])
+
+	const iniDateRef = useRef(initialDate);
+
+	useEffect(() => {
+		activeRef.current = isActive;
+	}, [isActive])
+
+	const activeRef = useRef(isActive);
+
+	//Method that sets isActive to false, and records current time
+	const offFocus = () => {
+		//Records time user left app for later
+		let date = new Date();
+		setInitialDate(date);
+		//Turns timer off
+		setActive(false);
+   	};
+
+	//Method that records current time, checks time elapsed, checks if time = 0
+	const onFocus = () => {
+		//Records time user put focus back on app
+		let date2 = new Date();
+		//Calculate time elapsed between times
+		var diff = Math.floor((date2.getTime() - iniDateRef.current.getTime())/1000);
+	 	setInitialDate(null);
+		//Check if time has reached zero
+		if((remainingSecs - diff) <= 0) {
+			//If reached zero, 
+			setRounds(rounds + 1);
+			//resetTimer(duration['Pomodoro']);
+			if (rounds >= 1) {
+				setBreak(true);
+			}
+		}
+		else {
+			//If not reached zero
+			setRemainingSecs((remainingSecs) => remainingSecs - diff);
+			setTimer(remainingSecs);
+			setActive(true);
+		}
+	}
+	
 	const checkStatusAsync = async () => {
 		const status = await BackgroundFetch.getStatusAsync();
 		const isRegistered = await TaskManager.isTaskRegisteredAsync(
@@ -146,7 +211,6 @@ function PomodoroScreen(props) {
 	};
 
 	const toggleFetchTask = async () => {
-		console.log('its working');
 		if (isRegistered) {
 			await unregisterBackgroundFetchAsync();
 		} else {
@@ -161,6 +225,8 @@ function PomodoroScreen(props) {
 	};
 
 	const stopSession = () => {
+		//Lose 2 HP
+		loseHP();
 		//bring up pop up
 		setRemainingSecs(resetTimer);
 		setMins(formatNumber(25));
@@ -173,7 +239,6 @@ function PomodoroScreen(props) {
 	TaskManager.defineTask(BACKGROUND_FETCH_TASK, async () => {
 		try {
 			const receivedNewData = Date.now();
-			console.log('tick');
 			setRemainingSecs((remainingSecs) => remainingSecs - 1);
 			setTimer(remainingSecs);
 			if (remainingSecs == 0) {
@@ -189,7 +254,6 @@ function PomodoroScreen(props) {
 				? BackgroundFetch.Result.NewData
 				: BackgroundFetch.Result.NoData;
 		} catch (error) {
-			console.log(error);
 			return BackgroundFetch.Result.Failed;
 		}
 	});
@@ -197,7 +261,6 @@ function PomodoroScreen(props) {
 	// 2. Register the task at some point in your app by providing the same name, and some configuration options for how the background fetch should behave
 	// Note: This does NOT need to be in the global scope and CAN be used in your React components!
 	async function registerBackgroundFetchAsync() {
-		console.log('its workingReg');
 
 		return BackgroundFetch.registerTaskAsync(BACKGROUND_FETCH_TASK, {
 			minimumInterval: 1 / 60, // TO INVESTIGATE: on docs this is seconds but when testing on android it is 1 minute
@@ -210,7 +273,6 @@ function PomodoroScreen(props) {
 	// This will cancel any future background fetch calls that match the given name
 	// Note: This does NOT need to be in the global scope and CAN be used in your React components!
 	async function unregisterBackgroundFetchAsync() {
-		console.log('its workingUnreg');
 		if (mode != 'Pomodoro') {
 			setMode('Pomodoro');
 		} else {

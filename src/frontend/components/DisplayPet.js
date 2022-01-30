@@ -30,6 +30,11 @@ export function getHP() {
 	return hp;
 }
 
+export function loseHP() {
+	console.log("lost");
+	hp.value -= 2;
+}
+
 export async function gainXP(xp, token) {
 	await fetch('http://localhost:5000/api/v1.0.0/pets/gain_exp', {
 		method: 'POST',
