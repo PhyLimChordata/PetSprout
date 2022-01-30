@@ -39,13 +39,14 @@ const restoreHp = (prevAmount, restoreAmount) => {
 };
 
 const addHealth = async (req, res) => {
-	ret = modifyHealth(req.user.id, req.body.hp, res);
+	let ret = modifyHealth(req.user.id, req.body.hp, res);
 	res.status(ret.status).json(ret.message);
 }
 
 const loseHealth = async (req, res) => {
-	ret = modifyHealth(req.user.id, -req.body.hp, res);
+	let ret = modifyHealth(req.user.id, -req.body.hp, res);
 	res.status(ret.status).json(ret.message);
+}
 
 const missedStreaksHealthLoss = async (id, numHabitsMissed, ) => {
 	try {
