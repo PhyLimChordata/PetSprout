@@ -1,9 +1,42 @@
 const Pets = require('../../schemas/petsSchema');
 const User = require('../../schemas/userSchema');
+const updatePet = require('./updatePet');
 
 const { validationResult } = require('express-validator');
 const missedHabitPunishment = -10; // Health lost per time habit is missed.
 
+const revivePet = async (req, res) => {
+	try {
+		let usersPet = await Pets.findOne({ user: req.user.id });
+
+		if (isDead(usersPet.currentPet)) {
+			usersPet.currentPet.hp = restoreHp(usersPet.currentPet.hp, usersPet.currentPet.maxhp / 2);
+			let { exp, level } = updatePet.changeExp(
+				usersPet.currentPet.expValue,
+				-(usersPet.currentPet.expValue / 2),
+			);
+			usersPet.currentPet.expValue = exp;
+			usersPet.currentPet.level = level;
+			await usersPet.save();
+			res.json(usersPet.currentPet);
+		}
+	} catch (error) {
+		console.error(error);
+		return res.status(500).json(`error in revive ${JSON.stringify(error)}`);
+	}
+};
+
+const isDead = (pet) => {
+	return pet.hp <= 0;
+};
+
+const restoreHp = (prevAmount, restoreAmount) => {
+	let currentAmount = prevAmount + restoreAmount;
+	if (currentAmount > 100) {
+		currentAmount = 100;
+	}
+	return currentAmount;
+};
 
 const addHealth = async (req, res) => {
 	ret = modifyHealth(req.user.id, req.body.hp, res);
@@ -13,7 +46,6 @@ const addHealth = async (req, res) => {
 const loseHealth = async (req, res) => {
 	ret = modifyHealth(req.user.id, -req.body.hp, res);
 	res.status(ret.status).json(ret.message);
-};
 
 const missedStreaksHealthLoss = async (id, numHabitsMissed, ) => {
 	try {
@@ -64,4 +96,5 @@ const modifyHealth = async (id, healthChange) => {
 
 exports.addHealth = addHealth;
 exports.loseHealth = loseHealth;
+exports.revivePet = revivePet;
 exports.missedStreaksHealthLoss = missedStreaksHealthLoss;
