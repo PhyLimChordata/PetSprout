@@ -5,18 +5,19 @@ const updatePet = require('./updatePet');
 const { validationResult } = require('express-validator');
 
 const revivePet = async (req, res) => {
-	currentPet = undefined;
 	try {
-		currentPet = await Pets.findOne({ user: req.user.id }).currentPet;
-		if (isDead(currentPet)) {
-			currentPet.hp = restoreHp(currentPet.hp, currentPet.maxhp / 2);
+		let usersPet = await Pets.findOne({ user: req.user.id });
+
+		if (isDead(usersPet.currentPet)) {
+			usersPet.currentPet.hp = restoreHp(usersPet.currentPet.hp, usersPet.currentPet.maxhp / 2);
 			let { exp, level } = updatePet.changeExp(
-				currentPet.expValue,
-				-(currentPet.expValue / 2),
+				usersPet.currentPet.expValue,
+				-(usersPet.currentPet.expValue / 2),
 			);
-			currentPet.expValue = exp;
-			currentPet.level = level;
-			await currentPet.save();
+			usersPet.currentPet.expValue = exp;
+			usersPet.currentPet.level = level;
+			await usersPet.save();
+			res.json(usersPet.currentPet);
 		}
 	} catch (error) {
 		console.error(error);
@@ -24,11 +25,11 @@ const revivePet = async (req, res) => {
 	}
 };
 
-const isDead = async (pet) => {
+const isDead = (pet) => {
 	return pet.hp <= 0;
 };
 
-const restoreHp = async (prevAmount, restoreAmount) => {
+const restoreHp = (prevAmount, restoreAmount) => {
 	let currentAmount = prevAmount + restoreAmount;
 	if (currentAmount > 100) {
 		currentAmount = 100;

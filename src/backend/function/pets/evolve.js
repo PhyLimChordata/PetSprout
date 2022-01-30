@@ -37,7 +37,7 @@ const evolvePet = async (req, res) => {
 			return;
 		}
 
-		// update caretaker count everytime a pet evovles/hatches
+		// update caretaker count everytime a pet evolves/hatches
 		let userAchievements = await Achievements.findOne({ user: req.user.id });
 		if (userAchievements) {
 			userAchievements.achievements.habipet.caretaker++;
@@ -49,11 +49,13 @@ const evolvePet = async (req, res) => {
 		currentPet.image = req.body.name;
 		currentPet.hp = 100;
 		currentPet.readyToEvolve = false;
+		console.log(currentPet.next_evolution_lvl)
 		currentPet.next_evolution_lvl = intervalGet(
 			currentPet.next_evolution_lvl + 1,
 			'level',
 			evolveLevels,
 		);
+		console.log(currentPet.next_evolution_lvl)
 		await usersPet.save();
 		res.json(currentPet);
 	} catch (error) {

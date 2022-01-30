@@ -21,6 +21,11 @@ const name = async (req, res) => {
 		usersPet.currentPet.name = req.body.name;
 		usersPet.currentPet.image = 'blob';
 		usersPet.currentPet.readyToEvolve = false;
+		usersPet.currentPet.next_evolution_lvl = intervalGet(
+			usersPet.currentPet.next_evolution_lvl + 1,
+			'level',
+			evolveLevels,
+		);
 		await usersPet.save();
 		res.json(usersPet.currentPet);
 	} catch (error) {
@@ -60,10 +65,12 @@ const gain_exp = async (req, res) => {
 
 		let usersPet = await Pets.findOne({ user: req.user.id });
 		let currentPet = usersPet.currentPet;
-		currentPet.expValue = currentPet.expValue + req.body.expValue;
 
-		let { exp, level } = changeExp(currentPet.expValue, req.body.ExpValue);
+		let { exp, level } = changeExp(currentPet.expValue, req.body.expValue);
 		currentPet.expValue = exp;
+		if (currentPet.level == level - 1) {
+			currentPet.hp = currentPet.maxhp
+		}
 		currentPet.level = level;
 
 		//add this for pet entries which currently exist
@@ -90,11 +97,12 @@ const gain_exp = async (req, res) => {
 };
 
 const changeExp = (prevAmount, changeAmount) => {
-	currentAmount = prevAmount + changeAmount;
-	currentLevel = intervalGet(currentAmount, 'totalExp', LevelMapping);
+	let currentAmount = prevAmount + changeAmount;
+	let currentLevel = intervalGet(currentAmount, 'totalXP', LevelMapping);
 	return { exp: currentAmount, level: currentLevel };
 };
 
 exports.name = name;
 exports.customize = customize;
 exports.gain_exp = gain_exp;
+exports.changeExp = changeExp

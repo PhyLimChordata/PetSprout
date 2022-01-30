@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { View, Image, SafeAreaView } from 'react-native';
+import { View, Image } from 'react-native';
 import ExperienceBar from '../components/ExperienceBar';
 
 import { useTheme } from '@react-navigation/native';
@@ -7,10 +7,8 @@ import { AuthContext } from '../Context';
 import { LevelMapping } from '../resources/mappings/LevelMapping';
 import { getImage } from '../resources/images/Pets/ImageMapping';
 import EvolutionPopup from './EvolutionPopup';
-import { get } from 'lodash';
+import FaintingPopup from './FaintingPopup'
 
-var totalXP = 0;
-var lvlToEvolve = 0;
 const heartSize = 70;
 //THIS CAN VARY BASED ON USER's PET
 const maxHealth = 100;
@@ -41,8 +39,6 @@ export async function gainXP(xp, token) {
 		},
 		body: JSON.stringify({
 			expValue: xp,
-			totalExp: totalXP,
-			levelToEvolveNext: lvlToEvolve,
 		}),
 	})
 		.then((res) => res.json().then(() => {}))
@@ -51,17 +47,14 @@ export async function gainXP(xp, token) {
 
 export function DisplayPet(props) {
 	const { colors } = useTheme();
-	const [totalXPCap, setTotalXPCap] = useState(_.cloneDeep(totalXP));
-	const [levelToEvolveNext, setLevelToEvolveNext] = useState(
-		_.cloneDeep(lvlToEvolve),
-	);
 
 	const [xpLevelCap, setXpLevelCap] = useState(0);
 	const [experience, setExperience] = useState('');
 	const [level, setLevel] = useState('');
 	const [displayed, setDisplayed] = useState(false);
-	const [refreshing, setRefreshing] = React.useState(false);
 	const [evolutionVisible, setEvolutionVisible] = useState(false);
+	const [faintVisible, setFaintVisible] = useState(false);
+
 	const [isEgg, setIsEgg] = useState(true);
 
 	useEffect(() => {
@@ -71,7 +64,6 @@ export function DisplayPet(props) {
 	});
 
 	const { getToken, getRefreshing, getPet, getColor } = useContext(AuthContext);
-
 	useEffect(() => {
 		if (getRefreshing) {
 			updatePet();
@@ -90,6 +82,7 @@ export function DisplayPet(props) {
 				res.json().then((currentPet) => {
 					setDisplayed(true);
 					let tempHeartValue = _.cloneDeep(hp);
+
 					tempHeartValue.view.height = currentPet.hp * (heartSize / maxHealth);
 					tempHeartValue.view.marginTop =
 						heartSize - tempHeartValue.view.height;
@@ -98,19 +91,19 @@ export function DisplayPet(props) {
 						tempHeartValue.view.height * (maxHealth / heartSize),
 					);
 					hp = _.cloneDeep(tempHeartValue);
+					console.log(hp)
 					console.log(currentPet);
-
-					if (currentPet.readyToEvolve) {
+					if (currentPet.hp === 0) {
+						setFaintVisible(true)
+					} else if (currentPet.readyToEvolve) {
 						setIsEgg(currentPet.image == 'egg');
 						setEvolutionVisible(true);
 					}
 
 					const petsLevel = currentPet.level;
+					console.log(petsLevel)
 					const petsLevelStr = petsLevel.toString();
 					setLevel(currentPet.level);
-					setNextLevelToEvolve();
-					setTotalXPCap(LevelMapping[petsLevelStr].totalXP);
-					totalXP = LevelMapping[petsLevelStr].totalXP;
 					//Cap for exp bar
 					setXpLevelCap(LevelMapping[petsLevelStr].xpLevelCap);
 					if (petsLevel == 0) {
@@ -124,17 +117,6 @@ export function DisplayPet(props) {
 				}),
 			)
 			.catch();
-	};
-
-	const setNextLevelToEvolve = () => {
-		if (level == 30) {
-			setLevelToEvolveNext(-1);
-			lvlToEvolve = -1;
-		} else {
-			setLevelToEvolveNext(level + 10 - (level % 10));
-			lvlToEvolve = level + 10 - (level % 10);
-		}
-		console.log(lvlToEvolve)
 	};
 
 	return (
@@ -167,6 +149,10 @@ export function DisplayPet(props) {
 				setVisible={setEvolutionVisible}
 				isEgg={isEgg}
 				navigation={props.navigation}
+			/>
+			<FaintingPopup
+				visible={faintVisible}
+				setVisible={setFaintVisible}
 			/>
 		</>
 	);

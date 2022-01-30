@@ -1,4 +1,4 @@
-export const LevelMapping = {
+const LevelMapping = {
 	0: { xpLevelCap: 100, totalXP: 100 },
 	1: { xpLevelCap: 400, totalXP: 500 },
 	2: { xpLevelCap: 725, totalXP: 1225 },
@@ -42,9 +42,12 @@ export const LevelMapping = {
 	40: { xpLevelCap: 4050, totalXP: 114625 },
 };
 
-export const evolveLevels = {
-	0: { level: 5 },
-	1: { level: 10 },
-	2: { level: 20 },
-	3: { level: 30 },
+const evolveLevels = {
+	5: { level: 5 },
+	10: { level: 10 },
+	20: { level: 20 },
+	30: { level: 30 },
 };
+
+exports.LevelMapping = LevelMapping;
+exports.evolveLevels = evolveLevels;

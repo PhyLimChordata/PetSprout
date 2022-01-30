@@ -11,11 +11,13 @@
  * since 5 less than 6 and greater than all prior values (2,4)
  * PREREQUISITE: the props in the map are in ascending order
  **/
-export let intervalGet = (key, prop, map) => {
+const intervalGet = (key, prop, map) => {
 	let keys = Object.keys(map);
 	for (let endpoint of keys) {
-		if (endpoint[prop] >= key) {
+		if (map[endpoint][prop] >= key) {
 			return endpoint;
 		}
 	}
 };
+
+exports.intervalGet = intervalGet;
