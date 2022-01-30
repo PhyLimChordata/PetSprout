@@ -31,9 +31,9 @@ const habitsScreenStyles = (theme) =>
 			marginBottom: 5,
 		},
 		scrollViewContainer: {
-			flex: 20,
-			marginLeft: 60,
-			marginRight: 60,
+			flex:1,
+			marginHorizontal: 60,
+			marginTop:10
 		},
 	});
 
