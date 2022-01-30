@@ -33,6 +33,7 @@ import ComingSoonScreen from './frontend/screens/ComingSoon';
 import ModifyHabitScreen from './frontend/screens/PutHabits/ModifyHabit';
 import NamePetScreen from './frontend/screens/NamePet';
 import AllHabitsScreen from './frontend/screens/AllHabits';
+import AllMissedHabitsScreen from './frontend/screens/AllMissedHabits';
 import PomodoroScreen from './frontend/screens/Pomodoro';
 import PomodoroTasksScreen from './frontend/screens/PomodoroTasks';
 import AcceptTermsAndConditionScreen from './frontend/screens/AcceptTermsAndCondition';
@@ -210,6 +211,7 @@ function NavContainer(props) {
 					<Stack.Screen name='FeedbackScreen' component={FeedbackScreen} />
 					<Stack.Screen name='ReportABugScreen' component={ReportABugScreen} />
 					<Stack.Screen name='AllHabitsScreen' component={AllHabitsScreen} />
+					<Stack.Screen name='AllMissedHabitsScreen' component={AllMissedHabitsScreen} />
 
 					<Stack.Screen
 						name='PomodoroTasksScreen'

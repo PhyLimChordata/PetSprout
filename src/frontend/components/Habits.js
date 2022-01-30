@@ -64,9 +64,9 @@ function Habits(props) {
 					console.log('completehabit was called');
 					if (frequency - 1 == 0) {
 						setCompleted(true);
-						gainXP(300, getToken);
+						gainXP(400, getToken);
 					} else {
-						gainXP(50, getToken);
+						gainXP(150, getToken);
 					}
 					changeRefreshing(true);
 					//console.log('refreshed');

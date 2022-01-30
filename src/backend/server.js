@@ -44,7 +44,7 @@ if (process.env.NOTIFICATIONTOGGLE === 'true') {
 }
 
 //Adds routes for express to use
-//Example route: http://localhost:5000/example/get
+//Example route: http://192.168.0.24:5000/example/get
 app.use('/api/v1.0.0/user', require('./routes/userRoute'));
 app.use('/api/v1.0.0/habit', require('./routes/habitRoute'));
 app.use('/api/v1.0.0/setting', require('./routes/settingRoute'));
@@ -52,7 +52,7 @@ app.use('/api/v1.0.0/achievements', require('./routes/achievementRoute'));
 app.use('/api/v1.0.0/pets', require('./routes/petsRoute'));
 app.use('/api/v1.0.0/doc', require('./routes/documentRoute'));
 
-//localhost:5000/api/v1.0.0/user
+//192.168.0.24:5000/api/v1.0.0/user
 
 app.listen(port, () => {
 	console.log(`Server is running on port: ${port}`);

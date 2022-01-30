@@ -14,6 +14,7 @@ router.get('/evolveCheck', authentication, evolve.evolveCheck);
 router.post('/switch_pet', authentication, switchPets);
 router.post('/add_health', authentication, health.addHealth);
 router.post('/lose_health', authentication, health.loseHealth);
+router.post('/revive', authentication, health.revivePet);
 router.post('/gain_exp', authentication, updatePet.gain_exp);
 router.post('/name_pet', authentication, updatePet.name);
 router.post('/evolve', authentication, evolve.evolve);

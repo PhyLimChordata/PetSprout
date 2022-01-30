@@ -2,6 +2,8 @@ const Pets = require('../../schemas/petsSchema');
 const User = require('../../schemas/userSchema');
 
 const { validationResult } = require('express-validator');
+const { LevelMapping, evolveLevels } = require('./const');
+const { intervalGet } = require('../common/util');
 
 const name = async (req, res) => {
 	try {
@@ -14,10 +16,16 @@ const name = async (req, res) => {
 
 		let usersPet = await Pets.findOne({ user: req.user.id });
 		if (req.body.name == '') {
-			req.body.name= req.user.userName + "'s Pet";
+			req.body.name = req.user.userName + "'s Pet";
 		}
 		usersPet.currentPet.name = req.body.name;
 		usersPet.currentPet.image = 'blob';
+		usersPet.currentPet.readyToEvolve = false;
+		usersPet.currentPet.next_evolution_lvl = intervalGet(
+			usersPet.currentPet.next_evolution_lvl + 1,
+			'level',
+			evolveLevels,
+		);
 		await usersPet.save();
 		res.json(usersPet.currentPet);
 	} catch (error) {
@@ -57,13 +65,24 @@ const gain_exp = async (req, res) => {
 
 		let usersPet = await Pets.findOne({ user: req.user.id });
 		let currentPet = usersPet.currentPet;
-		currentPet.expValue = currentPet.expValue + req.body.expValue;
 
-		if (req.body.totalExp <= currentPet.expValue) {
-			currentPet.level += 1;
-			currentPet.hp = 100;
+		let { exp, level } = changeExp(currentPet.expValue, req.body.expValue);
+		currentPet.expValue = exp;
+		if (currentPet.level == level - 1) {
+			currentPet.hp = currentPet.maxhp
 		}
-		if (currentPet.level === req.body.levelToEvolveNext) {
+		currentPet.level = level;
+
+		//add this for pet entries which currently exist
+		if (!currentPet.next_evolution_lvl) {
+			currentPet.next_evolution_lvl = intervalGet(
+				currentPet.level,
+				'level',
+				evolveLevels,
+			);
+		}
+
+		if (currentPet.level >= currentPet.next_evolution_lvl) {
 			currentPet.readyToEvolve = true;
 		}
 
@@ -77,6 +96,13 @@ const gain_exp = async (req, res) => {
 	}
 };
 
+const changeExp = (prevAmount, changeAmount) => {
+	let currentAmount = prevAmount + changeAmount;
+	let currentLevel = intervalGet(currentAmount, 'totalXP', LevelMapping);
+	return { exp: currentAmount, level: currentLevel };
+};
+
 exports.name = name;
 exports.customize = customize;
 exports.gain_exp = gain_exp;
+exports.changeExp = changeExp

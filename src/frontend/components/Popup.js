@@ -75,7 +75,7 @@ function Popup(props) {
 					props.setModalVisible(false);
 				}}
 				useNativeDriverForBackdrop
-				swipeDirection={['down']}
+				swipeDirection={props.disableOnBackdropPress ? null: ['down']}
 				style={{ justifyContent: 'center', alignItems: 'center' }}
 			>
 				<View style={style.container}>
