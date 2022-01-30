@@ -30,7 +30,7 @@ import * as BackgroundFetch from 'expo-background-fetch';
 
 import * as TaskManager from 'expo-task-manager';
 
-import { DisplayPet, gainXP, getHP, loseHP } from '../components/DisplayPet';
+import { DisplayPet, gainXP, loseHP } from '../components/DisplayPet';
 
 const BACKGROUND_FETCH_TASK = 'background-fetch';
 
@@ -226,7 +226,7 @@ function PomodoroScreen(props) {
 
 	const stopSession = () => {
 		//Lose 2 HP
-		loseHP();
+		loseHP(2, getToken).then();
 		//bring up pop up
 		setRemainingSecs(resetTimer);
 		setMins(formatNumber(25));
