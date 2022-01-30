@@ -39,14 +39,13 @@ const About = (theme) =>
 			paddingLeft: 40,
 			paddingRight: 40,
 			marginBottom: 20,
-			textAlign: 'center',
-			alignItems: 'center',
 			justifyContent: 'center',
 		},
 		aboutButtonText: {
 			fontSize: 20,
 			fontWeight: 'bold',
 			color: theme.background,
+			textAlign: 'center',
 		},
 	});
 
