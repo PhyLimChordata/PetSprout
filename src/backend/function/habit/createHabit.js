@@ -1,7 +1,7 @@
 const Habit = require('../../schemas/habitSchema');
 const User = require('../../schemas/userSchema');
 const Analyze = require('../../schemas/analyzeSchema');
-const alarmLib = require('./alarm');
+const alarmLib = require('../common/alarm');
 const { validationResult } = require('express-validator');
 
 /**
@@ -14,7 +14,7 @@ const { validationResult } = require('express-validator');
  */
 module.exports = async (req, res) => {
 	try {
-		let { title, description, reason, schedule, times, alarm, date } = req.body;
+		let { title, description, reason, schedule, times, alarm, date, timezone } = req.body;
 
 		let errors = [];
 		if (title === '') errors.push('title');
@@ -69,7 +69,9 @@ module.exports = async (req, res) => {
 		// to assign each alarm a unique ObjectId in the database.
 		let alarmList = []
 		for (const a of alarm) {
-			alarmList.push({date: a})
+			foo = new Date(a);
+			alarmList.push({date: a,
+							timezone: timezone})
 		}
 
 		let newHabit = {

@@ -16,7 +16,7 @@ import Colours from '../resources/themes/Colours';
 import { AuthContext } from '../Context';
 
 function SignupScreen(props) {
-	const [userName, setusername] = useState('');
+	const [userName, setUserName] = useState('');
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [reEnterPassword, setReEnterPassword] = useState('');
@@ -30,14 +30,13 @@ function SignupScreen(props) {
 
 	const { colors } = useTheme();
 
-	const [usernameInputStyle, setUsernameInputStyle] = useState({
+	const [userNameInputStyle, setUserNameInputStyle] = useState({
 		backgroundColor: colors.Secondary,
 		padding: 10,
 		borderWidth: 0,
 		borderStyle: 'solid',
 		fontSize: 15,
 		borderRadius: 5,
-		marginBottom: 20,
 		width: '90%',
 	});
 
@@ -48,7 +47,6 @@ function SignupScreen(props) {
 		borderStyle: 'solid',
 		fontSize: 15,
 		borderRadius: 5,
-		marginBottom: 20,
 		width: '90%',
 	});
 
@@ -59,7 +57,6 @@ function SignupScreen(props) {
 		borderStyle: 'solid',
 		fontSize: 15,
 		borderRadius: 5,
-		marginBottom: 20,
 		width: '90%',
 	});
 
@@ -70,7 +67,6 @@ function SignupScreen(props) {
 		borderStyle: 'solid',
 		fontSize: 15,
 		borderRadius: 5,
-		marginBottom: 20,
 		width: '90%',
 	});
 
@@ -79,7 +75,7 @@ function SignupScreen(props) {
 		padding: 10,
 		fontSize: 15,
 		borderRadius: 5,
-		width: 300,
+		width: '90%',
 	};
 
 	const [userNameTextStyle, setUserNameTextStyle] = useState({
@@ -107,17 +103,16 @@ function SignupScreen(props) {
 		color: colors.Quaternary,
 	});
 
-	const updatingUsernameInput = (text) => {
-		setusername(text);
+	const updatingUserNameInput = (text) => {
+		setUserName(text);
 		setUserNameError('');
-		setUsernameInputStyle({
+		setUserNameInputStyle({
 			backgroundColor: colors.Secondary,
 			padding: 10,
 			borderWidth: 0,
 			borderStyle: 'solid',
 			fontSize: 15,
 			borderRadius: 5,
-			marginBottom: 20,
 			width: '90%',
 		});
 		setUserNameTextStyle({
@@ -138,7 +133,6 @@ function SignupScreen(props) {
 			borderStyle: 'solid',
 			fontSize: 15,
 			borderRadius: 5,
-			marginBottom: 20,
 			width: '90%',
 		});
 		setEmailTextStyle({
@@ -158,7 +152,6 @@ function SignupScreen(props) {
 			borderWidth: 0,
 			borderStyle: 'solid',
 			borderRadius: 5,
-			marginBottom: 20,
 			width: '90%',
 		});
 		setPasswordTextStyle({
@@ -178,7 +171,6 @@ function SignupScreen(props) {
 			borderWidth: 0,
 			borderStyle: 'solid',
 			borderRadius: 5,
-			marginBottom: 20,
 			width: '90%',
 		});
 		setReEnterPasswordTextStyle({
@@ -205,10 +197,10 @@ function SignupScreen(props) {
 			}),
 		})
 			.then((res) => {
-				console.log(res);
+				console.log(res.status);
 				if (userName == '') {
 					setUserNameError('This is a required field');
-					setUsernameInputStyle(errorIndicator);
+					setUserNameInputStyle(errorIndicator);
 					setUserNameTextStyle({
 						fontSize: 20,
 						fontWeight: 'bold',
@@ -240,24 +232,30 @@ function SignupScreen(props) {
 						props.navigation.push('VerifyEmailSignUp', { email: email });
 					});
 				} else if (res.status == 401) {
-					setUserNameError(res.statusText);
-					if (res.statusText == 'User email exists') {
-						setEmailInputStyle(errorIndicator);
-						setEmailTextStyle({
-							fontSize: 20,
-							fontWeight: 'bold',
-							paddingBottom: 5,
-							color: Colours.Red.Error,
-						});
-					} else if (res.statusText == 'User name exists') {
-						setUsernameInputStyle(errorIndicator);
-						setUserNameTextStyle({
-							fontSize: 20,
-							fontWeight: 'bold',
-							paddingBottom: 5,
-							color: Colours.Red.Error,
-						});
-					}
+					res.json().then((data) => {
+						console.log(data);
+						if (data[0]) {
+							setUserNameError('Username already exists. Please try another');
+							setUserNameInputStyle(errorIndicator);
+							setUserNameTextStyle({
+								fontSize: 20,
+								fontWeight: 'bold',
+								paddingBottom: 5,
+								color: Colours.Red.Error,
+							});
+						}
+						if (data[1]) {
+							setEmailError('There is already an account using this email');
+							setEmailInputStyle(errorIndicator);
+							setEmailTextStyle({
+								fontSize: 20,
+								fontWeight: 'bold',
+								paddingBottom: 5,
+								color: Colours.Red.Error,
+							});
+						}	
+					});
+					
 				} else if (res.status == 400) {
 					if (password.length < 6) {
 						setPasswordError('Passwords must be 6-12 characters');
@@ -322,9 +320,9 @@ function SignupScreen(props) {
 				<View style={styles(colors).inputContainer}>
 					<Text style={userNameTextStyle}>Username</Text>
 					<TextInput
-						style={usernameInputStyle}
+						style={userNameInputStyle}
 						value={userName}
-						onChangeText={(text) => updatingUsernameInput(text)}
+						onChangeText={(text) => updatingUserNameInput(text)}
 					></TextInput>
 					<Text style={styles(colors).errorMessageRight}>{userNameError}</Text>
 					<Text style={emailTextStyle}>Email</Text>

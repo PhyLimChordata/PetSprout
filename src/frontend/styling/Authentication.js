@@ -112,10 +112,11 @@ const authenticationStyles = (theme) =>
 			fontWeight: 'bold',
 		},
 		errorMessageRight: {
-			alignSelf: 'flex-end',
+			textAlign: 'left',
 			color: Colours.Red.Error,
-			fontSize: 14,
+			fontSize: 13,
 			fontWeight: 'bold',
+			marginBottom: 15,
 		},
 	});
 

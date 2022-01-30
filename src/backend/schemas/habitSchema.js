@@ -43,11 +43,14 @@ const HabitSchema = new Schema(
 							date: {
 								type: Date
 							},
+							timezone: {
+								type: String
+							}
 						}
 				],
 				date: {
 					type: Date,
-					default: Date.now(),
+					default: Date.now,
 				},
 				todo: {
 					type: Number,

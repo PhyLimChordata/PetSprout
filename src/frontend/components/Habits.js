@@ -16,17 +16,29 @@ function Habits(props) {
 	const [frequency, setFrequency] = useState(props.frequency);
 	const [completed, setCompleted] = useState(props.completed);
 	const { getToken, changeRefreshing, getRefreshing } = useContext(AuthContext);
-
+	
 	const { colors } = useTheme();
-
+	
 	useEffect(() => {
 		if (!getRefreshing) {
 			setCompleted(props.completed);
 			setFrequency(props.frequency);
 			setStreak(props.streak);
+			if (props.startFunction) {
+				props.startFunction();
+			}
 		}
-	}, [getRefreshing]);
-
+	}
+	, [getRefreshing]);
+	
+	const disableCompletionTemp = () => {
+		if (props.pauseFunction()) {
+			props.pauseFunction();
+		}
+		props.pauseFunction();
+		completeHabit();
+	};
+	
 	const completeHabit = () => {
 		setFrequency(frequency - 1);
 		fetch(
@@ -57,6 +69,7 @@ function Habits(props) {
 						gainXP(50, getToken);
 					}
 					changeRefreshing(true);
+					//console.log('refreshed');
 				}),
 			)
 			.catch();
@@ -90,7 +103,7 @@ function Habits(props) {
 		<View>
 			<ScrollViewElement
 				rightFunction={
-					props.enableRight && !completed ? completeHabit : undefined
+					props.enableRight && !completed ? disableCompletionTemp : undefined
 				}
 				leftFunction={
 					props.enableLeft && !completed
@@ -102,6 +115,7 @@ function Habits(props) {
 								})
 						: undefined
 				}
+				disabled = {props.disabled}
 				text={props.name}
 				content={
 					<View
