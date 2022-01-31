@@ -213,7 +213,7 @@ function AcceptPrivacyPolicy(props) {
 									if(!getTCAccepted) {
 										props.navigation.navigate('AcceptTermsAndConditionScreen');
 									} else {
-										props.navigation.navigate('Habit');
+										props.navigation.navigate('HomeScreen');
 									}
 									
 								})

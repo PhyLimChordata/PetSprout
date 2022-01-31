@@ -321,7 +321,7 @@ function AcceptTermsAndCondition(props) {
 										})
 										.then(() => {
 											if(getPrivacyAccepted) {
-												props.navigation.navigate('Habit')
+												props.navigation.navigate('HomeScreen')
 											} else {
 												props.navigation.navigate('AcceptPrivacyPolicyScreen');
 											}
