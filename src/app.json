@@ -32,7 +32,7 @@
     "android": {
       "googleServicesFile": "./google-services.json",
       "softwareKeyboardLayoutMode": "pan",
-      "package": "com.phylimchordata.PetSprout",
+      "package": "com.phylimchordata.petsprout",
       "versionCode": 3,
       "adaptiveIcon": {
         "foregroundImage": "./frontend/resources/images/Logo/LogoGreenNonTransparent.png",
