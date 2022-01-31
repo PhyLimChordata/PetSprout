@@ -107,7 +107,7 @@ function HabitsScreen(props) {
 		>
 			<MenuHeader text='' navigation={props.navigation} displayHp={true} />
 			<DisplayPet navigation={props.navigation} />
-			{missedHabits.length > 0 && <MissedHabitBanner onPress={() => {props.navigation.navigate("AllMissedHabitsScreen")}}/>}
+			{false && missedHabits.length > 0 && <MissedHabitBanner onPress={() => {props.navigation.navigate("AllMissedHabitsScreen")}}/>}
 			<View style={styles(colors).scrollViewContainer}>
 				<TouchableOpacity
 					style={{alignSelf: 'flex-end'}}
