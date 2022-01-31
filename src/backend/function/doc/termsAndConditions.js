@@ -34,14 +34,14 @@ const didAcceptTerms = async (req, res) => {
         let doc = await DocumentSchema.findOne({user_id: userId});
         console.log(doc)
         if(!doc) {
-            res.status(200).send(false);
+            res.status(200).json({"accepted": false});
            
         } else {
             console.log(doc.did_accept_terms)
             if(doc.did_accept_terms) {
-                res.status(200).send(true);
+                res.status(200).json({"accepted": true});
             } else {
-                res.status(200).send(false);
+                res.status(200).json({"accepted": false});
             }
         }
     

@@ -1,5 +1,5 @@
 // React
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useContext } from 'react';
 import { Image, View, TouchableOpacity } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
@@ -68,6 +68,8 @@ export default function App() {
 	// TOGGLE TO FALSE TO TURN OFF NOTIFICATIONS
 	const [notificationsToggle, setNotificationsToggle] = useState("true");
 	const [token, setToken] = useState(null);
+	const [didTCAccept, setTCAccept] = useState(null);
+	const [didPrivacyAccept, setPrivacyAccept] = useState(null);
 	const [color, setColor] = useState('Green');
 	const [logo, setLogo] = useState(
 		require('./frontend/resources/images/Logo/LogoGreen.png'),
@@ -83,6 +85,12 @@ export default function App() {
 		return {
 			logIn: (generatedToken) => {
 				setToken(generatedToken);
+			},
+			setTCAccepted: (accepted) => {
+				setTCAccept(accepted)
+			},
+			setPrivacyAccepted: (accepted) => {
+				setPrivacyAccept(accepted)
 			},
 			signOut: () => {
 				setToken(null);
@@ -108,6 +116,8 @@ export default function App() {
 			},
 			getNotificationsToggle: notificationsToggle,
 			getToken: token,
+			getTCAccepted: didTCAccept,
+			getPrivacyAccepted: didPrivacyAccept,
 			getColor: color,
 			getLogo: logo,
 			getPet: pet,
@@ -120,6 +130,10 @@ export default function App() {
 		setNotificationsToggle,
 		token,
 		setToken,
+		didTCAccept,
+		setTCAccept,
+		didPrivacyAccept,
+		setPrivacyAccept,
 		color,
 		setColor,
 		mode,
@@ -177,6 +191,7 @@ function NavContainer(props) {
 		<NavigationContainer theme={props.theme}>
 			{props.token ? (
 				<Stack.Navigator headerMode='none'>
+					<Stack.Screen name='HomeScreen' component={HomeScreen}/>
 					<Stack.Screen
 						name='AcceptTermsAndConditionScreen'
 						component={AcceptTermsAndConditionScreen}
@@ -187,7 +202,6 @@ function NavContainer(props) {
 						component={AcceptPrivacyPolicyScreen}
 						initialParams={{isAcceptScreen: true}}
 					/>
-					<Stack.Screen name='HomeScreen' component={HomeScreen} />
 					<Stack.Screen
 						name='AchievementScreen'
 						component={AchievementScreen}
@@ -275,104 +289,123 @@ function NavContainer(props) {
 function HomeScreen(props) {
 	const { colors } = useTheme();
 	const [modalVisible, setModalVisible] = useState(false);
-	return (
-		<>
-			<Tab.Navigator
-				initialRouteName='TabOne'
-				backBehavior='order'
-				tabBarOptions={{
-					activeTintColor: colors.Quinary,
-					inactiveTintColor: colors.background,
-					style: { backgroundColor: colors.Tertiary },
-				}}
-			>
-				<Tab.Screen
-					name='Habit'
-					component={HabitsScreen}
-					options={{
-						tabBarLabel: 'Habit',
-						tabBarIcon: ({ color, size }) => (
-							<MaterialCommunityIcons
-								name='clipboard-check'
-								color={color}
-								size={size}
-							/>
-						),
-					}}
-				/>
-				<Tab.Screen
-					name='Calendar'
-					component={Calendar}
-					options={{
-						tabBarLabel: 'Calendar',
-						tabBarIcon: ({ color, size }) => (
-							<MaterialCommunityIcons
-								name='calendar'
-								color={color}
-								size={size}
-							/>
-						),
-					}}
-				/>
-				<Tab.Screen
-					name={'TabMiddle'}
-					component={CreateHabitScreen}
-					listeners={{
-						tabPress: (e) => {
-							props.navigation.navigate('CreateHabitScreen');
-							e.preventDefault();
-						},
-					}}
-					options={{
-						tabBarLabel: () => {
-							return null;
-						},
-						tabBarIcon: ({ focused }) => (
-							<Image
-								source={require('./frontend/resources/images/PlusSign.png')}
-								resizeMode='contain'
-								style={{
-									width: 35,
-									height: 35,
-									tintColor: colors.background,
-								}}
-							/>
-						),
-						tabBarButton: (props) => <CustomTabBarButton {...props} />,
-					}}
-				/>
-				<Tab.Screen
-					name='Pomodoro'
-					component={Pomodoro}
-					options={{
-						tabBarLabel: 'Pomodoro',
-						tabBarIcon: ({ color, size }) => (
-							<MaterialCommunityIcons name='clock' color={color} size={size} />
-						),
-					}}
-				/>
-				<Tab.Screen
-					name='Reflect'
-					component={Reflect}
-					options={{
-						tabBarLabel: 'Reflect',
-						tabBarIcon: ({ color, size }) => (
-							<MaterialCommunityIcons
-								name='notebook'
-								color={color}
-								size={size}
-							/>
-						),
-					}}
-				/>
-			</Tab.Navigator>
-			{/* <BottomMenu
-				navigation={props.navigation}
-				modalVisible={modalVisible}
-				setModalVisible={setModalVisible}
-			/> */}
-		</>
-	);
+	const { getTCAccepted, getPrivacyAccepted } = useContext(AuthContext);
+	if(getTCAccepted !== null && getPrivacyAccepted !== null) {
+		if(getTCAccepted && getPrivacyAccepted) {
+			return (
+				<>
+					<Tab.Navigator
+						initialRouteName='TabOne'
+						backBehavior='order'
+						tabBarOptions={{
+							activeTintColor: colors.Quinary,
+							inactiveTintColor: colors.background,
+							style: { backgroundColor: colors.Tertiary },
+						}}
+					>
+						<Tab.Screen
+							name='Habit'
+							component={HabitsScreen}
+							options={{
+								tabBarLabel: 'Habit',
+								tabBarIcon: ({ color, size }) => (
+									<MaterialCommunityIcons
+										name='clipboard-check'
+										color={color}
+										size={size}
+									/>
+								),
+							}}
+						/>
+						<Tab.Screen
+							name='Calendar'
+							component={Calendar}
+							options={{
+								tabBarLabel: 'Calendar',
+								tabBarIcon: ({ color, size }) => (
+									<MaterialCommunityIcons
+										name='calendar'
+										color={color}
+										size={size}
+									/>
+								),
+							}}
+						/>
+						<Tab.Screen
+							name={'TabMiddle'}
+							component={CreateHabitScreen}
+							listeners={{
+								tabPress: (e) => {
+									props.navigation.navigate('CreateHabitScreen');
+									e.preventDefault();
+								},
+							}}
+							options={{
+								tabBarLabel: () => {
+									return null;
+								},
+								tabBarIcon: ({ focused }) => (
+									<Image
+										source={require('./frontend/resources/images/PlusSign.png')}
+										resizeMode='contain'
+										style={{
+											width: 35,
+											height: 35,
+											tintColor: colors.background,
+										}}
+									/>
+								),
+								tabBarButton: (props) => <CustomTabBarButton {...props} />,
+							}}
+						/>
+						<Tab.Screen
+							name='Pomodoro'
+							component={Pomodoro}
+							options={{
+								tabBarLabel: 'Pomodoro',
+								tabBarIcon: ({ color, size }) => (
+									<MaterialCommunityIcons name='clock' color={color} size={size} />
+								),
+							}}
+						/>
+						<Tab.Screen
+							name='Reflect'
+							component={Reflect}
+							options={{
+								tabBarLabel: 'Reflect',
+								tabBarIcon: ({ color, size }) => (
+									<MaterialCommunityIcons
+										name='notebook'
+										color={color}
+										size={size}
+									/>
+								),
+							}}
+						/>
+					</Tab.Navigator>
+					{/* <BottomMenu
+						navigation={props.navigation}
+						modalVisible={modalVisible}
+						setModalVisible={setModalVisible}
+					/> */}
+				</>
+			);
+		} else {
+			if(!getTCAccepted) {
+				props.navigation.navigate('AcceptTermsAndConditionScreen', { isAcceptScreen: true });
+			}
+			if(!getPrivacyAccepted) {
+				props.navigation.navigate('AcceptPrivacyPolicyScreen', { isAcceptScreen: true });
+			}
+			return (
+				<></>
+			)
+		}    
+	} else {
+		return (
+			<></>
+		)
+	} 
 }
 
 // TODO: Replace the below with imported screens
