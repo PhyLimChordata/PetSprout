@@ -16,20 +16,24 @@
     "@react-navigation/bottom-tabs": "^5.11.10",
     "@react-navigation/native": "^5.9.4",
     "@react-navigation/stack": "^5.14.4",
+    "@sentry/react-native": "^3.2.13",
     "expo": "^44.0.0",
+    "expo-application": "~3.1.2",
     "expo-background-fetch": "~10.1.0",
     "expo-constants": "~13.0.0",
+    "expo-device": "~3.2.0",
     "expo-font": "~10.0.4",
     "expo-localization": "^12.0.0",
     "expo-modules-core": "^0.6.4",
     "expo-notifications": "~0.14.0",
     "expo-status-bar": "~1.2.0",
+    "expo-updates": "~0.5.4",
     "express": "^4.17.1",
     "firebase": "^9.6.1",
     "intl": "^1.2.5",
     "lodash.clonedeep": "^4.5.0",
-    "react": "17.0.1",
-    "react-dom": "17.0.1",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-44.0.0.tar.gz",
     "react-native-gesture-handler": "~2.1.0",
     "react-native-modal": "^12.0.2",
@@ -40,10 +44,13 @@
     "react-native-safe-area-context": "3.3.2",
     "react-native-screens": "~3.10.1",
     "react-native-toggle-element": "^1.0.1",
-    "react-native-web": "0.17.1"
+    "react-native-unimodules": "^0.14.10",
+    "react-native-web": "^0.17.1",
+    "sentry-expo": "^3.1.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.9"
+    "@babel/core": "^7.12.9",
+    "sentry-testkit": "^3.3.7"
   },
   "private": true
 }

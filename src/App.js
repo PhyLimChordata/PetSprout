@@ -3,6 +3,9 @@ import React, { useState, useMemo } from 'react';
 import { Image, View, TouchableOpacity } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
+// Sentry
+import * as Sentry from 'sentry-expo';
+
 // Navigation
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -52,6 +55,12 @@ import { AuthContext } from './frontend/Context';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
+
+Sentry.init({
+	dsn:'https://cf74a7ca0c6849dfbfcd88fa6b9123b9@o1129693.ingest.sentry.io/6173673',
+	enableInExpoDevelopment: true,
+	debug: true
+});
 
 export default function App() {
 	// Global variables within the app

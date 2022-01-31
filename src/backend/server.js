@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const alarm = require('./function/common/alarm');
 
 // configures env vars in .env files
-require('dotenv').config();
+require('dotenv').config({ path: '../.env'});
 
 const app = express();
 const port = process.env.PORT || 5000;
