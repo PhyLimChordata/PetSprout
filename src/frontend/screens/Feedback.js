@@ -26,7 +26,7 @@ function Feedback(props) {
 
 	const attemptSendFeedback = () => {
 		//console.log(feedback);
-		fetch('http://localhost:5000/api/v1.0.0/user/sendFeedbackReport', {
+		fetch('http://3.15.57.200:5000/api/v1.0.0/user/sendFeedbackReport', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',

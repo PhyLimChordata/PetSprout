@@ -197,7 +197,7 @@ function AcceptPrivacyPolicy(props) {
 						style={style.aboutButton}
 						onPress={() => {
 							if (status == 'checked') {
-								fetch('http://localhost:5000/api/v1.0.0/doc/acceptPolicy',{
+								fetch('http://3.15.57.200:5000/api/v1.0.0/doc/acceptPolicy',{
 									method: 'POST',
 									headers: {
 										'Content-Type': 'application/json',

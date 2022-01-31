@@ -43,7 +43,7 @@ function NameHabit(props) {
 	const { getToken, changePet } = useContext(AuthContext);
 	const namePet = (name) => {
 		console.log(name);
-		fetch('http://localhost:5000/api/v1.0.0/pets/name_pet', {
+		fetch('http://3.15.57.200:5000/api/v1.0.0/pets/name_pet', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',

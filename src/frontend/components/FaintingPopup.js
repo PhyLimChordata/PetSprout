@@ -11,7 +11,7 @@ function FaintingPopup(props) {
     const { colors } = useTheme();
     const style = styles(colors);
     const revivePet = () => {
-        fetch('http://localhost:5000/api/v1.0.0/pets/revive', {
+        fetch('http://3.15.57.200:5000/api/v1.0.0/pets/revive', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

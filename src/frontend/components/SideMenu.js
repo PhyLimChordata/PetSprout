@@ -124,7 +124,7 @@ function SideMenu(props) {
 		if (props.modalVisible) {
 			setColor(getColor);
 			setToggleValue(getMode == 'dark');
-			fetch('http://localhost:5000/api/v1.0.0/pets/get_current', {
+			fetch('http://3.15.57.200:5000/api/v1.0.0/pets/get_current', {
 				method: 'GET',
 				headers: {
 					'Content-Type': 'application/json',
@@ -141,7 +141,7 @@ function SideMenu(props) {
 	}, [props.modalVisible]);
 
 	useEffect(() => {
-		fetch('http://localhost:5000/api/v1.0.0/user/viewAccount', {
+		fetch('http://3.15.57.200:5000/api/v1.0.0/user/viewAccount', {
 			method: 'GET',
 			headers: {
 				'Content-Type': 'application/json',
@@ -156,7 +156,7 @@ function SideMenu(props) {
 	}, []);
 
 	useEffect(() => {
-		fetch('http://localhost:5000/api/v1.0.0/pets/get_current', {
+		fetch('http://3.15.57.200:5000/api/v1.0.0/pets/get_current', {
 			method: 'GET',
 			headers: {
 				'Content-Type': 'application/json',
