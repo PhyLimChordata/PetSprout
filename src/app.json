@@ -33,7 +33,7 @@
       "googleServicesFile": "./google-services.json",
       "softwareKeyboardLayoutMode": "pan",
       "package": "com.phylimchordata.PetSprout",
-      "versionCode": 1,
+      "versionCode": 3,
       "adaptiveIcon": {
         "foregroundImage": "./frontend/resources/images/Logo/LogoGreenNonTransparent.png",
         "backgroundColor": "#FFFFFF"
