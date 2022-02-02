@@ -398,7 +398,7 @@ function PomodoroScreen(props) {
 						marginBottom: 20,
 					}}
 					onPress={() => {
-						props.navigation.navigate('PomodoroTasksScreen');
+						//props.navigation.navigate('PomodoroTasksScreen');
 					}}
 				>
 					<Text
