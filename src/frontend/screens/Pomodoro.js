@@ -228,9 +228,7 @@ function PomodoroScreen(props) {
 		//Lose 2 HP
 		loseHP();
 		//bring up pop up
-		setRemainingSecs(resetTimer);
-		setMins(formatNumber(25));
-		setSecs(formatNumber(0));
+		resetTimer(duration['Pomodoro']);
 		setActive(false);
 	};
 
