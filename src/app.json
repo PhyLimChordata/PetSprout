@@ -23,8 +23,8 @@
           "file": "sentry-expo/upload-sourcemaps",
           "config": {
             "organization": "petsprout-e6",
-            "project": "petsprout",
-            "authToken": "SENTRY_AUTH_TOKEN"
+            "project": "petsprout-e6",
+            "authToken": "5b7160e6ed144fb498dc911bb366eed7009a0ccffcb948cdab9ec2e75b3c2bb7"
           }
         }
       ]
@@ -33,7 +33,7 @@
       "googleServicesFile": "./google-services.json",
       "softwareKeyboardLayoutMode": "pan",
       "package": "com.phylimchordata.petsprout",
-      "versionCode": 3,
+      "versionCode": 4,
       "adaptiveIcon": {
         "foregroundImage": "./frontend/resources/images/Logo/LogoGreenNonTransparent.png",
         "backgroundColor": "#FFFFFF"
