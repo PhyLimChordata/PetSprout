@@ -20,7 +20,7 @@ function PomodoroCancelPopup(props) {
 			style={style.bugError}
 			title='Are you sure?'
 			text={
-				'Failing to complete the full duration of a pomodoro session will lead to your pet’s health going down by x points'
+				'Failing to complete the full duration of a pomodoro session will lead to your pet\'s health going down by 2 points'
 			}
 			buttonType={'confirmation'}
 			successFunction={props.cancelFunction}
