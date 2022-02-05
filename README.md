@@ -50,7 +50,7 @@ If configured correctly, the code would redirect you to expo's developer tools w
 
     "Run in web browser"
 
-Clicking on the button with the label above will redirect you to a 3.15.57.200 where you should be able to see react components.
+Clicking on the button with the label above will redirect you to a 192.168.0.24 where you should be able to see react components.
 
 ### 5. If you intend on using your personal device...
 
