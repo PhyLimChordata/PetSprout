@@ -86,7 +86,7 @@ function NameHabit(props) {
 						paddingHorizontal: 50,
 					}}
 				>
-					Congratulations! Your HabiPet has hatched! What would you like to name
+					Congratulations! Your Pet has hatched! What would you like to name
 					it?
 				</Text>
 				<Text
@@ -96,7 +96,7 @@ function NameHabit(props) {
 						color: colors.Quaternary,
 					}}
 				>
-					NAME YOUR HABIPET
+					Name your Pet!
 				</Text>
 				<TextBox setText={setName} text={name}></TextBox>
 				<View style={{ flexDirection: 'row' }}>
