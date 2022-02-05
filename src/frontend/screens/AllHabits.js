@@ -35,7 +35,7 @@ function AllHabitsScreen(props) {
 		if (getRefreshing) {
 			displayHabits();
 		}
-	}, [getRefreshing])
+	}, [getRefreshing]);
 	const displayHabits = () => {
 		setDisplayed(true);
 		fetch('http://localhost:5000/api/v1.0.0/habit/show_all_user_habit/', {
@@ -48,7 +48,7 @@ function AllHabitsScreen(props) {
 			.then((res) =>
 				res.json().then((data) => {
 					// console.log(data);
-					console.log(data.habitList.length)
+					console.log(data.habitList.length);
 					const expValue = parseInt(data.expValue);
 					setHabits(data.habitList);
 					setUserHabitId(data._id);
@@ -80,33 +80,33 @@ function AllHabitsScreen(props) {
 					decelerationRate={'normal'}
 				>
 					{habits.map((data, index) => {
-							const scale = scrolling.interpolate({
-								inputRange: [-1, 0, 115 * index, 115 * (index + 1)],
-								outputRange: [1, 1, 1, 0],
-							});
+						const scale = scrolling.interpolate({
+							inputRange: [-1, 0, 115 * index, 115 * (index + 1)],
+							outputRange: [1, 1, 1, 0],
+						});
 
-							const opacity = scrolling.interpolate({
-								inputRange: [-1, 0, 115 * index, 115 * (index + 0.8)],
-								outputRange: [1, 1, 1, 0],
-							});
+						const opacity = scrolling.interpolate({
+							inputRange: [-1, 0, 115 * index, 115 * (index + 0.8)],
+							outputRange: [1, 1, 1, 0],
+						});
 
-							return (
-								<View>
-									<Animated.View style={{ opacity, transform: [{ scale }] }}>
-										<Habits
-											enableLeft={true}
-											navigation={props.navigation}
-											name={data.title}
-											streak={1}
-											frequency={data.times - data.todo}
-											habitId={data._id}
-											userHabitId={userHabitId}
-											deleteHabit={(selected) => deleteHabit(selected)}
-										></Habits>
-										<View style={{ height: 15 }}></View>
-									</Animated.View>
-								</View>
-							);
+						return (
+							<View>
+								<Animated.View style={{ opacity, transform: [{ scale }] }}>
+									<Habits
+										enableLeft={true}
+										navigation={props.navigation}
+										name={data.title}
+										streak={1}
+										frequency={data.times - data.todo}
+										habitId={data._id}
+										userHabitId={userHabitId}
+										deleteHabit={(selected) => deleteHabit(selected)}
+									></Habits>
+									<View style={{ height: 15 }}></View>
+								</Animated.View>
+							</View>
+						);
 					})}
 				</Animated.ScrollView>
 			</View>

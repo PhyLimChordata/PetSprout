@@ -20,7 +20,7 @@ import { useTheme } from '@react-navigation/native';
 import { AuthContext } from '../Context';
 
 import { DisplayPet } from '../components/DisplayPet';
-import MissedHabitBanner from "../components/MissedHabitBanner";
+import MissedHabitBanner from '../components/MissedHabitBanner';
 
 function HabitsScreen(props) {
 	const [habits, setHabits] = useState([]);
@@ -28,18 +28,17 @@ function HabitsScreen(props) {
 
 	const [userHabitId, setUserHabitId] = useState('');
 
-	const {colors} = useTheme();
+	const { colors } = useTheme();
 
 	const [displayed, setDisplayed] = useState(false);
 
 	const scrolling = React.useRef(new Animated.Value(0)).current;
 
-	const {getToken, getRefreshing, changeRefreshing, getPet} =
+	const { getToken, getRefreshing, changeRefreshing, getPet } =
 		useContext(AuthContext);
 
 	const [refreshing, setRefreshing] = React.useState(false);
 	const [disabled, setDisabled] = useState(false);
-
 
 	const onRefresh = React.useCallback(() => {
 		setRefreshing(true);
@@ -64,7 +63,7 @@ function HabitsScreen(props) {
 	const disableCheck = (val) => {
 		setDisabled(val);
 		//console.log('disabled');
-	}
+	};
 
 	const displayHabits = () => {
 		console.log('huhhhhh');
@@ -81,10 +80,10 @@ function HabitsScreen(props) {
 			.then((res) =>
 				res.json().then((data) => {
 					console.log('saddasasdasddas');
-					console.log(data)
+					console.log(data);
 					setTimeout(() => {
 						setHabits(data.habitList);
-						setMissedHabits(data.missing_habits)
+						setMissedHabits(data.missing_habits);
 						setUserHabitId(data._id);
 						setDisplayed(true);
 						setRefreshing(false);
@@ -107,10 +106,16 @@ function HabitsScreen(props) {
 		>
 			<MenuHeader text='' navigation={props.navigation} displayHp={true} />
 			<DisplayPet navigation={props.navigation} />
-			{false && missedHabits.length > 0 && <MissedHabitBanner onPress={() => {props.navigation.navigate("AllMissedHabitsScreen")}}/>}
+			{false && missedHabits.length > 0 && (
+				<MissedHabitBanner
+					onPress={() => {
+						props.navigation.navigate('AllMissedHabitsScreen');
+					}}
+				/>
+			)}
 			<View style={styles(colors).scrollViewContainer}>
 				<TouchableOpacity
-					style={{alignSelf: 'flex-end'}}
+					style={{ alignSelf: 'flex-end' }}
 					onPress={() => props.navigation.navigate('AllHabitsScreen')}
 				>
 					<Text
@@ -126,13 +131,13 @@ function HabitsScreen(props) {
 				<Animated.ScrollView
 					showsVerticalScrollIndicator={false}
 					onScroll={Animated.event(
-						[{nativeEvent: {contentOffset: {y: scrolling}}}],
-						{useNativeDriver: true},
+						[{ nativeEvent: { contentOffset: { y: scrolling } } }],
+						{ useNativeDriver: true },
 					)}
 					scrollEventThrottle={16}
 					// decelerationRate={'normal'}
 					refreshControl={
-						<RefreshControl refreshing={getRefreshing} onRefresh={onRefresh}/>
+						<RefreshControl refreshing={getRefreshing} onRefresh={onRefresh} />
 					}
 					scrollsToTop={true}
 					snapToInterval={100}
@@ -152,7 +157,7 @@ function HabitsScreen(props) {
 
 						return (
 							<View>
-								<Animated.View style={{opacity, transform: [{scale}]}}>
+								<Animated.View style={{ opacity, transform: [{ scale }] }}>
 									<Habits
 										completed={completed}
 										enableRight={true}
@@ -165,13 +170,13 @@ function HabitsScreen(props) {
 										userHabitId={userHabitId}
 										disabled={disabled}
 										pauseFunction={() => {
-											disableCheck(true)
+											disableCheck(true);
 										}}
 										startFunction={() => {
-											disableCheck(false)
+											disableCheck(false);
 										}}
 									></Habits>
-									<View style={{height: 15}}></View>
+									<View style={{ height: 15 }}></View>
 								</Animated.View>
 							</View>
 						);

@@ -14,7 +14,8 @@ const Analyze = require('../../schemas/analyzeSchema');
 const user_regist = async (req, res) => {
 	try {
 		let { userName, email, password } = req.body;
-		let userPresent, emailPresent = false;
+		let userPresent,
+			emailPresent = false;
 
 		let errors = validationResult(req);
 		if (!errors.isEmpty())
@@ -25,8 +26,9 @@ const user_regist = async (req, res) => {
 
 		let user = await User.findOne({ email }).select('-password');
 		if (user) emailPresent = true;
-		
-		if (userPresent || emailPresent) return res.status(401).json([userPresent, emailPresent])
+
+		if (userPresent || emailPresent)
+			return res.status(401).json([userPresent, emailPresent]);
 
 		let newUser = new User({
 			userName,

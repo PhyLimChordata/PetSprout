@@ -16,9 +16,9 @@ function Habits(props) {
 	const [frequency, setFrequency] = useState(props.frequency);
 	const [completed, setCompleted] = useState(props.completed);
 	const { getToken, changeRefreshing, getRefreshing } = useContext(AuthContext);
-	
+
 	const { colors } = useTheme();
-	
+
 	useEffect(() => {
 		if (!getRefreshing) {
 			setCompleted(props.completed);
@@ -28,9 +28,8 @@ function Habits(props) {
 				props.startFunction();
 			}
 		}
-	}
-	, [getRefreshing]);
-	
+	}, [getRefreshing]);
+
 	const disableCompletionTemp = () => {
 		if (props.pauseFunction()) {
 			props.pauseFunction();
@@ -38,7 +37,7 @@ function Habits(props) {
 		props.pauseFunction();
 		completeHabit();
 	};
-	
+
 	const completeHabit = () => {
 		setFrequency(frequency - 1);
 		fetch(
@@ -115,7 +114,7 @@ function Habits(props) {
 								})
 						: undefined
 				}
-				disabled = {props.disabled}
+				disabled={props.disabled}
 				text={props.name}
 				content={
 					<View

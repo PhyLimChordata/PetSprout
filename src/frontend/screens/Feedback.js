@@ -66,7 +66,7 @@ function Feedback(props) {
 					/>
 				}
 			/>
-			<View style={{flex:1, alignItems: 'center', marginTop:20}}>
+			<View style={{ flex: 1, alignItems: 'center', marginTop: 20 }}>
 				<TextBox
 					header={'Message'}
 					boxStyle={style.textbox}

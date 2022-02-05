@@ -37,8 +37,8 @@ function Login(props) {
 		color: colors.Quaternary,
 	});
 
-	const { getNotificationsToggle, logIn, setTCAccepted, setPrivacyAccepted } 
-		= useContext(AuthContext);
+	const { getNotificationsToggle, logIn, setTCAccepted, setPrivacyAccepted } =
+		useContext(AuthContext);
 
 	const updatingPrimaryInput = (text) => {
 		setPrimaryInfo(text);
@@ -109,13 +109,13 @@ function Login(props) {
 			primaryInfo: primaryInfo,
 			password: password,
 			date: new Date().toString(),
-		}
+		};
 		if (getNotificationsToggle) {
 			console.log(
 				`Clientside Notifications  (${getNotificationsToggle}) are enabled. Toggle is located in App.js.`,
 			);
 			registerForPushNotificationsAsync().then((pushToken) => {
-				login_body['expoPushToken'] = pushToken
+				login_body['expoPushToken'] = pushToken;
 				runLogin();
 			});
 		} else {
@@ -133,61 +133,69 @@ function Login(props) {
 				},
 				body: JSON.stringify(login_body),
 			})
-			.then((res) => {
-				let token = -1;
-				if (primaryInfo == '' || password == '') {
-					setError('Please enter all parameters');
-				} else if (res.status == 200) {
-					res.json().then((data) => {
-						fetch('http://localhost:5000/api/v1.0.0/doc/didAcceptPolicy', {
-							method: 'GET',
-							headers: {
-								'Content-Type': 'application/json',
-								'authentication-token': data.token,
-							}
-						})
-						.then((privRes) => {
-							fetch('http://localhost:5000/api/v1.0.0/doc/didAcceptTerms', {
+				.then((res) => {
+					let token = -1;
+					if (primaryInfo == '' || password == '') {
+						setError('Please enter all parameters');
+					} else if (res.status == 200) {
+						res.json().then((data) => {
+							fetch('http://localhost:5000/api/v1.0.0/doc/didAcceptPolicy', {
 								method: 'GET',
 								headers: {
 									'Content-Type': 'application/json',
 									'authentication-token': data.token,
-								}
+								},
 							})
-							.then((termsRes) => {
-								privRes.json().then((privData) => setPrivacyAccepted(privData.accepted))
-								termsRes.json().then((termsData) => setTCAccepted(termsData.accepted))
-							});
-						})
-						.then(() => {console.log("Setting token"); logIn(data.token)});
-					});
-				} else if (res.status == 404 || res.status == 401) {
-					setError('The provided information is incorrect');
-				} else if (res.status == 400) {
-					setError('User has not been verified');
-				} else if (res.status == 500) {
-					setError('Something wrong happened internally...');
-				}
-	
-				if (res.status != 200) {
-					setInputStyle({
-						backgroundColor: Colours.Red.NotSelected,
-						padding: 10,
-						fontSize: 15,
-						borderRadius: 5,
-						marginBottom: 20,
-						width: '100%',
-					});
-					setTextStyle({
-						fontSize: 20,
-						fontWeight: 'bold',
-						paddingBottom: 5,
-						color: Colours.Red.Error,
-					});
-				}
-			})
-			.catch(() => setError('Something wrong happened internally... :('));
-		}
+								.then((privRes) => {
+									fetch('http://localhost:5000/api/v1.0.0/doc/didAcceptTerms', {
+										method: 'GET',
+										headers: {
+											'Content-Type': 'application/json',
+											'authentication-token': data.token,
+										},
+									}).then((termsRes) => {
+										privRes
+											.json()
+											.then((privData) =>
+												setPrivacyAccepted(privData.accepted),
+											);
+										termsRes
+											.json()
+											.then((termsData) => setTCAccepted(termsData.accepted));
+									});
+								})
+								.then(() => {
+									console.log('Setting token');
+									logIn(data.token);
+								});
+						});
+					} else if (res.status == 404 || res.status == 401) {
+						setError('The provided information is incorrect');
+					} else if (res.status == 400) {
+						setError('User has not been verified');
+					} else if (res.status == 500) {
+						setError('Something wrong happened internally...');
+					}
+
+					if (res.status != 200) {
+						setInputStyle({
+							backgroundColor: Colours.Red.NotSelected,
+							padding: 10,
+							fontSize: 15,
+							borderRadius: 5,
+							marginBottom: 20,
+							width: '100%',
+						});
+						setTextStyle({
+							fontSize: 20,
+							fontWeight: 'bold',
+							paddingBottom: 5,
+							color: Colours.Red.Error,
+						});
+					}
+				})
+				.catch(() => setError('Something wrong happened internally... :('));
+		};
 	};
 
 	const { getLogo } = useContext(AuthContext);

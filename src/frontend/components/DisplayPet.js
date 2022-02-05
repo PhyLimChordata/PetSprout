@@ -7,7 +7,7 @@ import { AuthContext } from '../Context';
 import { LevelMapping } from '../resources/mappings/LevelMapping';
 import { getImage } from '../resources/images/Pets/ImageMapping';
 import EvolutionPopup from './EvolutionPopup';
-import FaintingPopup from './FaintingPopup'
+import FaintingPopup from './FaintingPopup';
 
 const heartSize = 70;
 //THIS CAN VARY BASED ON USER's PET
@@ -106,17 +106,17 @@ export function DisplayPet(props) {
 						tempHeartValue.view.height * (maxHealth / heartSize),
 					);
 					hp = _.cloneDeep(tempHeartValue);
-					console.log(hp)
+					console.log(hp);
 					console.log(currentPet);
 					if (currentPet.hp === 0) {
-						setFaintVisible(true)
+						setFaintVisible(true);
 					} else if (currentPet.readyToEvolve) {
 						setIsEgg(currentPet.image == 'egg');
 						setEvolutionVisible(true);
 					}
 
 					const petsLevel = currentPet.level;
-					console.log(petsLevel)
+					console.log(petsLevel);
 					const petsLevelStr = petsLevel.toString();
 					setLevel(currentPet.level);
 					//Cap for exp bar
@@ -132,43 +132,39 @@ export function DisplayPet(props) {
 				}),
 			)
 			.catch();
+
+		setXpLevelCap(10000);
+		setExperience(10);
 	};
 
 	return (
 		<>
-				<View
+			<View
+				style={{
+					width: '100%',
+					backgroundColor: '#FFFFFF',
+					alignItems: 'center',
+					justifyContent: 'center',
+					marginBottom: 0,
+				}}
+			>
+				<Image
 					style={{
-						width: '100%',
-						backgroundColor: "#FFFFFF",
-						alignItems: 'center',
-						justifyContent: 'center',
-						marginBottom: 0,
+						height: 150,
+						resizeMode: 'contain',
+						marginBottom: 5,
 					}}
-				>
-					<Image
-						style={{
-							height: 150,
-							resizeMode: 'contain',
-							marginBottom: 5,
-						}}
-						source={getImage(getPet, 'Happy', getColor)}
-					/>
-					<ExperienceBar
-						level={level}
-						exp={experience}
-						xpLevelCap={xpLevelCap}
-					/>
-				</View>
+					source={getImage(getPet, 'Happy', getColor)}
+				/>
+				<ExperienceBar level={level} exp={experience} xpLevelCap={xpLevelCap} />
+			</View>
 			<EvolutionPopup
 				visible={evolutionVisible}
 				setVisible={setEvolutionVisible}
 				isEgg={isEgg}
 				navigation={props.navigation}
 			/>
-			<FaintingPopup
-				visible={faintVisible}
-				setVisible={setFaintVisible}
-			/>
+			<FaintingPopup visible={faintVisible} setVisible={setFaintVisible} />
 		</>
 	);
 }

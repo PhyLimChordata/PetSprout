@@ -53,9 +53,9 @@ function NameHabit(props) {
 		})
 			.then((res) =>
 				res.json().then((data) => {
-					changePet(data.image)
+					changePet(data.image);
 					props.navigation.navigate('Habit');
-					console.log(data.image)
+					console.log(data.image);
 				}),
 			)
 			.catch(() => console.log('error'));

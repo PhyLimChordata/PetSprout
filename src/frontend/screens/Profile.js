@@ -150,7 +150,7 @@ function ProfileEdit(props) {
 						}
 					/>
 				</View>
-				<View style={{flex:1, alignItems: 'center', marginTop:20}}>
+				<View style={{ flex: 1, alignItems: 'center', marginTop: 20 }}>
 					<View style={styles.formContainer}>
 						<Text
 							style={[styles.textTitle, styles.text, { fontWeight: '900' }]}

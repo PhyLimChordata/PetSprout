@@ -253,9 +253,8 @@ function SignupScreen(props) {
 								paddingBottom: 5,
 								color: Colours.Red.Error,
 							});
-						}	
+						}
 					});
-					
 				} else if (res.status == 400) {
 					if (password.length < 6) {
 						setPasswordError('Passwords must be 6-12 characters');

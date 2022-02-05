@@ -83,7 +83,7 @@ function PutHabits(props) {
 				date: new Date(),
 				times: times,
 				alarm: alarms,
-				timezone: Localization.timezone
+				timezone: Localization.timezone,
 			}),
 		})
 			.then((res) => {
@@ -122,7 +122,7 @@ function PutHabits(props) {
 					date: new Date(),
 					times: alarms.length == 0 ? 1 : alarms.length,
 					alarm: alarms,
-					timezone: Localization.timezone
+					timezone: Localization.timezone,
 				}),
 			},
 		)
@@ -197,7 +197,7 @@ function PutHabits(props) {
 	}
 	function addAlarm(time) {
 		time.setSeconds(0, 0);
-		console.log(Appearance.getColorScheme())
+		console.log(Appearance.getColorScheme());
 		for (let alarm of alarms) {
 			alarm = new Date(alarm);
 			if (getTime(alarm) == getTime(time)) {
@@ -266,7 +266,7 @@ function PutHabits(props) {
 		color: Colours.Unique.Black,
 	};
 	var today = new Date();
-	today.setHours(0,0,0,0);
+	today.setHours(0, 0, 0, 0);
 	return (
 		<SafeAreaView
 			style={[

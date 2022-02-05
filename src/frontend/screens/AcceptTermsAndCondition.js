@@ -28,7 +28,8 @@ function AcceptTermsAndCondition(props) {
 
 	const [show, setShow] = useState(props.route.params.isAcceptScreen);
 
-	const { getToken, setTCAccepted, getPrivacyAccepted } = useContext(AuthContext);
+	const { getToken, setTCAccepted, getPrivacyAccepted } =
+		useContext(AuthContext);
 
 	const checkSwitch = () => {
 		if (status == 'unchecked') {
@@ -52,7 +53,7 @@ function AcceptTermsAndCondition(props) {
 		setEnable(!disabled);
 	};
 
-	const checkboxStyle = (Platform.OS == 'ios' && style.appleCheck);
+	const checkboxStyle = Platform.OS == 'ios' && style.appleCheck;
 
 	const getStyle = () => {
 		if (show == true) {
@@ -284,9 +285,7 @@ function AcceptTermsAndCondition(props) {
 				{show && (
 					<View style={style.center}>
 						<View style={style.checkboxContainer}>
-							<View
-								style={checkboxStyle}
-							>
+							<View style={checkboxStyle}>
 								<Checkbox
 									status={status}
 									onPress={checkSwitch}
@@ -306,23 +305,25 @@ function AcceptTermsAndCondition(props) {
 								style={style.aboutButton}
 								onPress={() => {
 									if (status == 'checked') {
-										fetch('http://localhost:5000/api/v1.0.0/doc/acceptTerms',{
+										fetch('http://localhost:5000/api/v1.0.0/doc/acceptTerms', {
 											method: 'POST',
 											headers: {
 												'Content-Type': 'application/json',
 												'authentication-token': getToken,
-											}
+											},
 										})
-										.then((res) => {
-											setTCAccepted(true)
-										})
-										.then(() => {
-											if(getPrivacyAccepted) {
-												props.navigation.navigate('HomeScreen')
-											} else {
-												props.navigation.navigate('AcceptPrivacyPolicyScreen');
-											}
-										})
+											.then((res) => {
+												setTCAccepted(true);
+											})
+											.then(() => {
+												if (getPrivacyAccepted) {
+													props.navigation.navigate('HomeScreen');
+												} else {
+													props.navigation.navigate(
+														'AcceptPrivacyPolicyScreen',
+													);
+												}
+											});
 									}
 								}}
 							>

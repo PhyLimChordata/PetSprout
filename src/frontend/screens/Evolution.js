@@ -139,7 +139,7 @@ function Evolution(props) {
 		})
 			.then((res) =>
 				res.json().then((data) => {
-					changePet(data.image)
+					changePet(data.image);
 				}),
 			)
 			.catch();

@@ -19,7 +19,7 @@ import { egg } from '../resources/images/Pets/Egg/Egg';
 import LogoutConfirmation from './LogoutPopup';
 import { EvolutionMapping } from '../resources/mappings/EvolutionMapping';
 import { getImage } from '../resources/images/Pets/ImageMapping';
-import FaintingPopup from "./FaintingPopup";
+import FaintingPopup from './FaintingPopup';
 function ThemeCircle({ colorTheme, onPress, selected }) {
 	const { height, width } = Dimensions.get('window');
 
@@ -165,7 +165,7 @@ function SideMenu(props) {
 		})
 			.then((res) =>
 				res.json().then((data) => {
-					console.log("Current pet from side menu is " + data.image)
+					console.log('Current pet from side menu is ' + data.image);
 					changePet(data.image);
 				}),
 			)
