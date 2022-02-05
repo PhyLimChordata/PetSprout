@@ -26,13 +26,13 @@ function MenuHeader(props) {
 
 				<Text style={styles(colors).headerText}>{props.text}</Text>
 			</View>
-			{!props.hideRight && !props.back && (
+			{/* {!props.hideRight && !props.back && (
 				<SideMenu
 					modalVisible={modalVisible}
 					setModalVisible={setModalVisible}
 					navigation={props.navigation}
 				/>
-			)}
+			)} */}
 			{props.children}
 			{props.displayHp ? <Heart /> : <></>}
 			<View style={{ alignContent: 'flex-end', height: 25 }}>
