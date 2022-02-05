@@ -44,6 +44,7 @@ function PomodoroScreen(props) {
 
 	const [remainingSecs, setRemainingSecs] = useState(duration['Pomodoro']);
 	const [isActive, setActive] = useState(false);
+	const [isCancelled, setCancelled] = useState(false);
 
 	const [breakEnabled, setBreak] = useState(false);
 	const [rounds, setRounds] = useState(1);
@@ -122,14 +123,16 @@ function PomodoroScreen(props) {
 			clearInterval(interval);
 			if (mode != 'Pomodoro') {
 				setMode('Pomodoro');
-			} else {
+			} else if (isCancelled) {
 				if (rounds >= 3 && rounds % 3 == 0) {
 					gainXP(500, getToken);
 				} else if (rounds > 0) {
 					gainXP(150, getToken);
 				}
-				changeRefreshing(true);
+			} else {
+				setCancelled(false)
 			}
+			changeRefreshing(true);
 		}
 		return () => clearInterval(interval);
 	}, [isActive, remainingSecs]);
@@ -231,6 +234,7 @@ function PomodoroScreen(props) {
 		setRemainingSecs(resetTimer);
 		setMins(formatNumber(25));
 		setSecs(formatNumber(0));
+		setCancelled(true);
 		setActive(false);
 	};
 
