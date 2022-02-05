@@ -395,7 +395,7 @@ function PomodoroScreen(props) {
 						Current Task
 					</Text>
 				</TouchableOpacity> */}
-				{/* <TouchableOpacity
+				 <TouchableOpacity
 					activeOpacity={0.6}
 					style={{
 						backgroundColor: colors.Background,
@@ -407,9 +407,9 @@ function PomodoroScreen(props) {
 						paddingRight: 40,
 						marginBottom: 20,
 					}}
-					onPress={() => {
-						props.navigation.navigate('PomodoroTasksScreen');
-					}}
+					// onPress={() => {
+					// 	props.navigation.navigate('PomodoroTasksScreen');
+					// }}
 				>
 					<Text
 						style={{
@@ -420,7 +420,7 @@ function PomodoroScreen(props) {
 					>
 						Current Task
 					</Text>
-				</TouchableOpacity> */}
+				</TouchableOpacity>
 
 				<Text
 					style={{
