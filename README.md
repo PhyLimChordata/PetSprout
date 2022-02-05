@@ -2,9 +2,9 @@
 
 ## Overview
 
-HabiPets is a mobile application which aims to help users build and maintain sustainable and healthy habits through empirically researched behavioral techniques and gamification.
+PetSprout is a mobile application which aims to help users build and maintain sustainable and healthy habits through empirically researched behavioral techniques and gamification.
 
-HabiPets is a portmanteau of the words Habits and Pets as the name suggests. Similar to that of a tamagotchi, each user will have a pet that will evolve and lose life points depending on the consistency of daily habits. Users will also have the ability to evolve and customize their companion gamifying the process.
+PetSprout is a portmanteau of the words Habits and Pets as the name suggests. Similar to that of a tamagotchi, each user will have a pet that will evolve and lose life points depending on the consistency of daily habits. Users will also have the ability to evolve and customize their companion gamifying the process.
 
 Other features of interest are tutorials, and methods commonly used in goal setting techniques, while implementing operant conditioning principles by having the pet react positively or negatively depending on the user's activity.
 
