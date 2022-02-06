@@ -8,6 +8,7 @@ import { LevelMapping } from '../resources/mappings/LevelMapping';
 import { getImage } from '../resources/images/Pets/ImageMapping';
 import EvolutionPopup from './EvolutionPopup';
 import FaintingPopup from './FaintingPopup'
+import {EvolutionMapping} from "../resources/mappings/EvolutionMapping";
 
 const heartSize = 70;
 //THIS CAN VARY BASED ON USER's PET
@@ -78,7 +79,7 @@ export function DisplayPet(props) {
 		}
 	});
 
-	const { getToken, getRefreshing, getPet, getColor } = useContext(AuthContext);
+	const { getToken, getRefreshing, getPet, getColor, changePet } = useContext(AuthContext);
 	useEffect(() => {
 		if (getRefreshing) {
 			updatePet();
@@ -114,7 +115,7 @@ export function DisplayPet(props) {
 						setIsEgg(currentPet.image == 'egg');
 						setEvolutionVisible(true);
 					}
-
+					changePet(currentPet.image);
 					const petsLevel = currentPet.level;
 					console.log(petsLevel)
 					const petsLevelStr = petsLevel.toString();
