@@ -1,9 +1,9 @@
 export const blob = {
     Happy: {
-        Blue: require('./blobHappyBlue.png'),
-        Orange: require('./blobHappyOrange.png'),
-        Purple: require('./blobHappyPurple.png'),
-        Red: require('./blobHappyRed.png'),
-        Green: require('./blobHappyGreen.png'),
+        Blue: require('./blobHappyBlue.gif'),
+        Orange: require('./blobHappyOrange.gif'),
+        Purple: require('./blobHappyPurple.gif'),
+        Red: require('./blobHappyRed.gif'),
+        Green: require('./blobHappyGreen.gif'),
     },
 };
