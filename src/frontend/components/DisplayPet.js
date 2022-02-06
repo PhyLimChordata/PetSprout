@@ -38,7 +38,7 @@ export async function loseHP(hp, token) {
 			'authentication-token': token,
 		},
 		body: JSON.stringify({
-			expValue: hp,
+			hp: hp,
 		}),
 	})
 		.then((res) => res.json().then(() => {}))
