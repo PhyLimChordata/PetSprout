@@ -150,6 +150,9 @@ function SideMenu(props) {
 	}, []);
 
 	const [toggleValue, setToggleValue] = useState(!defaultMode);
+	const [modalVisible, setModalVisible] = useState(props.modalVisible)
+
+	useEffect(() => setModalVisible(props.modalVisible), [props.modalVisible])
 
 	function colorChange(color) {
 		changeColorTheme(color);
@@ -170,7 +173,7 @@ function SideMenu(props) {
 			backdropOpacity={0.2}
 			onBackdropPress={() => props.setModalVisible(false)}
 			style={{ margin: 0 }}
-			isVisible={props.modalVisible}
+			isVisible={modalVisible}
 			animationIn='slideInLeft'
 			animationOut='slideOutLeft'
 		>
