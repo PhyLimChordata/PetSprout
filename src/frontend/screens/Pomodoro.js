@@ -239,6 +239,7 @@ function PomodoroScreen(props) {
 	const stopSession = () => {
 		//Lose 2 HP
 		loseHP(2, getToken).then();
+		changeRefreshing(true);
 		//bring up pop up
 		resetTimer(duration['Pomodoro']);
 		setCancelled(true);
