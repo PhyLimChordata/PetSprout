@@ -418,7 +418,7 @@ function PomodoroScreen(props) {
 							color: colors.Quaternary,
 						}}
 					>
-						Current Task
+						Work Hard
 					</Text>
 				</TouchableOpacity>
 

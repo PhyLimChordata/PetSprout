@@ -50,6 +50,7 @@ function Feedback(props) {
 				} else if (res.status == 500) {
 					setError('Something wrong happened internally...');
 				}
+				props.navigation.navigate('Habit');
 			})
 			.catch();
 	};
