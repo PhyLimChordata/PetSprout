@@ -396,7 +396,7 @@ function PomodoroScreen(props) {
 						Current Task
 					</Text>
 				</TouchableOpacity> */}
-				 <TouchableOpacity
+				{/* <TouchableOpacity
 					activeOpacity={0.6}
 					style={{
 						backgroundColor: colors.Background,
@@ -421,7 +421,7 @@ function PomodoroScreen(props) {
 					>
 						Work Hard
 					</Text>
-				</TouchableOpacity>
+				</TouchableOpacity> */}
 
 				<Text
 					style={{
