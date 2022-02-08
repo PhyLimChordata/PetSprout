@@ -322,6 +322,7 @@ function SignupScreen(props) {
 					<TextInput
 						style={userNameInputStyle}
 						value={userName}
+						autoCapitalize={'none'}
 						onChangeText={(text) => updatingUserNameInput(text)}
 					></TextInput>
 					<Text style={styles(colors).errorMessageRight}>{userNameError}</Text>
@@ -329,6 +330,7 @@ function SignupScreen(props) {
 					<TextInput
 						style={emailInputStyle}
 						value={email}
+						autoCapitalize={'none'}
 						onChangeText={(text) => updatingEmailInput(text)}
 					></TextInput>
 					<Text style={styles(colors).errorMessageRight}>{emailError}</Text>
@@ -338,6 +340,7 @@ function SignupScreen(props) {
 						style={passwordInputStyle}
 						secureTextEntry={true}
 						value={password}
+						autoCapitalize={'none'}
 						onChangeText={(text) => updatingPasswordInput(text)}
 					></TextInput>
 					<Text style={styles(colors).errorMessageRight}>{passwordError}</Text>
@@ -347,6 +350,7 @@ function SignupScreen(props) {
 						style={reEnterPasswordInputStyle}
 						secureTextEntry={true}
 						value={reEnterPassword}
+						autoCapitalize={'none'}
 						onChangeText={(text) => updatingReEnterPasswordInput(text)}
 					></TextInput>
 					<Text style={styles(colors).errorMessageRight}>

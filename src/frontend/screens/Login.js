@@ -69,6 +69,7 @@ function Login(props) {
 			padding: 10,
 			borderWidth: 0,
 			borderStyle: 'solid',
+			fontSize: 15,
 			borderRadius: 5,
 			marginBottom: 20,
 			width: '100%',
@@ -211,6 +212,7 @@ function Login(props) {
 					secureTextEntry={true}
 					value={password}
 					placeholder='*********'
+					autoCapitalize={'none'}
 					onChangeText={(text) => updatingPasswordInput(text)}
 				></TextInput>
 				<View style={styles(colors).forgotView}>
