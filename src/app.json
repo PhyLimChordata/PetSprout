@@ -33,7 +33,7 @@
       "googleServicesFile": "./google-services.json",
       "softwareKeyboardLayoutMode": "pan",
       "package": "com.phylimchordata.petsprout",
-      "versionCode": 8,
+      "versionCode": 9,
       "adaptiveIcon": {
         "foregroundImage": "./frontend/resources/images/Logo/LogoGreenNonTransparent.png",
         "backgroundColor": "#FFFFFF"
@@ -41,7 +41,7 @@
     },
     "ios": {
       "bundleIdentifier": "com.phylimchordata.PetSprout",
-      "buildNumber": "3.3.0"
+      "buildNumber": "3.2.0"
     },
     "web": {
       "favicon": "./frontend/resources/images/Logo/LogoGreenNonTransparent.png"
