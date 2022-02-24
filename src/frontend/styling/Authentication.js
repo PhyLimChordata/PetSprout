@@ -118,6 +118,31 @@ const authenticationStyles = (theme) =>
 			fontWeight: 'bold',
 			marginBottom: 15,
 		},
+		checkboxContainer: {
+			flexDirection: 'row',
+			alignItems: 'center',
+			justifyContent: 'center',
+			width: 275,
+			fontSize: 15,
+			fontStyle: 'normal',
+			color: theme.Quinary,
+			marginTop: 0,
+			marginBottom: 15,
+		},
+		textTop: {
+			fontSize: 31,
+			color: theme.Quaternary,
+			fontWeight: 'bold',
+			marginBottom: 10,
+			marginTop: 10,
+		},
+		appleCheck: {
+			borderColor: theme.Quaternary,
+			borderWidth: 2,
+			borderRadius: 5,
+			marginLeft: 0,
+			marginRight: 10,
+		}
 	});
 
 export default authenticationStyles;
