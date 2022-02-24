@@ -101,7 +101,6 @@ function Login(props) {
 
 	const saveLogin = async (key, value) => {
 		await SecureStore.setItemAsync(key, value);
-		console.log('hihiahgfalkjhdalkhdalkhdsalk')
 	}
 
 	const clear = async () => {
@@ -113,7 +112,7 @@ function Login(props) {
 	const getValueFor = async (key, setFunc) => {
 		let result = await SecureStore.getItemAsync(key);
 		if (result) {setFunc(result);}
-		else {console.log("hi");}
+		
 	}
 
 	const registerForPushNotificationsAsync = async () => {
