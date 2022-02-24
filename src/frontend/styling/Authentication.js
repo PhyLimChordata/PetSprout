@@ -128,6 +128,7 @@ const authenticationStyles = (theme) =>
 			color: theme.Quinary,
 			marginTop: 0,
 			marginBottom: 15,
+			marginRight: 10,
 		},
 		textTop: {
 			fontSize: 31,
