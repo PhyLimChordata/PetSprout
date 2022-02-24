@@ -40,7 +40,7 @@ function PomodoroScreen(props) {
 
 	const { colors } = useTheme();
 
-	const duration = { Pomodoro: 30, 'Long Break': 20, 'Short Break': 10 };
+	const duration = { Pomodoro: 1500, 'Long Break': 600, 'Short Break': 300 };
 
 	const [remainingSecs, setRemainingSecs] = useState(duration['Pomodoro']);
 	const [isActive, setActive] = useState(false);
