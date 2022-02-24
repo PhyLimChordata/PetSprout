@@ -40,13 +40,13 @@ function PomodoroScreen(props) {
 
 	const { colors } = useTheme();
 
-	const duration = { Pomodoro: 1500, 'Long Break': 600, 'Short Break': 300 };
+	const duration = { Pomodoro: 30, 'Long Break': 20, 'Short Break': 10 };
 
 	const [remainingSecs, setRemainingSecs] = useState(duration['Pomodoro']);
 	const [isActive, setActive] = useState(false);
 	const [isCancelled, setCancelled] = useState(false);
 
-	const [breakEnabled, setBreak] = useState(false);
+	const [breakEnabled, setBreak] = useState(true);
 	const [rounds, setRounds] = useState(1);
 
 	const [mode, setMode] = useState('Pomodoro');
@@ -102,7 +102,6 @@ function PomodoroScreen(props) {
 		let interval = null;
 		if (isActive) {
 			if (mode != 'Pomodoro') {
-				setBreak(false);
 				setRounds(0);
 			}
 			interval = setInterval(() => {
@@ -112,24 +111,19 @@ function PomodoroScreen(props) {
 					setRounds(rounds + 1);
 					//play sound and bring up pop up
 					showFinish();
-					if (rounds >= 1) {
-						setBreak(true);
-					}
 					setActive(false);
-					resetTimer(duration['Pomodoro']);
+					resetTimer(duration[mode]);
 				}
 			}, 1000);
-		} else if (!isActive && remainingSecs !== 0) {
+		} else if (!isActive && remainingSecs != 0 && finished) {
 			clearInterval(interval);
-			if (mode != 'Pomodoro') {
-				setMode('Pomodoro');
-			} else if (!isCancelled) {
+			if (!isCancelled) {
 				if (rounds >= 3 && rounds % 3 == 0) {
 					gainXP(500, getToken);
 				} else if (rounds > 0) {
 					gainXP(150, getToken);
 				} else {
-					setCancelled(false);
+			 		setCancelled(false);
 				}
 			}
 			changeRefreshing(true);
@@ -241,7 +235,7 @@ function PomodoroScreen(props) {
 		loseHP(2, getToken).then();
 		changeRefreshing(true);
 		//bring up pop up
-		resetTimer(duration['Pomodoro']);
+		resetTimer(duration[mode]);
 		setCancelled(true);
 		setActive(false);
 	};
@@ -260,7 +254,7 @@ function PomodoroScreen(props) {
 					setBreak(true);
 				}
 				setActive(false);
-				resetTimer(duration['Pomodoro']);
+				resetTimer(duration[mode]);
 			}
 			return receivedNewData
 				? BackgroundFetch.Result.NewData
