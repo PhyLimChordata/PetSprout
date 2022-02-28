@@ -339,7 +339,7 @@ function PomodoroScreen(props) {
 					duration={duration}
 				/>
 			</View>
-			<DisplayPet />
+			<DisplayPet navigation={props.navigation}/>
 			<View
 				style={{
 					display: 'flex',
