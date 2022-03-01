@@ -10,6 +10,8 @@ const jwt = require('jsonwebtoken');
 const HabitDAO = require('../habit/habitsDAO')
 const health = require('../pets/health')
 
+var moment = require('moment-timezone');  
+
 module.exports = async (req, res) => {
 	try {
 		let errors = validationResult(req);
@@ -50,15 +52,19 @@ module.exports = async (req, res) => {
 
 		let matching = await bcryptjs.compare(password, user.password);
 		if (!matching) return res.status(401).json('Wrong password');
-		let current = new Date(date);
+		let userTimezone = date.substring(date.indexOf("(")+1, date.lastIndexOf(")"));
+		console.log(date)
+		console.log(`user time zone = ${userTimezone}`)
+		let current = moment().tz(userTimezone);
+		// let current = new Date(date);
 		if (user.lastlogin !== null) {
-			let lastLoginYear = user.lastlogin.getFullYear();
-			let lastLoginMonth = user.lastlogin.getMonth();
-			let lastLoginDate = user.lastlogin.getDate();
-			current.setHours(0, 0, 0, 0);
-			let lastLogin = new Date(lastLoginYear, lastLoginMonth, lastLoginDate);
+			let lastLogin = moment(user.lastlogin).tz(userTimezone);
+			console.log(`User ${user._id} last login time = ${lastLogin}`)
+			console.log(`Current time = ${current}`)
+			console.log(`date = ${date}`)
 			let userHabit = await Habit.findOne({ user: user._id });
-			const daysApart = ((current - lastLogin)/ (1000 * 60 * 60 * 24)).toFixed(1);
+			// const daysApart = ((current - lastLogin)/ (1000 * 60 * 60 * 24)).toFixed(1);
+			daysApart = current.diff(lastLogin, 'days')
 			console.log(daysApart);
 			// Update habits todo and streaks for new day
 			if (daysApart > 0) {
