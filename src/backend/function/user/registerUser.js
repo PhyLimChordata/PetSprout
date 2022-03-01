@@ -80,10 +80,10 @@ const user_activation = async (req, res) => {
 
 		let mail_vali = await Mailing.findOne({ email });
 		if (!mail_vali) {
-			logError(`No validation email was sent to ${email}. (email can't be found in table Mailing)`)
+			logError(`No validation email was sent to ${email} (email can't be found in table Mailing). User account may have already been activated.`)
 			return res
 				.status(401)
-				.json('msg:' + 'No validation email was send before');
+				.json('msg:' + 'Sent validation email not found in database. User account may have already been activated.');
 		}
 
 		console.log(mail_vali);
