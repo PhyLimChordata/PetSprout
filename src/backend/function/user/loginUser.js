@@ -8,9 +8,10 @@ const bcryptjs = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 const HabitDAO = require('../habit/habitsDAO')
+const UserDAO = require('./userDAO')
 const health = require('../pets/health')
 
-var moment = require('moment-timezone');  
+const { DateTime } = require("luxon");
 
 module.exports = async (req, res) => {
 	try {
@@ -18,54 +19,53 @@ module.exports = async (req, res) => {
 		if (!errors.isEmpty())
 			return res.status(400).json({ errors: errors.array() });
 
-		let { primaryInfo, password, date, expoPushToken} = req.body;
+		let { primaryInfo, password, date, expoPushToken, timezone } = req.body;
 
-		let email = '';
-		let userName = '';
-
-		if (primaryInfo === undefined) primaryInfo = '';
-
-		if (regEmail.test(primaryInfo)) {
-			email = primaryInfo;
-		} else if (primaryInfo != '') {
-			userName = primaryInfo;
-		} else {
-			res.status(400).json('Email or user name should be provided');
+		if (typeof primaryInfo == 'undefined') {
+			return res.status(400).json('Email or user name should be provided')
 		}
-
 		if (typeof date == 'undefined') {
 			return res.status(400).json('Date should be provided.');
 		}
 
-		let user = null;
-		if (email === '') {
-			user = await User.findOne({ userName });
-			if (!user) return res.status(404).json('User has not been created');
-			email = user.email;
-		} else {
-			user = await User.findOne({ email });
-			if (!user) return res.status(404).json('User has not been created');
+		let userResult = await UserDAO.getUser(primaryInfo)
+		if (userResult.msg != "success") {
+			console.log(user)
+			return res.status(user.code).json(user.msg)
+		}
+		let user = userResult.result
+
+		// Check if user timezone changed, update if it did
+		if (user.timezone == null || user.timezone != timezone) {
+			await UserDAO.updateTimezone(user, timezone);
 		}
 
-		if (user.status === 0)
+		// Check if user has been verified/activated
+		if (user.status === 0) {
+			console.log(`Login User: User ${user._id} hasn't been verified`)
 			return res.status(400).json("User hasn't been activated");
+		}
 
+		// Check if password is correct
 		let matching = await bcryptjs.compare(password, user.password);
 		if (!matching) return res.status(401).json('Wrong password');
-		let userTimezone = date.substring(date.indexOf("(")+1, date.lastIndexOf(")"));
-		console.log(date)
-		console.log(`user time zone = ${userTimezone}`)
-		let current = moment().tz(userTimezone);
-		// let current = new Date(date);
+
+		// if user last login is not null, check if it is a new day and update todo and check streaks
 		if (user.lastlogin !== null) {
-			let lastLogin = moment(user.lastlogin).tz(userTimezone);
-			console.log(`User ${user._id} last login time = ${lastLogin}`)
-			console.log(`Current time = ${current}`)
-			console.log(`date = ${date}`)
-			let userHabit = await Habit.findOne({ user: user._id });
-			// const daysApart = ((current - lastLogin)/ (1000 * 60 * 60 * 24)).toFixed(1);
-			daysApart = current.diff(lastLogin, 'days')
-			console.log(daysApart);
+			// use luxon DateTime to create dates and sets it to user timezone (passed from frontend)
+			var currentDate = DateTime.fromISO(date, { zone: timezone });
+			var lastLoginDate = DateTime.fromISO(user.lastlogin.toISOString(), { zone: timezone });
+
+			// calculate days apart and convert it to days from miliseconds
+			daysApart = ((currentDate - lastLoginDate)/ (1000 * 60 * 60 * 24)).toFixed(1);
+
+			// Get user habits
+			let getHabitsResults = await HabitDAO.getHabits(user._id)
+			if(getHabitsResults.msg != "success") {
+				return res.status(getHabitsResults.code).json(getHabitsResults.msg)
+			}
+			let userHabit = getHabitsResults.result
+
 			// Update habits todo and streaks for new day
 			if (daysApart > 0) {
 				if (userHabit.habitList !== null) {
@@ -171,7 +171,7 @@ module.exports = async (req, res) => {
 			}
 		}
 
-		user.lastlogin = current;
+		user.lastlogin = new Date(date);
 
 		if(process.env.NOTIFICATIONTOGGLE === 'true') {
 			/* Check if ExpoPushToken has already been saved. */
@@ -216,6 +216,3 @@ module.exports = async (req, res) => {
 		return res.status(500).json('server error');
 	}
 };
-
-const regEmail =
-	/^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;

@@ -13,7 +13,7 @@ const Analyze = require('../../schemas/analyzeSchema');
 
 const user_regist = async (req, res) => {
 	try {
-		let { userName, email, password } = req.body;
+		let { userName, email, password, timezone } = req.body;
 		let userPresent, emailPresent = false;
 
 		let errors = validationResult(req);
@@ -34,6 +34,7 @@ const user_regist = async (req, res) => {
 			status: 0,
 			password,
 			lastlogin: null,
+			timezone
 		});
 
 		// hashedpassword (security)

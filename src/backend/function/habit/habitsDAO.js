@@ -26,7 +26,8 @@ async function getHabits(user_id) {
             logError(error_msg);
             return {
                 result: null,
-                msg: error_msg
+                msg: error_msg,
+                code: 404
             };
         }
     } catch (error) {
@@ -34,7 +35,8 @@ async function getHabits(user_id) {
         logError(error_msg)
         return {
             result: null,
-            msg: error_msg
+            msg: error_msg,
+            code: 500
         };
     }
 }

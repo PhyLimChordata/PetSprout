@@ -9,6 +9,7 @@ import { useTheme } from '@react-navigation/native';
 import Colours from '../resources/themes/Colours';
 import Constants from 'expo-constants';
 import * as Notifications from 'expo-notifications';
+import * as Localization from 'expo-localization';
 import HabitsScreen from './Habits';
 import Habits from '../components/Habits';
 
@@ -109,6 +110,7 @@ function Login(props) {
 			primaryInfo: primaryInfo,
 			password: password,
 			date: new Date().toString(),
+			timezone: Localization.timezone,
 		}
 		if (getNotificationsToggle) {
 			console.log(
