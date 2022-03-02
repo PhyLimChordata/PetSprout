@@ -212,6 +212,7 @@ function Login(props) {
 					value={password}
 					placeholder='*********'
 					onChangeText={(text) => updatingPasswordInput(text)}
+					autoCapitalize={'none'}
 				></TextInput>
 				<View style={styles(colors).forgotView}>
 					<TouchableOpacity
