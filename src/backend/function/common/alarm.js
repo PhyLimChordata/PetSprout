@@ -156,7 +156,7 @@ const schedule = async (info) => {
     }
 
     // Create the scheduled task.
-    // alarmLog(id, "CREATED")
+    alarmLog(id, "CREATED")
     try {
         var task = cron.schedule(`${localizedMinutes} ${localizedHours} * * ${sch}`, () => {
             var entry = jobs[id];
@@ -165,7 +165,7 @@ const schedule = async (info) => {
                       ` at ${displayTime}!`
 
             notification(entry['tokens'], msg);
-            // alarmLog(id, "SENT")
+            alarmLog(id, "SENT")
         }, {
             scheduled: true,
             timezone: timezone
@@ -185,7 +185,7 @@ const schedule = async (info) => {
 
 // Stops a current cron job, given an id
 const remove = async (id) => {
-    // alarmLog(id, "REMOVE")
+    alarmLog(id, "REMOVE")
     try {    
         (jobs[id]['task']).stop();
     } catch (error) {
