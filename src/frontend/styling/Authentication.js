@@ -140,7 +140,7 @@ const authenticationStyles = (theme) =>
 		appleCheck: {
 			borderColor: theme.Quaternary,
 			borderWidth: 2,
-			borderRadius: 0,
+			borderRadius: 5,
 			marginLeft: 0,
 			marginRight: 5,
 			transform: [{ scaleX: 0.5 }, { scaleY: 0.5 }]
