@@ -119,13 +119,18 @@ function PomodoroScreen(props) {
 					setRounds(rounds + 1);
 					//play sound and bring up pop up
 					showFinish();
+					if (rounds >= 1) {
+						setBreak(true);
+					}
 					setActive(false);
 					resetTimer(duration[mode]);
 				}
 			}, 1000);
 		} else if (!isActive && remainingSecs != 0 && finished) {
 			clearInterval(interval);
-			if (!isCancelled) {
+			if (mode != 'Pomodoro') {
+				setMode('Pomodoro');
+			} else if (!isCancelled) {
 				if (rounds >= 3 && rounds % 3 == 0) {
 					gainXP(500, getToken);
 				} else if (rounds > 0) {
