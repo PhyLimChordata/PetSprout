@@ -67,6 +67,7 @@ module.exports = async (req, res) => {
 					for (const habit of userHabit.habitList) {
 						habit.todo = 0;
 					}
+					await userHabit.save()
 				}
 				// Find user's achievement and pets
 				let userAchievements = await Achievement.findOne({ user : user._id });

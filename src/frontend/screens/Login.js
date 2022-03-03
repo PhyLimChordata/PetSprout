@@ -126,7 +126,7 @@ function Login(props) {
 		}
 
 		const runLogin = () => {
-			fetch('http://localhost:5000/api/v1.0.0/user/login', {
+			fetch('http://3.15.57.200:5000/api/v1.0.0/user/login', {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
@@ -139,7 +139,7 @@ function Login(props) {
 					setError('Please enter all parameters');
 				} else if (res.status == 200) {
 					res.json().then((data) => {
-						fetch('http://localhost:5000/api/v1.0.0/doc/didAcceptPolicy', {
+						fetch('http://3.15.57.200:5000/api/v1.0.0/doc/didAcceptPolicy', {
 							method: 'GET',
 							headers: {
 								'Content-Type': 'application/json',
@@ -147,7 +147,7 @@ function Login(props) {
 							}
 						})
 						.then((privRes) => {
-							fetch('http://localhost:5000/api/v1.0.0/doc/didAcceptTerms', {
+							fetch('http://3.15.57.200:5000/api/v1.0.0/doc/didAcceptTerms', {
 								method: 'GET',
 								headers: {
 									'Content-Type': 'application/json',

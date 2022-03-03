@@ -8,6 +8,7 @@ import { LevelMapping } from '../resources/mappings/LevelMapping';
 import { getImage } from '../resources/images/Pets/ImageMapping';
 import EvolutionPopup from './EvolutionPopup';
 import FaintingPopup from './FaintingPopup'
+import {EvolutionMapping} from "../resources/mappings/EvolutionMapping";
 
 const heartSize = 70;
 //THIS CAN VARY BASED ON USER's PET
@@ -31,14 +32,14 @@ export function getHP() {
 }
 
 export async function loseHP(hp, token) {
-	await fetch('http://localhost:5000/api/v1.0.0/pets/lose_health', {
+	await fetch('http://3.15.57.200:5000/api/v1.0.0/pets/lose_health', {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',
 			'authentication-token': token,
 		},
 		body: JSON.stringify({
-			expValue: hp,
+			hp: hp,
 		}),
 	})
 		.then((res) => res.json().then(() => {}))
@@ -46,7 +47,7 @@ export async function loseHP(hp, token) {
 }
 
 export async function gainXP(xp, token) {
-	await fetch('http://localhost:5000/api/v1.0.0/pets/gain_exp', {
+	await fetch('http://3.15.57.200:5000/api/v1.0.0/pets/gain_exp', {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',
@@ -78,7 +79,7 @@ export function DisplayPet(props) {
 		}
 	});
 
-	const { getToken, getRefreshing, getPet, getColor } = useContext(AuthContext);
+	const { getToken, getRefreshing, getPet, getColor, changePet } = useContext(AuthContext);
 	useEffect(() => {
 		if (getRefreshing) {
 			updatePet();
@@ -86,7 +87,7 @@ export function DisplayPet(props) {
 	}, [getRefreshing]);
 
 	const updatePet = () => {
-		fetch('http://localhost:5000/api/v1.0.0/pets/get_current', {
+		fetch('http://3.15.57.200:5000/api/v1.0.0/pets/get_current', {
 			method: 'GET',
 			headers: {
 				'Content-Type': 'application/json',
@@ -114,7 +115,7 @@ export function DisplayPet(props) {
 						setIsEgg(currentPet.image == 'egg');
 						setEvolutionVisible(true);
 					}
-
+					changePet(currentPet.image);
 					const petsLevel = currentPet.level;
 					console.log(petsLevel)
 					const petsLevelStr = petsLevel.toString();

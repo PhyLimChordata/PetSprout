@@ -112,7 +112,6 @@ function SideMenu(props) {
 	const { colors } = useTheme();
 	const [color, setColor] = useState(getColor);
 	const [userName, setUserName] = useState('');
-	const [pet, setPet] = useState(null);
 	const [logoutVisible, setLogoutVisible] = useState(false);
 
 	let defaultMode = true;
@@ -121,27 +120,7 @@ function SideMenu(props) {
 	}
 
 	useEffect(() => {
-		if (props.modalVisible) {
-			setColor(getColor);
-			setToggleValue(getMode == 'dark');
-			fetch('http://localhost:5000/api/v1.0.0/pets/get_current', {
-				method: 'GET',
-				headers: {
-					'Content-Type': 'application/json',
-					'authentication-token': getToken,
-				},
-			})
-				.then((res) =>
-					res.json().then((data) => {
-						setPet(EvolutionMapping[data.image]);
-					}),
-				)
-				.catch();
-		}
-	}, [props.modalVisible]);
-
-	useEffect(() => {
-		fetch('http://localhost:5000/api/v1.0.0/user/viewAccount', {
+		fetch('http://3.15.57.200:5000/api/v1.0.0/user/viewAccount', {
 			method: 'GET',
 			headers: {
 				'Content-Type': 'application/json',
@@ -153,10 +132,8 @@ function SideMenu(props) {
 				setUserName(data.userName);
 			})
 			.catch((err) => console.log(err));
-	}, []);
 
-	useEffect(() => {
-		fetch('http://localhost:5000/api/v1.0.0/pets/get_current', {
+		fetch('http://3.15.57.200:5000/api/v1.0.0/pets/get_current', {
 			method: 'GET',
 			headers: {
 				'Content-Type': 'application/json',
@@ -173,6 +150,9 @@ function SideMenu(props) {
 	}, []);
 
 	const [toggleValue, setToggleValue] = useState(!defaultMode);
+	const [modalVisible, setModalVisible] = useState(props.modalVisible)
+
+	useEffect(() => setModalVisible(props.modalVisible), [props.modalVisible])
 
 	function colorChange(color) {
 		changeColorTheme(color);
@@ -193,7 +173,7 @@ function SideMenu(props) {
 			backdropOpacity={0.2}
 			onBackdropPress={() => props.setModalVisible(false)}
 			style={{ margin: 0 }}
-			isVisible={props.modalVisible}
+			isVisible={modalVisible}
 			animationIn='slideInLeft'
 			animationOut='slideOutLeft'
 		>

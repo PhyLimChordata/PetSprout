@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, Image } from 'react-native';
+import { View, Text } from 'react-native';
 
 import styles from '../styling/Header';
 import Menu from './Menu';
@@ -7,7 +7,6 @@ import BackButton from './BackButton';
 import SideMenu from './SideMenu';
 
 import { useTheme } from '@react-navigation/native';
-import Colours from '../resources/themes/Colours';
 import Heart from '../components/Heart';
 
 function MenuHeader(props) {
@@ -18,11 +17,12 @@ function MenuHeader(props) {
 		<View style={styles(colors).header}>
 			<View style={styles(colors).menuTitle}>
 				{!props.hideRight &&
-					(props.back ? (
-						<BackButton navigation={props.navigation} />
-					) : (
-						<Menu menuClicked={() => setModalVisible(true)} />
-					))}
+					// (props.back ? (
+					// 	<BackButton navigation={props.navigation} />
+					// ) : (
+					// 	<Menu menuClicked={() => setModalVisible(true)} />
+					// ))
+					(props.back ? <BackButton navigation={props.navigation} /> : <></>)}
 
 				<Text style={styles(colors).headerText}>{props.text}</Text>
 			</View>

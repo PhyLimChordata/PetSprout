@@ -23,8 +23,8 @@
           "file": "sentry-expo/upload-sourcemaps",
           "config": {
             "organization": "petsprout-e6",
-            "project": "petsprout",
-            "authToken": "SENTRY_AUTH_TOKEN"
+            "project": "petsprout-e6",
+            "authToken": "5b7160e6ed144fb498dc911bb366eed7009a0ccffcb948cdab9ec2e75b3c2bb7"
           }
         }
       ]
@@ -32,8 +32,8 @@
     "android": {
       "googleServicesFile": "./google-services.json",
       "softwareKeyboardLayoutMode": "pan",
-      "package": "com.phylimchordata.PetSprout",
-      "versionCode": 1,
+      "package": "com.phylimchordata.petsprout",
+      "versionCode": 9,
       "adaptiveIcon": {
         "foregroundImage": "./frontend/resources/images/Logo/LogoGreenNonTransparent.png",
         "backgroundColor": "#FFFFFF"
@@ -41,7 +41,7 @@
     },
     "ios": {
       "bundleIdentifier": "com.phylimchordata.PetSprout",
-      "buildNumber": "1.1.0"
+      "buildNumber": "3.2.0"
     },
     "web": {
       "favicon": "./frontend/resources/images/Logo/LogoGreenNonTransparent.png"
