@@ -35,6 +35,7 @@ function Login(props) {
 	const checkSwitch = () => {
 		if (status == 'unchecked') {setStatus('checked');}
 		else {setStatus('unchecked');}
+		console.log(status);
 	}
 
 	const [inputStyle, setInputStyle] = useState({
@@ -269,8 +270,7 @@ function Login(props) {
 				</View>
 			</View>
 			<View style = {style.checkboxContainer}>
-				<View
-					style={checkboxStyle}>
+				<View style={checkboxStyle}>
 				<Checkbox
 					status = {status}
 					onPress = {checkSwitch}

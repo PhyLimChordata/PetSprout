@@ -99,7 +99,7 @@ const authenticationStyles = (theme) =>
 		forgotView: {
 			alignItems: 'center',
 			width: '100%',
-			marginBottom: 20,
+			marginBottom: 0,
 		},
 		errorView: {
 			alignItems: 'flex-end',
@@ -140,9 +140,10 @@ const authenticationStyles = (theme) =>
 		appleCheck: {
 			borderColor: theme.Quaternary,
 			borderWidth: 2,
-			borderRadius: 5,
+			borderRadius: 0,
 			marginLeft: 0,
-			marginRight: 10,
+			marginRight: 5,
+			transform: [{ scaleX: 0.5 }, { scaleY: 0.5 }]
 		}
 	});
 
