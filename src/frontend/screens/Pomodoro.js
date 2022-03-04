@@ -15,6 +15,14 @@ import PomodoroFinishPopup from '../components/PomodoroFinishPopup';
 import PomodoroStartPopup from '../components/PomodoroStartPopup';
 import PomodoroCancelPopup from '../components/PomodoroCancelPopup';
 
+import LongBreakFinishPopup from '../components/LongBreakFinishPopup';
+import LongBreakCancelPopup from '../components/LongBreakCancelPopup';
+import LongBreakStartPopup from '../components/LongBreakStartPopup';
+
+import ShortBreakCancelPopup from '../components/ShortBreakCancelPopup';
+import ShortBreakFinishPopup from '../components/ShortBreakFinishPopup';
+import ShortBreakStartPopup from '../components/ShortBreakStartPopup';
+
 import androidSafeAreaView from '../styling/AndroidSafeAreaView';
 import MenuHeader from '../components/MenuHeader';
 
@@ -343,80 +351,6 @@ function PomodoroScreen(props) {
 					marginBottom: 50,
 				}}
 			>
-				{/* Background timer
-			
-				<Text>
-					Background fetch status:{' '}
-					<Text>
-						{status && BackgroundFetch.BackgroundFetchStatus
-							? status && BackgroundFetch.BackgroundFetchStatus[status]
-							: ''}
-					</Text>
-				</Text>
-				<Text>
-					Background fetch task name:{' '}
-					<Text>
-						{isRegistered ? BACKGROUND_FETCH_TASK : 'Not registered yet!'}
-					</Text>
-				</Text>
-				<Button
-					title={
-						isRegistered
-							? 'Unregister BackgroundFetch task'
-							: 'Register BackgroundFetch task'
-					}
-					onPress={toggleFetchTask}
-				/> */}
-				{/* <TouchableOpacity
-					activeOpacity={0.6}
-					style={{
-						backgroundColor: colors.Tertiary,
-						borderRadius: 30,
-						padding: 10,
-						paddingLeft: 40,
-						paddingRight: 40,
-						marginBottom: 20,
-					}}
-					onPress={() => stopSession()}
-				>
-					<Text
-						style={{
-							fontSize: 20,
-							fontWeight: 'bold',
-							paddingBottom: 5,
-							color: colors.background,
-						}}
-					>
-						Current Task
-					</Text>
-				</TouchableOpacity> */}
-				{/* <TouchableOpacity
-					activeOpacity={0.6}
-					style={{
-						backgroundColor: colors.Background,
-						borderRadius: 30,
-						borderColor: colors.Quaternary,
-						padding: 10,
-						borderWidth: 3,
-						paddingLeft: 40,
-						paddingRight: 40,
-						marginBottom: 20,
-					}}
-					// onPress={() => {
-					// 	props.navigation.navigate('PomodoroTasksScreen');
-					// }}
-				>
-					<Text
-						style={{
-							fontSize: 20,
-							fontWeight: 'bold',
-							color: colors.Quaternary,
-						}}
-					>
-						Work Hard
-					</Text>
-				</TouchableOpacity> */}
-
 				<Text
 					style={{
 						fontSize: 60,
@@ -475,17 +409,42 @@ function PomodoroScreen(props) {
 					</TouchableOpacity>
 				)}
 			</View>
-			<PomodoroFinishPopup visible={finished} setVisible={setFinished} />
+			<PomodoroFinishPopup visible={finished && mode == 'Pomodoro'} setVisible={setFinished && mode == 'Pomodoro'} />
 			<PomodoroStartPopup
-				visible={start}
+				visible={start && mode == 'Pomodoro'}
 				setVisible={setStart}
 				startFunction={toggle}
 			/>
 			<PomodoroCancelPopup
-				visible={cancel}
+				visible={cancel && mode == 'Pomodoro'}
 				setVisible={setCancel}
 				cancelFunction={stopSession}
 			/>
+
+			<LongBreakFinishPopup visible={finished && mode == 'Long Break'} setVisible={setFinished && mode == 'Long Break'} />
+			<LongBreakStartPopup
+				visible={start && mode == 'Long Break'}
+				setVisible={setStart}
+				startFunction={toggle}
+			/>
+			<LongBreakCancelPopup
+				visible={cancel && mode == 'Long Break'}
+				setVisible={setCancel}
+				cancelFunction={stopSession}
+			/>
+
+			<ShortBreakFinishPopup visible={finished && mode == 'Short Break'} setVisible={setFinished && mode == 'Short Break'} />
+			<ShortBreakStartPopup
+				visible={start && mode == 'Short Break'}
+				setVisible={setStart}
+				startFunction={toggle}
+			/>
+			<ShortBreakCancelPopup
+				visible={cancel && mode == 'Short Break'}
+				setVisible={setCancel}
+				cancelFunction={stopSession}
+			/>
+	
 		</SafeAreaView>
 	);
 }
