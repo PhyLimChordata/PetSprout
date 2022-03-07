@@ -43,7 +43,6 @@ function PomodoroScreen(props) {
 	const duration = { Pomodoro: 1500, 'Long Break': 600, 'Short Break': 300 };
 
 	const [remainingSecs, setRemainingSecs] = useState(duration['Pomodoro']);
-	const remainingSecsRef = useRef(remainingSecs);
 	const [isActive, setActive] = useState(false);
 	const [isCancelled, setCancelled] = useState(false);
 
