@@ -171,10 +171,6 @@ function PomodoroScreen(props) {
 		iniDateRef.current = initialDate;
 	}, [initialDate]);
 
-	useEffect(() => {
-		remainingSecsRef.current = remainingSecs;
-	}, [remainingSecs]);
-
 	const iniDateRef = useRef(initialDate);
 
 	useEffect(() => {
