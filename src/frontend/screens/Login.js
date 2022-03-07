@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 
-import { View, Text, TextInput, Image, TouchableOpacity } from 'react-native';
+import { View, Text, TextInput, Image, TouchableOpacity, TouchableWithoutFeedback, Keyboard } from 'react-native';
 
 import styles from '../styling/Authentication';
 
@@ -193,6 +193,9 @@ function Login(props) {
 	const { getLogo } = useContext(AuthContext);
 
 	return (
+		<TouchableWithoutFeedback
+			onPress={() => {Keyboard.dismiss()}}
+		>
 		<View style={styles(colors).container}>
 			<Image style={styles(colors).authenticationLogo} source={getLogo} />
 			<View style={styles(colors).inputContainer}>
@@ -246,6 +249,7 @@ function Login(props) {
 				</TouchableOpacity>
 			</View>
 		</View>
+		</TouchableWithoutFeedback>
 	);
 }
 
