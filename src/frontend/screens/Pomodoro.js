@@ -40,9 +40,10 @@ function PomodoroScreen(props) {
 
 	const { colors } = useTheme();
 
-	const duration = { Pomodoro: 1500, 'Long Break': 600, 'Short Break': 300 };
+	const duration = { Pomodoro: 20, 'Long Break': 600, 'Short Break': 300 };
 
 	const [remainingSecs, setRemainingSecs] = useState(duration['Pomodoro']);
+	const remainingSecsRef = useRef(remainingSecs);
 	const [isActive, setActive] = useState(false);
 	const [isCancelled, setCancelled] = useState(false);
 
@@ -108,7 +109,7 @@ function PomodoroScreen(props) {
 			interval = setInterval(() => {
 				setRemainingSecs((remainingSecs) => remainingSecs - 1);
 				setTimer(remainingSecs);
-				if (remainingSecs == 0) {
+				if (remainingSecs <= 0) {
 					setRounds(rounds + 1);
 					//play sound and bring up pop up
 					showFinish();
@@ -171,6 +172,10 @@ function PomodoroScreen(props) {
 		iniDateRef.current = initialDate;
 	}, [initialDate]);
 
+	useEffect(() => {
+		remainingSecsRef.current = remainingSecs;
+	}, [remainingSecs]);
+
 	const iniDateRef = useRef(initialDate);
 
 	useEffect(() => {
@@ -198,19 +203,22 @@ function PomodoroScreen(props) {
 		);
 		setInitialDate(null);
 		//Check if time has reached zero
-		if (remainingSecs - diff <= 0) {
+		if (remainingSecsRef.current - diff <= 0) {
 			//If reached zero,
 			setRounds(rounds + 1);
 			//resetTimer(duration['Pomodoro']);
 			if (rounds >= 1) {
 				setBreak(true);
 			}
+			setRemainingSecs(0);
+			setTimer(0)
 		} else {
 			//If not reached zero
 			setRemainingSecs((remainingSecs) => remainingSecs - diff);
 			setTimer(remainingSecs);
-			setActive(true);
 		}
+		setActive(true);
+
 	};
 
 	const checkStatusAsync = async () => {

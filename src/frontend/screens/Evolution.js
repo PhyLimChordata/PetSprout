@@ -42,7 +42,7 @@ function Evolution(props) {
 		})
 			.then((res) =>
 				res.json().then((data) => {
-					console.log(data);
+					// console.log(data);
 					setEvolutionNames(EvolutionTreeMapping[data.image]);
 				}),
 			)
