@@ -20,4 +20,7 @@ const intervalGet = (key, prop, map) => {
 	}
 };
 
+const logError = (error_msg) => { console.log("    > " + error_msg)}
+
 exports.intervalGet = intervalGet;
+exports.logError = logError;

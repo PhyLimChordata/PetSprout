@@ -38,8 +38,8 @@ function AllMissedHabitsScreen(props) {
 	}, [getRefreshing])
 	const displayHabits = () => {
 		setDisplayed(true);
-		const date = new Date().toString();
-		fetch('http://192.168.2.78:5000/api/v1.0.0/habit/show_user_habit/' + date, {
+		const date = new Date().toISOString();
+		fetch('3.15.57.200:5000/api/v1.0.0/habit/show_user_habit/' + date, {
 			method: 'GET',
 			headers: {
 				'Content-Type': 'application/json',

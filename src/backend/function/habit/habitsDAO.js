@@ -1,7 +1,5 @@
 const Habit = require('../../schemas/habitSchema');
-const ObjectID = require("mongodb").ObjectID
-
-const logError = (error_msg) => { console.log("    > " + error_msg)}
+const { logError } = require('../common/util');
 
 /*
  *  Given user_id, returns the habits for the user if exists.

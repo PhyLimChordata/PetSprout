@@ -28,10 +28,11 @@ module.exports = async (req, res) => {
 			return res.status(400).json('Date should be provided.');
 		}
 
-		let userResult = await UserDAO.getUser(primaryInfo)
+		// Get user
+		let userResult = await UserDAO.getUser(primaryInfo, true)
 		if (userResult.msg != "success") {
-			console.log(user)
-			return res.status(user.code).json(user.msg)
+			console.log(userResult.msg)
+			return res.status(userResult.code).json(userResult.msg)
 		}
 		let user = userResult.result
 

@@ -1,6 +1,5 @@
 const User = require('../../schemas/userSchema');
-
-const logError = (error_msg) => { console.log("    > " + error_msg)}
+const { logError } = require('../common/util');
 
 /*
  *  Given user account (email or username) returns the user if exists.
@@ -12,17 +11,21 @@ const logError = (error_msg) => { console.log("    > " + error_msg)}
  * if error exists, error returned as string and result returns null.
  * o/w error as "success", result as { result: {...} }
  */
-async function getUser(account) {
+async function getUser(account, onLogin = false) {
     const regEmail =
 	    /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
     try {
-        var accountType = "email"
-        if (!regEmail.test(account)) {
-            accountType = "userName"
+        let user = null;
+        if (!onLogin) {
+            user = await User.findById(account).select('-password');
+        } else {
+            var accountType = "userName"
+            if (regEmail.test(account)) {
+                accountType = "email"
+            } 
+            user = await User.findOne({ [accountType]: account })
         }
 
-        let user = await User.findOne({ [accountType]: account });
-        console.log(user)
         if(user) {
             return {
                 result: user,
