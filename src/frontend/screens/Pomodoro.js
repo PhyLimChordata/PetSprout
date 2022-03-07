@@ -203,7 +203,7 @@ function PomodoroScreen(props) {
 		);
 		setInitialDate(null);
 		//Check if time has reached zero
-		if (remainingSecsRef.current - diff <= 0) {
+		if (remainingSecs - diff <= 0) {
 			//If reached zero,
 			setRounds(rounds + 1);
 			//resetTimer(duration['Pomodoro']);
