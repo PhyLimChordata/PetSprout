@@ -20,7 +20,7 @@ function LongBreakCancelPopup(props) {
 			style={style.bugError}
 			title='Are you sure?'
 			text={
-				'Failing to complete the full duration of a long break session will lead to your pet\'s health going down by 2 points'
+				'Please confirm your decision'
 			}
 			buttonType={'confirmation'}
 			successFunction={props.cancelFunction}
