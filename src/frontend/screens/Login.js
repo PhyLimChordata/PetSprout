@@ -1,23 +1,42 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 
 import { View, Text, TextInput, Image, TouchableOpacity, TouchableWithoutFeedback, Keyboard } from 'react-native';
 
 import styles from '../styling/Authentication';
 
 import { AuthContext } from '../Context';
+import { Checkbox } from 'react-native-paper';
+import * as SecureStore from 'expo-secure-store'
 import { useTheme } from '@react-navigation/native';
 import Colours from '../resources/themes/Colours';
 import Constants from 'expo-constants';
 import * as Notifications from 'expo-notifications';
 import HabitsScreen from './Habits';
 import Habits from '../components/Habits';
+import androidSafeAreaView from '../styling/AndroidSafeAreaView';
 
 function Login(props) {
 	const [primaryInfo, setPrimaryInfo] = useState('');
 	const [password, setPassword] = useState('');
 	const [error, setError] = useState('');
+	const [status, setStatus] = useState('unchecked')
 
 	const { colors } = useTheme();
+	const style = styles(colors);
+
+	const checkboxStyle = (Platform.OS == 'ios' && style.appleCheck);
+
+	useEffect(() => {
+		getValueFor('username', setPrimaryInfo);
+		getValueFor('password', setPassword);
+		getValueFor('status', setStatus)
+	}, [])
+
+	const checkSwitch = () => {
+		if (status == 'unchecked') {setStatus('checked');}
+		else {setStatus('unchecked');}
+		console.log(status);
+	}
 
 	const [inputStyle, setInputStyle] = useState({
 		backgroundColor: colors.Secondary,
@@ -81,6 +100,22 @@ function Login(props) {
 		});
 	};
 
+	const saveLogin = async (key, value) => {
+		await SecureStore.setItemAsync(key, value);
+	}
+
+	const clear = async () => {
+		await SecureStore.deleteItemAsync('username');
+		await SecureStore.deleteItemAsync('password');
+		await SecureStore.deleteItemAsync('status');
+	}
+
+	const getValueFor = async (key, setFunc) => {
+		let result = await SecureStore.getItemAsync(key);
+		if (result) {setFunc(result);}
+		
+	}
+
 	const registerForPushNotificationsAsync = async () => {
 		if (Constants.isDevice) {
 			const { status: existingStatus } =
@@ -138,6 +173,12 @@ function Login(props) {
 				if (primaryInfo == '' || password == '') {
 					setError('Please enter all parameters');
 				} else if (res.status == 200) {
+					if (status == 'checked') {
+						saveLogin('username', primaryInfo);
+						saveLogin('password', password);
+						saveLogin('status', status);
+					}
+					else {clear();}	
 					res.json().then((data) => {
 						fetch('http://3.15.57.200:5000/api/v1.0.0/doc/didAcceptPolicy', {
 							method: 'GET',
@@ -231,6 +272,19 @@ function Login(props) {
 					</TouchableOpacity>
 					<Text style={styles(colors).errorMessage}>{error}</Text>
 				</View>
+			</View>
+			<View style = {style.checkboxContainer}>
+				<View style={checkboxStyle}>
+				<Checkbox
+					status = {status}
+					onPress = {checkSwitch}
+					uncheckedColor = {style.textTop.color}
+					color = {style.textTop.color}
+				/>
+				</View>
+				<Text style = {style.forgotPassword}>
+					Remember Me
+				</Text>
 			</View>
 			<TouchableOpacity
 				activeOpacity={0.6}
