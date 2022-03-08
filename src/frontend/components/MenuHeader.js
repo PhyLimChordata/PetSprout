@@ -17,13 +17,12 @@ function MenuHeader(props) {
 		<View style={styles(colors).header}>
 			<View style={styles(colors).menuTitle}>
 				{!props.hideRight &&
-					(props.back ? (
-						<BackButton navigation={props.navigation} />
-					) : (
-						<Menu menuClicked={() => setModalVisible(true)} />
-					))
-					// (props.back ? <BackButton navigation={props.navigation} /> : <></>)
-				}
+					// (props.back ? (
+					// 	<BackButton navigation={props.navigation} />
+					// ) : (
+					// 	<Menu menuClicked={() => setModalVisible(true)} />
+					// ))
+					(props.back ? <BackButton navigation={props.navigation} /> : <></>)}
 
 				<Text style={styles(colors).headerText}>{props.text}</Text>
 			</View>
