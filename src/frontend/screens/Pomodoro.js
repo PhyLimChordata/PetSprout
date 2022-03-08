@@ -108,7 +108,7 @@ function PomodoroScreen(props) {
 			interval = setInterval(() => {
 				setRemainingSecs((remainingSecs) => remainingSecs - 1);
 				setTimer(remainingSecs);
-				if (remainingSecs == 0) {
+				if (remainingSecs <= 0) {
 					setRounds(rounds + 1);
 					//play sound and bring up pop up
 					showFinish();
@@ -205,12 +205,15 @@ function PomodoroScreen(props) {
 			if (rounds >= 1) {
 				setBreak(true);
 			}
+			setRemainingSecs(0);
+			setTimer(0)
 		} else {
 			//If not reached zero
 			setRemainingSecs((remainingSecs) => remainingSecs - diff);
 			setTimer(remainingSecs);
-			setActive(true);
 		}
+		setActive(true);
+
 	};
 
 	const checkStatusAsync = async () => {

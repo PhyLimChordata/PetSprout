@@ -81,7 +81,7 @@ function HabitsScreen(props) {
 			.then((res) =>
 				res.json().then((data) => {
 					console.log('saddasasdasddas');
-					console.log(data)
+					// console.log(data)
 					setTimeout(() => {
 						setHabits(data.habitList);
 						setMissedHabits(data.missing_habits)
