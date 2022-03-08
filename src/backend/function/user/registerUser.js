@@ -14,8 +14,8 @@ const Analyze = require('../../schemas/analyzeSchema');
 const logError = (error_msg) => { console.log("    > " + error_msg)}
 
 const user_regist = async (req, res) => {
-	console.log(`Registering user (username=${req.body.userName}, email=${email})`)
 	try {
+		console.log(`Registering user (username=${req.body.userName}, email=${req.body.email})`)
 		let { userName, email, password, timezone } = req.body;
 		let userPresent, emailPresent = false;
 
