@@ -1,5 +1,7 @@
 const Habit = require('../../schemas/habitSchema');
-const { logError } = require('../common/util');
+const ObjectID = require("mongodb").ObjectID
+
+const logError = (error_msg) => { console.log("    > " + error_msg)}
 
 /*
  *  Given user_id, returns the habits for the user if exists.
@@ -24,8 +26,7 @@ async function getHabits(user_id) {
             logError(error_msg);
             return {
                 result: null,
-                msg: error_msg,
-                code: 404
+                msg: error_msg
             };
         }
     } catch (error) {
@@ -33,8 +34,7 @@ async function getHabits(user_id) {
         logError(error_msg)
         return {
             result: null,
-            msg: error_msg,
-            code: 500
+            msg: error_msg
         };
     }
 }

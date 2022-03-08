@@ -1,39 +1,22 @@
 const Habit = require('../../schemas/habitSchema');
 const User = require('../../schemas/userSchema');
-const HabitDAO = require('./habitsDAO')
-const UserDAO = require('../user/userDAO')
-
-const { DateTime } = require("luxon");
 
 const masteryDays = 66;
 module.exports = async (req, res) => {
 	try {
-		// Get user
-		let userResult = await UserDAO.getUser(req.user.id)
-		if (userResult.msg != "success") {
-			console.log(userResult.msg)
-			return res.status(userResult.code).json(userResult.msg)
-		}
-		let user = userResult.result
+		let user = await User.findById(req.user.id).select('-password');
+		if (!user) return res.status(404).json('User could not found');
 
-		// Get user habits
-		let getHabitsResults = await HabitDAO.getHabits(user._id)
-		if(getHabitsResults.msg != "success") {
-			return res.status(getHabitsResults.code).json(getHabitsResults.msg)
-		}
-		let userHabitInfo = getHabitsResults.result
+		let userHabitInfo = await Habit.findOne({ user: req.user.id });
+		if (!userHabitInfo)
+			return res.status(404).json("HABITS: User's habits could not found");
 
-		// assume that User has timezone (its updated upon login)
-		var currentTime = DateTime.fromISO(req.params.day, { zone: user.timezone });
-		// Luxon DateTime weekday: 1 = Monday, 7 = Sunday, we want 0 = Sunday
-		let day = currentTime.weekday === 7 ? 0 : currentTime.weekday;
+		let day = new Date(req.params.day).getDay();
 
 		// Filtering out habits to be shown
-		let habitShow = userHabitInfo.habitList.filter(
-			function (habit) {
-				return habit.schedule.includes(day);
-			}
-		);
+		let habitShow = userHabitInfo.habitList.filter(function (habit) {
+			return habit.schedule.includes(day);
+		});
 
 		// Sort habit by frequency (number of times that they still need to
 		// copmplete the habit by)
@@ -79,7 +62,7 @@ module.exports = async (req, res) => {
 		return res.status(200).json(return_object);
 	} catch (error) {
 		console.error(error);
-		return res.status(500).json('Server error');
+		res.status(500).json('Server error');
 	}
 };
 

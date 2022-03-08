@@ -12,7 +12,6 @@ import androidSafeAreaView from '../styling/AndroidSafeAreaView';
 import styles from '../styling/Authentication';
 import { useTheme } from '@react-navigation/native';
 import Colours from '../resources/themes/Colours';
-import * as Localization from 'expo-localization';
 
 import { AuthContext } from '../Context';
 
@@ -195,7 +194,6 @@ function SignupScreen(props) {
 				userName: userName,
 				email: email,
 				password: password,
-				timezone: Localization.timezone
 			}),
 		})
 			.then((res) => {
