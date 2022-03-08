@@ -15,6 +15,14 @@ import PomodoroFinishPopup from '../components/PomodoroFinishPopup';
 import PomodoroStartPopup from '../components/PomodoroStartPopup';
 import PomodoroCancelPopup from '../components/PomodoroCancelPopup';
 
+import LongBreakFinishPopup from '../components/LongBreakFinishPopup';
+import LongBreakCancelPopup from '../components/LongBreakCancelPopup';
+import LongBreakStartPopup from '../components/LongBreakStartPopup';
+
+import ShortBreakCancelPopup from '../components/ShortBreakCancelPopup';
+import ShortBreakFinishPopup from '../components/ShortBreakFinishPopup';
+import ShortBreakStartPopup from '../components/ShortBreakStartPopup';
+
 import androidSafeAreaView from '../styling/AndroidSafeAreaView';
 import MenuHeader from '../components/MenuHeader';
 
@@ -46,7 +54,7 @@ function PomodoroScreen(props) {
 	const [isActive, setActive] = useState(false);
 	const [isCancelled, setCancelled] = useState(false);
 
-	const [breakEnabled, setBreak] = useState(false);
+	const [breakEnabled, setBreak] = useState(true);
 	const [rounds, setRounds] = useState(1);
 
 	const [mode, setMode] = useState('Pomodoro');
@@ -102,7 +110,6 @@ function PomodoroScreen(props) {
 		let interval = null;
 		if (isActive) {
 			if (mode != 'Pomodoro') {
-				setBreak(false);
 				setRounds(0);
 			}
 			interval = setInterval(() => {
@@ -112,24 +119,19 @@ function PomodoroScreen(props) {
 					setRounds(rounds + 1);
 					//play sound and bring up pop up
 					showFinish();
-					if (rounds >= 1) {
-						setBreak(true);
-					}
 					setActive(false);
-					resetTimer(duration['Pomodoro']);
+					resetTimer(duration[mode]);
 				}
 			}, 1000);
-		} else if (!isActive && remainingSecs !== 0) {
+		} else if (!isActive && remainingSecs != 0 && finished) {
 			clearInterval(interval);
-			if (mode != 'Pomodoro') {
-				setMode('Pomodoro');
-			} else if (!isCancelled) {
+			if (!isCancelled) {
 				if (rounds >= 3 && rounds % 3 == 0) {
 					gainXP(500, getToken);
 				} else if (rounds > 0) {
 					gainXP(150, getToken);
 				} else {
-					setCancelled(false);
+			 		setCancelled(false);
 				}
 			}
 			changeRefreshing(true);
@@ -240,11 +242,13 @@ function PomodoroScreen(props) {
 	};
 
 	const stopSession = () => {
-		//Lose 2 HP
-		loseHP(2, getToken).then();
+		if(mode == 'Pomodoro') {
+			//Lose 2 HP
+			loseHP(2, getToken).then();
+		}
 		changeRefreshing(true);
 		//bring up pop up
-		resetTimer(duration['Pomodoro']);
+		resetTimer(duration[mode]);
 		setCancelled(true);
 		setActive(false);
 	};
@@ -263,7 +267,7 @@ function PomodoroScreen(props) {
 					setBreak(true);
 				}
 				setActive(false);
-				resetTimer(duration['Pomodoro']);
+				resetTimer(duration[mode]);
 			}
 			return receivedNewData
 				? BackgroundFetch.Result.NewData
@@ -352,80 +356,6 @@ function PomodoroScreen(props) {
 					marginBottom: 50,
 				}}
 			>
-				{/* Background timer
-			
-				<Text>
-					Background fetch status:{' '}
-					<Text>
-						{status && BackgroundFetch.BackgroundFetchStatus
-							? status && BackgroundFetch.BackgroundFetchStatus[status]
-							: ''}
-					</Text>
-				</Text>
-				<Text>
-					Background fetch task name:{' '}
-					<Text>
-						{isRegistered ? BACKGROUND_FETCH_TASK : 'Not registered yet!'}
-					</Text>
-				</Text>
-				<Button
-					title={
-						isRegistered
-							? 'Unregister BackgroundFetch task'
-							: 'Register BackgroundFetch task'
-					}
-					onPress={toggleFetchTask}
-				/> */}
-				{/* <TouchableOpacity
-					activeOpacity={0.6}
-					style={{
-						backgroundColor: colors.Tertiary,
-						borderRadius: 30,
-						padding: 10,
-						paddingLeft: 40,
-						paddingRight: 40,
-						marginBottom: 20,
-					}}
-					onPress={() => stopSession()}
-				>
-					<Text
-						style={{
-							fontSize: 20,
-							fontWeight: 'bold',
-							paddingBottom: 5,
-							color: colors.background,
-						}}
-					>
-						Current Task
-					</Text>
-				</TouchableOpacity> */}
-				{/* <TouchableOpacity
-					activeOpacity={0.6}
-					style={{
-						backgroundColor: colors.Background,
-						borderRadius: 30,
-						borderColor: colors.Quaternary,
-						padding: 10,
-						borderWidth: 3,
-						paddingLeft: 40,
-						paddingRight: 40,
-						marginBottom: 20,
-					}}
-					// onPress={() => {
-					// 	props.navigation.navigate('PomodoroTasksScreen');
-					// }}
-				>
-					<Text
-						style={{
-							fontSize: 20,
-							fontWeight: 'bold',
-							color: colors.Quaternary,
-						}}
-					>
-						Work Hard
-					</Text>
-				</TouchableOpacity> */}
-
 				<Text
 					style={{
 						fontSize: 60,
@@ -484,17 +414,42 @@ function PomodoroScreen(props) {
 					</TouchableOpacity>
 				)}
 			</View>
-			<PomodoroFinishPopup visible={finished} setVisible={setFinished} />
+			<PomodoroFinishPopup visible={finished && mode == 'Pomodoro'} setVisible={setFinished && mode == 'Pomodoro'} />
 			<PomodoroStartPopup
-				visible={start}
+				visible={start && mode == 'Pomodoro'}
 				setVisible={setStart}
 				startFunction={toggle}
 			/>
 			<PomodoroCancelPopup
-				visible={cancel}
+				visible={cancel && mode == 'Pomodoro'}
 				setVisible={setCancel}
 				cancelFunction={stopSession}
 			/>
+
+			<LongBreakFinishPopup visible={finished && mode == 'Long Break'} setVisible={setFinished && mode == 'Long Break'} />
+			<LongBreakStartPopup
+				visible={start && mode == 'Long Break'}
+				setVisible={setStart}
+				startFunction={toggle}
+			/>
+			<LongBreakCancelPopup
+				visible={cancel && mode == 'Long Break'}
+				setVisible={setCancel}
+				cancelFunction={stopSession}
+			/>
+
+			<ShortBreakFinishPopup visible={finished && mode == 'Short Break'} setVisible={setFinished && mode == 'Short Break'} />
+			<ShortBreakStartPopup
+				visible={start && mode == 'Short Break'}
+				setVisible={setStart}
+				startFunction={toggle}
+			/>
+			<ShortBreakCancelPopup
+				visible={cancel && mode == 'Short Break'}
+				setVisible={setCancel}
+				cancelFunction={stopSession}
+			/>
+	
 		</SafeAreaView>
 	);
 }
