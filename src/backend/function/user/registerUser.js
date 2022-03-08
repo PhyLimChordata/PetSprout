@@ -15,8 +15,8 @@ const logError = (error_msg) => { console.log("    > " + error_msg)}
 
 const user_regist = async (req, res) => {
 	try {
-		console.log(`Registering user (username=${req.body.userName}, email=${req.body.email})`)
 		let { userName, email, password, timezone } = req.body;
+		console.log(`Registering user (username=${req.body.userName}, email=${req.body.email})`)
 		let userPresent, emailPresent = false;
 
 		let errors = validationResult(req);
