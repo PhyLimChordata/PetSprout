@@ -346,7 +346,7 @@ function PomodoroScreen(props) {
 					duration={duration}
 				/>
 			</View>
-			<DisplayPet />
+			<DisplayPet hideEvoPopup={true}/>
 			<View
 				style={{
 					display: 'flex',
