@@ -41,7 +41,7 @@
     },
     "ios": {
       "bundleIdentifier": "com.phylimchordata.PetSprout",
-      "buildNumber": "4.0.0"
+      "buildNumber": "4.1.0"
     },
     "web": {
       "favicon": "./frontend/resources/images/Logo/LogoGreenNonTransparent.png"
