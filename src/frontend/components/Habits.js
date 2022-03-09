@@ -31,14 +31,6 @@ function Habits(props) {
 	}
 	, [getRefreshing]);
 	
-	const disableCompletionTemp = () => {
-		if (props.pauseFunction()) {
-			props.pauseFunction();
-		}
-		props.pauseFunction();
-		completeHabit();
-	};
-	
 	const completeHabit = () => {
 		setFrequency(frequency - 1);
 		fetch(
@@ -61,7 +53,7 @@ function Habits(props) {
 		)
 			.then((res) =>
 				res.json().then(() => {
-					console.log('completehabit was called');
+					console.log('completeHabit was called');
 					if (frequency - 1 == 0) {
 						setCompleted(true);
 						gainXP(400, getToken);
@@ -69,7 +61,7 @@ function Habits(props) {
 						gainXP(150, getToken);
 					}
 					changeRefreshing(true);
-					//console.log('refreshed');
+					console.log('refreshed');
 				}),
 			)
 			.catch();
@@ -103,7 +95,7 @@ function Habits(props) {
 		<View>
 			<ScrollViewElement
 				rightFunction={
-					props.enableRight && !completed ? disableCompletionTemp : undefined
+					props.enableRight && !completed ? completeHabit : undefined
 				}
 				leftFunction={
 					props.enableLeft && !completed
@@ -115,7 +107,6 @@ function Habits(props) {
 								})
 						: undefined
 				}
-				disabled = {props.disabled}
 				text={props.name}
 				content={
 					<View
