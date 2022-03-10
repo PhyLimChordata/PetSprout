@@ -23,7 +23,7 @@ export const EvolutionMapping = {
 	butterfly: require('../images/Evolutions/Butterfly.png'),
 	'flying squirrel': require('../images/Evolutions/FlyingSquirrel.png'),
 	wyvern: require('../images/Evolutions/Wyvern.png'),
-	'mantaray': require('../images/Evolutions/MantaRay.png'),
+	'manta ray': require('../images/Evolutions/MantaRay.png'),
 	phoenix: require('../images/Evolutions/Phoenix.png'),
 	pegasus: require('../images/Evolutions/Pegasus.png'),
 	griffin: require('../images/Evolutions/Griffin.png'),
