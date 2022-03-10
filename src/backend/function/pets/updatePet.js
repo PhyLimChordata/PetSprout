@@ -68,7 +68,7 @@ const gain_exp = async (req, res) => {
 		let prevLevel = currentPet.level;
 		let { exp, level } = changeExp(currentPet.expValue, req.body.expValue);
 		currentPet.expValue = exp;
-		if (currentPet.level == level - 1) {
+		if (currentPet.level < level) {
 			currentPet.hp = currentPet.maxhp
 		}
 		currentPet.level = level;
