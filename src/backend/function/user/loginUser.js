@@ -10,6 +10,7 @@ const jwt = require('jsonwebtoken');
 const HabitDAO = require('../habit/habitsDAO')
 const UserDAO = require('./userDAO')
 const health = require('../pets/health')
+const {parseDateTime} = require('../common/time')
 
 const { DateTime } = require("luxon");
 
@@ -37,7 +38,7 @@ module.exports = async (req, res) => {
 		let user = userResult.result
 
 		// Check if user timezone changed, update if it did
-		if (user.timezone == null || user.timezone != timezone) {
+		if (timezone && (user.timezone == null || user.timezone != timezone)) {
 			await UserDAO.updateTimezone(user, timezone);
 		}
 
@@ -54,7 +55,8 @@ module.exports = async (req, res) => {
 		// if user last login is not null, check if it is a new day and update todo and check streaks
 		if (user.lastlogin !== null) {
 			// use luxon DateTime to create dates and sets it to user timezone (passed from frontend)
-			var currentDate = DateTime.fromISO(date, { zone: timezone });
+			console.log('date:'+date)
+			var currentDate = parseDateTime(date,timezone);
 			var lastLoginDate = DateTime.fromISO(user.lastlogin.toISOString(), { zone: timezone });
 
 			// calculate days apart and convert it to days from miliseconds

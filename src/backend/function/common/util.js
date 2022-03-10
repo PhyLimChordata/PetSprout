@@ -15,10 +15,10 @@ const intervalGet = (key, prop, map) => {
     let keys = Object.keys(map);
     for (let endpoint of keys) {
         if (map[endpoint][prop] >= key) {
-            return map[endpoint][prop];
+            return endpoint;
         }
     }
-    return map[keys[keys.length-1]][prop];
+    return keys[keys.length-1];
 };
 
 const logError = (error_msg) => { console.log("    > " + error_msg)}

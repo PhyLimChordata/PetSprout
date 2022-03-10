@@ -4,6 +4,7 @@ const HabitDAO = require('./habitsDAO')
 const UserDAO = require('../user/userDAO')
 
 const { DateTime } = require("luxon");
+const { parseDateTime } = require("../common/time.js");
 
 const masteryDays = 66;
 module.exports = async (req, res) => {
@@ -23,8 +24,8 @@ module.exports = async (req, res) => {
 		}
 		let userHabitInfo = getHabitsResults.result
 
-		// assume that User has timezone (its updated upon login)
-		var currentTime = DateTime.fromISO(req.params.day, { zone: user.timezone });
+		let currentTime=parseDateTime(req.params.day, user.timezone);
+		
 		// Luxon DateTime weekday: 1 = Monday, 7 = Sunday, we want 0 = Sunday
 		let day = currentTime.weekday === 7 ? 0 : currentTime.weekday;
 
@@ -92,3 +93,5 @@ function extend(target) {
 	});
 	return target;
 }
+
+
