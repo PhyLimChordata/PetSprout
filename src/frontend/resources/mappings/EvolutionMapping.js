@@ -29,7 +29,7 @@ export const EvolutionMapping = {
 	griffin: require('../images/Evolutions/Griffin.png'),
 	snake: require('../images/Evolutions/Snake.png'),
 	piranha: require('../images/Evolutions/Piranha.png'),
-	'betafish': require('../images/Evolutions/BetaFish.png'),
+	'beta fish': require('../images/Evolutions/BetaFish.png'),
 	hydra: require('../images/Evolutions/Hydra.png'),
 	seahorse: require('../images/Evolutions/Seahorse.png'),
 	eel: require('../images/Evolutions/Eel.png'),
