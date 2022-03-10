@@ -2,7 +2,7 @@ const Pets = require('../../schemas/petsSchema');
 const User = require('../../schemas/userSchema');
 
 const { validationResult } = require('express-validator');
-const { LevelMapping, evolveLevels } = require('./const');
+const { LevelMapping, evolveLevels, isFullyEvolved } = require('./const');
 const { intervalGet } = require('../common/util');
 
 const name = async (req, res) => {
@@ -65,7 +65,7 @@ const gain_exp = async (req, res) => {
 
 		let usersPet = await Pets.findOne({ user: req.user.id });
 		let currentPet = usersPet.currentPet;
-
+		let prevLevel = currentPet.level;
 		let { exp, level } = changeExp(currentPet.expValue, req.body.expValue);
 		currentPet.expValue = exp;
 		if (currentPet.level == level - 1) {
@@ -82,7 +82,9 @@ const gain_exp = async (req, res) => {
 			);
 		}
 
-		if (currentPet.level >= currentPet.next_evolution_lvl) {
+		if (isFullyEvolved(currentPet.next_evolution_level, prevLevel)){
+			currentPet.readyToEvolve = false;
+		}else if(currentPet.level >= currentPet.next_evolution_lvl ){
 			currentPet.readyToEvolve = true;
 		}
 
