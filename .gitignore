@@ -1,3 +1,5 @@
 .jshintrc
 .idea
 src/android/
+.expo
+credentials/
