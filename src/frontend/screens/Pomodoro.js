@@ -48,7 +48,7 @@ function PomodoroScreen(props) {
 
 	const { colors } = useTheme();
 
-	const duration = { Pomodoro: 1500, 'Long Break': 600, 'Short Break': 300 };
+	const duration = { Pomodoro: 4, 'Long Break': 3, 'Short Break': 2 };
 
 	const [remainingSecs, setRemainingSecs] = useState(duration['Pomodoro']);
 	const [isActive, setActive] = useState(false);
@@ -411,7 +411,7 @@ function PomodoroScreen(props) {
 					</TouchableOpacity>
 				)}
 			</View>
-			<PomodoroFinishPopup visible={finished && mode == 'Pomodoro'} setVisible={setFinished && mode == 'Pomodoro'} />
+			<PomodoroFinishPopup visible={finished && mode == 'Pomodoro'} setVisible={setFinished} />
 			<PomodoroStartPopup
 				visible={start && mode == 'Pomodoro'}
 				setVisible={setStart}
@@ -423,7 +423,7 @@ function PomodoroScreen(props) {
 				cancelFunction={stopSession}
 			/>
 
-			<LongBreakFinishPopup visible={finished && mode == 'Long Break'} setVisible={setFinished && mode == 'Long Break'} />
+			<LongBreakFinishPopup visible={finished && mode == 'Long Break'} setVisible={setFinished} />
 			<LongBreakStartPopup
 				visible={start && mode == 'Long Break'}
 				setVisible={setStart}
@@ -435,7 +435,7 @@ function PomodoroScreen(props) {
 				cancelFunction={stopSession}
 			/>
 
-			<ShortBreakFinishPopup visible={finished && mode == 'Short Break'} setVisible={setFinished && mode == 'Short Break'} />
+			<ShortBreakFinishPopup visible={finished && mode == 'Short Break'} setVisible={setFinished} />
 			<ShortBreakStartPopup
 				visible={start && mode == 'Short Break'}
 				setVisible={setStart}
