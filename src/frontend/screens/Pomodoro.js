@@ -244,13 +244,17 @@ function PomodoroScreen(props) {
 	const stopSession = () => {
 		if(mode == 'Pomodoro') {
 			//Lose 2 HP
-			loseHP(2, getToken).then();
+			loseHP(2, getToken);
 		}
 		changeRefreshing(true);
-		//bring up pop up
 		resetTimer(duration[mode]);
 		setCancelled(true);
 		setActive(false);
+		
+		setTimeout(() => {
+			changeRefreshing(true);
+			//bring up pop up
+		}, 5000);
 	};
 
 	// 1. Define the task by providing a name and the function that should be executed

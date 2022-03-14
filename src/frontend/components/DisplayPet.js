@@ -79,7 +79,7 @@ export function DisplayPet(props) {
 		}
 	});
 
-	const { getToken, getRefreshing, getPet, getColor, changePet } = useContext(AuthContext);
+	const { getToken, getRefreshing, changeRefreshing, getPet, getColor, changePet } = useContext(AuthContext);
 	useEffect(() => {
 		if (getRefreshing) {
 			updatePet();
@@ -130,6 +130,7 @@ export function DisplayPet(props) {
 						var previousTotalXPCap = LevelMapping[previousLevel].totalXP;
 						setExperience(currentPet.expValue - previousTotalXPCap);
 					}
+					changeRefreshing(false);
 				}),
 			)
 			.catch();
