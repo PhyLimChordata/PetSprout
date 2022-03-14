@@ -272,15 +272,15 @@ function SideMenu(props) {
 								marginLeft: '6%',
 							}}
 						>
-							<Tab
-								color={colors.Quaternary}
-								icon={'star'}
-								title={'Achievements'}
-								onPress={() => {
-									props.setModalVisible(false);
-									props.navigation.navigate('AchievementScreen');
-								}}
-							/>
+							{/*<Tab*/}
+							{/*	color={colors.Quaternary}*/}
+							{/*	icon={'star'}*/}
+							{/*	title={'Achievements'}*/}
+							{/*	onPress={() => {*/}
+							{/*		props.setModalVisible(false);*/}
+							{/*		props.navigation.navigate('AchievementScreen');*/}
+							{/*	}}*/}
+							{/*/>*/}
 							<Tab
 								color={colors.Quaternary}
 								icon={'account-circle'}
@@ -317,15 +317,15 @@ function SideMenu(props) {
 									props.navigation.navigate('CollaboratorsScreen');
 								}}
 							/>
-							<Tab
-								color={colors.Quaternary}
-								icon={'hand-heart'}
-								title={'Support Us!'}
-								onPress={() => {
-									props.setModalVisible(false);
-									props.navigation.navigate('SupportUsScreen');
-								}}
-							/>
+							{/*<Tab*/}
+							{/*	color={colors.Quaternary}*/}
+							{/*	icon={'hand-heart'}*/}
+							{/*	title={'Support Us!'}*/}
+							{/*	onPress={() => {*/}
+							{/*		props.setModalVisible(false);*/}
+							{/*		props.navigation.navigate('SupportUsScreen');*/}
+							{/*	}}*/}
+							{/*/>*/}
 							<Tab
 								color={colors.Quaternary}
 								icon={require('../resources/images/Icon.png')}

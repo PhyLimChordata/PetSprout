@@ -115,7 +115,7 @@ function PomodoroScreen(props) {
 			interval = setInterval(() => {
 				setRemainingSecs((remainingSecs) => remainingSecs - 1);
 				setTimer(remainingSecs);
-				if (remainingSecs == 0) {
+				if (remainingSecs <= 0) {
 					setRounds(rounds + 1);
 					//play sound and bring up pop up
 					showFinish();
@@ -207,12 +207,15 @@ function PomodoroScreen(props) {
 			if (rounds >= 1) {
 				setBreak(true);
 			}
+			setRemainingSecs(0);
+			setTimer(0)
 		} else {
 			//If not reached zero
 			setRemainingSecs((remainingSecs) => remainingSecs - diff);
 			setTimer(remainingSecs);
-			setActive(true);
 		}
+		setActive(true);
+
 	};
 
 	const checkStatusAsync = async () => {
@@ -343,7 +346,7 @@ function PomodoroScreen(props) {
 					duration={duration}
 				/>
 			</View>
-			<DisplayPet />
+			<DisplayPet hideEvoPopup={true}/>
 			<View
 				style={{
 					display: 'flex',
@@ -422,7 +425,6 @@ function PomodoroScreen(props) {
 				setVisible={setCancel}
 				cancelFunction={stopSession}
 			/>
-
 			<LongBreakFinishPopup visible={finished && mode == 'Long Break'} setVisible={setFinished} />
 			<LongBreakStartPopup
 				visible={start && mode == 'Long Break'}
@@ -434,7 +436,6 @@ function PomodoroScreen(props) {
 				setVisible={setCancel}
 				cancelFunction={stopSession}
 			/>
-
 			<ShortBreakFinishPopup visible={finished && mode == 'Short Break'} setVisible={setFinished} />
 			<ShortBreakStartPopup
 				visible={start && mode == 'Short Break'}
