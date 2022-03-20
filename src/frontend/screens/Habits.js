@@ -156,7 +156,6 @@ function HabitsScreen(props) {
 										streak={data.continuous}
 										frequency={data.times - data.todo}
 										userHabitId={userHabitId}
-										disabled={disabled}
 									></Habits>
 									<View style={{height: 15}}></View>
 								</Animated.View>

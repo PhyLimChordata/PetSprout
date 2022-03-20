@@ -1,5 +1,5 @@
-import React, { useRef } from 'react';
-import { View, Animated, TouchableOpacity, Image } from 'react-native';
+import React, { useRef, useState, useEffect } from 'react';
+import { View, Animated, TouchableOpacity, Image, ProgressViewIOSComponent } from 'react-native';
 import Swipeable from 'react-native-gesture-handler/Swipeable';
 
 import styles from '../styling/Habits';
@@ -51,14 +51,23 @@ function ScrollViewElement(props) {
 			</View>
 		);
 	};
+	const [undo, setUndo] = useState(false);
+	const undoRef = useRef(undo);
 
+	useEffect(() => {
+		undoRef.current = undo;
+	}, [undo]);
 	let right = () => {
-			
-		props.rightFunction();
-		swipeableRef.current.close();
-		
-		// if (props.rightClose && swipeableRef.current != null)
-		// 	swipeableRef.current.close()
+		let undoTimer = setTimeout(() => {
+			if (!undoRef.current) {
+				props.rightFunction();
+			}
+			swipeableRef.current.close();
+			setUndo(false);
+		}, 3000);
+
+		// call timer
+		undoTimer;
 	};
 
 	const rightSwipe = (progress, dragX) => {
@@ -81,7 +90,10 @@ function ScrollViewElement(props) {
 				}}
 			>
 				<Animated.View style={{ transform: [{ scale }] }}>
-					<Undo onPress={right}/>
+					<Undo onPress={() => {
+						setUndo(true);
+						swipeableRef.current.close();
+					}}/>
 				</Animated.View>
 			</View>
 		);
@@ -120,7 +132,10 @@ function ScrollViewElement(props) {
 				ref={swipeableRef}
 				renderRightActions={rightSwipe}
 				rightThreshold={80}
-				onSwipeableOpen={() => props.rightFunction()}
+				onSwipeableOpen={right}
+				onSwipeableClose={() => {
+					setUndo(true);
+				}}
 			>
 				{props.content}
 			</Swipeable>
