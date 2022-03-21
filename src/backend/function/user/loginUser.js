@@ -24,6 +24,9 @@ module.exports = async (req, res) => {
 
 		if (typeof primaryInfo == 'undefined') {
 			return res.status(400).json('Email or user name should be provided')
+		} else {
+			primaryInfo = primaryInfo.trim()
+			password = password.trim()
 		}
 		if (typeof date == 'undefined') {
 			return res.status(400).json('Date should be provided.');
