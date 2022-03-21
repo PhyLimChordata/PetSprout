@@ -10,21 +10,6 @@ import EvolutionPopup from './EvolutionPopup';
 import FaintingPopup from './FaintingPopup'
 import {EvolutionMapping} from "../resources/mappings/EvolutionMapping";
 
-const heartSize = 70;
-//THIS CAN VARY BASED ON USER's PET
-const maxHealth = 100;
-var hp = {
-	size: heartSize,
-	view: {
-		position: 'absolute',
-		height: heartSize,
-		width: heartSize,
-		marginTop: 0,
-		overflow: 'hidden',
-	},
-	image: { height: heartSize, width: heartSize, bottom: 0, zIndex: 1 },
-	value: 100,
-};
 const _ = require('lodash');
 
 export function getHP() {
@@ -97,18 +82,6 @@ export function DisplayPet(props) {
 			.then((res) =>
 				res.json().then((currentPet) => {
 					setDisplayed(true);
-					let tempHeartValue = _.cloneDeep(hp);
-
-					tempHeartValue.view.height = currentPet.hp * (heartSize / maxHealth);
-					tempHeartValue.view.marginTop =
-						heartSize - tempHeartValue.view.height;
-					tempHeartValue.image.bottom = tempHeartValue.view.marginTop;
-					tempHeartValue.value = Math.ceil(
-						tempHeartValue.view.height * (maxHealth / heartSize),
-					);
-					hp = _.cloneDeep(tempHeartValue);
-					console.log(hp)
-					console.log(currentPet);
 					if (currentPet.hp === 0) {
 						setFaintVisible(true)
 					} else if (currentPet.readyToEvolve) {
