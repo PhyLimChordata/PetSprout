@@ -51,8 +51,8 @@ function ScrollViewElement(props) {
 			if (!undoRef.current) {
 				props.rightFunction();
 			}
-			swipeableRef.current.close();
 			setUndo(false);
+			swipeableRef.current.close();
 		}, 3000);
 
 		// call timer
@@ -122,9 +122,6 @@ function ScrollViewElement(props) {
 				renderRightActions={rightSwipe}
 				rightThreshold={80}
 				onSwipeableOpen={right}
-				onSwipeableClose={() => {
-					setUndo(true);
-				}}
 			>
 				{props.content}
 			</Swipeable>
