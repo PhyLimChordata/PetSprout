@@ -31,6 +31,9 @@ const UserSchema = new Schema(
 		lastlogin: {
 			type: Date,
 		},
+		timezone: {
+			type: String,
+		},
 		//TODO: Store a metadata like a version number, timestamp, IP etc
 		termsAndAgreements: {
 			type: Boolean,

@@ -49,5 +49,11 @@ const evolveLevels = {
 	30: { level: 30 },
 };
 
+const isFullyEvolved = (next_evolution_level,level) => {
+	let evokeys = Object.keys(evolveLevels);
+	let finalEvolutionLevel = evokeys[evokeys.length-1];
+	return next_evolution_level >= finalEvolutionLevel && level > finalEvolutionLevel
+}
 exports.LevelMapping = LevelMapping;
 exports.evolveLevels = evolveLevels;
+exports.isFullyEvolved = isFullyEvolved;

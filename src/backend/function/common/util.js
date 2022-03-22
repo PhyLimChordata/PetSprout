@@ -12,12 +12,16 @@
  * PREREQUISITE: the props in the map are in ascending order
  **/
 const intervalGet = (key, prop, map) => {
-	let keys = Object.keys(map);
-	for (let endpoint of keys) {
-		if (map[endpoint][prop] >= key) {
-			return endpoint;
-		}
-	}
+    let keys = Object.keys(map);
+    for (let endpoint of keys) {
+        if (map[endpoint][prop] >= key) {
+            return endpoint;
+        }
+    }
+    return keys[keys.length-1];
 };
 
+const logError = (error_msg) => { console.log("    > " + error_msg)}
+
 exports.intervalGet = intervalGet;
+exports.logError = logError;

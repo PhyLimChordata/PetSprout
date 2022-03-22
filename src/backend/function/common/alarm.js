@@ -117,6 +117,10 @@ const schedule = async (info) => {
     var options = {hour: '2-digit', hour12: false, timeZone: timezone}
     var hours = date.toLocaleString('en-US', options);
     var localizedHours = parseInt(hours);
+    if(localizedHours === 24){
+        console.log(`Hour: 25 detected. schedule() parameters: ${JSON.stringify(info)}`);
+        localizedHours = 0;
+    }
 
     // Get Minutes in a given timezone.
     var date = new Date(alarm);
@@ -146,6 +150,7 @@ const schedule = async (info) => {
     pattern = `${localizedMinutes} ${localizedHours} * * ${sch}`
 
     if(!cron.validate(pattern)) {
+        console.log(`Cron Validation Error. schedule() parameters: ${JSON.stringify(info)}`);
         console.error(`Server Error: Invalid Cron Pattern: ${pattern}`);
         return;
     }
