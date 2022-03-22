@@ -42,7 +42,7 @@ function ReportABug(props) {
 				}
 				if (res.status == 200) {
 					res.json().then((data) => {
-						console.log('Success!');
+						//console.log('Success!');
 					});
 				} else if (res.status == 404) {
 					setError('User not found');

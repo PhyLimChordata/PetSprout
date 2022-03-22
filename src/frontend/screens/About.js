@@ -20,7 +20,7 @@ function About(props) {
 	const style = styles(colors);
 	const { getLogo } = useContext(AuthContext);
 	const {height, width} = Dimensions.get('window');
-	console.log(Constants.manifest)
+	//console.log(Constants.manifest)
 	return (
 		<SafeAreaView style={androidSafeAreaView().AndroidSafeArea}>
 			<MenuHeader text='About' navigation={props.navigation}></MenuHeader>

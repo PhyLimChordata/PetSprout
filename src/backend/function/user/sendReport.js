@@ -53,7 +53,7 @@ const regEmail =
 
 function sendEmail(message, email, type) {
 	try {
-		console.log('sendEmail start --> ' + JSON.stringify(email));
+		//console.log('sendEmail start --> ' + JSON.stringify(email));
 		if (regEmail.test(email)) {
 			const transport = nodemailer.createTransport(
 				smtpTransport({
@@ -75,14 +75,14 @@ function sendEmail(message, email, type) {
 				'<td>' +
 				message +
 				'</td> </tr> </table>';
-			console.log(html);
+			//console.log(html);
 			var data = {
 				from: 'PetSprout',
 				to: 'petsprouthelp@gmail.com',
 				subject: type,
 				html: html,
 			};
-			console.log(data);
+			//console.log(data);
 			transport.sendMail(data);
 		} else {
 			assert(false, 422, 'Please enter correct email syntax');

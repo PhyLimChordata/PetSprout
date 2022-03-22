@@ -23,7 +23,7 @@ const update_login_streaks = async(req, res) => {
 		lastLogin.setHours(0, 0, 0);
 
 		const daysApart = ((today - lastLogin)/ (1000 * 60 * 60 * 24)).toFixed(1);
-		console.log("Days since last login of user id " + user_id + ": " + daysApart);
+		//console.log("Days since last login of user id " + user_id + ": " + daysApart);
 		if(daysApart == 1) {
 			let new_streak = user_achievements.login_streak + 1;
 			user_achievements.login_streak = new_streak;
@@ -41,7 +41,7 @@ const update_login_streaks = async(req, res) => {
 
 		res.status(200).json(user_achievements.login_streak);
 	} catch (error) {
-		console.log(error);
+		//console.log(error);
 		return res.status(500).json('server error');
 	}
 };
@@ -55,12 +55,12 @@ const update_user_achievements = async (req, res) => {
 			return res.status(404).json('Achievements not found');
 
 		for (field in req.body) {
-			console.log(field);
+			//console.log(field);
 		}
 
 		res.status(200).json(user_achievements);
 	} catch (error) {
-		console.log(error);
+		//console.log(error);
 		return res.status(500).json('server error');
 	}
 };

@@ -20,7 +20,7 @@ const acceptTerms = async (req, res) => {
         res.status(200).json("Terms and Conditions accepted.");
     
     } catch (error) {
-        console.log(`Server Error for /acceptTerms for user ${userId}.\n ${error}`);
+        //console.log(`Server Error for /acceptTerms for user ${userId}.\n ${error}`);
         res.status(500).json("Server Error when handling /acceptTerms");
     }
 }
@@ -30,14 +30,14 @@ const didAcceptTerms = async (req, res) => {
         // Check if there exists a document for that user already.
         // TODO: In the future check if there exists an (User, Document Version) entry.
         userId = req.user.id;
-        console.log(userId)
+        //console.log(userId)
         let doc = await DocumentSchema.findOne({user_id: userId});
-        console.log(doc)
+        //console.log(doc)
         if(!doc) {
             res.status(200).json({"accepted": false});
            
         } else {
-            console.log(doc.did_accept_terms)
+            //console.log(doc.did_accept_terms)
             if(doc.did_accept_terms) {
                 res.status(200).json({"accepted": true});
             } else {
@@ -46,7 +46,7 @@ const didAcceptTerms = async (req, res) => {
         }
     
     } catch (error) {
-        console.log(`Server Error for /didAcceptTerms for user ${userId}.\n ${error}`);
+        //console.log(`Server Error for /didAcceptTerms for user ${userId}.\n ${error}`);
         res.status(500).json("Server Error when handling /didAcceptPolicy");
     }
 }

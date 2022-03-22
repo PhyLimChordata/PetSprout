@@ -14,7 +14,7 @@ const update_caretaker_count = async(req, res) => {
 		res.status(200).json({ "caretaker": user_achievements.achievements.habipet.caretaker});
 
 	} catch (error) {
-		console.log(error);
+		//console.log(error);
 		return res.status(500).json('server error');
 	}
 };

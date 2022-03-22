@@ -24,8 +24,8 @@ function AllMissedHabitsScreen(props) {
 	const deleteHabit = (habit) => {
 		setSelected(habit);
 		setDeleteVisible(true);
-		console.log(habit);
-		console.log('eh');
+		//console.log(habit);
+		//console.log('eh');
 	};
 	useEffect(() => {
 		if (habits.length == 0 && !displayed) displayHabits();

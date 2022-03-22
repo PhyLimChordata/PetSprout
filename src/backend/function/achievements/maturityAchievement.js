@@ -7,7 +7,7 @@ const update_maturity = async(req, res) => {
 
         let user_achievements = await Achievement.findOne({ user: user_id });
         if(!user_achievements){
-			console.log(`User id ${user_id} achievements not found`);
+			//console.log(`User id ${user_id} achievements not found`);
 			return res.status(404).json(`User id ${user_id} achievements not found`);
 		} 
         user_achievements.achievements.habipet.caretaker++;

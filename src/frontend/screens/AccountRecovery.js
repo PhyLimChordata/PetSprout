@@ -90,7 +90,7 @@ function PasswordScreen(props) {
 
 				if (res.status == 403) {
 					res.json().then((data) => {
-						console.log(data.email);
+						//console.log(data.email);
 						activateAccount(data.email);
 					});
 				} else if (res.status != 200) {

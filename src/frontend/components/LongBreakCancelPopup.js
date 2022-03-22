@@ -10,7 +10,7 @@ function LongBreakCancelPopup(props) {
 	const style = styles(colors);
 	const cancelPomodoro = () => {
 		// TODO
-		console.log('eh');
+		//console.log('eh');
 	};
 	return (
 		<Popup

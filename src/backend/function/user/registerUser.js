@@ -16,13 +16,13 @@ const logError = (error_msg) => { console.log("    > " + error_msg)}
 const user_regist = async (req, res) => {
 	try {
 		let { userName, email, password, timezone } = req.body;
-		console.log(`Registering user (username=${req.body.userName}, email=${req.body.email})`)
+		//console.log(`Registering user (username=${req.body.userName}, email=${req.body.email})`)
 		let userPresent, emailPresent = false;
 
 		let errors = validationResult(req);
 		if (!errors.isEmpty()) {
 			logError("Encountered errors while validating request body:")
-			console.log(errors.array())
+			//console.log(errors.array())
 			return res.status(400).json({ error: errors.array() });
 		}
 
@@ -63,7 +63,7 @@ const user_regist = async (req, res) => {
 			veri_code: code,
 		});
 		
-		console.log(newEmail);
+		//console.log(newEmail);
 		await newEmail.save();
 		logError(`Successfully stored new instance of verifications for user ${userName} (email=${email})`)
 		return res.status(200).json('Success');
@@ -74,7 +74,7 @@ const user_regist = async (req, res) => {
 };
 
 const user_activation = async (req, res) => {
-	console.log(`Activating user (email=${req.params.email}):`)
+	//console.log(`Activating user (email=${req.params.email}):`)
 	try {
 		let code = req.params.code;
 		let email = req.params.email;
@@ -87,11 +87,11 @@ const user_activation = async (req, res) => {
 				.json('msg:' + 'Sent validation email not found in database. User account may have already been activated.');
 		}
 
-		console.log(mail_vali);
+		//console.log(mail_vali);
 		const intervalTime = 1000 * 60 * 60;
 		const endTime = new Date();
 		if (endTime - mail_vali.time > intervalTime) {
-			console.log('inside');
+			//console.log('inside');
 			await Mailing.deleteMany({ email });
 			logError(`Validation code sent to ${email} was expired (expiration time was ${mail_vali.time} and current time is ${endTime})`)
 			return res.status(401).json('msg:' + 'Code is expired');
@@ -179,7 +179,7 @@ const user_activation = async (req, res) => {
 
 			newUserHabit.habitList.push(newHabit);
 		}
-		console.log(newUserHabit);
+		//console.log(newUserHabit);
 
 		let weeklySchedule = ['5'];
 		if (weeklySchedule.includes(current_day.toString())) {
@@ -237,14 +237,14 @@ const user_activation = async (req, res) => {
 };
 
 const send_activate_email = async (req, res) => {
-	console.log("Resending activation email:")
+	//console.log("Resending activation email:")
 	try {
 		let { email } = req.body;
 
 		let errors = validationResult(req);
 		if (!errors.isEmpty()) {
 			logError(`Encountered errors while resending activation email to ${email}...`)
-			console.log({ error: error.array() })
+			//console.log({ error: error.array() })
 			return res.status(400).json({ error: error.array() });
 		}
 
@@ -263,7 +263,7 @@ const send_activate_email = async (req, res) => {
 			email,
 			veri_code: code,
 		});
-		console.log(newEmail);
+		//console.log(newEmail);
 		await newEmail.save();
 		logError(`Successfully save sent email to Mailing!`)
 		return res.status(200).json('Success');
@@ -278,7 +278,7 @@ const regEmail =
 
 function sendUserEmail(cnd, code) {
 	try {
-		console.log('sendUserEmail start --> ' + JSON.stringify(cnd));
+		//console.log('sendUserEmail start --> ' + JSON.stringify(cnd));
 		if (regEmail.test(cnd)) {
 			const transport = nodemailer.createTransport(
 				smtpTransport({
@@ -302,14 +302,14 @@ function sendUserEmail(cnd, code) {
 				'">Click this link to verify your account!</a>' +
 				'<br><br>We hope you have a fun time building your habits!' +
 				'<br><br>Thanks!';
-			console.log(html);
+			//console.log(html);
 			var data = {
 				from: 'PetSprout',
 				to: cnd,
 				subject: 'Validation',
 				html: html,
 			};
-			console.log(data);
+			//console.log(data);
 			transport.sendMail(data);
 		} else {
 			assert(false, 422, 'Please enter correct email syntax');

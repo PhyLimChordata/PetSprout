@@ -42,7 +42,7 @@ function Feedback(props) {
 				}
 				if (res.status == 200) {
 					res.json().then((data) => {
-						console.log('Success!');
+						//console.log('Success!');
 						//sendFeedback(data.token);
 					});
 				} else if (res.status == 404) {

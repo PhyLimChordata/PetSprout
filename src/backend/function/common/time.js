@@ -25,7 +25,7 @@ const fromJSDatetimeString = (text,timezone) => {
 
 //text contains a datetime string, timezone is an IANA timezone or null/undefined
 let parseDateTime = (text,timezone) => {
-        console.log("'"+text+"'")
+        //console.log("'"+text+"'")
 		
 		if(timezone){
 			currentTime = DateTime.fromISO(text, { zone: timezone });

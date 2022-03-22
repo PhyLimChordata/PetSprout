@@ -11,10 +11,10 @@ var jobs = {};
  */
 const startupAlarms = async () => {
     for await (const u of User.find()) {
-        console.log(`[Alarm Startup] Scheduling Alarms for ${u._id}`)
+        //console.log(`[Alarm Startup] Scheduling Alarms for ${u._id}`)
         for await (const h of Habit.findOne({user: u._id })) {
             for (const habit of h.habitList) {
-                console.log(`[Alarm Startup] Habit Alarms Scheduled: ${habit.title}`)
+                //console.log(`[Alarm Startup] Habit Alarms Scheduled: ${habit.title}`)
                 scheduleHabitAlarms(u._id, habit.analyze);
             }
         }
@@ -118,7 +118,7 @@ const schedule = async (info) => {
     var hours = date.toLocaleString('en-US', options);
     var localizedHours = parseInt(hours);
     if(localizedHours === 24){
-        console.log(`Hour: 25 detected. schedule() parameters: ${JSON.stringify(info)}`);
+        //console.log(`Hour: 25 detected. schedule() parameters: ${JSON.stringify(info)}`);
         localizedHours = 0;
     }
 
@@ -150,8 +150,8 @@ const schedule = async (info) => {
     pattern = `${localizedMinutes} ${localizedHours} * * ${sch}`
 
     if(!cron.validate(pattern)) {
-        console.log(`Cron Validation Error. schedule() parameters: ${JSON.stringify(info)}`);
-        console.error(`Server Error: Invalid Cron Pattern: ${pattern}`);
+        //console.log(`Cron Validation Error. schedule() parameters: ${JSON.stringify(info)}`);
+        //console.error(`Server Error: Invalid Cron Pattern: ${pattern}`);
         return;
     }
 
@@ -196,7 +196,7 @@ const remove = async (id) => {
 
 const alarmLog = (id, method) => {
     var displayTime = `${jobs[id]['h']}:${jobs[id]['m']}${jobs[id]['isPm']}`;
-    console.log(`${method} alarm for ${displayTime} in ${jobs[id]['tz']}, days: ${jobs[id]['sch']}, id: ${id}`);
+    //console.log(`${method} alarm for ${displayTime} in ${jobs[id]['tz']}, days: ${jobs[id]['sch']}, id: ${id}`);
 }
 exports.scheduleHabitAlarms = scheduleHabitAlarms;
 exports.unscheduleHabitAlarms = unscheduleHabitAlarms;

@@ -36,7 +36,7 @@ function Login(props) {
 	const checkSwitch = () => {
 		if (status == 'unchecked') {setStatus('checked');}
 		else {setStatus('unchecked');}
-		console.log(status);
+		//console.log(status);
 	}
 
 	const [inputStyle, setInputStyle] = useState({
@@ -126,13 +126,13 @@ function Login(props) {
 				const { status } = await Notifications.requestPermissionsAsync();
 				finalStatus = status;
 			}
-			console.log('Push Notifications: ' + finalStatus);
+			//console.log('Push Notifications: ' + finalStatus);
 			if (finalStatus !== 'granted') {
 				alert('Failed to get push token for push notification!');
 				return;
 			}
 			const token = (await Notifications.getExpoPushTokenAsync()).data;
-			console.log(token);
+			//console.log(token);
 			return token;
 		} else {
 			alert('Must use physical device for Push Notifications');
@@ -140,7 +140,7 @@ function Login(props) {
 	};
 
 	const attemptLogin = () => {
-		console.log(`Logging in with notifications: ${getNotificationsToggle}`);
+		//console.log(`Logging in with notifications: ${getNotificationsToggle}`);
 		let login_body = {
 			primaryInfo: primaryInfo,
 			password: password,
@@ -148,17 +148,19 @@ function Login(props) {
 			timezone: Localization.timezone,
 		}
 		if (getNotificationsToggle) {
+			/*
 			console.log(
 				`Clientside Notifications  (${getNotificationsToggle}) are enabled. Toggle is located in App.js.`,
-			);
+			);*/
 			registerForPushNotificationsAsync().then((pushToken) => {
 				login_body['expoPushToken'] = pushToken
 				runLogin();
 			});
 		} else {
+			/*
 			console.log(
 				`Clientside Notifications (${getNotificationsToggle}) are DISABLED. Toggle is located in App.js.`,
-			);
+			);*/
 			runLogin();
 		}
 

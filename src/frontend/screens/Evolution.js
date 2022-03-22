@@ -128,7 +128,7 @@ function Evolution(props) {
 		}).start(() => setButtonDisabled(false));
 		setButtonDisabled(true);
 		setShowColor(true);
-		console.log(evolutionNames[selected]);
+		//console.log(evolutionNames[selected]);
 		fetch('http://3.15.57.200:5000/api/v1.0.0/pets/evolve', {
 			method: 'POST',
 			headers: {

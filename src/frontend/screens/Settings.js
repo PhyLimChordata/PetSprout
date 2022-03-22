@@ -67,13 +67,13 @@ function SettingsPage(props) {
 		const { colors } = useTheme();
 
 		async function update(value) {
-			console.log('value = ' + value);
+			//console.log('value = ' + value);
 			props.handle(value);
-			console.log('notif: ' + notif);
-			console.log('emailnotif = ' + emailNotif);
-			console.log('voiceNotif = ' + voiceNotif);
-			console.log('reminder = ' + reminder);
-			console.log('vibration = ' + vibration);
+			//console.log('notif: ' + notif);
+			//console.log('emailnotif = ' + emailNotif);
+			//console.log('voiceNotif = ' + voiceNotif);
+			//console.log('reminder = ' + reminder);
+			//console.log('vibration = ' + vibration);
 			return;
 		}
 
@@ -99,11 +99,12 @@ function SettingsPage(props) {
 					activeThumbColor={thumbColor}
 					value={props.enabled}
 					onValueChange={(val) => {
-						console.log(props.handle);
-						console.log(
+						//console.log(props.handle);
+						/*console.log(
 							'Previous value for ' + props.tag + ' = ' + props.enabled,
 						);
 						console.log('Received value for ' + props.tag + ' = ' + val);
+						*/
 						props.handle(
 							val,
 							fetch(
@@ -119,11 +120,11 @@ function SettingsPage(props) {
 									}),
 								},
 							).then((res) => {
-								console.log('Updating settings: ' + res.status);
+								//console.log('Updating settings: ' + res.status);
 								res
 									.json()
 									.then((data) => {
-										console.log(data);
+										//console.log(data);
 									})
 									.catch((err) => console.log(err));
 							}),

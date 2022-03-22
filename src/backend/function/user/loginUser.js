@@ -32,7 +32,7 @@ module.exports = async (req, res) => {
 		// Get user
 		let userResult = await UserDAO.getUser(primaryInfo, true)
 		if (userResult.msg != "success") {
-			console.log(userResult.msg)
+			//console.log(userResult.msg)
 			return res.status(userResult.code).json(userResult.msg)
 		}
 		let user = userResult.result
@@ -44,7 +44,7 @@ module.exports = async (req, res) => {
 
 		// Check if user has been verified/activated
 		if (user.status === 0) {
-			console.log(`Login User: User ${user._id} hasn't been verified`)
+			//console.log(`Login User: User ${user._id} hasn't been verified`)
 			return res.status(400).json("User hasn't been activated");
 		}
 
@@ -55,7 +55,7 @@ module.exports = async (req, res) => {
 		// if user last login is not null, check if it is a new day and update todo and check streaks
 		if (user.lastlogin !== null) {
 			// use luxon DateTime to create dates and sets it to user timezone (passed from frontend)
-			console.log('date:'+date)
+			//console.log('date:'+date)
 			var currentDate = parseDateTime(date,timezone);
 			var lastLoginDate = DateTime.fromISO(user.lastlogin.toISOString(), { zone: timezone });
 
@@ -157,11 +157,11 @@ module.exports = async (req, res) => {
 						// Automatically updates continuous to 0 too for data consistency.
 						let updateMissingSuccess = await HabitDAO.updateHabitMissing(user._id, habit._id, habit.missing + newMissingValue)
 						if(updateMissingSuccess.msg !== "success") {
-							console.log(updateMissingSuccess.msg)
+							//console.log(updateMissingSuccess.msg)
 						}
 						let updateNextSignInDateSuccess = await HabitDAO.updateNextSignInDate(user._id, habit._id, nextTodoTime)
 						if(updateNextSignInDateSuccess.msg !== 'success') {
-							console.log(updateNextSignInDateSuccess.msg)
+							//console.log(updateNextSignInDateSuccess.msg)
 						}
 
 						/* Health Loss based on missed streaks. */

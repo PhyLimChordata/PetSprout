@@ -22,7 +22,7 @@ function VerifyEmailSignUp(props) {
 			.then((res) => {
 				if (res.status == 200) {
 					res.json().then((data) => {
-						console.log(data);
+						//console.log(data);
 					});
 				}
 			})

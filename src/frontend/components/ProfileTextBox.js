@@ -13,14 +13,14 @@ const EditBox = (props) => {
     const [focused, onSelected] = React.useState(false);
 
     const handleChange = (text) => {
-        console.log('handleChange ' + text);
+        //console.log('handleChange ' + text);
         onChangeText(text);
         props.handle(text);
     };
 
     useEffect(() => {}, [focused]);
 
-    console.log(props.tag+ ' = ' + text)
+    //console.log(props.tag+ ' = ' + text)
 
     return (
         <SafeAreaView style={styles.formContainer}>

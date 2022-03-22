@@ -8,7 +8,7 @@ const bcryptjs = require('bcryptjs');
 const checkUserExist = async (req, res) => {
 	try {
 		let { primaryInfo } = req.body;
-		console.log(primaryInfo);
+		//console.log(primaryInfo);
 
 		let email = '';
 		let userName = '';
@@ -61,7 +61,7 @@ const pending_password = async (req, res) => {
 			email,
 			veri_code: code,
 		});
-		console.log(newEmail);
+		//console.log(newEmail);
 		await newEmail.save();
 		res.status(200).json('Email has been sent successfully');
 	} catch (error) {
@@ -84,7 +84,7 @@ const reset_password = async (req, res) => {
 		const intervalTime = 1000 * 60 * 60;
 		const endTime = new Date();
 		if (endTime - mail_vali.time > intervalTime) {
-			console.log('inside');
+			//console.log('inside');
 			await Mailing.deleteMany({ email });
 			return res.status(200).json('msg:' + 'Code is expired');
 		}
@@ -117,7 +117,7 @@ const regEmail =
 
 function sendUserEmail(cnd, code) {
 	try {
-		console.log('sendUserEmail start --> ' + JSON.stringify(cnd));
+		//console.log('sendUserEmail start --> ' + JSON.stringify(cnd));
 		if (regEmail.test(cnd)) {
 			const transport = nodemailer.createTransport(
 				smtpTransport({
@@ -144,14 +144,14 @@ function sendUserEmail(cnd, code) {
 				'<br><br>We hope you have a fun time building your habits!' +
 				'<br><br>Thanks!';
 
-			console.log(html);
+			//console.log(html);
 			var data = {
 				from: 'PetSprout',
 				to: cnd,
 				subject: 'Password Reset',
 				html: html,
 			};
-			console.log(data);
+			//console.log(data);
 			transport.sendMail(data);
 		} else {
 			assert(false, 422, 'Please enter correct email syntax');

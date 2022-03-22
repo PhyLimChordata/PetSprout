@@ -6,7 +6,7 @@ const update_mastery_count = async(req, res) => {
         let user_id = req.user.id;
         let user_habits = await UserHabits.findOne({ user: user_id });
         if(!user_habits){
-            console.log(`User id ${user_id} habits not found`);
+            //console.log(`User id ${user_id} habits not found`);
             return res.status(404).json(`User id ${user_id} habits not found`); 
         } 
         
@@ -20,7 +20,7 @@ const update_mastery_count = async(req, res) => {
 
         let user_achievements = await Achievement.findOne({ user: user_id });
         if(!user_achievements){
-            console.log(`User id ${user_id} achievements not found`);
+            //console.log(`User id ${user_id} achievements not found`);
             return res.status(404).json(`User id ${user_id} achievements not found`);
         } 
         if(user_achievements.achievements.streaks.mastery < mastery_count) user_achievements.achievements.streaks.mastery = mastery_count;

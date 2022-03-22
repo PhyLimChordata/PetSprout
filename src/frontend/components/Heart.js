@@ -15,7 +15,7 @@ export default function Heart(props) {
 
 	useEffect(() => {
 		if (!displayed) {
-			console.log(getHP);
+			//console.log(getHP);
 			setHp(getHP);
 			setDisplayed(true);
 		}
