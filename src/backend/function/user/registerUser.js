@@ -11,14 +11,20 @@ const bcryptjs = require('bcryptjs');
 
 const Analyze = require('../../schemas/analyzeSchema');
 
+const logError = (error_msg) => { console.log("    > " + error_msg)}
+
 const user_regist = async (req, res) => {
 	try {
-		let { userName, email, password } = req.body;
+		let { userName, email, password, timezone } = req.body;
+		console.log(`Registering user (username=${req.body.userName}, email=${req.body.email})`)
 		let userPresent, emailPresent = false;
 
 		let errors = validationResult(req);
-		if (!errors.isEmpty())
+		if (!errors.isEmpty()) {
+			logError("Encountered errors while validating request body:")
+			console.log(errors.array())
 			return res.status(400).json({ error: errors.array() });
+		}
 
 		let fetchUserName = await User.findOne({ userName }).select('-password');
 		if (fetchUserName) userPresent = true;
@@ -34,6 +40,7 @@ const user_regist = async (req, res) => {
 			status: 0,
 			password,
 			lastlogin: null,
+			timezone
 		});
 
 		// hashedpassword (security)
@@ -43,34 +50,42 @@ const user_regist = async (req, res) => {
 
 		//save to the database
 		await newUser.save();
+		logError(`Successfully saved user to database, now sending validation email to ${email} for ${userName}...`)
 
 		const code = require('crypto').randomBytes(16).toString('hex');
 		sendUserEmail(email, code);
+		logError(`Successfully sent validation email to user ${userName} to email ${email}`)
 
 		await Mailing.deleteMany({ email });
+		logError(`Successfully deleted all records of sent verifications to user ${userName} (email=${email})!`)
 		let newEmail = new Mailing({
 			email,
 			veri_code: code,
 		});
+		
 		console.log(newEmail);
 		await newEmail.save();
-		res.status(200).json('Success');
+		logError(`Successfully stored new instance of verifications for user ${userName} (email=${email})`)
+		return res.status(200).json('Success');
 	} catch (error) {
-		console.error(error);
+		console.error(error)
 		return res.status(500).json('Server error');
 	}
 };
 
 const user_activation = async (req, res) => {
+	console.log(`Activating user (email=${req.params.email}):`)
 	try {
 		let code = req.params.code;
 		let email = req.params.email;
 
 		let mail_vali = await Mailing.findOne({ email });
-		if (!mail_vali)
+		if (!mail_vali) {
+			logError(`No validation email was sent to ${email} (email can't be found in table Mailing). User account may have already been activated.`)
 			return res
-				.status(200)
-				.json('msg:' + 'No validation email was send before');
+				.status(401)
+				.json('msg:' + 'Sent validation email not found in database. User account may have already been activated.');
+		}
 
 		console.log(mail_vali);
 		const intervalTime = 1000 * 60 * 60;
@@ -78,14 +93,20 @@ const user_activation = async (req, res) => {
 		if (endTime - mail_vali.time > intervalTime) {
 			console.log('inside');
 			await Mailing.deleteMany({ email });
-			return res.status(200).json('msg:' + 'Code is expired');
+			logError(`Validation code sent to ${email} was expired (expiration time was ${mail_vali.time} and current time is ${endTime})`)
+			return res.status(401).json('msg:' + 'Code is expired');
 		}
 
-		if (code !== mail_vali.veri_code)
-			res.status(200).json('msg:' + 'incorrect validation code');
+		if (code !== mail_vali.veri_code) {
+			logError(`Validation code in ${email} does not match code stored in database: received: ${code} but expecting ${mail_vali.veri_code}`)
+			return res.status(401).json('msg:' + ' incorrect validation code' + ', another verification email may have been sent. please check again for the newest one.')
+		}
 
 		let user = await User.findOne({ email });
-		if (!user) res.status(404).json("User doesn't exist");
+		if (!user) {
+			logError(`Successfully validated ${email}, but cannot find user!`)
+			return res.status(404).json("User doesn't exist");
+		}
 		user.status = 1;
 		await user.save();
 
@@ -208,7 +229,7 @@ const user_activation = async (req, res) => {
 		await newUserAchievements.save();
 
 		await Mailing.deleteMany({ email });
-		res.status(200).json('Success');
+		return res.status(200).json('Success');
 	} catch (error) {
 		console.error(error);
 		return res.status(500).json('Server error');
@@ -216,18 +237,25 @@ const user_activation = async (req, res) => {
 };
 
 const send_activate_email = async (req, res) => {
+	console.log("Resending activation email:")
 	try {
 		let { email } = req.body;
 
 		let errors = validationResult(req);
-		if (!errors.isEmpty())
+		if (!errors.isEmpty()) {
+			logError(`Encountered errors while resending activation email to ${email}...`)
+			console.log({ error: error.array() })
 			return res.status(400).json({ error: error.array() });
+		}
 
 		await Mailing.deleteMany({ email });
+		logError(`Successfully deleted all records of verification codes related to ${email}`)
 
 		let user = await User.findOne({ email });
-		if (!user) return res.status(404).json("User hasn't been registered in");
-
+		if (!user) {
+			logError(`User with email ${email} does not exist in the database.`)
+			return res.status(404).json("User hasn't been registered in");
+		}
 		const code = require('crypto').randomBytes(16).toString('hex');
 		sendUserEmail(email, code);
 
@@ -237,7 +265,8 @@ const send_activate_email = async (req, res) => {
 		});
 		console.log(newEmail);
 		await newEmail.save();
-		res.status(200).json('Success');
+		logError(`Successfully save sent email to Mailing!`)
+		return res.status(200).json('Success');
 	} catch (error) {
 		console.error(error);
 		return res.status(500).json('Server error');

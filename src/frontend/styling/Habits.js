@@ -14,7 +14,7 @@ const habitsStyles = (theme) =>
 			backgroundColor: Colours.Grey.ExpBarBackground,
 		},
 		completedHabitTextTitle: {
-			fontSize: 25,
+			fontSize: 20,
 			fontWeight: 'bold',
 			color: Colours.Grey.Text,
 		},
@@ -68,7 +68,7 @@ const habitsStyles = (theme) =>
 			height: 25,
 		},
 		textTitle: {
-			fontSize: 25,
+			fontSize: 20,
 			fontWeight: 'bold',
 			color: theme.Quinary,
 		},

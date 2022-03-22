@@ -43,13 +43,13 @@ export const ImageMapping = {
 }
 
 export function getImage(name, status, colour) {
-	let petName = name.toLowerCase();
-	console.log(name.toLowerCase())
+	let petName = name.toLowerCase().replace(/\s/g, '');
+	// console.log(name.toLowerCase())
 	if(typeof ImageMapping[petName][petName][status][colour] == "undefined") {
 		console.log(`ImageMapping: Getting ${status} ${colour} ${petName} but returned undefined.`)
 		return ImageMapping['egg']['egg']['Happy']['Green']
 	} else {
-		console.log(`ImageMapping: Getting ${status} ${colour} ${petName}.`)
+		// console.log(`ImageMapping: Getting ${status} ${colour} ${petName}.`)
 		return ImageMapping[petName][petName][status][colour]
 	}
 }

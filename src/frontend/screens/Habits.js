@@ -70,7 +70,7 @@ function HabitsScreen(props) {
 		console.log('huhhhhh');
 		setDisplayed(true);
 		setRefreshing(true);
-		const date = new Date().toString();
+		const date = new Date().toISOString();
 		fetch('http://3.15.57.200:5000/api/v1.0.0/habit/show_user_habit/' + date, {
 			method: 'GET',
 			headers: {
@@ -81,7 +81,7 @@ function HabitsScreen(props) {
 			.then((res) =>
 				res.json().then((data) => {
 					console.log('saddasasdasddas');
-					console.log(data)
+					// console.log(data)
 					setTimeout(() => {
 						setHabits(data.habitList);
 						setMissedHabits(data.missing_habits)

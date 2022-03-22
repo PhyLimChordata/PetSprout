@@ -160,12 +160,14 @@ export function DisplayPet(props) {
 						xpLevelCap={xpLevelCap}
 					/>
 				</View>
+			{!props.hideEvoPopup &&
 			<EvolutionPopup
 				visible={evolutionVisible}
 				setVisible={setEvolutionVisible}
 				isEgg={isEgg}
 				navigation={props.navigation}
 			/>
+			}
 			<FaintingPopup
 				visible={faintVisible}
 				setVisible={setFaintVisible}

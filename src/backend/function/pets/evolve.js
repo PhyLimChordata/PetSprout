@@ -49,13 +49,13 @@ const evolvePet = async (req, res) => {
 		currentPet.image = req.body.name;
 		currentPet.hp = 100;
 		currentPet.readyToEvolve = false;
-		console.log(currentPet.next_evolution_lvl)
+
 		currentPet.next_evolution_lvl = intervalGet(
 			currentPet.next_evolution_lvl + 1,
 			'level',
 			evolveLevels,
 		);
-		console.log(currentPet.next_evolution_lvl)
+
 		await usersPet.save();
 		res.json(currentPet);
 	} catch (error) {

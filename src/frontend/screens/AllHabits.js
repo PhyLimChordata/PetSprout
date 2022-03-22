@@ -48,7 +48,7 @@ function AllHabitsScreen(props) {
 			.then((res) =>
 				res.json().then((data) => {
 					// console.log(data);
-					console.log(data.habitList.length)
+					// console.log(data.habitList.length)
 					const expValue = parseInt(data.expValue);
 					setHabits(data.habitList);
 					setUserHabitId(data._id);
