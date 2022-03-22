@@ -26,6 +26,11 @@ const user_regist = async (req, res) => {
 			return res.status(400).json({ error: errors.array() });
 		}
 
+		// Remove whtie spaces before and after strings
+		userName = userName.trim()
+		email = email.trim()
+		password = password.trim()
+
 		let fetchUserName = await User.findOne({ userName }).select('-password');
 		if (fetchUserName) userPresent = true;
 
