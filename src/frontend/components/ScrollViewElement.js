@@ -7,17 +7,6 @@ import styles from '../styling/Habits';
 import Colours from '../resources/themes/Colours';
 import { useTheme } from '@react-navigation/native';
 
-/*
-For swiping for undo button
-
-- just try to check if the user has clicked or not after three seconds
-- change right() function
-- look at Habits.js component
-- disableCompletionTemp has to be changed
-- https://reactnative.dev/docs/timers
-
-*/
-
 function ScrollViewElement(props) {
 	const swipeableRef = useRef(props.swipe);
 	const leftSwipe = (progress, dragX) => {

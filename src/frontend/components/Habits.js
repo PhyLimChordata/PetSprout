@@ -53,7 +53,6 @@ function Habits(props) {
 		)
 			.then((res) =>
 				res.json().then(() => {
-					console.log('completeHabit was called');
 					if (frequency - 1 == 0) {
 						setCompleted(true);
 						gainXP(400, getToken);
@@ -61,7 +60,6 @@ function Habits(props) {
 						gainXP(150, getToken);
 					}
 					changeRefreshing(true);
-					console.log('refreshed');
 				}),
 			)
 			.catch();
