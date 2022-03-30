@@ -38,10 +38,9 @@ function HabitsScreen(props) {
 		useContext(AuthContext);
 
 	const [refreshing, setRefreshing] = React.useState(false);
-	const [disabled, setDisabled] = useState(false);
-
 
 	const onRefresh = React.useCallback(() => {
+		console.log("refreshing now");
 		setRefreshing(true);
 		changeRefreshing(true);
 		displayHabits();
@@ -49,25 +48,20 @@ function HabitsScreen(props) {
 
 	useEffect(() => {
 		if (habits.length == 0 && !displayed) {
-			console.log('ooop');
+			console.log('if habits.length is 0 and not displayed, display it');
 			displayHabits();
 		}
 	});
 
 	useEffect(() => {
 		if (getRefreshing) {
-			console.log('rees');
+			console.log('getRefreshing');
 			displayHabits();
 		}
 	}, [getRefreshing]);
 
-	const disableCheck = (val) => {
-		setDisabled(val);
-		//console.log('disabled');
-	}
-
 	const displayHabits = () => {
-		console.log('huhhhhh');
+		console.log('displaying habits');
 		setDisplayed(true);
 		setRefreshing(true);
 		const date = new Date().toISOString();
@@ -94,7 +88,7 @@ function HabitsScreen(props) {
 			)
 			.catch((err) => {
 				console.log(err);
-				console.log('saddasasdasddas');
+				console.log('error for displaying habits');
 			});
 	};
 
@@ -162,13 +156,6 @@ function HabitsScreen(props) {
 										streak={data.continuous}
 										frequency={data.times - data.todo}
 										userHabitId={userHabitId}
-										disabled={disabled}
-										pauseFunction={() => {
-											disableCheck(true)
-										}}
-										startFunction={() => {
-											disableCheck(false)
-										}}
 									></Habits>
 									<View style={{height: 15}}></View>
 								</Animated.View>

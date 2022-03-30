@@ -107,8 +107,8 @@ export function DisplayPet(props) {
 						tempHeartValue.view.height * (maxHealth / heartSize),
 					);
 					hp = _.cloneDeep(tempHeartValue);
-					console.log(hp)
-					console.log(currentPet);
+					//console.log(hp)
+					//console.log(currentPet);
 					if (currentPet.hp === 0) {
 						setFaintVisible(true)
 					} else if (currentPet.readyToEvolve) {
@@ -117,7 +117,7 @@ export function DisplayPet(props) {
 					}
 					changePet(currentPet.image);
 					const petsLevel = currentPet.level;
-					console.log(petsLevel)
+					//console.log(petsLevel)
 					const petsLevelStr = petsLevel.toString();
 					setLevel(currentPet.level);
 					//Cap for exp bar

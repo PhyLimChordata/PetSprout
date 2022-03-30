@@ -21,7 +21,7 @@ function FaintingPopup(props) {
             .then((res) => {
                 res.json().then((data) => {
                     console.log(data);
-                    console.log('eh')
+                    console.log('Pet is revived')
                     changeRefreshing(true)
                 });
             })

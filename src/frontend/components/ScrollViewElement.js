@@ -1,5 +1,5 @@
-import React, { useRef } from 'react';
-import { View, Animated, TouchableOpacity, Image } from 'react-native';
+import React, { useRef, useState, useEffect } from 'react';
+import { View, Animated, TouchableOpacity, Image, ProgressViewIOSComponent } from 'react-native';
 import Swipeable from 'react-native-gesture-handler/Swipeable';
 
 import styles from '../styling/Habits';
@@ -40,6 +40,24 @@ function ScrollViewElement(props) {
 			</View>
 		);
 	};
+	const [undo, setUndo] = useState(false);
+	const undoRef = useRef(undo);
+
+	useEffect(() => {
+		undoRef.current = undo;
+	}, [undo]);
+	let right = () => {
+		let undoTimer = setTimeout(() => {
+			if (!undoRef.current) {
+				props.rightFunction();
+			}
+			setUndo(false);
+			swipeableRef.current.close();
+		}, 3000);
+
+		// call timer
+		undoTimer;
+	};
 
 	const rightSwipe = (progress, dragX) => {
 		const scale = dragX.interpolate({
@@ -47,15 +65,6 @@ function ScrollViewElement(props) {
 			outputRange: [1, 0],
 			extrapolate: 'clamp',
 		});
-		
-		let right = () => {
-			
-			props.rightFunction();
-			swipeableRef.current.close();
-			
-			// if (props.rightClose && swipeableRef.current != null)
-			// 	swipeableRef.current.close()
-		};
 		
 		return (
 			<View
@@ -70,7 +79,10 @@ function ScrollViewElement(props) {
 				}}
 			>
 				<Animated.View style={{ transform: [{ scale }] }}>
-					<Checkmark onPress={right} disabled = {props.disabled}/>
+					<Undo onPress={() => {
+						setUndo(true);
+						swipeableRef.current.close();
+					}}/>
 				</Animated.View>
 			</View>
 		);
@@ -84,8 +96,9 @@ function ScrollViewElement(props) {
 				renderRightActions={rightSwipe}
 				leftThreshold={80}
 				rightThreshold={80}
+
 				// onSwipeableLeftOpen={props.leftFunction}
-				// onSwipeableRightOpen={props.rightFunction}
+				
 			>
 				{props.content}
 			</Swipeable>
@@ -97,6 +110,7 @@ function ScrollViewElement(props) {
 				renderLeftActions={leftSwipe}
 				leftThreshold={80}
 				// onSwipeableLeftOpen={props.leftFunction}
+				
 			>
 				{props.content}
 			</Swipeable>
@@ -107,6 +121,7 @@ function ScrollViewElement(props) {
 				ref={swipeableRef}
 				renderRightActions={rightSwipe}
 				rightThreshold={80}
+				onSwipeableOpen={right}
 			>
 				{props.content}
 			</Swipeable>
@@ -115,13 +130,13 @@ function ScrollViewElement(props) {
 	return <View>{props.content}</View>;
 }
 
-function Checkmark(props) {
+function Undo(props) {
 	const { colors } = useTheme();
 	return (
-		<TouchableOpacity activeOpacity={0.6} onPress={props.onPress} disabled = {props.disabled}>
+		<TouchableOpacity activeOpacity={0.6} onPress={props.onPress}>
 			<Image
 				style={styles(colors).swipeIcon}
-				source={require('../resources/images/Checkmark.png')}
+				source={require('../resources/images/BackButton.png')}
 			/>
 		</TouchableOpacity>
 	);

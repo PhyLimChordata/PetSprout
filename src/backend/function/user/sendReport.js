@@ -82,7 +82,7 @@ function sendEmail(message, email, type) {
 				subject: type,
 				html: html,
 			};
-			console.log(data);
+			//console.log(data);
 			transport.sendMail(data);
 		} else {
 			assert(false, 422, 'Please enter correct email syntax');
