@@ -89,6 +89,7 @@ const habitsStyles = (theme) =>
 			width: '100%',
 			height: 15,
 			backgroundColor: Colours.Grey.ExpBarBackground,
+			color: Colours.Blue.Confirm,
 			borderRadius: 10,
 		},
 		ellipsisCircle: {

@@ -14,7 +14,7 @@ function ExperienceBar(props) {
 		// width: 20,
 		width: width,
 		height: 15,
-		backgroundColor: colors.Tertiary,
+		backgroundColor: styles(colors).expBar.color,
 		borderRadius: 10,
 	};
 
