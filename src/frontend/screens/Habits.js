@@ -161,7 +161,6 @@ function HabitsScreen(props) {
 										name={data.title}
 										streak={data.continuous}
 										frequency={data.times - data.todo}
-										//habitId={data._id}
 										userHabitId={userHabitId}
 										disabled={disabled}
 										pauseFunction={() => {
