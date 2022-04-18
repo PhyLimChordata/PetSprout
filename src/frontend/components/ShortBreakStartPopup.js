@@ -9,7 +9,6 @@ function ShortBreakStartPopup(props) {
 	const style = styles(colors);
 	const startPomodoro = () => {
 		// TODO
-		// console.log('eh')
 	};
 
 	return (

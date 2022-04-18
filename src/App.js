@@ -108,7 +108,6 @@ export default function App() {
 				setLogo(logo);
 			},
 			changePet: (pet) => {
-				console.log(pet)
 				setPet(pet);
 			},
 			changeComingSoon: (comingSoon) => {

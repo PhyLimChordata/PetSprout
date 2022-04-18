@@ -12,7 +12,7 @@ module.exports = async (req, res) => {
 		// Get user
 		let userResult = await UserDAO.getUser(req.user.id)
 		if (userResult.msg != "success") {
-			console.log(userResult.msg)
+			//console.log(userResult.msg)
 			return res.status(userResult.code).json(userResult.msg)
 		}
 		let user = userResult.result

@@ -30,9 +30,10 @@ connection.once('open', () => {
 
 // Notification Toggled
 if (process.env.NOTIFICATIONTOGGLE === 'true') {
+	/*
 	console.log(
 		`Serverside Notifications are enabled. Toggle is located in .env file.`,
-	);
+	);*/
 
 	/* Reschedule alarms that were lost. */
 	alarm.startup();

@@ -37,7 +37,6 @@ module.exports.createDirs = function () {
 }
 
 module.exports.appendMapping = function () {
-    console.log("append")
     fs.writeFileSync('./mapping.js', 'export const ImageMapping = {\n');
     fs.readdirSync('./').forEach((file) => {
         fs.appendFileSync('./mapping.js', '\t'+file+": " + "require('./"+ file + "/" + file +"'),\n");

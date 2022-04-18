@@ -16,7 +16,7 @@ const { validationResult } = require('express-validator');
 module.exports = async (req, res) => {
 	try {
 		let errors = validationResult(req);
-		console.log(errors);
+		//console.log(errors);
 		if (!errors.isEmpty())
 			return res.status(400).json({ error: errors.array() });
 
@@ -60,7 +60,7 @@ module.exports = async (req, res) => {
 		if (remainingToLevel <= 5) {
 			userHabit.heart = 3;
 			if (expValue / 100 == 5) {
-				console.log('evolve');
+				//console.log('evolve');
 			}
 		}
 		// await analyze.save();

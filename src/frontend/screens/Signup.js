@@ -199,7 +199,6 @@ function SignupScreen(props) {
 			}),
 		})
 			.then((res) => {
-				console.log(res.status);
 				if (userName == '') {
 					setUserNameError('This is a required field');
 					setUserNameInputStyle(errorIndicator);
@@ -235,7 +234,6 @@ function SignupScreen(props) {
 					});
 				} else if (res.status == 401) {
 					res.json().then((data) => {
-						console.log(data);
 						if (data[0]) {
 							setUserNameError('Username already exists. Please try another');
 							setUserNameInputStyle(errorIndicator);

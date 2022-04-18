@@ -20,7 +20,7 @@ const acceptPolicy = async (req, res) => {
         res.status(200).json("Privacy Policy accepted.")
     
     } catch (error) {
-        console.log(`Server Error for /acceptPolicy for user ${userId}.\n ${error}`);
+        //console.log(`Server Error for /acceptPolicy for user ${userId}.\n ${error}`);
         res.status(500).json("Server Error when handling /acceptPolicy");
     }
 }
@@ -30,14 +30,14 @@ const didAcceptPolicy = async (req, res) => {
         // Check if there exists a document for that user already.
         // TODO: In the future check if there exists an (User, Document Version) entry.
         userId = req.user.id;
-        console.log(userId)
+        //console.log(userId)
         let doc = await DocumentSchema.findOne({user_id: userId});
-        console.log(doc)
+        //console.log(doc)
         if(!doc) {
             res.status(200).json({"accepted": false});
            
         } else {
-            console.log(doc.did_accept_policy)
+            //console.log(doc.did_accept_policy)
             if(doc.did_accept_policy) {
                 res.status(200).json({"accepted": true});
             } else {
@@ -46,7 +46,7 @@ const didAcceptPolicy = async (req, res) => {
         }
     
     } catch (error) {
-        console.log(`Server Error for /didAcceptPolicy for user ${userId}.\n ${error}`);
+        //console.log(`Server Error for /didAcceptPolicy for user ${userId}.\n ${error}`);
         res.status(500).json("Server Error when handling /didAcceptPolicy");
     }
 }

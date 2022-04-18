@@ -25,7 +25,6 @@ function ReportABug(props) {
 	const { getToken } = useContext(AuthContext);
 
 	const attemptSendBug = () => {
-		//console.log(bug);
 		fetch('http://3.15.57.200:5000/api/v1.0.0/user/sendBugReport', {
 			method: 'POST',
 			headers: {
@@ -42,7 +41,6 @@ function ReportABug(props) {
 				}
 				if (res.status == 200) {
 					res.json().then((data) => {
-						console.log('Success!');
 					});
 				} else if (res.status == 404) {
 					setError('User not found');

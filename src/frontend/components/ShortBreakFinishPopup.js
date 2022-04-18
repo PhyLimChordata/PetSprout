@@ -9,7 +9,6 @@ function ShortBreakFinishPopup(props) {
 	const style = styles(colors);
 	const finishPomodoro = () => {
 		// TODO
-		console.log('eh');
 	};
 
 	return (

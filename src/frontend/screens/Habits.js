@@ -49,25 +49,21 @@ function HabitsScreen(props) {
 
 	useEffect(() => {
 		if (habits.length == 0 && !displayed) {
-			console.log('ooop');
 			displayHabits();
 		}
 	});
 
 	useEffect(() => {
 		if (getRefreshing) {
-			console.log('rees');
 			displayHabits();
 		}
 	}, [getRefreshing]);
 
 	const disableCheck = (val) => {
 		setDisabled(val);
-		//console.log('disabled');
 	}
 
 	const displayHabits = () => {
-		console.log('huhhhhh');
 		setDisplayed(true);
 		setRefreshing(true);
 		const date = new Date().toISOString();
@@ -80,8 +76,6 @@ function HabitsScreen(props) {
 		})
 			.then((res) =>
 				res.json().then((data) => {
-					console.log('saddasasdasddas');
-					// console.log(data)
 					setTimeout(() => {
 						setHabits(data.habitList);
 						setMissedHabits(data.missing_habits)
@@ -94,7 +88,6 @@ function HabitsScreen(props) {
 			)
 			.catch((err) => {
 				console.log(err);
-				console.log('saddasasdasddas');
 			});
 	};
 
