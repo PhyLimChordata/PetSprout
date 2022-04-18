@@ -25,7 +25,6 @@ function Feedback(props) {
 	const { getToken } = useContext(AuthContext);
 
 	const attemptSendFeedback = () => {
-		//console.log(feedback);
 		fetch('http://3.15.57.200:5000/api/v1.0.0/user/sendFeedbackReport', {
 			method: 'POST',
 			headers: {
@@ -42,7 +41,6 @@ function Feedback(props) {
 				}
 				if (res.status == 200) {
 					res.json().then((data) => {
-						//console.log('Success!');
 						//sendFeedback(data.token);
 					});
 				} else if (res.status == 404) {

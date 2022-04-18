@@ -8,7 +8,6 @@ import Colours from '../resources/themes/Colours';
 
 function Ellipsis(props) {
 	const printTest = () => {
-		//console.log('to have the settings displayed in the top right');
 	};
 	const { colors } = useTheme();
 	const containerColor = props.completed

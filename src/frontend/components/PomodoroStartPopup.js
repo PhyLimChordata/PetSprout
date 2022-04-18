@@ -9,7 +9,6 @@ function PomodoroStartPopup(props) {
 	const style = styles(colors);
 	const startPomodoro = () => {
 		// TODO
-		//console.log('eh')
 	};
 
 	return (

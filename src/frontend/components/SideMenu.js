@@ -142,7 +142,6 @@ function SideMenu(props) {
 		})
 			.then((res) =>
 				res.json().then((data) => {
-					//console.log("Current pet from side menu is " + data.image)
 					changePet(data.image);
 				}),
 			)
@@ -158,8 +157,6 @@ function SideMenu(props) {
 		changeColorTheme(color);
 		setColor(color);
 		props.setModalVisible(false);
-		//console.log(color);
-		//console.log(logo[color]);
 		changeLogo(logo[color]);
 		changeComingSoon(comingsoon[color]);
 	}

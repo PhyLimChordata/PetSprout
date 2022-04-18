@@ -32,12 +32,11 @@ module.exports.createDirs = function () {
         for(let index in newFiles)
             dirs += "\t\t" + colours[index] + ": require('./" + newFiles[index] + "'),\n"
         dirs += "\t},\n};"
-        fs.writeFile('./'+newDir+'/'+newDir+'.js', dirs, (err) => //console.log(err))
+        fs.writeFile('./'+newDir+'/'+newDir+'.js', dirs, (err) => console.log(err))
     }) 
 }
 
 module.exports.appendMapping = function () {
-    //console.log("append")
     fs.writeFileSync('./mapping.js', 'export const ImageMapping = {\n');
     fs.readdirSync('./').forEach((file) => {
         fs.appendFileSync('./mapping.js', '\t'+file+": " + "require('./"+ file + "/" + file +"'),\n");

@@ -24,8 +24,6 @@ function AllHabitsScreen(props) {
 	const deleteHabit = (habit) => {
 		setSelected(habit);
 		setDeleteVisible(true);
-		//console.log(habit);
-		//console.log('eh');
 	};
 	useEffect(() => {
 		if (habits.length == 0 && !displayed) displayHabits();
@@ -47,8 +45,6 @@ function AllHabitsScreen(props) {
 		})
 			.then((res) =>
 				res.json().then((data) => {
-					// console.log(data);
-					// console.log(data.habitList.length)
 					const expValue = parseInt(data.expValue);
 					setHabits(data.habitList);
 					setUserHabitId(data._id);

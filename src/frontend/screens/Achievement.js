@@ -52,20 +52,12 @@ function AchievementScreen(props) {
 			})
 				.then((res) => res.json())
 				.then((data) => {
-					//console.log(data);
 					for (let cat in Object.keys(data)) {
 						let sublist = [];
 
-						//console.log('cat = ' + cat);
 						let cate = data[Object.keys(data)[cat]];
-						//console.log('cate = ');
-						//console.log(cate);
 						for (let ach in Object.keys(cate)) {
-							//console.log(Object.keys(cate)[ach]);
-							//console.log('ach = ' + ach);
 							let achieve = cate[Object.keys(cate)[ach]];
-							//console.log('achieve = ');
-							//console.log(achieve);
 							sublist.push({
 								name: Object.keys(cate)[ach],
 								level:
@@ -81,7 +73,6 @@ function AchievementScreen(props) {
 					}
 				})
 				.then(() => {
-					//console.log(list);
 					setAchievements(list);
 				})
 				.catch((e) => console.log(e));
@@ -143,7 +134,6 @@ const AchievementPanel = (props) => {
 
 const CarouselAcheivement = (props) => {
 	let list = props.list;
-	//console.log(list);
 	if (list.length > 3) {
 		let panels = [];
 		let subpanel = [];
@@ -157,8 +147,6 @@ const CarouselAcheivement = (props) => {
 		if (subpanel.length > 0) {
 			panels.push(subpanel);
 		}
-		//console.log('Panel:');
-		//console.log(panels);
 
 		return (
 			<ScrollView
@@ -186,7 +174,6 @@ const CarouselAcheivement = (props) => {
 };
 
 const OneCategory = (props) => {
-	//console.log(props.progresses);
 	return (
 		<View>
 			<Text

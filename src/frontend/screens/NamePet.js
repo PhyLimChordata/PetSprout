@@ -42,7 +42,6 @@ function Button(props) {
 function NameHabit(props) {
 	const { getToken, changePet } = useContext(AuthContext);
 	const namePet = (name) => {
-		console.log(name);
 		fetch('http://3.15.57.200:5000/api/v1.0.0/pets/name_pet', {
 			method: 'POST',
 			headers: {
@@ -55,7 +54,6 @@ function NameHabit(props) {
 				res.json().then((data) => {
 					changePet(data.image)
 					props.navigation.navigate('Habit');
-					// console.log(data.image)
 				}),
 			)
 			.catch(() => console.log('error'));

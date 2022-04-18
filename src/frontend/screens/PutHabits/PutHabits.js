@@ -197,7 +197,6 @@ function PutHabits(props) {
 	}
 	function addAlarm(time) {
 		time.setSeconds(0, 0);
-		//console.log(Appearance.getColorScheme())
 		for (let alarm of alarms) {
 			alarm = new Date(alarm);
 			if (getTime(alarm) == getTime(time)) {
