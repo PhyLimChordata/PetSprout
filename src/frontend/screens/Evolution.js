@@ -33,7 +33,7 @@ function Evolution(props) {
 	const [evolutionNames, setEvolutionNames] = useState([]);
 	const [buttonDisabled, setButtonDisabled] = useState(false);
 	useEffect(() => {
-		fetch('http://3.15.57.200:5000/api/v1.0.0/pets/get_current', {
+		fetch('http://localhost:5000/api/v1.0.0/pets/get_current', {
 			method: 'GET',
 			headers: {
 				'Content-Type': 'application/json',
@@ -129,7 +129,7 @@ function Evolution(props) {
 		setButtonDisabled(true);
 		setShowColor(true);
 		console.log(evolutionNames[selected]);
-		fetch('http://3.15.57.200:5000/api/v1.0.0/pets/evolve', {
+		fetch('http://localhost:5000/api/v1.0.0/pets/evolve', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',

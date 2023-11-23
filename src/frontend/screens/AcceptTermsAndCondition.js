@@ -306,7 +306,7 @@ function AcceptTermsAndCondition(props) {
 								style={style.aboutButton}
 								onPress={() => {
 									if (status == 'checked') {
-										fetch('http://3.15.57.200:5000/api/v1.0.0/doc/acceptTerms',{
+										fetch('http://localhost:5000/api/v1.0.0/doc/acceptTerms',{
 											method: 'POST',
 											headers: {
 												'Content-Type': 'application/json',

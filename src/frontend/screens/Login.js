@@ -163,7 +163,7 @@ function Login(props) {
 		}
 
 		const runLogin = () => {
-			fetch('http://3.15.57.200:5000/api/v1.0.0/user/login', {
+			fetch('http://localhost:5000/api/v1.0.0/user/login', {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
@@ -182,7 +182,7 @@ function Login(props) {
 					}
 					else {clear();}	
 					res.json().then((data) => {
-						fetch('http://3.15.57.200:5000/api/v1.0.0/doc/didAcceptPolicy', {
+						fetch('http://localhost:5000/api/v1.0.0/doc/didAcceptPolicy', {
 							method: 'GET',
 							headers: {
 								'Content-Type': 'application/json',
@@ -190,7 +190,7 @@ function Login(props) {
 							}
 						})
 						.then((privRes) => {
-							fetch('http://3.15.57.200:5000/api/v1.0.0/doc/didAcceptTerms', {
+							fetch('http://localhost:5000/api/v1.0.0/doc/didAcceptTerms', {
 								method: 'GET',
 								headers: {
 									'Content-Type': 'application/json',

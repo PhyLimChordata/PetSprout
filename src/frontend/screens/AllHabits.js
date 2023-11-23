@@ -38,7 +38,7 @@ function AllHabitsScreen(props) {
 	}, [getRefreshing])
 	const displayHabits = () => {
 		setDisplayed(true);
-		fetch('http://3.15.57.200:5000/api/v1.0.0/habit/show_all_user_habit/', {
+		fetch('http://localhost:5000/api/v1.0.0/habit/show_all_user_habit/', {
 			method: 'GET',
 			headers: {
 				'Content-Type': 'application/json',

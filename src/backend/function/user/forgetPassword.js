@@ -133,12 +133,12 @@ function sendUserEmail(cnd, code) {
 
 			var html =
 				"Hello, <br><br>Recently, your password has been resetted. If this wasn't you, please ignore this message and contact us regarding a possible account breach. <br><br>To reset your password, you will need to confirm it was done so by you by clicking the link below. If you have forgotten what the password had been resetted to, you may always attempt to reset your password again." +
-				'<br><br><a href="http://3.15.57.200:5000/api/v1.0.0/user/reset_password/' +
+				'' +
 				code +
-				'/' +
+				'' +
 				cnd +
-				'/' +
-				'">' +
+				'<br><br><a href="http://localhost:5000/api/v1.0.0/user/reset_password///">' +
+				'' +
 				'Click to allow resetting password and return back to app page </a>' +
 				'<br><br>If problems proceed to continue, feel free to contact us and we can arrange another method of recovering your account.' +
 				'<br><br>We hope you have a fun time building your habits!' +

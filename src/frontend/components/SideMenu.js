@@ -120,7 +120,7 @@ function SideMenu(props) {
 	}
 
 	useEffect(() => {
-		fetch('http://3.15.57.200:5000/api/v1.0.0/user/viewAccount', {
+		fetch('http://localhost:5000/api/v1.0.0/user/viewAccount', {
 			method: 'GET',
 			headers: {
 				'Content-Type': 'application/json',
@@ -133,7 +133,7 @@ function SideMenu(props) {
 			})
 			.catch((err) => console.log(err));
 
-		fetch('http://3.15.57.200:5000/api/v1.0.0/pets/get_current', {
+		fetch('http://localhost:5000/api/v1.0.0/pets/get_current', {
 			method: 'GET',
 			headers: {
 				'Content-Type': 'application/json',
@@ -152,7 +152,10 @@ function SideMenu(props) {
 	const [toggleValue, setToggleValue] = useState(!defaultMode);
 	const [modalVisible, setModalVisible] = useState(props.modalVisible)
 
-	useEffect(() => setModalVisible(props.modalVisible), [props.modalVisible])
+	useEffect(() => {
+		console.log("DSHUASIUDHIASH")
+		setModalVisible(props.modalVisible)
+	}, [props.modalVisible])
 
 	function colorChange(color) {
 		changeColorTheme(color);
